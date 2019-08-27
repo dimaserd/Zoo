@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Zoo.GenericUserInterface</id>
+    <version>0.8.0</version>
+    <title>Generic UserInterface</title>
+    <authors>Dmitry Serdyukov</authors>
+    <owners>Dmitry Serdyukov</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Логика для построения обобщеных примитивных интерфейсов для создания редактирования и удаления сущностей</description>
+    <releaseNotes>Что-то сделали лучше, что-то сделали хуже.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <dependencies>
+      <dependency id="NetCroco.Core" version="1.5.3" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\netstandard2.0\Zoo.GenericUserInterface.dll" target="lib\netstandard2.0"></file>
+    <file src="bin\Release\netstandard2.0\Zoo.GenericUserInterface.pdb" target="lib\netstandard2.0"></file>
+    <file src="bin\Release\netstandard2.0\Zoo.GenericUserInterface.xml" target="lib\netstandard2.0"></file>
+  </files>
+</package>
