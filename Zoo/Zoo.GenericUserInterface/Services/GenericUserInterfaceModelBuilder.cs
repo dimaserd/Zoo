@@ -26,6 +26,30 @@ namespace Zoo.GenericUserInterface.Services
         }
 
         /// <summary>
+        /// Переместить свойство на начальную позицию
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder<T> ShiftToStartFor(Expression<Func<T, object>> expression)
+        {
+            var memberName = (expression.Body as MemberExpression).Member.Name;
+
+            return ShiftPropertyToStartFor(memberName) as GenericUserInterfaceModelBuilder<T>;
+        }
+
+        /// <summary>
+        /// Переместить свойство в конец списка
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder<T> ShiftToEndFor(Expression<Func<T, object>> expression)
+        {
+            var memberName = (expression.Body as MemberExpression).Member.Name;
+
+            return ShiftPropertyToEndFor(memberName) as GenericUserInterfaceModelBuilder<T>;
+        }
+
+        /// <summary>
         /// Установить скрытое поле ввода для свойства объекта
         /// </summary>
         /// <param name="expression"></param>
@@ -47,6 +71,19 @@ namespace Zoo.GenericUserInterface.Services
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
             return SetTextAreaFor(memberName) as GenericUserInterfaceModelBuilder<T>;
+        }
+
+        /// <summary>
+        /// Установить выпадающий список с единственным выбором для свойства объекта
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="selectListItems"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder<T> DropDownListFor(Expression<Func<T, bool?>> expression, List<MySelectListItem> selectListItems)
+        {
+            var memberName = (expression.Body as MemberExpression).Member.Name;
+
+            return SetDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<T>;
         }
 
         /// <summary>
@@ -143,6 +180,38 @@ namespace Zoo.GenericUserInterface.Services
             }
 
             return block;
+        }
+
+        /// <summary>
+        /// Установить свойство в конец списка
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder ShiftPropertyToEndFor(string propertyName)
+        {
+            var block = GetBlockByPropertyName(propertyName);
+
+            Result.Blocks.Remove(block);
+
+            Result.Blocks.Add(block);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Установить свойство в начало списка
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder ShiftPropertyToStartFor(string propertyName)
+        {
+            var block = GetBlockByPropertyName(propertyName);
+
+            Result.Blocks.Remove(block);
+
+            Result.Blocks.Insert(0, block);
+
+            return this;
         }
 
         /// <summary>

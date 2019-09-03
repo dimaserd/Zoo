@@ -14,6 +14,20 @@
             Описание типа данных
             </summary>
         </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToStartFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Переместить свойство на начальную позицию
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToEndFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Переместить свойство в конец списка
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.HiddenFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
             <summary>
             Установить скрытое поле ввода для свойства объекта
@@ -26,6 +40,14 @@
             Установить большой текстовое поле ввода для свойства объекта
             </summary>
             <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor(System.Linq.Expressions.Expression{System.Func{`0,System.Nullable{System.Boolean}}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+            <summary>
+            Установить выпадающий список с единственным выбором для свойства объекта
+            </summary>
+            <param name="expression"></param>
+            <param name="selectListItems"></param>
             <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
@@ -64,6 +86,20 @@
             <summary>
             Результат - модель для построения пользовательского интерфейса
             </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.ShiftPropertyToEndFor(System.String)">
+            <summary>
+            Установить свойство в конец списка
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.ShiftPropertyToStartFor(System.String)">
+            <summary>
+            Установить свойство в начало списка
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetHiddenFor(System.String)">
             <summary>
