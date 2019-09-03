@@ -62,6 +62,16 @@ namespace Zoo.GenericUserInterface.Models
             };
         }
 
+        private static UserInterfaceBlock GetBlockForEnumerable(CrocoTypeDescription prop)
+        {
+            return new UserInterfaceBlock
+            {
+                InterfaceType = UserInterfaceType.MultipleDropDownList,
+                PropertyName = prop.PropertyName,
+                SelectList = GetSelectList(prop),
+            };
+        }
+
         private static List<UserInterfaceBlock> GetBlocks(CrocoTypeDescription desc)
         {
             List<UserInterfaceBlock> result = new List<UserInterfaceBlock>();
@@ -89,6 +99,14 @@ namespace Zoo.GenericUserInterface.Models
                 };
             }
 
+            if(prop.IsEnumerable)
+            {
+                return new List<UserInterfaceBlock>()
+                {
+                    GetBlockForEnumerable(prop)
+                };
+            }
+
             if (prop.IsClass)
             {
                 return GetBlocks(prop);
@@ -101,10 +119,21 @@ namespace Zoo.GenericUserInterface.Models
         {
             List<Func<CrocoTypeDescription, bool>> emptySelectListPredicates = new List<Func<CrocoTypeDescription, bool>>
             {
-                x => x.IsEnumerable,
+                x => x.IsEnumerable, 
                 x => x.FullTypeName == typeof(DateTime).FullName
             };
             
+            if(prop.IsEnumerable && prop.EnumeratedType.IsEnumeration)
+            {
+                var enumeratedType = prop.EnumeratedType;
+
+                return enumeratedType.EnumValues.Select(x => new MySelectListItem
+                {
+                    Text = x.DisplayName,
+                    Value = x.StringRepresentation
+                }).ToList();
+            }
+
             if (prop.FullTypeName == typeof(bool).FullName)
             {
                 return MySelectListItemExtensions.GetBooleanList();

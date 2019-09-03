@@ -28,12 +28,28 @@
             <param name="expression"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor(System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
             <summary>
             Установить выпадающий список с единственным выбором для свойства объекта
             </summary>
             <param name="expression"></param>
             <param name="selectListItems"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.EnumDropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Установить выпадающий список с единственным выбором для свойства объекта типа Перечисление
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.EnumMultipleDropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{``0}}})">
+            <summary>
+            Установить выпадающий список с единственным выбором для свойства объекта типа Перечисление
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="expression"></param>
             <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.MultipleDropDownListFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
@@ -49,14 +65,14 @@
             Результат - модель для построения пользовательского интерфейса
             </summary>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.HiddenFor(System.String)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetHiddenFor(System.String)">
             <summary>
             Установить скрытый тип инпута, который нельзя редактировать
             </summary>
             <param name="propertyName"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.MultipleDropDownListFor(System.String,System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetMultipleDropDownListFor(System.String,System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
             <summary>
             Установить выпадающий список со множественным выбором для свойства объекта
             </summary>
@@ -64,7 +80,7 @@
             <param name="selectListItems"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.DropDownListFor(System.String,System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetDropDownListFor(System.String,System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
             <summary>
             Установить выпадающий список с единственным выбором для свойства объекта
             </summary>
@@ -72,7 +88,7 @@
             <param name="selectListItems"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.TextAreaFor(System.String)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetTextAreaFor(System.String)">
             <summary>
             Установить большой текстовый инпут для имени свойства
             </summary>

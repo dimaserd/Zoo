@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Zoo.GenericUserInterface.Enumerations;
+using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
 
 namespace Zoo.GenericUserInterface.Services
@@ -33,7 +34,7 @@ namespace Zoo.GenericUserInterface.Services
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
-            return HiddenFor(memberName) as GenericUserInterfaceModelBuilder<T>;
+            return SetHiddenFor(memberName) as GenericUserInterfaceModelBuilder<T>;
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace Zoo.GenericUserInterface.Services
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
-            return TextAreaFor(memberName) as GenericUserInterfaceModelBuilder<T>;
+            return SetTextAreaFor(memberName) as GenericUserInterfaceModelBuilder<T>;
         }
 
         /// <summary>
@@ -54,11 +55,41 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="expression"></param>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<T> DropDownListFor(Expression<Func<T, string>> expression, List<MySelectListItem> selectListItems)
+        public GenericUserInterfaceModelBuilder<T> DropDownListFor(Expression<Func<T, object>> expression, List<MySelectListItem> selectListItems)
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
-            return DropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<T>;
+            return SetDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<T>;
+        }
+
+        /// <summary>
+        /// Установить выпадающий список с единственным выбором для свойства объекта типа Перечисление
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder<T> EnumDropDownListFor<TEnum>(Expression<Func<T, TEnum>> expression) where TEnum : Enum
+        {
+            var memberName = (expression.Body as MemberExpression).Member.Name;
+
+            var selectListItems = MySelectListItemExtensions.GetEnumDropDownList(typeof(TEnum));
+
+            return SetDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<T>;
+        }
+
+        /// <summary>
+        /// Установить выпадающий список с единственным выбором для свойства объекта типа Перечисление
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder<T> EnumMultipleDropDownListFor<TEnum>(Expression<Func<T, IEnumerable<TEnum>>> expression) where TEnum : Enum
+        {
+            var memberName = (expression.Body as MemberExpression).Member.Name;
+
+            var selectListItems = MySelectListItemExtensions.GetEnumDropDownList(typeof(TEnum));
+
+            return SetMultipleDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<T>;
         }
 
         /// <summary>
@@ -71,7 +102,7 @@ namespace Zoo.GenericUserInterface.Services
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
-            return MultipleDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<T>;
+            return SetMultipleDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<T>;
         }
     }
 
@@ -119,7 +150,7 @@ namespace Zoo.GenericUserInterface.Services
         /// </summary>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        protected GenericUserInterfaceModelBuilder HiddenFor(string propertyName)
+        public GenericUserInterfaceModelBuilder SetHiddenFor(string propertyName)
         {
             var block = GetBlockByPropertyName(propertyName);
 
@@ -134,7 +165,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="propertyName"></param>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        protected GenericUserInterfaceModelBuilder MultipleDropDownListFor(string propertyName, List<MySelectListItem> selectListItems)
+        public GenericUserInterfaceModelBuilder SetMultipleDropDownListFor(string propertyName, List<MySelectListItem> selectListItems)
         {
             var block = GetBlockByPropertyName(propertyName);
 
@@ -151,7 +182,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="propertyName"></param>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        protected GenericUserInterfaceModelBuilder DropDownListFor(string propertyName, List<MySelectListItem> selectListItems)
+        public GenericUserInterfaceModelBuilder SetDropDownListFor(string propertyName, List<MySelectListItem> selectListItems)
         {
             var block = GetBlockByPropertyName(propertyName);
 
@@ -162,13 +193,13 @@ namespace Zoo.GenericUserInterface.Services
             return this;
         }
 
-        
+
         /// <summary>
         /// Установить большой текстовый инпут для имени свойства
         /// </summary>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        protected GenericUserInterfaceModelBuilder TextAreaFor(string propertyName)
+        public GenericUserInterfaceModelBuilder SetTextAreaFor(string propertyName)
         {
             var block = GetBlockByPropertyName(propertyName);
 
