@@ -14,6 +14,27 @@
             Описание типа данных
             </summary>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Resources.ExceptionTexts">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementDropDownForMethodToEnumProperty">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете применить метод DropDownFor к свойству, которое является перечислением. Данная операция не имеет смысла..
+            </summary>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToStartFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
             <summary>
             Переместить свойство на начальную позицию
@@ -21,14 +42,14 @@
             <param name="expression"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToEndFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToEndFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
             <summary>
             Переместить свойство в конец списка
             </summary>
             <param name="expression"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.HiddenFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.HiddenFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
             <summary>
             Установить скрытое поле ввода для свойства объекта
             </summary>
@@ -42,7 +63,7 @@
             <param name="expression"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor(System.Linq.Expressions.Expression{System.Func{`0,System.Nullable{System.Boolean}}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
             <summary>
             Установить выпадающий список с единственным выбором для свойства объекта
             </summary>
@@ -50,31 +71,7 @@
             <param name="selectListItems"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
-            <summary>
-            Установить выпадающий список с единственным выбором для свойства объекта
-            </summary>
-            <param name="expression"></param>
-            <param name="selectListItems"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.EnumDropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
-            <summary>
-            Установить выпадающий список с единственным выбором для свойства объекта типа Перечисление
-            </summary>
-            <typeparam name="TEnum"></typeparam>
-            <param name="expression"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.EnumMultipleDropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{``0}}})">
-            <summary>
-            Установить выпадающий список с единственным выбором для свойства объекта типа Перечисление
-            </summary>
-            <typeparam name="TEnum"></typeparam>
-            <param name="expression"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.MultipleDropDownListFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.MultipleDropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
             <summary>
             Установить выпадающий список со множественным выбором для свойства объекта
             </summary>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services;
 
 namespace Tests
@@ -19,6 +20,8 @@ namespace Tests
 
     public class SomeClass
     {
+        public SomeType EnumProp { get; set; }
+
         public List<string> Property2 { get; set; }
 
         public List<int> Property3 { get; set; }
@@ -107,6 +110,24 @@ namespace Tests
             });
 
             Assert.IsTrue(true);
+        }
+
+        [Test]
+        public void TestImplementingDropDownForToEnumProperty()
+        {
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
+
+            var ex = Assert.Throws<ApplicationException>(() => builder.DropDownListFor(x => x.EnumProp, new List<Zoo.GenericUserInterface.Models.MySelectListItem>
+            {
+                new Zoo.GenericUserInterface.Models.MySelectListItem
+                {
+                    Selected = false,
+                    Text = "Text",
+
+                }
+            }));
+
+            Assert.AreEqual(ex.Message, ExceptionTexts.CantImplementDropDownForMethodToEnumProperty);
         }
     }
 }
