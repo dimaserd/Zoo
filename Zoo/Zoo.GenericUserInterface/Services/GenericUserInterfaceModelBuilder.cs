@@ -67,7 +67,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="expression"></param>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<T> MultipleDropDownListFor(Expression<Func<T, string>> expression, List<MySelectListItem> selectListItems)
+        public GenericUserInterfaceModelBuilder<T> MultipleDropDownListFor(Expression<Func<T, object>> expression, List<MySelectListItem> selectListItems)
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
