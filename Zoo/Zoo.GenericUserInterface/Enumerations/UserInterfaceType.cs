@@ -6,6 +6,7 @@
         TextArea,
         DropDownList,
         Hidden,
-        DatePicker
+        DatePicker,
+        MultipleDropDownList,
     }
 }

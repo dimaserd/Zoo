@@ -24,6 +24,11 @@ namespace Zoo.GenericUserInterface.Services
 
         }
 
+        /// <summary>
+        /// Установить скрытое поле ввода для свойства объекта
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
         public GenericUserInterfaceModelBuilder<T> HiddenFor(Expression<Func<T, object>> expression)
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
@@ -31,11 +36,42 @@ namespace Zoo.GenericUserInterface.Services
             return HiddenFor(memberName) as GenericUserInterfaceModelBuilder<T>;
         }
 
+        /// <summary>
+        /// Установить большой текстовое поле ввода для свойства объекта
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
         public GenericUserInterfaceModelBuilder<T> TextAreaFor(Expression<Func<T, string>> expression)
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
             return TextAreaFor(memberName) as GenericUserInterfaceModelBuilder<T>;
+        }
+
+        /// <summary>
+        /// Установить выпадающий список с единственным выбором для свойства объекта
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="selectListItems"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder<T> DropDownListFor(Expression<Func<T, string>> expression, List<MySelectListItem> selectListItems)
+        {
+            var memberName = (expression.Body as MemberExpression).Member.Name;
+
+            return DropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<T>;
+        }
+
+        /// <summary>
+        /// Установить выпадающий список со множественным выбором для свойства объекта
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="selectListItems"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder<T> MultipleDropDownListFor(Expression<Func<T, string>> expression, List<MySelectListItem> selectListItems)
+        {
+            var memberName = (expression.Body as MemberExpression).Member.Name;
+
+            return MultipleDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<T>;
         }
     }
 
@@ -61,19 +97,11 @@ namespace Zoo.GenericUserInterface.Services
             Result = GenerateGenericUserInterfaceModel.CreateFromType(type, modelPrefix, null);
         }
 
+        /// <summary>
+        /// Результат - модель для построения пользовательского интерфейса
+        /// </summary>
         public GenerateGenericUserInterfaceModel Result { get; }
         
-        public GenericUserInterfaceModelBuilder LeftOnlyPropertyNames(string propNames)
-        {
-            var propertyNames = propNames.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-            var t = propertyNames.Join(Result.Blocks, x => x, y => y.PropertyName, (x, y) => new KeyValuePair<string, UserInterfaceBlock>(x, y));
-
-            Result.Blocks = t.Select(x => x.Value).ToList();
-
-            return this;
-        }
-
         private UserInterfaceBlock GetBlockByPropertyName(string propertyName)
         {
             var block = Result.Blocks.FirstOrDefault(x => x.PropertyName == propertyName);
@@ -100,7 +128,30 @@ namespace Zoo.GenericUserInterface.Services
             return this;
         }
 
-        public GenericUserInterfaceModelBuilder DropDownListFor(string propertyName, List<MySelectListItem> selectListItems)
+        /// <summary>
+        /// Установить выпадающий список со множественным выбором для свойства объекта
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="selectListItems"></param>
+        /// <returns></returns>
+        protected GenericUserInterfaceModelBuilder MultipleDropDownListFor(string propertyName, List<MySelectListItem> selectListItems)
+        {
+            var block = GetBlockByPropertyName(propertyName);
+
+            block.InterfaceType = UserInterfaceType.MultipleDropDownList;
+
+            block.SelectList = selectListItems;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Установить выпадающий список с единственным выбором для свойства объекта
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="selectListItems"></param>
+        /// <returns></returns>
+        protected GenericUserInterfaceModelBuilder DropDownListFor(string propertyName, List<MySelectListItem> selectListItems)
         {
             var block = GetBlockByPropertyName(propertyName);
 

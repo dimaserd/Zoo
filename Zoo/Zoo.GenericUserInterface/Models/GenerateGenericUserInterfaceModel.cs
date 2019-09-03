@@ -10,8 +10,14 @@ namespace Zoo.GenericUserInterface.Models
 {
     public class GenerateGenericUserInterfaceModel
     {
+        /// <summary>
+        /// Префикс для построения модели
+        /// </summary>
         public string Prefix { get; set; }
 
+        /// <summary>
+        /// Описание типа данных
+        /// </summary>
         public CrocoTypeDescription TypeDescription { get; set; }
 
         public List<UserInterfaceBlock> Blocks { get; set; }
