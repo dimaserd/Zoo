@@ -61,11 +61,29 @@ namespace Zoo.GenericUserInterface.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Вы не можете применить метод DropDownFor к свойству, которое является перечислением. Данная операция не имеет смысла..
+        ///   Ищет локализованную строку, похожую на Вы не можете применить метод {0} к свойству, которое является перечислением. Данная операция не имеет смысла..
         /// </summary>
-        public static string CantImplementDropDownForMethodToEnumProperty {
+        public static string CantImplementMethodNameToEnumPropertyFormat {
             get {
-                return ResourceManager.GetString("CantImplementDropDownForMethodToEnumProperty", resourceCulture);
+                return ResourceManager.GetString("CantImplementMethodNameToEnumPropertyFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое является массивом из перечислений. Данная операция не имеет смысла, так как перечисление, автоматически предоставляет массив возможных значений..
+        /// </summary>
+        public static string CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty {
+            get {
+                return ResourceManager.GetString("CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
+        /// </summary>
+        public static string CantImplementMultipleDropDownForToNotEnumerableProperty {
+            get {
+                return ResourceManager.GetString("CantImplementMultipleDropDownForToNotEnumerableProperty", resourceCulture);
             }
         }
     }

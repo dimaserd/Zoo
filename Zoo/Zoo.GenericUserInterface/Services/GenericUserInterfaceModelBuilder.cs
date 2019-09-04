@@ -1,11 +1,9 @@
-﻿using Croco.Core.Common.Resources;
-using Croco.Core.Logic.Models.Documentation;
+﻿using Croco.Core.Logic.Models.Documentation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Resources;
 
@@ -91,7 +89,7 @@ namespace Zoo.GenericUserInterface.Services
 
             if(crocDescr.IsEnumeration)
             {
-                throw new ApplicationException(ExceptionTexts.CantImplementDropDownForMethodToEnumProperty);
+                throw new ApplicationException(string.Format(ExceptionTexts.CantImplementMethodNameToEnumPropertyFormat, nameof(DropDownListFor)));
             }
 
             return SetDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<TModel>;
@@ -107,6 +105,18 @@ namespace Zoo.GenericUserInterface.Services
         public GenericUserInterfaceModelBuilder<TModel> MultipleDropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<MySelectListItem> selectListItems)
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
+
+            var crocDescr = CrocoTypeDescription.GetDescription(typeof(TProp));
+
+            if(!crocDescr.IsEnumerable)
+            {
+                throw new ApplicationException(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty);
+            }
+
+            if (crocDescr.EnumeratedType.IsEnumeration)
+            {
+                throw new ApplicationException(ExceptionTexts.CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty);
+            }
 
             return SetMultipleDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<TModel>;
         }

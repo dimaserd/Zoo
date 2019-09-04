@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Zoo.GenericUserInterface.Enumerations;
+using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services;
 
@@ -27,49 +29,12 @@ namespace Tests
         public List<int> Property3 { get; set; }
 
         public List<SomeType> Property { get; set; }
-    }
-
-    public class EditApplicationUser
-    {
-        public string Id { get; set; }
-
-        /// <summary>
-        /// Имя пользователя
-        /// </summary>
-        [Display(Name = "Имя")]
-        public string Name { get; set; }
-
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        [Display(Name = "Дата рождения")]
-        public DateTime? BirthDate { get; set; }
-
-        /// <summary>
-        /// Фамилия пользователя
-        /// </summary>
-        [Display(Name = "Фамилия")]
-        public string Surname { get; set; }
-
-        /// <summary>
-        /// Отчество
-        /// </summary>
-        [Display(Name = "Отчество")]
-        public string Patronymic { get; set; }
 
         /// <summary>
         /// Пол
         /// </summary>
         [Display(Name = "Пол")]
         public bool? Sex { get; set; }
-
-        public string ObjectJson { get; set; }
-
-        /// <summary>
-        /// Номер телефона
-        /// </summary>
-        [Display(Name = "Номер телефона")]
-        public string PhoneNumber { get; set; }
     }
 
     public class Tests
@@ -97,19 +62,24 @@ namespace Tests
         [Test]
         public void Test()
         {
-            var builder = new GenericUserInterfaceModelBuilder<EditApplicationUser>("prefix");
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
 
-            builder.DropDownListFor(x => x.Sex, new List<Zoo.GenericUserInterface.Models.MySelectListItem>
+            var list = new List<MySelectListItem>
             {
-                new Zoo.GenericUserInterface.Models.MySelectListItem
+                new MySelectListItem
                 {
                     Selected = false,
                     Text = "Text",
 
                 }
-            });
+            };
 
-            Assert.IsTrue(true);
+            builder.DropDownListFor(x => x.Sex, list);
+
+            var lastProp = builder.Result.Blocks.Last();
+
+            Assert.IsTrue(lastProp.InterfaceType == UserInterfaceType.DropDownList);
+            Assert.IsTrue(lastProp.SelectList == list);
         }
 
         [Test]
@@ -119,15 +89,49 @@ namespace Tests
 
             var ex = Assert.Throws<ApplicationException>(() => builder.DropDownListFor(x => x.EnumProp, new List<Zoo.GenericUserInterface.Models.MySelectListItem>
             {
-                new Zoo.GenericUserInterface.Models.MySelectListItem
+                new MySelectListItem
                 {
                     Selected = false,
-                    Text = "Text",
-
+                    Text = "Text"
                 }
             }));
 
-            Assert.AreEqual(ex.Message, ExceptionTexts.CantImplementDropDownForMethodToEnumProperty);
+            Assert.AreEqual(ex.Message, string.Format(ExceptionTexts.CantImplementMethodNameToEnumPropertyFormat, nameof(builder.DropDownListFor)));
+        }
+
+        [Test]
+        public void TestImplementingMultipleDropDownForToNotEnumerableProperty()
+        {
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
+
+            var ex = Assert.Throws<ApplicationException>(() => builder.MultipleDropDownListFor(x => x.EnumProp, new List<MySelectListItem>
+            {
+                new MySelectListItem
+                {
+                    Selected = false,
+                    Text = "Text"
+                }
+            }));
+
+            Assert.AreEqual(ex.Message, string.Format(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty, nameof(builder.MultipleDropDownListFor)));
+        }
+
+
+        [Test]
+        public void TestImplementingMultipleDropDownForToEnumProperty()
+        {
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
+
+            var ex = Assert.Throws<ApplicationException>(() => builder.MultipleDropDownListFor(x => x.Property, new List<MySelectListItem>
+            {
+                new MySelectListItem
+                {
+                    Selected = false,
+                    Text = "Text"
+                }
+            }));
+
+            Assert.AreEqual(ex.Message, ExceptionTexts.CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty);
         }
     }
 }

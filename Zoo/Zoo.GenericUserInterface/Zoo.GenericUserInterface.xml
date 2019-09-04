@@ -30,9 +30,19 @@
               обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementDropDownForMethodToEnumProperty">
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementMethodNameToEnumPropertyFormat">
             <summary>
-              Ищет локализованную строку, похожую на Вы не можете применить метод DropDownFor к свойству, которое является перечислением. Данная операция не имеет смысла..
+              Ищет локализованную строку, похожую на Вы не можете применить метод {0} к свойству, которое является перечислением. Данная операция не имеет смысла..
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое является массивом из перечислений. Данная операция не имеет смысла, так как перечисление, автоматически предоставляет массив возможных значений..
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
             </summary>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToStartFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">

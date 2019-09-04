@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CantImplementDropDownForMethodToEnumProperty" xml:space="preserve">
-    <value>Вы не можете применить метод DropDownFor к свойству, которое является перечислением. Данная операция не имеет смысла.</value>
+  <data name="CantImplementMethodNameToEnumPropertyFormat" xml:space="preserve">
+    <value>Вы не можете применить метод {0} к свойству, которое является перечислением. Данная операция не имеет смысла.</value>
+  </data>
+  <data name="CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty" xml:space="preserve">
+    <value>Вы не можете применить метод MultipleDropDownFor к свойству, которое является массивом из перечислений. Данная операция не имеет смысла, так как перечисление, автоматически предоставляет массив возможных значений.</value>
+  </data>
+  <data name="CantImplementMultipleDropDownForToNotEnumerableProperty" xml:space="preserve">
+    <value>Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом.</value>
   </data>
 </root>
