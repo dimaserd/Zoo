@@ -1,4 +1,4 @@
-﻿using Croco.Core.Logic.Models.Documentation;
+﻿using Croco.Core.Documentation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

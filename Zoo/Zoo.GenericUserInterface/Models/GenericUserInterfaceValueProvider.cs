@@ -1,5 +1,5 @@
 ﻿using Croco.Core.Common.Utils;
-using Croco.Core.Logic.Models.Documentation;
+using Croco.Core.Documentation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +7,26 @@ using Zoo.GenericUserInterface.Models.Values;
 
 namespace Zoo.GenericUserInterface.Models
 {
+    /// <summary>
+    /// Провайдер значений для модели
+    /// </summary>
     public class GenericUserInterfaceValueProvider
     {
+        /// <summary>
+        /// Значения для типов данных не являющихся массивами
+        /// </summary>
         public List<GenericUserInterfacePropertySingleValue> Singles { get; set; }
 
+        /// <summary>
+        /// Значения для типов данных которые являются массивами
+        /// </summary>
         public List<GenericUserInterfacePropertyListValue> Arrays { get; set; }
 
+        /// <summary>
+        /// Создать провайдера значений из объекта
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public static GenericUserInterfaceValueProvider Create(object model)
         {
             var modelType = model.GetType();

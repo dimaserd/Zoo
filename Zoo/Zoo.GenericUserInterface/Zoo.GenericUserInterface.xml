@@ -14,6 +14,28 @@
             Описание типа данных
             </summary>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider">
+            <summary>
+            Провайдер значений для модели
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider.Singles">
+            <summary>
+            Значения для типов данных не являющихся массивами
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider.Arrays">
+            <summary>
+            Значения для типов данных которые являются массивами
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider.Create(System.Object)">
+            <summary>
+            Создать провайдера значений из объекта
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Resources.ExceptionTexts">
             <summary>
               Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
