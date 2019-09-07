@@ -49,7 +49,8 @@ namespace Zoo.GenericUserInterface.Models
             {
                 if (prop.IsClass)
                 {
-                    throw new Exception("Вложенные классы не поддерживаются");
+                    //Вложенный класс не поддерживается как провайдер значений для свойства
+                    continue;
                 }
 
                 var jsonValueOfModel = GetJson(model, prop);
