@@ -4,6 +4,46 @@
         <name>Zoo.GenericUserInterface</name>
     </assembly>
     <members>
+        <member name="T:Zoo.GenericUserInterface.Enumerations.UserInterfaceType">
+            <summary>
+            Тип пользовательского интерейса для свойства
+            </summary>
+        </member>
+        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.CustomInput">
+            <summary>
+            Кастомный элемент ввода
+            </summary>
+        </member>
+        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.TextBox">
+            <summary>
+            Текстовое поле
+            </summary>
+        </member>
+        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.TextArea">
+            <summary>
+            Большое текстовое поле
+            </summary>
+        </member>
+        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.DropDownList">
+            <summary>
+            Выпадающий список
+            </summary>
+        </member>
+        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.Hidden">
+            <summary>
+            Скрытый инпут со значением
+            </summary>
+        </member>
+        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.DatePicker">
+            <summary>
+            Календарь для даты
+            </summary>
+        </member>
+        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.MultipleDropDownList">
+            <summary>
+            Выпадающий список с множественным выбором
+            </summary>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.Prefix">
             <summary>
             Префикс для построения модели
@@ -35,6 +75,31 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.UserInterfaceBlock">
+            <summary>
+            Блок описывающий свойство в модели
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.PropertyName">
+            <summary>
+            Название свойства
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.InterfaceType">
+            <summary>
+            Тип пользовательского интрефейса
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.SelectList">
+            <summary>
+            Значения для выпадающего списка
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.CustomDataJson">
+            <summary>
+            Json с кастомными данными, можно использовать для построения кастомного инпута
+            </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Resources.ExceptionTexts">
             <summary>

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Zoo.GenericUserInterface</id>
-    <version>0.9.5</version>
+    <version>0.9.6</version>
     <title>Generic UserInterface</title>
     <authors>Dmitry Serdyukov</authors>
     <owners>Dmitry Serdyukov</owners>
@@ -11,8 +11,8 @@
     <releaseNotes>Что-то сделали лучше, что-то сделали хуже.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <dependencies>
-      <dependency id="NetCroco.Core" version="1.9.6" />
-      <dependency id="NetCroco.Core.Documentation" version="1.1.5" />
+      <dependency id="NetCroco.Core" version="1.9.14" />
+      <dependency id="NetCroco.Core.Documentation" version="1.1.7" />
     </dependencies>
   </metadata>
   <files>
