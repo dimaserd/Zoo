@@ -9,18 +9,36 @@ using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services
 {
+    /// <summary>
+    /// Вспомогательный класс для построения обобщенного интерфейса
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
     public class GenericUserInterfaceModelBuilder<TModel> : GenericUserInterfaceModelBuilder where TModel : class
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="modelPrefix"></param>
         public GenericUserInterfaceModelBuilder(string modelPrefix) : base(typeof(TModel), modelPrefix)
         {
 
         }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="modelPrefix"></param>
+        /// <param name="valueProvider"></param>
         public GenericUserInterfaceModelBuilder(string modelPrefix, GenericUserInterfaceValueProvider valueProvider) : base(typeof(TModel), modelPrefix, valueProvider)
         {
 
         }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="modelPrefix"></param>
         public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix) : base(typeof(TModel), modelPrefix, GenericUserInterfaceValueProvider.Create(model))
         {
 

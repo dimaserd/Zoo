@@ -132,6 +132,32 @@
               Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
             </summary>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1">
+            <summary>
+            Вспомогательный класс для построения обобщенного интерфейса
+            </summary>
+            <typeparam name="TModel"></typeparam>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.#ctor(System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="modelPrefix"></param>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.#ctor(System.String,Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="modelPrefix"></param>
+            <param name="valueProvider"></param>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.#ctor(`0,System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="model"></param>
+            <param name="modelPrefix"></param>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToStartFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
             <summary>
             Переместить свойство на начальную позицию

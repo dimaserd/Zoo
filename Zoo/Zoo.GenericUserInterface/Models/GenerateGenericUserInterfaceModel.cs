@@ -56,7 +56,7 @@ namespace Zoo.GenericUserInterface.Models
             return new GenerateGenericUserInterfaceModel
             {
                 TypeDescription = desc,
-                Blocks = GetBlocks(desc),
+                Blocks = GetBlocks("", desc),
                 Prefix = modelPrefix,
                 ValueProvider = valueProvider
             };
@@ -72,19 +72,19 @@ namespace Zoo.GenericUserInterface.Models
             };
         }
 
-        private static List<UserInterfaceBlock> GetBlocks(CrocoTypeDescription desc)
+        private static List<UserInterfaceBlock> GetBlocks(string prefix, CrocoTypeDescription desc)
         {
             List<UserInterfaceBlock> result = new List<UserInterfaceBlock>();
 
             foreach (var prop in desc.Properties)
             {
-                result.AddRange(GetBlocksFromProperty(prop));
+                result.AddRange(GetBlocksFromProperty(prefix, prop));
             }
 
             return result;
         }
 
-        private static List<UserInterfaceBlock> GetBlocksFromProperty(CrocoTypeDescription prop)
+        private static List<UserInterfaceBlock> GetBlocksFromProperty(string prefix, CrocoTypeDescription prop)
         {
             if (!prop.IsClass && !prop.IsEnumerable)
             {
@@ -92,7 +92,7 @@ namespace Zoo.GenericUserInterface.Models
                 {
                     new UserInterfaceBlock
                     {
-                        PropertyName = prop.PropertyName,
+                        PropertyName = $"{prefix}{prop.PropertyName}",
                         InterfaceType = GetUserInterfaceType(prop),
                         SelectList = GetSelectList(prop)
                     }
@@ -109,7 +109,7 @@ namespace Zoo.GenericUserInterface.Models
 
             if (prop.IsClass)
             {
-                return GetBlocks(prop);
+                return GetBlocks($"{prefix}{prop.PropertyName}.", prop);
             }
 
             throw new Exception("не продумано");
