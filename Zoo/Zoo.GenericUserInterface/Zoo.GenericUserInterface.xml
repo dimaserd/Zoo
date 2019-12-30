@@ -157,6 +157,22 @@
             Json с кастомными данными, можно использовать для построения кастомного инпута
             </summary>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Values.GenericUserInterfacePropertyGenericValue`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Values.GenericUserInterfacePropertyGenericValue`1.PropertyName">
+            <summary>
+            Название свойства
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Values.GenericUserInterfacePropertyGenericValue`1.Value">
+            <summary>
+            Значение
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Resources.ExceptionTexts">
             <summary>
               Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
