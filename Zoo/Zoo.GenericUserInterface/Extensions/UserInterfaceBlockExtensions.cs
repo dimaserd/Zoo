@@ -6,16 +6,6 @@ namespace Zoo.GenericUserInterface.Extensions
 {
     public static class UserInterfaceBlockExtensions
     {
-        public static UserInterfaceBlock GetBooleanDropDownListBlock(string propertyName)
-        {
-            return new UserInterfaceBlock
-            {
-                PropertyName = propertyName,
-                InterfaceType = UserInterfaceType.DropDownList,
-                SelectList = MySelectListItemExtensions.GetBooleanList()
-            };
-        }
-
         public static UserInterfaceBlock GetTextBoxBlock(string propertyName)
         {
             return new UserInterfaceBlock

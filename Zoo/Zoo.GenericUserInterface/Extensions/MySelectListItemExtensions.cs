@@ -11,16 +11,30 @@ namespace Zoo.GenericUserInterface.Extensions
         /// <summary>
         /// Получить список из булевых значений
         /// </summary>
+        /// <param name="isNullable"></param>
+        /// <param name="nullText"></param>
         /// <param name="falseText"></param>
         /// <param name="trueText"></param>
         /// <returns></returns>
-        public static List<MySelectListItem> GetBooleanList(string falseText = "Нет", string trueText = "Да")
+        public static List<MySelectListItem> GetBooleanList(bool isNullable, string nullText = "Не выбрано", string falseText = "Нет", string trueText = "Да")
         {
-            return new List<MySelectListItem>
+            var list = new List<MySelectListItem>();
+
+            if(isNullable)
+            {
+                list.Add(new MySelectListItem
+                {
+                    Selected = true,
+                    Text = nullText,
+                    Value = null
+                });
+            }
+
+            list.AddRange(new List<MySelectListItem>
             {
                 new MySelectListItem
                 {
-                    Selected = true,
+                    Selected = !isNullable,
                     Text = falseText,
                     Value = false.ToString(),
                 },
@@ -30,7 +44,9 @@ namespace Zoo.GenericUserInterface.Extensions
                     Text = trueText,
                     Value = true.ToString()
                 }
-            };
+            });
+
+            return list;
         }
 
         /// <summary>

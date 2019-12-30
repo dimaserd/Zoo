@@ -10,6 +10,8 @@ namespace Zoo.GenericUserInterface.Models
 {
     public class GenerateGenericUserInterfaceModel
     {
+        public static readonly string NotSelectedText = "Не выбрано";
+
         /// <summary>
         /// Префикс для построения модели
         /// </summary>
@@ -149,7 +151,7 @@ namespace Zoo.GenericUserInterface.Models
 
             if (prop.FullTypeName == typeof(bool).FullName)
             {
-                return MySelectListItemExtensions.GetBooleanList();
+                return MySelectListItemExtensions.GetBooleanList(prop.IsNullable);
             }
 
             if (emptySelectListPredicates.Any(x => x(prop)))
@@ -159,11 +161,25 @@ namespace Zoo.GenericUserInterface.Models
 
             if (prop.IsEnumeration)
             {
-                return prop.EnumDescription.EnumValues.Select(x => new MySelectListItem
+                var enumsList = new List<MySelectListItem>();
+
+                if(prop.IsNullable)
+                {
+                    enumsList.Add(new MySelectListItem
+                    {
+                        Value = null,
+                        Selected = true,
+                        Text = NotSelectedText
+                    });
+                }
+
+                enumsList.AddRange(prop.EnumDescription.EnumValues.Select(x => new MySelectListItem
                 {
                     Value = x.StringRepresentation,
                     Text = x.DisplayName
-                }).ToList();
+                }));
+
+                return enumsList;
             }
 
             return null;
