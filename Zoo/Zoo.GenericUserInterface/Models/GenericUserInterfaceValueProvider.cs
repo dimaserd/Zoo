@@ -59,7 +59,7 @@ namespace Zoo.GenericUserInterface.Models
                 {
                     t.Arrays.Add(new GenericUserInterfacePropertyListValue
                     {
-                        PropertyName = prop.PropertyName,
+                        PropertyName = prop.PropertyDescription.PropertyName,
                         Value = Tool.JsonConverter.Deserialize<List<string>>(jsonValueOfModel)
                     });
                 }
@@ -67,7 +67,7 @@ namespace Zoo.GenericUserInterface.Models
                 {
                     t.Singles.Add(new GenericUserInterfacePropertySingleValue
                     {
-                        PropertyName = prop.PropertyName,
+                        PropertyName = prop.PropertyDescription.PropertyName,
                         Value = Tool.JsonConverter.Deserialize<string>(jsonValueOfModel)
                     });
                 }
@@ -78,7 +78,7 @@ namespace Zoo.GenericUserInterface.Models
 
         private static string GetJson(object obj, CrocoTypeDescription prop)
         {
-            var propOfModel = obj.GetType().GetProperty(prop.PropertyName);
+            var propOfModel = obj.GetType().GetProperty(prop.PropertyDescription.PropertyName);
 
             var valueOfProp = propOfModel.GetValue(obj);
 

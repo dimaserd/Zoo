@@ -20,10 +20,23 @@ namespace Zoo.GenericUserInterface.Models
         /// </summary>
         public CrocoTypeDescription TypeDescription { get; set; }
 
+        /// <summary>
+        /// Блоки для свойств
+        /// </summary>
         public List<UserInterfaceBlock> Blocks { get; set; }
 
+        /// <summary>
+        /// Провайдер значений
+        /// </summary>
         public GenericUserInterfaceValueProvider ValueProvider { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="valueProvider"></param>
+        /// <param name="modelPrefix"></param>
+        /// <returns></returns>
         public static GenerateGenericUserInterfaceModel Create(IHaveGenericUserInterface model, GenericUserInterfaceValueProvider valueProvider, string modelPrefix)
         {
             var typeDesc = CrocoTypeDescription.GetDescription(model.GetType());
@@ -67,7 +80,7 @@ namespace Zoo.GenericUserInterface.Models
             return new UserInterfaceBlock
             {
                 InterfaceType = UserInterfaceType.MultipleDropDownList,
-                PropertyName = prop.PropertyName,
+                PropertyName = prop.PropertyDescription.PropertyName,
                 SelectList = GetSelectList(prop),
             };
         }
@@ -92,7 +105,7 @@ namespace Zoo.GenericUserInterface.Models
                 {
                     new UserInterfaceBlock
                     {
-                        PropertyName = $"{prefix}{prop.PropertyName}",
+                        PropertyName = $"{prefix}{prop.PropertyDescription.PropertyName}",
                         InterfaceType = GetUserInterfaceType(prop),
                         SelectList = GetSelectList(prop)
                     }
@@ -109,7 +122,7 @@ namespace Zoo.GenericUserInterface.Models
 
             if (prop.IsClass)
             {
-                return GetBlocks($"{prefix}{prop.PropertyName}.", prop);
+                return GetBlocks($"{prefix}{prop.PropertyDescription.PropertyName}.", prop);
             }
 
             throw new Exception("не продумано");
@@ -127,7 +140,7 @@ namespace Zoo.GenericUserInterface.Models
             {
                 var enumeratedType = prop.EnumeratedType;
 
-                return enumeratedType.EnumValues.Select(x => new MySelectListItem
+                return enumeratedType.EnumDescription.EnumValues.Select(x => new MySelectListItem
                 {
                     Text = x.DisplayName,
                     Value = x.StringRepresentation
@@ -146,7 +159,7 @@ namespace Zoo.GenericUserInterface.Models
 
             if (prop.IsEnumeration)
             {
-                return prop.EnumValues.Select(x => new MySelectListItem
+                return prop.EnumDescription.EnumValues.Select(x => new MySelectListItem
                 {
                     Value = x.StringRepresentation,
                     Text = x.DisplayName

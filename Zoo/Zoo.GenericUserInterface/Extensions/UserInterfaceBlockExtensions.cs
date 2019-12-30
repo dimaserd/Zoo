@@ -25,7 +25,7 @@ namespace Zoo.GenericUserInterface.Extensions
             };
         }
 
-        public static UserInterfaceBlock GetTexAreaBlock(string propertyName)
+        public static UserInterfaceBlock GetTextAreaBlock(string propertyName)
         {
             return new UserInterfaceBlock
             {
