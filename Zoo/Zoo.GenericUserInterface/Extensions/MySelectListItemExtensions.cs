@@ -12,11 +12,9 @@ namespace Zoo.GenericUserInterface.Extensions
         /// Получить список из булевых значений
         /// </summary>
         /// <param name="isNullable"></param>
-        /// <param name="nullText"></param>
-        /// <param name="falseText"></param>
-        /// <param name="trueText"></param>
+        /// <param name="opts"></param>
         /// <returns></returns>
-        public static List<MySelectListItem> GetBooleanList(bool isNullable, string nullText = "Не выбрано", string falseText = "Нет", string trueText = "Да")
+        public static List<MySelectListItem> GetBooleanList(bool isNullable, GenericInterfaceOptions opts)
         {
             var list = new List<MySelectListItem>();
 
@@ -25,7 +23,7 @@ namespace Zoo.GenericUserInterface.Extensions
                 list.Add(new MySelectListItem
                 {
                     Selected = true,
-                    Text = nullText,
+                    Text =  opts.NotSelectedText,
                     Value = null
                 });
             }
@@ -35,13 +33,13 @@ namespace Zoo.GenericUserInterface.Extensions
                 new MySelectListItem
                 {
                     Selected = !isNullable,
-                    Text = falseText,
+                    Text = opts.TextOnFalse,
                     Value = false.ToString(),
                 },
 
                 new MySelectListItem
                 {
-                    Text = trueText,
+                    Text = opts.TextOnTrue,
                     Value = true.ToString()
                 }
             });

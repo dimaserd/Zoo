@@ -26,8 +26,18 @@ namespace Zoo.GenericUserInterface.Services
         /// Конструктор
         /// </summary>
         /// <param name="modelPrefix"></param>
+        /// <param name="opts"></param>
+        public GenericUserInterfaceModelBuilder(string modelPrefix, GenericInterfaceOptions opts) : base(typeof(TModel), modelPrefix, null, opts)
+        {
+
+        }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="modelPrefix"></param>
         /// <param name="valueProvider"></param>
-        public GenericUserInterfaceModelBuilder(string modelPrefix, GenericUserInterfaceValueProvider valueProvider) : base(typeof(TModel), modelPrefix, valueProvider)
+        public GenericUserInterfaceModelBuilder(string modelPrefix, GenericUserInterfaceValueProvider valueProvider) : base(typeof(TModel), modelPrefix, valueProvider, null)
         {
 
         }
@@ -37,7 +47,20 @@ namespace Zoo.GenericUserInterface.Services
         /// </summary>
         /// <param name="model"></param>
         /// <param name="modelPrefix"></param>
-        public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix) : base(typeof(TModel), modelPrefix, GenericUserInterfaceValueProvider.Create(model))
+        public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix) : base(typeof(TModel), modelPrefix, GenericUserInterfaceValueProvider.Create(model), null)
+        {
+
+        }
+
+        
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="modelPrefix"></param>
+        /// <param name="opts"></param>
+        public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix, GenericInterfaceOptions opts) : base(typeof(TModel), modelPrefix, GenericUserInterfaceValueProvider.Create(model), opts)
         {
 
         }

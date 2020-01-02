@@ -14,6 +14,11 @@ namespace Zoo.GenericUserInterface.Models
         public string PropertyName { get; set; }
 
         /// <summary>
+        /// Текст лейбла
+        /// </summary>
+        public string LabelText { get; set; }
+
+        /// <summary>
         /// Тип пользовательского интрефейса
         /// </summary>
         public UserInterfaceType InterfaceType { get; set; }

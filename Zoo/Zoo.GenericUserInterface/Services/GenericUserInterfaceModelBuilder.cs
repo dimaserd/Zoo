@@ -6,27 +6,63 @@ using Zoo.GenericUserInterface.Models;
 
 namespace Zoo.GenericUserInterface.Services
 {
+    /// <summary>
+    /// Построитель обобщенного пользовательского интерфейса
+    /// </summary>
     public class GenericUserInterfaceModelBuilder
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="modelPrefix"></param>
         public GenericUserInterfaceModelBuilder(object model, string modelPrefix)
         {
             Result = GenerateGenericUserInterfaceModel.CreateFromObject(model, modelPrefix);
         }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="result"></param>
         public GenericUserInterfaceModelBuilder(GenerateGenericUserInterfaceModel result)
         {
             Result = result ?? throw new NullReferenceException(nameof(result));
         }
 
-        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix, GenericUserInterfaceValueProvider valueProvider)
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="modelPrefix"></param>
+        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix) : this(type, modelPrefix, null, null)
         {
-            Result = GenerateGenericUserInterfaceModel.CreateFromType(type, modelPrefix, valueProvider);
         }
 
-        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix)
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="modelPrefix"></param>
+        /// <param name="opts"></param>
+        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix, GenericInterfaceOptions opts): this(type, modelPrefix, null, opts)
         {
-            Result = GenerateGenericUserInterfaceModel.CreateFromType(type, modelPrefix, null);
+
         }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="modelPrefix"></param>
+        /// <param name="valueProvider"></param>
+        /// <param name="opts"></param>
+        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix, GenericUserInterfaceValueProvider valueProvider, GenericInterfaceOptions opts)
+        {
+            Result = GenerateGenericUserInterfaceModel.CreateFromType(type, modelPrefix, valueProvider, opts);
+        }
+
+        
 
         /// <summary>
         /// Результат - модель для построения пользовательского интерфейса
