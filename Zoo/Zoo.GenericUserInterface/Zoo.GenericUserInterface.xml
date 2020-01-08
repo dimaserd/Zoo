@@ -137,7 +137,7 @@
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.GenericInterfaceOverrider`1">
             <summary>
-            Переопределитель обобщенного интерфейса
+            Переопределитель интерфейса
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -148,27 +148,9 @@
         </member>
         <member name="M:Zoo.GenericUserInterface.Models.GenericInterfaceOverrider`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
             <summary>
-            Переорпеделить интерфейс
+            
             </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.GenericInterfaceSelfOverrider`1.TypeFullName">
-            <summary>
-            Полное название типа
-            </summary>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.GenericInterfaceSelfOverrider`1.GetOverrider">
-            <summary>
-            Получить переопределитель интерфейса
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.GenericInterfaceSelfOverrider`1.SelfOverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
-            <summary>
-            Переопределить интерфейс
-            </summary>
-            <param name="model"></param>
+            <param name="overrider"></param>
             <returns></returns>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.GenericUserInterfaceOverridings">
@@ -282,6 +264,11 @@
         <member name="T:Zoo.GenericUserInterface.Models.Values.GenericUserInterfacePropertyListValue">
             <summary>
             Модель провайдера значений для списка
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Values.GenericUserInterfacePropertySingleValue">
+            <summary>
+            Единичное значение
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Resources.ExceptionTexts">

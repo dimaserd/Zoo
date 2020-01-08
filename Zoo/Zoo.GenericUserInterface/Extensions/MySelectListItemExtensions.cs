@@ -6,7 +6,7 @@ using Zoo.GenericUserInterface.Models;
 
 namespace Zoo.GenericUserInterface.Extensions
 {
-    public static class MySelectListItemExtensions
+    internal static class MySelectListItemExtensions
     {
         /// <summary>
         /// Получить список из булевых значений
@@ -14,7 +14,7 @@ namespace Zoo.GenericUserInterface.Extensions
         /// <param name="isNullable"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public static List<MySelectListItem> GetBooleanList(bool isNullable, GenericInterfaceOptions opts)
+        internal static List<MySelectListItem> GetBooleanList(bool isNullable, GenericInterfaceOptions opts)
         {
             var list = new List<MySelectListItem>();
 
@@ -52,7 +52,7 @@ namespace Zoo.GenericUserInterface.Extensions
         /// </summary>
         /// <param name="enumType"></param>
         /// <returns></returns>
-        public static List<MySelectListItem> GetEnumDropDownList(Type enumType)
+        internal static List<MySelectListItem> GetEnumDropDownList(Type enumType)
         {
             var crocoType = CrocoTypeDescription.GetDescription(enumType);
 
