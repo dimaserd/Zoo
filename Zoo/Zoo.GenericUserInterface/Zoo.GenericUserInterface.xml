@@ -158,6 +158,25 @@
             <param name="overrider"></param>
             <returns></returns>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Models.GenericInterfaceOverriderImplementation`1">
+            <summary>
+            Реализация 
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.GenericInterfaceOverriderImplementation`1.#ctor(System.Func{Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0},System.Threading.Tasks.Task})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="task"></param>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.GenericInterfaceOverriderImplementation`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
+            <summary>
+            Переопределение 
+            </summary>
+            <param name="overrider"></param>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Models.GenericUserInterfaceOverridings">
             <summary>
             Переопределения пользовательских интерфейсов для типов
