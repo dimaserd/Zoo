@@ -66,6 +66,14 @@ namespace Zoo.GenericUserInterface.Services
         }
 
         /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="model"></param>
+        public GenericUserInterfaceModelBuilder(GenerateGenericUserInterfaceModel model): base(model)
+        {
+        }
+
+        /// <summary>
         /// Переместить свойство на начальную позицию
         /// </summary>
         /// <param name="expression"></param>

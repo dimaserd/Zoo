@@ -84,6 +84,13 @@
             Провайдер значений
             </summary>
         </member>
+        <member name="M:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.OverrideAsync(Zoo.GenericUserInterface.Models.GenericUserInterfaceOverridings)">
+            <summary>
+            Кастомно переопределить
+            </summary>
+            <param name="overridings"></param>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.CreateFromObject(System.Object,System.String)">
             <summary>
             Создать из объекта используя провайдер значений
@@ -126,6 +133,62 @@
             <summary>
             Дефолтные опции
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.GenericInterfaceOverrider`1">
+            <summary>
+            Переопределитель обобщенного интерфейса
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.GenericInterfaceOverrider`1.TypeFullName">
+            <summary>
+            Полное название типа
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.GenericInterfaceOverrider`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
+            <summary>
+            Переорпеделить интерфейс
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.GenericInterfaceSelfOverrider`1.TypeFullName">
+            <summary>
+            Полное название типа
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.GenericInterfaceSelfOverrider`1.GetOverrider">
+            <summary>
+            Получить переопределитель интерфейса
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.GenericInterfaceSelfOverrider`1.SelfOverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
+            <summary>
+            Переопределить интерфейс
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.GenericUserInterfaceOverridings">
+            <summary>
+            Переопределения пользовательских интерфейсов для типов
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.GenericUserInterfaceOverridings.Add``1(Zoo.GenericUserInterface.Models.GenericInterfaceOverrider{``0})">
+            <summary>
+            Добавить новое переопределение для интерфейса
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="overrider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.GenericUserInterfaceOverridings.GetOverriding(System.String)">
+            <summary>
+            Получить переопрделение по полному названию типа
+            </summary>
+            <param name="typeFullName"></param>
             <returns></returns>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider">
@@ -383,6 +446,12 @@
             <param name="model"></param>
             <param name="modelPrefix"></param>
             <param name="opts"></param>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.#ctor(Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="model"></param>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToStartFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
             <summary>

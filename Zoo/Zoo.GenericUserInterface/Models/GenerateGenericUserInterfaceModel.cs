@@ -2,18 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
 
 namespace Zoo.GenericUserInterface.Models
 {
+
     /// <summary>
     /// Модель для создания обощенного интерфейса
     /// </summary>
     public class GenerateGenericUserInterfaceModel
     {
-        public static readonly string NotSelectedText = "Не выбрано";
-
         /// <summary>
         /// Префикс для построения модели
         /// </summary>
@@ -33,6 +33,23 @@ namespace Zoo.GenericUserInterface.Models
         /// Провайдер значений
         /// </summary>
         public GenericUserInterfaceValueProvider ValueProvider { get; set; }
+
+        /// <summary>
+        /// Кастомно переопределить
+        /// </summary>
+        /// <param name="overridings"></param>
+        /// <returns></returns>
+        public Task OverrideAsync(GenericUserInterfaceOverridings overridings)
+        {
+            var overriding = overridings.GetOverriding(TypeDescription.FullTypeName);
+            
+            if(overriding == null)
+            {
+                return Task.CompletedTask;
+            }
+
+            return overriding(this);
+        }
 
         /// <summary>
         /// Создать из объекта используя провайдер значений

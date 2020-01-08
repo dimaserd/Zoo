@@ -62,8 +62,6 @@ namespace Zoo.GenericUserInterface.Services
             Result = GenerateGenericUserInterfaceModel.CreateFromType(type, modelPrefix, valueProvider, opts);
         }
 
-        
-
         /// <summary>
         /// Результат - модель для построения пользовательского интерфейса
         /// </summary>

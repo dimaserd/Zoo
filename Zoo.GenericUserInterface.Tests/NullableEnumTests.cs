@@ -37,7 +37,6 @@ namespace Zoo.GenericUserInterface.Tests
             Assert.IsTrue(fItem.Selected);
 
             Assert.IsNull(fItem.Value);
-            Assert.IsTrue(fItem.Text == GenerateGenericUserInterfaceModel.NotSelectedText);
         }
     }
 }
