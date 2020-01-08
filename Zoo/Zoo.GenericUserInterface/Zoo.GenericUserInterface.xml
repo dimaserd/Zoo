@@ -44,6 +44,11 @@
             Выпадающий список с множественным выбором
             </summary>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Extensions.MySelectListItemExtensions">
+            <summary>
+            Расширения для построения списков
+            </summary>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Extensions.MySelectListItemExtensions.GetBooleanList(System.Boolean,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
             <summary>
             Получить список из булевых значений
