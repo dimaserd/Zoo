@@ -264,9 +264,29 @@
             Значения для выпадающего списка
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.TextBoxData">
+            <summary>
+            Дополнительная информация для текстового блока
+            </summary>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.CustomDataJson">
             <summary>
             Json с кастомными данными, можно использовать для построения кастомного инпута
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.UserInterfaceTextBoxData">
+            <summary>
+            Дополнительная информация о текстбоксе
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceTextBoxData.IsInteger">
+            <summary>
+            Тип данных является целым числом
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceTextBoxData.IntStep">
+            <summary>
+            Целочисленный шаг
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Values.GenericUserInterfacePropertyGenericValue`1">

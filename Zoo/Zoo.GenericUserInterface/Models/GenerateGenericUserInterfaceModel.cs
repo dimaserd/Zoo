@@ -113,18 +113,47 @@ namespace Zoo.GenericUserInterface.Models
             return result;
         }
 
+        private static UserInterfaceTextBoxData GetTextBoxDataForProperty(CrocoTypeDescription prop, UserInterfaceType interfaceType)
+        {
+            if(interfaceType != UserInterfaceType.TextBox)
+            {
+                return null;
+            }
+
+            var integerTypeNames = new[] 
+            { 
+                typeof(int).FullName, 
+                typeof(uint).FullName, 
+                typeof(long).FullName, 
+                typeof(ulong).FullName,
+                typeof(ushort).FullName,
+                typeof(short).FullName
+            };
+
+            var isInteger = integerTypeNames.Contains(prop.FullTypeName);
+
+            return new UserInterfaceTextBoxData
+            {
+                IsInteger = isInteger,
+                IntStep = 1,
+            };
+        }
+
         private static List<UserInterfaceBlock> GetBlocksFromProperty(string prefix, CrocoTypeDescription prop, GenericInterfaceOptions opts)
         {
             if (!prop.IsClass && !prop.IsEnumerable)
             {
+                var type = GetUserInterfaceType(prop);
+
                 return new List<UserInterfaceBlock>
                 {
                     new UserInterfaceBlock
                     {
                         LabelText = prop.PropertyDescription?.PropertyDisplayName,
                         PropertyName = $"{prefix}{prop.PropertyDescription.PropertyName}",
-                        InterfaceType = GetUserInterfaceType(prop),
-                        SelectList = GetSelectList(prop, opts)
+                        InterfaceType = type,
+                        SelectList = GetSelectList(prop, opts),
+                        TextBoxData = GetTextBoxDataForProperty(prop, type)
                     }
                 };
             }

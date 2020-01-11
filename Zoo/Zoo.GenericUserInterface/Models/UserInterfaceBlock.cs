@@ -29,6 +29,11 @@ namespace Zoo.GenericUserInterface.Models
         public List<MySelectListItem> SelectList { get; set; }
 
         /// <summary>
+        /// Дополнительная информация для текстового блока
+        /// </summary>
+        public UserInterfaceTextBoxData TextBoxData { get; set; }
+
+        /// <summary>
         /// Json с кастомными данными, можно использовать для построения кастомного инпута
         /// </summary>
         public string CustomDataJson { get; set; }
