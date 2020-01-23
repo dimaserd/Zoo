@@ -16,8 +16,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\netstandard2.1\Zoo.GenericUserInterface.dll" target="lib\netstandard2.0"></file>
-    <file src="bin\Release\netstandard2.1\Zoo.GenericUserInterface.pdb" target="lib\netstandard2.0"></file>
-    <file src="bin\Release\netstandard2.1\Zoo.GenericUserInterface.xml" target="lib\netstandard2.0"></file>
+    <file src="bin\Release\netstandard2.1\Zoo.GenericUserInterface.dll" target="lib\netstandard2.1"></file>
+    <file src="bin\Release\netstandard2.1\Zoo.GenericUserInterface.pdb" target="lib\netstandard2.1"></file>
+    <file src="bin\Release\netstandard2.1\Zoo.GenericUserInterface.xml" target="lib\netstandard2.1"></file>
   </files>
 </package>

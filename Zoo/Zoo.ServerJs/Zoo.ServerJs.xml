@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zoo.ServerJs</name>
+    </assembly>
+    <members>
+        <member name="T:Zoo.ServerJs.Models.JsOpenApiWorkerMethodDocumentation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.Parameters">
+            <summary>
+            Типы входных параметров
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.Response">
+            <summary>
+            Тип возвращаемого значения 
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.Method">
+            <summary>
+            Ссылка на метод
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.MethodName">
+            <summary>
+            Название метода
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.Description">
+            <summary>
+            Описание метода
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocsOptions.MethodName">
+            <summary>
+            Название метода
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocsOptions.Description">
+            <summary>
+            Описание метода
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.Call(System.String,System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="workerName">название класса рабочего который нужно вызвать</param>
+            <param name="method">метод который нужно вызвать у данного рабочего</param>
+            <param name="methodParams">Параметры метода</param>
+        </member>
+    </members>
+</doc>
