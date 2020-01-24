@@ -15,6 +15,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Zoo.ServerJs.Consts.JsConsts">
+            <summary>
+            Константы для вызова js обработчиков
+            </summary>
+        </member>
+        <member name="F:Zoo.ServerJs.Consts.JsConsts.ApiObjectName">
+            <summary>
+            Название объекта
+            </summary>
+        </member>
+        <member name="F:Zoo.ServerJs.Consts.JsConsts.CallFunctionName">
+            <summary>
+            Название функции, которое используется для вызова js обработчиков
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Models.JsAction`1">
             <summary>
             Обертка над методом в Javascript аналогичная <see cref="T:System.Action`1"/>
