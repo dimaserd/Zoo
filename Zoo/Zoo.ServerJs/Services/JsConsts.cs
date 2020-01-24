@@ -1,6 +1,6 @@
 ﻿namespace Zoo.ServerJs.Services
 {
-    public static class JsConsts
+    internal static class JsConsts
     {
         public const string ApiObjectName = "api";
 

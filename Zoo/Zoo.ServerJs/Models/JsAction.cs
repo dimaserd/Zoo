@@ -3,28 +3,41 @@ using System.Collections.Generic;
 
 namespace Zoo.ServerJs.Models
 {
-    public class JsAction<T1>
+    /// <summary>
+    /// Обертка над методом в Javascript аналогичная <see cref="Action{T}"/>
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class JsAction<T>
     {
-        public JsAction(Action<T1> action)
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="action"></param>
+        public JsAction(Action<T> action)
         {
             Action = action;
         }
 
-        Action<T1> Action { get; }
+        Action<T> Action { get; }
 
+        /// <summary>
+        /// Получить документацию по методу
+        /// </summary>
+        /// <param name="opts"></param>
+        /// <returns></returns>
         public JsWorkerMethodDocs GetJsMethod(JsWorkerMethodDocsOptions opts)
         {
             return new JsWorkerMethodDocs
             {
                 MethodName = opts.MethodName,
                 Description = opts.Description,
-                Parameters = new List<Type> { typeof(T1) },
+                Parameters = new List<Type> { typeof(T) },
                 Response = null,
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = p => 
                     {
-                        Action(p.GetParameter<T1>());
+                        Action(p.GetParameter<T>());
                         return new JsWorkerMethodResult
                         {
                             Result = null,

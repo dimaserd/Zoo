@@ -5,10 +5,19 @@ using Zoo.ServerJs.Abstractions;
 
 namespace Zoo.ServerJs.Services
 {
+    /// <summary>
+    /// Свойства для javascript исполнителя
+    /// </summary>
     public class JsExecutorProperties
     {
-        public Action<Engine> EngineProperties { get; set; }
+        /// <summary>
+        /// Действие над движком
+        /// </summary>
+        public Action<Engine> EngineAction { get; set; }
 
+        /// <summary>
+        /// Список обработчиков
+        /// </summary>
         public List<IJsWorker> JsWorkers { get; set; }
     }
 }

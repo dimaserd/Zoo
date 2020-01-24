@@ -6,8 +6,15 @@ using Zoo.ServerJs.Models;
 
 namespace Zoo.ServerJs.Services
 {
+    /// <summary>
+    /// Обработчик js вызовов
+    /// </summary>
     public class HandleJsCallWorker
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="workers"></param>
         public HandleJsCallWorker(List<IJsWorker> workers)
         {
             Workers = workers;

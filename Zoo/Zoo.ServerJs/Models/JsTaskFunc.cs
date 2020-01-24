@@ -4,15 +4,28 @@ using System.Threading.Tasks;
 
 namespace Zoo.ServerJs.Models
 {
+    /// <summary>
+    /// Обертка над таской в Javascript аналогичная <see cref="Task{TResult}"/>
+    /// </summary>
+    /// <typeparam name="TResult"></typeparam>
     public class JsTaskFunc<TResult>
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="task"></param>
         public JsTaskFunc(Func<Task<TResult>> task)
         {
-            Task = task;
+            InnerTask = task;
         }
 
-        Func<Task<TResult>> Task { get; }
+        Func<Task<TResult>> InnerTask { get; }
 
+        /// <summary>
+        /// Получить документацию по методу
+        /// </summary>
+        /// <param name="opts"></param>
+        /// <returns></returns>
         public JsWorkerMethodDocs GetJsMethod(JsWorkerMethodDocsOptions opts)
         {
             return new JsWorkerMethodDocs
@@ -25,15 +38,26 @@ namespace Zoo.ServerJs.Models
                 {
                     FunctionLink = p => new JsWorkerMethodResult
                     {
-                        Result = Task().GetAwaiter().GetResult(),
+                        Result = InnerTask().GetAwaiter().GetResult(),
                     }
                 }
             };
         }
     }
 
+    /// <summary>
+    /// Обертка над параметризированной таской в Javascript аналогичная вызову асинхронной функции с параметрами.
+    /// <para></para>
+    /// Результат вызова которой аналогичен <see cref="Task{TResult}"/>
+    /// </summary>
+    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     public class JsTaskFunc<T1, TResult>
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="task"></param>
         public JsTaskFunc(Func<T1, Task<TResult>> task)
         {
             Task = task;
@@ -41,6 +65,11 @@ namespace Zoo.ServerJs.Models
 
         Func<T1, Task<TResult>> Task { get; }
 
+        /// <summary>
+        /// Получить документацию по методу
+        /// </summary>
+        /// <param name="opts"></param>
+        /// <returns></returns>
         public JsWorkerMethodDocs GetJsMethod(JsWorkerMethodDocsOptions opts)
         {
             return new JsWorkerMethodDocs
@@ -60,8 +89,20 @@ namespace Zoo.ServerJs.Models
         }
     }
 
+    /// <summary>
+    /// Обертка над параметризированной таской в Javascript аналогичная вызову асинхронной функции с параметрами.
+    /// <para></para>
+    /// Результат вызова которой аналогичен <see cref="Task{TResult}"/>
+    /// </summary>
+    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="T2"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
     public class JsTaskFunc<T1, T2, TResult>
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="task"></param>
         public JsTaskFunc(Func<T1, T2, Task<TResult>> task)
         {
             Task = task;
@@ -69,6 +110,11 @@ namespace Zoo.ServerJs.Models
 
         Func<T1, T2, Task<TResult>> Task { get; }
 
+        /// <summary>
+        /// Получить документацию по методу
+        /// </summary>
+        /// <param name="opts"></param>
+        /// <returns></returns>
         public JsWorkerMethodDocs GetJsMethod(JsWorkerMethodDocsOptions opts)
         {
             return new JsWorkerMethodDocs

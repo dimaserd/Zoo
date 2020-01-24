@@ -9,6 +9,10 @@ namespace Zoo.ServerJs.Models
     /// </summary>
     public class JsOpenApiWorkerMethodDocumentation
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="methodDocs"></param>
         public JsOpenApiWorkerMethodDocumentation(JsWorkerMethodDocs methodDocs)
         {
             MethodName = methodDocs.MethodName;
@@ -25,12 +29,24 @@ namespace Zoo.ServerJs.Models
             }
         }
 
+        /// <summary>
+        /// Название метода
+        /// </summary>
         public string MethodName { get; set; }
 
+        /// <summary>
+        /// Описание
+        /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Ответ от метода обработчика. Подробное описание типа.
+        /// </summary>
         public CrocoTypeDescription Response { get; set; }
 
+        /// <summary>
+        /// Параметры для метода обработчика. Подробное описание типа.
+        /// </summary>
         public List<CrocoTypeDescription> Parameters { get; set; }
     }
 }

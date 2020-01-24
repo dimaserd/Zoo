@@ -12,17 +12,31 @@ using Zoo.ServerJs.Models;
 
 namespace Zoo.ServerJs.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TApplication"></typeparam>
     public class JsExecutor<TApplication> where TApplication : class, ICrocoApplication
     {
         private readonly Action<Engine> _engineProps;
         
+        /// <summary>
+        /// Javascript обработчики
+        /// </summary>
         public List<IJsWorker> JsWorkers { get; }
 
+        /// <summary>
+        /// Приложение
+        /// </summary>
         protected TApplication Application { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
         public JsExecutor(JsExecutorProperties properties)
         {
-            _engineProps = properties.EngineProperties;
+            _engineProps = properties.EngineAction;
             JsWorkers = properties.JsWorkers;
             _callHandler = new HandleJsCallWorker(JsWorkers);
             Application = CrocoApp.Application.As<TApplication>();
@@ -71,11 +85,20 @@ namespace Zoo.ServerJs.Services
         
         #region Методы
 
+        /// <summary>
+        /// Получить документацию
+        /// </summary>
+        /// <returns></returns>
         public List<JsOpenApiWorkerDocumentation> GetDocumentation()
         {
             return JsWorkers.Select(x => new JsOpenApiWorkerDocumentation(x.JsWorkerDocs())).ToList();
         }
 
+        /// <summary>
+        /// Асинхронно вызвать несколько обработчиков
+        /// </summary>
+        /// <param name="jsScripts"></param>
+        /// <returns></returns>
         public async Task<List<BaseApiResponse<object>>> CallManySimpleApis(List<string> jsScripts)
         {
             var tasks = jsScripts.Select(script => Task.FromResult(CallSimpleApi(script)));
@@ -83,6 +106,11 @@ namespace Zoo.ServerJs.Services
             return (await Task.WhenAll(tasks)).ToList();
         }
 
+        /// <summary>
+        /// Вызвать обработчик
+        /// </summary>
+        /// <param name="jsScript"></param>
+        /// <returns></returns>
         public BaseApiResponse<object> CallSimpleApi(string jsScript)
         {
             try
@@ -98,6 +126,11 @@ namespace Zoo.ServerJs.Services
             }
         }
 
+        /// <summary>
+        /// Вызвать скрипт
+        /// </summary>
+        /// <param name="jsScript"></param>
+        /// <returns></returns>
         public BaseApiResponse<JsScriptExecutedResult> RunScriptDetaiiled(string jsScript)
         {
             var startDate = Application.DateTimeProvider.Now;
@@ -112,7 +145,6 @@ namespace Zoo.ServerJs.Services
                 {
                     StartDate = startDate,
                     FinishDate = finishDate,
-                    ExecutionMSecs = (finishDate - startDate).TotalMilliseconds,
                     Logs = Logs,
                 } );
             }
@@ -125,7 +157,6 @@ namespace Zoo.ServerJs.Services
                 {
                     StartDate = startDate,
                     FinishDate = finishDate,
-                    ExecutionMSecs = (finishDate - startDate).TotalMilliseconds,
                     ExceptionStackTrace = ex.ToString()
                 });
             }
@@ -134,16 +165,15 @@ namespace Zoo.ServerJs.Services
 
         #region Подключенные методы
         
-        protected object Call(string workerName, string methodName, params object[] parameters)
+        private object Call(string workerName, string methodName, params object[] parameters)
         {
             return _callHandler.Call(workerName, methodName, parameters);
         }
 
-        protected void Log(params object[] objs)
+        private void Log(params object[] objs)
         {
             Logs.Add(objs.ToList());
         }
-
         #endregion
     }
 }

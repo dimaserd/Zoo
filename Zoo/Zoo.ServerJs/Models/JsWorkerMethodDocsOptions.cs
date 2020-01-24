@@ -1,5 +1,8 @@
 ﻿namespace Zoo.ServerJs.Models
 {
+    /// <summary>
+    /// Опции для построения документации по методу
+    /// </summary>
     public class JsWorkerMethodDocsOptions
     {
         /// <summary>
