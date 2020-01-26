@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using System.Linq;
-using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Tests

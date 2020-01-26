@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Zoo.ServerJs</id>
-    <version>0.9.1</version>
+    <version>0.9.2</version>
     <title>Server Js</title>
     <authors>Dmitry Serdyukov</authors>
     <owners>Dmitry Serdyukov</owners>
@@ -12,8 +12,8 @@
     <copyright>Copyright 2019</copyright>
     <dependencies>
       <dependency id="Jint" version="2.11.58" />
-      <dependency id="NetCroco.Core.Documentation" version="1.1.17" />
-      <dependency id="NetCroco.WebApplication" version="1.5.32" />
+      <dependency id="NetCroco.Core.Documentation" version="1.1.19" />
+      <dependency id="NetCroco.WebApplication" version="1.5.35" />
     </dependencies>
   </metadata>
   <files>

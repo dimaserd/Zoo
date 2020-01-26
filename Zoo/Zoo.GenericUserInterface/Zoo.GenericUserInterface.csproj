@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NetCroco.Core" Version="1.9.30" />
-    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.17" />
+    <PackageReference Include="NetCroco.Core" Version="1.9.35" />
+    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.19" />
   </ItemGroup>
 
   <ItemGroup>

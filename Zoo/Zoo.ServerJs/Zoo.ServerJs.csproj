@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.9.2</Version>
+    <Company>CrocoSoft</Company>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Authors>Dmitry Serdyukov</Authors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -14,8 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="Jint" Version="2.11.58" />
-    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.17" />
-    <PackageReference Include="NetCroco.WebApplication" Version="1.5.32" />
+    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.19" />
+    <PackageReference Include="NetCroco.WebApplication" Version="1.5.35" />
   </ItemGroup>
 
 </Project>
