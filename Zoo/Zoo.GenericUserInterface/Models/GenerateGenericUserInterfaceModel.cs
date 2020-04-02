@@ -8,7 +8,6 @@ using Zoo.GenericUserInterface.Extensions;
 
 namespace Zoo.GenericUserInterface.Models
 {
-
     /// <summary>
     /// Модель для создания обощенного интерфейса
     /// </summary>
@@ -33,6 +32,11 @@ namespace Zoo.GenericUserInterface.Models
         /// Провайдер значений
         /// </summary>
         public GenericUserInterfaceValueProvider ValueProvider { get; set; }
+
+        /// <summary>
+        /// Сериализованные кастомные данные
+        /// </summary>
+        public string CustomDataJson { get; set; }
 
         /// <summary>
         /// Кастомно переопределить

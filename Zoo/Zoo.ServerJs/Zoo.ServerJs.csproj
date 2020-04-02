@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -19,8 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="Jint" Version="2.11.58" />
-    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.19" />
-    <PackageReference Include="NetCroco.WebApplication" Version="1.5.35" />
+    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.23" />
+    <PackageReference Include="NetCroco.WebApplication" Version="1.5.56" />
   </ItemGroup>
 
 </Project>

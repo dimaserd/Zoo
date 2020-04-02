@@ -89,6 +89,11 @@
             Провайдер значений
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.CustomDataJson">
+            <summary>
+            Сериализованные кастомные данные
+            </summary>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.OverrideAsync(Zoo.GenericUserInterface.Models.GenericUserInterfaceOverridings)">
             <summary>
             Кастомно переопределить

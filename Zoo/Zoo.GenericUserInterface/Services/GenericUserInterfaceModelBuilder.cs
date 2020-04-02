@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Croco.Core.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
@@ -66,7 +67,19 @@ namespace Zoo.GenericUserInterface.Services
         /// Результат - модель для построения пользовательского интерфейса
         /// </summary>
         public GenerateGenericUserInterfaceModel Result { get; }
-        
+
+        /// <summary>
+        /// Добавить кастомный блок данных
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder AddCustomData(object data)
+        {
+            Result.CustomDataJson = Tool.JsonConverter.Serialize(data);
+
+            return this;
+        }
+
         private UserInterfaceBlock GetBlockByPropertyName(string propertyName)
         {
             var block = Result.Blocks.FirstOrDefault(x => x.PropertyName == propertyName);
