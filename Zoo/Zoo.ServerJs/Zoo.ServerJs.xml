@@ -531,6 +531,11 @@
             </summary>
             <param name="properties"></param>
         </member>
+        <member name="P:Zoo.ServerJs.Services.JsExecutor`1.Engine">
+            <summary>
+            Движок JInt
+            </summary>
+        </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor`1.GetDocumentation">
             <summary>
             Получить документацию
