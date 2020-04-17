@@ -17,10 +17,10 @@ namespace Zoo.ServerJs.Services
         /// <param name="workers"></param>
         public HandleJsCallWorker(List<IJsWorker> workers)
         {
-            Workers = workers;
+            Workers = workers.Select(x => x.JsWorkerDocs()).ToList();
         }
 
-        private List<IJsWorker> Workers { get; }
+        private List<JsWorkerDocumentation> Workers { get; }
         
         /// <summary>
         /// 
@@ -30,14 +30,14 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodParams">Параметры метода</param>
         public object Call(string workerName, string method, params object[] methodParams)
         {
-            var worker = Workers.FirstOrDefault(x => x.JsWorkerDocs().WorkerName == workerName);
+            var worker = Workers.FirstOrDefault(x => x.WorkerName == workerName);
 
             if (worker == null)
             {
                 throw new ArgumentNullException($"В системе нет зарегистрированного рабочего класса с именем '{workerName}'");
             }
             
-            return worker.JsWorkerDocs().HandleCall(method, new JsWorkerMethodCallParameters(methodParams)).Result;
+            return worker.HandleCall(method, new JsWorkerMethodCallParameters(methodParams)).Result;
         }
     }
 }

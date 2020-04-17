@@ -54,7 +54,10 @@ namespace Zoo.ServerJs.Services
         
         private List<List<object>> Logs => _logs ?? (_logs = new List<List<object>>());
 
-        private Engine Engine
+        /// <summary>
+        /// Движок JInt
+        /// </summary>
+        protected Engine Engine
         {
             get
             {
@@ -147,7 +150,7 @@ namespace Zoo.ServerJs.Services
                     StartDate = startDate,
                     FinishDate = finishDate,
                     Logs = Logs,
-                } );
+                });
             }
 
             catch(Exception ex)

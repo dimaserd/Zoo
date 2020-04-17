@@ -13,7 +13,7 @@
     <dependencies>
       <dependency id="Jint" version="2.11.58" />
       <dependency id="NetCroco.Core.Documentation" version="1.1.19" />
-      <dependency id="NetCroco.WebApplication" version="1.5.35" />
+      <dependency id="NetCroco.WebApplication" version="1.5.78" />
     </dependencies>
   </metadata>
   <files>
