@@ -45,7 +45,7 @@ namespace Zoo.ServerJs.Models
 
             if(method == null)
             {
-                throw new ApplicationException($"Метод с названием {methodName} не существует в группе методов класса {WorkerName}");
+                throw new ApplicationException($"Метод с названием '{methodName}' не существует в группе методов класса '{WorkerName}'");
             }
 
             return method.Method.HandleCall(parameters);

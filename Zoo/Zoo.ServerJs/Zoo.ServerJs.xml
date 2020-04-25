@@ -339,14 +339,6 @@
             </summary>
             <param name="parameters"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodCallParameters.GetJson``1(System.Object)">
-            <summary>
-            Получить json
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="param"></param>
-            <returns></returns>
-        </member>
         <member name="M:Zoo.ServerJs.Models.JsWorkerMethodCallParameters.GetParameter``1">
             <summary>
             Получить параметр
@@ -509,54 +501,48 @@
             <param name="method">метод который нужно вызвать у данного рабочего</param>
             <param name="methodParams">Параметры метода</param>
         </member>
-        <member name="T:Zoo.ServerJs.Services.JsExecutor`1">
+        <member name="T:Zoo.ServerJs.Services.JsExecutor">
             <summary>
             
             </summary>
-            <typeparam name="TApplication"></typeparam>
         </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutor`1.JsWorkers">
+        <member name="P:Zoo.ServerJs.Services.JsExecutor.JsWorkers">
             <summary>
             Javascript обработчики
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutor`1.Application">
-            <summary>
-            Приложение
-            </summary>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor`1.#ctor(Zoo.ServerJs.Services.JsExecutorProperties)">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(Zoo.ServerJs.Services.JsExecutorProperties)">
             <summary>
             
             </summary>
             <param name="properties"></param>
         </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutor`1.Engine">
+        <member name="P:Zoo.ServerJs.Services.JsExecutor.Engine">
             <summary>
             Движок JInt
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor`1.GetDocumentation">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.GetDocumentation">
             <summary>
             Получить документацию
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor`1.CallManySimpleApis(System.Collections.Generic.List{System.String})">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.CallManySimpleApis(System.Collections.Generic.List{System.String})">
             <summary>
             Асинхронно вызвать несколько обработчиков
             </summary>
             <param name="jsScripts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor`1.CallSimpleApi(System.String)">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.CallSimpleApi(System.String)">
             <summary>
             Вызвать обработчик
             </summary>
             <param name="jsScript"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor`1.RunScriptDetaiiled(System.String)">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.RunScriptDetaiiled(System.String)">
             <summary>
             Вызвать скрипт
             </summary>

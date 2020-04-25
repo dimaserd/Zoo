@@ -1,4 +1,5 @@
 ﻿using Croco.Core.Utils;
+using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Models
 {
@@ -21,22 +22,6 @@ namespace Zoo.ServerJs.Models
         }
 
         /// <summary>
-        /// Получить json
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="param"></param>
-        /// <returns></returns>
-        private string GetJson<T>(object param)
-        {
-            if (typeof(T) == typeof(int))
-            {
-                return param.ToString();
-            }
-
-            return Tool.JsonConverter.Serialize(param);
-        }
-
-        /// <summary>
         /// Получить параметр
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -47,9 +32,9 @@ namespace Zoo.ServerJs.Models
 
             _currentIndex++;
 
-            var json = GetJson<T>(param);
+            var json = ZooSerializer.Serialize(param);
 
-            return Tool.JsonConverter.Deserialize<T>(json);
+            return ZooSerializer.Deserialize<T>(json);
         }
     }
 }

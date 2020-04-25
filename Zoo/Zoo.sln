@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo.GenericUserInterface", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo.GenericUserInterface.Tests", "..\Zoo.GenericUserInterface.Tests\Zoo.GenericUserInterface.Tests.csproj", "{B5000847-8FB2-4055-828B-410F134CE91D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoo.ServerJs", "Zoo.ServerJs\Zoo.ServerJs.csproj", "{3AAAFDDE-F281-4819-8ED1-983DB852E294}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo.ServerJs", "Zoo.ServerJs\Zoo.ServerJs.csproj", "{3AAAFDDE-F281-4819-8ED1-983DB852E294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoo.ServerJs.Tests", "Zoo.ServerJs.Tests\Zoo.ServerJs.Tests.csproj", "{E8084A07-DD70-4D34-99E7-1FAC97FBE59C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3AAAFDDE-F281-4819-8ED1-983DB852E294}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AAAFDDE-F281-4819-8ED1-983DB852E294}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AAAFDDE-F281-4819-8ED1-983DB852E294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8084A07-DD70-4D34-99E7-1FAC97FBE59C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8084A07-DD70-4D34-99E7-1FAC97FBE59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8084A07-DD70-4D34-99E7-1FAC97FBE59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8084A07-DD70-4D34-99E7-1FAC97FBE59C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

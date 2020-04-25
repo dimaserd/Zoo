@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Croco.Core.Abstractions.Application;
 using Croco.Core.Abstractions.Models;
-using Croco.Core.Application;
-using Croco.Core.Extensions;
+using Croco.Core.Utils;
 using Jint;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
+using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
 {
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TApplication"></typeparam>
-    public class JsExecutor<TApplication> where TApplication : class, ICrocoApplication
+    public class JsExecutor
     {
         private readonly Action<Engine> _engineProps;
         
@@ -25,11 +23,6 @@ namespace Zoo.ServerJs.Services
         /// Javascript обработчики
         /// </summary>
         public List<IJsWorker> JsWorkers { get; }
-
-        /// <summary>
-        /// Приложение
-        /// </summary>
-        protected TApplication Application { get; }
 
         /// <summary>
         /// 
@@ -40,7 +33,6 @@ namespace Zoo.ServerJs.Services
             _engineProps = properties.EngineAction;
             JsWorkers = properties.JsWorkers;
             _callHandler = new HandleJsCallWorker(JsWorkers);
-            Application = CrocoApp.Application.As<TApplication>();
         }
         
         private Engine _engine;
@@ -71,7 +63,8 @@ namespace Zoo.ServerJs.Services
                 _engine.SetValue(JsConsts.ApiObjectName, new
                 {
                     //Данное название функции должно быть неизменным относительно
-                    Call = new Func<string, string, object[], object>(Call)
+                    Call = new Func<string, string, object[], object>(Call),
+                    CallJson = new Func<string, string, object[], string>(CallJson)
                 });
 
                 _engine.SetValue("console", new 
@@ -79,7 +72,7 @@ namespace Zoo.ServerJs.Services
                     log = new Action<object[]>(Log)
                 });
 
-                _engineProps(_engine);
+                _engineProps?.Invoke(_engine);
                 
                 return _engine;
             }
@@ -137,13 +130,13 @@ namespace Zoo.ServerJs.Services
         /// <returns></returns>
         public BaseApiResponse<JsScriptExecutedResult> RunScriptDetaiiled(string jsScript)
         {
-            var startDate = Application.DateTimeProvider.Now;
+            var startDate = DateTime.UtcNow;
 
             try
             {
                 Engine.Execute(jsScript);
 
-                var finishDate = Application.DateTimeProvider.Now;
+                var finishDate = DateTime.UtcNow;
 
                 return new BaseApiResponse<JsScriptExecutedResult>(true, "Скрипт выполнен успешно", new JsScriptExecutedResult
                 {
@@ -155,7 +148,7 @@ namespace Zoo.ServerJs.Services
 
             catch(Exception ex)
             {
-                var finishDate = Application.DateTimeProvider.Now;
+                var finishDate = DateTime.UtcNow;
 
                 return new BaseApiResponse<JsScriptExecutedResult>(false, "Ошибка при выполнении скрипта. " + ex.Message, new JsScriptExecutedResult
                 {
@@ -172,6 +165,11 @@ namespace Zoo.ServerJs.Services
         private object Call(string workerName, string methodName, params object[] parameters)
         {
             return _callHandler.Call(workerName, methodName, parameters);
+        }
+
+        private string CallJson(string workerName, string methodName, params object[] parameters)
+        {
+            return ZooSerializer.Serialize(_callHandler.Call(workerName, methodName, parameters));
         }
 
         private void Log(params object[] objs)

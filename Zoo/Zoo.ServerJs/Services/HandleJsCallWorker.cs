@@ -28,7 +28,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="workerName">название класса рабочего который нужно вызвать</param>
         /// <param name="method">метод который нужно вызвать у данного рабочего</param>
         /// <param name="methodParams">Параметры метода</param>
-        public object Call(string workerName, string method, params object[] methodParams)
+        public object Call(string workerName, string method, params dynamic[] methodParams)
         {
             var worker = Workers.FirstOrDefault(x => x.WorkerName == workerName);
 
