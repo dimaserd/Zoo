@@ -11,17 +11,17 @@ namespace Zoo.ServerJs.Models
         /// <summary>
         /// Дата начала
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public DateTime StartedOnUtc { get; set; }
 
         /// <summary>
         /// Дата окончания
         /// </summary>
-        public DateTime FinishDate { get; set; }
+        public DateTime FinishOnUtc { get; set; }
 
         /// <summary>
         /// Список логов
         /// </summary>
-        public List<List<object>> Logs { get; set; }
+        public List<JsLogggedVariables> Logs { get; set; }
 
         /// <summary>
         /// Исключение

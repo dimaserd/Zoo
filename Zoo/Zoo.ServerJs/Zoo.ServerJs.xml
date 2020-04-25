@@ -131,6 +131,21 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
+        <member name="T:Zoo.ServerJs.Models.JsLogggedVariables">
+            <summary>
+            Залоггированные переменные
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsLogggedVariables.LoggedOnUtc">
+            <summary>
+            Дата логгирования
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsLogggedVariables.SerializedVariables">
+            <summary>
+            Сериализованные переменные
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Models.JsOpenApiWorkerDocumentation">
             <summary>
             Описание серверного javascript обработчика
@@ -193,12 +208,12 @@
             Результат выполнения метода серверного javascript обработчика
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.StartDate">
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.StartedOnUtc">
             <summary>
             Дата начала
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.FinishDate">
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.FinishOnUtc">
             <summary>
             Дата окончания
             </summary>
@@ -211,6 +226,21 @@
         <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.ExceptionStackTrace">
             <summary>
             Исключение
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.JsSerializedVariable">
+            <summary>
+            сериализованная переменная
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsSerializedVariable.TypeFullName">
+            <summary>
+            Полное название типа данных
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsSerializedVariable.DataJson">
+            <summary>
+            Сериализованные данные
             </summary>
         </member>
         <member name="T:Zoo.ServerJs.Models.JsTaskFunc`1">

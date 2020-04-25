@@ -1,5 +1,4 @@
-﻿using Croco.Core.Utils;
-using Zoo.ServerJs.Statics;
+﻿using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Models
 {

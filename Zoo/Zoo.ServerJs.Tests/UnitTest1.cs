@@ -21,6 +21,11 @@ namespace Zoo.ServerJs.Tests
             return new BaseApiResponse(true, "ok");
         }
 
+        public static int[] GetArray()
+        {
+            return new int[4] { 1, 2, 3, 4 };
+        }
+
         public JsWorkerDocumentation JsWorkerDocs()
         {
             return new JsWorkerDocumentation
@@ -33,7 +38,13 @@ namespace Zoo.ServerJs.Tests
                     {
                         MethodName = "AddProductToGroup",
                         Description = "Добавить товар в группу товаров",
-                    }, new JsFunc<ProductInProductGroupIdModel, BaseApiResponse>(AddProductToGroup))
+                    }, new JsFunc<ProductInProductGroupIdModel, BaseApiResponse>(AddProductToGroup)),
+
+                    JsWorkerMethodDocs.GetMethod(new JsWorkerMethodDocsOptions
+                    {
+                        MethodName = "GetArray",
+                        Description = "Получить массив"
+                    }, new JsFunc<int[]>(GetArray))
                 }
             };
         }
@@ -44,7 +55,9 @@ namespace Zoo.ServerJs.Tests
         [Test]
         public void Test1()
         {
-            var script = "api.Call(\"ProductGroupJsWorker\", \"AddProductToGroup\", { ProductGroupId: \"d8c8cf9b-1d9b-4199-a85e-615edd64b4d7\", ProductId: 1 });";
+            var script = "var t = api.Call(\"ProductGroupJsWorker\", \"AddProductToGroup\", { ProductGroupId: \"d8c8cf9b-1d9b-4199-a85e-615edd64b4d7\", ProductId: 1 });";
+
+            script += "\n console.log('Result', t)";
 
             var executor = new JsExecutor(new JsExecutorProperties
             {
@@ -54,7 +67,51 @@ namespace Zoo.ServerJs.Tests
                 }
             });
 
-            executor.RunScriptDetaiiled(script);
+            var result = executor.RunScriptDetaiiled(script);
+        }
+
+        [Test]
+        public void Test2()
+        {
+            var script = "var t = JSON.parse( api.Call(\"ProductGroupJsWorker\", \"GetArray\") );\n";
+
+            script += "console.log(t);\n";
+            script += "console.log(t.length);\n";
+            script += "for(var i = 0; i < t.length; i++) {";
+            
+            script += "\n console.log('Result', i, t[i]); \n}";
+
+            var executor = new JsExecutor(new JsExecutorProperties
+            {
+                JsWorkers = new List<IJsWorker>
+                {
+                    new ProductGroupJsWorker()
+                }
+            });
+
+            var result = executor.RunScriptDetaiiled(script);
+        }
+
+        [Test]
+        public void Test3()
+        {
+            var script = $"var t = {ProductGroupJsWorker.GetArray()};\n";
+
+            script += "console.log(t);\n";
+            script += "console.log(t.length);\n";
+            script += "for(var i = 0; i < t.length; i++) {";
+
+            script += "\n console.log('Result', i, t[i]); \n}";
+
+            var executor = new JsExecutor(new JsExecutorProperties
+            {
+                JsWorkers = new List<IJsWorker>
+                {
+                    new ProductGroupJsWorker()
+                }
+            });
+
+            var result = executor.RunScriptDetaiiled(script);
         }
     }
 }
