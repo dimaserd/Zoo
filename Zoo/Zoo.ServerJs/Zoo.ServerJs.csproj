@@ -20,6 +20,6 @@
   <ItemGroup>
     <PackageReference Include="Jint" Version="2.11.58" />
     <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.23" />
-    <PackageReference Include="NetCroco.Core" Version="1.9.78" />
+    <PackageReference Include="NetCroco.Core" Version="1.9.79" />
   </ItemGroup>
 </Project>

@@ -531,6 +531,26 @@
             <param name="method">метод который нужно вызвать у данного рабочего</param>
             <param name="methodParams">Параметры метода</param>
         </member>
+        <member name="T:Zoo.ServerJs.Services.JsExecApi">
+            <summary>
+            обертка для Апи
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecApi.#ctor(Zoo.ServerJs.Services.HandleJsCallWorker)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="callHandler"></param>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecApi.Call(System.String,System.String,System.Object[])">
+            <summary>
+            Вызов Js рабочего
+            </summary>
+            <param name="workerName"></param>
+            <param name="methodName"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.ServerJs.Services.JsExecutor">
             <summary>
             

@@ -11,23 +11,6 @@ using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
 {
-    public class JsExecApi
-    {
-        private readonly HandleJsCallWorker _callHandler;
-
-        public JsExecApi(HandleJsCallWorker callHandler)
-        {
-            _callHandler = callHandler;
-        }
-
-        public string Call(string workerName, string methodName, params object[] parameters)
-        {
-            var res = _callHandler.Call(workerName, methodName, parameters);
-
-            return ZooSerializer.Serialize(res);
-        }
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -62,7 +45,7 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Движок JInt
         /// </summary>
-        protected Engine Engine
+        public Engine Engine
         {
             get
             {
@@ -143,31 +126,26 @@ namespace Zoo.ServerJs.Services
             {
                 Engine.Execute(jsScript);
 
-                var finishDate = DateTime.UtcNow;
-
                 return new BaseApiResponse<JsScriptExecutedResult>(true, "Скрипт выполнен успешно", new JsScriptExecutedResult
                 {
                     StartedOnUtc = startDate,
-                    FinishOnUtc = finishDate,
+                    FinishOnUtc = DateTime.UtcNow,
                     Logs = Logs,
                 });
             }
 
             catch(Exception ex)
             {
-                var finishDate = DateTime.UtcNow;
-
                 return new BaseApiResponse<JsScriptExecutedResult>(false, "Ошибка при выполнении скрипта. " + ex.Message, new JsScriptExecutedResult
                 {
                     StartedOnUtc = startDate,
-                    FinishOnUtc = finishDate,
+                    FinishOnUtc = DateTime.UtcNow,
                     ExceptionStackTrace = ex.ToString()
                 });
             }
         }
         #endregion
 
-        #region Подключенные методы
         private void Log(params object[] objs)
         {
             Logs.Add(new JsLogggedVariables 
@@ -180,6 +158,5 @@ namespace Zoo.ServerJs.Services
                 }).ToList()
             });
         }
-        #endregion
     }
 }
