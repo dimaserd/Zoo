@@ -24,6 +24,11 @@ namespace Zoo.ServerJs.Services
         public List<IJsWorker> JsWorkers { get; }
 
         /// <summary>
+        /// Внешние компоненты
+        /// </summary>
+        public List<ExternalJsComponent> ExternalComponents { get; }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="properties"></param>
@@ -31,12 +36,11 @@ namespace Zoo.ServerJs.Services
         {
             _engineProps = properties.EngineAction;
             JsWorkers = properties.JsWorkers;
-            _callHandler = new HandleJsCallWorker(JsWorkers);
+            ExternalComponents = properties.ExternalComponents;
+            
         }
         
         private Engine _engine;
-
-        private readonly HandleJsCallWorker _callHandler;
 
         #region Свойства
         
@@ -55,7 +59,7 @@ namespace Zoo.ServerJs.Services
                 }
 
                 _engine = new Engine();
-                _engine.SetValue(JsConsts.ApiObjectName, new JsExecApi(_callHandler));
+                _engine.SetValue(JsConsts.ApiObjectName, new HandleJsCallWorker(JsWorkers, ExternalComponents));
 
                 _engine.SetValue("console", new 
                 {

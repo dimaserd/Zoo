@@ -398,6 +398,13 @@
             Результат - модель для построения пользовательского интерфейса
             </summary>
         </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.AddCustomData(System.Object)">
+            <summary>
+            Добавить кастомный блок данных
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.ShiftPropertyToEndFor(System.String)">
             <summary>
             Установить свойство в конец списка

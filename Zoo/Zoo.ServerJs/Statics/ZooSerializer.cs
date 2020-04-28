@@ -89,7 +89,6 @@ namespace Zoo.ServerJs.Statics
     {
         static readonly IJsonConverter Converter = new NewtonsoftSerializer();
 
-        
 
         public static T Deserialize<T>(string json)
         {

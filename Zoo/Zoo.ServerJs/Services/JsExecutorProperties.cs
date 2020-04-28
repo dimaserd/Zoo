@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Jint;
 using Zoo.ServerJs.Abstractions;
+using Zoo.ServerJs.Models;
 
 namespace Zoo.ServerJs.Services
 {
@@ -18,6 +19,11 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Список обработчиков
         /// </summary>
-        public List<IJsWorker> JsWorkers { get; set; }
+        public List<IJsWorker> JsWorkers { get; set; } = new List<IJsWorker>();
+
+        /// <summary>
+        /// Внешние компоненты
+        /// </summary>
+        public List<ExternalJsComponent> ExternalComponents { get; set; } = new List<ExternalJsComponent>();
     }
 }

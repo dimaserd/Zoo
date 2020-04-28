@@ -1,9 +1,11 @@
 using Croco.Core.Abstractions.Models;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Services;
+using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Tests
 {
@@ -16,7 +18,7 @@ namespace Zoo.ServerJs.Tests
 
     public class ProductGroupJsWorker : IJsWorker
     {
-        static BaseApiResponse AddProductToGroup(ProductInProductGroupIdModel model)
+        public static BaseApiResponse AddProductToGroup(ProductInProductGroupIdModel model)
         {
             return new BaseApiResponse(true, "ok");
         }
@@ -50,12 +52,12 @@ namespace Zoo.ServerJs.Tests
         }
     }
 
-    public class Tests
+    public class ApiCallTests
     {
         [Test]
         public void Test1()
         {
-            var script = "var t = api.Call(\"ProductGroupJsWorker\", \"AddProductToGroup\", { ProductGroupId: \"d8c8cf9b-1d9b-4199-a85e-615edd64b4d7\", ProductId: 1 });";
+            var script = "var t = JSON.parse( api.Call(\"ProductGroupJsWorker\", \"AddProductToGroup\", { ProductGroupId: \"d8c8cf9b-1d9b-4199-a85e-615edd64b4d7\", ProductId: 1 }) );";
 
             script += "\n console.log('Result', t)";
 
@@ -68,6 +70,14 @@ namespace Zoo.ServerJs.Tests
             });
 
             var result = executor.RunScriptDetaiiled(script);
+
+            Assert.IsTrue(result.ResponseObject.Logs.Count == 1);
+
+            var log = result.ResponseObject.Logs.First();
+
+            var json = ZooSerializer.Serialize(ProductGroupJsWorker.AddProductToGroup(null));
+
+            Assert.AreEqual(log.SerializedVariables.Last().DataJson, json);
         }
 
         [Test]
@@ -90,28 +100,8 @@ namespace Zoo.ServerJs.Tests
             });
 
             var result = executor.RunScriptDetaiiled(script);
-        }
 
-        [Test]
-        public void Test3()
-        {
-            var script = $"var t = {ProductGroupJsWorker.GetArray()};\n";
-
-            script += "console.log(t);\n";
-            script += "console.log(t.length);\n";
-            script += "for(var i = 0; i < t.length; i++) {";
-
-            script += "\n console.log('Result', i, t[i]); \n}";
-
-            var executor = new JsExecutor(new JsExecutorProperties
-            {
-                JsWorkers = new List<IJsWorker>
-                {
-                    new ProductGroupJsWorker()
-                }
-            });
-
-            var result = executor.RunScriptDetaiiled(script);
+            Assert.AreEqual(ProductGroupJsWorker.GetArray().Length + 2, result.ResponseObject.Logs.Count);
         }
     }
 }
