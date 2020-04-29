@@ -21,12 +21,17 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Javascript обработчики
         /// </summary>
-        public List<IJsWorker> JsWorkers { get; }
+        public IReadOnlyCollection<IJsWorker> JsWorkers { get; }
 
         /// <summary>
         /// Внешние компоненты
         /// </summary>
-        public List<ExternalJsComponent> ExternalComponents { get; }
+        public IReadOnlyCollection<ExternalJsComponent> ExternalComponents { get; }
+
+        /// <summary>
+        /// Обработчик Js вызовов
+        /// </summary>
+        public HandleJsCallWorker JsCallHandler { get; }
 
         /// <summary>
         /// 
@@ -37,7 +42,7 @@ namespace Zoo.ServerJs.Services
             _engineProps = properties.EngineAction;
             JsWorkers = properties.JsWorkers;
             ExternalComponents = properties.ExternalComponents;
-            
+            JsCallHandler = new HandleJsCallWorker(JsWorkers, ExternalComponents);
         }
         
         private Engine _engine;
@@ -59,7 +64,7 @@ namespace Zoo.ServerJs.Services
                 }
 
                 _engine = new Engine();
-                _engine.SetValue(JsConsts.ApiObjectName, new HandleJsCallWorker(JsWorkers, ExternalComponents));
+                _engine.SetValue(JsConsts.ApiObjectName, JsCallHandler);
 
                 _engine.SetValue("console", new 
                 {

@@ -532,7 +532,7 @@
             Обработчик js вызовов
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.#ctor(System.Collections.Generic.List{Zoo.ServerJs.Abstractions.IJsWorker},System.Collections.Generic.List{Zoo.ServerJs.Models.ExternalJsComponent})">
+        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.#ctor(System.Collections.Generic.IReadOnlyCollection{Zoo.ServerJs.Abstractions.IJsWorker},System.Collections.Generic.IReadOnlyCollection{Zoo.ServerJs.Models.ExternalJsComponent})">
             <summary>
             Конструктор
             </summary>
@@ -569,6 +569,11 @@
         <member name="P:Zoo.ServerJs.Services.JsExecutor.ExternalComponents">
             <summary>
             Внешние компоненты
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Services.JsExecutor.JsCallHandler">
+            <summary>
+            Обработчик Js вызовов
             </summary>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(Zoo.ServerJs.Services.JsExecutorProperties)">
@@ -628,6 +633,26 @@
             <summary>
             Внешние компоненты
             </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Statics.ZooSerializer">
+            <summary>
+            Внутренний сериализатор
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Statics.ZooSerializer.Deserialize``1(System.String)">
+            <summary>
+            Дессериализовать строку в объект
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Statics.ZooSerializer.Serialize(System.Object)">
+            <summary>
+            Сериализовать объект в строку
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

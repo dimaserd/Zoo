@@ -85,16 +85,30 @@ namespace Zoo.ServerJs.Statics
         }
     }
 
+    /// <summary>
+    /// Внутренний сериализатор
+    /// </summary>
     public static class ZooSerializer
     {
         static readonly IJsonConverter Converter = new NewtonsoftSerializer();
 
 
+        /// <summary>
+        /// Дессериализовать строку в объект
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="json"></param>
+        /// <returns></returns>
         public static T Deserialize<T>(string json)
         {
             return Converter.Deserialize<T>(json);
         }
 
+        /// <summary>
+        /// Сериализовать объект в строку
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static string Serialize(object obj)
         {
             return Converter.Serialize(obj);

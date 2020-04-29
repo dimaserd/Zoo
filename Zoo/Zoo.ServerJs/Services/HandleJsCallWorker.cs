@@ -19,14 +19,14 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         /// <param name="workers"></param>
         /// <param name="externalComponents"></param>
-        public HandleJsCallWorker(List<IJsWorker> workers, List<ExternalJsComponent> externalComponents)
+        public HandleJsCallWorker(IReadOnlyCollection<IJsWorker> workers, IReadOnlyCollection<ExternalJsComponent> externalComponents)
         {
             Workers = workers.Select(x => x.JsWorkerDocs()).ToList();
             ExternalComponents = externalComponents ?? new List<ExternalJsComponent>();
         }
 
-        private List<ExternalJsComponent> ExternalComponents { get; }
-        private List<JsWorkerDocumentation> Workers { get; }
+        private IReadOnlyCollection<ExternalJsComponent> ExternalComponents { get; }
+        private IReadOnlyCollection<JsWorkerDocumentation> Workers { get; }
         
         /// <summary>
         /// Вызвать внутренний сервис, написанный на Js
