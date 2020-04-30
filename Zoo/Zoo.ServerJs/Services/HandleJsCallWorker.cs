@@ -96,7 +96,7 @@ namespace Zoo.ServerJs.Services
 
             if (component == null)
             {
-                throw new Exception($"Компонент не найден по указанному названию '{methodName}'");
+                throw new Exception($"Компонент не найден по указанному названию '{componentName}'");
             }
 
             var uid = $"n{Guid.NewGuid()}".Replace("-", "_");
