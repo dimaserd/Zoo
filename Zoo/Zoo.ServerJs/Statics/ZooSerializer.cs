@@ -1,12 +1,11 @@
-﻿using Croco.Core.Common.Abstractions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
 
 namespace Zoo.ServerJs.Statics
 {
-    internal class NewtonsoftSerializer : IJsonConverter
+    internal class NewtonsoftSerializer
     {
         internal class StrictIntConverter : JsonConverter
         {
@@ -90,7 +89,7 @@ namespace Zoo.ServerJs.Statics
     /// </summary>
     public static class ZooSerializer
     {
-        static readonly IJsonConverter Converter = new NewtonsoftSerializer();
+        static readonly NewtonsoftSerializer Converter = new NewtonsoftSerializer();
 
 
         /// <summary>
