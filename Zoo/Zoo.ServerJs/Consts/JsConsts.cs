@@ -14,5 +14,10 @@
         /// Название функции, которое используется для вызова js обработчиков
         /// </summary>
         public const string CallFunctionName = "Call";
+
+        /// <summary>
+        /// Название функции, которое используется для вызова внешнего js компонента
+        /// </summary>
+        public const string CallExternalFunctionName = "CallExternal";
     }
 }

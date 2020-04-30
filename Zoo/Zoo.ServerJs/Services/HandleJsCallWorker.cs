@@ -57,9 +57,33 @@ namespace Zoo.ServerJs.Services
         /// <returns></returns>
         public string CallExternal(string componentName, string methodName, object methodPayLoad)
         {
+            try
+            {
+                return CallExternalUnSafe(componentName, methodName, methodPayLoad);
+            } 
+            catch(Exception ex)
+            {
+                var mes = $"Произошла ошибка при вызове внешнего компонента. Название внешнего компонента = '{componentName}'.\n "
+                    + $"Название метода = '{methodName}'.\n";
+
+                if(methodPayLoad != null)
+                {
+                    mes += $"Параметр метода = {ZooSerializer.Serialize(methodPayLoad)}.\n ";
+                }
+                else
+                {
+                    mes += $"Параметр метода = [Метод был вызван без параметра].\n ";
+                }
+
+                throw new Exception(mes + ex.Message);
+            }
+        }
+
+        private string CallExternalUnSafe(string componentName, string methodName, object methodPayLoad)
+        {
             var component = ExternalComponents.FirstOrDefault(x => x.ComponentName == componentName);
 
-            if(component == null)
+            if (component == null)
             {
                 throw new Exception($"Компонент не найден по указанному названию '{methodName}'");
             }

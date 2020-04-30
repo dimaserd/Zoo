@@ -149,7 +149,8 @@ namespace Zoo.ServerJs.Services
                 {
                     StartedOnUtc = startDate,
                     FinishOnUtc = DateTime.UtcNow,
-                    ExceptionStackTrace = ex.ToString()
+                    ExceptionStackTrace = ex.ToString(),
+                    Logs = Logs                    
                 });
             }
         }

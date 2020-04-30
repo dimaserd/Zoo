@@ -30,6 +30,11 @@
             Название функции, которое используется для вызова js обработчиков
             </summary>
         </member>
+        <member name="F:Zoo.ServerJs.Consts.JsConsts.CallExternalFunctionName">
+            <summary>
+            Название функции, которое используется для вызова внешнего js компонента
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Models.ExternalJsComponent">
             <summary>
             Внешний js компонент
