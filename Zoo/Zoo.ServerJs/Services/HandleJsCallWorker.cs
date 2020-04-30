@@ -53,6 +53,17 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         /// <param name="componentName"></param>
         /// <param name="methodName"></param>
+        /// <returns></returns>
+        public string CallExternal(string componentName, string methodName)
+        {
+            return CallExternal(componentName, methodName, null);
+        }
+
+        /// <summary>
+        /// Вызвать внешний сервис, определенный через Js
+        /// </summary>
+        /// <param name="componentName"></param>
+        /// <param name="methodName"></param>
         /// <param name="methodPayLoad"></param>
         /// <returns></returns>
         public string CallExternal(string componentName, string methodName, object methodPayLoad)

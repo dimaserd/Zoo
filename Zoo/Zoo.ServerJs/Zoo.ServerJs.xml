@@ -552,6 +552,14 @@
             <param name="method">метод который нужно вызвать у данного рабочего</param>
             <param name="methodParams">Параметры метода</param>
         </member>
+        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallExternal(System.String,System.String)">
+            <summary>
+            Вызвать внешний сервис, определенный через Js
+            </summary>
+            <param name="componentName"></param>
+            <param name="methodName"></param>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallExternal(System.String,System.String,System.Object)">
             <summary>
             Вызвать внешний сервис, определенный через Js

@@ -88,5 +88,41 @@ namespace Zoo.ServerJs.Tests
             //(6 + 6) / 4
             Assert.AreEqual(logVar.DataJson, "3.0");
         }
+
+        [Test]
+        public void CallWithNoArgs()
+        {
+            var jsExecutor = new JsExecutor(new JsExecutorProperties
+            {
+                ExternalComponents = new List<ExternalJsComponent>
+                {
+                    new ExternalJsComponent
+                    {
+                        ComponentName = "Test",
+                        Script = "function Test() { \n" +
+                        "return 5;\n" +
+                        " }"
+                    }
+                }
+            });
+
+            var script = "var res = api.CallExternal('Test', 'Test');\n";
+
+            script += "res = JSON.parse(res);\n";
+            script += "console.log(res);\n";
+
+            var result = jsExecutor.RunScriptDetaiiled(script);
+
+            Assert.IsTrue(result.IsSucceeded);
+
+            var resp = result.ResponseObject;
+
+            Assert.IsTrue(resp.Logs.Count == 1);
+
+            var logVar = resp.Logs.First().SerializedVariables.First();
+
+            //(6 + 6) / 4
+            Assert.AreEqual(logVar.DataJson, "5.0");
+        }
     }
 }
