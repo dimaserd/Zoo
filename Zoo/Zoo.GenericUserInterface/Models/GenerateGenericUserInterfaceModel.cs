@@ -189,7 +189,7 @@ namespace Zoo.GenericUserInterface.Models
                 x => x.FullTypeName == typeof(DateTime).FullName
             };
 
-            var enumeratedType = main.GetTypeDescription(prop.EnumeratedDiplayFullTypeName);
+            var enumeratedType = main.GetMainTypeDescription();
 
             if(prop.IsEnumerable && enumeratedType.IsEnumeration)
             {
@@ -247,7 +247,6 @@ namespace Zoo.GenericUserInterface.Models
             {
                 return UserInterfaceType.DatePicker;
             }
-
             if (desc.IsEnumeration)
             {
                 return UserInterfaceType.DropDownList;

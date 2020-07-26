@@ -25,11 +25,11 @@ namespace Zoo.GenericUserInterface.Tests
 
             var fProp = result.Blocks.First();
 
-            Assert.IsTrue(fProp.InterfaceType == Enumerations.UserInterfaceType.DropDownList);
+            Assert.AreEqual(Enumerations.UserInterfaceType.DropDownList, fProp.InterfaceType);
 
             var selectList = fProp.SelectList;
 
-            Assert.IsTrue(selectList.Count == 3);
+            Assert.AreEqual(3, selectList.Count);
 
             var fItem = selectList.First();
 

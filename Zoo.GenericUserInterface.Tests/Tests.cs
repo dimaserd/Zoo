@@ -40,13 +40,27 @@ namespace Tests
     public class Tests
     {
         [Test]
+        public void TestListOfStringPoperty()
+        {
+            var result = new GenericUserInterfaceModelBuilder<SomeClass>("prefix").Result;
+
+            var block = result.Blocks.First(t => t.PropertyName == nameof(SomeClass.Property2));
+
+            Assert.AreEqual(nameof(SomeClass.Property2), block.LabelText);
+            Assert.AreEqual(UserInterfaceType.MultipleDropDownList, block.InterfaceType);
+            Assert.IsTrue(block.SelectList.Count == 0);
+        }
+
+        [Test]
         public void ShiftToStartForTest()
         {
             var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
 
             builder.ShiftToStartFor(x => x.Property);
 
-            Assert.IsTrue(builder.Result.Blocks.First().PropertyName == nameof(SomeClass.Property));
+            var result = builder.Result;
+
+            Assert.IsTrue(result.Blocks.First().PropertyName == nameof(SomeClass.Property));
         }
 
         [Test]

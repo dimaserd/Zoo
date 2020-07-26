@@ -19,7 +19,6 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="modelPrefix"></param>
         public GenericUserInterfaceModelBuilder(string modelPrefix) : base(typeof(TModel), modelPrefix)
         {
-
         }
 
         /// <summary>
@@ -29,7 +28,6 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="opts"></param>
         public GenericUserInterfaceModelBuilder(string modelPrefix, GenericInterfaceOptions opts) : base(typeof(TModel), modelPrefix, null, opts)
         {
-
         }
 
         /// <summary>
@@ -39,7 +37,6 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="valueProvider"></param>
         public GenericUserInterfaceModelBuilder(string modelPrefix, GenericUserInterfaceValueProvider valueProvider) : base(typeof(TModel), modelPrefix, valueProvider, null)
         {
-
         }
 
         /// <summary>
@@ -49,10 +46,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="modelPrefix"></param>
         public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix) : base(typeof(TModel), modelPrefix, GenericUserInterfaceValueProvider.Create(model), null)
         {
-
         }
-
-        
 
         /// <summary>
         /// Конструктор
@@ -62,7 +56,6 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="opts"></param>
         public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix, GenericInterfaceOptions opts) : base(typeof(TModel), modelPrefix, GenericUserInterfaceValueProvider.Create(model), opts)
         {
-
         }
 
         /// <summary>
