@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="NetCroco.Core" Version="1.9.88" />
-    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.23" />
+    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.30" />
   </ItemGroup>
 
   <ItemGroup>

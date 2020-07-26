@@ -132,9 +132,8 @@ namespace Zoo.GenericUserInterface.Services
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
-            var crocDescr = CrocoTypeDescription.GetDescription(typeof(TProp));
-
-            if(crocDescr.IsEnumeration)
+            var mainDoc = CrocoTypeDescription.GetDescription(typeof(TProp)).GetMainTypeDescription();
+            if(mainDoc.IsEnumeration)
             {
                 throw new ApplicationException(string.Format(ExceptionTexts.CantImplementMethodNameToEnumPropertyFormat, nameof(DropDownListFor)));
             }
@@ -154,13 +153,16 @@ namespace Zoo.GenericUserInterface.Services
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
             var crocDescr = CrocoTypeDescription.GetDescription(typeof(TProp));
+            var main = crocDescr.GetMainTypeDescription();
 
-            if(!crocDescr.IsEnumerable)
+            if(!main.IsEnumerable)
             {
                 throw new ApplicationException(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty);
             }
 
-            if (crocDescr.EnumeratedType.IsEnumeration)
+            var enumerated = crocDescr.GetTypeDescription(main.EnumeratedDiplayFullTypeName);
+            
+            if (enumerated.IsEnumeration)
             {
                 throw new ApplicationException(ExceptionTexts.CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty);
             }

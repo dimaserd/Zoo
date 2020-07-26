@@ -42,11 +42,11 @@ namespace Zoo.ServerJs.Models
         /// <summary>
         /// Ответ от метода обработчика. Подробное описание типа.
         /// </summary>
-        public CrocoTypeDescription Response { get; set; }
+        public CrocoTypeDescriptionResult Response { get; set; }
 
         /// <summary>
         /// Параметры для метода обработчика. Подробное описание типа.
         /// </summary>
-        public List<CrocoTypeDescription> Parameters { get; set; }
+        public List<CrocoTypeDescriptionResult> Parameters { get; set; }
     }
 }

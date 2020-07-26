@@ -59,12 +59,14 @@ namespace Zoo.GenericUserInterface.Extensions
         {
             var crocoType = CrocoTypeDescription.GetDescription(enumType);
 
-            if(!crocoType.IsEnumeration)
+            var main = crocoType.GetMainTypeDescription();
+
+            if(!main.IsEnumeration)
             {
                 throw new Exception("Данный тип не является перечислением");
             }
 
-            return crocoType.EnumDescription.EnumValues.Select(x => new MySelectListItem
+            return main.EnumDescription.EnumValues.Select(x => new MySelectListItem
             {
                 Text = x.DisplayName,
                 Value = x.StringRepresentation

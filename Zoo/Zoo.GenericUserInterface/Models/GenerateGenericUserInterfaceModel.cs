@@ -21,7 +21,7 @@ namespace Zoo.GenericUserInterface.Models
         /// <summary>
         /// Описание типа данных
         /// </summary>
-        public CrocoTypeDescription TypeDescription { get; set; }
+        public CrocoTypeDescriptionResult TypeDescription { get; set; }
 
         /// <summary>
         /// Блоки для свойств
@@ -45,7 +45,7 @@ namespace Zoo.GenericUserInterface.Models
         /// <returns></returns>
         public Task OverrideAsync(GenericUserInterfaceOverridings overridings)
         {
-            var overriding = overridings.GetOverriding(TypeDescription.FullTypeName);
+            var overriding = overridings.GetOverriding(TypeDescription.GetMainTypeDescription().FullTypeName);
             
             if(overriding == null)
             {
@@ -94,24 +94,25 @@ namespace Zoo.GenericUserInterface.Models
             };
         }
 
-        private static UserInterfaceBlock GetBlockForEnumerable(CrocoTypeDescription prop, GenericInterfaceOptions opts)
+        private static UserInterfaceBlock GetBlockForEnumerable(CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult desc, GenericInterfaceOptions opts)
         {
             return new UserInterfaceBlock
             {
                 LabelText = prop.PropertyDescription?.PropertyDisplayName,
                 InterfaceType = UserInterfaceType.MultipleDropDownList,
                 PropertyName = prop.PropertyDescription.PropertyName,
-                SelectList = GetSelectList(prop, opts),
+                SelectList = GetSelectList(desc.GetTypeDescription(prop.DisplayFullTypeName) , desc, opts),
             };
         }
 
-        private static List<UserInterfaceBlock> GetBlocks(string prefix, CrocoTypeDescription desc, GenericInterfaceOptions opts)
+        private static List<UserInterfaceBlock> GetBlocks(string prefix, CrocoTypeDescriptionResult desc, GenericInterfaceOptions opts)
         {
             List<UserInterfaceBlock> result = new List<UserInterfaceBlock>();
 
-            foreach (var prop in desc.Properties)
+            var main = desc.GetMainTypeDescription();
+            foreach (var prop in main.Properties)
             {
-                result.AddRange(GetBlocksFromProperty(prefix, prop, opts));
+                result.AddRange(GetBlocksFromProperty(prefix, prop, desc, opts));
             }
 
             return result;
@@ -143,11 +144,13 @@ namespace Zoo.GenericUserInterface.Models
             };
         }
 
-        private static List<UserInterfaceBlock> GetBlocksFromProperty(string prefix, CrocoTypeDescription prop, GenericInterfaceOptions opts)
+        private static List<UserInterfaceBlock> GetBlocksFromProperty(string prefix, CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)
         {
-            if (!prop.IsClass && !prop.IsEnumerable)
+            var propTypeDescription = main.GetTypeDescription(prop.DisplayFullTypeName);
+
+            if (!propTypeDescription.IsClass && !propTypeDescription.IsEnumerable)
             {
-                var type = GetUserInterfaceType(prop);
+                var type = GetUserInterfaceType(propTypeDescription);
 
                 return new List<UserInterfaceBlock>
                 {
@@ -156,40 +159,40 @@ namespace Zoo.GenericUserInterface.Models
                         LabelText = prop.PropertyDescription?.PropertyDisplayName,
                         PropertyName = $"{prefix}{prop.PropertyDescription.PropertyName}",
                         InterfaceType = type,
-                        SelectList = GetSelectList(prop, opts),
-                        TextBoxData = GetTextBoxDataForProperty(prop, type)
+                        SelectList = GetSelectList(main.GetTypeDescription(prop.DisplayFullTypeName), main, opts),
+                        TextBoxData = GetTextBoxDataForProperty(propTypeDescription, type)
                     }
                 };
             }
 
-            if(prop.IsEnumerable)
+            if(propTypeDescription.IsEnumerable)
             {
                 return new List<UserInterfaceBlock>()
                 {
-                    GetBlockForEnumerable(prop, opts)
+                    GetBlockForEnumerable(prop, main, opts)
                 };
             }
 
-            if (prop.IsClass)
+            if (propTypeDescription.IsClass)
             {
-                return GetBlocks($"{prefix}{prop.PropertyDescription.PropertyName}.", prop, opts);
+                return GetBlocks($"{prefix}{prop.PropertyDescription.PropertyName}.", main, opts);
             }
 
             throw new Exception("не продумано");
         }
 
-        private static List<MySelectListItem> GetSelectList(CrocoTypeDescription prop, GenericInterfaceOptions opts)
+        private static List<MySelectListItem> GetSelectList(CrocoTypeDescription prop, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)
         {
-            List<Func<CrocoTypeDescription, bool>> emptySelectListPredicates = new List<Func<CrocoTypeDescription, bool>>
+            var emptySelectListPredicates = new List<Func<CrocoTypeDescription, bool>>
             {
                 x => x.IsEnumerable, 
                 x => x.FullTypeName == typeof(DateTime).FullName
             };
-            
-            if(prop.IsEnumerable && prop.EnumeratedType.IsEnumeration)
-            {
-                var enumeratedType = prop.EnumeratedType;
 
+            var enumeratedType = main.GetTypeDescription(prop.EnumeratedDiplayFullTypeName);
+
+            if(prop.IsEnumerable && enumeratedType.IsEnumeration)
+            {
                 return enumeratedType.EnumDescription.EnumValues.Select(x => new MySelectListItem
                 {
                     Text = x.DisplayName,

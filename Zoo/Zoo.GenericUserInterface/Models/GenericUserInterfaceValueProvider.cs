@@ -33,7 +33,9 @@ namespace Zoo.GenericUserInterface.Models
 
             var typeDescription = CrocoTypeDescription.GetDescription(modelType);
 
-            if (!typeDescription.IsClass)
+            var main = typeDescription.GetMainTypeDescription();
+
+            if (!main.IsClass)
             {
                 throw new Exception("Не поддерживается");
             }
@@ -45,17 +47,19 @@ namespace Zoo.GenericUserInterface.Models
             };
 
 
-            foreach (var prop in typeDescription.Properties)
+            foreach (var prop in main.Properties)
             {
-                if (prop.IsClass)
+                var propDescr = typeDescription.GetTypeDescription(prop.DisplayFullTypeName);
+
+                if (propDescr.IsClass)
                 {
                     //Вложенный класс не поддерживается как провайдер значений для свойства
                     continue;
                 }
 
-                var jsonValueOfModel = GetJson(model, prop);
+                var jsonValueOfModel = GetJson(model, prop, typeDescription);
 
-                if(prop.IsEnumerable)
+                if(propDescr.IsEnumerable)
                 {
                     t.Arrays.Add(new GenericUserInterfacePropertyListValue
                     {
@@ -76,13 +80,15 @@ namespace Zoo.GenericUserInterface.Models
             return t;
         }
 
-        private static string GetJson(object obj, CrocoTypeDescription prop)
+        private static string GetJson(object obj, CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult main)
         {
+            var propDescr = main.GetTypeDescription(prop.DisplayFullTypeName);
+
             var propOfModel = obj.GetType().GetProperty(prop.PropertyDescription.PropertyName);
 
             var valueOfProp = propOfModel.GetValue(obj);
 
-            return prop.IsEnumerable ? UnWrapJsonForArrayOfSomething(valueOfProp) : Tool.JsonConverter.Serialize(valueOfProp);
+            return propDescr.IsEnumerable ? UnWrapJsonForArrayOfSomething(valueOfProp) : Tool.JsonConverter.Serialize(valueOfProp);
         }
 
         private static string UnWrapJsonForArrayOfSomething(object valueOfProp)
