@@ -101,7 +101,7 @@ namespace Zoo.GenericUserInterface.Models
                 LabelText = prop.PropertyDescription?.PropertyDisplayName,
                 InterfaceType = UserInterfaceType.MultipleDropDownList,
                 PropertyName = prop.PropertyDescription.PropertyName,
-                SelectList = GetSelectList(desc.GetTypeDescription(prop.DisplayFullTypeName) , desc, opts),
+                SelectList = GetSelectList(prop, desc, opts),
             };
         }
 
@@ -159,7 +159,7 @@ namespace Zoo.GenericUserInterface.Models
                         LabelText = prop.PropertyDescription?.PropertyDisplayName,
                         PropertyName = $"{prefix}{prop.PropertyDescription.PropertyName}",
                         InterfaceType = type,
-                        SelectList = GetSelectList(main.GetTypeDescription(prop.DisplayFullTypeName), main, opts),
+                        SelectList = GetSelectList(prop, main, opts),
                         TextBoxData = GetTextBoxDataForProperty(propTypeDescription, type)
                     }
                 };
@@ -181,7 +181,7 @@ namespace Zoo.GenericUserInterface.Models
             throw new Exception("не продумано");
         }
 
-        private static List<MySelectListItem> GetSelectList(CrocoTypeDescription prop, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)
+        private static List<MySelectListItem> GetSelectList(CrocoPropertyReferenceDescription propDescr, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)
         {
             var emptySelectListPredicates = new List<Func<CrocoTypeDescription, bool>>
             {
@@ -189,32 +189,37 @@ namespace Zoo.GenericUserInterface.Models
                 x => x.FullTypeName == typeof(DateTime).FullName
             };
 
-            var enumeratedType = main.GetMainTypeDescription();
-
-            if(prop.IsEnumerable && enumeratedType.IsEnumeration)
+            var propTypeDesc = main.GetTypeDescription(propDescr.DisplayFullTypeName);
+            
+            if (propTypeDesc.IsEnumerable)
             {
-                return enumeratedType.EnumDescription.EnumValues.Select(x => new MySelectListItem
+                var enumeratedType = main.GetTypeDescription(propTypeDesc.EnumeratedDiplayFullTypeName);
+
+                if (enumeratedType.IsEnumeration)
                 {
-                    Text = x.DisplayName,
-                    Value = x.StringRepresentation
-                }).ToList();
+                    return enumeratedType.EnumDescription.EnumValues.Select(x => new MySelectListItem
+                    {
+                        Text = x.DisplayName,
+                        Value = x.StringRepresentation
+                    }).ToList();
+                }
             }
 
-            if (prop.FullTypeName == typeof(bool).FullName)
+            if (propTypeDesc.FullTypeName == typeof(bool).FullName)
             {
-                return MySelectListItemExtensions.GetBooleanList(prop.IsNullable, opts);
+                return MySelectListItemExtensions.GetBooleanList(propTypeDesc.IsNullable, opts);
             }
 
-            if (emptySelectListPredicates.Any(x => x(prop)))
+            if (emptySelectListPredicates.Any(x => x(propTypeDesc)))
             {
                 return new List<MySelectListItem>();
             }
 
-            if (prop.IsEnumeration)
+            if (propTypeDesc.IsEnumeration)
             {
                 var enumsList = new List<MySelectListItem>();
 
-                if(prop.IsNullable)
+                if(propTypeDesc.IsNullable)
                 {
                     enumsList.Add(new MySelectListItem
                     {
@@ -224,7 +229,7 @@ namespace Zoo.GenericUserInterface.Models
                     });
                 }
 
-                enumsList.AddRange(prop.EnumDescription.EnumValues.Select(x => new MySelectListItem
+                enumsList.AddRange(propTypeDesc.EnumDescription.EnumValues.Select(x => new MySelectListItem
                 {
                     Value = x.StringRepresentation,
                     Text = x.DisplayName
