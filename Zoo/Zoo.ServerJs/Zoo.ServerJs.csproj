@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.9.15</Version>
+    <Version>0.9.16</Version>
     <Company>CrocoSoft</Company>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Authors>Dmitry Serdyukov</Authors>
@@ -19,8 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="Jint" Version="2.11.58" />
-    <PackageReference Include="NetCroco.Core.Abstractions" Version="1.1.43" />
-    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.32" />
+    <PackageReference Include="NetCroco.Core.Abstractions" Version="1.1.45" />
+    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.33" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 </Project>
