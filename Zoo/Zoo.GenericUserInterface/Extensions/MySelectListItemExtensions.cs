@@ -17,13 +17,13 @@ namespace Zoo.GenericUserInterface.Extensions
         /// <param name="isNullable"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public static List<MySelectListItem> GetBooleanList(bool isNullable, GenericInterfaceOptions opts)
+        public static List<SelectListItem> GetBooleanList(bool isNullable, GenericInterfaceOptions opts)
         {
-            var list = new List<MySelectListItem>();
+            var list = new List<SelectListItem>();
 
             if(isNullable)
             {
-                list.Add(new MySelectListItem
+                list.Add(new SelectListItem
                 {
                     Selected = true,
                     Text =  opts.NotSelectedText,
@@ -31,16 +31,16 @@ namespace Zoo.GenericUserInterface.Extensions
                 });
             }
 
-            list.AddRange(new List<MySelectListItem>
+            list.AddRange(new List<SelectListItem>
             {
-                new MySelectListItem
+                new SelectListItem
                 {
                     Selected = !isNullable,
                     Text = opts.TextOnFalse,
                     Value = false.ToString(),
                 },
 
-                new MySelectListItem
+                new SelectListItem
                 {
                     Text = opts.TextOnTrue,
                     Value = true.ToString()
@@ -55,7 +55,7 @@ namespace Zoo.GenericUserInterface.Extensions
         /// </summary>
         /// <param name="enumType"></param>
         /// <returns></returns>
-        public static List<MySelectListItem> GetEnumDropDownList(Type enumType)
+        public static List<SelectListItem> GetEnumDropDownList(Type enumType)
         {
             var crocoType = CrocoTypeDescription.GetDescription(enumType);
 
@@ -66,7 +66,7 @@ namespace Zoo.GenericUserInterface.Extensions
                 throw new Exception("Данный тип не является перечислением");
             }
 
-            return main.EnumDescription.EnumValues.Select(x => new MySelectListItem
+            return main.EnumDescription.EnumValues.Select(x => new SelectListItem
             {
                 Text = x.DisplayName,
                 Value = x.StringRepresentation

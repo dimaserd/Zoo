@@ -56,11 +56,11 @@ namespace Zoo.GenericUserInterface.Services
         /// </summary>
         /// <param name="type"></param>
         /// <param name="modelPrefix"></param>
-        /// <param name="valueProvider"></param>
+        /// <param name="valueJson"></param>
         /// <param name="opts"></param>
-        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix, GenericUserInterfaceValueProvider valueProvider, GenericInterfaceOptions opts)
+        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix, string valueJson, GenericInterfaceOptions opts)
         {
-            Result = GenerateGenericUserInterfaceModel.CreateFromType(type, modelPrefix, valueProvider, opts);
+            Result = GenerateGenericUserInterfaceModel.CreateFromType(type, modelPrefix, valueJson, opts);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="propertyName"></param>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        public GenericUserInterfaceModelBuilder SetMultipleDropDownListFor(string propertyName, List<MySelectListItem> selectListItems)
+        public GenericUserInterfaceModelBuilder SetMultipleDropDownListFor(string propertyName, List<SelectListItem> selectListItems)
         {
             var block = GetBlockByPropertyName(propertyName);
 
@@ -161,7 +161,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="propertyName"></param>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        public GenericUserInterfaceModelBuilder SetDropDownListFor(string propertyName, List<MySelectListItem> selectListItems)
+        public GenericUserInterfaceModelBuilder SetDropDownListFor(string propertyName, List<SelectListItem> selectListItems)
         {
             var block = GetBlockByPropertyName(propertyName);
 

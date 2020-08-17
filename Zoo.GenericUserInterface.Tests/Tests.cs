@@ -78,9 +78,9 @@ namespace Tests
         {
             var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
 
-            var list = new List<MySelectListItem>
+            var list = new List<SelectListItem>
             {
-                new MySelectListItem
+                new SelectListItem
                 {
                     Selected = false,
                     Text = "Text",
@@ -101,9 +101,9 @@ namespace Tests
         {
             var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
 
-            var ex = Assert.Throws<ApplicationException>(() => builder.DropDownListFor(x => x.EnumProp, new List<Zoo.GenericUserInterface.Models.MySelectListItem>
+            var ex = Assert.Throws<ApplicationException>(() => builder.DropDownListFor(x => x.EnumProp, new List<Zoo.GenericUserInterface.Models.SelectListItem>
             {
-                new MySelectListItem
+                new SelectListItem
                 {
                     Selected = false,
                     Text = "Text"
@@ -118,9 +118,9 @@ namespace Tests
         {
             var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
 
-            var ex = Assert.Throws<ApplicationException>(() => builder.MultipleDropDownListFor(x => x.EnumProp, new List<MySelectListItem>
+            var ex = Assert.Throws<ApplicationException>(() => builder.MultipleDropDownListFor(x => x.EnumProp, new List<SelectListItem>
             {
-                new MySelectListItem
+                new SelectListItem
                 {
                     Selected = false,
                     Text = "Text"
@@ -136,9 +136,9 @@ namespace Tests
         {
             var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
 
-            var ex = Assert.Throws<ApplicationException>(() => builder.MultipleDropDownListFor(x => x.Property, new List<MySelectListItem>
+            var ex = Assert.Throws<ApplicationException>(() => builder.MultipleDropDownListFor(x => x.Property, new List<SelectListItem>
             {
-                new MySelectListItem
+                new SelectListItem
                 {
                     Selected = false,
                     Text = "Text"

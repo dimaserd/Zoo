@@ -84,9 +84,9 @@
             Блоки для свойств
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.ValueProvider">
+        <member name="P:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.ValueJson">
             <summary>
-            Провайдер значений
+            Данные для заполнения объекта
             </summary>
         </member>
         <member name="P:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.CustomDataJson">
@@ -109,13 +109,13 @@
             <param name="modelPrefix"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.CreateFromType(System.Type,System.String,Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
+        <member name="M:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.CreateFromType(System.Type,System.String,System.String,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
             <summary>
             Создать из типа
             </summary>
             <param name="type"></param>
             <param name="modelPrefix"></param>
-            <param name="valueProvider"></param>
+            <param name="valueJson"></param>
             <param name="opts"></param>
             <returns></returns>
         </member>
@@ -202,46 +202,29 @@
             <param name="typeFullName"></param>
             <returns></returns>
         </member>
-        <member name="T:Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider">
-            <summary>
-            Провайдер значений для модели
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider.Singles">
-            <summary>
-            Значения для типов данных не являющихся массивами
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider.Arrays">
-            <summary>
-            Значения для типов данных которые являются массивами
-            </summary>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider.Create(System.Object)">
-            <summary>
-            Создать провайдера значений из объекта
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.MySelectListItem">
+        <member name="T:Zoo.GenericUserInterface.Models.SelectListItem">
             <summary>
             Элемент выпадающего списка
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Models.MySelectListItem.Value">
+        <member name="P:Zoo.GenericUserInterface.Models.SelectListItem.Value">
             <summary>
             Значение
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Models.MySelectListItem.Text">
+        <member name="P:Zoo.GenericUserInterface.Models.SelectListItem.Text">
             <summary>
             Текст для показа
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Models.MySelectListItem.Selected">
+        <member name="P:Zoo.GenericUserInterface.Models.SelectListItem.Selected">
             <summary>
             Флаг выбранности
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.SelectListItem.DataJson">
+            <summary>
+            Кастомные данные
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.UserInterfaceBlock">
@@ -351,6 +334,28 @@
               Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
             </summary>
         </member>
+        <member name="M:Zoo.GenericUserInterface.Services.CrudGenericUserInterface`3.GetList(`0)">
+            <summary>
+            Получить список
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.CrudGenericUserInterface`3.Create(`2)">
+            <summary>
+            Создать
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.CrudGenericUserInterface`3.Update(System.String,`2)">
+            <summary>
+            Обновить
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder">
             <summary>
             Построитель обобщенного пользовательского интерфейса
@@ -384,13 +389,13 @@
             <param name="modelPrefix"></param>
             <param name="opts"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.#ctor(System.Type,System.String,Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.#ctor(System.Type,System.String,System.String,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
             <summary>
             Конструктор
             </summary>
             <param name="type"></param>
             <param name="modelPrefix"></param>
-            <param name="valueProvider"></param>
+            <param name="valueJson"></param>
             <param name="opts"></param>
         </member>
         <member name="P:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.Result">
@@ -426,7 +431,7 @@
             <param name="propertyName"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetMultipleDropDownListFor(System.String,System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetMultipleDropDownListFor(System.String,System.Collections.Generic.List{Zoo.GenericUserInterface.Models.SelectListItem})">
             <summary>
             Установить выпадающий список со множественным выбором для свойства объекта
             </summary>
@@ -434,7 +439,7 @@
             <param name="selectListItems"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetDropDownListFor(System.String,System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetDropDownListFor(System.String,System.Collections.Generic.List{Zoo.GenericUserInterface.Models.SelectListItem})">
             <summary>
             Установить выпадающий список с единственным выбором для свойства объекта
             </summary>
@@ -467,20 +472,6 @@
             </summary>
             <param name="modelPrefix"></param>
             <param name="opts"></param>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.#ctor(System.String,Zoo.GenericUserInterface.Models.GenericUserInterfaceValueProvider)">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="modelPrefix"></param>
-            <param name="valueProvider"></param>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.#ctor(`0,System.String)">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="model"></param>
-            <param name="modelPrefix"></param>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.#ctor(`0,System.String,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
             <summary>
@@ -524,7 +515,7 @@
             <param name="expression"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.SelectListItem})">
             <summary>
             Установить выпадающий список с единственным выбором для свойства объекта
             </summary>
@@ -532,7 +523,7 @@
             <param name="selectListItems"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.MultipleDropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.MySelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.MultipleDropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.SelectListItem})">
             <summary>
             Установить выпадающий список со множественным выбором для свойства объекта
             </summary>

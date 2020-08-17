@@ -16,9 +16,9 @@ namespace Zoo.GenericUserInterface.Tests
     {
         public override Task OverrideInterfaceAsync(GenericUserInterfaceModelBuilder<SomeTypeToOverride> builder)
         {
-            builder.DropDownListFor(x => x.SomeProperty, new List<MySelectListItem>
+            builder.DropDownListFor(x => x.SomeProperty, new List<SelectListItem>
             {
-                new MySelectListItem
+                new SelectListItem
                 {
                     Text = "Text",
                     Selected = true,

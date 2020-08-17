@@ -13,8 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NetCroco.Core" Version="1.9.88" />
-    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.32" />
+    <PackageReference Include="NetCroco.Core" Version="1.9.89" />
+    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.33" />
+    <PackageReference Include="NetCroco.Mapper" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

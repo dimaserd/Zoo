@@ -26,7 +26,7 @@ namespace Zoo.GenericUserInterface.Models
         /// <summary>
         /// Значения для выпадающего списка
         /// </summary>
-        public List<MySelectListItem> SelectList { get; set; }
+        public List<SelectListItem> SelectList { get; set; }
 
         /// <summary>
         /// Дополнительная информация для текстового блока

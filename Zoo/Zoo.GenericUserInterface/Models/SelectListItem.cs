@@ -3,7 +3,7 @@
     /// <summary>
     /// Элемент выпадающего списка
     /// </summary>
-    public class MySelectListItem
+    public class SelectListItem
     {
         /// <summary>
         /// Значение
@@ -19,5 +19,10 @@
         /// Флаг выбранности
         /// </summary>
         public bool Selected { get; set; }
+
+        /// <summary>
+        /// Кастомные данные
+        /// </summary>
+        public string DataJson { get; set; }
     }
 }

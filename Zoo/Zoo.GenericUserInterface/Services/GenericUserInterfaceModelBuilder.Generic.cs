@@ -1,4 +1,5 @@
 ﻿using Croco.Core.Documentation.Models;
+using Croco.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -33,28 +34,10 @@ namespace Zoo.GenericUserInterface.Services
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="modelPrefix"></param>
-        /// <param name="valueProvider"></param>
-        public GenericUserInterfaceModelBuilder(string modelPrefix, GenericUserInterfaceValueProvider valueProvider) : base(typeof(TModel), modelPrefix, valueProvider, null)
-        {
-        }
-
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="modelPrefix"></param>
-        public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix) : base(typeof(TModel), modelPrefix, GenericUserInterfaceValueProvider.Create(model), null)
-        {
-        }
-
-        /// <summary>
-        /// Конструктор
-        /// </summary>
         /// <param name="model"></param>
         /// <param name="modelPrefix"></param>
         /// <param name="opts"></param>
-        public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix, GenericInterfaceOptions opts) : base(typeof(TModel), modelPrefix, GenericUserInterfaceValueProvider.Create(model), opts)
+        public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix, GenericInterfaceOptions opts) : base(typeof(TModel), modelPrefix, Tool.JsonConverter.Serialize(model), opts)
         {
         }
 
@@ -121,7 +104,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="expression"></param>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<TModel> DropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<MySelectListItem> selectListItems)
+        public GenericUserInterfaceModelBuilder<TModel> DropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<SelectListItem> selectListItems)
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
@@ -141,7 +124,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="expression"></param>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<TModel> MultipleDropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<MySelectListItem> selectListItems)
+        public GenericUserInterfaceModelBuilder<TModel> MultipleDropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<SelectListItem> selectListItems)
         {
             var memberName = (expression.Body as MemberExpression).Member.Name;
 
