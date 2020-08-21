@@ -24,6 +24,11 @@ namespace Zoo.GenericUserInterface.Models
         public UserInterfaceType InterfaceType { get; set; }
 
         /// <summary>
+        /// Название кастомного типа пользовательского интерфейса
+        /// </summary>
+        public string CustomUserInterfaceType { get; set; }
+
+        /// <summary>
         /// Значения для выпадающего списка
         /// </summary>
         public List<SelectListItem> SelectList { get; set; }

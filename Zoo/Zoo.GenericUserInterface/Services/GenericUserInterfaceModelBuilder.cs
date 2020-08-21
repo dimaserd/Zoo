@@ -139,6 +139,24 @@ namespace Zoo.GenericUserInterface.Services
         }
 
         /// <summary>
+        /// Установить кастомный тип инпута
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="customType"></param>
+        /// <param name="customDataJson"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder SetHiddenFor(string propertyName, string customType, string customDataJson)
+        {
+            var block = GetBlockByPropertyName(propertyName);
+
+            block.InterfaceType = UserInterfaceType.CustomInput;
+            block.CustomUserInterfaceType = customType;
+            block.CustomDataJson = customDataJson;
+
+            return this;
+        }
+
+        /// <summary>
         /// Установить выпадающий список со множественным выбором для свойства объекта
         /// </summary>
         /// <param name="propertyName"></param>

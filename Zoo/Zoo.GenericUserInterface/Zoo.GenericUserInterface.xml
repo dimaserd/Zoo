@@ -247,6 +247,11 @@
             Тип пользовательского интрефейса
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.CustomUserInterfaceType">
+            <summary>
+            Название кастомного типа пользовательского интерфейса
+            </summary>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.SelectList">
             <summary>
             Значения для выпадающего списка
@@ -431,6 +436,15 @@
             <param name="propertyName"></param>
             <returns></returns>
         </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetHiddenFor(System.String,System.String,System.String)">
+            <summary>
+            Установить кастомный тип инпута
+            </summary>
+            <param name="propertyName"></param>
+            <param name="customType"></param>
+            <param name="customDataJson"></param>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetMultipleDropDownListFor(System.String,System.Collections.Generic.List{Zoo.GenericUserInterface.Models.SelectListItem})">
             <summary>
             Установить выпадающий список со множественным выбором для свойства объекта
@@ -506,6 +520,15 @@
             Установить скрытое поле ввода для свойства объекта
             </summary>
             <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.CustomFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.String,System.String)">
+            <summary>
+            Установить скрытое поле ввода для свойства объекта
+            </summary>
+            <param name="expression"></param>
+            <param name="customType"></param>
+            <param name="customDataJson"></param>
             <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.TextAreaFor(System.Linq.Expressions.Expression{System.Func{`0,System.String}})">

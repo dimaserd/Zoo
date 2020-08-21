@@ -86,6 +86,20 @@ namespace Zoo.GenericUserInterface.Services
         }
 
         /// <summary>
+        /// Установить скрытое поле ввода для свойства объекта
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="customType"></param>
+        /// <param name="customDataJson"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceModelBuilder<TModel> CustomFor<TProp>(Expression<Func<TModel, TProp>> expression, string customType, string customDataJson)
+        {
+            var memberName = (expression.Body as MemberExpression).Member.Name;
+
+            return SetHiddenFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
+        }
+
+        /// <summary>
         /// Установить большой текстовое поле ввода для свойства объекта
         /// </summary>
         /// <param name="expression"></param>
