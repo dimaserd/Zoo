@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using Zoo.ServerJs.Models;
@@ -8,8 +9,9 @@ namespace Zoo.ServerJs.Tests
 {
     public class ApiCallComponentTests
     {
-        [Test]
-        public void Test()
+        [TestCase(7, 12)]
+        [TestCase(3, 4)]
+        public void Test(int arg1, int arg2)
         {
             var jsExecutor = new JsExecutor(new JsExecutorProperties
             {
@@ -23,10 +25,6 @@ namespace Zoo.ServerJs.Tests
                     }
                 }
             });
-
-            var arg1 = 5;
-
-            var arg2 = 6;
 
             var script = $"var res = api.CallExternal('Test', 'Calculator', {{ 'Arg1': {arg1}, 'Arg2': {arg2} }}); \n";
 
@@ -44,8 +42,8 @@ namespace Zoo.ServerJs.Tests
             Assert.AreEqual($"\"{arg1 + arg2}.0\"", logValue.DataJson);
         }
 
-        [Test]
-        public void CallAfterCall()
+        [TestCase(6, 6)]
+        public void CallAfterCall(double arg1, double arg2, double delimeter)
         {
             var jsExecutor = new JsExecutor(new JsExecutorProperties
             {
@@ -56,7 +54,7 @@ namespace Zoo.ServerJs.Tests
                         ComponentName = "Test",
                         Script = "function Calculator(model) { \n" +
                         "var t = model.Arg1 + model.Arg2;\n" +
-                        "var s = JSON.parse( api.CallExternal('Test2', 'CalculatorNew', { 'Arg1': t, 'Arg2': 4 }) );\n" +
+                        "var s = JSON.parse( api.CallExternal('Test2', 'CalculatorNew', { 'Arg1': t, 'Arg2': " + $"{delimeter}" + " }) );\n" +
                         "return s;\n" +
                         " }"
                     },
@@ -70,7 +68,7 @@ namespace Zoo.ServerJs.Tests
                 }
             });
 
-            var script = "var res = api.CallExternal('Test', 'Calculator', { 'Arg1': 6, 'Arg2': 6 });\n";
+            var script = "var res = api.CallExternal('Test', 'Calculator', { 'Arg1': " + $"{arg1}, 'Arg2': {arg2}" + " });\n";
 
             script += "res = JSON.parse(res);\n";
             script += "console.log(res);\n";
@@ -85,8 +83,11 @@ namespace Zoo.ServerJs.Tests
 
             var logVar = resp.Logs.First().SerializedVariables.First();
 
+
+            var exprexctedValue = (arg1 + arg2) / delimeter;
+            
             //(6 + 6) / 4
-            Assert.AreEqual(logVar.DataJson, "3.0");
+            Assert.AreEqual(exprexctedValue, JsonConvert.DeserializeObject<double>(logVar.DataJson));
         }
 
         [Test]
