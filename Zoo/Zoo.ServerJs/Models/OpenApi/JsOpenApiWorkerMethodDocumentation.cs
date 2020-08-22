@@ -1,8 +1,9 @@
 ﻿using Croco.Core.Documentation.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Zoo.ServerJs.Models.Method;
 
-namespace Zoo.ServerJs.Models
+namespace Zoo.ServerJs.Models.OpenApi
 {
     /// <summary>
     /// 
@@ -18,12 +19,12 @@ namespace Zoo.ServerJs.Models
             MethodName = methodDocs.MethodName;
             Description = methodDocs.Description;
 
-            if(methodDocs.Response != null)
+            if (methodDocs.Response != null)
             {
                 Response = CrocoTypeDescription.GetDescription(methodDocs.Response);
             }
-            
-            if(methodDocs.Parameters != null)
+
+            if (methodDocs.Parameters != null)
             {
                 Parameters = methodDocs.Parameters.Select(x => CrocoTypeDescription.GetDescription(x)).ToList();
             }

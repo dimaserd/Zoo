@@ -1,6 +1,6 @@
 ﻿using Zoo.ServerJs.Statics;
 
-namespace Zoo.ServerJs.Models
+namespace Zoo.ServerJs.Models.Method
 {
     /// <summary>
     /// Параметры вызова javascript метода

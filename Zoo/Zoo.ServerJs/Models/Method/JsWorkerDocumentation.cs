@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Zoo.ServerJs.Models.OpenApi;
 
-namespace Zoo.ServerJs.Models
+namespace Zoo.ServerJs.Models.Method
 {
     /// <summary>
     /// Документация серверного js обработчика
@@ -43,7 +44,7 @@ namespace Zoo.ServerJs.Models
         {
             var method = Methods.FirstOrDefault(x => x.MethodName == methodName);
 
-            if(method == null)
+            if (method == null)
             {
                 throw new ApplicationException($"Метод с названием '{methodName}' не существует в группе методов класса '{WorkerName}'");
             }

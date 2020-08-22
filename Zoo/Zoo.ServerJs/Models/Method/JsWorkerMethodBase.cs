@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zoo.ServerJs.Models
+namespace Zoo.ServerJs.Models.Method
 {
     /// <summary>
     /// Базовое описание метода для серверного javascript обработчика

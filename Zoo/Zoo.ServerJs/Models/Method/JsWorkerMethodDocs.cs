@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Zoo.ServerJs.Models
+namespace Zoo.ServerJs.Models.Method
 {
     /// <summary>
     /// Модель описывающая js метод или функцию
@@ -10,7 +10,6 @@ namespace Zoo.ServerJs.Models
     {
         internal JsWorkerMethodDocs()
         {
-
         }
 
         /// <summary>

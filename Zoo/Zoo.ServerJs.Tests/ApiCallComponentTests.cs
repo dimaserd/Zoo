@@ -39,10 +39,11 @@ namespace Zoo.ServerJs.Tests
             Assert.IsTrue(resp.Logs.Count == 1);
             var logValue = resp.Logs.First().SerializedVariables.First();
 
-            Assert.AreEqual($"\"{arg1 + arg2}.0\"", logValue.DataJson);
+            Assert.AreEqual((double)(arg1 + arg2), JsonConvert.DeserializeObject<double>(logValue.DataJson));
         }
 
-        [TestCase(6, 6)]
+        [TestCase(6, 6, 4)]
+        [TestCase(6, 1, 3)]
         public void CallAfterCall(double arg1, double arg2, double delimeter)
         {
             var jsExecutor = new JsExecutor(new JsExecutorProperties
@@ -86,12 +87,14 @@ namespace Zoo.ServerJs.Tests
 
             var exprexctedValue = (arg1 + arg2) / delimeter;
             
-            //(6 + 6) / 4
             Assert.AreEqual(exprexctedValue, JsonConvert.DeserializeObject<double>(logVar.DataJson));
         }
 
-        [Test]
-        public void CallWithNoArgs()
+        [TestCase(12)]
+        [TestCase(6)]
+        [TestCase(7)]
+        [TestCase(14)]
+        public void CallWithNoArgs(double n1)
         {
             var jsExecutor = new JsExecutor(new JsExecutorProperties
             {
@@ -101,7 +104,7 @@ namespace Zoo.ServerJs.Tests
                     {
                         ComponentName = "Test",
                         Script = "function Test() { \n" +
-                        "return 5;\n" +
+                        $"return {n1};\n" +
                         " }"
                     }
                 }
@@ -122,8 +125,7 @@ namespace Zoo.ServerJs.Tests
 
             var logVar = resp.Logs.First().SerializedVariables.First();
 
-            //(6 + 6) / 4
-            Assert.AreEqual(logVar.DataJson, "5.0");
+            Assert.AreEqual(JsonConvert.DeserializeObject<double>(logVar.DataJson), n1);
         }
     }
 }

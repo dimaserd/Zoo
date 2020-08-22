@@ -1,4 +1,4 @@
-﻿using Zoo.ServerJs.Models;
+﻿using Zoo.ServerJs.Models.Method;
 
 namespace Zoo.ServerJs.Abstractions
 {

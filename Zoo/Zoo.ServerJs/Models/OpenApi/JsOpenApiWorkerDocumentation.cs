@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Zoo.ServerJs.Models.Method;
 
-namespace Zoo.ServerJs.Models
+namespace Zoo.ServerJs.Models.OpenApi
 {
     /// <summary>
     /// Описание серверного javascript обработчика

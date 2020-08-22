@@ -1,4 +1,4 @@
-﻿namespace Zoo.ServerJs.Models
+﻿namespace Zoo.ServerJs.Models.Method
 {
     /// <summary>
     /// Результат вызова метода обработчика

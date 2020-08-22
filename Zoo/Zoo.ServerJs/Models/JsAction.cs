@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Zoo.ServerJs.Models.Method;
 
 namespace Zoo.ServerJs.Models
 {

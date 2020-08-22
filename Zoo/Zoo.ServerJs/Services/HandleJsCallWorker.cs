@@ -5,6 +5,7 @@ using System.Linq;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
+using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services

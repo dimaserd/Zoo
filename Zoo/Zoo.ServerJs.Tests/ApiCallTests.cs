@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
+using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Services;
 using Zoo.ServerJs.Statics;
 

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Croco.Core.Abstractions.Models;
 using Jint;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
+using Zoo.ServerJs.Models.OpenApi;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
@@ -95,11 +95,9 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         /// <param name="jsScripts"></param>
         /// <returns></returns>
-        public async Task<List<BaseApiResponse<object>>> CallManySimpleApis(List<string> jsScripts)
+        public List<BaseApiResponse<object>> CallManySimpleApis(List<string> jsScripts)
         {
-            var tasks = jsScripts.Select(script => Task.FromResult(CallSimpleApi(script)));
-
-            return (await Task.WhenAll(tasks)).ToList();
+            return jsScripts.Select(script => CallSimpleApi(script)).ToList();
         }
 
         /// <summary>
