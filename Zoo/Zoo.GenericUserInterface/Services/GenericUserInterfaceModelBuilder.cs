@@ -145,7 +145,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="customType"></param>
         /// <param name="customDataJson"></param>
         /// <returns></returns>
-        public GenericUserInterfaceModelBuilder SetHiddenFor(string propertyName, string customType, string customDataJson)
+        public GenericUserInterfaceModelBuilder SetCustomFor(string propertyName, string customType, string customDataJson)
         {
             var block = GetBlockByPropertyName(propertyName);
 

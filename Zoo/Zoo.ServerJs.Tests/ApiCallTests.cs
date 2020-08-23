@@ -19,6 +19,9 @@ namespace Zoo.ServerJs.Tests
 
     public class ProductGroupJsWorker : IJsWorker
     {
+        public const string GetArrayName = "GetArray";
+        public const string WorkerName = nameof(ProductGroupJsWorker);
+
         public static BaseApiResponse AddProductToGroup(ProductInProductGroupIdModel model)
         {
             return new BaseApiResponse(true, "ok");
@@ -26,14 +29,14 @@ namespace Zoo.ServerJs.Tests
 
         public static int[] GetArray()
         {
-            return new int[4] { 1, 2, 3, 4 };
+            return new int[] { 1, 2, 3, 4 };
         }
 
         public JsWorkerDocumentation JsWorkerDocs()
         {
             return new JsWorkerDocumentation
             {
-                WorkerName = "ProductGroupJsWorker",
+                WorkerName = WorkerName,
                 Description = "",
                 Methods = new List<JsWorkerMethodDocs>
                 {
@@ -45,7 +48,7 @@ namespace Zoo.ServerJs.Tests
 
                     JsWorkerMethodDocs.GetMethod(new JsWorkerMethodDocsOptions
                     {
-                        MethodName = "GetArray",
+                        MethodName = GetArrayName,
                         Description = "Получить массив"
                     }, new JsFunc<int[]>(GetArray))
                 }
@@ -58,7 +61,7 @@ namespace Zoo.ServerJs.Tests
         [Test]
         public void Test1()
         {
-            var script = "var t = JSON.parse( api.Call(\"ProductGroupJsWorker\", \"AddProductToGroup\", { ProductGroupId: \"d8c8cf9b-1d9b-4199-a85e-615edd64b4d7\", ProductId: 1 }) );";
+            var script = $"var t = JSON.parse( api.Call(\"{ProductGroupJsWorker.WorkerName}\"," + " \"AddProductToGroup\", { ProductGroupId: \"d8c8cf9b-1d9b-4199-a85e-615edd64b4d7\", ProductId: 1 }) );";
 
             script += "\n console.log('Result', t)";
 
@@ -84,7 +87,7 @@ namespace Zoo.ServerJs.Tests
         [Test]
         public void Test2()
         {
-            var script = "var t = JSON.parse( api.Call(\"ProductGroupJsWorker\", \"GetArray\") );\n";
+            var script = $"var t = JSON.parse( api.Call(\"{ProductGroupJsWorker.WorkerName}\", \"{ProductGroupJsWorker.GetArrayName}\") );\n";
 
             script += "console.log(t);\n";
             script += "console.log(t.length);\n";

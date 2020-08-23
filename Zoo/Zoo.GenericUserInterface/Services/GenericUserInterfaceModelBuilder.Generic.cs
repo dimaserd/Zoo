@@ -56,7 +56,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> ShiftToStartFor(Expression<Func<TModel, object>> expression)
         {
-            var memberName = (expression.Body as MemberExpression).Member.Name;
+            var memberName = GetMemberName(expression);
 
             return ShiftPropertyToStartFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
         }
@@ -68,7 +68,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> ShiftToEndFor<TProp>(Expression<Func<TModel, TProp>> expression)
         {
-            var memberName = (expression.Body as MemberExpression).Member.Name;
+            var memberName = GetMemberName(expression);
 
             return ShiftPropertyToEndFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
         }
@@ -80,7 +80,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> HiddenFor<TProp>(Expression<Func<TModel, TProp>> expression)
         {
-            var memberName = (expression.Body as MemberExpression).Member.Name;
+            var memberName = GetMemberName(expression);
 
             return SetHiddenFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
         }
@@ -94,9 +94,9 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> CustomFor<TProp>(Expression<Func<TModel, TProp>> expression, string customType, string customDataJson)
         {
-            var memberName = (expression.Body as MemberExpression).Member.Name;
+            var memberName = GetMemberName(expression);
 
-            return SetHiddenFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
+            return SetCustomFor(memberName, customType, customDataJson) as GenericUserInterfaceModelBuilder<TModel>;
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> TextAreaFor(Expression<Func<TModel, string>> expression)
         {
-            var memberName = (expression.Body as MemberExpression).Member.Name;
+            var memberName = GetMemberName(expression);
 
             return SetTextAreaFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
         }
@@ -120,7 +120,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> DropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<SelectListItem> selectListItems)
         {
-            var memberName = (expression.Body as MemberExpression).Member.Name;
+            var memberName = GetMemberName(expression);
 
             var mainDoc = CrocoTypeDescription.GetDescription(typeof(TProp)).GetMainTypeDescription();
             if(mainDoc.IsEnumeration)
@@ -140,7 +140,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> MultipleDropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<SelectListItem> selectListItems)
         {
-            var memberName = (expression.Body as MemberExpression).Member.Name;
+            var memberName = GetMemberName(expression);
 
             var crocDescr = CrocoTypeDescription.GetDescription(typeof(TProp));
             var main = crocDescr.GetMainTypeDescription();
@@ -158,6 +158,11 @@ namespace Zoo.GenericUserInterface.Services
             }
 
             return SetMultipleDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<TModel>;
+        }
+
+        private string GetMemberName<TProp>(Expression<Func<TModel, TProp>> expression)
+        {
+            return (expression.Body as MemberExpression).Member.Name;
         }
     }
 }

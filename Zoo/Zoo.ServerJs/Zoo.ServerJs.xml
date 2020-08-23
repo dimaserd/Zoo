@@ -62,7 +62,7 @@
             </summary>
             <param name="action"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsAction`1.GetJsMethod(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Models.JsAction`1.GetJsMethod(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Получить документацию по методу
             </summary>
@@ -81,7 +81,7 @@
             </summary>
             <param name="func"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsFunc`1.GetJsMethod(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Models.JsFunc`1.GetJsMethod(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Получить документацию по методу
             </summary>
@@ -101,7 +101,7 @@
             </summary>
             <param name="func"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsFunc`2.GetJsMethod(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Models.JsFunc`2.GetJsMethod(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Получить документацию по методу
             </summary>
@@ -122,7 +122,7 @@
             </summary>
             <param name="func"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsFunc`3.GetJsMethod(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Models.JsFunc`3.GetJsMethod(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Получить документацию по методу
             </summary>
@@ -144,7 +144,7 @@
             </summary>
             <param name="func"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsFunc`4.GetJsMethod(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Models.JsFunc`4.GetJsMethod(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Получить документацию по методу
             </summary>
@@ -164,63 +164,6 @@
         <member name="P:Zoo.ServerJs.Models.JsLogggedVariables.SerializedVariables">
             <summary>
             Сериализованные переменные
-            </summary>
-        </member>
-        <member name="T:Zoo.ServerJs.Models.JsOpenApiWorkerDocumentation">
-            <summary>
-            Описание серверного javascript обработчика
-            </summary>
-        </member>
-        <member name="M:Zoo.ServerJs.Models.JsOpenApiWorkerDocumentation.#ctor(Zoo.ServerJs.Models.JsWorkerDocumentation)">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="docs"></param>
-        </member>
-        <member name="P:Zoo.ServerJs.Models.JsOpenApiWorkerDocumentation.WorkerName">
-            <summary>
-            Название обработчика
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Models.JsOpenApiWorkerDocumentation.Description">
-            <summary>
-            Описание
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Models.JsOpenApiWorkerDocumentation.Methods">
-            <summary>
-            Методы
-            </summary>
-        </member>
-        <member name="T:Zoo.ServerJs.Models.JsOpenApiWorkerMethodDocumentation">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Zoo.ServerJs.Models.JsOpenApiWorkerMethodDocumentation.#ctor(Zoo.ServerJs.Models.JsWorkerMethodDocs)">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="methodDocs"></param>
-        </member>
-        <member name="P:Zoo.ServerJs.Models.JsOpenApiWorkerMethodDocumentation.MethodName">
-            <summary>
-            Название метода
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Models.JsOpenApiWorkerMethodDocumentation.Description">
-            <summary>
-            Описание
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Models.JsOpenApiWorkerMethodDocumentation.Response">
-            <summary>
-            Ответ от метода обработчика. Подробное описание типа.
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Models.JsOpenApiWorkerMethodDocumentation.Parameters">
-            <summary>
-            Параметры для метода обработчика. Подробное описание типа.
             </summary>
         </member>
         <member name="T:Zoo.ServerJs.Models.JsScriptExecutedResult">
@@ -275,7 +218,7 @@
             </summary>
             <param name="task"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsTaskFunc`1.GetJsMethod(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Models.JsTaskFunc`1.GetJsMethod(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Получить документацию по методу
             </summary>
@@ -297,7 +240,7 @@
             </summary>
             <param name="task"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsTaskFunc`2.GetJsMethod(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Models.JsTaskFunc`2.GetJsMethod(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Получить документацию по методу
             </summary>
@@ -320,40 +263,40 @@
             </summary>
             <param name="task"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsTaskFunc`3.GetJsMethod(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Models.JsTaskFunc`3.GetJsMethod(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Получить документацию по методу
             </summary>
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="T:Zoo.ServerJs.Models.JsWorkerDocumentation">
+        <member name="T:Zoo.ServerJs.Models.Method.JsWorkerDocumentation">
             <summary>
             Документация серверного js обработчика
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerDocumentation.WorkerName">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerDocumentation.WorkerName">
             <summary>
             Название обработчика
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerDocumentation.Description">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerDocumentation.Description">
             <summary>
             Описание
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerDocumentation.Methods">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerDocumentation.Methods">
             <summary>
             Методы обработчика
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerDocumentation.GetOpenApiDocumentation">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerDocumentation.GetOpenApiDocumentation">
             <summary>
             Получить модель для построения документации
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerDocumentation.HandleCall(System.String,Zoo.ServerJs.Models.JsWorkerMethodCallParameters)">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerDocumentation.HandleCall(System.String,Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters)">
             <summary>
             Обработка вызова метода
             </summary>
@@ -361,72 +304,72 @@
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="T:Zoo.ServerJs.Models.JsWorkerMethodBase">
+        <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodBase">
             <summary>
             Базовое описание метода для серверного javascript обработчика
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodBase.FunctionLink">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodBase.FunctionLink">
             <summary>
             Ссылка на функцию
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodBase.HandleCall(Zoo.ServerJs.Models.JsWorkerMethodCallParameters)">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodBase.HandleCall(Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters)">
             <summary>
             Обработать вызов
             </summary>
             <param name="parameters"></param>
             <returns></returns>
         </member>
-        <member name="T:Zoo.ServerJs.Models.JsWorkerMethodCallParameters">
+        <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters">
             <summary>
             Параметры вызова javascript метода
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodCallParameters.#ctor(System.Object[])">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters.#ctor(System.Object[])">
             <summary>
             Конструктор
             </summary>
             <param name="parameters"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodCallParameters.GetParameter``1">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters.GetParameter``1">
             <summary>
             Получить параметр
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="T:Zoo.ServerJs.Models.JsWorkerMethodDocs">
+        <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs">
             <summary>
             Модель описывающая js метод или функцию
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.Parameters">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.Parameters">
             <summary>
             Типы входных параметров
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.Response">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.Response">
             <summary>
             Тип возвращаемого значения 
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.Method">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.Method">
             <summary>
             Ссылка на метод
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.MethodName">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.MethodName">
             <summary>
             Название метода
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocs.Description">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.Description">
             <summary>
             Описание метода
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodDocs.GetMethod``1(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsTaskFunc{``0})">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.GetMethod``1(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsTaskFunc{``0})">
             <summary>
             Получить обертку для метода
             </summary>
@@ -435,37 +378,7 @@
             <param name="func"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodDocs.GetMethod``2(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsTaskFunc{``0,``1})">
-            <summary>
-            Получить обертку для метода
-            </summary>
-            <typeparam name="T1"></typeparam>
-            <typeparam name="TResult"></typeparam>
-            <param name="opts"></param>
-            <param name="func"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodDocs.GetMethod``3(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsTaskFunc{``0,``1,``2})">
-            <summary>
-            Получить обертку для метода
-            </summary>
-            <typeparam name="T1"></typeparam>
-            <typeparam name="T2"></typeparam>
-            <typeparam name="TResult"></typeparam>
-            <param name="opts"></param>
-            <param name="func"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodDocs.GetMethod``1(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsFunc{``0})">
-            <summary>
-            Получить обертку для метода
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="opts"></param>
-            <param name="func"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodDocs.GetMethod``2(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsFunc{``0,``1})">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.GetMethod``2(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsTaskFunc{``0,``1})">
             <summary>
             Получить обертку для метода
             </summary>
@@ -475,7 +388,7 @@
             <param name="func"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodDocs.GetMethod``3(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsFunc{``0,``1,``2})">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.GetMethod``3(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsTaskFunc{``0,``1,``2})">
             <summary>
             Получить обертку для метода
             </summary>
@@ -486,7 +399,37 @@
             <param name="func"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodDocs.GetMethod``4(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsFunc{``0,``1,``2,``3})">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.GetMethod``1(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsFunc{``0})">
+            <summary>
+            Получить обертку для метода
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="opts"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.GetMethod``2(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsFunc{``0,``1})">
+            <summary>
+            Получить обертку для метода
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="opts"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.GetMethod``3(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsFunc{``0,``1,``2})">
+            <summary>
+            Получить обертку для метода
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="opts"></param>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.GetMethod``4(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsFunc{``0,``1,``2,``3})">
             <summary>
             Получить обертку для метода
             </summary>
@@ -498,7 +441,7 @@
             <param name="func"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Models.JsWorkerMethodDocs.GetMethod``1(Zoo.ServerJs.Models.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsAction{``0})">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.GetMethod``1(Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions,Zoo.ServerJs.Models.JsAction{``0})">
             <summary>
             Получить обертку для метода
             </summary>
@@ -507,29 +450,86 @@
             <param name="func"></param>
             <returns></returns>
         </member>
-        <member name="T:Zoo.ServerJs.Models.JsWorkerMethodDocsOptions">
+        <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions">
             <summary>
             Опции для построения документации по методу
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocsOptions.MethodName">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions.MethodName">
             <summary>
             Название метода
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodDocsOptions.Description">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions.Description">
             <summary>
             Описание метода
             </summary>
         </member>
-        <member name="T:Zoo.ServerJs.Models.JsWorkerMethodResult">
+        <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodResult">
             <summary>
             Результат вызова метода обработчика
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsWorkerMethodResult.Result">
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodResult.Result">
             <summary>
             Результат вызова
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerDocumentation">
+            <summary>
+            Описание серверного javascript обработчика
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerDocumentation.#ctor(Zoo.ServerJs.Models.Method.JsWorkerDocumentation)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="docs"></param>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerDocumentation.WorkerName">
+            <summary>
+            Название обработчика
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerDocumentation.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerDocumentation.Methods">
+            <summary>
+            Методы
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.#ctor(Zoo.ServerJs.Models.Method.JsWorkerMethodDocs)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="methodDocs"></param>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.MethodName">
+            <summary>
+            Название метода
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.Response">
+            <summary>
+            Ответ от метода обработчика. Подробное описание типа.
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.Parameters">
+            <summary>
+            Параметры для метода обработчика. Подробное описание типа.
             </summary>
         </member>
         <member name="T:Zoo.ServerJs.Services.HandleJsCallWorker">
