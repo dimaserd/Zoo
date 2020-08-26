@@ -13,18 +13,12 @@ namespace Zoo.ServerJs.Tests
         [TestCase(3, 4)]
         public void Test(int arg1, int arg2)
         {
-            var jsExecutor = new JsExecutor(new JsExecutorProperties
+            var jsExecutor = new JsExecutorBuilder().AddExternalComponent(new ExternalJsComponent
             {
-                ExternalComponents = new List<ExternalJsComponent>
-                {
-                    new ExternalJsComponent
-                    {
-                        ComponentName = "Test",
-                        Script = "function Calculator(model) { \n" +
-                        "return model.Arg1 + model.Arg2; \n }"
-                    }
-                }
-            });
+                ComponentName = "Test",
+                Script = "function Calculator(model) { \n" +
+                "return model.Arg1 + model.Arg2; \n }"
+            }).BuildJsExecutor();
 
             var script = $"var res = api.CallExternal('Test', 'Calculator', {{ 'Arg1': {arg1}, 'Arg2': {arg2} }}); \n";
 
@@ -46,28 +40,21 @@ namespace Zoo.ServerJs.Tests
         [TestCase(6, 1, 3)]
         public void CallAfterCall(double arg1, double arg2, double delimeter)
         {
-            var jsExecutor = new JsExecutor(new JsExecutorProperties
+            var jsExecutor = new JsExecutorBuilder().AddExternalComponent(new ExternalJsComponent
             {
-                ExternalComponents = new List<ExternalJsComponent>
-                {
-                    new ExternalJsComponent
-                    {
-                        ComponentName = "Test",
-                        Script = "function Calculator(model) { \n" +
+                ComponentName = "Test",
+                Script = "function Calculator(model) { \n" +
                         "var t = model.Arg1 + model.Arg2;\n" +
                         "var s = JSON.parse( api.CallExternal('Test2', 'CalculatorNew', { 'Arg1': t, 'Arg2': " + $"{delimeter}" + " }) );\n" +
                         "return s;\n" +
                         " }"
-                    },
-
-                    new ExternalJsComponent
-                    {
-                        ComponentName = "Test2",
-                        Script = "function CalculatorNew(model) { \n" +
+            })
+            .AddExternalComponent(new ExternalJsComponent
+            {
+                ComponentName = "Test2",
+                Script = "function CalculatorNew(model) { \n" +
                         "return model.Arg1 / model.Arg2; }"
-                    }
-                }
-            });
+            }).BuildJsExecutor();
 
             var script = "var res = api.CallExternal('Test', 'Calculator', { 'Arg1': " + $"{arg1}, 'Arg2': {arg2}" + " });\n";
 
@@ -96,19 +83,13 @@ namespace Zoo.ServerJs.Tests
         [TestCase(14)]
         public void CallWithNoArgs(double n1)
         {
-            var jsExecutor = new JsExecutor(new JsExecutorProperties
+            var jsExecutor = new JsExecutorBuilder().AddExternalComponent(new ExternalJsComponent
             {
-                ExternalComponents = new List<ExternalJsComponent>
-                {
-                    new ExternalJsComponent
-                    {
-                        ComponentName = "Test",
-                        Script = "function Test() { \n" +
-                        $"return {n1};\n" +
-                        " }"
-                    }
-                }
-            });
+                ComponentName = "Test",
+                Script = "function Test() { \n" +
+                $"return {n1};\n" +
+                " }"
+            }).BuildJsExecutor();
 
             var script = "var res = api.CallExternal('Test', 'Test');\n";
 

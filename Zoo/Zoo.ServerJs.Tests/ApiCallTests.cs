@@ -65,13 +65,7 @@ namespace Zoo.ServerJs.Tests
 
             script += "\n console.log('Result', t)";
 
-            var executor = new JsExecutor(new JsExecutorProperties
-            {
-                JsWorkers = new List<IJsWorker>
-                {
-                    new ProductGroupJsWorker()
-                }
-            });
+            var executor = new JsExecutorBuilder().AddJsWorker(new ProductGroupJsWorker()).BuildJsExecutor();
 
             var result = executor.RunScriptDetaiiled(script);
 
@@ -95,13 +89,7 @@ namespace Zoo.ServerJs.Tests
             
             script += "\n console.log('Result', i, t[i]); \n}";
 
-            var executor = new JsExecutor(new JsExecutorProperties
-            {
-                JsWorkers = new List<IJsWorker>
-                {
-                    new ProductGroupJsWorker()
-                }
-            });
+            var executor = new JsExecutorBuilder().AddJsWorker(new ProductGroupJsWorker()).BuildJsExecutor();
 
             var result = executor.RunScriptDetaiiled(script);
 

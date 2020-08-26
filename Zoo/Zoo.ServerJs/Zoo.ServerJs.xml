@@ -627,6 +627,45 @@
             <param name="jsScript"></param>
             <returns></returns>
         </member>
+        <member name="T:Zoo.ServerJs.Services.JsExecutorBuilder">
+            <summary>
+            Построитель для <see cref="T:Zoo.ServerJs.Services.JsExecutor"/>
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddExternalComponents(System.Collections.Generic.IEnumerable{Zoo.ServerJs.Models.ExternalJsComponent})">
+            <summary>
+            Добавить внешние компоненты
+            </summary>
+            <param name="components"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddExternalComponent(Zoo.ServerJs.Models.ExternalJsComponent)">
+            <summary>
+            Добавить внешний компонент
+            </summary>
+            <param name="component"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddJsWorker(Zoo.ServerJs.Abstractions.IJsWorker)">
+            <summary>
+            Добавить нового рабочего
+            </summary>
+            <param name="jsWorker"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddJsWorkerы(System.Collections.Generic.IEnumerable{Zoo.ServerJs.Abstractions.IJsWorker})">
+            <summary>
+            Добавить новых рабочих
+            </summary>
+            <param name="jsWorkers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.BuildJsExecutor(System.Action{Jint.Engine})">
+            <summary>
+            Построить исполнителя скриптов
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.ServerJs.Services.JsExecutorProperties">
             <summary>
             Свойства для javascript исполнителя

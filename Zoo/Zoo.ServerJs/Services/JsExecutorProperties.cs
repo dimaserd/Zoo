@@ -19,11 +19,11 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Список обработчиков
         /// </summary>
-        public List<IJsWorker> JsWorkers { get; set; } = new List<IJsWorker>();
+        public Dictionary<string, IJsWorker> JsWorkers { get; set; } = new Dictionary<string ,IJsWorker>();
 
         /// <summary>
         /// Внешние компоненты
         /// </summary>
-        public List<ExternalJsComponent> ExternalComponents { get; set; } = new List<ExternalJsComponent>();
+        public Dictionary<string, ExternalJsComponent> ExternalComponents { get; set; } = new Dictionary<string, ExternalJsComponent>();
     }
 }

@@ -339,28 +339,6 @@
               Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
             </summary>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.CrudGenericUserInterface`3.GetList(`0)">
-            <summary>
-            Получить список
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.CrudGenericUserInterface`3.Create(`2)">
-            <summary>
-            Создать
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.CrudGenericUserInterface`3.Update(System.String,`2)">
-            <summary>
-            Обновить
-            </summary>
-            <param name="id"></param>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
         <member name="T:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder">
             <summary>
             Построитель обобщенного пользовательского интерфейса
@@ -436,7 +414,7 @@
             <param name="propertyName"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetHiddenFor(System.String,System.String,System.String)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.SetCustomFor(System.String,System.String,System.String)">
             <summary>
             Установить кастомный тип инпута
             </summary>

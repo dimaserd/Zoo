@@ -21,12 +21,12 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Javascript обработчики
         /// </summary>
-        public IReadOnlyCollection<IJsWorker> JsWorkers { get; }
+        public Dictionary<string, IJsWorker> JsWorkers { get; }
 
         /// <summary>
         /// Внешние компоненты
         /// </summary>
-        public IReadOnlyCollection<ExternalJsComponent> ExternalComponents { get; }
+        public Dictionary<string, ExternalJsComponent> ExternalComponents { get; }
 
         /// <summary>
         /// Обработчик Js вызовов
@@ -42,7 +42,7 @@ namespace Zoo.ServerJs.Services
             _engineProps = properties.EngineAction;
             JsWorkers = properties.JsWorkers;
             ExternalComponents = properties.ExternalComponents;
-            JsCallHandler = new HandleJsCallWorker(JsWorkers, ExternalComponents);
+            JsCallHandler = new HandleJsCallWorker(JsWorkers.Values.ToList(), ExternalComponents.Values.ToList());
         }
         
         private Engine _engine;
@@ -87,7 +87,7 @@ namespace Zoo.ServerJs.Services
         /// <returns></returns>
         public List<JsOpenApiWorkerDocumentation> GetDocumentation()
         {
-            return JsWorkers.Select(x => new JsOpenApiWorkerDocumentation(x.JsWorkerDocs())).ToList();
+            return JsWorkers.Values.Select(x => new JsOpenApiWorkerDocumentation(x.JsWorkerDocs())).ToList();
         }
 
         /// <summary>
