@@ -653,7 +653,7 @@
             <param name="jsWorker"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddJsWorkerы(System.Collections.Generic.IEnumerable{Zoo.ServerJs.Abstractions.IJsWorker})">
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddJsWorkers(System.Collections.Generic.IEnumerable{Zoo.ServerJs.Abstractions.IJsWorker})">
             <summary>
             Добавить новых рабочих
             </summary>

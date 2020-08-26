@@ -67,7 +67,7 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         /// <param name="jsWorkers"></param>
         /// <returns></returns>
-        public JsExecutorBuilder AddJsWorkerы(IEnumerable<IJsWorker> jsWorkers)
+        public JsExecutorBuilder AddJsWorkers(IEnumerable<IJsWorker> jsWorkers)
         {
             foreach(var jsWorker in jsWorkers)
             {
