@@ -39,5 +39,15 @@
         /// Выпадающий список с множественным выбором
         /// </summary>
         MultipleDropDownList,
+
+        /// <summary>
+        /// Вложенный новый интерфейс
+        /// </summary>
+        GenericInterfaceForClass,
+
+        /// <summary>
+        /// Вложенный новый интерфейс для массива
+        /// </summary>
+        GenericInterfaceForArray
     }
 }

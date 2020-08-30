@@ -9,14 +9,45 @@ namespace Zoo.GenericUserInterface.Extensions
 {
     internal static class GenericUserInterfaceModelBuilderExtensions
     {
-        private static UserInterfaceBlock GetBlockForEnumerable(CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult desc, GenericInterfaceOptions opts)
+        private static string AddPropNameToPrefix(string prefix, string propName)
         {
+            return prefix == string.Empty ? propName : $"{prefix}.{propName}";
+        }
+
+        private static UserInterfaceBlock GetBlockForEnumerable(string prefix, CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult desc, GenericInterfaceOptions opts)
+        {
+            var type = desc.GetTypeDescription(prop.DisplayFullTypeName);
+
+            if(!type.IsEnumerable)
+            {
+                throw new InvalidOperationException("Type is not of type enumerable");
+            }
+
+            var enumeratedType = desc.GetTypeDescription(type.EnumeratedDiplayFullTypeName);
+
+            if(enumeratedType.IsPrimitive)
+            {
+                return new UserInterfaceBlock
+                {
+                    LabelText = prop.PropertyDescription.PropertyDisplayName,
+                    InterfaceType = UserInterfaceType.MultipleDropDownList,
+                    PropertyName = prop.PropertyDescription.PropertyName,
+                    SelectList = GetSelectList(prop, desc, opts)
+                };
+            }
+
+            var newPrefix = AddPropNameToPrefix(prefix, prop.PropertyDescription.PropertyName);
+
             return new UserInterfaceBlock
             {
-                LabelText = prop.PropertyDescription?.PropertyDisplayName,
-                InterfaceType = UserInterfaceType.MultipleDropDownList,
+                LabelText = prop.PropertyDescription.PropertyDisplayName,
+                InterfaceType = UserInterfaceType.GenericInterfaceForArray,
                 PropertyName = prop.PropertyDescription.PropertyName,
-                SelectList = GetSelectList(prop, desc, opts),
+                InnerGenericInterface = new GenericInterfaceModel
+                {
+                    Prefix = newPrefix,
+                    Blocks = GetBlocks(newPrefix, enumeratedType, desc, opts)
+                }
             };
         }
 
@@ -26,7 +57,7 @@ namespace Zoo.GenericUserInterface.Extensions
 
             foreach (var prop in currentType.Properties)
             {
-                result.AddRange(GetBlocksFromProperty(prefix, prop, desc, opts));
+                result.Add(GetBlockFromProperty(prefix, prop, desc, opts));
             }
 
             return result;
@@ -59,7 +90,7 @@ namespace Zoo.GenericUserInterface.Extensions
             };
         }
 
-        private static List<UserInterfaceBlock> GetBlocksFromProperty(string prefix, CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)
+        private static UserInterfaceBlock GetBlockFromProperty(string prefix, CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)
         {
             var propTypeDescription = main.GetTypeDescription(prop.DisplayFullTypeName);
 
@@ -67,35 +98,41 @@ namespace Zoo.GenericUserInterface.Extensions
             {
                 var type = GetUserInterfaceType(propTypeDescription);
 
-                return new List<UserInterfaceBlock>
+                return new UserInterfaceBlock
                 {
-                    new UserInterfaceBlock
-                    {
-                        LabelText = prop.PropertyDescription?.PropertyDisplayName,
-                        PropertyName = $"{prefix}{prop.PropertyDescription.PropertyName}",
-                        InterfaceType = type,
-                        SelectList = GetSelectList(prop, main, opts),
-                        TextBoxData = GetTextBoxDataForProperty(propTypeDescription, type)
-                    }
+                    LabelText = prop.PropertyDescription.PropertyDisplayName,
+                    PropertyName = prop.PropertyDescription.PropertyName,
+                    InterfaceType = type,
+                    SelectList = GetSelectList(prop, main, opts),
+                    TextBoxData = GetTextBoxDataForProperty(propTypeDescription, type)
                 };
             }
 
             if (propTypeDescription.IsEnumerable)
             {
-                return new List<UserInterfaceBlock>()
-                {
-                    GetBlockForEnumerable(prop, main, opts)
-                };
+                return GetBlockForEnumerable(prefix, prop, main, opts);
             }
 
             if (propTypeDescription.IsClass)
             {
                 var propDesc = main.GetTypeDescription(propTypeDescription.TypeDisplayFullName);
 
-                return GetBlocks($"{prefix}{prop.PropertyDescription.PropertyName}.", propDesc, main, opts);
+                var newPrefix = AddPropNameToPrefix(prefix, prop.PropertyDescription.PropertyName);
+
+                return new UserInterfaceBlock
+                {
+                    InterfaceType = UserInterfaceType.GenericInterfaceForClass,
+                    LabelText = prop.PropertyDescription.PropertyDisplayName,
+                    PropertyName = prop.PropertyDescription.PropertyName,
+                    InnerGenericInterface = new GenericInterfaceModel
+                    {
+                        Prefix = newPrefix,
+                        Blocks = GetBlocks(newPrefix, propDesc, main, opts)
+                    }
+                };
             }
 
-            throw new Exception("не продумано");
+            throw new Exception("Not supported");
         }
 
         private static List<SelectListItem> GetSelectList(CrocoPropertyReferenceDescription propDescr, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)

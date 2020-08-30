@@ -17,9 +17,9 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void Test()
         {
-            var interfaceModel = new GenericUserInterfaceModelBuilder<TypeWithInteger>("").Result;
+            var interfaceModel = new GenericUserInterfaceModelBuilder<TypeWithInteger>().Result;
 
-            var prop1Block = interfaceModel.Blocks.First();
+            var prop1Block = interfaceModel.Interface.Blocks.First();
 
             Assert.AreEqual(UserInterfaceType.TextBox, prop1Block.InterfaceType);
 

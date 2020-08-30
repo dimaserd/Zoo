@@ -17,17 +17,15 @@ namespace Zoo.GenericUserInterface.Services
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="modelPrefix"></param>
-        public GenericUserInterfaceModelBuilder(string modelPrefix) : base(typeof(TModel), modelPrefix)
+        public GenericUserInterfaceModelBuilder() : base(typeof(TModel))
         {
         }
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="modelPrefix"></param>
         /// <param name="opts"></param>
-        public GenericUserInterfaceModelBuilder(string modelPrefix, GenericInterfaceOptions opts) : base(typeof(TModel), modelPrefix, null, opts)
+        public GenericUserInterfaceModelBuilder(GenericInterfaceOptions opts) : base(typeof(TModel), null, opts)
         {
         }
 
@@ -35,9 +33,8 @@ namespace Zoo.GenericUserInterface.Services
         /// Конструктор
         /// </summary>
         /// <param name="model"></param>
-        /// <param name="modelPrefix"></param>
         /// <param name="opts"></param>
-        public GenericUserInterfaceModelBuilder(TModel model, string modelPrefix, GenericInterfaceOptions opts) : base(typeof(TModel), modelPrefix, Tool.JsonConverter.Serialize(model), opts)
+        public GenericUserInterfaceModelBuilder(TModel model, GenericInterfaceOptions opts) : base(typeof(TModel), Tool.JsonConverter.Serialize(model), opts)
         {
         }
 

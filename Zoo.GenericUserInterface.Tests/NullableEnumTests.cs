@@ -21,9 +21,9 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void NullableEnumTest()
         {
-            var result = new GenericUserInterfaceModelBuilder<Type1WithNullableEnum>("someprefix").Result;
+            var result = new GenericUserInterfaceModelBuilder<Type1WithNullableEnum>().Result;
 
-            var fProp = result.Blocks.First();
+            var fProp = result.Interface.Blocks.First();
 
             Assert.AreEqual(Enumerations.UserInterfaceType.DropDownList, fProp.InterfaceType);
 

@@ -42,5 +42,10 @@ namespace Zoo.GenericUserInterface.Models
         /// Json с кастомными данными, можно использовать для построения кастомного инпута
         /// </summary>
         public string CustomDataJson { get; set; }
+
+        /// <summary>
+        /// Вложенный интерфейс
+        /// </summary>
+        public GenericInterfaceModel InnerGenericInterface { get; set; }
     }
 }

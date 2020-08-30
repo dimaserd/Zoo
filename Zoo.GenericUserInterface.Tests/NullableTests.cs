@@ -21,9 +21,9 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void NullableBoolTest()
         {
-            var builder = new GenericUserInterfaceModelBuilder<Type1>("somePrefix");
+            var builder = new GenericUserInterfaceModelBuilder<Type1>();
 
-            var result = builder.Result;
+            var result = builder.Result.Interface;
 
             Assert.AreEqual(1, result.Blocks.Count);
             
@@ -43,9 +43,9 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void OrdinaryBoolTest()
         {
-            var builder = new GenericUserInterfaceModelBuilder<Type2>("somePrefix");
+            var builder = new GenericUserInterfaceModelBuilder<Type2>();
 
-            var result = builder.Result;
+            var result = builder.Result.Interface;
 
             Assert.AreEqual(1, result.Blocks.Count);
 

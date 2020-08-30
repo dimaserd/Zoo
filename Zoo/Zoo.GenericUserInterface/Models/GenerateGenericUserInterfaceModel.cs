@@ -1,7 +1,6 @@
 ﻿using Croco.Core.Documentation.Models;
 using Croco.Core.Utils;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Extensions;
 
@@ -13,19 +12,14 @@ namespace Zoo.GenericUserInterface.Models
     public class GenerateGenericUserInterfaceModel
     {
         /// <summary>
-        /// Префикс для построения модели
+        /// Интерфейс
         /// </summary>
-        public string Prefix { get; set; }
+        public GenericInterfaceModel Interface { get; set; }
 
         /// <summary>
-        /// Описание типа данных
+        /// Сериализованные кастомные данные
         /// </summary>
-        public CrocoTypeDescriptionResult TypeDescription { get; set; }
-
-        /// <summary>
-        /// Блоки для свойств
-        /// </summary>
-        public List<UserInterfaceBlock> Blocks { get; set; }
+        public string CustomDataJson { get; set; }
 
         /// <summary>
         /// Данные для заполнения объекта
@@ -33,9 +27,9 @@ namespace Zoo.GenericUserInterface.Models
         public string ValueJson { get; set; }
 
         /// <summary>
-        /// Сериализованные кастомные данные
+        /// Описание типа данных
         /// </summary>
-        public string CustomDataJson { get; set; }
+        public CrocoTypeDescriptionResult TypeDescription { get; set; }
 
         /// <summary>
         /// Кастомно переопределить
@@ -58,24 +52,22 @@ namespace Zoo.GenericUserInterface.Models
         /// Создать из объекта используя провайдер значений
         /// </summary>
         /// <param name="model"></param>
-        /// <param name="modelPrefix"></param>
         /// <returns></returns>
-        public static GenerateGenericUserInterfaceModel CreateFromObject(object model, string modelPrefix)
+        public static GenerateGenericUserInterfaceModel CreateFromObject(object model)
         {
-            var prov = Tool.JsonConverter.Serialize(model);
+            var dataJson = Tool.JsonConverter.Serialize(model);
 
-            return CreateFromType(model.GetType(), modelPrefix, prov, null);
+            return CreateFromType(model.GetType(), dataJson, null);
         }
 
         /// <summary>
         /// Создать из типа
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="modelPrefix"></param>
         /// <param name="valueJson"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public static GenerateGenericUserInterfaceModel CreateFromType(Type type, string modelPrefix, string valueJson, GenericInterfaceOptions opts = null)
+        public static GenerateGenericUserInterfaceModel CreateFromType(Type type, string valueJson, GenericInterfaceOptions opts = null)
         {
             var desc = CrocoTypeDescription.GetDescription(type);
 
@@ -84,11 +76,16 @@ namespace Zoo.GenericUserInterface.Models
                 opts = GenericInterfaceOptions.Default();
             }
 
+            var blocks = GenericUserInterfaceModelBuilderExtensions.GetBlocks("", desc.GetMainTypeDescription(), desc, opts);
+
             return new GenerateGenericUserInterfaceModel
             {
                 TypeDescription = desc,
-                Blocks = GenericUserInterfaceModelBuilderExtensions.GetBlocks("", desc.GetMainTypeDescription(), desc, opts),
-                Prefix = modelPrefix,
+                Interface = new GenericInterfaceModel
+                {
+                    Prefix = "",
+                    Blocks = blocks
+                },
                 ValueJson = valueJson
             };
         }

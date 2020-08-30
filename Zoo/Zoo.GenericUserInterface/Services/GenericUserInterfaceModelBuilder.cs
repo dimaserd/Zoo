@@ -16,10 +16,9 @@ namespace Zoo.GenericUserInterface.Services
         /// Конструктор
         /// </summary>
         /// <param name="model"></param>
-        /// <param name="modelPrefix"></param>
-        public GenericUserInterfaceModelBuilder(object model, string modelPrefix)
+        public GenericUserInterfaceModelBuilder(object model)
         {
-            Result = GenerateGenericUserInterfaceModel.CreateFromObject(model, modelPrefix);
+            Result = GenerateGenericUserInterfaceModel.CreateFromObject(model);
         }
 
         /// <summary>
@@ -35,8 +34,7 @@ namespace Zoo.GenericUserInterface.Services
         /// Конструктор
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="modelPrefix"></param>
-        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix) : this(type, modelPrefix, null, null)
+        public GenericUserInterfaceModelBuilder(Type type) : this(type, null, null)
         {
         }
 
@@ -44,23 +42,20 @@ namespace Zoo.GenericUserInterface.Services
         /// Конструктор
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="modelPrefix"></param>
         /// <param name="opts"></param>
-        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix, GenericInterfaceOptions opts): this(type, modelPrefix, null, opts)
+        public GenericUserInterfaceModelBuilder(Type type, GenericInterfaceOptions opts): this(type, null, opts)
         {
-
         }
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="modelPrefix"></param>
         /// <param name="valueJson"></param>
         /// <param name="opts"></param>
-        public GenericUserInterfaceModelBuilder(Type type, string modelPrefix, string valueJson, GenericInterfaceOptions opts)
+        public GenericUserInterfaceModelBuilder(Type type, string valueJson, GenericInterfaceOptions opts)
         {
-            Result = GenerateGenericUserInterfaceModel.CreateFromType(type, modelPrefix, valueJson, opts);
+            Result = GenerateGenericUserInterfaceModel.CreateFromType(type, valueJson, opts);
         }
 
         /// <summary>
@@ -82,7 +77,7 @@ namespace Zoo.GenericUserInterface.Services
 
         private UserInterfaceBlock GetBlockByPropertyName(string propertyName)
         {
-            var block = Result.Blocks.FirstOrDefault(x => x.PropertyName == propertyName);
+            var block = Result.Interface.Blocks.FirstOrDefault(x => x.PropertyName == propertyName);
 
             if (block == null)
             {
@@ -101,9 +96,9 @@ namespace Zoo.GenericUserInterface.Services
         {
             var block = GetBlockByPropertyName(propertyName);
 
-            Result.Blocks.Remove(block);
+            Result.Interface.Blocks.Remove(block);
 
-            Result.Blocks.Add(block);
+            Result.Interface.Blocks.Add(block);
 
             return this;
         }
@@ -117,9 +112,9 @@ namespace Zoo.GenericUserInterface.Services
         {
             var block = GetBlockByPropertyName(propertyName);
 
-            Result.Blocks.Remove(block);
+            Result.Interface.Blocks.Remove(block);
 
-            Result.Blocks.Insert(0, block);
+            Result.Interface.Blocks.Insert(0, block);
 
             return this;
         }

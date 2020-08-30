@@ -42,9 +42,9 @@ namespace Tests
         [Test]
         public void TestListOfStringPoperty()
         {
-            var result = new GenericUserInterfaceModelBuilder<SomeClass>("prefix").Result;
+            var result = new GenericUserInterfaceModelBuilder<SomeClass>().Result;
 
-            var block = result.Blocks.First(t => t.PropertyName == nameof(SomeClass.Property2));
+            var block = result.Interface.Blocks.First(t => t.PropertyName == nameof(SomeClass.Property2));
 
             Assert.AreEqual(nameof(SomeClass.Property2), block.LabelText);
             Assert.AreEqual(UserInterfaceType.MultipleDropDownList, block.InterfaceType);
@@ -54,29 +54,29 @@ namespace Tests
         [Test]
         public void ShiftToStartForTest()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>();
 
             builder.ShiftToStartFor(x => x.Property);
 
             var result = builder.Result;
 
-            Assert.IsTrue(result.Blocks.First().PropertyName == nameof(SomeClass.Property));
+            Assert.IsTrue(result.Interface.Blocks.First().PropertyName == nameof(SomeClass.Property));
         }
 
         [Test]
         public void ShiftToEndForTest()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>();
 
             builder.ShiftToEndFor(x => x.Property2);
 
-            Assert.IsTrue(builder.Result.Blocks.Last().PropertyName == nameof(SomeClass.Property2));
+            Assert.IsTrue(builder.Result.Interface.Blocks.Last().PropertyName == nameof(SomeClass.Property2));
         }
 
         [Test]
         public void Test()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>();
 
             var list = new List<SelectListItem>
             {
@@ -90,7 +90,7 @@ namespace Tests
 
             builder.DropDownListFor(x => x.Sex, list);
 
-            var lastProp = builder.Result.Blocks.Last();
+            var lastProp = builder.Result.Interface.Blocks.Last();
 
             Assert.IsTrue(lastProp.InterfaceType == UserInterfaceType.DropDownList);
             Assert.IsTrue(lastProp.SelectList == list);
@@ -99,7 +99,7 @@ namespace Tests
         [Test]
         public void TestImplementingDropDownForToEnumProperty()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>();
 
             var ex = Assert.Throws<ApplicationException>(() => builder.DropDownListFor(x => x.EnumProp, new List<Zoo.GenericUserInterface.Models.SelectListItem>
             {
@@ -116,7 +116,7 @@ namespace Tests
         [Test]
         public void TestImplementingMultipleDropDownForToNotEnumerableProperty()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>();
 
             var ex = Assert.Throws<ApplicationException>(() => builder.MultipleDropDownListFor(x => x.EnumProp, new List<SelectListItem>
             {
@@ -134,7 +134,7 @@ namespace Tests
         [Test]
         public void TestImplementingMultipleDropDownForToEnumProperty()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>("prefix");
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>();
 
             var ex = Assert.Throws<ApplicationException>(() => builder.MultipleDropDownListFor(x => x.Property, new List<SelectListItem>
             {

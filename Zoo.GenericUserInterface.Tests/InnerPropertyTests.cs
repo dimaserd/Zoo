@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Services;
 
@@ -25,9 +26,9 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void Test()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeType>("prefix");
+            var builder = new GenericUserInterfaceModelBuilder<SomeType>();
 
-            var result = builder.Result;
+            var result = builder.Result.Interface;
 
             var block0 = result.Blocks[0];
 
@@ -36,13 +37,21 @@ namespace Zoo.GenericUserInterface.Tests
 
             var block1 = result.Blocks[1];
 
-            Assert.AreEqual(block1.PropertyName, $"{nameof(SomeType.CreatedOn)}.{nameof(SomeType.CreatedOn.Min)}");
-            Assert.AreEqual(block1.InterfaceType, UserInterfaceType.DatePicker);
+            var innerInterface = block1.InnerGenericInterface;
 
-            var block2 = result.Blocks[2];
+            Assert.AreEqual(nameof(SomeType.CreatedOn), innerInterface.Prefix);
+            Assert.AreEqual(UserInterfaceType.GenericInterfaceForClass, block1.InterfaceType);
+            Assert.AreEqual(block1.PropertyName, nameof(SomeType.CreatedOn));
 
-            Assert.AreEqual(block2.PropertyName, $"{nameof(SomeType.CreatedOn)}.{nameof(SomeType.CreatedOn.Max)}");
-            Assert.AreEqual(block2.InterfaceType, UserInterfaceType.DatePicker);
+            var innerInterfaceBlock1 = innerInterface.Blocks.First();
+
+            Assert.AreEqual(innerInterfaceBlock1.PropertyName, nameof(SomeType.CreatedOn.Min));
+            Assert.AreEqual(innerInterfaceBlock1.InterfaceType, UserInterfaceType.DatePicker);
+
+            var innerInterfaceBlock2 = innerInterface.Blocks.Last();
+
+            Assert.AreEqual(innerInterfaceBlock2.PropertyName, nameof(SomeType.CreatedOn.Max));
+            Assert.AreEqual(innerInterfaceBlock2.InterfaceType, UserInterfaceType.DatePicker);
         }
     }
 }

@@ -19,9 +19,9 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void Test()
         {
-            var descr = new GenericUserInterfaceModelBuilder<ModelWithLabel>("somePrefix").Result;
+            var descr = new GenericUserInterfaceModelBuilder<ModelWithLabel>().Result;
 
-            Assert.AreEqual(SomeValue, descr.Blocks.First().LabelText);
+            Assert.AreEqual(SomeValue, descr.Interface.Blocks.First().LabelText);
         }
     }
 }
