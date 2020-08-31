@@ -1,8 +1,10 @@
 ﻿using Croco.Core.Documentation.Models;
+using Croco.Core.Documentation.Services;
 using Croco.Core.Utils;
 using System;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Extensions;
+using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Models
 {
@@ -46,48 +48,6 @@ namespace Zoo.GenericUserInterface.Models
             }
 
             return overriding(this);
-        }
-
-        /// <summary>
-        /// Создать из объекта используя провайдер значений
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public static GenerateGenericUserInterfaceModel CreateFromObject(object model)
-        {
-            var dataJson = Tool.JsonConverter.Serialize(model);
-
-            return CreateFromType(model.GetType(), dataJson, null);
-        }
-
-        /// <summary>
-        /// Создать из типа
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="valueJson"></param>
-        /// <param name="opts"></param>
-        /// <returns></returns>
-        public static GenerateGenericUserInterfaceModel CreateFromType(Type type, string valueJson, GenericInterfaceOptions opts = null)
-        {
-            var desc = CrocoTypeDescription.GetDescription(type);
-
-            if(opts == null)
-            {
-                opts = GenericInterfaceOptions.Default();
-            }
-
-            var blocks = GenericUserInterfaceModelBuilderExtensions.GetBlocks("", desc.GetMainTypeDescription(), desc, opts);
-
-            return new GenerateGenericUserInterfaceModel
-            {
-                TypeDescription = desc,
-                Interface = new GenericInterfaceModel
-                {
-                    Prefix = "",
-                    Blocks = blocks
-                },
-                ValueJson = valueJson
-            };
         }
     }
 }

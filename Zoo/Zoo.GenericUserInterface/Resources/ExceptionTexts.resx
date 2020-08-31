@@ -126,4 +126,10 @@
   <data name="CantImplementMultipleDropDownForToNotEnumerableProperty" xml:space="preserve">
     <value>Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом.</value>
   </data>
+  <data name="NonComplexTypesAreNotSupported" xml:space="preserve">
+    <value>Non complex types are not supported</value>
+  </data>
+  <data name="RecursiveTypesAreNotSupported" xml:space="preserve">
+    <value>Recursive types are not supported</value>
+  </data>
 </root>

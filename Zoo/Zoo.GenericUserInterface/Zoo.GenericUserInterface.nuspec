@@ -2,17 +2,17 @@
 <package >
   <metadata>
     <id>Zoo.GenericUserInterface</id>
-    <version>0.9.23</version>
+    <version>0.9.24</version>
     <title>Generic UserInterface</title>
     <authors>Dmitry Serdyukov</authors>
     <owners>Dmitry Serdyukov</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Логика для построения обобщеных примитивных интерфейсов для создания, редактирования и удаления сущностей</description>
+    <description>Логика для построения обобщеных примитивных интерфейсов из классов C#</description>
     <releaseNotes>Что-то сделали лучше, что-то сделали хуже.</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <dependencies>
       <dependency id="NetCroco.Core" version="1.9.93" />
-      <dependency id="NetCroco.Core.Documentation" version="1.1.34" />
+      <dependency id="NetCroco.Core.Documentation" version="1.1.36" />
     </dependencies>
   </metadata>
   <files>

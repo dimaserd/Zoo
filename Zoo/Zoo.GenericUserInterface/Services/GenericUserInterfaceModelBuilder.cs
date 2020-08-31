@@ -1,9 +1,13 @@
-﻿using Croco.Core.Utils;
+﻿using Croco.Core.Documentation.Models;
+using Croco.Core.Documentation.Services;
+using Croco.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
+using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services
 {
@@ -18,7 +22,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="model"></param>
         public GenericUserInterfaceModelBuilder(object model)
         {
-            Result = GenerateGenericUserInterfaceModel.CreateFromObject(model);
+            Result = CreateFromObject(model);
         }
 
         /// <summary>
@@ -55,7 +59,64 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="opts"></param>
         public GenericUserInterfaceModelBuilder(Type type, string valueJson, GenericInterfaceOptions opts)
         {
-            Result = GenerateGenericUserInterfaceModel.CreateFromType(type, valueJson, opts);
+            Result = CreateFromType(type, valueJson, opts);
+        }
+
+
+        /// <summary>
+        /// Создать из объекта используя провайдер значений
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static GenerateGenericUserInterfaceModel CreateFromObject(object model)
+        {
+            var dataJson = Tool.JsonConverter.Serialize(model);
+
+            return CreateFromType(model.GetType(), dataJson, null);
+        }
+
+        /// <summary>
+        /// Создать из типа
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="valueJson"></param>
+        /// <param name="opts"></param>
+        /// <returns></returns>
+        public static GenerateGenericUserInterfaceModel CreateFromType(Type type, string valueJson = null, GenericInterfaceOptions opts = null)
+        {
+            var desc = CrocoTypeDescription.GetDescription(type);
+
+            var main = desc.GetMainTypeDescription();
+
+            if (!main.IsClass)
+            {
+                throw new InvalidOperationException(ExceptionTexts.NonComplexTypesAreNotSupported);
+            }
+
+            var isRecursive = new CrocoClassDescriptionChecker().IsRecursiveType(main, desc.Types);
+
+            if (isRecursive)
+            {
+                throw new InvalidOperationException(ExceptionTexts.RecursiveTypesAreNotSupported);
+            }
+
+            if (opts == null)
+            {
+                opts = GenericInterfaceOptions.Default();
+            }
+
+            var blocks = GenericUserInterfaceModelBuilderExtensions.GetBlocks("", desc.GetMainTypeDescription(), desc, opts);
+
+            return new GenerateGenericUserInterfaceModel
+            {
+                TypeDescription = desc,
+                Interface = new GenericInterfaceModel
+                {
+                    Prefix = "",
+                    Blocks = blocks
+                },
+                ValueJson = valueJson
+            };
         }
 
         /// <summary>

@@ -106,22 +106,6 @@
             <param name="overridings"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.CreateFromObject(System.Object)">
-            <summary>
-            Создать из объекта используя провайдер значений
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel.CreateFromType(System.Type,System.String,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
-            <summary>
-            Создать из типа
-            </summary>
-            <param name="type"></param>
-            <param name="valueJson"></param>
-            <param name="opts"></param>
-            <returns></returns>
-        </member>
         <member name="T:Zoo.GenericUserInterface.Models.GenericInterfaceModel">
             <summary>
             Интерфейс
@@ -362,6 +346,16 @@
               Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.NonComplexTypesAreNotSupported">
+            <summary>
+              Ищет локализованную строку, похожую на Non complex types are not supported.
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.RecursiveTypesAreNotSupported">
+            <summary>
+              Ищет локализованную строку, похожую на Recursive types are not supported.
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder">
             <summary>
             Построитель обобщенного пользовательского интерфейса
@@ -399,6 +393,22 @@
             <param name="type"></param>
             <param name="valueJson"></param>
             <param name="opts"></param>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.CreateFromObject(System.Object)">
+            <summary>
+            Создать из объекта используя провайдер значений
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.CreateFromType(System.Type,System.String,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
+            <summary>
+            Создать из типа
+            </summary>
+            <param name="type"></param>
+            <param name="valueJson"></param>
+            <param name="opts"></param>
+            <returns></returns>
         </member>
         <member name="P:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.Result">
             <summary>

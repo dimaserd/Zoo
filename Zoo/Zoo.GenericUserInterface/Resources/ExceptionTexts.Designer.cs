@@ -86,5 +86,23 @@ namespace Zoo.GenericUserInterface.Resources {
                 return ResourceManager.GetString("CantImplementMultipleDropDownForToNotEnumerableProperty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Non complex types are not supported.
+        /// </summary>
+        public static string NonComplexTypesAreNotSupported {
+            get {
+                return ResourceManager.GetString("NonComplexTypesAreNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Recursive types are not supported.
+        /// </summary>
+        public static string RecursiveTypesAreNotSupported {
+            get {
+                return ResourceManager.GetString("RecursiveTypesAreNotSupported", resourceCulture);
+            }
+        }
     }
 }

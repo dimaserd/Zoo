@@ -16,7 +16,7 @@ namespace Zoo.GenericUserInterface.Extensions
 
         private static UserInterfaceBlock GetBlockForEnumerable(string prefix, CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult desc, GenericInterfaceOptions opts)
         {
-            var type = desc.GetTypeDescription(prop.DisplayFullTypeName);
+            var type = desc.GetTypeDescription(prop.TypeDisplayFullName);
 
             if(!type.IsEnumerable)
             {
@@ -92,7 +92,7 @@ namespace Zoo.GenericUserInterface.Extensions
 
         private static UserInterfaceBlock GetBlockFromProperty(string prefix, CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)
         {
-            var propTypeDescription = main.GetTypeDescription(prop.DisplayFullTypeName);
+            var propTypeDescription = main.GetTypeDescription(prop.TypeDisplayFullName);
 
             if (!propTypeDescription.IsClass && !propTypeDescription.IsEnumerable)
             {
@@ -143,7 +143,7 @@ namespace Zoo.GenericUserInterface.Extensions
                 x => x.FullTypeName == typeof(DateTime).FullName
             };
 
-            var propTypeDesc = main.GetTypeDescription(propDescr.DisplayFullTypeName);
+            var propTypeDesc = main.GetTypeDescription(propDescr.TypeDisplayFullName);
 
             if (propTypeDesc.IsEnumerable)
             {
