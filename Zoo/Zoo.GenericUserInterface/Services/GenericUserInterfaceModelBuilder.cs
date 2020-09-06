@@ -21,7 +21,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <summary>
         /// Построитель
         /// </summary>
-        protected CrocoTypeDescriptionBuilder Builder = new CrocoTypeDescriptionBuilder();
+        public CrocoTypeDescriptionBuilder TypeDescriptionBuilder = new CrocoTypeDescriptionBuilder();
 
         #region Конструкторы
 
@@ -81,7 +81,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         private GenerateGenericUserInterfaceModel CreateFromType(Type type, string valueJson = null, GenericInterfaceOptions opts = null)
         {
-            var desc = Builder.GetTypeDescriptionResult(type);
+            var desc = TypeDescriptionBuilder.GetTypeDescriptionResult(type);
 
             var main = desc.GetMainTypeDescription();
 

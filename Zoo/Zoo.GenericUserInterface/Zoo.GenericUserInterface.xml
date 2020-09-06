@@ -204,6 +204,14 @@
             <typeparam name="TModel"></typeparam>
             <returns></returns>
         </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceCollection.ValidateOverriders">
+            <summary>
+            Вызывает все интерфейсы, которые были переопределены и если где-то произойдет ошибка, она будет выплюнута наружу.
+            <para></para>
+            Рекомендуется использовать в тестах для предотвращения ошибок в рантайме.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceCollection.GetOverriding(System.Type)">
             <summary>
             Получить переопрделение по полному названию типа
@@ -223,6 +231,31 @@
         <member name="F:Zoo.GenericUserInterface.Models.Overridings.InterfaceOverriderType.Static">
             <summary>
             Переопределение для интерфейса статично и высчитывается ровно один раз
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1">
+            <summary>
+            Данные для построения выпадающего списка
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Text">
+            <summary>
+            Текст для показа
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Selected">
+            <summary>
+            Флаг выбранности
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.DataJson">
+            <summary>
+            Кастомные данные
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Value">
+            <summary>
+            Значение
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.SelectListItem">
@@ -326,19 +359,29 @@
               обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementMethodNameToEnumPropertyFormat">
-            <summary>
-              Ищет локализованную строку, похожую на Вы не можете применить метод {0} к свойству, которое является перечислением. Данная операция не имеет смысла..
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty">
-            <summary>
-              Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое является массивом из перечислений. Данная операция не имеет смысла, так как перечисление, автоматически предоставляет массив возможных значений..
-            </summary>
-        </member>
         <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty">
             <summary>
               Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementSetDropListNameToEnumPropertyFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете установить выпадающий список к свойству {0}, которое является перечислением. Данная операция не имеет смысла, так как выпадающий список заполняется автоматически из типа перечисления..
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantSetDropListForPropertyThatIsNotPrimitiveFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете установить выпадающий список с единственным выбором на свойство {0}. Так как его тип данных не является примитивным..
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantSetDropListNotOnPrimitives">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете установить выпадающий список с единственным выбором на свойство, тип которого не является примитивным.
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantSetMultipleDropListNotOnPrimitivesFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете установить выпадающий список с множественным выбором на свойство, тип которого не является примитивным. Cвойство: {0}. Тип данных: {1}.
             </summary>
         </member>
         <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.NonComplexTypesAreNotSupported">
@@ -356,33 +399,48 @@
               Ищет локализованную строку, похожую на Recursive types are not supported.
             </summary>
         </member>
-        <member name="T:Zoo.GenericUserInterface.Services.GenericUserInterfaceBlockBuilder`1">
+        <member name="T:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1">
             <summary>
             Построитель для конкретного блока в интерейсе
             </summary>
             <typeparam name="TProp"></typeparam>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBlockBuilder`1.#ctor(Croco.Core.Documentation.Services.CrocoTypeDescriptionBuilder,Zoo.GenericUserInterface.Models.UserInterfaceBlock)">
+        <member name="P:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.Builder">
+            <summary>
+            построитель документации
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.Block">
+            <summary>
+            Редактируемый блок
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.DescribedType">
+            <summary>
+            Описанный тип данных
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.#ctor(Croco.Core.Documentation.Services.CrocoTypeDescriptionBuilder,Zoo.GenericUserInterface.Models.UserInterfaceBlock)">
             <summary>
             
             </summary>
             <param name="builder"></param>
             <param name="block"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBlockBuilder`1.SetLabel(System.String)">
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetLabel(System.String)">
             <summary>
             Установить текст лейбла
             </summary>
             <param name="labelText"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBlockBuilder`1.SetTextArea">
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetTextArea">
             <summary>
             Установить тип блока, как большое текстовое поле
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBlockBuilder`1.SetCustom(System.String,System.String)">
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetCustom(System.String,System.String)">
             <summary>
             Установить кастомный тип блока
             </summary>
@@ -390,21 +448,21 @@
             <param name="customDataJson"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBlockBuilder`1.SetDropDownList(System.Collections.Generic.List{Zoo.GenericUserInterface.Models.SelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetDropDownList(System.Collections.Generic.List{Zoo.GenericUserInterface.Models.Overridings.SelectListItemData{`0}})">
             <summary>
             Установить блок, как выпадающий список
             </summary>
             <param name="selectListItems"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBlockBuilder`1.SetMultipleDropDownList(System.Collections.Generic.List{Zoo.GenericUserInterface.Models.SelectListItem})">
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetMultipleDropDownList(System.Collections.Generic.List{Zoo.GenericUserInterface.Models.Overridings.SelectListItemData{`0}})">
             <summary>
             Установить выпадающий список со множественным выбором для свойства объекта
             </summary>
             <param name="selectListItems"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBlockBuilder`1.SetHidden">
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetHidden">
             <summary>
             Устновить скрытый тип элемента ввода
             </summary>
@@ -420,7 +478,7 @@
             Результат - модель для построения пользовательского интерфейса
             </summary>
         </member>
-        <member name="F:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.Builder">
+        <member name="F:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.TypeDescriptionBuilder">
             <summary>
             Построитель
             </summary>
@@ -533,27 +591,18 @@
             <param name="expression"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.DropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.SelectListItem})">
+        <member name="T:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions">
             <summary>
-            Установить выпадающий список с единственным выбором для свойства объекта
+            Расширения
             </summary>
-            <param name="expression"></param>
-            <param name="selectListItems"></param>
-            <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.MultipleDropDownListFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Collections.Generic.List{Zoo.GenericUserInterface.Models.SelectListItem})">
-            <summary>
-            Установить выпадающий список со множественным выбором для свойства объекта
-            </summary>
-            <param name="expression"></param>
-            <param name="selectListItems"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.GetBlockBuilder``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.GetBlockBuilder``2(Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
             <summary>
             Получить конфигуратор для блока
             </summary>
+            <typeparam name="TModel"></typeparam>
             <typeparam name="TProp"></typeparam>
+            <param name="builder"></param>
             <param name="expression"></param>
             <returns></returns>
         </member>

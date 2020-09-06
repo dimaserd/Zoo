@@ -117,14 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CantImplementMethodNameToEnumPropertyFormat" xml:space="preserve">
-    <value>Вы не можете применить метод {0} к свойству, которое является перечислением. Данная операция не имеет смысла.</value>
-  </data>
-  <data name="CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty" xml:space="preserve">
-    <value>Вы не можете применить метод MultipleDropDownFor к свойству, которое является массивом из перечислений. Данная операция не имеет смысла, так как перечисление, автоматически предоставляет массив возможных значений.</value>
-  </data>
   <data name="CantImplementMultipleDropDownForToNotEnumerableProperty" xml:space="preserve">
     <value>Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом.</value>
+  </data>
+  <data name="CantImplementSetDropListNameToEnumPropertyFormat" xml:space="preserve">
+    <value>Вы не можете установить выпадающий список к свойству {0}, которое является перечислением. Данная операция не имеет смысла, так как выпадающий список заполняется автоматически из типа перечисления.</value>
+  </data>
+  <data name="CantSetDropListForPropertyThatIsNotPrimitiveFormat" xml:space="preserve">
+    <value>Вы не можете установить выпадающий список с единственным выбором на свойство {0}. Так как его тип данных не является примитивным.</value>
+  </data>
+  <data name="CantSetDropListNotOnPrimitives" xml:space="preserve">
+    <value>Вы не можете установить выпадающий список с единственным выбором на свойство, тип которого не является примитивным</value>
+  </data>
+  <data name="CantSetMultipleDropListNotOnPrimitivesFormat" xml:space="preserve">
+    <value>Вы не можете установить выпадающий список с множественным выбором на свойство, тип которого не является примитивным. Cвойство: {0}. Тип данных: {1}</value>
   </data>
   <data name="NonComplexTypesAreNotSupported" xml:space="preserve">
     <value>Non complex types are not supported</value>

@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Services.BlockBuilders;
 
 namespace Zoo.GenericUserInterface.Services
 {
@@ -44,7 +46,6 @@ namespace Zoo.GenericUserInterface.Services
         public GenericUserInterfaceModelBuilder(TModel model, GenericInterfaceOptions opts) : base(typeof(TModel), Tool.JsonConverter.Serialize(model), opts)
         {
         }
-
         #endregion
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> HiddenFor<TProp>(Expression<Func<TModel, TProp>> expression)
         {
-            GetBlockBuilder(expression).SetHidden();
+            this.GetBlockBuilder(expression).SetHidden();
             return this;
         }
 
@@ -96,7 +97,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> CustomFor<TProp>(Expression<Func<TModel, TProp>> expression, string customType, string customDataJson)
         {
-            GetBlockBuilder(expression).SetCustom(customType, customDataJson);
+            this.GetBlockBuilder(expression).SetCustom(customType, customDataJson);
             return this;
         }
 
@@ -107,54 +108,13 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> TextAreaFor<TProp>(Expression<Func<TModel, TProp>> expression)
         {
-            GetBlockBuilder(expression).SetTextArea();
+            this.GetBlockBuilder(expression).SetTextArea();
             return this;
         }
         
-        /// <summary>
-        /// Установить выпадающий список с единственным выбором для свойства объекта
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="selectListItems"></param>
-        /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<TModel> DropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<SelectListItem> selectListItems)
+        internal UserInterfaceBlock GetBlockByExpression<TProp>(Expression<Func<TModel, TProp>> expression)
         {
-            GetBlockBuilder(expression).SetDropDownList(selectListItems);
-            return this;
-        }
-
-        /// <summary>
-        /// Установить выпадающий список со множественным выбором для свойства объекта
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="selectListItems"></param>
-        /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<TModel> MultipleDropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<SelectListItem> selectListItems)
-        {
-            GetBlockBuilder(expression).SetMultipleDropDownList(selectListItems);
-            return this;
-        }
-
-
-        /// <summary>
-        /// Получить конфигуратор для блока
-        /// </summary>
-        /// <typeparam name="TProp"></typeparam>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        public GenericUserInterfaceBlockBuilder<TProp> GetBlockBuilder<TProp>(Expression<Func<TModel, TProp>> expression)
-        {
-            return new GenericUserInterfaceBlockBuilder<TProp>(Builder, GetBlockByExpression(expression));
-        } 
-
-        private UserInterfaceBlock GetBlockByExpression<TProp>(Expression<Func<TModel, TProp>> expression)
-        {
-            return GetBlockByPropertyName(GetMemberName(expression));
-        }
-
-        private string GetMemberName<TProp>(Expression<Func<TModel, TProp>> expression)
-        {
-            return (expression.Body as MemberExpression).Member.Name;
+            return GetBlockByPropertyName(MyExpressionExtensions.GetMemberName(expression));
         }
 
         private UserInterfaceBlock GetBlockByPropertyName(string propertyName)
@@ -167,6 +127,25 @@ namespace Zoo.GenericUserInterface.Services
             }
 
             return block;
+        }
+    }
+
+    /// <summary>
+    /// Расширения
+    /// </summary>
+    public static class GenericUserInterfaceBuilderExtensions
+    {
+        /// <summary>
+        /// Получить конфигуратор для блока
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TProp"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static GenericUserInterfaceBlockBuilder<TProp> GetBlockBuilder<TModel, TProp>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TProp>> expression) where TModel : class
+        {
+            return new GenericUserInterfaceBlockBuilder<TProp>(builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
         }
     }
 }

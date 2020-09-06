@@ -22,7 +22,7 @@ namespace Zoo.GenericUserInterface.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ExceptionTexts {
+    internal class ExceptionTexts {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Zoo.GenericUserInterface.Resources {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zoo.GenericUserInterface.Resources.ExceptionTexts", typeof(ExceptionTexts).Assembly);
@@ -51,7 +51,7 @@ namespace Zoo.GenericUserInterface.Resources {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,36 +61,54 @@ namespace Zoo.GenericUserInterface.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Вы не можете применить метод {0} к свойству, которое является перечислением. Данная операция не имеет смысла..
-        /// </summary>
-        public static string CantImplementMethodNameToEnumPropertyFormat {
-            get {
-                return ResourceManager.GetString("CantImplementMethodNameToEnumPropertyFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое является массивом из перечислений. Данная операция не имеет смысла, так как перечисление, автоматически предоставляет массив возможных значений..
-        /// </summary>
-        public static string CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty {
-            get {
-                return ResourceManager.GetString("CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
         /// </summary>
-        public static string CantImplementMultipleDropDownForToNotEnumerableProperty {
+        internal static string CantImplementMultipleDropDownForToNotEnumerableProperty {
             get {
                 return ResourceManager.GetString("CantImplementMultipleDropDownForToNotEnumerableProperty", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы не можете установить выпадающий список к свойству {0}, которое является перечислением. Данная операция не имеет смысла, так как выпадающий список заполняется автоматически из типа перечисления..
+        /// </summary>
+        internal static string CantImplementSetDropListNameToEnumPropertyFormat {
+            get {
+                return ResourceManager.GetString("CantImplementSetDropListNameToEnumPropertyFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы не можете установить выпадающий список с единственным выбором на свойство {0}. Так как его тип данных не является примитивным..
+        /// </summary>
+        internal static string CantSetDropListForPropertyThatIsNotPrimitiveFormat {
+            get {
+                return ResourceManager.GetString("CantSetDropListForPropertyThatIsNotPrimitiveFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы не можете установить выпадающий список с единственным выбором на свойство, тип которого не является примитивным.
+        /// </summary>
+        internal static string CantSetDropListNotOnPrimitives {
+            get {
+                return ResourceManager.GetString("CantSetDropListNotOnPrimitives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы не можете установить выпадающий список с множественным выбором на свойство, тип которого не является примитивным. Cвойство: {0}. Тип данных: {1}.
+        /// </summary>
+        internal static string CantSetMultipleDropListNotOnPrimitivesFormat {
+            get {
+                return ResourceManager.GetString("CantSetMultipleDropListNotOnPrimitivesFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Non complex types are not supported.
         /// </summary>
-        public static string NonComplexTypesAreNotSupported {
+        internal static string NonComplexTypesAreNotSupported {
             get {
                 return ResourceManager.GetString("NonComplexTypesAreNotSupported", resourceCulture);
             }
@@ -99,7 +117,7 @@ namespace Zoo.GenericUserInterface.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Переопределение интерфейса для типа {0} уже задано.
         /// </summary>
-        public static string OverridingForTypeIsAlreadySetFormat {
+        internal static string OverridingForTypeIsAlreadySetFormat {
             get {
                 return ResourceManager.GetString("OverridingForTypeIsAlreadySetFormat", resourceCulture);
             }
@@ -108,7 +126,7 @@ namespace Zoo.GenericUserInterface.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Recursive types are not supported.
         /// </summary>
-        public static string RecursiveTypesAreNotSupported {
+        internal static string RecursiveTypesAreNotSupported {
             get {
                 return ResourceManager.GetString("RecursiveTypesAreNotSupported", resourceCulture);
             }

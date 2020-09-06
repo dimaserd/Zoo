@@ -1,14 +1,27 @@
 ﻿using Croco.Core.Documentation.Models;
+using Croco.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Models.Overridings;
 
 namespace Zoo.GenericUserInterface.Extensions
 {
     internal static class GenericUserInterfaceModelBuilderExtensions
     {
+        internal static List<SelectListItem> ToSelectListItems<TProp>(List<SelectListItemData<TProp>> selectListItems)
+        {
+            return selectListItems.Select(x => new SelectListItem
+            {
+                DataJson = x.DataJson,
+                Text = x.Text,
+                Selected = x.Selected,
+                Value = Tool.JsonConverter.Serialize(x.Value)
+            }).ToList();
+        }
+
         private static string AddPropNameToPrefix(string prefix, string propName)
         {
             return prefix == string.Empty ? propName : $"{prefix}.{propName}";

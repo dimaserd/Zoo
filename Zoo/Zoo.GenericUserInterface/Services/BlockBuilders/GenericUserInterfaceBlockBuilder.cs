@@ -3,10 +3,12 @@ using Croco.Core.Documentation.Services;
 using System;
 using System.Collections.Generic;
 using Zoo.GenericUserInterface.Enumerations;
+using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Resources;
 
-namespace Zoo.GenericUserInterface.Services
+namespace Zoo.GenericUserInterface.Services.BlockBuilders
 {
     /// <summary>
     /// Построитель для конкретного блока в интерейсе
@@ -14,9 +16,20 @@ namespace Zoo.GenericUserInterface.Services
     /// <typeparam name="TProp"></typeparam>
     public class GenericUserInterfaceBlockBuilder<TProp>
     {
-        CrocoTypeDescriptionBuilder Builder { get; }
-        UserInterfaceBlock Block { get; }
-        CrocoTypeDescriptionResult DescribedType { get; set; }
+        /// <summary>
+        /// построитель документации
+        /// </summary>
+        protected CrocoTypeDescriptionBuilder Builder { get; }
+        
+        /// <summary>
+        /// Редактируемый блок
+        /// </summary>
+        protected UserInterfaceBlock Block { get; }
+        
+        /// <summary>
+        /// Описанный тип данных
+        /// </summary>
+        protected CrocoTypeDescriptionResult DescribedType { get; set; }
 
         /// <summary>
         /// 
@@ -49,7 +62,7 @@ namespace Zoo.GenericUserInterface.Services
         {
             if (Block.InterfaceType != UserInterfaceType.TextBox)
             {
-                throw new Exception($"Только блоки типа  {nameof(UserInterfaceType.TextBox)} можно переключать на {nameof(UserInterfaceType.TextArea)}");
+                throw new Exception($"Только блоки типа {nameof(UserInterfaceType.TextBox)} можно переключать на {nameof(UserInterfaceType.TextArea)}");
             }
 
             Block.InterfaceType = UserInterfaceType.TextArea;
@@ -77,18 +90,28 @@ namespace Zoo.GenericUserInterface.Services
         /// </summary>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        public GenericUserInterfaceBlockBuilder<TProp> SetDropDownList(List<SelectListItem> selectListItems)
+        public GenericUserInterfaceBlockBuilder<TProp> SetDropDownList(List<SelectListItemData<TProp>> selectListItems)
         {
+            if (selectListItems is null)
+            {
+                throw new ArgumentNullException(nameof(selectListItems));
+            }
+
             var mainDoc = Builder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
             if (mainDoc.IsEnumeration)
             {
-                throw new ApplicationException(string.Format(ExceptionTexts.CantImplementMethodNameToEnumPropertyFormat, nameof(SetDropDownList)));
+                throw new InvalidOperationException(string.Format(ExceptionTexts.CantImplementSetDropListNameToEnumPropertyFormat, Block.PropertyName));
+            }
+
+            if (!mainDoc.IsPrimitive)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.CantSetDropListForPropertyThatIsNotPrimitiveFormat, Block.PropertyName));
             }
 
             Block.InterfaceType = UserInterfaceType.DropDownList;
             Block.DropDownData = new DropDownListData
             {
-                SelectList = selectListItems,
+                SelectList = GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(selectListItems),
                 CanAddNewItem = false
             };
             return this;
@@ -99,27 +122,31 @@ namespace Zoo.GenericUserInterface.Services
         /// </summary>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
-        public GenericUserInterfaceBlockBuilder<TProp> SetMultipleDropDownList(List<SelectListItem> selectListItems)
+        public GenericUserInterfaceBlockBuilder<TProp> SetMultipleDropDownList(List<SelectListItemData<TProp>> selectListItems)
         {
+            if (selectListItems is null)
+            {
+                throw new ArgumentNullException(nameof(selectListItems));
+            }
+
             var main = DescribedType.GetMainTypeDescription();
 
             if (!main.IsEnumerable)
             {
-                throw new ApplicationException(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty);
+                throw new InvalidOperationException(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty);
             }
 
             var enumerated = DescribedType.GetTypeDescription(main.EnumeratedDiplayFullTypeName);
 
-            if (enumerated.IsEnumeration)
+            if (!enumerated.IsPrimitive)
             {
-                throw new ApplicationException(ExceptionTexts.CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty);
+                throw new InvalidOperationException(string.Format(ExceptionTexts.CantSetMultipleDropListNotOnPrimitivesFormat, Block.PropertyName, typeof(TProp).FullName));
             }
 
             Block.InterfaceType = UserInterfaceType.MultipleDropDownList;
-
             Block.DropDownData = new DropDownListData
             {
-                SelectList = selectListItems,
+                SelectList = GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(selectListItems),
                 CanAddNewItem = false
             };
 

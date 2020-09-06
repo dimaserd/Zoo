@@ -14,7 +14,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
     public class GenericUserInterfaceCollection
     {
         readonly Dictionary<string, GenerateGenericUserInterfaceModel> ComputedInterfaces = new Dictionary<string, GenerateGenericUserInterfaceModel>();
-        readonly Dictionary<Type, Overrider> Dictionary = new Dictionary<Type, Overrider>();
+        readonly Dictionary<Type, Overrider> InterfaceOverriders = new Dictionary<Type, Overrider>();
 
         GenericInterfaceOptions Options { get; }
 
@@ -37,12 +37,12 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         public GenericUserInterfaceCollection AddOverrider<T>(GenericInterfaceOverrider<T> overrider) where T : class
         {
             var key = typeof(T);
-            if (Dictionary.ContainsKey(key))
+            if (InterfaceOverriders.ContainsKey(key))
             {
                 throw new InvalidOperationException(string.Format(ExceptionTexts.OverridingForTypeIsAlreadySetFormat, key.FullName));
             }
 
-            Dictionary.Add(key, new Overrider 
+            InterfaceOverriders.Add(key, new Overrider 
             {
                 OverrideFunction = x => overrider.OverrideInterfaceAsync(new GenericUserInterfaceModelBuilder<T>(x)),
                 Type = overrider.Type
@@ -100,17 +100,31 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         }
 
         /// <summary>
+        /// Вызывает все интерфейсы, которые были переопределены и если где-то произойдет ошибка, она будет выплюнута наружу.
+        /// <para></para>
+        /// Рекомендуется использовать в тестах для предотвращения ошибок в рантайме.
+        /// </summary>
+        /// <returns></returns>
+        public async Task ValidateOverriders()
+        {
+            foreach(var overrider in InterfaceOverriders)
+            {
+                await GetInterface(overrider.Key.FullName);
+            }
+        }
+
+        /// <summary>
         /// Получить переопрделение по полному названию типа
         /// </summary>
         /// <returns></returns>
         private Overrider GetOverriding(Type key)
         {
-            if (!Dictionary.ContainsKey(key))
+            if (!InterfaceOverriders.ContainsKey(key))
             {
                 return null;
             }
 
-            return Dictionary[key];
+            return InterfaceOverriders[key];
         }
 
         internal class Overrider
