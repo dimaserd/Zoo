@@ -20,7 +20,7 @@ namespace Zoo.GenericUserInterface.Tests.EnumerbleProps
 
             Assert.AreEqual(nameof(ClassWithStringArrayProp.Property), block.LabelText);
             Assert.AreEqual(UserInterfaceType.MultipleDropDownList, block.InterfaceType);
-            Assert.AreEqual(0, block.SelectList.Count);
+            Assert.AreEqual(0, block.DropDownData.SelectList.Count);
         }
 
         public class ClassWithIntProp : ClassWithArrayProp<int>
@@ -36,7 +36,7 @@ namespace Zoo.GenericUserInterface.Tests.EnumerbleProps
 
             Assert.AreEqual(nameof(ClassWithIntProp.Property), block.LabelText);
             Assert.AreEqual(UserInterfaceType.MultipleDropDownList, block.InterfaceType);
-            Assert.AreEqual(0, block.SelectList.Count);
+            Assert.AreEqual(0, block.DropDownData.SelectList.Count);
         }
 
         public class ClassWithByteProp : ClassWithArrayProp<byte>
@@ -52,7 +52,7 @@ namespace Zoo.GenericUserInterface.Tests.EnumerbleProps
 
             Assert.AreEqual(nameof(ClassWithByteProp.Property), block.LabelText);
             Assert.AreEqual(UserInterfaceType.MultipleDropDownList, block.InterfaceType);
-            Assert.AreEqual(0, block.SelectList.Count);
+            Assert.AreEqual(0, block.DropDownData.SelectList.Count);
         }
 
         public class SomeComplexType

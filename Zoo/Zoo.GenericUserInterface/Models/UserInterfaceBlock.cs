@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Zoo.GenericUserInterface.Enumerations;
+﻿using Zoo.GenericUserInterface.Enumerations;
 
 namespace Zoo.GenericUserInterface.Models
 {
@@ -29,9 +28,9 @@ namespace Zoo.GenericUserInterface.Models
         public string CustomUserInterfaceType { get; set; }
 
         /// <summary>
-        /// Значения для выпадающего списка
+        /// Данные для построения выпадающего списка
         /// </summary>
-        public List<SelectListItem> SelectList { get; set; }
+        public DropDownListData DropDownData { get; set; }
 
         /// <summary>
         /// Дополнительная информация для текстового блока

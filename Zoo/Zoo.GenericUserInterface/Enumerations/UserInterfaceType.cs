@@ -48,6 +48,16 @@
         /// <summary>
         /// Вложенный новый интерфейс для массива
         /// </summary>
-        GenericInterfaceForArray
+        GenericInterfaceForArray,
+
+        /// <summary>
+        /// Автокомплит для единичного выбора (Поддерживается только для примитивных типов)
+        /// </summary>
+        AutoCompleteForSingle,
+
+        /// <summary>
+        /// Автокомплит для мультивыбора (Поддерживается только для масиива из примитивных типа)
+        /// </summary>
+        AutoCompleteForMultiple
     }
 }

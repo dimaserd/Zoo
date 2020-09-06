@@ -32,7 +32,7 @@ namespace Zoo.GenericUserInterface.Extensions
                     LabelText = prop.PropertyDescription.PropertyDisplayName,
                     InterfaceType = UserInterfaceType.MultipleDropDownList,
                     PropertyName = prop.PropertyDescription.PropertyName,
-                    SelectList = GetSelectList(prop, desc, opts)
+                    DropDownData = GetSelectListData(prop, desc, opts)
                 };
             }
 
@@ -98,12 +98,14 @@ namespace Zoo.GenericUserInterface.Extensions
             {
                 var type = GetUserInterfaceType(propTypeDescription);
 
+                var selectList = GetSelectListData(prop, main, opts);
+
                 return new UserInterfaceBlock
                 {
                     LabelText = prop.PropertyDescription.PropertyDisplayName,
                     PropertyName = prop.PropertyDescription.PropertyName,
                     InterfaceType = type,
-                    SelectList = GetSelectList(prop, main, opts),
+                    DropDownData = selectList,
                     TextBoxData = GetTextBoxDataForProperty(propTypeDescription, type)
                 };
             }
@@ -135,7 +137,7 @@ namespace Zoo.GenericUserInterface.Extensions
             throw new Exception("Not supported");
         }
 
-        private static List<SelectListItem> GetSelectList(CrocoPropertyReferenceDescription propDescr, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)
+        private static DropDownListData GetSelectListData(CrocoPropertyReferenceDescription propDescr, CrocoTypeDescriptionResult main, GenericInterfaceOptions opts)
         {
             var emptySelectListPredicates = new List<Func<CrocoTypeDescription, bool>>
             {
@@ -151,22 +153,34 @@ namespace Zoo.GenericUserInterface.Extensions
 
                 if (enumeratedType.IsEnumeration)
                 {
-                    return enumeratedType.EnumDescription.EnumValues.Select(x => new SelectListItem
+                    return new DropDownListData
                     {
-                        Text = x.DisplayName,
-                        Value = x.StringRepresentation
-                    }).ToList();
+                        SelectList = enumeratedType.EnumDescription.EnumValues.Select(x => new SelectListItem
+                        {
+                            Text = x.DisplayName,
+                            Value = x.StringRepresentation
+                        }).ToList(),
+                        CanAddNewItem = false
+                    };
                 }
             }
 
             if (propTypeDesc.FullTypeName == typeof(bool).FullName)
             {
-                return MySelectListItemExtensions.GetBooleanList(propTypeDesc.IsNullable, opts);
+                return new DropDownListData
+                {
+                    SelectList = MySelectListItemExtensions.GetBooleanList(propTypeDesc.IsNullable, opts),
+                    CanAddNewItem = false
+                };
             }
 
             if (emptySelectListPredicates.Any(x => x(propTypeDesc)))
             {
-                return new List<SelectListItem>();
+                return new DropDownListData 
+                {
+                    SelectList = new List<SelectListItem>(),
+                    CanAddNewItem = true
+                } ;
             }
 
             if (propTypeDesc.IsEnumeration)
@@ -189,13 +203,17 @@ namespace Zoo.GenericUserInterface.Extensions
                     Text = x.DisplayName
                 }));
 
-                return enumsList;
+                return new DropDownListData
+                {
+                    CanAddNewItem = false,
+                    SelectList = enumsList
+                };
             }
 
             return null;
         }
 
-        internal static UserInterfaceType GetUserInterfaceType(CrocoTypeDescription desc)
+        private static UserInterfaceType GetUserInterfaceType(CrocoTypeDescription desc)
         {
             if (desc.FullTypeName == typeof(bool).FullName)
             {

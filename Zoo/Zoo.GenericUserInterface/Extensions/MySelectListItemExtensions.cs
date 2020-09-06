@@ -1,7 +1,4 @@
-﻿using Croco.Core.Documentation.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Zoo.GenericUserInterface.Models;
 
 namespace Zoo.GenericUserInterface.Extensions
@@ -9,7 +6,7 @@ namespace Zoo.GenericUserInterface.Extensions
     /// <summary>
     /// Расширения для построения списков
     /// </summary>
-    public static class MySelectListItemExtensions
+    internal static class MySelectListItemExtensions
     {
         /// <summary>
         /// Получить список из булевых значений
@@ -17,7 +14,7 @@ namespace Zoo.GenericUserInterface.Extensions
         /// <param name="isNullable"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public static List<SelectListItem> GetBooleanList(bool isNullable, GenericInterfaceOptions opts)
+        internal static List<SelectListItem> GetBooleanList(bool isNullable, GenericInterfaceOptions opts)
         {
             var list = new List<SelectListItem>();
 
@@ -48,29 +45,6 @@ namespace Zoo.GenericUserInterface.Extensions
             });
 
             return list;
-        }
-
-        /// <summary>
-        /// Получить список из енамов
-        /// </summary>
-        /// <param name="enumType"></param>
-        /// <returns></returns>
-        public static List<SelectListItem> GetEnumDropDownList(Type enumType)
-        {
-            var crocoType = CrocoTypeDescription.GetDescription(enumType);
-
-            var main = crocoType.GetMainTypeDescription();
-
-            if(!main.IsEnumeration)
-            {
-                throw new Exception("Данный тип не является перечислением");
-            }
-
-            return main.EnumDescription.EnumValues.Select(x => new SelectListItem
-            {
-                Text = x.DisplayName,
-                Value = x.StringRepresentation
-            }).ToList();
         }
     }
 }

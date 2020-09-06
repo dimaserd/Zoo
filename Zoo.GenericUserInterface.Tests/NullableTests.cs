@@ -31,7 +31,7 @@ namespace Zoo.GenericUserInterface.Tests
 
             Assert.AreEqual(UserInterfaceType.DropDownList, block.InterfaceType);
 
-            var selectList = block.SelectList;
+            var selectList = block.DropDownData.SelectList;
             Assert.IsTrue(selectList.Count == 3);
 
             var firstSelectItem = selectList.First();
@@ -54,7 +54,7 @@ namespace Zoo.GenericUserInterface.Tests
             Assert.AreEqual(UserInterfaceType.DropDownList, block.InterfaceType);
 
 
-            var selectList = block.SelectList;
+            var selectList = block.DropDownData.SelectList;
 
             //Так как жто не Nullable null быть не должно
             Assert.IsFalse(selectList.Any(x => x.Value == null));

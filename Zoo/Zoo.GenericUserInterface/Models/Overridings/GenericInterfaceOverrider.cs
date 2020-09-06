@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Services;
 
-namespace Zoo.GenericUserInterface.Models
+namespace Zoo.GenericUserInterface.Models.Overridings
 {
     /// <summary>
     /// Переопределитель интерфейса
@@ -9,10 +9,7 @@ namespace Zoo.GenericUserInterface.Models
     /// <typeparam name="T"></typeparam>
     public abstract class GenericInterfaceOverrider<T> where T : class
     {
-        /// <summary>
-        /// Полное название типа
-        /// </summary>
-        public string TypeFullName => typeof(T).FullName;
+        internal InterfaceOverriderType Type => InterfaceOverriderType.Computed;
 
         /// <summary>
         /// 

@@ -129,6 +129,9 @@
   <data name="NonComplexTypesAreNotSupported" xml:space="preserve">
     <value>Non complex types are not supported</value>
   </data>
+  <data name="OverridingForTypeIsAlreadySetFormat" xml:space="preserve">
+    <value>Переопределение интерфейса для типа {0} уже задано</value>
+  </data>
   <data name="RecursiveTypesAreNotSupported" xml:space="preserve">
     <value>Recursive types are not supported</value>
   </data>

@@ -1,10 +1,9 @@
-﻿using Croco.Core.Documentation.Models;
-using Croco.Core.Utils;
+﻿using Croco.Core.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Zoo.GenericUserInterface.Models;
-using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services
 {
@@ -14,10 +13,18 @@ namespace Zoo.GenericUserInterface.Services
     /// <typeparam name="TModel"></typeparam>
     public class GenericUserInterfaceModelBuilder<TModel> : GenericUserInterfaceModelBuilder where TModel : class
     {
+        #region Конструкторы
         /// <summary>
         /// Конструктор
         /// </summary>
         public GenericUserInterfaceModelBuilder() : base(typeof(TModel))
+        {
+        }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        internal GenericUserInterfaceModelBuilder(GenerateGenericUserInterfaceModel model) : base(model)
         {
         }
 
@@ -38,13 +45,7 @@ namespace Zoo.GenericUserInterface.Services
         {
         }
 
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="model"></param>
-        public GenericUserInterfaceModelBuilder(GenerateGenericUserInterfaceModel model): base(model)
-        {
-        }
+        #endregion
 
         /// <summary>
         /// Переместить свойство на начальную позицию
@@ -53,9 +54,11 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> ShiftToStartFor(Expression<Func<TModel, object>> expression)
         {
-            var memberName = GetMemberName(expression);
+            var block = GetBlockByExpression(expression);
 
-            return ShiftPropertyToStartFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
+            Result.Interface.Blocks.Remove(block);
+            Result.Interface.Blocks.Insert(0, block);
+            return this;
         }
 
         /// <summary>
@@ -65,9 +68,12 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> ShiftToEndFor<TProp>(Expression<Func<TModel, TProp>> expression)
         {
-            var memberName = GetMemberName(expression);
+            var block = GetBlockByExpression(expression);
 
-            return ShiftPropertyToEndFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
+            Result.Interface.Blocks.Remove(block);
+            Result.Interface.Blocks.Add(block);
+
+            return this;
         }
 
         /// <summary>
@@ -77,9 +83,8 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> HiddenFor<TProp>(Expression<Func<TModel, TProp>> expression)
         {
-            var memberName = GetMemberName(expression);
-
-            return SetHiddenFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
+            GetBlockBuilder(expression).SetHidden();
+            return this;
         }
 
         /// <summary>
@@ -91,9 +96,8 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> CustomFor<TProp>(Expression<Func<TModel, TProp>> expression, string customType, string customDataJson)
         {
-            var memberName = GetMemberName(expression);
-
-            return SetCustomFor(memberName, customType, customDataJson) as GenericUserInterfaceModelBuilder<TModel>;
+            GetBlockBuilder(expression).SetCustom(customType, customDataJson);
+            return this;
         }
 
         /// <summary>
@@ -101,13 +105,11 @@ namespace Zoo.GenericUserInterface.Services
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<TModel> TextAreaFor(Expression<Func<TModel, string>> expression)
+        public GenericUserInterfaceModelBuilder<TModel> TextAreaFor<TProp>(Expression<Func<TModel, TProp>> expression)
         {
-            var memberName = GetMemberName(expression);
-
-            return SetTextAreaFor(memberName) as GenericUserInterfaceModelBuilder<TModel>;
+            GetBlockBuilder(expression).SetTextArea();
+            return this;
         }
-
         
         /// <summary>
         /// Установить выпадающий список с единственным выбором для свойства объекта
@@ -117,17 +119,9 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> DropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<SelectListItem> selectListItems)
         {
-            var memberName = GetMemberName(expression);
-
-            var mainDoc = CrocoTypeDescription.GetDescription(typeof(TProp)).GetMainTypeDescription();
-            if(mainDoc.IsEnumeration)
-            {
-                throw new ApplicationException(string.Format(ExceptionTexts.CantImplementMethodNameToEnumPropertyFormat, nameof(DropDownListFor)));
-            }
-
-            return SetDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<TModel>;
+            GetBlockBuilder(expression).SetDropDownList(selectListItems);
+            return this;
         }
-
 
         /// <summary>
         /// Установить выпадающий список со множественным выбором для свойства объекта
@@ -137,29 +131,42 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public GenericUserInterfaceModelBuilder<TModel> MultipleDropDownListFor<TProp>(Expression<Func<TModel, TProp>> expression, List<SelectListItem> selectListItems)
         {
-            var memberName = GetMemberName(expression);
+            GetBlockBuilder(expression).SetMultipleDropDownList(selectListItems);
+            return this;
+        }
 
-            var crocDescr = CrocoTypeDescription.GetDescription(typeof(TProp));
-            var main = crocDescr.GetMainTypeDescription();
 
-            if(!main.IsEnumerable)
-            {
-                throw new ApplicationException(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty);
-            }
+        /// <summary>
+        /// Получить конфигуратор для блока
+        /// </summary>
+        /// <typeparam name="TProp"></typeparam>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceBlockBuilder<TProp> GetBlockBuilder<TProp>(Expression<Func<TModel, TProp>> expression)
+        {
+            return new GenericUserInterfaceBlockBuilder<TProp>(Builder, GetBlockByExpression(expression));
+        } 
 
-            var enumerated = crocDescr.GetTypeDescription(main.EnumeratedDiplayFullTypeName);
-            
-            if (enumerated.IsEnumeration)
-            {
-                throw new ApplicationException(ExceptionTexts.CantImplementMultipleDropDownForToEnumerableOfEnumerationProperty);
-            }
-
-            return SetMultipleDropDownListFor(memberName, selectListItems) as GenericUserInterfaceModelBuilder<TModel>;
+        private UserInterfaceBlock GetBlockByExpression<TProp>(Expression<Func<TModel, TProp>> expression)
+        {
+            return GetBlockByPropertyName(GetMemberName(expression));
         }
 
         private string GetMemberName<TProp>(Expression<Func<TModel, TProp>> expression)
         {
             return (expression.Body as MemberExpression).Member.Name;
+        }
+
+        private UserInterfaceBlock GetBlockByPropertyName(string propertyName)
+        {
+            var block = Result.Interface.Blocks.FirstOrDefault(x => x.PropertyName == propertyName);
+
+            if (block == null)
+            {
+                throw new Exception($"Свойство {propertyName} не найдено");
+            }
+
+            return block;
         }
     }
 }

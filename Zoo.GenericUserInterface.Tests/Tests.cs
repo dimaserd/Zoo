@@ -48,7 +48,7 @@ namespace Tests
 
             Assert.AreEqual(nameof(SomeClass.Property2), block.LabelText);
             Assert.AreEqual(UserInterfaceType.MultipleDropDownList, block.InterfaceType);
-            Assert.IsTrue(block.SelectList.Count == 0);
+            Assert.IsTrue(block.DropDownData.SelectList.Count == 0);
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace Tests
             var lastProp = builder.Result.Interface.Blocks.Last();
 
             Assert.IsTrue(lastProp.InterfaceType == UserInterfaceType.DropDownList);
-            Assert.IsTrue(lastProp.SelectList == list);
+            Assert.IsTrue(lastProp.DropDownData.SelectList == list);
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace Tests
         {
             var builder = new GenericUserInterfaceModelBuilder<SomeClass>();
 
-            var ex = Assert.Throws<ApplicationException>(() => builder.DropDownListFor(x => x.EnumProp, new List<Zoo.GenericUserInterface.Models.SelectListItem>
+            var ex = Assert.Throws<ApplicationException>(() => builder.DropDownListFor(x => x.EnumProp, new List<SelectListItem>
             {
                 new SelectListItem
                 {
@@ -110,7 +110,8 @@ namespace Tests
                 }
             }));
 
-            Assert.AreEqual(ex.Message, string.Format(ExceptionTexts.CantImplementMethodNameToEnumPropertyFormat, nameof(builder.DropDownListFor)));
+            var expectedMessage = string.Format(ExceptionTexts.CantImplementMethodNameToEnumPropertyFormat, "SetDropDownList");
+            Assert.AreEqual(expectedMessage, ex.Message);
         }
 
         [Test]

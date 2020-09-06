@@ -97,6 +97,15 @@ namespace Zoo.GenericUserInterface.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Переопределение интерфейса для типа {0} уже задано.
+        /// </summary>
+        public static string OverridingForTypeIsAlreadySetFormat {
+            get {
+                return ResourceManager.GetString("OverridingForTypeIsAlreadySetFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Recursive types are not supported.
         /// </summary>
         public static string RecursiveTypesAreNotSupported {

@@ -27,7 +27,7 @@ namespace Zoo.GenericUserInterface.Tests
 
             Assert.AreEqual(Enumerations.UserInterfaceType.DropDownList, fProp.InterfaceType);
 
-            var selectList = fProp.SelectList;
+            var selectList = fProp.DropDownData.SelectList;
 
             Assert.AreEqual(3, selectList.Count);
 
