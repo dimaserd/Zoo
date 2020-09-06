@@ -132,6 +132,9 @@
   <data name="CantSetMultipleDropListNotOnPrimitivesFormat" xml:space="preserve">
     <value>Вы не можете установить выпадающий список с множественным выбором на свойство, тип которого не является примитивным. Cвойство: {0}. Тип данных: {1}</value>
   </data>
+  <data name="DontUseGetBlockBuilderForCollectionOnCollectionsOfChars" xml:space="preserve">
+    <value>Dont use GetBlockBuilderForCollection on collections of chars. Use ordinary string property.</value>
+  </data>
   <data name="NonComplexTypesAreNotSupported" xml:space="preserve">
     <value>Non complex types are not supported</value>
   </data>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services.BlockBuilders;
 
 namespace Zoo.GenericUserInterface.Services
@@ -111,7 +112,7 @@ namespace Zoo.GenericUserInterface.Services
             this.GetBlockBuilder(expression).SetTextArea();
             return this;
         }
-        
+
         internal UserInterfaceBlock GetBlockByExpression<TProp>(Expression<Func<TModel, TProp>> expression)
         {
             return GetBlockByPropertyName(MyExpressionExtensions.GetMemberName(expression));
@@ -136,6 +137,48 @@ namespace Zoo.GenericUserInterface.Services
     public static class GenericUserInterfaceBuilderExtensions
     {
         /// <summary>
+        /// Получить конфигуратор для блока, который является колекцией
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TItem"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static GenericUserInterfaceBlockBuilderForCollectionType<TItem> GetBlockBuilderForCollection<TModel, TItem>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TItem[]>> expression) where TModel : class
+        {
+            CheckItem<TItem>();
+            return new GenericUserInterfaceBlockBuilderForCollectionType<TItem>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
+        }
+
+        /// <summary>
+        /// Получить конфигуратор для блока, который является колекцией
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TItem"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static GenericUserInterfaceBlockBuilderForCollectionType<TItem> GetBlockBuilderForCollection<TModel, TItem>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, IEnumerable<TItem>>> expression) where TModel : class
+        {
+            CheckItem<TItem>();
+            return new GenericUserInterfaceBlockBuilderForCollectionType<TItem>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
+        }
+
+        /// <summary>
+        /// Получить конфигуратор для блока, который является колекцией
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TItem"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static GenericUserInterfaceBlockBuilderForCollectionType<TItem> GetBlockBuilderForCollection<TModel, TItem>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, List<TItem>>> expression) where TModel : class
+        {
+            CheckItem<TItem>();
+            return new GenericUserInterfaceBlockBuilderForCollectionType<TItem>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
+        }
+
+        /// <summary>
         /// Получить конфигуратор для блока
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
@@ -145,7 +188,15 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public static GenericUserInterfaceBlockBuilder<TProp> GetBlockBuilder<TModel, TProp>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TProp>> expression) where TModel : class
         {
-            return new GenericUserInterfaceBlockBuilder<TProp>(builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
+            return new GenericUserInterfaceBlockBuilder<TProp>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
+        }
+
+        private static void CheckItem<TItem>()
+        {
+            if (typeof(TItem) == typeof(char))
+            {
+                throw new InvalidOperationException(ExceptionTexts.DontUseGetBlockBuilderForCollectionOnCollectionsOfChars);
+            }
         }
     }
 }

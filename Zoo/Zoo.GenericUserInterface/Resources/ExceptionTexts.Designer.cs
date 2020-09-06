@@ -106,6 +106,15 @@ namespace Zoo.GenericUserInterface.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Dont use GetBlockBuilderForCollection on collections of chars. Use ordinary string property..
+        /// </summary>
+        internal static string DontUseGetBlockBuilderForCollectionOnCollectionsOfChars {
+            get {
+                return ResourceManager.GetString("DontUseGetBlockBuilderForCollectionOnCollectionsOfChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Non complex types are not supported.
         /// </summary>
         internal static string NonComplexTypesAreNotSupported {

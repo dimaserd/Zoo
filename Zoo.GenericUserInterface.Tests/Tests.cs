@@ -1,13 +1,9 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Models;
-using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Services;
-using Zoo.GenericUserInterface.Models.Overridings;
 
 namespace Tests
 {

@@ -1,7 +1,6 @@
 ﻿using Jint;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
 

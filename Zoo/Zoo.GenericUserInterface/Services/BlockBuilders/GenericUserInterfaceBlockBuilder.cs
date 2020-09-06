@@ -2,6 +2,7 @@
 using Croco.Core.Documentation.Services;
 using System;
 using System.Collections.Generic;
+using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
@@ -14,8 +15,10 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
     /// Построитель для конкретного блока в интерейсе
     /// </summary>
     /// <typeparam name="TProp"></typeparam>
-    public class GenericUserInterfaceBlockBuilder<TProp>
+    public class GenericUserInterfaceBlockBuilder<TProp> : IGenericInterfaceBuilder
     {
+        IGenericInterfaceBuilder InterfaceBuilder { get; }
+
         /// <summary>
         /// построитель документации
         /// </summary>
@@ -32,12 +35,19 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         protected CrocoTypeDescriptionResult DescribedType { get; set; }
 
         /// <summary>
+        /// Результат - модель для построения пользовательского интерфейса
+        /// </summary>
+        public GenerateGenericUserInterfaceModel Result => InterfaceBuilder.Result;
+
+        /// <summary>
         /// 
         /// </summary>
+        /// <param name="interfaceBuilder"></param>
         /// <param name="builder"></param>
         /// <param name="block"></param>
-        internal GenericUserInterfaceBlockBuilder(CrocoTypeDescriptionBuilder builder, UserInterfaceBlock block)
+        internal GenericUserInterfaceBlockBuilder(IGenericInterfaceBuilder interfaceBuilder, CrocoTypeDescriptionBuilder builder, UserInterfaceBlock block)
         {
+            InterfaceBuilder = interfaceBuilder;
             Builder = builder;
             Block = block;
             DescribedType = Builder.GetTypeDescriptionResult(typeof(TProp));
@@ -114,42 +124,6 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
                 SelectList = GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(selectListItems),
                 CanAddNewItem = false
             };
-            return this;
-        }
-
-        /// <summary>
-        /// Установить выпадающий список со множественным выбором для свойства объекта
-        /// </summary>
-        /// <param name="selectListItems"></param>
-        /// <returns></returns>
-        public GenericUserInterfaceBlockBuilder<TProp> SetMultipleDropDownList(List<SelectListItemData<TProp>> selectListItems)
-        {
-            if (selectListItems is null)
-            {
-                throw new ArgumentNullException(nameof(selectListItems));
-            }
-
-            var main = DescribedType.GetMainTypeDescription();
-
-            if (!main.IsEnumerable)
-            {
-                throw new InvalidOperationException(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty);
-            }
-
-            var enumerated = DescribedType.GetTypeDescription(main.EnumeratedDiplayFullTypeName);
-
-            if (!enumerated.IsPrimitive)
-            {
-                throw new InvalidOperationException(string.Format(ExceptionTexts.CantSetMultipleDropListNotOnPrimitivesFormat, Block.PropertyName, typeof(TProp).FullName));
-            }
-
-            Block.InterfaceType = UserInterfaceType.MultipleDropDownList;
-            Block.DropDownData = new DropDownListData
-            {
-                SelectList = GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(selectListItems),
-                CanAddNewItem = false
-            };
-
             return this;
         }
 
