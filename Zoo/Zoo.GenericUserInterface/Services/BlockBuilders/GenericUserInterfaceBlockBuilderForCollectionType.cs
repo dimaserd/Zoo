@@ -11,6 +11,10 @@ using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services.BlockBuilders
 {
+    /// <summary>
+    /// Построитель блока для обощенного интерфейса с типом коллекция
+    /// </summary>
+    /// <typeparam name="TItem"></typeparam>
     public class GenericUserInterfaceBlockBuilderForCollectionType<TItem> : GenericUserInterfaceBlockBuilder<TItem[]>
     {
         internal GenericUserInterfaceBlockBuilderForCollectionType(IGenericInterfaceBuilder interfaceBuilder, CrocoTypeDescriptionBuilder builder, UserInterfaceBlock block) 
@@ -57,9 +61,9 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// <summary>
         /// Установить список с автоподсказами для свойства данного объекта
         /// </summary>
-        /// <param name="dataPopulator"></param>
+        /// <param name="dataProvider"></param>
         /// <returns></returns>
-        public GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetAutoCompleteFor(Func<Task<SelectListItemData<TItem>>> dataPopulator)
+        public GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetAutoCompleteFor<TDataProvider>(DataProviderForAutoCompletion<TItem> dataProvider) where TDataProvider : DataProviderForAutoCompletion<TItem>
         {
             var mainDesc = DescribedType.GetMainTypeDescription();
             if (mainDesc.IsEnumerable && !DescribedType.GetTypeDescription(mainDesc.EnumeratedDiplayFullTypeName).IsPrimitive)
@@ -70,7 +74,10 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
                     "Необходим тип, который будет являтся примитивом или массивом из примитивов.");
             }
 
+
+
             //TODO Сделать логику
+            
 
             return this;
         }

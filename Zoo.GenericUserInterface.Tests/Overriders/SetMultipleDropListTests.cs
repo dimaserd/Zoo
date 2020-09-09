@@ -121,6 +121,5 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             Assert.AreEqual(UserInterfaceType.MultipleDropDownList, block.InterfaceType);
             Assert.AreEqual(1, block.DropDownData.SelectList.Count);
         }
-
     }
 }
