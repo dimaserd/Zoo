@@ -4,6 +4,7 @@ using System;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services

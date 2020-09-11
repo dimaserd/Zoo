@@ -87,6 +87,16 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Models.AutoCompleteData">
+            <summary>
+            Данные для автокомплита
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.AutoCompleteData.DataProviderTypeFullName">
+            <summary>
+            Провайдер данных
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Models.DropDownListData">
             <summary>
             Данные для построения выпадающего списка
@@ -174,47 +184,57 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericInterfaceOverrider`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericInterfaceOverrider`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag,Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
             <summary>
             
             </summary>
+            <param name="bag"></param>
             <param name="overrider"></param>
             <returns></returns>
         </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceCollection">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericInterfaceOverrider`1.GetOverrider">
             <summary>
-            Переопределения пользовательских интерфейсов для типов
+            Получить переопределитель
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag">
+            <summary>
+            Портфель из пользовательских интерфейсов для типов и прочего добра необходимого для
+            его построения
             </summary>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceCollection.#ctor(Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.#ctor(System.IServiceProvider,Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
             <summary>
             Конструктор
             </summary>
+            <param name="serviceProvider"></param>
+            <param name="bagOptions"></param>
             <param name="options"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceCollection.AddOverrider``1(Zoo.GenericUserInterface.Models.Overridings.GenericInterfaceOverrider{``0})">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.GetDataProvider``2">
             <summary>
-            Добавить новое переопределение для интерфейса
+            Получить провайдера данных
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="overrider"></param>
+            <typeparam name="TDataProvider"></typeparam>
+            <typeparam name="TItem"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceCollection.GetInterface(System.String)">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.GetInterface(System.String)">
             <summary>
             Получить интерфейс
             </summary>
             <param name="typeDisplayFullName"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceCollection.GetInterface``1">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.GetInterface``1">
             <summary>
             Получить интерфейс
             </summary>
             <typeparam name="TModel"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceCollection.ValidateOverriders">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.ValidateOverriders">
             <summary>
             Вызывает все интерфейсы, которые были переопределены и если где-то произойдет ошибка, она будет выплюнута наружу.
             <para></para>
@@ -222,11 +242,56 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceCollection.GetOverriding(System.Type)">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.GetOverriding(System.Type)">
             <summary>
             Получить переопрделение по полному названию типа
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="serviceCollection"></param>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddOverrider``2">
+            <summary>
+            Добавить переопределение для интерфейса
+            </summary>
+            <typeparam name="TOverrider"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddOverrider``2(System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Добавить переопределение для интерфейса
+            </summary>
+            <typeparam name="TOverrider"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProvider``2">
+            <summary>
+            Добавить провайдер данных
+            </summary>
+            <typeparam name="TDataProvider"></typeparam>
+            <typeparam name="TItem"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.Build">
+            <summary>
+            Построить
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions">
+            <summary>
+            Опции для создания портфеля из интерфейсов
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions.InterfaceOverriders">
+            <summary>
+            Переопределители интерфейсов
+            </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.InterfaceOverriderType">
             <summary>
@@ -338,6 +403,11 @@
             Вложенный интерфейс
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.AutoCompleteData">
+            <summary>
+            Данные для построения автокомплита
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Models.UserInterfaceTextBoxData">
             <summary>
             Дополнительная информация о текстбоксе
@@ -420,7 +490,12 @@
             </summary>
             <typeparam name="TProp"></typeparam>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.Builder">
+        <member name="P:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.InterfaceBuilder">
+            <summary>
+            Построитель интерфейса
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.DocsBuilder">
             <summary>
             построитель документации
             </summary>
@@ -482,6 +557,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilderForCollectionType`1">
+            <summary>
+            Построитель блока для обощенного интерфейса с типом коллекция
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilderForCollectionType`1.SetMultipleDropDownList(System.Collections.Generic.List{Zoo.GenericUserInterface.Models.Overridings.SelectListItemData{`0}})">
             <summary>
             Установить выпадающий список со множественным выбором для свойства объекта
@@ -489,11 +570,10 @@
             <param name="selectListItems"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilderForCollectionType`1.SetAutoCompleteFor(System.Func{System.Threading.Tasks.Task{Zoo.GenericUserInterface.Models.Overridings.SelectListItemData{`0}}})">
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilderForCollectionType`1.SetAutoCompleteFor``1">
             <summary>
             Установить список с автоподсказами для свойства данного объекта
             </summary>
-            <param name="dataPopulator"></param>
             <returns></returns>
         </member>
         <member name="T:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder">

@@ -17,12 +17,15 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
     /// <typeparam name="TProp"></typeparam>
     public class GenericUserInterfaceBlockBuilder<TProp> : IGenericInterfaceBuilder
     {
-        IGenericInterfaceBuilder InterfaceBuilder { get; }
+        /// <summary>
+        /// Построитель интерфейса
+        /// </summary>
+        protected IGenericInterfaceBuilder InterfaceBuilder { get; }
 
         /// <summary>
         /// построитель документации
         /// </summary>
-        protected CrocoTypeDescriptionBuilder Builder { get; }
+        protected CrocoTypeDescriptionBuilder DocsBuilder { get; }
         
         /// <summary>
         /// Редактируемый блок
@@ -48,9 +51,9 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         internal GenericUserInterfaceBlockBuilder(IGenericInterfaceBuilder interfaceBuilder, CrocoTypeDescriptionBuilder builder, UserInterfaceBlock block)
         {
             InterfaceBuilder = interfaceBuilder;
-            Builder = builder;
+            DocsBuilder = builder;
             Block = block;
-            DescribedType = Builder.GetTypeDescriptionResult(typeof(TProp));
+            DescribedType = DocsBuilder.GetTypeDescriptionResult(typeof(TProp));
         }
 
         /// <summary>
@@ -107,7 +110,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
                 throw new ArgumentNullException(nameof(selectListItems));
             }
 
-            var mainDoc = Builder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
+            var mainDoc = DocsBuilder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
             if (mainDoc.IsEnumeration)
             {
                 throw new InvalidOperationException(string.Format(ExceptionTexts.CantImplementSetDropListNameToEnumPropertyFormat, Block.PropertyName));

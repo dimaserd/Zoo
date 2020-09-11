@@ -46,5 +46,10 @@ namespace Zoo.GenericUserInterface.Models
         /// Вложенный интерфейс
         /// </summary>
         public GenericInterfaceModel InnerGenericInterface { get; set; }
+
+        /// <summary>
+        /// Данные для построения автокомплита
+        /// </summary>
+        public AutoCompleteData AutoCompleteData { get; set; }
     }
 }

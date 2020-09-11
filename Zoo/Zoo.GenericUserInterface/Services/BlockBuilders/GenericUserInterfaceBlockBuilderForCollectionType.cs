@@ -1,7 +1,6 @@
 ﻿using Croco.Core.Documentation.Services;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
@@ -61,9 +60,8 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// <summary>
         /// Установить список с автоподсказами для свойства данного объекта
         /// </summary>
-        /// <param name="dataProvider"></param>
         /// <returns></returns>
-        public GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetAutoCompleteFor<TDataProvider>(DataProviderForAutoCompletion<TItem> dataProvider) where TDataProvider : DataProviderForAutoCompletion<TItem>
+        public GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetAutoCompleteFor<TDataProvider>() where TDataProvider : DataProviderForAutoCompletion<TItem>
         {
             var mainDesc = DescribedType.GetMainTypeDescription();
             if (mainDesc.IsEnumerable && !DescribedType.GetTypeDescription(mainDesc.EnumeratedDiplayFullTypeName).IsPrimitive)
@@ -75,9 +73,11 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             }
 
 
-
-            //TODO Сделать логику
-            
+            Block.InterfaceType = UserInterfaceType.AutoCompleteForMultiple;
+            Block.AutoCompleteData = new AutoCompleteData
+            {
+                DataProviderTypeFullName = typeof(TDataProvider).FullName
+            };
 
             return this;
         }
