@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Tests
@@ -19,7 +20,7 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void Test()
         {
-            var descr = new GenericUserInterfaceModelBuilder<ModelWithLabel>().Result;
+            var descr = new GenericUserInterfaceModelBuilder<ModelWithLabel>(GenericUserInterfaceBag.CreateDefault()).Result;
 
             Assert.AreEqual(SomeValue, descr.Interface.Blocks.First().LabelText);
         }

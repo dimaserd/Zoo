@@ -5,10 +5,14 @@ using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Models.Overridings
 {
+    /// <summary>
+    /// Построитель портфеля обобщенных пользовательских интерфейсов
+    /// </summary>
     public class GenericUserInterfaceBagBuilder
     {
         GenericInterfaceOptions InterfaceOptions { get; set; }
         readonly Dictionary<Type, Type> InterfaceOverriders = new Dictionary<Type, Type>();
+        readonly Dictionary<string, Type> DataProviders = new Dictionary<string, Type>();
         IServiceCollection ServiceCollection { get; }
 
         /// <summary>
@@ -71,9 +75,16 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// <returns></returns>
         public GenericUserInterfaceBagBuilder AddDataProvider<TDataProvider, TItem>() where TDataProvider : DataProviderForAutoCompletion<TItem>
         {
+            var type = typeof(TDataProvider);
+            DataProviders.Add(type.FullName, type);
             ServiceCollection.AddTransient<TDataProvider>();
             
             return this;
+        }
+
+        internal bool HasDataProvider<TDataProvider, TItem>()
+        {
+            return DataProviders.ContainsKey(typeof(TDataProvider).FullName);
         }
 
         /// <summary>
@@ -89,6 +100,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
             ServiceCollection.AddSingleton(InterfaceOptions);
             ServiceCollection.AddSingleton(new GenericUserInterfaceBagOptions 
             {
+                DataProviders = DataProviders,
                 InterfaceOverriders = InterfaceOverriders
             });
             ServiceCollection.AddSingleton<GenericUserInterfaceBag>();

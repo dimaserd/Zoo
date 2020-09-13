@@ -1,10 +1,8 @@
 ﻿using Croco.Core.Documentation.Services;
 using Croco.Core.Utils;
 using System;
-using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
-using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services
@@ -12,7 +10,7 @@ namespace Zoo.GenericUserInterface.Services
     /// <summary>
     /// Построитель обобщенного пользовательского интерфейса
     /// </summary>
-    public class GenericUserInterfaceModelBuilder : IGenericInterfaceBuilder
+    public class GenericUserInterfaceModelBuilder
     {
         /// <inheritdoc />
         public GenerateGenericUserInterfaceModel Result { get; }

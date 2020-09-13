@@ -8,7 +8,6 @@ using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Models.Overridings
 {
-
     /// <summary>
     /// Портфель из пользовательских интерфейсов для типов и прочего добра необходимого для
     /// его построения
@@ -18,11 +17,21 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         IServiceProvider ServiceProvider { get; }
 
         Dictionary<Type, Type> InterfaceOverriders { get; }
+        Dictionary<string, Type> DataProviders { get; }
 
         readonly Dictionary<string, GenerateGenericUserInterfaceModel> ComputedInterfaces = new Dictionary<string, GenerateGenericUserInterfaceModel>();
-        readonly Dictionary<Type, DataProvider> ComputedDataProviders = new Dictionary<Type, DataProvider>();
         
-        GenericInterfaceOptions Options { get; }
+        public GenericInterfaceOptions Options { get; }
+
+        public static GenericUserInterfaceBag CreateDefault()
+        {
+            var serviceProvider = new ServiceCollection().BuildServiceProvider();
+            return new GenericUserInterfaceBag(serviceProvider, new GenericUserInterfaceBagOptions 
+            {
+                DataProviders = new Dictionary<string, Type>(),
+                InterfaceOverriders = new Dictionary<Type, Type>()
+            }, GenericInterfaceOptions.Default());
+        }
 
         /// <summary>
         /// Конструктор
@@ -33,26 +42,29 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         public GenericUserInterfaceBag(IServiceProvider serviceProvider, GenericUserInterfaceBagOptions bagOptions, GenericInterfaceOptions options)
         {
             InterfaceOverriders = bagOptions.InterfaceOverriders;
+            DataProviders = bagOptions.DataProviders;
             ServiceProvider = serviceProvider;
             Options = options;
         }
 
         /// <summary>
-        /// Получить провайдера данных
+        /// Получить результат выполнения функции с данными по имени провайдера
         /// </summary>
-        /// <typeparam name="TDataProvider"></typeparam>
-        /// <typeparam name="TItem"></typeparam>
+        /// <param name="input"></param>
+        /// <param name="providerTypeFullName"></param>
         /// <returns></returns>
-        public TDataProvider GetDataProvider<TDataProvider, TItem>() 
-            where TDataProvider : IDataProviderForAutoCompletion<TItem>
+        public Task<AutoCompleteSuggestion[]> CallAutoCompleteDataProvider(string input, string providerTypeFullName)
         {
-            var key = typeof(TDataProvider);
-            if (ComputedDataProviders.ContainsKey(key))
+            if (DataProviders.ContainsKey(providerTypeFullName))
             {
-                throw new Exception("Провайдер данных не зарегистрирован");
+                throw new Exception("Провайдер данных не найден по полному названию типа");
             }
 
-            return (TDataProvider)ServiceProvider.GetRequiredService(key);
+            var typeOfDataProvider = DataProviders[providerTypeFullName];
+
+            var provider = ServiceProvider.GetRequiredService(typeOfDataProvider) as IDataProviderForAutoCompletion;
+
+            return provider.GetSuggestionsData(input);
         }
 
         /// <summary>

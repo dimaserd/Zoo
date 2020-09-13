@@ -3,8 +3,8 @@ using Zoo.GenericUserInterface.Models.Overridings;
 
 namespace Zoo.GenericUserInterface.Abstractions
 {
-    public interface IDataProviderForAutoCompletion<TItem>
+    internal interface IDataProviderForAutoCompletion
     {
-        Task<AutoCompleteSuggestionData<TItem>[]> GetData(string typedText);
+        Task<AutoCompleteSuggestion[]> GetSuggestionsData(string typedText);
     }
 }

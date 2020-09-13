@@ -61,17 +61,17 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// Установить список с автоподсказами для свойства данного объекта
         /// </summary>
         /// <returns></returns>
-        public GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetAutoCompleteFor<TDataProvider>() where TDataProvider : DataProviderForAutoCompletion<TItem>
+        public GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetAutoCompleteFor<TDataProvider>()
+            where TDataProvider : DataProviderForAutoCompletion<TItem>
         {
             var mainDesc = DescribedType.GetMainTypeDescription();
             if (mainDesc.IsEnumerable && !DescribedType.GetTypeDescription(mainDesc.EnumeratedDiplayFullTypeName).IsPrimitive)
             {
                 throw new InvalidOperationException(
                     $"Вы не можете установить для свойства {Block.PropertyName} тип блока 'Автозаполнение'. " +
-                    "Так как у данное свойство является массивом из непримитивов. " +
+                    "Так как данное свойство является массивом из непримитивов. " +
                     "Необходим тип, который будет являтся примитивом или массивом из примитивов.");
             }
-
 
             Block.InterfaceType = UserInterfaceType.AutoCompleteForMultiple;
             Block.AutoCompleteData = new AutoCompleteData

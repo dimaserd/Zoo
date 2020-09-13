@@ -32,7 +32,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
                 Type = InterfaceType,
                 OverrideFunction = (bag, model) =>
                 {
-                    var builder = new GenericUserInterfaceModelBuilder<T>(model);
+                    var builder = new GenericUserInterfaceModelBuilder<T>(model, bag);
 
                     return OverrideInterfaceAsync(bag, builder);
                 }

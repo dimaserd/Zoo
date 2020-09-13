@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
+using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Tests
@@ -17,7 +18,7 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void Test()
         {
-            var interfaceModel = new GenericUserInterfaceModelBuilder<TypeWithInteger>().Result;
+            var interfaceModel = new GenericUserInterfaceModelBuilder<TypeWithInteger>(GenericUserInterfaceBag.CreateDefault()).Result;
 
             var prop1Block = interfaceModel.Interface.Blocks.First();
 

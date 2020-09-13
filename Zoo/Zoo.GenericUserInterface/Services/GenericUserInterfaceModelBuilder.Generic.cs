@@ -1,12 +1,11 @@
 ﻿using Croco.Core.Utils;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
-using Zoo.GenericUserInterface.Resources;
-using Zoo.GenericUserInterface.Services.BlockBuilders;
+using Zoo.GenericUserInterface.Models.Overridings;
 
 namespace Zoo.GenericUserInterface.Services
 {
@@ -14,38 +13,45 @@ namespace Zoo.GenericUserInterface.Services
     /// Вспомогательный класс для построения обобщенного интерфейса
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
-    public class GenericUserInterfaceModelBuilder<TModel> : GenericUserInterfaceModelBuilder where TModel : class
+    public class GenericUserInterfaceModelBuilder<TModel> : GenericUserInterfaceModelBuilder, IGenericInterfaceBuilder where TModel : class
     {
+        /// <inheritdoc />
+        public GenericUserInterfaceBag Bag { get; }
         #region Конструкторы
         /// <summary>
         /// Конструктор
         /// </summary>
-        public GenericUserInterfaceModelBuilder() : base(typeof(TModel))
+        public GenericUserInterfaceModelBuilder(GenericUserInterfaceBag bag) : base(typeof(TModel))
         {
+            Bag = bag;
         }
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        internal GenericUserInterfaceModelBuilder(GenerateGenericUserInterfaceModel model) : base(model)
+        internal GenericUserInterfaceModelBuilder(GenerateGenericUserInterfaceModel model, GenericUserInterfaceBag bag) : base(model)
         {
+            Bag = bag;
         }
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="opts"></param>
-        public GenericUserInterfaceModelBuilder(GenericInterfaceOptions opts) : base(typeof(TModel), null, opts)
+        /// <param name="bag"></param>
+        public GenericUserInterfaceModelBuilder(GenericInterfaceOptions opts, GenericUserInterfaceBag bag) : base(typeof(TModel), null, opts)
         {
+            Bag = bag;
         }
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="model"></param>
-        /// <param name="opts"></param>
-        public GenericUserInterfaceModelBuilder(TModel model, GenericInterfaceOptions opts) : base(typeof(TModel), Tool.JsonConverter.Serialize(model), opts)
+        /// <param name="bag"></param>
+        public GenericUserInterfaceModelBuilder(TModel model, GenericUserInterfaceBag bag) : base(typeof(TModel), Tool.JsonConverter.Serialize(model), bag.Options)
         {
+            Bag = bag;
         }
         #endregion
 
@@ -128,75 +134,6 @@ namespace Zoo.GenericUserInterface.Services
             }
 
             return block;
-        }
-    }
-
-    /// <summary>
-    /// Расширения
-    /// </summary>
-    public static class GenericUserInterfaceBuilderExtensions
-    {
-        /// <summary>
-        /// Получить конфигуратор для блока, который является колекцией
-        /// </summary>
-        /// <typeparam name="TModel"></typeparam>
-        /// <typeparam name="TItem"></typeparam>
-        /// <param name="builder"></param>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        public static GenericUserInterfaceBlockBuilderForCollectionType<TItem> GetBlockBuilderForCollection<TModel, TItem>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TItem[]>> expression) where TModel : class
-        {
-            CheckItem<TItem>();
-            return new GenericUserInterfaceBlockBuilderForCollectionType<TItem>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
-        }
-
-        /// <summary>
-        /// Получить конфигуратор для блока, который является колекцией
-        /// </summary>
-        /// <typeparam name="TModel"></typeparam>
-        /// <typeparam name="TItem"></typeparam>
-        /// <param name="builder"></param>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        public static GenericUserInterfaceBlockBuilderForCollectionType<TItem> GetBlockBuilderForCollection<TModel, TItem>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, IEnumerable<TItem>>> expression) where TModel : class
-        {
-            CheckItem<TItem>();
-            return new GenericUserInterfaceBlockBuilderForCollectionType<TItem>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
-        }
-
-        /// <summary>
-        /// Получить конфигуратор для блока, который является колекцией
-        /// </summary>
-        /// <typeparam name="TModel"></typeparam>
-        /// <typeparam name="TItem"></typeparam>
-        /// <param name="builder"></param>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        public static GenericUserInterfaceBlockBuilderForCollectionType<TItem> GetBlockBuilderForCollection<TModel, TItem>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, List<TItem>>> expression) where TModel : class
-        {
-            CheckItem<TItem>();
-            return new GenericUserInterfaceBlockBuilderForCollectionType<TItem>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
-        }
-
-        /// <summary>
-        /// Получить конфигуратор для блока
-        /// </summary>
-        /// <typeparam name="TModel"></typeparam>
-        /// <typeparam name="TProp"></typeparam>
-        /// <param name="builder"></param>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        public static GenericUserInterfaceBlockBuilder<TProp> GetBlockBuilder<TModel, TProp>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TProp>> expression) where TModel : class
-        {
-            return new GenericUserInterfaceBlockBuilder<TProp>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
-        }
-
-        private static void CheckItem<TItem>()
-        {
-            if (typeof(TItem) == typeof(char))
-            {
-                throw new InvalidOperationException(ExceptionTexts.DontUseGetBlockBuilderForCollectionOnCollectionsOfChars);
-            }
         }
     }
 }

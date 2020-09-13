@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
+using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Tests.EnumerbleProps
@@ -14,7 +15,7 @@ namespace Zoo.GenericUserInterface.Tests.EnumerbleProps
         [Test]
         public void TestClassWithStringArrayProp()
         {
-            var result = new GenericUserInterfaceModelBuilder<ClassWithStringArrayProp>().Result;
+            var result = new GenericUserInterfaceModelBuilder<ClassWithStringArrayProp>(GenericUserInterfaceBag.CreateDefault()).Result;
 
             var block = result.Interface.Blocks.First();
 
@@ -30,7 +31,7 @@ namespace Zoo.GenericUserInterface.Tests.EnumerbleProps
         [Test]
         public void TestClassWithIntArrayProp()
         {
-            var result = new GenericUserInterfaceModelBuilder<ClassWithIntProp>().Result;
+            var result = new GenericUserInterfaceModelBuilder<ClassWithIntProp>(GenericUserInterfaceBag.CreateDefault()).Result;
 
             var block = result.Interface.Blocks.First();
 
@@ -46,7 +47,7 @@ namespace Zoo.GenericUserInterface.Tests.EnumerbleProps
         [Test]
         public void TestClassWithByteArrayProp()
         {
-            var result = new GenericUserInterfaceModelBuilder<ClassWithByteProp>().Result;
+            var result = new GenericUserInterfaceModelBuilder<ClassWithByteProp>(GenericUserInterfaceBag.CreateDefault()).Result;
 
             var block = result.Interface.Blocks.First();
 
@@ -68,7 +69,7 @@ namespace Zoo.GenericUserInterface.Tests.EnumerbleProps
         [Test]
         public void TestClassOnComplexArrayProp()
         {
-            var result = new GenericUserInterfaceModelBuilder<ClassWithComplexArrayProp>().Result;
+            var result = new GenericUserInterfaceModelBuilder<ClassWithComplexArrayProp>(GenericUserInterfaceBag.CreateDefault()).Result;
 
             Assert.AreEqual(1, result.Interface.Blocks.Count);
 

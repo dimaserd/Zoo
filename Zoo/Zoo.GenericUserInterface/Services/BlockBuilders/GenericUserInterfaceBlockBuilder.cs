@@ -37,10 +37,11 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// </summary>
         protected CrocoTypeDescriptionResult DescribedType { get; set; }
 
-        /// <summary>
-        /// Результат - модель для построения пользовательского интерфейса
-        /// </summary>
+        /// <inheritdoc />
         public GenerateGenericUserInterfaceModel Result => InterfaceBuilder.Result;
+
+        /// <inheritdoc />
+        public GenericUserInterfaceBag Bag => InterfaceBuilder.Bag;
 
         /// <summary>
         /// 

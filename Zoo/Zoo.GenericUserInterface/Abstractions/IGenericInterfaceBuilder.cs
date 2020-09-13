@@ -1,4 +1,5 @@
 ﻿using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Models.Overridings;
 
 namespace Zoo.GenericUserInterface.Abstractions
 {
@@ -11,5 +12,10 @@ namespace Zoo.GenericUserInterface.Abstractions
         /// Результат - модель для построения пользовательского интерфейса
         /// </summary>
         GenerateGenericUserInterfaceModel Result { get; }
+
+        /// <summary>
+        /// Портфель из логики переопределений интерфейсов
+        /// </summary>
+        GenericUserInterfaceBag Bag { get; }
     }
 }

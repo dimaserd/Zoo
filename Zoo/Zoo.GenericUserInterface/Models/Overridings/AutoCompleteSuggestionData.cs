@@ -4,8 +4,18 @@ namespace Zoo.GenericUserInterface.Models.Overridings
 {
     public class AutoCompleteSuggestionData<TItem>
     {
+        /// <summary>
+        /// Текст который будет показан
+        /// </summary>
         public string Text { get; set; }
+        /// <summary>
+        /// Дополнительные данные
+        /// </summary>
         public string DataJson { get; set; }
+
+        /// <summary>
+        /// Значение
+        /// </summary>
         public TItem Value { get; set; }
 
         internal AutoCompleteSuggestion ToAutoCompleteSuggestion()

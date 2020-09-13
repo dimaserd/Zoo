@@ -17,7 +17,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
         [Test]
         public void Test()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>();
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>(GenericUserInterfaceBag.CreateDefault());
 
             var list = new List<SelectListItemData<bool?>>
             {
@@ -47,7 +47,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
         [Test]
         public void ToEnumProperty_ShouldThrowException()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>();
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>(GenericUserInterfaceBag.CreateDefault());
 
             var ex = Assert.Throws<InvalidOperationException>(() => builder.GetBlockBuilder(x => x.EnumProp).SetDropDownList(new List<SelectListItemData<SomeEnumType>>()));
 
