@@ -2,6 +2,10 @@
 
 namespace Zoo.GenericUserInterface.Models.Overridings
 {
+    /// <summary>
+    /// Обобщенная модель данных для автокомлита
+    /// </summary>
+    /// <typeparam name="TItem"></typeparam>
     public class AutoCompleteSuggestionData<TItem>
     {
         /// <summary>

@@ -183,6 +183,32 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestion">
+            <summary>
+            Модель данных для автокомплита
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestion.Text">
+            <summary>
+            Текст, который будет показан
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestion.DataJson">
+            <summary>
+            Дополнительные данные
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestion.Value">
+            <summary>
+            Сериализованное значение
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestionData`1">
+            <summary>
+            Обобщенная модель данных для автокомлита
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestionData`1.Text">
             <summary>
             Текст который будет показан
@@ -197,6 +223,26 @@
             <summary>
             Значение
             </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.DataProviderForAutoCompletion`1">
+            <summary>
+            Провайдер данных для автокомплита
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.DataProviderForAutoCompletion`1.GetData(System.String)">
+            <summary>
+            Функция для получения данных
+            </summary>
+            <param name="typedText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.DataProviderForAutoCompletion`1.GetSuggestionsData(System.String)">
+            <summary>
+            Реализация с перекладкой. Используется внутри библиотекой
+            </summary>
+            <param name="typedText"></param>
+            <returns></returns>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericInterfaceOverrider`1">
             <summary>
@@ -223,6 +269,17 @@
             Портфель из пользовательских интерфейсов для типов и прочего добра необходимого для
             его построения
             </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.Options">
+            <summary>
+            Опции для создания интерфейса
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.CreateDefault">
+            <summary>
+            Создать дефолтный пустой портфель интерфейсов
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.#ctor(System.IServiceProvider,Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
             <summary>
@@ -336,6 +393,21 @@
         <member name="F:Zoo.GenericUserInterface.Models.Overridings.InterfaceOverriderType.Static">
             <summary>
             Переопределение для интерфейса статично и высчитывается ровно один раз
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.Overrider">
+            <summary>
+            Переопределитель интерфейсов
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.OverrideFunction">
+            <summary>
+            Функция для переопределения
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.Type">
+            <summary>
+            Тип высчитывания переопределителя интерфейса
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1">

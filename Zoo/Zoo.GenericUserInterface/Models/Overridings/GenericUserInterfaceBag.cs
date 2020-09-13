@@ -21,8 +21,15 @@ namespace Zoo.GenericUserInterface.Models.Overridings
 
         readonly Dictionary<string, GenerateGenericUserInterfaceModel> ComputedInterfaces = new Dictionary<string, GenerateGenericUserInterfaceModel>();
         
+        /// <summary>
+        /// Опции для создания интерфейса
+        /// </summary>
         public GenericInterfaceOptions Options { get; }
 
+        /// <summary>
+        /// Создать дефолтный пустой портфель интерфейсов
+        /// </summary>
+        /// <returns></returns>
         public static GenericUserInterfaceBag CreateDefault()
         {
             var serviceProvider = new ServiceCollection().BuildServiceProvider();
@@ -55,7 +62,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// <returns></returns>
         public Task<AutoCompleteSuggestion[]> CallAutoCompleteDataProvider(string input, string providerTypeFullName)
         {
-            if (DataProviders.ContainsKey(providerTypeFullName))
+            if (!DataProviders.ContainsKey(providerTypeFullName))
             {
                 throw new Exception("Провайдер данных не найден по полному названию типа");
             }
