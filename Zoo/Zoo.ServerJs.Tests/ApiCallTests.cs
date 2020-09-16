@@ -1,9 +1,8 @@
 using Croco.Core.Abstractions.Models;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using System.Collections.Generic;
 using System.Linq;
 using Zoo.ServerJs.Abstractions;
-using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Services;
 using Zoo.ServerJs.Statics;
@@ -32,27 +31,20 @@ namespace Zoo.ServerJs.Tests
             return new int[] { 1, 2, 3, 4 };
         }
 
-        public JsWorkerDocumentation JsWorkerDocs()
+        public JsWorkerDocumentation JsWorkerDocs(JsWorkerBuilder builder)
         {
-            return new JsWorkerDocumentation
-            {
-                WorkerName = WorkerName,
-                Description = "",
-                Methods = new List<JsWorkerMethodDocs>
+            return builder.SetWorkerName(WorkerName)
+                .SetDescription("")
+                .AddMethod<ProductInProductGroupIdModel, BaseApiResponse>(AddProductToGroup, new JsWorkerMethodDocsOptions
                 {
-                    JsWorkerMethodDocs.GetMethod(new JsWorkerMethodDocsOptions
-                    {
-                        MethodName = "AddProductToGroup",
-                        Description = "Добавить товар в группу товаров",
-                    }, new JsFunc<ProductInProductGroupIdModel, BaseApiResponse>(AddProductToGroup)),
-
-                    JsWorkerMethodDocs.GetMethod(new JsWorkerMethodDocsOptions
-                    {
-                        MethodName = GetArrayName,
-                        Description = "Получить массив"
-                    }, new JsFunc<int[]>(GetArray))
-                }
-            };
+                    MethodName = "AddProductToGroup",
+                    Description = "Добавить товар в группу товаров",
+                })
+                .AddMethod(GetArray, new JsWorkerMethodDocsOptions
+                {
+                    MethodName = GetArrayName,
+                    Description = "Получить массив"
+                }).Build();
         }
     }
 
@@ -61,14 +53,20 @@ namespace Zoo.ServerJs.Tests
         [Test]
         public void Test1()
         {
+            var serviceCollcetion = new ServiceCollection();
+
             var script = $"var t = JSON.parse( api.Call(\"{ProductGroupJsWorker.WorkerName}\"," + " \"AddProductToGroup\", { ProductGroupId: \"d8c8cf9b-1d9b-4199-a85e-615edd64b4d7\", ProductId: 1 }) );";
 
             script += "\n console.log('Result', t)";
 
-            var executor = new JsExecutorBuilder().AddJsWorker(new ProductGroupJsWorker()).BuildJsExecutor();
+            new JsExecutorBuilder(serviceCollcetion)
+                .AddJsWorker(builder => new ProductGroupJsWorker().JsWorkerDocs(builder))
+                .Build();
 
-            var result = executor.RunScriptDetaiiled(script);
+            var srvProvider = serviceCollcetion.BuildServiceProvider();
 
+            var result = srvProvider.GetRequiredService<JsExecutor>().RunScriptDetaiiled(script);
+            Assert.IsTrue(result.IsSucceeded);
             Assert.IsTrue(result.ResponseObject.Logs.Count == 1);
 
             var log = result.ResponseObject.Logs.First();
@@ -89,7 +87,13 @@ namespace Zoo.ServerJs.Tests
             
             script += "\n console.log('Result', i, t[i]); \n}";
 
-            var executor = new JsExecutorBuilder().AddJsWorker(new ProductGroupJsWorker()).BuildJsExecutor();
+            var serviceCollection = new ServiceCollection();
+
+            new JsExecutorBuilder(serviceCollection)
+                .AddJsWorker(builder => new ProductGroupJsWorker().JsWorkerDocs(builder))
+                .Build();
+
+            var executor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
 
             var result = executor.RunScriptDetaiiled(script);
 

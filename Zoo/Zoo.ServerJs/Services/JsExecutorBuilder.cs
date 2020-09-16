@@ -1,8 +1,11 @@
 ﻿using Jint;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
+using Zoo.ServerJs.Models.Method;
+using Zoo.ServerJs.Resources;
 
 namespace Zoo.ServerJs.Services
 {
@@ -12,7 +15,18 @@ namespace Zoo.ServerJs.Services
     public class JsExecutorBuilder
     {
         readonly Dictionary<string, ExternalJsComponent> _components = new Dictionary<string, ExternalJsComponent>();
-        readonly Dictionary<string, IJsWorker> _workers = new Dictionary<string, IJsWorker>();
+        readonly Dictionary<string, JsWorkerDocumentation> _jsWorkers = new Dictionary<string, JsWorkerDocumentation>();
+
+        internal IServiceCollection ServiceCollection { get; }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="serviceCollection"></param>
+        public JsExecutorBuilder(IServiceCollection serviceCollection)
+        {
+            ServiceCollection = serviceCollection;
+        }
 
         /// <summary>
         /// Добавить внешние компоненты
@@ -47,46 +61,37 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Добавить нового рабочего
         /// </summary>
-        /// <param name="jsWorker"></param>
+        /// <param name="jsWorkerBuilderFunc"></param>
         /// <returns></returns>
-        public JsExecutorBuilder AddJsWorker(IJsWorker jsWorker)
+        public JsExecutorBuilder AddJsWorker(Func<JsWorkerBuilder, JsWorkerDocumentation> jsWorkerBuilderFunc)
         {
-            var docs = jsWorker.JsWorkerDocs();
-            if (_workers.ContainsKey(docs.WorkerName))
+            var jsWorkerBuilder = new JsWorkerBuilder(this);
+
+            var jsWorker = jsWorkerBuilderFunc(jsWorkerBuilder);
+
+            jsWorker.Validate();
+            if (_jsWorkers.ContainsKey(jsWorker.WorkerName))
             {
-                throw new Exception($"Рабочий класс с названием '{docs.WorkerName}' уже зарегистрирован");
+                throw new InvalidOperationException(string.Format(ExceptionTexts.JsWorkerWithNameAlreadyRegisteredFormat, jsWorker.WorkerName));
             }
 
-            _workers.Add(docs.WorkerName, jsWorker);
+            _jsWorkers.Add(jsWorker.WorkerName, jsWorker);
             return this;
         }
 
         /// <summary>
-        /// Добавить новых рабочих
+        /// Зарегистрировать класс <see cref="JsExecutor"/> в контейнере зависимостей
         /// </summary>
-        /// <param name="jsWorkers"></param>
-        /// <returns></returns>
-        public JsExecutorBuilder AddJsWorkers(IEnumerable<IJsWorker> jsWorkers)
+        /// <param name="action"></param>
+        public void Build(Action<Engine> action = null)
         {
-            foreach(var jsWorker in jsWorkers)
-            {
-                AddJsWorker(jsWorker);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Построить исполнителя скриптов
-        /// </summary>
-        /// <returns></returns>
-        public JsExecutor BuildJsExecutor(Action<Engine> action = null)
-        {
-            return new JsExecutor(new JsExecutorProperties
+            ServiceCollection.AddSingleton(new JsExecutorProperties
             {
                 EngineAction = action,
                 ExternalComponents = _components,
-                JsWorkers = _workers
-            }); ;
+                JsWorkers = _jsWorkers
+            });
+            ServiceCollection.AddSingleton<JsExecutor>();
         }
     }
 }

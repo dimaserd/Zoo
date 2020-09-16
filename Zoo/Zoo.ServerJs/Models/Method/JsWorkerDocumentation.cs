@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Zoo.ServerJs.Models.OpenApi;
+using Zoo.ServerJs.Resources;
 
 namespace Zoo.ServerJs.Models.Method
 {
@@ -23,33 +22,36 @@ namespace Zoo.ServerJs.Models.Method
         /// <summary>
         /// Методы обработчика
         /// </summary>
-        public List<JsWorkerMethodDocs> Methods { get; set; }
-
-        /// <summary>
-        /// Получить модель для построения документации
-        /// </summary>
-        /// <returns></returns>
-        public JsOpenApiWorkerDocumentation GetOpenApiDocumentation()
-        {
-            return new JsOpenApiWorkerDocumentation(this);
-        }
+        public Dictionary<string, JsWorkerMethodDocs> Methods { get; set; } = new Dictionary<string, JsWorkerMethodDocs>();
 
         /// <summary>
         /// Обработка вызова метода
         /// </summary>
         /// <param name="methodName"></param>
+        /// <param name="serviceProvider"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public JsWorkerMethodResult HandleCall(string methodName, JsWorkerMethodCallParameters parameters)
+        internal JsWorkerMethodResult HandleCall(string methodName, IServiceProvider serviceProvider, JsWorkerMethodCallParameters parameters)
         {
-            var method = Methods.FirstOrDefault(x => x.MethodName == methodName);
-
-            if (method == null)
+            if (!Methods.ContainsKey(methodName))
             {
-                throw new ApplicationException($"Метод с названием '{methodName}' не существует в группе методов класса '{WorkerName}'");
+                throw new InvalidOperationException(string.Format(ExceptionTexts.MethodWithNameAlreadyExistsInWorkerFormat, methodName, WorkerName));
             }
 
-            return method.Method.HandleCall(parameters);
+            return Methods[methodName].Method.HandleCall(parameters, serviceProvider);
+        }
+
+        internal void Validate()
+        {
+            if (string.IsNullOrWhiteSpace(WorkerName))
+            {
+                throw new InvalidOperationException(ExceptionTexts.WorkerNameIsRequired);
+            }
+
+            if (Methods.Count == 0)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.NoMethodsInWorkerFormat, WorkerName));
+            }
         }
     }
 }

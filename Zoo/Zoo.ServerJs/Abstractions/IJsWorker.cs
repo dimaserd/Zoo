@@ -1,4 +1,5 @@
 ﻿using Zoo.ServerJs.Models.Method;
+using Zoo.ServerJs.Services;
 
 namespace Zoo.ServerJs.Abstractions
 {
@@ -8,9 +9,10 @@ namespace Zoo.ServerJs.Abstractions
     public interface IJsWorker
     {
         /// <summary>
-        /// Получить документацию
+        /// Получить локументацию
         /// </summary>
+        /// <param name="builder"></param>
         /// <returns></returns>
-        JsWorkerDocumentation JsWorkerDocs();
+        JsWorkerDocumentation JsWorkerDocs(JsWorkerBuilder builder);
     }
 }

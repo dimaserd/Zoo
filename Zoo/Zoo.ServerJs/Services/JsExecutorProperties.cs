@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Jint;
-using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
+using Zoo.ServerJs.Models.Method;
 
 namespace Zoo.ServerJs.Services
 {
@@ -19,7 +19,7 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Список обработчиков
         /// </summary>
-        public Dictionary<string, IJsWorker> JsWorkers { get; set; } = new Dictionary<string ,IJsWorker>();
+        public Dictionary<string, JsWorkerDocumentation> JsWorkers { get; set; } = new Dictionary<string, JsWorkerDocumentation>();
 
         /// <summary>
         /// Внешние компоненты

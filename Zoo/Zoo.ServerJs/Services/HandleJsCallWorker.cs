@@ -1,8 +1,6 @@
 ﻿using Jint;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
@@ -18,16 +16,19 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Конструктор
         /// </summary>
+        /// <param name="serviceProvider"></param>
         /// <param name="workers"></param>
         /// <param name="externalComponents"></param>
-        public HandleJsCallWorker(IReadOnlyCollection<IJsWorker> workers, IReadOnlyCollection<ExternalJsComponent> externalComponents)
+        internal HandleJsCallWorker(IServiceProvider serviceProvider, Dictionary<string, JsWorkerDocumentation> workers, Dictionary<string, ExternalJsComponent> externalComponents)
         {
-            Workers = workers.Select(x => x.JsWorkerDocs()).ToList();
-            ExternalComponents = externalComponents ?? new List<ExternalJsComponent>();
+            ServiceProvider = serviceProvider;
+            Workers = workers;
+            ExternalComponents = externalComponents;
         }
 
-        private IReadOnlyCollection<ExternalJsComponent> ExternalComponents { get; }
-        private IReadOnlyCollection<JsWorkerDocumentation> Workers { get; }
+        private Dictionary<string, ExternalJsComponent> ExternalComponents { get; }
+        private IServiceProvider ServiceProvider { get; }
+        private Dictionary<string, JsWorkerDocumentation> Workers { get; }
         
         /// <summary>
         /// Вызвать внутренний сервис, написанный на Js
@@ -37,14 +38,14 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodParams">Параметры метода</param>
         public string Call(string workerName, string method, params dynamic[] methodParams)
         {
-            var worker = Workers.FirstOrDefault(x => x.WorkerName == workerName);
-
-            if (worker == null)
+            if (!Workers.ContainsKey(workerName))
             {
-                throw new ArgumentNullException($"В системе нет зарегистрированного рабочего класса с именем '{workerName}'");
+                throw new InvalidOperationException($"В системе нет зарегистрированного рабочего класса с именем '{workerName}'");
             }
-            
-            var res = worker.HandleCall(method, new JsWorkerMethodCallParameters(methodParams)).Result;
+
+            var worker = Workers[workerName];
+
+            var res = worker.HandleCall(method, ServiceProvider, new JsWorkerMethodCallParameters(methodParams)).Result;
 
             return ZooSerializer.Serialize(res);
         }
@@ -93,12 +94,12 @@ namespace Zoo.ServerJs.Services
 
         private string CallExternalUnSafe(string componentName, string methodName, object methodPayLoad)
         {
-            var component = ExternalComponents.FirstOrDefault(x => x.ComponentName == componentName);
-
-            if (component == null)
+            if (!ExternalComponents.ContainsKey(componentName))
             {
-                throw new Exception($"Компонент не найден по указанному названию '{componentName}'");
+                throw new InvalidOperationException($"Компонент не найден по указанному названию '{componentName}'");
             }
+
+            var component = ExternalComponents[componentName];
 
             var uid = $"n{Guid.NewGuid()}".Replace("-", "_");
 

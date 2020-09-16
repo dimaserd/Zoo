@@ -17,7 +17,7 @@ namespace Zoo.ServerJs.Models.OpenApi
         {
             WorkerName = docs.WorkerName;
             Description = docs.Description;
-            Methods = docs.Methods.Select(x => new JsOpenApiWorkerMethodDocumentation(x)).ToList();
+            Methods = docs.Methods.Select(x => new JsOpenApiWorkerMethodDocumentation(x.Value)).ToList();
         }
 
         /// <summary>

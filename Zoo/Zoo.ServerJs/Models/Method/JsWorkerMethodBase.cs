@@ -10,16 +10,17 @@ namespace Zoo.ServerJs.Models.Method
         /// <summary>
         /// Ссылка на функцию
         /// </summary>
-        public Func<JsWorkerMethodCallParameters, JsWorkerMethodResult> FunctionLink { get; set; }
+        public Func<JsWorkerMethodCallParameters, IServiceProvider, JsWorkerMethodResult> FunctionLink { get; set; }
 
         /// <summary>
         /// Обработать вызов
         /// </summary>
         /// <param name="parameters"></param>
+        /// <param name="serviceProvider"></param>
         /// <returns></returns>
-        public JsWorkerMethodResult HandleCall(JsWorkerMethodCallParameters parameters)
+        public JsWorkerMethodResult HandleCall(JsWorkerMethodCallParameters parameters, IServiceProvider serviceProvider)
         {
-            return FunctionLink(parameters);
+            return FunctionLink(parameters, serviceProvider);
         }
     }
 }

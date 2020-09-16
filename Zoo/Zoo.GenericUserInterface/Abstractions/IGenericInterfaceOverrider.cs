@@ -2,7 +2,7 @@
 
 namespace Zoo.GenericUserInterface.Abstractions
 {
-    internal interface IGenericInterfaceOverrider
+    public interface IGenericInterfaceOverrider
     {
         Overrider GetOverrider();
     }

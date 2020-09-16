@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Models.Overridings
@@ -28,14 +30,14 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// Добавить переопределение для интерфейса
         /// </summary>
         /// <typeparam name="TOverrider"></typeparam>
-        /// <typeparam name="TModel"></typeparam>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddOverrider<TOverrider, TModel>() 
-            where TOverrider : GenericInterfaceOverrider<TModel>
-            where TModel : class
+        public GenericUserInterfaceBagBuilder AddOverrider<TOverrider>() where TOverrider : class, IGenericInterfaceOverrider
         {
-            AddOverriderInner<TOverrider, TModel>();
+            var type = typeof(TOverrider);
+
+            AddOverriderInner(type, GetFirstInnerGeneric(type));
             ServiceCollection.AddTransient<TOverrider>();
+
             return this;
         }
 
@@ -43,28 +45,15 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// Добавить переопределение для интерфейса
         /// </summary>
         /// <typeparam name="TOverrider"></typeparam>
-        /// <typeparam name="TModel"></typeparam>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddOverrider<TOverrider, TModel>(Func<IServiceProvider, TOverrider> providerFunc)
-            where TOverrider : GenericInterfaceOverrider<TModel>
-            where TModel : class
+        public GenericUserInterfaceBagBuilder AddOverrider<TOverrider>(Func<IServiceProvider, TOverrider> providerFunc) where TOverrider : class, IGenericInterfaceOverrider
         {
-            AddOverriderInner<TOverrider, TModel>();
+            var type = typeof(TOverrider);
+            
+            AddOverriderInner(type, GetFirstInnerGeneric(type));
             ServiceCollection.AddTransient(providerFunc);
+
             return this;
-        }
-
-        private void AddOverriderInner<TOverrider, TModel>()
-            where TOverrider : GenericInterfaceOverrider<TModel>
-            where TModel : class
-        {
-            var key = typeof(TModel);
-            if (InterfaceOverriders.ContainsKey(key))
-            {
-                throw new InvalidOperationException(string.Format(ExceptionTexts.OverridingForTypeIsAlreadySetFormat, key.FullName));
-            }
-
-            InterfaceOverriders.Add(key, typeof(TOverrider));
         }
 
         /// <summary>
@@ -80,11 +69,6 @@ namespace Zoo.GenericUserInterface.Models.Overridings
             ServiceCollection.AddTransient<TDataProvider>();
             
             return this;
-        }
-
-        internal bool HasDataProvider<TDataProvider, TItem>()
-        {
-            return DataProviders.ContainsKey(typeof(TDataProvider).FullName);
         }
 
         /// <summary>
@@ -104,6 +88,29 @@ namespace Zoo.GenericUserInterface.Models.Overridings
                 InterfaceOverriders = InterfaceOverriders
             });
             ServiceCollection.AddSingleton<GenericUserInterfaceBag>();
+        }
+
+        private void AddOverriderInner(Type overriderType, Type modelType)
+        {
+            if (InterfaceOverriders.ContainsKey(modelType))
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.OverridingForTypeIsAlreadySetFormat, modelType.FullName));
+            }
+
+            InterfaceOverriders.Add(modelType, overriderType);
+        }
+
+        private Type GetFirstInnerGeneric(Type type)
+        {
+            var baseType = type.BaseType;
+
+            if (!baseType.IsGenericType)
+            {
+                throw new InvalidOperationException("Базовый тип не является обобщенным");
+            }
+
+            return baseType.GenericTypeArguments
+                .First();
         }
     }
 }

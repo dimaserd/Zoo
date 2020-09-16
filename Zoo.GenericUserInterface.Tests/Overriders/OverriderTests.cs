@@ -49,8 +49,8 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var ex = Assert.Throws<InvalidOperationException>(() =>
             {
                 new GenericUserInterfaceBagBuilder(new ServiceCollection())
-                    .AddOverrider<SomeTypeOverrider, SomeTypeToOverride>()
-                    .AddOverrider<SomeTypeOverrider, SomeTypeToOverride>();
+                    .AddOverrider<SomeTypeOverrider>()
+                    .AddOverrider<SomeTypeOverrider>();
             });
 
             var expectedMes = string.Format(ExceptionTexts.OverridingForTypeIsAlreadySetFormat, typeof(SomeTypeToOverride).FullName);
@@ -66,7 +66,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var srv = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(srv)
-                .AddOverrider<SomeTypeOverrider, SomeTypeToOverride>(srv => new SomeTypeOverrider(labelText))
+                .AddOverrider<SomeTypeOverrider>(srv => new SomeTypeOverrider(labelText))
                 .Build();
 
             var provider = srv.BuildServiceProvider();

@@ -336,20 +336,18 @@
             </summary>
             <param name="serviceCollection"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddOverrider``2">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddOverrider``1">
             <summary>
             Добавить переопределение для интерфейса
             </summary>
             <typeparam name="TOverrider"></typeparam>
-            <typeparam name="TModel"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddOverrider``2(System.Func{System.IServiceProvider,``0})">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddOverrider``1(System.Func{System.IServiceProvider,``0})">
             <summary>
             Добавить переопределение для интерфейса
             </summary>
             <typeparam name="TOverrider"></typeparam>
-            <typeparam name="TModel"></typeparam>
             <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProvider``2">

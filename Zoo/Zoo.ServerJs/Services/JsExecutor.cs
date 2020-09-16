@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Croco.Core.Abstractions.Models;
 using Jint;
-using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
+using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Models.OpenApi;
 using Zoo.ServerJs.Statics;
 
@@ -16,12 +16,12 @@ namespace Zoo.ServerJs.Services
     /// </summary>
     public class JsExecutor
     {
-        private readonly Action<Engine> _engineProps;
-        
+        private readonly List<JsOpenApiWorkerDocumentation> _openApiDocs;
+
         /// <summary>
         /// Javascript обработчики
         /// </summary>
-        public Dictionary<string, IJsWorker> JsWorkers { get; }
+        public Dictionary<string, JsWorkerDocumentation> JsWorkers { get; }
 
         /// <summary>
         /// Внешние компоненты
@@ -36,17 +36,30 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="serviceProvider"></param>
         /// <param name="properties"></param>
-        public JsExecutor(JsExecutorProperties properties)
+        public JsExecutor(IServiceProvider serviceProvider, JsExecutorProperties properties)
         {
-            _engineProps = properties.EngineAction;
             JsWorkers = properties.JsWorkers;
             ExternalComponents = properties.ExternalComponents;
-            JsCallHandler = new HandleJsCallWorker(JsWorkers.Values.ToList(), ExternalComponents.Values.ToList());
-        }
-        
-        private Engine _engine;
 
+            _openApiDocs = JsWorkers.Select(x => x.Value).Select(x => new JsOpenApiWorkerDocumentation(x)).ToList();
+
+            JsCallHandler = new HandleJsCallWorker(serviceProvider, JsWorkers, ExternalComponents);
+            
+            var engine = new Engine()
+                .SetValue(JsConsts.ApiObjectName, JsCallHandler)
+                .SetValue("console", new
+                {
+                    log = new Action<object[]>(Log)
+                });
+
+            properties.EngineAction?.Invoke(engine);
+
+            Engine = engine;
+        }
+
+        
         #region Свойства
         
         private readonly List<JsLogggedVariables> Logs = new List<JsLogggedVariables>();
@@ -54,41 +67,17 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Движок JInt
         /// </summary>
-        public Engine Engine
-        {
-            get
-            {
-                if (_engine != null)
-                {
-                    return _engine;
-                }
+        public Engine Engine { get; }
 
-                _engine = new Engine();
-                _engine.SetValue(JsConsts.ApiObjectName, JsCallHandler);
-
-                _engine.SetValue("console", new 
-                {
-                    log = new Action<object[]>(Log)
-                });
-
-                _engineProps?.Invoke(_engine);
-                
-                return _engine;
-            }
-        }
-        
         #endregion
-        
+
         #region Методы
 
         /// <summary>
         /// Получить документацию
         /// </summary>
         /// <returns></returns>
-        public List<JsOpenApiWorkerDocumentation> GetDocumentation()
-        {
-            return JsWorkers.Values.Select(x => new JsOpenApiWorkerDocumentation(x.JsWorkerDocs())).ToList();
-        }
+        public List<JsOpenApiWorkerDocumentation> GetDocumentation() => _openApiDocs;
 
         /// <summary>
         /// Асинхронно вызвать несколько обработчиков

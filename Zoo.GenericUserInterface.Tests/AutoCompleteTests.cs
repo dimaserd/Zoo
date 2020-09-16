@@ -59,7 +59,7 @@ namespace Zoo.GenericUserInterface.Tests
 
             new GenericUserInterfaceBagBuilder(serviceCollection)
                 .AddDataProvider<SomeDataProvider, int>()
-                .AddOverrider<SomeModelForAutoCompleteOverrider, SomeModelForAutoComplete>()
+                .AddOverrider<SomeModelForAutoCompleteOverrider>()
                 .Build();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
@@ -85,6 +85,8 @@ namespace Zoo.GenericUserInterface.Tests
             Assert.AreEqual(providerTypeFullName, fBlock.AutoCompleteData.DataProviderTypeFullName);
 
             var data = await bag.CallAutoCompleteDataProvider("", providerTypeFullName);
+            Assert.IsNotNull(data);
+            Assert.IsTrue(data.Length > 0);
         }
     }
 }

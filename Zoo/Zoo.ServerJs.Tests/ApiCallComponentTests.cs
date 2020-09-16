@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Linq;
 using Zoo.ServerJs.Models;
@@ -12,12 +13,16 @@ namespace Zoo.ServerJs.Tests
         [TestCase(3, 4)]
         public void Test(int arg1, int arg2)
         {
-            var jsExecutor = new JsExecutorBuilder().AddExternalComponent(new ExternalJsComponent
+            var serviceCollection = new ServiceCollection();
+
+            new JsExecutorBuilder(serviceCollection).AddExternalComponent(new ExternalJsComponent
             {
                 ComponentName = "Test",
                 Script = "function Calculator(model) { \n" +
                 "return model.Arg1 + model.Arg2; \n }"
-            }).BuildJsExecutor();
+            }).Build();
+
+            var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
 
             var script = $"var res = api.CallExternal('Test', 'Calculator', {{ 'Arg1': {arg1}, 'Arg2': {arg2} }}); \n";
 
@@ -39,7 +44,9 @@ namespace Zoo.ServerJs.Tests
         [TestCase(6, 1, 3)]
         public void CallAfterCall(double arg1, double arg2, double delimeter)
         {
-            var jsExecutor = new JsExecutorBuilder().AddExternalComponent(new ExternalJsComponent
+            var serviceCollection = new ServiceCollection();
+
+            new JsExecutorBuilder(serviceCollection).AddExternalComponent(new ExternalJsComponent
             {
                 ComponentName = "Test",
                 Script = "function Calculator(model) { \n" +
@@ -53,7 +60,9 @@ namespace Zoo.ServerJs.Tests
                 ComponentName = "Test2",
                 Script = "function CalculatorNew(model) { \n" +
                         "return model.Arg1 / model.Arg2; }"
-            }).BuildJsExecutor();
+            }).Build();
+
+            var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
 
             var script = "var res = api.CallExternal('Test', 'Calculator', { 'Arg1': " + $"{arg1}, 'Arg2': {arg2}" + " });\n";
 
@@ -82,13 +91,17 @@ namespace Zoo.ServerJs.Tests
         [TestCase(14)]
         public void CallWithNoArgs(double n1)
         {
-            var jsExecutor = new JsExecutorBuilder().AddExternalComponent(new ExternalJsComponent
+            var serviceCollection = new ServiceCollection();
+
+            new JsExecutorBuilder(serviceCollection).AddExternalComponent(new ExternalJsComponent
             {
                 ComponentName = "Test",
                 Script = "function Test() { \n" +
                 $"return {n1};\n" +
                 " }"
-            }).BuildJsExecutor();
+            }).Build();
+
+            var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
 
             var script = "var res = api.CallExternal('Test', 'Test');\n";
 
