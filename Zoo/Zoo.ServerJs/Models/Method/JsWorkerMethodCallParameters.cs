@@ -1,4 +1,5 @@
-﻿using Zoo.ServerJs.Statics;
+﻿using System;
+using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Models.Method
 {
@@ -11,11 +12,8 @@ namespace Zoo.ServerJs.Models.Method
 
         private int _currentIndex = 0;
 
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="parameters"></param>
-        public JsWorkerMethodCallParameters(object[] parameters)
+
+        internal JsWorkerMethodCallParameters(object[] parameters)
         {
             _parameters = parameters;
         }
@@ -25,7 +23,7 @@ namespace Zoo.ServerJs.Models.Method
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T GetParameter<T>()
+        internal T GetParameter<T>()
         {
             var param = _parameters[_currentIndex];
 
@@ -35,5 +33,11 @@ namespace Zoo.ServerJs.Models.Method
 
             return ZooSerializer.Deserialize<T>(json);
         }
+
+        internal int GetParamsLength()
+        {
+            return _parameters?.Length ?? 0;
+        }
+
     }
 }

@@ -51,18 +51,6 @@ namespace Zoo.ServerJs.Services
         }
 
         /// <summary>
-        /// Вызвать внутренний сервис, написанный на Js
-        /// </summary>
-        /// <param name="workerName">название класса рабочего который нужно вызвать</param>
-        /// <param name="method">метод который нужно вызвать у данного рабочего</param>
-        /// <param name="methodParams">Параметры метода</param>
-        public TResult CallAndParse<TResult>(string workerName, string method, params dynamic[] methodParams)
-        {
-            var res = Call(workerName, method, methodParams);
-            return ZooSerializer.Deserialize<TResult>(res);
-        }
-
-        /// <summary>
         /// Вызвать внешний сервис, определенный через Js
         /// </summary>
         /// <param name="componentName"></param>

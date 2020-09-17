@@ -26,6 +26,11 @@
             Название объекта
             </summary>
         </member>
+        <member name="F:Zoo.ServerJs.Consts.JsConsts.InnerApiObjectName">
+            <summary>
+            Название объекта
+            </summary>
+        </member>
         <member name="F:Zoo.ServerJs.Consts.JsConsts.CallFunctionName">
             <summary>
             Название функции, которое используется для вызова js обработчиков
@@ -86,7 +91,7 @@
             Список логов
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.ExceptionStackTrace">
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.Exception">
             <summary>
             Исключение
             </summary>
@@ -158,12 +163,6 @@
             Параметры вызова javascript метода
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters.#ctor(System.Object[])">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="parameters"></param>
-        </member>
         <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters.GetParameter``1">
             <summary>
             Получить параметр
@@ -199,6 +198,16 @@
         <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.Description">
             <summary>
             Описание метода
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.ResultDescription">
+            <summary>
+            Описание результата
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.ParameterDescriptions">
+            <summary>
+            Описание параметров
             </summary>
         </member>
         <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions">
@@ -283,6 +292,16 @@
             Описание
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.ResultDescription">
+            <summary>
+            Описание результата
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.ParameterDescriptions">
+            <summary>
+            Описание параметров
+            </summary>
+        </member>
         <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.Response">
             <summary>
             Ответ от метода обработчика. Подробное описание типа.
@@ -314,6 +333,11 @@
               Ищет локализованную строку, похожую на Рабочий Js класс с именем {0} уже зарегистрирован.
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.MethodWasCalledWithLessParamsFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Метод &apos;{0}&apos; Js класса &apos;{1}&apos; содержит {2} параметров, но был вызван с {3} параметрами..
+            </summary>
+        </member>
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.MethodWithNameAlreadyExistsInWorkerFormat">
             <summary>
               Ищет локализованную строку, похожую на Метод с названием &apos;{0}&apos; не существует в группе методов класса &apos;{1}&apos;.
@@ -334,6 +358,41 @@
               Ищет локализованную строку, похожую на Необходимо указать имя рабочего класса.
             </summary>
         </member>
+        <member name="T:Zoo.ServerJs.Resources.ScriptResources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Resources.ScriptResources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Resources.ScriptResources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Resources.ScriptResources.ScriptInit">
+             <summary>
+               Ищет локализованную строку, похожую на var api = {};
+            api.PrepareResult = function (result) {
+                if (result !== undefined) {
+                    return JSON.parse(result);
+                }
+            }
+            api.Call = function (workerName, methodName, p1, p2, p3, p4) {
+                var result = inner_js_api.Call(workerName, methodName, p1, p2, p3, p4);
+            
+                return this.PrepareResult(result);
+            }
+            api.CallExternal = function (componentName, methodName, methodPayLoad) {
+                var result = inner_js_api.CallExternal(componentName, methodName, methodPayLoad);
+            
+                return this.PrepareResul [остаток строки не уместился]&quot;;.
+             </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Services.HandleJsCallWorker">
             <summary>
             Обработчик js вызовов
@@ -350,14 +409,6 @@
         <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.Call(System.String,System.String,System.Object[])">
             <summary>
             Вызвать внутренний метод сервис
-            </summary>
-            <param name="workerName">название класса рабочего который нужно вызвать</param>
-            <param name="method">метод который нужно вызвать у данного рабочего</param>
-            <param name="methodParams">Параметры метода</param>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallAndParse``1(System.String,System.String,System.Object[])">
-            <summary>
-            Вызвать внутренний сервис, написанный на Js
             </summary>
             <param name="workerName">название класса рабочего который нужно вызвать</param>
             <param name="method">метод который нужно вызвать у данного рабочего</param>
@@ -382,7 +433,7 @@
         </member>
         <member name="T:Zoo.ServerJs.Services.JsExecutor">
             <summary>
-            
+            Исполнитель кода на Js
             </summary>
         </member>
         <member name="P:Zoo.ServerJs.Services.JsExecutor.JsWorkers">
@@ -418,19 +469,13 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor.CallManySimpleApis(System.Collections.Generic.List{System.String})">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.CallAndParse``1(System.String,System.String,System.Object[])">
             <summary>
-            Асинхронно вызвать несколько обработчиков
+            Вызвать внутренний сервис, написанный на Js
             </summary>
-            <param name="jsScripts"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor.CallSimpleApi(System.String)">
-            <summary>
-            Вызвать обработчик
-            </summary>
-            <param name="jsScript"></param>
-            <returns></returns>
+            <param name="workerName">название класса рабочего который нужно вызвать</param>
+            <param name="method">метод который нужно вызвать у данного рабочего</param>
+            <param name="methodParams">Параметры метода</param>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor.RunScriptDetaiiled(System.String)">
             <summary>

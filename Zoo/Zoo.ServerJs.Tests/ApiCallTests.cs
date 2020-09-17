@@ -54,7 +54,7 @@ namespace Zoo.ServerJs.Tests
         {
             var serviceCollcetion = new ServiceCollection();
 
-            var script = $"var t = JSON.parse( api.Call(\"{ProductGroupJsWorker.WorkerName}\"," + " \"AddProductToGroup\", { ProductGroupId: \"d8c8cf9b-1d9b-4199-a85e-615edd64b4d7\", ProductId: 1 }) );";
+            var script = $"var t = api.Call(\"{ProductGroupJsWorker.WorkerName}\"," + " \"AddProductToGroup\", { ProductGroupId: \"d8c8cf9b-1d9b-4199-a85e-615edd64b4d7\", ProductId: 1 });";
 
             script += "\n console.log('Result', t)";
 
@@ -64,9 +64,11 @@ namespace Zoo.ServerJs.Tests
 
             var srvProvider = serviceCollcetion.BuildServiceProvider();
 
-            var result = srvProvider.GetRequiredService<JsExecutor>().RunScriptDetaiiled(script);
+            var executor = srvProvider.GetRequiredService<JsExecutor>();
+
+            var result = executor.RunScriptDetaiiled(script);
             Assert.IsTrue(result.IsSucceeded);
-            Assert.IsTrue(result.ResponseObject.Logs.Count == 1);
+            Assert.AreEqual(1, result.ResponseObject.Logs.Count);
 
             var log = result.ResponseObject.Logs.First();
 
@@ -78,7 +80,7 @@ namespace Zoo.ServerJs.Tests
         [Test]
         public void Test2()
         {
-            var script = $"var t = JSON.parse( api.Call(\"{ProductGroupJsWorker.WorkerName}\", \"{ProductGroupJsWorker.GetArrayName}\") );\n";
+            var script = $"var t = api.Call(\"{ProductGroupJsWorker.WorkerName}\", \"{ProductGroupJsWorker.GetArrayName}\");";
 
             script += "console.log(t);\n";
             script += "console.log(t.length);\n";
@@ -95,7 +97,7 @@ namespace Zoo.ServerJs.Tests
             var executor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
 
             var result = executor.RunScriptDetaiiled(script);
-
+            Assert.IsTrue(result.IsSucceeded);
             Assert.AreEqual(ProductGroupJsWorker.GetArray().Length + 2, result.ResponseObject.Logs.Count);
         }
     }

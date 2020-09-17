@@ -11,6 +11,11 @@
         public const string ApiObjectName = "api";
 
         /// <summary>
+        /// Название объекта
+        /// </summary>
+        public const string InnerApiObjectName = "inner_js_api";
+
+        /// <summary>
         /// Название функции, которое используется для вызова js обработчиков
         /// </summary>
         public const string CallFunctionName = "Call";

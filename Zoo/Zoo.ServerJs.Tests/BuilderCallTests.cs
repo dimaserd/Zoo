@@ -91,7 +91,7 @@ namespace Zoo.ServerJs.Tests
                     MethodName = "sda"
                 })
                 .GetServiceMethodBuilder<SomeService>()
-                .AddMethodViaTaskWithResult<int, string, int>((srv, p1, p2) => srv.SomeTask(p1), new JsWorkerMethodDocsOptions
+                .AddMethodViaTaskWithResult<int, int>((srv, p1) => srv.SomeTask(p1), new JsWorkerMethodDocsOptions
                 {
                     MethodName = MultiplyByTwoMethodName,
                     Description = "some"
@@ -127,13 +127,29 @@ namespace Zoo.ServerJs.Tests
         [TestCase("someName", 3)]
         [TestCase("someName1", 4)]
         [TestCase("someName2", 5)]
-        public async Task TestMethodCall(string workerName, int a)
+        public async Task TestMethodCall_ShouldReturnRightResult(string workerName, int a)
         {
             var jsExecutor = BuildAndGetExecutor(workerName);
 
             var expectedRes = await new SomeService().SomeTask(a);
-            var res = jsExecutor.JsCallHandler.CallAndParse<int>(workerName, MultiplyByTwoMethodName, a);
+            var res = jsExecutor.CallAndParse<int>(workerName, MultiplyByTwoMethodName, a);
             Assert.AreEqual(expectedRes, res);
+        }
+
+
+        [TestCase("someName")]
+        [TestCase("someName1")]
+        [TestCase("someName2")]
+        public void TestMethodCall_WithMissingParameters_ShouldThrow(string workerName)
+        {
+            var jsExecutor = BuildAndGetExecutor(workerName);
+
+            var ex = Assert.Throws<InvalidOperationException>(() => jsExecutor.CallAndParse<int>(workerName, MultiplyByTwoMethodName));
+
+            var mes = string.Format(ExceptionTexts.MethodWasCalledWithLessParamsFormat,
+                    MultiplyByTwoMethodName, workerName, 1, 0);
+
+            Assert.AreEqual(mes, ex.Message);
         }
     }
 }

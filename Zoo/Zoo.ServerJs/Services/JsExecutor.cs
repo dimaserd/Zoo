@@ -7,12 +7,13 @@ using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Models.OpenApi;
+using Zoo.ServerJs.Resources;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
 {
     /// <summary>
-    /// 
+    /// Исполнитель кода на Js
     /// </summary>
     public class JsExecutor
     {
@@ -48,13 +49,15 @@ namespace Zoo.ServerJs.Services
             JsCallHandler = new HandleJsCallWorker(serviceProvider, JsWorkers, ExternalComponents);
             
             var engine = new Engine()
-                .SetValue(JsConsts.ApiObjectName, JsCallHandler)
+                .SetValue(JsConsts.InnerApiObjectName, JsCallHandler)
                 .SetValue("console", new
                 {
                     log = new Action<object[]>(Log)
                 });
 
             properties.EngineAction?.Invoke(engine);
+
+            engine.Execute(ScriptResources.ScriptInit);
 
             Engine = engine;
         }
@@ -80,33 +83,15 @@ namespace Zoo.ServerJs.Services
         public List<JsOpenApiWorkerDocumentation> GetDocumentation() => _openApiDocs;
 
         /// <summary>
-        /// Асинхронно вызвать несколько обработчиков
+        /// Вызвать внутренний сервис, написанный на Js
         /// </summary>
-        /// <param name="jsScripts"></param>
-        /// <returns></returns>
-        public List<BaseApiResponse<object>> CallManySimpleApis(List<string> jsScripts)
+        /// <param name="workerName">название класса рабочего который нужно вызвать</param>
+        /// <param name="method">метод который нужно вызвать у данного рабочего</param>
+        /// <param name="methodParams">Параметры метода</param>
+        public TResult CallAndParse<TResult>(string workerName, string method, params object[] methodParams)
         {
-            return jsScripts.Select(script => CallSimpleApi(script)).ToList();
-        }
-
-        /// <summary>
-        /// Вызвать обработчик
-        /// </summary>
-        /// <param name="jsScript"></param>
-        /// <returns></returns>
-        public BaseApiResponse<object> CallSimpleApi(string jsScript)
-        {
-            try
-            {
-                Engine.Execute($"var result = {jsScript}");
-                var result = Engine.GetValue("result").ToObject();
-
-                return new BaseApiResponse<object>(true, "Ok", result);
-            }
-            catch(Exception ex)
-            {
-                return new BaseApiResponse<object>(ex);
-            }
+            var res = JsCallHandler.Call(workerName, method, methodParams);
+            return ZooSerializer.Deserialize<TResult>(res);
         }
 
         /// <summary>
@@ -120,6 +105,7 @@ namespace Zoo.ServerJs.Services
 
             try
             {
+                Logs.Clear();
                 Engine.Execute(jsScript);
 
                 return new BaseApiResponse<JsScriptExecutedResult>(true, "Скрипт выполнен успешно", new JsScriptExecutedResult
@@ -136,7 +122,7 @@ namespace Zoo.ServerJs.Services
                 {
                     StartedOnUtc = startDate,
                     FinishOnUtc = DateTime.UtcNow,
-                    ExceptionStackTrace = ex.ToString(),
+                    Exception = ex,
                     Logs = Logs                    
                 });
             }

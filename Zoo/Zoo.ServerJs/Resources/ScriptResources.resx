@@ -117,22 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="JsWorkerWithNameAlreadyRegisteredFormat" xml:space="preserve">
-    <value>Рабочий Js класс с именем {0} уже зарегистрирован</value>
-  </data>
-  <data name="MethodWasCalledWithLessParamsFormat" xml:space="preserve">
-    <value>Метод '{0}' Js класса '{1}' содержит {2} параметров, но был вызван с {3} параметрами.</value>
-  </data>
-  <data name="MethodWithNameAlreadyExistsInWorkerFormat" xml:space="preserve">
-    <value>Метод с названием '{0}' не существует в группе методов класса '{1}'</value>
-  </data>
-  <data name="NoMethodsInWorkerFormat" xml:space="preserve">
-    <value>В Js классе {0} не зарегистрировано ни одного метода</value>
-  </data>
-  <data name="TypeOfServiceNotRegisteredInServiceCollectionFormat" xml:space="preserve">
-    <value>Сервис с типом {0} не зарегистрирован в контейнере зависимостей, для начала зарегистрируйте его в коллекции сервисов.</value>
-  </data>
-  <data name="WorkerNameIsRequired" xml:space="preserve">
-    <value>Необходимо указать имя рабочего класса</value>
+  <data name="ScriptInit" xml:space="preserve">
+    <value>var api = {};
+api.PrepareResult = function (result) {
+    if (result !== undefined) {
+        return JSON.parse(result);
+    }
+}
+api.Call = function (workerName, methodName, p1, p2, p3, p4) {
+    var result = inner_js_api.Call(workerName, methodName, p1, p2, p3, p4);
+
+    return this.PrepareResult(result);
+}
+api.CallExternal = function (componentName, methodName, methodPayLoad) {
+    var result = inner_js_api.CallExternal(componentName, methodName, methodPayLoad);
+
+    return this.PrepareResult(result);
+}</value>
   </data>
 </root>

@@ -22,14 +22,14 @@ namespace Zoo.ServerJs.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ExceptionTexts {
+    internal class ScriptResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ExceptionTexts() {
+        internal ScriptResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Zoo.ServerJs.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zoo.ServerJs.Resources.ExceptionTexts", typeof(ExceptionTexts).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zoo.ServerJs.Resources.ScriptResources", typeof(ScriptResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,25 @@ namespace Zoo.ServerJs.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Рабочий Js класс с именем {0} уже зарегистрирован.
+        ///   Ищет локализованную строку, похожую на var api = {};
+        ///api.PrepareResult = function (result) {
+        ///    if (result !== undefined) {
+        ///        return JSON.parse(result);
+        ///    }
+        ///}
+        ///api.Call = function (workerName, methodName, p1, p2, p3, p4) {
+        ///    var result = inner_js_api.Call(workerName, methodName, p1, p2, p3, p4);
+        ///
+        ///    return this.PrepareResult(result);
+        ///}
+        ///api.CallExternal = function (componentName, methodName, methodPayLoad) {
+        ///    var result = inner_js_api.CallExternal(componentName, methodName, methodPayLoad);
+        ///
+        ///    return this.PrepareResul [остаток строки не уместился]&quot;;.
         /// </summary>
-        internal static string JsWorkerWithNameAlreadyRegisteredFormat {
+        internal static string ScriptInit {
             get {
-                return ResourceManager.GetString("JsWorkerWithNameAlreadyRegisteredFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Метод &apos;{0}&apos; Js класса &apos;{1}&apos; содержит {2} параметров, но был вызван с {3} параметрами..
-        /// </summary>
-        internal static string MethodWasCalledWithLessParamsFormat {
-            get {
-                return ResourceManager.GetString("MethodWasCalledWithLessParamsFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Метод с названием &apos;{0}&apos; не существует в группе методов класса &apos;{1}&apos;.
-        /// </summary>
-        internal static string MethodWithNameAlreadyExistsInWorkerFormat {
-            get {
-                return ResourceManager.GetString("MethodWithNameAlreadyExistsInWorkerFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на В Js классе {0} не зарегистрировано ни одного метода.
-        /// </summary>
-        internal static string NoMethodsInWorkerFormat {
-            get {
-                return ResourceManager.GetString("NoMethodsInWorkerFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Сервис с типом {0} не зарегистрирован в контейнере зависимостей, для начала зарегистрируйте его в коллекции сервисов..
-        /// </summary>
-        internal static string TypeOfServiceNotRegisteredInServiceCollectionFormat {
-            get {
-                return ResourceManager.GetString("TypeOfServiceNotRegisteredInServiceCollectionFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Необходимо указать имя рабочего класса.
-        /// </summary>
-        internal static string WorkerNameIsRequired {
-            get {
-                return ResourceManager.GetString("WorkerNameIsRequired", resourceCulture);
+                return ResourceManager.GetString("ScriptInit", resourceCulture);
             }
         }
     }

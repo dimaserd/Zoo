@@ -38,7 +38,21 @@ namespace Zoo.ServerJs.Models.Method
                 throw new InvalidOperationException(string.Format(ExceptionTexts.MethodWithNameAlreadyExistsInWorkerFormat, methodName, WorkerName));
             }
 
-            return Methods[methodName].Method.HandleCall(parameters, serviceProvider);
+            var method = Methods[methodName];
+
+            var countOfMethodParams = method.Parameters?.Count ?? 0;
+
+            var paramsInBag = parameters.GetParamsLength();
+
+            if (paramsInBag < countOfMethodParams)
+            {
+                var mes = string.Format(ExceptionTexts.MethodWasCalledWithLessParamsFormat,
+                    methodName, WorkerName, countOfMethodParams, paramsInBag);
+
+                throw new InvalidOperationException(mes);
+            }
+
+            return method.Method.HandleCall(parameters, serviceProvider);
         }
 
         internal void Validate()

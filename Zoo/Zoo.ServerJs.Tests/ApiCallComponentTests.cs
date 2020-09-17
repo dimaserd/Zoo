@@ -51,7 +51,7 @@ namespace Zoo.ServerJs.Tests
                 ComponentName = "Test",
                 Script = "function Calculator(model) { \n" +
                         "var t = model.Arg1 + model.Arg2;\n" +
-                        "var s = JSON.parse( api.CallExternal('Test2', 'CalculatorNew', { 'Arg1': t, 'Arg2': " + $"{delimeter}" + " }) );\n" +
+                        "var s = api.CallExternal('Test2', 'CalculatorNew', { 'Arg1': t, 'Arg2': " + $"{delimeter}" + " });\n" +
                         "return s;\n" +
                         " }"
             })
@@ -66,7 +66,6 @@ namespace Zoo.ServerJs.Tests
 
             var script = "var res = api.CallExternal('Test', 'Calculator', { 'Arg1': " + $"{arg1}, 'Arg2': {arg2}" + " });\n";
 
-            script += "res = JSON.parse(res);\n";
             script += "console.log(res);\n";
 
             var result = jsExecutor.RunScriptDetaiiled(script);
@@ -105,7 +104,6 @@ namespace Zoo.ServerJs.Tests
 
             var script = "var res = api.CallExternal('Test', 'Test');\n";
 
-            script += "res = JSON.parse(res);\n";
             script += "console.log(res);\n";
 
             var result = jsExecutor.RunScriptDetaiiled(script);
