@@ -13,7 +13,7 @@ namespace Zoo.ServerJs.Tests
     {
         public const string MultiplyByTwoMethodName = "MultiplyByTwo";
 
-        public void SomeAction()
+        public static void SomeAction()
         {
 
         }
@@ -78,7 +78,7 @@ namespace Zoo.ServerJs.Tests
             Assert.AreEqual(mes, ex.Message);
         }
 
-        private JsExecutor BuildAndGetExecutor(string workerName)
+        public static JsExecutor BuildAndGetExecutor(string workerName)
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddTransient<SomeService>();
@@ -116,40 +116,12 @@ namespace Zoo.ServerJs.Tests
         {
             var jsExecutor = BuildAndGetExecutor(workerName);
             var docs = jsExecutor.GetDocumentation();
-            Assert.AreEqual(1, docs.Count);
+            Assert.AreEqual(1, docs.Workers.Count);
 
-            var fWorker = docs.First();
+            var fWorker = docs.Workers.First();
 
             Assert.AreEqual(workerName, fWorker.WorkerName);
             Assert.AreEqual(3, fWorker.Methods.Count);
-        }
-
-        [TestCase("someName", 3)]
-        [TestCase("someName1", 4)]
-        [TestCase("someName2", 5)]
-        public async Task TestMethodCall_ShouldReturnRightResult(string workerName, int a)
-        {
-            var jsExecutor = BuildAndGetExecutor(workerName);
-
-            var expectedRes = await new SomeService().SomeTask(a);
-            var res = jsExecutor.CallAndParse<int>(workerName, MultiplyByTwoMethodName, a);
-            Assert.AreEqual(expectedRes, res);
-        }
-
-
-        [TestCase("someName")]
-        [TestCase("someName1")]
-        [TestCase("someName2")]
-        public void TestMethodCall_WithMissingParameters_ShouldThrow(string workerName)
-        {
-            var jsExecutor = BuildAndGetExecutor(workerName);
-
-            var ex = Assert.Throws<InvalidOperationException>(() => jsExecutor.CallAndParse<int>(workerName, MultiplyByTwoMethodName));
-
-            var mes = string.Format(ExceptionTexts.MethodWasCalledWithLessParamsFormat,
-                    MultiplyByTwoMethodName, workerName, 1, 0);
-
-            Assert.AreEqual(mes, ex.Message);
         }
     }
 }

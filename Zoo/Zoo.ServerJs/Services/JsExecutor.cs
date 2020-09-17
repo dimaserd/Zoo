@@ -17,7 +17,7 @@ namespace Zoo.ServerJs.Services
     /// </summary>
     public class JsExecutor
     {
-        private readonly List<JsOpenApiWorkerDocumentation> _openApiDocs;
+        private readonly JsOpenApiDocs _openApiDocs;
 
         /// <summary>
         /// Javascript обработчики
@@ -44,8 +44,7 @@ namespace Zoo.ServerJs.Services
             JsWorkers = properties.JsWorkers;
             ExternalComponents = properties.ExternalComponents;
 
-            _openApiDocs = JsWorkers.Select(x => x.Value).Select(x => new JsOpenApiWorkerDocumentation(x)).ToList();
-
+            _openApiDocs = CreateDocs();
             JsCallHandler = new HandleJsCallWorker(serviceProvider, JsWorkers, ExternalComponents);
             
             var engine = new Engine()
@@ -62,6 +61,14 @@ namespace Zoo.ServerJs.Services
             Engine = engine;
         }
 
+        private JsOpenApiDocs CreateDocs()
+        {
+            return new JsOpenApiDocs
+            {
+                Workers = JsWorkers.Select(x => x.Value).Select(x => new JsOpenApiWorkerDocumentation(x)).ToList(),
+                ExternalJsComponents = ExternalComponents.Select(x => x.Value).ToList()
+            };
+        }
         
         #region Свойства
         
@@ -80,7 +87,7 @@ namespace Zoo.ServerJs.Services
         /// Получить документацию
         /// </summary>
         /// <returns></returns>
-        public List<JsOpenApiWorkerDocumentation> GetDocumentation() => _openApiDocs;
+        public JsOpenApiDocs GetDocumentation() => _openApiDocs;
 
         /// <summary>
         /// Вызвать внутренний сервис, написанный на Js
@@ -88,9 +95,21 @@ namespace Zoo.ServerJs.Services
         /// <param name="workerName">название класса рабочего который нужно вызвать</param>
         /// <param name="method">метод который нужно вызвать у данного рабочего</param>
         /// <param name="methodParams">Параметры метода</param>
-        public TResult CallAndParse<TResult>(string workerName, string method, params object[] methodParams)
+        public TResult Call<TResult>(string workerName, string method, params object[] methodParams)
         {
             var res = JsCallHandler.Call(workerName, method, methodParams);
+            return ZooSerializer.Deserialize<TResult>(res);
+        }
+
+        /// <summary>
+        /// Вызвать компонент, написанный на Js
+        /// </summary>
+        /// <param name="componentName">название компонента который нужно вызвать</param>
+        /// <param name="methodName">метод который нужно вызвать у данного компонента</param>
+        /// <param name="methodPayload">Параметр, который нужно передать в метод компонента</param>
+        public TResult CallExternalComponent<TResult>(string componentName, string methodName, object methodPayload)
+        {
+            var res = JsCallHandler.CallExternal(componentName, methodName, methodPayload);
             return ZooSerializer.Deserialize<TResult>(res);
         }
 
@@ -102,10 +121,10 @@ namespace Zoo.ServerJs.Services
         public BaseApiResponse<JsScriptExecutedResult> RunScriptDetaiiled(string jsScript)
         {
             var startDate = DateTime.UtcNow;
+            Logs.Clear();
 
             try
             {
-                Logs.Clear();
                 Engine.Execute(jsScript);
 
                 return new BaseApiResponse<JsScriptExecutedResult>(true, "Скрипт выполнен успешно", new JsScriptExecutedResult

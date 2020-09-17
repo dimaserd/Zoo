@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Linq;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Services;
+using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Tests
 {
@@ -24,6 +25,7 @@ namespace Zoo.ServerJs.Tests
 
             var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
 
+            
             var script = $"var res = api.CallExternal('Test', 'Calculator', {{ 'Arg1': {arg1}, 'Arg2': {arg2} }}); \n";
 
             script += "console.log(res)";
@@ -37,7 +39,11 @@ namespace Zoo.ServerJs.Tests
             Assert.IsTrue(resp.Logs.Count == 1);
             var logValue = resp.Logs.First().SerializedVariables.First();
 
-            Assert.AreEqual((double)(arg1 + arg2), JsonConvert.DeserializeObject<double>(logValue.DataJson));
+            var expectedRes = (double)(arg1 + arg2);
+            var directCallResult = jsExecutor.CallExternalComponent<int>("Test", "Calculator", new { Arg1 = arg1, Arg2 = arg2 });
+
+            Assert.AreEqual(expectedRes, directCallResult);
+            Assert.AreEqual(directCallResult, ZooSerializer.Deserialize<int>(logValue.DataJson));
         }
 
         [TestCase(6, 6, 4)]
@@ -78,10 +84,11 @@ namespace Zoo.ServerJs.Tests
 
             var logVar = resp.Logs.First().SerializedVariables.First();
 
+            var directCallValue = jsExecutor.CallExternalComponent<double>("Test", "Calculator", new { Arg1 = arg1, Arg2 = arg2 });
+            var expectedValue = (arg1 + arg2) / delimeter;
 
-            var exprexctedValue = (arg1 + arg2) / delimeter;
-            
-            Assert.AreEqual(exprexctedValue, JsonConvert.DeserializeObject<double>(logVar.DataJson));
+            Assert.AreEqual(directCallValue, expectedValue);
+            Assert.AreEqual(expectedValue, ZooSerializer.Deserialize<double>(logVar.DataJson));
         }
 
         [TestCase(12)]

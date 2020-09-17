@@ -245,6 +245,21 @@
             Результат вызова
             </summary>
         </member>
+        <member name="T:Zoo.ServerJs.Models.OpenApi.JsOpenApiDocs">
+            <summary>
+            Описание открытого Js API
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiDocs.Workers">
+            <summary>
+            Рабочие классы интегрированные с c# логикой
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiDocs.ExternalJsComponents">
+            <summary>
+            Внешние Js компоненты
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerDocumentation">
             <summary>
             Описание серверного javascript обработчика
@@ -469,13 +484,21 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor.CallAndParse``1(System.String,System.String,System.Object[])">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.Call``1(System.String,System.String,System.Object[])">
             <summary>
             Вызвать внутренний сервис, написанный на Js
             </summary>
             <param name="workerName">название класса рабочего который нужно вызвать</param>
             <param name="method">метод который нужно вызвать у данного рабочего</param>
             <param name="methodParams">Параметры метода</param>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.CallExternalComponent``1(System.String,System.String,System.Object)">
+            <summary>
+            Вызвать компонент, написанный на Js
+            </summary>
+            <param name="componentName">название компонента который нужно вызвать</param>
+            <param name="methodName">метод который нужно вызвать у данного компонента</param>
+            <param name="methodPayload">Параметр, который нужно передать в метод компонента</param>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor.RunScriptDetaiiled(System.String)">
             <summary>
