@@ -34,13 +34,12 @@ namespace Zoo.ServerJs.Tests
         public JsWorkerDocumentation JsWorkerDocs(JsWorkerBuilder builder)
         {
             return builder.SetWorkerName(WorkerName)
-                .SetDescription("")
-                .AddMethod<ProductInProductGroupIdModel, BaseApiResponse>(AddProductToGroup, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction<ProductInProductGroupIdModel, BaseApiResponse>(AddProductToGroup, new JsWorkerMethodDocsOptions
                 {
                     MethodName = "AddProductToGroup",
                     Description = "Добавить товар в группу товаров",
                 })
-                .AddMethod(GetArray, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction(GetArray, new JsWorkerMethodDocsOptions
                 {
                     MethodName = GetArrayName,
                     Description = "Получить массив"

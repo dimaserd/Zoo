@@ -8,6 +8,19 @@ namespace Zoo.ServerJs.Models.Method
     /// </summary>
     public class JsWorkerMethodDocs
     {
+        internal JsWorkerMethodDocs(JsWorkerMethodDocsOptions opts)
+        {
+            MethodName = opts.MethodName;
+            Description = opts.Description;
+            ResultDescription = opts.ResultDescription;
+            ParameterDescriptions = opts.ParameterDescriptions;
+        }
+
+        public JsWorkerMethodDocs()
+        {
+
+        }
+
         /// <summary>
         /// Типы входных параметров
         /// </summary>
@@ -32,5 +45,15 @@ namespace Zoo.ServerJs.Models.Method
         /// Описание метода
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Описание результата
+        /// </summary>
+        public string ResultDescription { get; set; }
+
+        /// <summary>
+        /// Описание параметров
+        /// </summary>
+        public string[] ParameterDescriptions { get; set; }
     }
 }

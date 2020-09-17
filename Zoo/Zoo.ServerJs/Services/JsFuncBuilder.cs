@@ -9,10 +9,8 @@ namespace Zoo.ServerJs.Services
     {
         internal static JsWorkerMethodDocs GetFunc<TResult>(Func<TResult> func, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = null,
                 Response = typeof(TResult),
                 Method = new JsWorkerMethodBase
@@ -32,10 +30,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetFunc<T, TResult>(Func<T, TResult> func, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = new List<Type> { typeof(T) },
                 Response = typeof(TResult),
                 Method = new JsWorkerMethodBase
@@ -55,10 +51,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetFunc<T1, T2, TResult>(Func<T1, T2, TResult> func, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = new List<Type> { typeof(T1), typeof(T2) },
                 Response = typeof(TResult),
                 Method = new JsWorkerMethodBase
@@ -78,10 +72,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetFunc<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = new List<Type> { typeof(T1), typeof(T2), typeof(T3) },
                 Response = typeof(TResult),
                 Method = new JsWorkerMethodBase
@@ -101,10 +93,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetAction(Action action, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = null,
                 Response = null,
                 Method = new JsWorkerMethodBase
@@ -123,10 +113,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetAction<T1>(Action<T1> action, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = new List<Type> { typeof(T1) },
                 Response = null,
                 Method = new JsWorkerMethodBase
@@ -145,10 +133,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetAction<T1, T2>(Action<T1, T2> action, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = new List<Type> { typeof(T1), typeof(T2) },
                 Response = null,
                 Method = new JsWorkerMethodBase
@@ -167,10 +153,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetTask(Func<Task> task, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = null,
                 Response = null,
                 Method = new JsWorkerMethodBase
@@ -189,10 +173,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetTask<T1>(Func<T1, Task> task, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = new List<Type> { typeof(T1) },
                 Response = null,
                 Method = new JsWorkerMethodBase
@@ -211,10 +193,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetTask<TResult>(Func<Task<TResult>> task, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = null,
                 Response = typeof(TResult),
                 Method = new JsWorkerMethodBase
@@ -232,10 +212,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetTask<T1, TResult>(Func<T1, Task<TResult>> task, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = new List<Type> { typeof(T1) },
                 Response = typeof(TResult),
                 Method = new JsWorkerMethodBase
@@ -253,10 +231,8 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetTask<T1, T2, TResult>(Func<T1, T2, Task<TResult>> task, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs
+            return new JsWorkerMethodDocs(opts)
             {
-                MethodName = opts.MethodName,
-                Description = opts.Description,
                 Parameters = new List<Type> { typeof(T1), typeof(T2) },
                 Response = typeof(TResult),
                 Method = new JsWorkerMethodBase

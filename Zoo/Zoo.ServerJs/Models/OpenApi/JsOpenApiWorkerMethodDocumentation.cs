@@ -18,6 +18,8 @@ namespace Zoo.ServerJs.Models.OpenApi
         {
             MethodName = methodDocs.MethodName;
             Description = methodDocs.Description;
+            ParameterDescriptions = methodDocs.ParameterDescriptions;
+            ResultDescription = methodDocs.ResultDescription;
 
             if (methodDocs.Response != null)
             {
@@ -39,6 +41,16 @@ namespace Zoo.ServerJs.Models.OpenApi
         /// Описание
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Описание результата
+        /// </summary>
+        public string ResultDescription { get; set; }
+
+        /// <summary>
+        /// Описание параметров
+        /// </summary>
+        public string[] ParameterDescriptions { get; set; }
 
         /// <summary>
         /// Ответ от метода обработчика. Подробное описание типа.

@@ -21,12 +21,12 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Javascript обработчики
         /// </summary>
-        public Dictionary<string, JsWorkerDocumentation> JsWorkers { get; }
+        Dictionary<string, JsWorkerDocumentation> JsWorkers { get; }
 
         /// <summary>
         /// Внешние компоненты
         /// </summary>
-        public Dictionary<string, ExternalJsComponent> ExternalComponents { get; }
+        Dictionary<string, ExternalJsComponent> ExternalComponents { get; }
 
         /// <summary>
         /// Обработчик Js вызовов

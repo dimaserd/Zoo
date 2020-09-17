@@ -216,6 +216,16 @@
             Описание метода
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions.ResultDescription">
+            <summary>
+            Описание результата
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions.ParameterDescriptions">
+            <summary>
+            Описание параметров
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodResult">
             <summary>
             Результат вызова метода обработчика
@@ -314,6 +324,11 @@
               Ищет локализованную строку, похожую на В Js классе {0} не зарегистрировано ни одного метода.
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.TypeOfServiceNotRegisteredInServiceCollectionFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Сервис с типом {0} не зарегистрирован в контейнере зависимостей, для начала зарегистрируйте его в коллекции сервисов..
+            </summary>
+        </member>
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.WorkerNameIsRequired">
             <summary>
               Ищет локализованную строку, похожую на Необходимо указать имя рабочего класса.
@@ -333,6 +348,14 @@
             <param name="externalComponents"></param>
         </member>
         <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.Call(System.String,System.String,System.Object[])">
+            <summary>
+            Вызвать внутренний метод сервис
+            </summary>
+            <param name="workerName">название класса рабочего который нужно вызвать</param>
+            <param name="method">метод который нужно вызвать у данного рабочего</param>
+            <param name="methodParams">Параметры метода</param>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallAndParse``1(System.String,System.String,System.Object[])">
             <summary>
             Вызвать внутренний сервис, написанный на Js
             </summary>
@@ -479,6 +502,11 @@
             Построитель Js рабочего
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Services.JsWorkerBuilder.Builder">
+            <summary>
+            Построитель
+            </summary>
+        </member>
         <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.SetWorkerName(System.String)">
             <summary>
             Установить название
@@ -500,7 +528,7 @@
             <typeparam name="TService">Тип сервиса</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod``1(System.Func{``0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaFunction``1(System.Func{``0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -509,7 +537,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod``2(System.Func{``0,``1},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaFunction``2(System.Func{``0,``1},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -519,7 +547,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod``3(System.Func{``0,``1,``2},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaFunction``3(System.Func{``0,``1,``2},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -530,7 +558,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod``4(System.Func{``0,``1,``2,``3},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaFunction``4(System.Func{``0,``1,``2,``3},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -542,7 +570,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod(System.Action,Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaAction(System.Action,Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -550,7 +578,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod``1(System.Action{``0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaAction``1(System.Action{``0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -559,7 +587,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod``2(System.Action{``0,``1},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaAction``2(System.Action{``0,``1},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -569,7 +597,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod(System.Func{System.Threading.Tasks.Task},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaTask(System.Func{System.Threading.Tasks.Task},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -577,7 +605,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod``1(System.Func{``0,System.Threading.Tasks.Task},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaTask``1(System.Func{``0,System.Threading.Tasks.Task},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -586,7 +614,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod``1(System.Func{System.Threading.Tasks.Task{``0}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaTask``1(System.Func{System.Threading.Tasks.Task{``0}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -595,7 +623,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethod``2(System.Func{``0,System.Threading.Tasks.Task{``1}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerBuilder.AddMethodViaTask``2(System.Func{``0,System.Threading.Tasks.Task{``1}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -617,7 +645,7 @@
             </summary>
             <typeparam name="TService"></typeparam>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod``1(System.Func{`0,``0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaFunction``1(System.Func{`0,``0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -626,7 +654,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod``2(System.Func{`0,``0,``1},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaFunction``2(System.Func{`0,``0,``1},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -636,7 +664,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod``3(System.Func{`0,``0,``1,``2},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaFunction``3(System.Func{`0,``0,``1,``2},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -647,7 +675,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod``4(System.Func{`0,``0,``1,``2,``3},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaFunction``4(System.Func{`0,``0,``1,``2,``3},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -659,7 +687,7 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod(System.Action{`0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaAction(System.Action{`0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
@@ -667,62 +695,67 @@
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod``1(System.Action{`0,``0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
-            <summary>
-            Добавить метод
-            </summary>
-            <typeparam name="T1"></typeparam>
-            <param name="func"></param>
-            <param name="opts"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod``2(System.Action{`0,``0,``1},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaAction``1(System.Action{`0,``0},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
             <typeparam name="T1"></typeparam>
-            <typeparam name="T2"></typeparam>
             <param name="func"></param>
             <param name="opts"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod(System.Func{`0,System.Threading.Tasks.Task},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
-            <summary>
-            Добавить метод
-            </summary>
-            <param name="func"></param>
-            <param name="opts"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod``1(System.Func{`0,System.Threading.Tasks.Task{``0}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
-            <summary>
-            Добавить метод
-            </summary>
-            <typeparam name="TResult"></typeparam>
-            <param name="func"></param>
-            <param name="opts"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod``2(System.Func{`0,``0,System.Threading.Tasks.Task{``1}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
-            <summary>
-            Добавить метод
-            </summary>
-            <typeparam name="T1"></typeparam>
-            <typeparam name="TResult"></typeparam>
-            <param name="func"></param>
-            <param name="opts"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethod``3(System.Func{`0,``0,``1,System.Threading.Tasks.Task{``2}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaAction``2(System.Action{`0,``0,``1},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>
             <typeparam name="T1"></typeparam>
             <typeparam name="T2"></typeparam>
+            <param name="func"></param>
+            <param name="opts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaTask(System.Func{`0,System.Threading.Tasks.Task},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+            <summary>
+            Добавить метод
+            </summary>
+            <param name="func"></param>
+            <param name="opts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaTaskWithResult``1(System.Func{`0,System.Threading.Tasks.Task{``0}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+            <summary>
+            Добавить метод
+            </summary>
             <typeparam name="TResult"></typeparam>
             <param name="func"></param>
             <param name="opts"></param>
             <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaTaskWithResult``2(System.Func{`0,``0,System.Threading.Tasks.Task{``1}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+            <summary>
+            Добавить метод
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="func"></param>
+            <param name="opts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaTaskWithResult``3(System.Func{`0,``0,``1,System.Threading.Tasks.Task{``2}},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+            <summary>
+            Добавить метод
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="func"></param>
+            <param name="opts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.Build">
+            <summary>
+            Построить Js рабочего
+            </summary>
         </member>
         <member name="T:Zoo.ServerJs.Statics.ZooSerializer">
             <summary>

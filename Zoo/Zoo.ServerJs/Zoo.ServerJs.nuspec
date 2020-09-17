@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Zoo.ServerJs</id>
-    <version>0.9.25</version>
+    <version>0.9.28</version>
     <title>Server Js</title>
     <authors>Dmitry Serdyukov</authors>
     <owners>Dmitry Serdyukov</owners>
@@ -11,6 +11,7 @@
     <releaseNotes>Что-то сделали лучше, что-то сделали хуже.</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <dependencies>
+      <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="3.1.8" />
       <dependency id="Jint" version="2.11.58" />
       <dependency id="NetCroco.Core.Documentation" version="1.1.36" />
       <dependency id="NetCroco.Core.Abstractions" version="1.1.47" />

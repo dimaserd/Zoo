@@ -88,6 +88,15 @@ namespace Zoo.ServerJs.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Сервис с типом {0} не зарегистрирован в контейнере зависимостей, для начала зарегистрируйте его в коллекции сервисов..
+        /// </summary>
+        internal static string TypeOfServiceNotRegisteredInServiceCollectionFormat {
+            get {
+                return ResourceManager.GetString("TypeOfServiceNotRegisteredInServiceCollectionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Необходимо указать имя рабочего класса.
         /// </summary>
         internal static string WorkerNameIsRequired {
