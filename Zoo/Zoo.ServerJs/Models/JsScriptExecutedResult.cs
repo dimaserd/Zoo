@@ -26,6 +26,6 @@ namespace Zoo.ServerJs.Models
         /// <summary>
         /// Исключение
         /// </summary>
-        public Exception Exception { get; set; }
+        public ExcepionData ExceptionData { get; set; }
     }
 }

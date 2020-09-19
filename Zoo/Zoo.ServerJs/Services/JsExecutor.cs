@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Croco.Core.Abstractions.Models;
 using Jint;
 using Zoo.ServerJs.Consts;
@@ -141,7 +142,11 @@ namespace Zoo.ServerJs.Services
                 {
                     StartedOnUtc = startDate,
                     FinishOnUtc = DateTime.UtcNow,
-                    Exception = ex,
+                    ExceptionData = new ExcepionData 
+                    {
+                        Message = ex.Message,
+                        StackTrace = ex.StackTrace
+                    },
                     Logs = Logs                    
                 });
             }

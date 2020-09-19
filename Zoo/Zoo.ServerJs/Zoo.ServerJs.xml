@@ -41,6 +41,21 @@
             Название функции, которое используется для вызова внешнего js компонента
             </summary>
         </member>
+        <member name="T:Zoo.ServerJs.Models.ExcepionData">
+            <summary>
+            Данные для исключения
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.ExcepionData.Message">
+            <summary>
+            Сообщение
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.ExcepionData.StackTrace">
+            <summary>
+            Стек вызовов
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Models.ExternalJsComponent">
             <summary>
             Внешний js компонент
@@ -91,7 +106,7 @@
             Список логов
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.Exception">
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.ExceptionData">
             <summary>
             Исключение
             </summary>
