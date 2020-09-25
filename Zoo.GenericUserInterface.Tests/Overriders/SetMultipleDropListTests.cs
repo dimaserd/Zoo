@@ -28,7 +28,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
         [Test]
         public void TestImplementingMultipleDropDownForToNotEnumerableProperty()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeType>(GenericUserInterfaceBag.CreateDefault());
+            var builder = new GenericUserInterfaceModelBuilder<SomeType>(TestsHelper.CreateDefaultBag());
 
             var ex = Assert.Throws<InvalidOperationException>(() => builder.GetBlockBuilderForCollection(x => x.Prop1));
 
@@ -40,7 +40,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
         {
             var ex = Assert.Throws<InvalidOperationException>(() => 
             {
-                new GenericUserInterfaceModelBuilder<SomeType>(GenericUserInterfaceBag.CreateDefault())
+                new GenericUserInterfaceModelBuilder<SomeType>(TestsHelper.CreateDefaultBag())
                     .GetBlockBuilderForCollection(x => x.ComplexCollectionType)
                     .SetMultipleDropDownList(new List<SelectListItemData<int[]>>());
             });
@@ -56,7 +56,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var propName = nameof(SomeType.Prop2);
             string defaultValue = "someValue";
 
-            var interfaceModel = new GenericUserInterfaceModelBuilder<SomeType>(GenericUserInterfaceBag.CreateDefault())
+            var interfaceModel = new GenericUserInterfaceModelBuilder<SomeType>(TestsHelper.CreateDefaultBag())
                     .GetBlockBuilderForCollection(x => x.Prop2)
                     .SetMultipleDropDownList(new List<SelectListItemData<string>>
                     {
@@ -80,7 +80,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var propName = nameof(SomeType.Prop3);
             int defaultValue = 0;
 
-            var interfaceModel = new GenericUserInterfaceModelBuilder<SomeType>(GenericUserInterfaceBag.CreateDefault())
+            var interfaceModel = new GenericUserInterfaceModelBuilder<SomeType>(TestsHelper.CreateDefaultBag())
                     .GetBlockBuilderForCollection(x => x.Prop3)
                     .SetMultipleDropDownList(new List<SelectListItemData<int>>
                     {
@@ -104,7 +104,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var propName = nameof(SomeType.Prop4);
             var defaultValue = "";
 
-            var interfaceModel = new GenericUserInterfaceModelBuilder<SomeType>(GenericUserInterfaceBag.CreateDefault())
+            var interfaceModel = new GenericUserInterfaceModelBuilder<SomeType>(TestsHelper.CreateDefaultBag())
                     .GetBlockBuilderForCollection(x => x.Prop4)
                     .SetMultipleDropDownList(new List<SelectListItemData<string>>
                     {

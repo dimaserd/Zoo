@@ -1,5 +1,5 @@
 ﻿using Zoo.GenericUserInterface.Models;
-using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Bag;
 
 namespace Zoo.GenericUserInterface.Abstractions
 {

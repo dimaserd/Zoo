@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Zoo.GenericUserInterface.Models.Bag;
 
 namespace Zoo.GenericUserInterface.Models.Overridings
 {
@@ -12,10 +13,5 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// Функция для переопределения
         /// </summary>
         public Func<GenericUserInterfaceBag, GenerateGenericUserInterfaceModel, Task> OverrideFunction { get; set; }
-
-        /// <summary>
-        /// Тип высчитывания переопределителя интерфейса
-        /// </summary>
-        public InterfaceOverriderType Type { get; set; }
     }
 }

@@ -117,6 +117,11 @@
             Можно ли добавлять новые данные
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Models.DropDownListData.DataProviderTypeFullName">
+            <summary>
+            Провайдер данных
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Models.GenerateGenericUserInterfaceModel">
             <summary>
             Модель для создания обощенного интерфейса
@@ -244,6 +249,24 @@
             <param name="typedText"></param>
             <returns></returns>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.DataProviderForSelectList`1">
+            <summary>
+            Провайдер данных для выпадающего списка
+            </summary>
+            <typeparam name="TITem"></typeparam>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.DataProviderForSelectList`1.GetData">
+            <summary>
+            Функция для получения данных
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.DataProviderForSelectList`1.GetSelectListItems">
+            <summary>
+            Реализация с перекладкой. Используется внутри библиотекой
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericInterfaceOverrider`1">
             <summary>
             Переопределитель интерфейса
@@ -274,12 +297,6 @@
             <summary>
             Опции для создания интерфейса
             </summary>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.CreateDefault">
-            <summary>
-            Создать дефолтный пустой портфель интерфейсов
-            </summary>
-            <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBag.#ctor(System.IServiceProvider,Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
             <summary>
@@ -325,6 +342,56 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions">
+            <summary>
+            Опции для создания портфеля из интерфейсов
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions.DataProviders">
+            <summary>
+            Провайдеры данных
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions.InterfaceOverriders">
+            <summary>
+            Переопределители интерфейсов
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.Overrider">
+            <summary>
+            Переопределитель интерфейсов
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.OverrideFunction">
+            <summary>
+            Функция для переопределения
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1">
+            <summary>
+            Данные для построения выпадающего списка
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Text">
+            <summary>
+            Текст для показа
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Selected">
+            <summary>
+            Флаг выбранности
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.DataJson">
+            <summary>
+            Кастомные данные
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Value">
+            <summary>
+            Значение
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder">
             <summary>
             Построитель портфеля обобщенных пользовательских интерфейсов
@@ -361,76 +428,6 @@
         <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.Build">
             <summary>
             Построить
-            </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions">
-            <summary>
-            Опции для создания портфеля из интерфейсов
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions.DataProviders">
-            <summary>
-            Провайдеры данных
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagOptions.InterfaceOverriders">
-            <summary>
-            Переопределители интерфейсов
-            </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.InterfaceOverriderType">
-            <summary>
-            Тип высчитывания переопределителя интерфейса
-            </summary>
-        </member>
-        <member name="F:Zoo.GenericUserInterface.Models.Overridings.InterfaceOverriderType.Computed">
-            <summary>
-            Переопределение для интерфейса, высчитывается каждый раз
-            </summary>
-        </member>
-        <member name="F:Zoo.GenericUserInterface.Models.Overridings.InterfaceOverriderType.Static">
-            <summary>
-            Переопределение для интерфейса статично и высчитывается ровно один раз
-            </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.Overrider">
-            <summary>
-            Переопределитель интерфейсов
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.OverrideFunction">
-            <summary>
-            Функция для переопределения
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.Type">
-            <summary>
-            Тип высчитывания переопределителя интерфейса
-            </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1">
-            <summary>
-            Данные для построения выпадающего списка
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Text">
-            <summary>
-            Текст для показа
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Selected">
-            <summary>
-            Флаг выбранности
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.DataJson">
-            <summary>
-            Кастомные данные
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Value">
-            <summary>
-            Значение
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.SelectListItem">
@@ -647,9 +644,23 @@
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetDropDownList(System.Collections.Generic.List{Zoo.GenericUserInterface.Models.Overridings.SelectListItemData{`0}})">
             <summary>
-            Установить блок, как выпадающий список
+            Установить блок, как выпадающий список со статическими данными
             </summary>
             <param name="selectListItems"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetDropDownList``1">
+            <summary>
+            Установить блок, как выпадающий список с динамическими данными
+            </summary>
+            <typeparam name="TDataProvider"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetAutoCompleteFor``1">
+            <summary>
+            Установить список с автоподсказами для свойства данного объекта
+            </summary>
+            <typeparam name="TDataProvider"></typeparam>
             <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetHidden">

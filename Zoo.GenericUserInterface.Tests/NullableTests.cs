@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Tests
@@ -22,7 +21,7 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void NullableBoolTest()
         {
-            var builder = new GenericUserInterfaceModelBuilder<Type1>(GenericUserInterfaceBag.CreateDefault());
+            var builder = new GenericUserInterfaceModelBuilder<Type1>(TestsHelper.CreateDefaultBag());
 
             var result = builder.Result.Interface;
 
@@ -44,7 +43,7 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void OrdinaryBoolTest()
         {
-            var builder = new GenericUserInterfaceModelBuilder<Type2>(GenericUserInterfaceBag.CreateDefault());
+            var builder = new GenericUserInterfaceModelBuilder<Type2>(TestsHelper.CreateDefaultBag());
 
             var result = builder.Result.Interface;
 

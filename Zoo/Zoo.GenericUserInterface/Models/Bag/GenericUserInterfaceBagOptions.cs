@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Zoo.GenericUserInterface.Models.Overridings
+namespace Zoo.GenericUserInterface.Models.Bag
 {
     /// <summary>
     /// Опции для создания портфеля из интерфейсов
@@ -9,9 +9,14 @@ namespace Zoo.GenericUserInterface.Models.Overridings
     public class GenericUserInterfaceBagOptions
     {
         /// <summary>
-        /// Провайдеры данных
+        /// Провайдеры данных для выпадающего списка
         /// </summary>
-        public Dictionary<string, Type> DataProviders { get; set; }
+        public Dictionary<string, Type> SelectListDataProviders { get; set; }
+
+        /// <summary>
+        /// Провайдеры данных для автокомплита
+        /// </summary>
+        public Dictionary<string, Type> AutoCompletionDataProviders { get; set; }
 
         /// <summary>
         /// Переопределители интерфейсов

@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
+using Zoo.GenericUserInterface.Models.Overridings;
 
-namespace Zoo.GenericUserInterface.Models.Overridings
+namespace Zoo.GenericUserInterface.Models.Providers
 {
     /// <summary>
     /// Провайдер данных для автокомплита
@@ -24,9 +25,9 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// <returns></returns>
         public async Task<AutoCompleteSuggestion[]> GetSuggestionsData(string typedText)
         {
-            var data = await GetData(typedText);
-
-            return data.Select(x => x.ToAutoCompleteSuggestion()).ToArray();
+            return (await GetData(typedText))
+                .Select(x => x.ToAutoCompleteSuggestion())
+                .ToArray();
         }
     }
 }

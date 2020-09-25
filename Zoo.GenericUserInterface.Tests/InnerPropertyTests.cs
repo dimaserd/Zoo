@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Tests
@@ -27,7 +26,7 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void Test()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeType>(GenericUserInterfaceBag.CreateDefault());
+            var builder = new GenericUserInterfaceModelBuilder<SomeType>(TestsHelper.CreateDefaultBag());
 
             var result = builder.Result.Interface;
 

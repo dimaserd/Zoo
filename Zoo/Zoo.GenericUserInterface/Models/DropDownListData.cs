@@ -16,5 +16,10 @@ namespace Zoo.GenericUserInterface.Models
         /// Можно ли добавлять новые данные
         /// </summary>
         public bool CanAddNewItem { get; set; }
+
+        /// <summary>
+        /// Провайдер данных
+        /// </summary>
+        internal string DataProviderTypeFullName { get; set; }
     }
 }

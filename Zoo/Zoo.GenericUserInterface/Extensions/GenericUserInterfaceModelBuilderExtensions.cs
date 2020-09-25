@@ -13,13 +13,18 @@ namespace Zoo.GenericUserInterface.Extensions
     {
         internal static List<SelectListItem> ToSelectListItems<TProp>(List<SelectListItemData<TProp>> selectListItems)
         {
-            return selectListItems.Select(x => new SelectListItem
+            return selectListItems.Select(ToSelectListItem).ToList();
+        }
+
+        internal static SelectListItem ToSelectListItem<TProp>(SelectListItemData<TProp> data)
+        {
+            return new SelectListItem
             {
-                DataJson = x.DataJson,
-                Text = x.Text,
-                Selected = x.Selected,
-                Value = Tool.JsonConverter.Serialize(x.Value)
-            }).ToList();
+                DataJson = data.DataJson,
+                Text = data.Text,
+                Selected = data.Selected,
+                Value = Tool.JsonConverter.Serialize(data.Value)
+            };
         }
 
         private static string AddPropNameToPrefix(string prefix, string propName)

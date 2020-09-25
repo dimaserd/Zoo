@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
-using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Bag;
 
 namespace Zoo.GenericUserInterface.Services
 {

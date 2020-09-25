@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using System.Linq;
-using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Tests
@@ -22,7 +21,7 @@ namespace Zoo.GenericUserInterface.Tests
         [Test]
         public void NullableEnumTest()
         {
-            var result = new GenericUserInterfaceModelBuilder<Type1WithNullableEnum>(GenericUserInterfaceBag.CreateDefault()).Result;
+            var result = new GenericUserInterfaceModelBuilder<Type1WithNullableEnum>(TestsHelper.CreateDefaultBag()).Result;
 
             var fProp = result.Interface.Blocks.First();
 

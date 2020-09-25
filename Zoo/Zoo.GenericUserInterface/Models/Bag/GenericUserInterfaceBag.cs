@@ -4,9 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
+using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
 
-namespace Zoo.GenericUserInterface.Models.Overridings
+namespace Zoo.GenericUserInterface.Models.Bag
 {
     /// <summary>
     /// Портфель из пользовательских интерфейсов для типов и прочего добра необходимого для
@@ -16,29 +17,16 @@ namespace Zoo.GenericUserInterface.Models.Overridings
     {
         IServiceProvider ServiceProvider { get; }
 
-        Dictionary<Type, Type> InterfaceOverriders { get; }
-        Dictionary<string, Type> DataProviders { get; }
+        internal Dictionary<Type, Type> InterfaceOverriders { get; }
+        internal Dictionary<string, Type> AutoCompletionDataProviders { get; }
+        internal Dictionary<string, Type> SelectListDataProviders { get; }
 
         readonly Dictionary<string, GenerateGenericUserInterfaceModel> ComputedInterfaces = new Dictionary<string, GenerateGenericUserInterfaceModel>();
-        
+
         /// <summary>
         /// Опции для создания интерфейса
         /// </summary>
         public GenericInterfaceOptions Options { get; }
-
-        /// <summary>
-        /// Создать дефолтный пустой портфель интерфейсов
-        /// </summary>
-        /// <returns></returns>
-        public static GenericUserInterfaceBag CreateDefault()
-        {
-            var serviceProvider = new ServiceCollection().BuildServiceProvider();
-            return new GenericUserInterfaceBag(serviceProvider, new GenericUserInterfaceBagOptions 
-            {
-                DataProviders = new Dictionary<string, Type>(),
-                InterfaceOverriders = new Dictionary<Type, Type>()
-            }, GenericInterfaceOptions.Default());
-        }
 
         /// <summary>
         /// Конструктор
@@ -48,8 +36,9 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// <param name="options"></param>
         public GenericUserInterfaceBag(IServiceProvider serviceProvider, GenericUserInterfaceBagOptions bagOptions, GenericInterfaceOptions options)
         {
+            SelectListDataProviders = bagOptions.SelectListDataProviders;
             InterfaceOverriders = bagOptions.InterfaceOverriders;
-            DataProviders = bagOptions.DataProviders;
+            AutoCompletionDataProviders = bagOptions.AutoCompletionDataProviders;
             ServiceProvider = serviceProvider;
             Options = options;
         }
@@ -62,12 +51,12 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// <returns></returns>
         public Task<AutoCompleteSuggestion[]> CallAutoCompleteDataProvider(string input, string providerTypeFullName)
         {
-            if (!DataProviders.ContainsKey(providerTypeFullName))
+            if (!AutoCompletionDataProviders.ContainsKey(providerTypeFullName))
             {
                 throw new Exception("Провайдер данных не найден по полному названию типа");
             }
 
-            var typeOfDataProvider = DataProviders[providerTypeFullName];
+            var typeOfDataProvider = AutoCompletionDataProviders[providerTypeFullName];
 
             var provider = ServiceProvider.GetRequiredService(typeOfDataProvider) as IDataProviderForAutoCompletion;
 
@@ -81,8 +70,8 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// <returns></returns>
         public async Task<GenerateGenericUserInterfaceModel> GetInterface(string typeDisplayFullName)
         {
-            var type = CrocoTypeSearcher.FindFirstTypeByName(typeDisplayFullName);
-            
+            var type = CrocoTypeSearcher.FindFirstTypeByName(typeDisplayFullName, x => !x.IsGenericTypeDefinition);
+
             if (type == null)
             {
                 return null;
@@ -94,19 +83,15 @@ namespace Zoo.GenericUserInterface.Models.Overridings
 
             var overriding = GetOverriding(type);
 
-            if(overriding == null)
+            if (overriding == null)
             {
-                //Если переопределения нет, то интерфейс считается статическим
                 ComputedInterfaces.Add(typeDisplayFullName, interfaceModel);
                 return interfaceModel;
             }
 
             await overriding.OverrideFunction(this, interfaceModel);
 
-            if (overriding.Type == InterfaceOverriderType.Static)
-            {
-                ComputedInterfaces.Add(typeDisplayFullName, interfaceModel);
-            }
+            ComputedInterfaces.Add(typeDisplayFullName, interfaceModel);
 
             return interfaceModel;
         }
@@ -129,7 +114,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// <returns></returns>
         public async Task ValidateOverriders()
         {
-            foreach(var overrider in InterfaceOverriders)
+            foreach (var overrider in InterfaceOverriders)
             {
                 await GetInterface(overrider.Key.FullName);
             }

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
+using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Models.Overridings
@@ -11,8 +12,6 @@ namespace Zoo.GenericUserInterface.Models.Overridings
     public abstract class GenericInterfaceOverrider<T> : IGenericInterfaceOverrider
         where T : class 
     {
-        internal InterfaceOverriderType InterfaceType => InterfaceOverriderType.Computed;
-
         /// <summary>
         /// 
         /// </summary>
@@ -29,7 +28,6 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         {
             return new Overrider
             {
-                Type = InterfaceType,
                 OverrideFunction = (bag, model) =>
                 {
                     var builder = new GenericUserInterfaceModelBuilder<T>(model, bag);

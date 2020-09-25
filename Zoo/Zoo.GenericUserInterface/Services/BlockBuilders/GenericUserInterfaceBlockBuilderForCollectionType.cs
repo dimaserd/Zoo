@@ -6,6 +6,7 @@ using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services.BlockBuilders
@@ -61,7 +62,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// Установить список с автоподсказами для свойства данного объекта
         /// </summary>
         /// <returns></returns>
-        public GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetAutoCompleteFor<TDataProvider>()
+        public new GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetAutoCompleteFor<TDataProvider>()
             where TDataProvider : DataProviderForAutoCompletion<TItem>
         {
             var mainDesc = DescribedType.GetMainTypeDescription();
@@ -70,7 +71,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
                 throw new InvalidOperationException(
                     $"Вы не можете установить для свойства {Block.PropertyName} тип блока 'Автозаполнение'. " +
                     "Так как данное свойство является массивом из непримитивов. " +
-                    "Необходим тип, который будет являтся примитивом или массивом из примитивов.");
+                    "Необходим тип, который будет являтся массивом из примитивов.");
             }
 
             Block.InterfaceType = UserInterfaceType.AutoCompleteForMultiple;

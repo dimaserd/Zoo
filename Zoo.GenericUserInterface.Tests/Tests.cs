@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
+using Zoo.GenericUserInterface.Tests;
 
 namespace Tests
 {
@@ -41,7 +41,7 @@ namespace Tests
         [Test]
         public void TestListOfStringPoperty()
         {
-            var result = new GenericUserInterfaceModelBuilder<SomeClass>(GenericUserInterfaceBag.CreateDefault()).Result;
+            var result = new GenericUserInterfaceModelBuilder<SomeClass>(TestsHelper.CreateDefaultBag()).Result;
 
             var block = result.Interface.Blocks.First(t => t.PropertyName == nameof(SomeClass.Property2));
 
@@ -53,7 +53,7 @@ namespace Tests
         [Test]
         public void ShiftToStartForTest()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>(GenericUserInterfaceBag.CreateDefault());
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>(TestsHelper.CreateDefaultBag());
 
             builder.ShiftToStartFor(x => x.Property);
 
@@ -65,7 +65,7 @@ namespace Tests
         [Test]
         public void ShiftToEndForTest()
         {
-            var builder = new GenericUserInterfaceModelBuilder<SomeClass>(GenericUserInterfaceBag.CreateDefault());
+            var builder = new GenericUserInterfaceModelBuilder<SomeClass>(TestsHelper.CreateDefaultBag());
 
             builder.ShiftToEndFor(x => x.Property2);
 

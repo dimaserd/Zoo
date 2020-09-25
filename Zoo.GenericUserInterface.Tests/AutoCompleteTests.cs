@@ -4,7 +4,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Enumerations;
+using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Tests
@@ -58,7 +60,7 @@ namespace Zoo.GenericUserInterface.Tests
             var serviceCollection = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(serviceCollection)
-                .AddDataProvider<SomeDataProvider, int>()
+                .AddDataProviderForAutoCompletion<SomeDataProvider, int>()
                 .AddOverrider<SomeModelForAutoCompleteOverrider>()
                 .Build();
 

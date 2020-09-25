@@ -6,11 +6,15 @@ using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services.BlockBuilders
 {
+
+
     /// <summary>
     /// Построитель для конкретного блока в интерейсе
     /// </summary>
@@ -74,9 +78,9 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// <returns></returns>
         public GenericUserInterfaceBlockBuilder<TProp> SetTextArea()
         {
-            if (Block.InterfaceType != UserInterfaceType.TextBox)
+            if (typeof(TProp) == typeof(string))
             {
-                throw new Exception($"Только блоки типа {nameof(UserInterfaceType.TextBox)} можно переключать на {nameof(UserInterfaceType.TextArea)}");
+                throw new Exception($"Только к типу данных строка можно установить элемент TextArea");
             }
 
             Block.InterfaceType = UserInterfaceType.TextArea;
@@ -100,7 +104,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         }
 
         /// <summary>
-        /// Установить блок, как выпадающий список
+        /// Установить блок, как выпадающий список со статическими данными
         /// </summary>
         /// <param name="selectListItems"></param>
         /// <returns></returns>
@@ -128,6 +132,58 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
                 SelectList = GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(selectListItems),
                 CanAddNewItem = false
             };
+            return this;
+        }
+
+        /// <summary>
+        /// Установить блок, как выпадающий список с динамическими данными
+        /// </summary>
+        /// <typeparam name="TDataProvider"></typeparam>
+        /// <returns></returns>
+        public GenericUserInterfaceBlockBuilder<TProp> SetDropDownList<TDataProvider>() where TDataProvider : DataProviderForSelectList<TProp>
+        {
+            var mainDoc = DocsBuilder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
+            if (mainDoc.IsEnumeration)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.CantImplementSetDropListNameToEnumPropertyFormat, Block.PropertyName));
+            }
+
+            if (!mainDoc.IsPrimitive)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.CantSetDropListForPropertyThatIsNotPrimitiveFormat, Block.PropertyName));
+            }
+
+            Block.InterfaceType = UserInterfaceType.DropDownList;
+            Block.DropDownData = new DropDownListData
+            {
+                DataProviderTypeFullName = typeof(TDataProvider).FullName
+            };
+            return this;
+        }
+
+        /// <summary>
+        /// Установить список с автоподсказами для свойства данного объекта
+        /// </summary>
+        /// <typeparam name="TDataProvider"></typeparam>
+        /// <returns></returns>
+        public GenericUserInterfaceBlockBuilder<TProp> SetAutoCompleteFor<TDataProvider>()
+           where TDataProvider : DataProviderForAutoCompletion<TProp>
+        {
+            var mainDesc = DescribedType.GetMainTypeDescription();
+            if (mainDesc.IsPrimitive)
+            {
+                throw new InvalidOperationException(
+                    $"Вы не можете установить для свойства {Block.PropertyName} тип блока 'Автозаполнение'. " +
+                    "Так как данное свойство не является примитивным. " +
+                    "Необходим тип, который будет являтся примитивом.");
+            }
+
+            Block.InterfaceType = UserInterfaceType.AutoCompleteForSingle;
+            Block.AutoCompleteData = new AutoCompleteData
+            {
+                DataProviderTypeFullName = typeof(TDataProvider).FullName
+            };
+
             return this;
         }
 
