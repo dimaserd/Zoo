@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
+using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Services;
 
@@ -28,13 +30,37 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         {
             return new Overrider
             {
-                OverrideFunction = (bag, model) =>
+                OverrideFunction = async (bag, model) =>
                 {
                     var builder = new GenericUserInterfaceModelBuilder<T>(model, bag);
 
-                    return OverrideInterfaceAsync(bag, builder);
+                    await OverrideInterfaceAsync(bag, builder);
+                    await ProccessDropDownDatas(bag, model);
                 }
             };
+        }
+
+        private static Task ProccessDropDownDatas(GenericUserInterfaceBag bag, GenerateGenericUserInterfaceModel model)
+        {
+            return ProccessInterfaceModel(bag, model.Interface);
+        }
+
+        private static async Task ProccessInterfaceModel(GenericUserInterfaceBag bag, GenericInterfaceModel interfaceModel)
+        {
+            foreach (var block in interfaceModel.Blocks)
+            {
+                if(block.InterfaceType == UserInterfaceType.GenericInterfaceForArray || block.InterfaceType == UserInterfaceType.GenericInterfaceForClass)
+                {
+                    await ProccessInterfaceModel(bag, interfaceModel);
+                }
+
+                if (block.InterfaceType == UserInterfaceType.DropDownList && block.DropDownData.DataProviderTypeFullName != null)
+                {
+                    var providerTypeFullName = block.DropDownData.DataProviderTypeFullName;
+
+                    block.DropDownData.SelectList = (await bag.CallSelectListItemDataProvider(providerTypeFullName)).ToList();
+                }
+            }
         }
     }
 }

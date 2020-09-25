@@ -53,7 +53,7 @@ namespace Zoo.GenericUserInterface.Models.Bag
         {
             if (!AutoCompletionDataProviders.ContainsKey(providerTypeFullName))
             {
-                throw new Exception("Провайдер данных не найден по полному названию типа");
+                throw new InvalidOperationException("Провайдер данных не найден по полному названию типа");
             }
 
             var typeOfDataProvider = AutoCompletionDataProviders[providerTypeFullName];
@@ -61,6 +61,25 @@ namespace Zoo.GenericUserInterface.Models.Bag
             var provider = ServiceProvider.GetRequiredService(typeOfDataProvider) as IDataProviderForAutoCompletion;
 
             return provider.GetSuggestionsData(input);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="providerTypeFullName"></param>
+        /// <returns></returns>
+        public Task<SelectListItem[]> CallSelectListItemDataProvider(string providerTypeFullName)
+        {
+            if (!SelectListDataProviders.ContainsKey(providerTypeFullName))
+            {
+                throw new InvalidOperationException("Провайдер данных не найден по полному названию типа");
+            }
+
+            var typeOfDataProvider = SelectListDataProviders[providerTypeFullName];
+
+            var provider = ServiceProvider.GetRequiredService(typeOfDataProvider) as IDataProviderForSelectList;
+
+            return provider.GetSelectListItems();
         }
 
         /// <summary>

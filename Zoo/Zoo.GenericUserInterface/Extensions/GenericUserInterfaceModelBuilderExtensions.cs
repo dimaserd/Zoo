@@ -11,12 +11,12 @@ namespace Zoo.GenericUserInterface.Extensions
 {
     internal static class GenericUserInterfaceModelBuilderExtensions
     {
-        internal static List<SelectListItem> ToSelectListItems<TProp>(List<SelectListItemData<TProp>> selectListItems)
+        internal static List<SelectListItem> ToSelectListItems<TProp>(this List<SelectListItemData<TProp>> selectListItems)
         {
             return selectListItems.Select(ToSelectListItem).ToList();
         }
 
-        internal static SelectListItem ToSelectListItem<TProp>(SelectListItemData<TProp> data)
+        internal static SelectListItem ToSelectListItem<TProp>(this SelectListItemData<TProp> data)
         {
             return new SelectListItem
             {

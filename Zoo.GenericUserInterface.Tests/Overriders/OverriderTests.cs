@@ -67,7 +67,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var srv = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(srv)
-                .AddOverrider<SomeTypeOverrider>(srv => new SomeTypeOverrider(labelText))
+                .AddOverrider(srv => new SomeTypeOverrider(labelText))
                 .Build();
 
             var provider = srv.BuildServiceProvider();

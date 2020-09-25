@@ -115,16 +115,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
                 throw new ArgumentNullException(nameof(selectListItems));
             }
 
-            var mainDoc = DocsBuilder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
-            if (mainDoc.IsEnumeration)
-            {
-                throw new InvalidOperationException(string.Format(ExceptionTexts.CantImplementSetDropListNameToEnumPropertyFormat, Block.PropertyName));
-            }
-
-            if (!mainDoc.IsPrimitive)
-            {
-                throw new InvalidOperationException(string.Format(ExceptionTexts.CantSetDropListForPropertyThatIsNotPrimitiveFormat, Block.PropertyName));
-            }
+            DropDownListChecks();
 
             Block.InterfaceType = UserInterfaceType.DropDownList;
             Block.DropDownData = new DropDownListData
@@ -142,16 +133,14 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// <returns></returns>
         public GenericUserInterfaceBlockBuilder<TProp> SetDropDownList<TDataProvider>() where TDataProvider : DataProviderForSelectList<TProp>
         {
-            var mainDoc = DocsBuilder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
-            if (mainDoc.IsEnumeration)
+            var key = typeof(TDataProvider).FullName;
+
+            if (!Bag.SelectListDataProviders.ContainsKey(key))
             {
-                throw new InvalidOperationException(string.Format(ExceptionTexts.CantImplementSetDropListNameToEnumPropertyFormat, Block.PropertyName));
+                throw new InvalidOperationException($"Провайдер данных с типом {key} не зарегистрирован");
             }
 
-            if (!mainDoc.IsPrimitive)
-            {
-                throw new InvalidOperationException(string.Format(ExceptionTexts.CantSetDropListForPropertyThatIsNotPrimitiveFormat, Block.PropertyName));
-            }
+            DropDownListChecks();
 
             Block.InterfaceType = UserInterfaceType.DropDownList;
             Block.DropDownData = new DropDownListData
@@ -195,6 +184,20 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         {
             Block.InterfaceType = UserInterfaceType.Hidden;
             return this;
+        }
+
+        private void DropDownListChecks()
+        {
+            var mainDoc = DocsBuilder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
+            if (mainDoc.IsEnumeration)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.CantImplementSetDropListNameToEnumPropertyFormat, Block.PropertyName));
+            }
+
+            if (!mainDoc.IsPrimitive)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.CantSetDropListForPropertyThatIsNotPrimitiveFormat, Block.PropertyName));
+            }
         }
     }
 }
