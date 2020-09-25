@@ -35,6 +35,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
                     var builder = new GenericUserInterfaceModelBuilder<T>(model, bag);
 
                     await OverrideInterfaceAsync(bag, builder);
+                    //TODO Сделать кещируемым все что было до установки выпадающих списков
                     await ProccessDropDownDatas(bag, model);
                 }
             };
