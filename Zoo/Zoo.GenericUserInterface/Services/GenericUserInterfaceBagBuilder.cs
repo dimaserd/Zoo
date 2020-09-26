@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Models.Bag;
-using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Models.Overridings

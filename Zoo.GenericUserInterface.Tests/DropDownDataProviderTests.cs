@@ -2,21 +2,18 @@
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Models.Providers;
+using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Tests
 {
-    
-
     public class DropDownDataProviderTests
     {
         public class SomeModel
@@ -26,7 +23,6 @@ namespace Zoo.GenericUserInterface.Tests
 
         public class SomeSelectListDataProvider : DataProviderForSelectList<int>
         {
-
             public static SelectListItemData<int>[] Items = new SelectListItemData<int>[]
             {
                 new SelectListItemData<int>
@@ -52,6 +48,27 @@ namespace Zoo.GenericUserInterface.Tests
 
                 return Task.CompletedTask;
             }
+        }
+
+        [Test]
+        public void TestWithoutRegistrationProvider()
+        {
+            var srvCollection = new ServiceCollection();
+
+            //Не регистрируем провайдера данных для переопределителя
+            new GenericUserInterfaceBagBuilder(srvCollection)
+                .AddOverrider<SomeModelInterfaceOverrider>()
+                .Build();
+
+            var bag = srvCollection.BuildServiceProvider()
+                .GetRequiredService<GenericUserInterfaceBag>();
+
+            var ex = Assert.ThrowsAsync<InvalidOperationException>(() => bag.GetInterface<SomeModel>());
+
+            var key = typeof(SomeSelectListDataProvider).FullName;
+            var expectedMessage = string.Format(ExceptionTexts.DataProviderWithTypeNotRegisteredFormat, key);
+
+            Assert.AreEqual(expectedMessage, ex.Message);
         }
 
         [Test]

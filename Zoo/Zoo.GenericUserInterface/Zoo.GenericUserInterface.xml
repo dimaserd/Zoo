@@ -595,6 +595,11 @@
               Ищет локализованную строку, похожую на Вы не можете установить выпадающий список с множественным выбором на свойство, тип которого не является примитивным. Cвойство: {0}. Тип данных: {1}.
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.DataProviderWithTypeNotRegisteredFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Провайдер данных с типом {0} не зарегистрирован.
+            </summary>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.DontUseGetBlockBuilderForCollectionOnCollectionsOfChars">
             <summary>
               Ищет локализованную строку, похожую на Dont use GetBlockBuilderForCollection on collections of chars. Use ordinary string property..

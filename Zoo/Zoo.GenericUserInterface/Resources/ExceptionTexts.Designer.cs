@@ -61,6 +61,15 @@ namespace Zoo.GenericUserInterface.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Array types are not supported, use SetMultipleDropDownList method for array types.
+        /// </summary>
+        internal static string ArrayTypesAreNotSupportedSetMultipleDropDownList {
+            get {
+                return ResourceManager.GetString("ArrayTypesAreNotSupportedSetMultipleDropDownList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
         /// </summary>
         internal static string CantImplementMultipleDropDownForToNotEnumerableProperty {
@@ -102,6 +111,24 @@ namespace Zoo.GenericUserInterface.Resources {
         internal static string CantSetMultipleDropListNotOnPrimitivesFormat {
             get {
                 return ResourceManager.GetString("CantSetMultipleDropListNotOnPrimitivesFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Провайдер для автокомплита с типом данным {0} не зарегистрирован.
+        /// </summary>
+        internal static string DataProviderForAutoCompletionNotRegisteredFormat {
+            get {
+                return ResourceManager.GetString("DataProviderForAutoCompletionNotRegisteredFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Провайдер данных с типом {0} не зарегистрирован.
+        /// </summary>
+        internal static string DataProviderWithTypeNotRegisteredFormat {
+            get {
+                return ResourceManager.GetString("DataProviderWithTypeNotRegisteredFormat", resourceCulture);
             }
         }
         

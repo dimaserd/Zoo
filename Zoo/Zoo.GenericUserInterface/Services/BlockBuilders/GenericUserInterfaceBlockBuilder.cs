@@ -13,8 +13,6 @@ using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services.BlockBuilders
 {
-
-
     /// <summary>
     /// Построитель для конкретного блока в интерейсе
     /// </summary>
@@ -137,7 +135,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
 
             if (!Bag.SelectListDataProviders.ContainsKey(key))
             {
-                throw new InvalidOperationException($"Провайдер данных с типом {key} не зарегистрирован");
+                throw new InvalidOperationException(string.Format(ExceptionTexts.DataProviderWithTypeNotRegisteredFormat, key));
             }
 
             DropDownListChecks();
@@ -189,6 +187,12 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         private void DropDownListChecks()
         {
             var mainDoc = DocsBuilder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
+            
+            if(mainDoc.IsEnumerable)
+            {
+                throw new InvalidOperationException(ExceptionTexts.ArrayTypesAreNotSupportedSetMultipleDropDownList);
+            }
+            
             if (mainDoc.IsEnumeration)
             {
                 throw new InvalidOperationException(string.Format(ExceptionTexts.CantImplementSetDropListNameToEnumPropertyFormat, Block.PropertyName));

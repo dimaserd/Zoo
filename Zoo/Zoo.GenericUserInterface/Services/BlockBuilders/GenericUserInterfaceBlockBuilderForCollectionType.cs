@@ -65,6 +65,13 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         public new GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetAutoCompleteFor<TDataProvider>()
             where TDataProvider : DataProviderForAutoCompletion<TItem>
         {
+            var key = typeof(TDataProvider).FullName;
+
+            if (!Bag.AutoCompletionDataProviders.ContainsKey(key))
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.DataProviderForAutoCompletionNotRegisteredFormat, key));
+            }
+
             var mainDesc = DescribedType.GetMainTypeDescription();
             if (mainDesc.IsEnumerable && !DescribedType.GetTypeDescription(mainDesc.EnumeratedDiplayFullTypeName).IsPrimitive)
             {
