@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Croco.Core.Utils;
+using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using Zoo.GenericUserInterface.Models;
@@ -21,6 +23,14 @@ namespace Zoo.GenericUserInterface.Tests
                 SelectListDataProviders = new Dictionary<string, Type>(),
                 InterfaceOverriders = new Dictionary<Type, Type>()
             }, GenericInterfaceOptions.Default());
+        }
+
+        public static void AssertAreEqualViaJson<T>(T data1, T data2)
+        {
+            var json1 = Tool.JsonConverter.Serialize(data1);
+            var json2 = Tool.JsonConverter.Serialize(data2);
+
+            Assert.AreEqual(json1, json2);
         }
     }
 }

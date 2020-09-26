@@ -1,5 +1,4 @@
-﻿using Croco.Core.Utils;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,16 +32,9 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var lastProp = builder.Result.Interface.Blocks.Last();
 
             Assert.IsTrue(lastProp.InterfaceType == UserInterfaceType.DropDownList);
-            AsserAreEqualViaJson(GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(list), lastProp.DropDownData.SelectList);
+            TestsHelper.AssertAreEqualViaJson(GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(list), lastProp.DropDownData.SelectList);
         }
 
-        private void AsserAreEqualViaJson<T>(T data1, T data2)
-        {
-            var json1 = Tool.JsonConverter.Serialize(data1);
-            var json2 = Tool.JsonConverter.Serialize(data2);
-
-            Assert.AreEqual(json1, json2);
-        }
 
         [Test]
         public void ToEnumProperty_ShouldThrowException()

@@ -1,5 +1,4 @@
-﻿using System;
-using Zoo.ServerJs.Statics;
+﻿using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Models.Method
 {

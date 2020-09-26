@@ -1,7 +1,6 @@
 ﻿using Croco.Core.Documentation.Models;
 using NUnit.Framework;
 using System;
-using Zoo.ServerJs.Models;
 
 namespace Zoo.ServerJs.Tests
 {

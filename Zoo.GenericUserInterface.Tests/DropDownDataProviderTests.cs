@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Linq;
@@ -85,7 +84,7 @@ namespace Zoo.GenericUserInterface.Tests
                 .GetRequiredService<GenericUserInterfaceBag>();
 
             var interfaceModel = await bag.GetInterface<SomeModel>();
-
+            var secondModel = await bag.GetInterface<SomeModel>();
             Assert.AreEqual(1, interfaceModel.Interface.Blocks.Count);
 
             var fBlock = interfaceModel.Interface.Blocks.First();
@@ -93,10 +92,8 @@ namespace Zoo.GenericUserInterface.Tests
             Assert.AreEqual(UserInterfaceType.DropDownList, fBlock.InterfaceType);
 
             var expectedData = SomeSelectListDataProvider.Items.Select(x => x.ToSelectListItem()).ToList();
-            var expectedJson = JsonConvert.SerializeObject(expectedData);
-            var resultJson = JsonConvert.SerializeObject(fBlock.DropDownData.SelectList);
-
-            Assert.AreEqual(expectedJson, resultJson);
+            
+            TestsHelper.AssertAreEqualViaJson(expectedData, fBlock.DropDownData.SelectList);
         }
     }
 }

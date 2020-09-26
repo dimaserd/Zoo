@@ -336,9 +336,14 @@
             Переопределитель интерфейсов
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.OverrideFunction">
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.MainOverrideFunction">
             <summary>
-            Функция для переопределения
+            Основная Функция для переопределения
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.SetDropDownDatasFunction">
+            <summary>
+            Вторая функция для переопределения
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1">
@@ -570,6 +575,11 @@
               обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.ArrayTypesAreNotSupportedSetMultipleDropDownList">
+            <summary>
+              Ищет локализованную строку, похожую на Array types are not supported, use SetMultipleDropDownList method for array types.
+            </summary>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty">
             <summary>
               Ищет локализованную строку, похожую на Вы не можете применить метод MultipleDropDownFor к свойству, которое не является массивом..
@@ -593,6 +603,11 @@
         <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantSetMultipleDropListNotOnPrimitivesFormat">
             <summary>
               Ищет локализованную строку, похожую на Вы не можете установить выпадающий список с множественным выбором на свойство, тип которого не является примитивным. Cвойство: {0}. Тип данных: {1}.
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.DataProviderForAutoCompletionNotRegisteredFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Провайдер для автокомплита с типом данным {0} не зарегистрирован.
             </summary>
         </member>
         <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.DataProviderWithTypeNotRegisteredFormat">
@@ -719,6 +734,13 @@
             Установить выпадающий список со множественным выбором для свойства объекта
             </summary>
             <param name="selectListItems"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilderForCollectionType`1.SetMultipleDropDownList``1">
+            <summary>
+            Установить выпадающий список со множественным выбором для свойства объекта
+            </summary>
+            <typeparam name="TDataProvider">Провайдер данных</typeparam>
             <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilderForCollectionType`1.SetAutoCompleteFor``1">

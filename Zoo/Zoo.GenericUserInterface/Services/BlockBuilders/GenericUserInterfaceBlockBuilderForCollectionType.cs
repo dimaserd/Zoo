@@ -34,19 +34,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
                 throw new ArgumentNullException(nameof(selectListItems));
             }
 
-            var main = DescribedType.GetMainTypeDescription();
-
-            if (!main.IsEnumerable)
-            {
-                throw new InvalidOperationException(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty);
-            }
-
-            var enumerated = DescribedType.GetTypeDescription(main.EnumeratedDiplayFullTypeName);
-
-            if (!enumerated.IsPrimitive)
-            {
-                throw new InvalidOperationException(string.Format(ExceptionTexts.CantSetMultipleDropListNotOnPrimitivesFormat, Block.PropertyName, typeof(TItem).FullName));
-            }
+            ValidateForMultipleDropDownList();
 
             Block.InterfaceType = UserInterfaceType.MultipleDropDownList;
             Block.DropDownData = new DropDownListData
@@ -57,6 +45,34 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
 
             return this;
         }
+
+        /// <summary>
+        /// Установить выпадающий список со множественным выбором для свойства объекта
+        /// </summary>
+        /// <typeparam name="TDataProvider">Провайдер данных</typeparam>
+        /// <returns></returns>
+        public GenericUserInterfaceBlockBuilderForCollectionType<TItem> SetMultipleDropDownList<TDataProvider>() where TDataProvider : DataProviderForSelectList<TItem>
+        {
+            var key = typeof(TDataProvider).FullName;
+
+            if (!Bag.SelectListDataProviders.ContainsKey(key))
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.DataProviderWithTypeNotRegisteredFormat, key));
+            }
+
+            ValidateForMultipleDropDownList();
+
+            Block.InterfaceType = UserInterfaceType.MultipleDropDownList;
+            Block.DropDownData = new DropDownListData
+            {
+                DataProviderTypeFullName = key,
+                CanAddNewItem = false
+            };
+
+            return this;
+        }
+
+        
 
         /// <summary>
         /// Установить список с автоподсказами для свойства данного объекта
@@ -88,6 +104,23 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             };
 
             return this;
+        }
+
+        private void ValidateForMultipleDropDownList()
+        {
+            var main = DescribedType.GetMainTypeDescription();
+
+            if (!main.IsEnumerable)
+            {
+                throw new InvalidOperationException(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty);
+            }
+
+            var enumerated = DescribedType.GetTypeDescription(main.EnumeratedDiplayFullTypeName);
+
+            if (!enumerated.IsPrimitive)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.CantSetMultipleDropListNotOnPrimitivesFormat, Block.PropertyName, typeof(TItem).FullName));
+            }
         }
     }
 }

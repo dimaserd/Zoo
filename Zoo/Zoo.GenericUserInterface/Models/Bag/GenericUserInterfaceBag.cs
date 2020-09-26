@@ -21,7 +21,7 @@ namespace Zoo.GenericUserInterface.Models.Bag
         internal Dictionary<string, Type> AutoCompletionDataProviders { get; }
         internal Dictionary<string, Type> SelectListDataProviders { get; }
 
-        readonly Dictionary<string, GenerateGenericUserInterfaceModel> ComputedInterfaces = new Dictionary<string, GenerateGenericUserInterfaceModel>();
+        readonly Dictionary<string, (GenerateGenericUserInterfaceModel, Type)> ComputedInterfaces = new Dictionary<string, (GenerateGenericUserInterfaceModel, Type)>();
 
         /// <summary>
         /// Опции для создания интерфейса
@@ -89,28 +89,15 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// <returns></returns>
         public async Task<GenerateGenericUserInterfaceModel> GetInterface(string typeDisplayFullName)
         {
-            var type = CrocoTypeSearcher.FindFirstTypeByName(typeDisplayFullName, x => !x.IsGenericTypeDefinition);
+            var interfaceModelResult = await GetOrAddInterfaceFromComputed(typeDisplayFullName);
 
-            if (type == null)
+            var overriding = GetOverriding(interfaceModelResult.Item2);
+
+            var interfaceModel = interfaceModelResult.Item1;
+            if (overriding != null)
             {
-                return null;
+                await overriding.SetDropDownDatasFunction(this, interfaceModel);
             }
-
-            var builder = new GenericUserInterfaceModelBuilder(type, Options);
-
-            var interfaceModel = builder.Result;
-
-            var overriding = GetOverriding(type);
-
-            if (overriding == null)
-            {
-                ComputedInterfaces.Add(typeDisplayFullName, interfaceModel);
-                return interfaceModel;
-            }
-
-            await overriding.OverrideFunction(this, interfaceModel);
-
-            ComputedInterfaces.Add(typeDisplayFullName, interfaceModel);
 
             return interfaceModel;
         }
@@ -153,6 +140,35 @@ namespace Zoo.GenericUserInterface.Models.Bag
             var overrider = ServiceProvider.GetRequiredService(InterfaceOverriders[key]) as IGenericInterfaceOverrider;
 
             return overrider.GetOverrider();
+        }
+
+        private async Task<(GenerateGenericUserInterfaceModel, Type)> GetOrAddInterfaceFromComputed(string typeDisplayFullName)
+        {
+            if (ComputedInterfaces.ContainsKey(typeDisplayFullName))
+            {
+                return ComputedInterfaces[typeDisplayFullName];
+            }
+
+            var type = CrocoTypeSearcher.FindFirstTypeByName(typeDisplayFullName, x => !x.IsGenericTypeDefinition);
+
+            if (type == null)
+            {
+                return (null, null);
+            }
+
+            var builder = new GenericUserInterfaceModelBuilder(type, Options);
+
+            var interfaceModel = builder.Result;
+
+            var overriding = GetOverriding(type);
+
+            if (overriding != null)
+            {
+                await overriding.MainOverrideFunction(this, interfaceModel);
+                ComputedInterfaces.Add(typeDisplayFullName, (interfaceModel, type));
+            }
+
+            return (interfaceModel, type);
         }
     }
 }

@@ -10,8 +10,13 @@ namespace Zoo.GenericUserInterface.Models.Overridings
     public class Overrider
     {
         /// <summary>
-        /// Функция для переопределения
+        /// Основная Функция для переопределения
         /// </summary>
-        public Func<GenericUserInterfaceBag, GenerateGenericUserInterfaceModel, Task> OverrideFunction { get; set; }
+        public Func<GenericUserInterfaceBag, GenerateGenericUserInterfaceModel, Task> MainOverrideFunction { get; set; }
+
+        /// <summary>
+        /// Вторая функция для переопределения
+        /// </summary>
+        public Func<GenericUserInterfaceBag, GenerateGenericUserInterfaceModel, Task> SetDropDownDatasFunction { get; set; }
     }
 }
