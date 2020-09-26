@@ -60,7 +60,7 @@ namespace Zoo.GenericUserInterface.Tests
             var serviceCollection = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(serviceCollection)
-                .AddDataProviderForAutoCompletion<SomeDataProvider, int>()
+                .AddDataProviderForAutoCompletion<SomeDataProvider>()
                 .AddOverrider<SomeModelForAutoCompleteOverrider>()
                 .Build();
 

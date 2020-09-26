@@ -44,6 +44,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// Добавить переопределение для интерфейса
         /// </summary>
         /// <typeparam name="TOverrider"></typeparam>
+        /// <param name="providerFunc"></param>
         /// <returns></returns>
         public GenericUserInterfaceBagBuilder AddOverrider<TOverrider>(Func<IServiceProvider, TOverrider> providerFunc) where TOverrider : class, IGenericInterfaceOverrider
         {
@@ -54,45 +55,41 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// Добавить провайдер данных для автокомплита
         /// </summary>
         /// <typeparam name="TDataProvider"></typeparam>
-        /// <typeparam name="TItem"></typeparam>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddDataProviderForAutoCompletion<TDataProvider, TItem>() where TDataProvider : DataProviderForAutoCompletion<TItem>
+        public GenericUserInterfaceBagBuilder AddDataProviderForAutoCompletion<TDataProvider>() where TDataProvider : class, IDataProviderForAutoCompletion
         {
-            return AddDataProviderForAutoCompletionInner<TDataProvider, TItem>(() => ServiceCollection.AddTransient<TDataProvider>());
+            return AddDataProviderForAutoCompletionInner<TDataProvider>(() => ServiceCollection.AddTransient<TDataProvider>());
         }
 
         /// <summary>
         /// Добавить провайдер данных для автокомплита
         /// </summary>
         /// <typeparam name="TDataProvider"></typeparam>
-        /// <typeparam name="TItem"></typeparam>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddDataProviderForAutoCompletion<TDataProvider, TItem>(Func<IServiceProvider, TDataProvider> providerFunc) where TDataProvider : DataProviderForAutoCompletion<TItem>
+        public GenericUserInterfaceBagBuilder AddDataProviderForAutoCompletion<TDataProvider>(Func<IServiceProvider, TDataProvider> providerFunc) where TDataProvider : class, IDataProviderForAutoCompletion
         {
-            return AddDataProviderForAutoCompletionInner<TDataProvider, TItem>(() => ServiceCollection.AddTransient(providerFunc));
+            return AddDataProviderForAutoCompletionInner<TDataProvider>(() => ServiceCollection.AddTransient(providerFunc));
         }
 
         /// <summary>
         /// Добавить провайдер данных для выпадающего списка
         /// </summary>
         /// <typeparam name="TDataProvider"></typeparam>
-        /// <typeparam name="TItem"></typeparam>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddDataProviderForSelectList<TDataProvider, TItem>() where TDataProvider : DataProviderForSelectList<TItem>
+        public GenericUserInterfaceBagBuilder AddDataProviderForSelectList<TDataProvider>() where TDataProvider : class, IDataProviderForSelectList
         {
-            return AddDataProviderForSelectListInner<TDataProvider, TItem>(() => ServiceCollection.AddTransient<TDataProvider>());
+            return AddDataProviderForSelectListInner<TDataProvider>(() => ServiceCollection.AddTransient<TDataProvider>());
         }
 
         /// <summary>
         /// Добавить провайдер данных для выпадающего списка
         /// </summary>
         /// <typeparam name="TDataProvider"></typeparam>
-        /// <typeparam name="TItem"></typeparam>
         /// <param name="providerFunc"></param>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddDataProviderForSelectList<TDataProvider, TItem>(Func<IServiceProvider, TDataProvider> providerFunc) where TDataProvider : DataProviderForSelectList<TItem>
+        public GenericUserInterfaceBagBuilder AddDataProviderForSelectList<TDataProvider>(Func<IServiceProvider, TDataProvider> providerFunc) where TDataProvider : class, IDataProviderForSelectList
         {
-            return AddDataProviderForSelectListInner<TDataProvider, TItem>(() => ServiceCollection.AddTransient(providerFunc));
+            return AddDataProviderForSelectListInner<TDataProvider>(() => ServiceCollection.AddTransient(providerFunc));
         }
 
 
@@ -149,7 +146,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
             return this;
         }
 
-        private GenericUserInterfaceBagBuilder AddDataProviderForSelectListInner<TDataProvider, TItem>(Action action) where TDataProvider : DataProviderForSelectList<TItem>
+        private GenericUserInterfaceBagBuilder AddDataProviderForSelectListInner<TDataProvider>(Action action) where TDataProvider : class, IDataProviderForSelectList
         {
             var type = typeof(TDataProvider);
             SelectListDataProviders.Add(type.FullName, type);
@@ -158,7 +155,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
             return this;
         }
 
-        private GenericUserInterfaceBagBuilder AddDataProviderForAutoCompletionInner<TDataProvider, TItem>(Action action) where TDataProvider : DataProviderForAutoCompletion<TItem>
+        private GenericUserInterfaceBagBuilder AddDataProviderForAutoCompletionInner<TDataProvider>(Action action) where TDataProvider : class, IDataProviderForAutoCompletion
         {
             var type = typeof(TDataProvider);
             AutoCompletionDataProviders.Add(type.FullName, type);

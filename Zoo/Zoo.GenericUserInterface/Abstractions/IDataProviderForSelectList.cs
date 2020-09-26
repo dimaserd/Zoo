@@ -3,7 +3,7 @@ using Zoo.GenericUserInterface.Models;
 
 namespace Zoo.GenericUserInterface.Abstractions
 {
-    internal interface IDataProviderForSelectList
+    public interface IDataProviderForSelectList
     {
         Task<SelectListItem[]> GetSelectListItems();
     }

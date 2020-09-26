@@ -389,38 +389,35 @@
             Добавить переопределение для интерфейса
             </summary>
             <typeparam name="TOverrider"></typeparam>
+            <param name="providerFunc"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForAutoCompletion``2">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForAutoCompletion``1">
             <summary>
             Добавить провайдер данных для автокомплита
             </summary>
             <typeparam name="TDataProvider"></typeparam>
-            <typeparam name="TItem"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForAutoCompletion``2(System.Func{System.IServiceProvider,``0})">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForAutoCompletion``1(System.Func{System.IServiceProvider,``0})">
             <summary>
             Добавить провайдер данных для автокомплита
             </summary>
             <typeparam name="TDataProvider"></typeparam>
-            <typeparam name="TItem"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForSelectList``2">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForSelectList``1">
             <summary>
             Добавить провайдер данных для выпадающего списка
             </summary>
             <typeparam name="TDataProvider"></typeparam>
-            <typeparam name="TItem"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForSelectList``2(System.Func{System.IServiceProvider,``0})">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForSelectList``1(System.Func{System.IServiceProvider,``0})">
             <summary>
             Добавить провайдер данных для выпадающего списка
             </summary>
             <typeparam name="TDataProvider"></typeparam>
-            <typeparam name="TItem"></typeparam>
             <param name="providerFunc"></param>
             <returns></returns>
         </member>

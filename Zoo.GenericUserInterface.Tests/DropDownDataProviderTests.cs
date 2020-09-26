@@ -60,7 +60,7 @@ namespace Zoo.GenericUserInterface.Tests
             var srvCollection = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(srvCollection)
-                .AddDataProviderForSelectList<SomeSelectListDataProvider, int>()
+                .AddDataProviderForSelectList<SomeSelectListDataProvider>()
                 .AddOverrider<SomeModelInterfaceOverrider>()
                 .Build();
 
