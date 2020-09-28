@@ -16,7 +16,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
         public string SomeProperty { get; set; }
     }
 
-    public class SomeTypeOverrider : GenericInterfaceOverrider<SomeTypeToOverride>
+    public class SomeTypeOverrider : UserInterfaceOverrider<SomeTypeToOverride>
     {
         string LabelText { get; }
 

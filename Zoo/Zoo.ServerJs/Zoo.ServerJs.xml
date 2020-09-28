@@ -190,6 +190,11 @@
             Модель описывающая js метод или функцию
             </summary>
         </member>
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
         <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs.Parameters">
             <summary>
             Типы входных параметров

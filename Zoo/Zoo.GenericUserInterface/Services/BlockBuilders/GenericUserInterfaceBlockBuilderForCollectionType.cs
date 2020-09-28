@@ -89,7 +89,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             }
 
             var mainDesc = DescribedType.GetMainTypeDescription();
-            if (mainDesc.IsEnumerable && !DescribedType.GetTypeDescription(mainDesc.EnumeratedDiplayFullTypeName).IsPrimitive)
+            if (mainDesc.ArrayDescription.IsArray && !DescribedType.GetTypeDescription(mainDesc.ArrayDescription.ElementDiplayFullTypeName).IsPrimitive)
             {
                 throw new InvalidOperationException(
                     $"Вы не можете установить для свойства {Block.PropertyName} тип блока 'Автозаполнение'. " +
@@ -110,12 +110,12 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         {
             var main = DescribedType.GetMainTypeDescription();
 
-            if (!main.IsEnumerable)
+            if (!main.ArrayDescription.IsArray)
             {
                 throw new InvalidOperationException(ExceptionTexts.CantImplementMultipleDropDownForToNotEnumerableProperty);
             }
 
-            var enumerated = DescribedType.GetTypeDescription(main.EnumeratedDiplayFullTypeName);
+            var enumerated = DescribedType.GetTypeDescription(main.ArrayDescription.ElementDiplayFullTypeName);
 
             if (!enumerated.IsPrimitive)
             {

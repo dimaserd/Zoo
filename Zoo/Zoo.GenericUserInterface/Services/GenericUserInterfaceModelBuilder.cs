@@ -87,11 +87,16 @@ namespace Zoo.GenericUserInterface.Services
                 throw new InvalidOperationException(ExceptionTexts.NonComplexTypesAreNotSupported);
             }
 
-            var isRecursive = new CrocoClassDescriptionChecker().IsRecursiveType(main, desc.Types);
+            var typeChecker = new CrocoClassDescriptionChecker();
 
-            if (isRecursive)
+            if (typeChecker.IsRecursiveType(desc))
             {
                 throw new InvalidOperationException(ExceptionTexts.RecursiveTypesAreNotSupported);
+            }
+
+            if (typeChecker.HasMultiDimensionalArrays(desc))
+            {
+                throw new InvalidOperationException(ExceptionTexts.ClassesWithMultiDimensionalArrayPropertiesAreNotSupported);
             }
 
             if (opts == null)

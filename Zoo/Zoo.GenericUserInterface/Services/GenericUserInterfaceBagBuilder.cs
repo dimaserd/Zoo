@@ -157,6 +157,9 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         private GenericUserInterfaceBagBuilder AddDataProviderForAutoCompletionInner<TDataProvider>(Action action) where TDataProvider : class, IDataProviderForAutoCompletion
         {
             var type = typeof(TDataProvider);
+
+            var innerGeneric = GetFirstInnerGeneric(type);
+
             AutoCompletionDataProviders.Add(type.FullName, type);
             action();
 

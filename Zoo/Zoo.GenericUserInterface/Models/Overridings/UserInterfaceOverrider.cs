@@ -11,7 +11,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
     /// Переопределитель интерфейса
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class GenericInterfaceOverrider<T> : IGenericInterfaceOverrider
+    public abstract class UserInterfaceOverrider<T> : IGenericInterfaceOverrider
         where T : class 
     {
         /// <summary>
@@ -56,7 +56,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
 
                 if (blockType == UserInterfaceType.GenericInterfaceForArray || blockType == UserInterfaceType.GenericInterfaceForClass)
                 {
-                    await ProccessInterfaceModel(bag, interfaceModel);
+                    await ProccessInterfaceModel(bag, block.InnerGenericInterface);
                 }
 
                 if ((blockType == UserInterfaceType.DropDownList || blockType == UserInterfaceType.MultipleDropDownList) && block.DropDownData.DataProviderTypeFullName != null)

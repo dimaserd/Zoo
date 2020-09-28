@@ -1,60 +1,45 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Models.Overridings;
-using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Services;
 
-namespace Zoo.GenericUserInterface.Tests
+namespace Zoo.GenericUserInterface.Tests.AutoComplete
 {
-    public class SomeModelForAutoComplete
+    public class SettingAutoCompletionDataProviderTests
     {
-        public int[] Names { get; set; }
+        public class SomeDataProviderWithComplexData
+        {
+
+        }
+
+        [Test]
+        public void Test()
+        {
+
+        }
     }
 
-    public class SomeDataProvider : DataProviderForAutoCompletion<int>
+    public class AutoCompleteForMultipleTests
     {
-        static readonly Random _random = new Random();
-
-        public static AutoCompleteSuggestionData<int>[] GetDataStatic()
+        public class SomeModelForAutoComplete
         {
-            return new int[]
+            public int[] Names { get; set; }
+        }
+
+        public class SomeModelForAutoCompleteOverrider : UserInterfaceOverrider<SomeModelForAutoComplete>
+        {
+            public override Task OverrideInterfaceAsync(GenericUserInterfaceBag bag, GenericUserInterfaceModelBuilder<SomeModelForAutoComplete> overrider)
             {
-                GetNum(), GetNum(), GetNum(), GetNum(), GetNum()
-            }.Select(x => new AutoCompleteSuggestionData<int>
-            {
-                Text = x.ToString(),
-                Value = x
-            }).ToArray();
+                overrider.GetBlockBuilderForCollection(x => x.Names).SetAutoCompleteFor<SomeDataProvider>();
+
+                return Task.CompletedTask;
+            }
         }
 
-        public override Task<AutoCompleteSuggestionData<int>[]> GetData(string typedText)
-        {
-            return Task.FromResult(GetDataStatic());
-        }
-
-        private static int GetNum()
-        {
-            return _random.Next(0, 100);
-        }
-    }
-
-    public class SomeModelForAutoCompleteOverrider : GenericInterfaceOverrider<SomeModelForAutoComplete>
-    {   
-        public override Task OverrideInterfaceAsync(GenericUserInterfaceBag bag, GenericUserInterfaceModelBuilder<SomeModelForAutoComplete> overrider)
-        {
-            overrider.GetBlockBuilderForCollection(x => x.Names).SetAutoCompleteFor<SomeDataProvider>();
-
-            return Task.CompletedTask;
-        }
-    }
-
-    public class AutoCompleteTests
-    {
         private GenericUserInterfaceBag GetAndBuildBag()
         {
             var serviceCollection = new ServiceCollection();

@@ -38,7 +38,7 @@ namespace Zoo.GenericUserInterface.Tests
             }
         }
 
-        public class SomeModelInterfaceOverrider : GenericInterfaceOverrider<SomeModel>
+        public class SomeModelInterfaceOverrider : UserInterfaceOverrider<SomeModel>
         {
             public override Task OverrideInterfaceAsync(GenericUserInterfaceBag bag, GenericUserInterfaceModelBuilder<SomeModel> overrider)
             {

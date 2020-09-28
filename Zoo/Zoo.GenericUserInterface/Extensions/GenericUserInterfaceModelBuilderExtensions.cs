@@ -36,12 +36,12 @@ namespace Zoo.GenericUserInterface.Extensions
         {
             var type = desc.GetTypeDescription(prop.TypeDisplayFullName);
 
-            if(!type.IsEnumerable)
+            if(!type.ArrayDescription.IsArray)
             {
                 throw new InvalidOperationException("Type is not of type enumerable");
             }
 
-            var enumeratedType = desc.GetTypeDescription(type.EnumeratedDiplayFullTypeName);
+            var enumeratedType = desc.GetTypeDescription(type.ArrayDescription.ElementDiplayFullTypeName);
 
             if(enumeratedType.IsPrimitive)
             {
@@ -112,7 +112,7 @@ namespace Zoo.GenericUserInterface.Extensions
         {
             var propTypeDescription = main.GetTypeDescription(prop.TypeDisplayFullName);
 
-            if (!propTypeDescription.IsClass && !propTypeDescription.IsEnumerable)
+            if (!propTypeDescription.IsClass && !propTypeDescription.ArrayDescription.IsArray)
             {
                 var type = GetUserInterfaceType(propTypeDescription);
 
@@ -128,7 +128,7 @@ namespace Zoo.GenericUserInterface.Extensions
                 };
             }
 
-            if (propTypeDescription.IsEnumerable)
+            if (propTypeDescription.ArrayDescription.IsArray)
             {
                 return GetBlockForEnumerable(prefix, prop, main, opts);
             }
@@ -159,15 +159,15 @@ namespace Zoo.GenericUserInterface.Extensions
         {
             var emptySelectListPredicates = new List<Func<CrocoTypeDescription, bool>>
             {
-                x => x.IsEnumerable,
+                x => x.ArrayDescription.IsArray,
                 x => x.FullTypeName == typeof(DateTime).FullName
             };
 
             var propTypeDesc = main.GetTypeDescription(propDescr.TypeDisplayFullName);
 
-            if (propTypeDesc.IsEnumerable)
+            if (propTypeDesc.ArrayDescription.IsArray)
             {
-                var enumeratedType = main.GetTypeDescription(propTypeDesc.EnumeratedDiplayFullTypeName);
+                var enumeratedType = main.GetTypeDescription(propTypeDesc.ArrayDescription.ElementDiplayFullTypeName);
 
                 if (enumeratedType.IsEnumeration)
                 {

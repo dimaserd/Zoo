@@ -4,6 +4,29 @@
         <name>Zoo.GenericUserInterface</name>
     </assembly>
     <members>
+        <member name="T:Zoo.GenericUserInterface.Abstractions.IDataProviderForAutoCompletion">
+            <summary>
+            Провайдер данных для автокомплита
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Abstractions.IDataProviderForAutoCompletion.GetSuggestionsData(System.String)">
+            <summary>
+            Получить данные в зависимости от подсказки
+            </summary>
+            <param name="typedText"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Abstractions.IDataProviderForSelectList">
+            <summary>
+            Провайдер данных для выпадающего списка
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Abstractions.IDataProviderForSelectList.GetSelectListItems">
+            <summary>
+            Получить данные для выпадющего списка
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Abstractions.IGenericInterfaceBuilder">
             <summary>
             Абстракция построителя интерфейсов
@@ -18,6 +41,17 @@
             <summary>
             Портфель из логики переопределений интерфейсов
             </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Abstractions.IGenericInterfaceOverrider">
+            <summary>
+            Перепоределитель интерфейса
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Abstractions.IGenericInterfaceOverrider.GetOverrider">
+            <summary>
+            Получить переопределитель
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Zoo.GenericUserInterface.Enumerations.UserInterfaceType">
             <summary>
@@ -311,26 +345,6 @@
             Значение
             </summary>
         </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericInterfaceOverrider`1">
-            <summary>
-            Переопределитель интерфейса
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericInterfaceOverrider`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag,Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
-            <summary>
-            
-            </summary>
-            <param name="bag"></param>
-            <param name="overrider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericInterfaceOverrider`1.GetOverrider">
-            <summary>
-            Получить переопределитель
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.Overrider">
             <summary>
             Переопределитель интерфейсов
@@ -370,6 +384,26 @@
             <summary>
             Значение
             </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.UserInterfaceOverrider`1">
+            <summary>
+            Переопределитель интерфейса
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.UserInterfaceOverrider`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag,Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
+            <summary>
+            
+            </summary>
+            <param name="bag"></param>
+            <param name="overrider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.UserInterfaceOverrider`1.GetOverrider">
+            <summary>
+            Получить переопределитель
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder">
             <summary>
@@ -603,6 +637,11 @@
         <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.CantSetMultipleDropListNotOnPrimitivesFormat">
             <summary>
               Ищет локализованную строку, похожую на Вы не можете установить выпадающий список с множественным выбором на свойство, тип которого не является примитивным. Cвойство: {0}. Тип данных: {1}.
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.ClassesWithMultiDimensionalArrayPropertiesAreNotSupported">
+            <summary>
+              Ищет локализованную строку, похожую на Классы со свойствами Многомерные массивы не поддерживаются.
             </summary>
         </member>
         <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.DataProviderForAutoCompletionNotRegisteredFormat">

@@ -135,6 +135,9 @@
   <data name="CantSetMultipleDropListNotOnPrimitivesFormat" xml:space="preserve">
     <value>Вы не можете установить выпадающий список с множественным выбором на свойство, тип которого не является примитивным. Cвойство: {0}. Тип данных: {1}</value>
   </data>
+  <data name="ClassesWithMultiDimensionalArrayPropertiesAreNotSupported" xml:space="preserve">
+    <value>Классы со свойствами Многомерные массивы не поддерживаются</value>
+  </data>
   <data name="DataProviderForAutoCompletionNotRegisteredFormat" xml:space="preserve">
     <value>Провайдер для автокомплита с типом данным {0} не зарегистрирован</value>
   </data>

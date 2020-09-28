@@ -10,11 +10,11 @@ using Zoo.GenericUserInterface.Services;
 namespace Zoo.GenericUserInterface.Tests.Overriders
 {
     public class SetMultipleDropListTests
-    {
+    {        
         internal class SomeType
         {
             public string Prop1 { get; set; }
-            public List<int[]> ComplexCollectionType { get; set; }
+            
             public List<string> Prop2 { get; set; }
             public int[] Prop3 { get; set; }
             public IEnumerable<string> Prop4 { get; set; }
@@ -33,21 +33,6 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var ex = Assert.Throws<InvalidOperationException>(() => builder.GetBlockBuilderForCollection(x => x.Prop1));
 
             Assert.AreEqual(ex.Message, ExceptionTexts.DontUseGetBlockBuilderForCollectionOnCollectionsOfChars);
-        }
-
-        [Test]
-        public void CollectionOfComplexObjects_ShouldFail()
-        {
-            var ex = Assert.Throws<InvalidOperationException>(() => 
-            {
-                new GenericUserInterfaceModelBuilder<SomeType>(TestsHelper.CreateDefaultBag())
-                    .GetBlockBuilderForCollection(x => x.ComplexCollectionType)
-                    .SetMultipleDropDownList(new List<SelectListItemData<int[]>>());
-            });
-
-            var mes = string.Format(ExceptionTexts.CantSetMultipleDropListNotOnPrimitivesFormat, nameof(SomeType.ComplexCollectionType), typeof(int[]).FullName);
-
-            Assert.AreEqual(mes, ex.Message);
         }
 
         [Test]

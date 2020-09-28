@@ -16,9 +16,11 @@ namespace Zoo.ServerJs.Models.Method
             ParameterDescriptions = opts.ParameterDescriptions;
         }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public JsWorkerMethodDocs()
         {
-
         }
 
         /// <summary>

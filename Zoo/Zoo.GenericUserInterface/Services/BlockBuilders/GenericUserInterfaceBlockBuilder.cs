@@ -76,7 +76,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// <returns></returns>
         public GenericUserInterfaceBlockBuilder<TProp> SetTextArea()
         {
-            if (typeof(TProp) == typeof(string))
+            if (typeof(TProp) != typeof(string))
             {
                 throw new Exception($"Только к типу данных строка можно установить элемент TextArea");
             }
@@ -157,7 +157,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
            where TDataProvider : DataProviderForAutoCompletion<TProp>
         {
             var mainDesc = DescribedType.GetMainTypeDescription();
-            if (mainDesc.IsPrimitive)
+            if (!mainDesc.IsPrimitive)
             {
                 throw new InvalidOperationException(
                     $"Вы не можете установить для свойства {Block.PropertyName} тип блока 'Автозаполнение'. " +
@@ -188,7 +188,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         {
             var mainDoc = DocsBuilder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
             
-            if(mainDoc.IsEnumerable)
+            if(mainDoc.ArrayDescription.IsArray)
             {
                 throw new InvalidOperationException(ExceptionTexts.ArrayTypesAreNotSupportedSetMultipleDropDownList);
             }

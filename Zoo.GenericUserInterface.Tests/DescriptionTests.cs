@@ -18,7 +18,7 @@ namespace Zoo.GenericUserInterface.Tests
             Assert.IsNotNull(doc);
             Assert.AreEqual(type, main.ExtractType());
 
-            var isRecursive = new CrocoClassDescriptionChecker().IsRecursiveType(main, doc.Types);
+            var isRecursive = new CrocoClassDescriptionChecker().IsRecursiveType(doc);
 
             Assert.AreEqual(isRecursiveExpected, isRecursive);
         }

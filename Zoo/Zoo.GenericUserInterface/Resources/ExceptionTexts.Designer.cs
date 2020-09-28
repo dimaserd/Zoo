@@ -115,6 +115,15 @@ namespace Zoo.GenericUserInterface.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Классы со свойствами Многомерные массивы не поддерживаются.
+        /// </summary>
+        internal static string ClassesWithMultiDimensionalArrayPropertiesAreNotSupported {
+            get {
+                return ResourceManager.GetString("ClassesWithMultiDimensionalArrayPropertiesAreNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Провайдер для автокомплита с типом данным {0} не зарегистрирован.
         /// </summary>
         internal static string DataProviderForAutoCompletionNotRegisteredFormat {
