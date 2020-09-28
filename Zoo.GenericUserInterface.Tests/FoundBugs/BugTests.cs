@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Models.Bag;
@@ -12,7 +11,7 @@ using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Services;
 
-namespace Zoo.GenericUserInterface.Tests
+namespace Zoo.GenericUserInterface.Tests.FoundBugs
 {
     public class TestClass
     {
@@ -160,7 +159,7 @@ namespace Zoo.GenericUserInterface.Tests
 
             var bag = services.BuildServiceProvider().GetRequiredService<GenericUserInterfaceBag>();
 
-            GenerateGenericUserInterfaceModel userInterface = await bag.GetInterface<TestClass>();
+            await bag.GetInterface<TestClass>();
         }
     }
 }

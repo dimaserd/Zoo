@@ -78,7 +78,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         {
             if (typeof(TProp) != typeof(string))
             {
-                throw new Exception($"Только к типу данных строка можно установить элемент TextArea");
+                throw new InvalidOperationException(ExceptionTexts.TextAreaCanBeSetOnlyOnStrings);
             }
 
             Block.InterfaceType = UserInterfaceType.TextArea;

@@ -156,4 +156,7 @@
   <data name="RecursiveTypesAreNotSupported" xml:space="preserve">
     <value>Recursive types are not supported</value>
   </data>
+  <data name="TextAreaCanBeSetOnlyOnStrings" xml:space="preserve">
+    <value>Только к типу данных строка можно установить элемент TextArea</value>
+  </data>
 </root>

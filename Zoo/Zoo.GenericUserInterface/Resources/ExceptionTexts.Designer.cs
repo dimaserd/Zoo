@@ -176,5 +176,14 @@ namespace Zoo.GenericUserInterface.Resources {
                 return ResourceManager.GetString("RecursiveTypesAreNotSupported", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Только к типу данных строка можно установить элемент TextArea.
+        /// </summary>
+        internal static string TextAreaCanBeSetOnlyOnStrings {
+            get {
+                return ResourceManager.GetString("TextAreaCanBeSetOnlyOnStrings", resourceCulture);
+            }
+        }
     }
 }

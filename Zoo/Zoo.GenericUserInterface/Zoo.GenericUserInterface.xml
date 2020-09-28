@@ -674,6 +674,11 @@
               Ищет локализованную строку, похожую на Recursive types are not supported.
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.TextAreaCanBeSetOnlyOnStrings">
+            <summary>
+              Ищет локализованную строку, похожую на Только к типу данных строка можно установить элемент TextArea.
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1">
             <summary>
             Построитель для конкретного блока в интерейсе
