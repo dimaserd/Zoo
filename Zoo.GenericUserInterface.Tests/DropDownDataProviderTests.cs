@@ -56,13 +56,13 @@ namespace Zoo.GenericUserInterface.Tests
 
             //Не регистрируем провайдера данных для переопределителя
             new GenericUserInterfaceBagBuilder(srvCollection)
-                .AddOverrider<SomeModelInterfaceOverrider>()
+                .AddDefaultOverrider<SomeModelInterfaceOverrider>()
                 .Build();
 
             var bag = srvCollection.BuildServiceProvider()
                 .GetRequiredService<GenericUserInterfaceBag>();
 
-            var ex = Assert.ThrowsAsync<InvalidOperationException>(() => bag.GetInterface<SomeModel>());
+            var ex = Assert.ThrowsAsync<InvalidOperationException>(() => bag.GetDefaultInterface<SomeModel>());
 
             var key = typeof(SomeSelectListDataProvider).FullName;
             var expectedMessage = string.Format(ExceptionTexts.DataProviderWithTypeNotRegisteredFormat, key);
@@ -77,14 +77,14 @@ namespace Zoo.GenericUserInterface.Tests
 
             new GenericUserInterfaceBagBuilder(srvCollection)
                 .AddDataProviderForSelectList<SomeSelectListDataProvider>()
-                .AddOverrider<SomeModelInterfaceOverrider>()
+                .AddDefaultOverrider<SomeModelInterfaceOverrider>()
                 .Build();
 
             var bag = srvCollection.BuildServiceProvider()
                 .GetRequiredService<GenericUserInterfaceBag>();
 
-            var interfaceModel = await bag.GetInterface<SomeModel>();
-            var secondModel = await bag.GetInterface<SomeModel>();
+            var interfaceModel = await bag.GetDefaultInterface<SomeModel>();
+            var secondModel = await bag.GetDefaultInterface<SomeModel>();
             Assert.AreEqual(1, interfaceModel.Interface.Blocks.Count);
 
             var fBlock = interfaceModel.Interface.Blocks.First();

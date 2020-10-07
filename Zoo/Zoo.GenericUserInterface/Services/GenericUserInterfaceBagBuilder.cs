@@ -14,7 +14,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
     public class GenericUserInterfaceBagBuilder
     {
         GenericInterfaceOptions InterfaceOptions { get; set; }
-        readonly Dictionary<Type, Type> InterfaceOverriders = new Dictionary<Type, Type>();
+        readonly Dictionary<Type, Type> DefaultInterfaceOverriders = new Dictionary<Type, Type>();
         readonly Dictionary<string, Type> AutoCompletionDataProviders = new Dictionary<string, Type>();
         readonly Dictionary<string, Type> SelectListDataProviders = new Dictionary<string, Type>();
 
@@ -34,9 +34,9 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// </summary>
         /// <typeparam name="TOverrider"></typeparam>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddOverrider<TOverrider>() where TOverrider : class, IGenericInterfaceOverrider
+        public GenericUserInterfaceBagBuilder AddDefaultOverrider<TOverrider>() where TOverrider : class, IGenericInterfaceOverrider
         {
-            return AddOverriderInner<TOverrider>(() => ServiceCollection.AddTransient<TOverrider>());
+            return AddDefaultOverriderInner<TOverrider>(() => ServiceCollection.AddTransient<TOverrider>());
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         /// <typeparam name="TOverrider"></typeparam>
         /// <param name="providerFunc"></param>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddOverrider<TOverrider>(Func<IServiceProvider, TOverrider> providerFunc) where TOverrider : class, IGenericInterfaceOverrider
+        public GenericUserInterfaceBagBuilder AddDefaultOverrider<TOverrider>(Func<IServiceProvider, TOverrider> providerFunc) where TOverrider : class, IGenericInterfaceOverrider
         {
-            return AddOverriderInner<TOverrider>(() => ServiceCollection.AddTransient(providerFunc));
+            return AddDefaultOverriderInner<TOverrider>(() => ServiceCollection.AddTransient(providerFunc));
         }
 
         /// <summary>
@@ -107,19 +107,19 @@ namespace Zoo.GenericUserInterface.Models.Overridings
             {
                 SelectListDataProviders = SelectListDataProviders,
                 AutoCompletionDataProviders = AutoCompletionDataProviders,
-                InterfaceOverriders = InterfaceOverriders
+                DefaultInterfaceOverriders = DefaultInterfaceOverriders
             });
             ServiceCollection.AddSingleton<GenericUserInterfaceBag>();
         }
 
-        private void AddOverriderInner(Type overriderType, Type modelType)
+        private void AddDefaultOverriderRecord(Type overriderType, Type modelType)
         {
-            if (InterfaceOverriders.ContainsKey(modelType))
+            if (DefaultInterfaceOverriders.ContainsKey(modelType))
             {
                 throw new InvalidOperationException(string.Format(ExceptionTexts.OverridingForTypeIsAlreadySetFormat, modelType.FullName));
             }
 
-            InterfaceOverriders.Add(modelType, overriderType);
+            DefaultInterfaceOverriders.Add(modelType, overriderType);
         }
 
         private Type GetFirstInnerGeneric(Type type)
@@ -135,11 +135,11 @@ namespace Zoo.GenericUserInterface.Models.Overridings
                 .First();
         }
 
-        private GenericUserInterfaceBagBuilder AddOverriderInner<TOverrider>(Action action) where TOverrider : class, IGenericInterfaceOverrider
+        private GenericUserInterfaceBagBuilder AddDefaultOverriderInner<TOverrider>(Action action) where TOverrider : class, IGenericInterfaceOverrider
         {
             var type = typeof(TOverrider);
 
-            AddOverriderInner(type, GetFirstInnerGeneric(type));
+            AddDefaultOverriderRecord(type, GetFirstInnerGeneric(type));
             action();
 
             return this;
@@ -157,8 +157,6 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         private GenericUserInterfaceBagBuilder AddDataProviderForAutoCompletionInner<TDataProvider>(Action action) where TDataProvider : class, IDataProviderForAutoCompletion
         {
             var type = typeof(TDataProvider);
-
-            var innerGeneric = GetFirstInnerGeneric(type);
 
             AutoCompletionDataProviders.Add(type.FullName, type);
             action();

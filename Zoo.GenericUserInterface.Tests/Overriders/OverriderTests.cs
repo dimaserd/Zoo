@@ -50,8 +50,8 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var ex = Assert.Throws<InvalidOperationException>(() =>
             {
                 new GenericUserInterfaceBagBuilder(new ServiceCollection())
-                    .AddOverrider<SomeTypeOverrider>()
-                    .AddOverrider<SomeTypeOverrider>();
+                    .AddDefaultOverrider<SomeTypeOverrider>()
+                    .AddDefaultOverrider<SomeTypeOverrider>();
             });
 
             var expectedMes = string.Format(ExceptionTexts.OverridingForTypeIsAlreadySetFormat, typeof(SomeTypeToOverride).FullName);
@@ -67,14 +67,14 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var srv = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(srv)
-                .AddOverrider(srv => new SomeTypeOverrider(labelText))
+                .AddDefaultOverrider(srv => new SomeTypeOverrider(labelText))
                 .Build();
 
             var provider = srv.BuildServiceProvider();
 
             var interfaceCollection = provider.GetRequiredService<GenericUserInterfaceBag>();
 
-            var descr = await interfaceCollection.GetInterface<SomeTypeToOverride>();
+            var descr = await interfaceCollection.GetDefaultInterface<SomeTypeToOverride>();
 
             var descrFBlock = descr.Interface.Blocks.First(x => x.PropertyName == nameof(SomeTypeToOverride.SomeProperty));
 

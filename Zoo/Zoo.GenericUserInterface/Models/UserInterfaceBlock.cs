@@ -1,4 +1,5 @@
-﻿using Zoo.GenericUserInterface.Enumerations;
+﻿using Croco.Core.Documentation.Models;
+using Zoo.GenericUserInterface.Enumerations;
 
 namespace Zoo.GenericUserInterface.Models
 {
@@ -7,6 +8,20 @@ namespace Zoo.GenericUserInterface.Models
     /// </summary>
     public class UserInterfaceBlock
     {
+        internal UserInterfaceBlock(CrocoPropertyReferenceDescription prop)
+        {
+            LabelText = prop.PropertyDescription.PropertyDisplayName;
+            PropertyName = prop.PropertyDescription.PropertyName;
+            TypeDisplayFullName = prop.TypeDisplayFullName;
+        }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public UserInterfaceBlock()
+        {
+        }
+
         /// <summary>
         /// Название свойства
         /// </summary>
@@ -51,5 +66,10 @@ namespace Zoo.GenericUserInterface.Models
         /// Данные для построения автокомплита
         /// </summary>
         public AutoCompleteData AutoCompleteData { get; set; }
+
+        /// <summary>
+        /// Ссылка на тип данных из (Croco.Documentation)
+        /// </summary>
+        public string TypeDisplayFullName { get; set; }
     }
 }

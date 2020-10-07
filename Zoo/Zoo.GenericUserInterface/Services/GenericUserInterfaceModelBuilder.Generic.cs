@@ -84,41 +84,6 @@ namespace Zoo.GenericUserInterface.Services
             return this;
         }
 
-        /// <summary>
-        /// Установить скрытое поле ввода для свойства объекта
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<TModel> HiddenFor<TProp>(Expression<Func<TModel, TProp>> expression)
-        {
-            this.GetBlockBuilder(expression).SetHidden();
-            return this;
-        }
-
-        /// <summary>
-        /// Установить скрытое поле ввода для свойства объекта
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="customType"></param>
-        /// <param name="customDataJson"></param>
-        /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<TModel> CustomFor<TProp>(Expression<Func<TModel, TProp>> expression, string customType, string customDataJson)
-        {
-            this.GetBlockBuilder(expression).SetCustom(customType, customDataJson);
-            return this;
-        }
-
-        /// <summary>
-        /// Установить большой текстовое поле ввода для свойства объекта
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<TModel> TextAreaFor<TProp>(Expression<Func<TModel, TProp>> expression)
-        {
-            this.GetBlockBuilder(expression).SetTextArea();
-            return this;
-        }
-
         internal UserInterfaceBlock GetBlockByExpression<TProp>(Expression<Func<TModel, TProp>> expression)
         {
             return GetBlockByPropertyName(MyExpressionExtensions.GetMemberName(expression));

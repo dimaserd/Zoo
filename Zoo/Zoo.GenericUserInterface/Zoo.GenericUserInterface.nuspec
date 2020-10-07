@@ -12,7 +12,7 @@
     <copyright>Copyright 2020</copyright>
     <dependencies>
       <dependency id="NetCroco.Core" version="1.9.93" />
-      <dependency id="NetCroco.Core.Documentation" version="1.1.40" />
+      <dependency id="NetCroco.Core.Documentation" version="1.1.41" />
     </dependencies>
   </metadata>
   <files>

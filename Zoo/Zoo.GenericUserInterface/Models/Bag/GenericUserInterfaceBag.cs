@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
+using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
 
@@ -17,10 +18,17 @@ namespace Zoo.GenericUserInterface.Models.Bag
     {
         IServiceProvider ServiceProvider { get; }
 
-        internal Dictionary<Type, Type> InterfaceOverriders { get; }
+        /// <summary>
+        /// Какой тип нужно переопределить и каким переопределителем
+        /// </summary>
+        internal Dictionary<Type, Type> DefaultInterfaceOverriders { get; }
+ 
         internal Dictionary<string, Type> AutoCompletionDataProviders { get; }
         internal Dictionary<string, Type> SelectListDataProviders { get; }
 
+        /// <summary>
+        /// Посчитанные интерфейсы, ключ строка с названием типа данных
+        /// </summary>
         readonly Dictionary<string, (GenerateGenericUserInterfaceModel, Type)> ComputedInterfaces = new Dictionary<string, (GenerateGenericUserInterfaceModel, Type)>();
 
         /// <summary>
@@ -37,7 +45,7 @@ namespace Zoo.GenericUserInterface.Models.Bag
         public GenericUserInterfaceBag(IServiceProvider serviceProvider, GenericUserInterfaceBagOptions bagOptions, GenericInterfaceOptions options)
         {
             SelectListDataProviders = bagOptions.SelectListDataProviders;
-            InterfaceOverriders = bagOptions.InterfaceOverriders;
+            DefaultInterfaceOverriders = bagOptions.DefaultInterfaceOverriders;
             AutoCompletionDataProviders = bagOptions.AutoCompletionDataProviders;
             ServiceProvider = serviceProvider;
             Options = options;
@@ -87,11 +95,11 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// </summary>
         /// <param name="typeDisplayFullName"></param>
         /// <returns></returns>
-        public async Task<GenerateGenericUserInterfaceModel> GetInterface(string typeDisplayFullName)
+        public async Task<GenerateGenericUserInterfaceModel> GetDefaultInterface(string typeDisplayFullName)
         {
-            var interfaceModelResult = await GetOrAddInterfaceFromComputed(typeDisplayFullName);
+            var interfaceModelResult = await GetOrAddDefaultInterfaceFromComputed(typeDisplayFullName);
 
-            var overriding = GetOverriding(interfaceModelResult.Item2);
+            var overriding = GetDefaultOverriding(interfaceModelResult.Item2);
 
             var interfaceModel = interfaceModelResult.Item1;
             if (overriding != null)
@@ -107,9 +115,9 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <returns></returns>
-        public Task<GenerateGenericUserInterfaceModel> GetInterface<TModel>()
+        public Task<GenerateGenericUserInterfaceModel> GetDefaultInterface<TModel>()
         {
-            return GetInterface(typeof(TModel).FullName);
+            return GetDefaultInterface(typeof(TModel).FullName);
         }
 
         /// <summary>
@@ -118,11 +126,11 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// Рекомендуется использовать в тестах для предотвращения ошибок в рантайме.
         /// </summary>
         /// <returns></returns>
-        public async Task ValidateOverriders()
+        public async Task ValidateDefaultOverriders()
         {
-            foreach (var overrider in InterfaceOverriders)
+            foreach (var overrider in DefaultInterfaceOverriders)
             {
-                await GetInterface(overrider.Key.FullName);
+                await GetDefaultInterface(overrider.Key.FullName);
             }
         }
 
@@ -130,19 +138,19 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// Получить переопрделение по полному названию типа
         /// </summary>
         /// <returns></returns>
-        private Overrider GetOverriding(Type key)
+        private Overrider GetDefaultOverriding(Type key)
         {
-            if (!InterfaceOverriders.ContainsKey(key))
+            if (!DefaultInterfaceOverriders.ContainsKey(key))
             {
                 return null;
             }
 
-            var overrider = ServiceProvider.GetRequiredService(InterfaceOverriders[key]) as IGenericInterfaceOverrider;
+            var overrider = ServiceProvider.GetRequiredService(DefaultInterfaceOverriders[key]) as IGenericInterfaceOverrider;
 
             return overrider.GetOverrider();
         }
 
-        private async Task<(GenerateGenericUserInterfaceModel, Type)> GetOrAddInterfaceFromComputed(string typeDisplayFullName)
+        private async Task<(GenerateGenericUserInterfaceModel, Type)> GetOrAddDefaultInterfaceFromComputed(string typeDisplayFullName)
         {
             if (ComputedInterfaces.ContainsKey(typeDisplayFullName))
             {
@@ -160,15 +168,34 @@ namespace Zoo.GenericUserInterface.Models.Bag
 
             var interfaceModel = builder.Result;
 
-            var overriding = GetOverriding(type);
+            var overriding = GetDefaultOverriding(type);
 
             if (overriding != null)
             {
                 await overriding.MainOverrideFunction(this, interfaceModel);
+                await ProcessClassesAndArrays(interfaceModel);
                 ComputedInterfaces.Add(typeDisplayFullName, (interfaceModel, type));
             }
 
+            await ProcessClassesAndArrays(interfaceModel);
             return (interfaceModel, type);
+        }
+
+        private async Task ProcessClassesAndArrays(GenerateGenericUserInterfaceModel interfaceModel)
+        {
+            foreach (var block in interfaceModel.Interface.Blocks)
+            {
+                if (block.InterfaceType == UserInterfaceType.GenericInterfaceForClass)
+                {
+                    var defaultInterface = await GetOrAddDefaultInterfaceFromComputed(block.TypeDisplayFullName);
+                    block.InnerGenericInterface = defaultInterface.Item1.Interface;
+                }
+                else if(block.InterfaceType == UserInterfaceType.GenericInterfaceForArray)
+                {
+                    var defaultInterface = await GetOrAddDefaultInterfaceFromComputed(block.TypeDisplayFullName[0..^2]);
+                    block.InnerGenericInterface = defaultInterface.Item1.Interface;
+                }
+            }
         }
     }
 }

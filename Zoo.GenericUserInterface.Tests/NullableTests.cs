@@ -53,7 +53,6 @@ namespace Zoo.GenericUserInterface.Tests
 
             Assert.AreEqual(UserInterfaceType.DropDownList, block.InterfaceType);
 
-
             var selectList = block.DropDownData.SelectList;
 
             //Так как жто не Nullable null быть не должно

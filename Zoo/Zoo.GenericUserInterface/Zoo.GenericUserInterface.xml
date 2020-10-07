@@ -142,6 +142,16 @@
             его построения
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.DefaultInterfaceOverriders">
+            <summary>
+            Какой тип нужно переопределить и каким переопределителем
+            </summary>
+        </member>
+        <member name="F:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.ComputedInterfaces">
+            <summary>
+            Посчитанные интерфейсы, ключ строка с названием типа данных
+            </summary>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.Options">
             <summary>
             Опции для создания интерфейса
@@ -170,21 +180,21 @@
             <param name="providerTypeFullName"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.GetInterface(System.String)">
+        <member name="M:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.GetDefaultInterface(System.String)">
             <summary>
             Получить интерфейс
             </summary>
             <param name="typeDisplayFullName"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.GetInterface``1">
+        <member name="M:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.GetDefaultInterface``1">
             <summary>
             Получить интерфейс
             </summary>
             <typeparam name="TModel"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.ValidateOverriders">
+        <member name="M:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.ValidateDefaultOverriders">
             <summary>
             Вызывает все интерфейсы, которые были переопределены и если где-то произойдет ошибка, она будет выплюнута наружу.
             <para></para>
@@ -192,7 +202,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.GetOverriding(System.Type)">
+        <member name="M:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBag.GetDefaultOverriding(System.Type)">
             <summary>
             Получить переопрделение по полному названию типа
             </summary>
@@ -213,7 +223,7 @@
             Провайдеры данных для автокомплита
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.InterfaceOverriders">
+        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.DefaultInterfaceOverriders">
             <summary>
             Переопределители интерфейсов
             </summary>
@@ -416,14 +426,14 @@
             </summary>
             <param name="serviceCollection"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddOverrider``1">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDefaultOverrider``1">
             <summary>
             Добавить переопределение для интерфейса
             </summary>
             <typeparam name="TOverrider"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddOverrider``1(System.Func{System.IServiceProvider,``0})">
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDefaultOverrider``1(System.Func{System.IServiceProvider,``0})">
             <summary>
             Добавить переопределение для интерфейса
             </summary>
@@ -533,6 +543,11 @@
             Блок описывающий свойство в модели
             </summary>
         </member>
+        <member name="M:Zoo.GenericUserInterface.Models.UserInterfaceBlock.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.PropertyName">
             <summary>
             Название свойства
@@ -576,6 +591,11 @@
         <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.AutoCompleteData">
             <summary>
             Данные для построения автокомплита
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.TypeDisplayFullName">
+            <summary>
+            Ссылка на тип данных из (Croco.Documentation)
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.UserInterfaceTextBoxData">
@@ -936,29 +956,6 @@
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToEndFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
             <summary>
             Переместить свойство в конец списка
-            </summary>
-            <param name="expression"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.HiddenFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
-            <summary>
-            Установить скрытое поле ввода для свойства объекта
-            </summary>
-            <param name="expression"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.CustomFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.String,System.String)">
-            <summary>
-            Установить скрытое поле ввода для свойства объекта
-            </summary>
-            <param name="expression"></param>
-            <param name="customType"></param>
-            <param name="customDataJson"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.TextAreaFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
-            <summary>
-            Установить большой текстовое поле ввода для свойства объекта
             </summary>
             <param name="expression"></param>
             <returns></returns>

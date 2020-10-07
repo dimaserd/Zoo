@@ -31,7 +31,7 @@ namespace Zoo.GenericUserInterface.Extensions
         {
             return prefix == string.Empty ? propName : $"{prefix}.{propName}";
         }
-
+        
         private static UserInterfaceBlock GetBlockForEnumerable(string prefix, CrocoPropertyReferenceDescription prop, CrocoTypeDescriptionResult desc, GenericInterfaceOptions opts)
         {
             var type = desc.GetTypeDescription(prop.TypeDisplayFullName);
@@ -45,22 +45,18 @@ namespace Zoo.GenericUserInterface.Extensions
 
             if(enumeratedType.IsPrimitive)
             {
-                return new UserInterfaceBlock
+                return new UserInterfaceBlock(prop)
                 {
-                    LabelText = prop.PropertyDescription.PropertyDisplayName,
                     InterfaceType = UserInterfaceType.MultipleDropDownList,
-                    PropertyName = prop.PropertyDescription.PropertyName,
                     DropDownData = GetSelectListData(prop, desc, opts)
                 };
             }
 
             var newPrefix = AddPropNameToPrefix(prefix, prop.PropertyDescription.PropertyName);
 
-            return new UserInterfaceBlock
+            return new UserInterfaceBlock(prop)
             {
-                LabelText = prop.PropertyDescription.PropertyDisplayName,
                 InterfaceType = UserInterfaceType.GenericInterfaceForArray,
-                PropertyName = prop.PropertyDescription.PropertyName,
                 InnerGenericInterface = new GenericInterfaceModel
                 {
                     Prefix = newPrefix,
@@ -88,18 +84,20 @@ namespace Zoo.GenericUserInterface.Extensions
                 return null;
             }
 
-            var integerTypeNames = new[]
+            var integerTypes = new[]
             {
-                typeof(int).FullName,
-                typeof(uint).FullName,
-                typeof(long).FullName,
-                typeof(ulong).FullName,
-                typeof(ushort).FullName,
-                typeof(short).FullName,
-                typeof(byte).FullName
+                typeof(int),
+                typeof(uint),
+                typeof(long),
+                typeof(ulong),
+                typeof(ushort),
+                typeof(short),
+                typeof(byte)
             };
 
-            var isInteger = integerTypeNames.Contains(prop.FullTypeName);
+            var type = prop.ExtractType();
+
+            var isInteger = integerTypes.Contains(type);
 
             return new UserInterfaceTextBoxData
             {
@@ -118,10 +116,8 @@ namespace Zoo.GenericUserInterface.Extensions
 
                 var selectList = GetSelectListData(prop, main, opts);
 
-                return new UserInterfaceBlock
-                {
-                    LabelText = prop.PropertyDescription.PropertyDisplayName,
-                    PropertyName = prop.PropertyDescription.PropertyName,
+                return new UserInterfaceBlock(prop)
+                {   
                     InterfaceType = type,
                     DropDownData = selectList,
                     TextBoxData = GetTextBoxDataForProperty(propTypeDescription, type)
@@ -139,11 +135,9 @@ namespace Zoo.GenericUserInterface.Extensions
 
                 var newPrefix = AddPropNameToPrefix(prefix, prop.PropertyDescription.PropertyName);
 
-                return new UserInterfaceBlock
+                return new UserInterfaceBlock(prop)
                 {
                     InterfaceType = UserInterfaceType.GenericInterfaceForClass,
-                    LabelText = prop.PropertyDescription.PropertyDisplayName,
-                    PropertyName = prop.PropertyDescription.PropertyName,
                     InnerGenericInterface = new GenericInterfaceModel
                     {
                         Prefix = newPrefix,
@@ -160,7 +154,7 @@ namespace Zoo.GenericUserInterface.Extensions
             var emptySelectListPredicates = new List<Func<CrocoTypeDescription, bool>>
             {
                 x => x.ArrayDescription.IsArray,
-                x => x.FullTypeName == typeof(DateTime).FullName
+                x => x.ExtractType() == typeof(DateTime) || x.ExtractType() == typeof(DateTime?)
             };
 
             var propTypeDesc = main.GetTypeDescription(propDescr.TypeDisplayFullName);
@@ -183,7 +177,7 @@ namespace Zoo.GenericUserInterface.Extensions
                 }
             }
 
-            if (propTypeDesc.FullTypeName == typeof(bool).FullName)
+            if (propTypeDesc.ExtractType() == typeof(bool) || propTypeDesc.ExtractType() == typeof(bool?))
             {
                 return new DropDownListData
                 {
@@ -233,15 +227,18 @@ namespace Zoo.GenericUserInterface.Extensions
 
         private static UserInterfaceType GetUserInterfaceType(CrocoTypeDescription desc)
         {
-            if (desc.FullTypeName == typeof(bool).FullName)
+            var type = desc.ExtractType();
+
+            if (type == typeof(bool) || type == typeof(bool?))
             {
                 return UserInterfaceType.DropDownList;
             }
 
-            if (desc.FullTypeName == typeof(DateTime).FullName)
+            if (type == typeof(DateTime) || type == typeof(DateTime?))
             {
                 return UserInterfaceType.DatePicker;
             }
+
             if (desc.IsEnumeration)
             {
                 return UserInterfaceType.DropDownList;

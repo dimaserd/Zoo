@@ -21,7 +21,7 @@ namespace Zoo.GenericUserInterface.Tests
             {
                 AutoCompletionDataProviders = new Dictionary<string, Type>(),
                 SelectListDataProviders = new Dictionary<string, Type>(),
-                InterfaceOverriders = new Dictionary<Type, Type>()
+                DefaultInterfaceOverriders = new Dictionary<Type, Type>()
             }, GenericInterfaceOptions.Default());
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Zoo.GenericUserInterface.Models.Overridings;
 
 namespace Zoo.GenericUserInterface.Models.Bag
 {
@@ -21,6 +22,6 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// <summary>
         /// Переопределители интерфейсов
         /// </summary>
-        public Dictionary<Type, Type> InterfaceOverriders { get; set; }
+        public Dictionary<Type, Type> DefaultInterfaceOverriders { get; set; }
     }
 }

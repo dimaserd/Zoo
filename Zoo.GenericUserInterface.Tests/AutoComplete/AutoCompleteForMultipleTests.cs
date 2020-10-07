@@ -46,7 +46,7 @@ namespace Zoo.GenericUserInterface.Tests.AutoComplete
 
             new GenericUserInterfaceBagBuilder(serviceCollection)
                 .AddDataProviderForAutoCompletion<SomeDataProvider>()
-                .AddOverrider<SomeModelForAutoCompleteOverrider>()
+                .AddDefaultOverrider<SomeModelForAutoCompleteOverrider>()
                 .Build();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
@@ -60,7 +60,7 @@ namespace Zoo.GenericUserInterface.Tests.AutoComplete
         {
             var bag = GetAndBuildBag();
 
-            var userInterface = await bag.GetInterface<SomeModelForAutoComplete>();
+            var userInterface = await bag.GetDefaultInterface<SomeModelForAutoComplete>();
 
             Assert.AreEqual(1, userInterface.Interface.Blocks.Count);
 

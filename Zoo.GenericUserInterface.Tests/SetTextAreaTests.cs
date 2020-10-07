@@ -45,12 +45,12 @@ namespace Zoo.GenericUserInterface.Tests
             var services = new ServiceCollection();
             
             new GenericUserInterfaceBagBuilder(services)
-                .AddOverrider<FailingOverrider>()
+                .AddDefaultOverrider<FailingOverrider>()
                 .Build();
 
             var bag = services.BuildServiceProvider().GetRequiredService<GenericUserInterfaceBag>();
 
-            var ex = Assert.ThrowsAsync<InvalidOperationException>(() => bag.GetInterface<SomeType>());
+            var ex = Assert.ThrowsAsync<InvalidOperationException>(() => bag.GetDefaultInterface<SomeType>());
 
             Assert.AreEqual(ExceptionTexts.TextAreaCanBeSetOnlyOnStrings, ex.Message);
         }
@@ -61,12 +61,12 @@ namespace Zoo.GenericUserInterface.Tests
             var services = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(services)
-                .AddOverrider<GoodOverrider>()
+                .AddDefaultOverrider<GoodOverrider>()
                 .Build();
 
             var bag = services.BuildServiceProvider().GetRequiredService<GenericUserInterfaceBag>();
 
-            var interfaceModel = await bag.GetInterface<SomeType>();
+            var interfaceModel = await bag.GetDefaultInterface<SomeType>();
 
             var blocks = interfaceModel.Interface.Blocks;
 

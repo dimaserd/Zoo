@@ -13,7 +13,7 @@
     <dependencies>
       <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="3.1.8" />
       <dependency id="Jint" version="2.11.58" />
-      <dependency id="NetCroco.Core.Documentation" version="1.1.40" />
+      <dependency id="NetCroco.Core.Documentation" version="1.1.41" />
       <dependency id="NetCroco.Core.Abstractions" version="1.1.47" />
       <dependency id="Newtonsoft.Json" version="12.0.3" />
     </dependencies>

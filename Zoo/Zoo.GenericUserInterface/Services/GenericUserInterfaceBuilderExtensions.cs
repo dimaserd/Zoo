@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using Zoo.GenericUserInterface.Enumerations;
+using Zoo.GenericUserInterface.Extensions;
+using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services.BlockBuilders;
 
@@ -21,7 +25,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public static GenericUserInterfaceBlockBuilderForCollectionType<TItem> GetBlockBuilderForCollection<TModel, TItem>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TItem[]>> expression) where TModel : class
         {
-            CheckItem<TItem>();
+            CheckCollectionItem<TItem>();
             return new GenericUserInterfaceBlockBuilderForCollectionType<TItem>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
         }
 
@@ -35,7 +39,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public static GenericUserInterfaceBlockBuilderForCollectionType<TItem> GetBlockBuilderForCollection<TModel, TItem>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, IEnumerable<TItem>>> expression) where TModel : class
         {
-            CheckItem<TItem>();
+            CheckCollectionItem<TItem>();
             return new GenericUserInterfaceBlockBuilderForCollectionType<TItem>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
         }
 
@@ -49,7 +53,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public static GenericUserInterfaceBlockBuilderForCollectionType<TItem> GetBlockBuilderForCollection<TModel, TItem>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, List<TItem>>> expression) where TModel : class
         {
-            CheckItem<TItem>();
+            CheckCollectionItem<TItem>();
             return new GenericUserInterfaceBlockBuilderForCollectionType<TItem>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
         }
 
@@ -66,7 +70,23 @@ namespace Zoo.GenericUserInterface.Services
             return new GenericUserInterfaceBlockBuilder<TProp>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
         }
 
-        private static void CheckItem<TItem>()
+        public static void SetInterfaceForClass<TModel, TProp, TOverrider>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TProp>> expression, TOverrider overrider) 
+            where TModel : class 
+            where TProp : class
+            where TOverrider : UserInterfaceOverrider<TProp>
+        {
+            var propName = MyExpressionExtensions.GetMemberName(expression);
+            var blockForProp = builder.Result.Interface.Blocks.First(x => x.PropertyName == propName);
+
+            if(blockForProp.InterfaceType != UserInterfaceType.GenericInterfaceForClass)
+            {
+                throw new InvalidOperationException("");
+            }
+
+            //blockForProp.InnerGenericInterface = overrider.OverrideInterfaceAsync<>
+        }
+
+        private static void CheckCollectionItem<TItem>()
         {
             if (typeof(TItem) == typeof(char))
             {

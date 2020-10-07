@@ -60,14 +60,14 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
 
             new GenericUserInterfaceBagBuilder(serviceCollection)
                 .AddDataProviderForSelectList<SomeDataProviderForSelectList>()
-                .AddOverrider<SomeTypeInterfaceOverrider>()
+                .AddDefaultOverrider<SomeTypeInterfaceOverrider>()
                 .Build();
 
             var bag = serviceCollection
                 .BuildServiceProvider()
                 .GetRequiredService<GenericUserInterfaceBag>();
 
-            var interfaceModel = await bag.GetInterface<SomeType>();
+            var interfaceModel = await bag.GetDefaultInterface<SomeType>();
 
             var fBlock = interfaceModel.Interface.Blocks.First();
 

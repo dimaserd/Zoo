@@ -174,6 +174,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             return this;
         }
 
+        
         /// <summary>
         /// Устновить скрытый тип элемента ввода
         /// </summary>

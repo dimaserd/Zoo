@@ -46,12 +46,12 @@ namespace Zoo.GenericUserInterface.Tests
             var innerInterfaceBlock1 = innerInterface.Blocks.First();
 
             Assert.AreEqual(innerInterfaceBlock1.PropertyName, nameof(SomeType.CreatedOn.Min));
-            Assert.AreEqual(innerInterfaceBlock1.InterfaceType, UserInterfaceType.DatePicker);
+            Assert.AreEqual(UserInterfaceType.DatePicker, innerInterfaceBlock1.InterfaceType);
 
             var innerInterfaceBlock2 = innerInterface.Blocks.Last();
 
             Assert.AreEqual(innerInterfaceBlock2.PropertyName, nameof(SomeType.CreatedOn.Max));
-            Assert.AreEqual(innerInterfaceBlock2.InterfaceType, UserInterfaceType.DatePicker);
+            Assert.AreEqual(UserInterfaceType.DatePicker, innerInterfaceBlock2.InterfaceType);
         }
     }
 }
