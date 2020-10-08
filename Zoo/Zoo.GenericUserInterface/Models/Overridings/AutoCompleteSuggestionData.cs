@@ -28,7 +28,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
             {
                 DataJson = DataJson,
                 Text = Text,
-                Value = Tool.JsonConverter.Serialize(Value)
+                Value = typeof(TItem) == typeof(string)? Value.ToString() : Tool.JsonConverter.Serialize(Value)
             };
         }
     }

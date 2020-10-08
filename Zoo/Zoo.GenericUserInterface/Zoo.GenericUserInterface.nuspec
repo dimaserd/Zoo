@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Zoo.GenericUserInterface</id>
-    <version>0.9.30</version>
+    <version>0.9.31</version>
     <title>Generic UserInterface</title>
     <authors>Dmitry Serdyukov</authors>
     <owners>Dmitry Serdyukov</owners>

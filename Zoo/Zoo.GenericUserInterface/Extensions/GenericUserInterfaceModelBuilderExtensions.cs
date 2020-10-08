@@ -23,7 +23,7 @@ namespace Zoo.GenericUserInterface.Extensions
                 DataJson = data.DataJson,
                 Text = data.Text,
                 Selected = data.Selected,
-                Value = Tool.JsonConverter.Serialize(data.Value)
+                Value = typeof(TProp) == typeof(string)? data.Value.ToString() : Tool.JsonConverter.Serialize(data.Value)
             };
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Zoo.GenericUserInterface.Models.Overridings;
 
 namespace Zoo.GenericUserInterface.Models.Bag
 {

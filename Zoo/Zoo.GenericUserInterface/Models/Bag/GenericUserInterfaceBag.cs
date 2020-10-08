@@ -1,7 +1,7 @@
 ﻿using Croco.Core.Documentation.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
@@ -21,15 +21,17 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// <summary>
         /// Какой тип нужно переопределить и каким переопределителем
         /// </summary>
-        internal Dictionary<Type, Type> DefaultInterfaceOverriders { get; }
+        internal ConcurrentDictionary<Type, Type> DefaultInterfaceOverriders { get; }
  
-        internal Dictionary<string, Type> AutoCompletionDataProviders { get; }
-        internal Dictionary<string, Type> SelectListDataProviders { get; }
+        internal ConcurrentDictionary<string, Type> AutoCompletionDataProviders { get; }
+        internal ConcurrentDictionary<string, Type> SelectListDataProviders { get; }
+
+        internal ConcurrentDictionary<string, Type> TypeSearchMatchings = new ConcurrentDictionary<string, Type>();
 
         /// <summary>
         /// Посчитанные интерфейсы, ключ строка с названием типа данных
         /// </summary>
-        readonly Dictionary<string, (GenerateGenericUserInterfaceModel, Type)> ComputedInterfaces = new Dictionary<string, (GenerateGenericUserInterfaceModel, Type)>();
+        readonly ConcurrentDictionary<Type, GenerateGenericUserInterfaceModel> ComputedInterfaces = new ConcurrentDictionary<Type, GenerateGenericUserInterfaceModel>();
 
         /// <summary>
         /// Опции для создания интерфейса
@@ -44,9 +46,9 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// <param name="options"></param>
         public GenericUserInterfaceBag(IServiceProvider serviceProvider, GenericUserInterfaceBagOptions bagOptions, GenericInterfaceOptions options)
         {
-            SelectListDataProviders = bagOptions.SelectListDataProviders;
-            DefaultInterfaceOverriders = bagOptions.DefaultInterfaceOverriders;
-            AutoCompletionDataProviders = bagOptions.AutoCompletionDataProviders;
+            SelectListDataProviders = new ConcurrentDictionary<string, Type>(bagOptions.SelectListDataProviders);
+            DefaultInterfaceOverriders = new ConcurrentDictionary<Type, Type>(bagOptions.DefaultInterfaceOverriders);
+            AutoCompletionDataProviders = new ConcurrentDictionary<string, Type>(bagOptions.AutoCompletionDataProviders);
             ServiceProvider = serviceProvider;
             Options = options;
         }
@@ -97,11 +99,11 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// <returns></returns>
         public async Task<GenerateGenericUserInterfaceModel> GetDefaultInterface(string typeDisplayFullName)
         {
-            var interfaceModelResult = await GetOrAddDefaultInterfaceFromComputed(typeDisplayFullName);
+            var interfaceModelWithType = await GetOrAddDefaultInterfaceFromComputed(typeDisplayFullName);
 
-            var overriding = GetDefaultOverriding(interfaceModelResult.Item2);
+            var overriding = GetDefaultOverriding(interfaceModelWithType.Item1);
 
-            var interfaceModel = interfaceModelResult.Item1;
+            var interfaceModel = interfaceModelWithType.Item2;
             if (overriding != null)
             {
                 await overriding.SetDropDownDatasFunction(this, interfaceModel);
@@ -150,18 +152,35 @@ namespace Zoo.GenericUserInterface.Models.Bag
             return overrider.GetOverrider();
         }
 
-        private async Task<(GenerateGenericUserInterfaceModel, Type)> GetOrAddDefaultInterfaceFromComputed(string typeDisplayFullName)
+        private Type SearchTypeFromCache(string typeDisplayFullName)
         {
-            if (ComputedInterfaces.ContainsKey(typeDisplayFullName))
+            if (TypeSearchMatchings.ContainsKey(typeDisplayFullName))
             {
-                return ComputedInterfaces[typeDisplayFullName];
+                return TypeSearchMatchings[typeDisplayFullName];
             }
 
             var type = CrocoTypeSearcher.FindFirstTypeByName(typeDisplayFullName, x => !x.IsGenericTypeDefinition);
 
+            if(type != null)
+            {
+                TypeSearchMatchings[typeDisplayFullName] = type;
+            }
+
+            return type;
+        }
+
+        private async Task<(Type, GenerateGenericUserInterfaceModel)> GetOrAddDefaultInterfaceFromComputed(string typeDisplayFullName)
+        {
+            var type = SearchTypeFromCache(typeDisplayFullName);
+
             if (type == null)
             {
                 return (null, null);
+            }
+
+            if (ComputedInterfaces.ContainsKey(type))
+            {
+                return (type, ComputedInterfaces[type]);
             }
 
             var builder = new GenericUserInterfaceModelBuilder(type, Options);
@@ -174,11 +193,11 @@ namespace Zoo.GenericUserInterface.Models.Bag
             {
                 await overriding.MainOverrideFunction(this, interfaceModel);
                 await ProcessClassesAndArrays(interfaceModel);
-                ComputedInterfaces.Add(typeDisplayFullName, (interfaceModel, type));
+                ComputedInterfaces.TryAdd(type, interfaceModel);
             }
 
             await ProcessClassesAndArrays(interfaceModel);
-            return (interfaceModel, type);
+            return (type, interfaceModel);
         }
 
         private async Task ProcessClassesAndArrays(GenerateGenericUserInterfaceModel interfaceModel)
@@ -188,12 +207,12 @@ namespace Zoo.GenericUserInterface.Models.Bag
                 if (block.InterfaceType == UserInterfaceType.GenericInterfaceForClass)
                 {
                     var defaultInterface = await GetOrAddDefaultInterfaceFromComputed(block.TypeDisplayFullName);
-                    block.InnerGenericInterface = defaultInterface.Item1.Interface;
+                    block.InnerGenericInterface = defaultInterface.Item2.Interface;
                 }
                 else if(block.InterfaceType == UserInterfaceType.GenericInterfaceForArray)
                 {
                     var defaultInterface = await GetOrAddDefaultInterfaceFromComputed(block.TypeDisplayFullName[0..^2]);
-                    block.InnerGenericInterface = defaultInterface.Item1.Interface;
+                    block.InnerGenericInterface = defaultInterface.Item2.Interface;
                 }
             }
         }
