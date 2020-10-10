@@ -135,7 +135,7 @@ namespace Zoo.ServerJs.Services
 
             RemoteJsOpenApiDocs docsRecord = new RemoteJsOpenApiDocs
             {
-                Desription = remoteApi
+                Description = remoteApi
             };
 
             try

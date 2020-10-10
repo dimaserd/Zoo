@@ -10,7 +10,7 @@ namespace Zoo.ServerJs.Models.OpenApi
         /// <summary>
         /// Описание ремоута
         /// </summary>
-        public RemoteJsOpenApi Desription { get; set; }
+        public RemoteJsOpenApi Description { get; set; }
 
         /// <summary>
         /// Описание методов ремоута

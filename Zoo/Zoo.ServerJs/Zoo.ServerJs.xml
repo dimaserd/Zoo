@@ -352,7 +352,7 @@
             Доки для построения удаленных вызовов
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs.Desription">
+        <member name="P:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs.Description">
             <summary>
             Описание ремоута
             </summary>
