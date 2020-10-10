@@ -13,11 +13,18 @@ namespace Zoo.ServerJs.Models.OpenApi
         /// Конструктор
         /// </summary>
         /// <param name="docs"></param>
-        public JsOpenApiWorkerDocumentation(JsWorkerDocumentation docs)
+        internal JsOpenApiWorkerDocumentation(JsWorkerDocumentation docs)
         {
             WorkerName = docs.WorkerName;
             Description = docs.Description;
             Methods = docs.Methods.Select(x => new JsOpenApiWorkerMethodDocumentation(x.Value)).ToList();
+        }
+
+        /// <summary>
+        /// Дефолтный конструктор
+        /// </summary>
+        public JsOpenApiWorkerDocumentation()
+        {
         }
 
         /// <summary>

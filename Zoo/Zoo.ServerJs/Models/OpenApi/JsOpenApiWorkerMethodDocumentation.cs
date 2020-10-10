@@ -14,7 +14,7 @@ namespace Zoo.ServerJs.Models.OpenApi
         /// Конструктор
         /// </summary>
         /// <param name="methodDocs"></param>
-        public JsOpenApiWorkerMethodDocumentation(JsWorkerMethodDocs methodDocs)
+        internal JsOpenApiWorkerMethodDocumentation(JsWorkerMethodDocs methodDocs)
         {
             MethodName = methodDocs.MethodName;
             Description = methodDocs.Description;
@@ -30,6 +30,14 @@ namespace Zoo.ServerJs.Models.OpenApi
             {
                 Parameters = methodDocs.Parameters.Select(x => CrocoTypeDescription.GetDescription(x)).ToList();
             }
+        }
+
+        /// <summary>
+        /// Дефолтный конструктор
+        /// </summary>
+        public JsOpenApiWorkerMethodDocumentation()
+        {
+
         }
 
         /// <summary>

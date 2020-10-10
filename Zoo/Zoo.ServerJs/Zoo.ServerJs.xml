@@ -291,6 +291,11 @@
             </summary>
             <param name="docs"></param>
         </member>
+        <member name="M:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerDocumentation.#ctor">
+            <summary>
+            Дефолтный конструктор
+            </summary>
+        </member>
         <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerDocumentation.WorkerName">
             <summary>
             Название обработчика
@@ -316,6 +321,11 @@
             Конструктор
             </summary>
             <param name="methodDocs"></param>
+        </member>
+        <member name="M:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.#ctor">
+            <summary>
+            Дефолтный конструктор
+            </summary>
         </member>
         <member name="P:Zoo.ServerJs.Models.OpenApi.JsOpenApiWorkerMethodDocumentation.MethodName">
             <summary>
