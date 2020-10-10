@@ -70,7 +70,8 @@ namespace Zoo.GenericUserInterface.Services
             return new GenericUserInterfaceBlockBuilder<TProp>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
         }
 
-        public static void SetInterfaceForClass<TModel, TProp, TOverrider>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TProp>> expression, TOverrider overrider) 
+        //TODO Реализовать позже
+        private static void SetInterfaceForClass<TModel, TProp, TOverrider>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TProp>> expression, TOverrider overrider) 
             where TModel : class 
             where TProp : class
             where TOverrider : UserInterfaceOverrider<TProp>
