@@ -413,6 +413,11 @@
               обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.ComponentWithNameAlreadyRegisteredFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Компонент с названием &apos;{0}&apos; уже зарегистрирован.
+            </summary>
+        </member>
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.JsWorkerWithNameAlreadyRegisteredFormat">
             <summary>
               Ищет локализованную строку, похожую на Рабочий Js класс с именем {0} уже зарегистрирован.
@@ -428,9 +433,19 @@
               Ищет локализованную строку, похожую на Метод с названием &apos;{0}&apos; не существует в группе методов класса &apos;{1}&apos;.
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.NeedSettingHttpClientBeforeUseMethodFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Перед добавлением удаленного Апи, необходимо предоставить фабрику Http клиента. Воспользуйтесь методом {0}.
+            </summary>
+        </member>
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.NoMethodsInWorkerFormat">
             <summary>
               Ищет локализованную строку, похожую на В Js классе {0} не зарегистрировано ни одного метода.
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.RemoteApiWithNameAlreadyRegisteredFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Удаленное апи с названием &apos;{0}&apos; уже зарегистрировано.
             </summary>
         </member>
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.TypeOfServiceNotRegisteredInServiceCollectionFormat">

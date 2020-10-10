@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ComponentWithNameAlreadyRegisteredFormat" xml:space="preserve">
+    <value>Компонент с названием '{0}' уже зарегистрирован</value>
+  </data>
   <data name="JsWorkerWithNameAlreadyRegisteredFormat" xml:space="preserve">
     <value>Рабочий Js класс с именем {0} уже зарегистрирован</value>
   </data>
@@ -126,8 +129,14 @@
   <data name="MethodWithNameAlreadyExistsInWorkerFormat" xml:space="preserve">
     <value>Метод с названием '{0}' не существует в группе методов класса '{1}'</value>
   </data>
+  <data name="NeedSettingHttpClientBeforeUseMethodFormat" xml:space="preserve">
+    <value>Перед добавлением удаленного Апи, необходимо предоставить фабрику Http клиента. Воспользуйтесь методом {0}</value>
+  </data>
   <data name="NoMethodsInWorkerFormat" xml:space="preserve">
     <value>В Js классе {0} не зарегистрировано ни одного метода</value>
+  </data>
+  <data name="RemoteApiWithNameAlreadyRegisteredFormat" xml:space="preserve">
+    <value>Удаленное апи с названием '{0}' уже зарегистрировано</value>
   </data>
   <data name="TypeOfServiceNotRegisteredInServiceCollectionFormat" xml:space="preserve">
     <value>Сервис с типом {0} не зарегистрирован в контейнере зависимостей, для начала зарегистрируйте его в коллекции сервисов.</value>

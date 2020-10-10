@@ -61,6 +61,15 @@ namespace Zoo.ServerJs.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Компонент с названием &apos;{0}&apos; уже зарегистрирован.
+        /// </summary>
+        internal static string ComponentWithNameAlreadyRegisteredFormat {
+            get {
+                return ResourceManager.GetString("ComponentWithNameAlreadyRegisteredFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Рабочий Js класс с именем {0} уже зарегистрирован.
         /// </summary>
         internal static string JsWorkerWithNameAlreadyRegisteredFormat {
@@ -88,11 +97,29 @@ namespace Zoo.ServerJs.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Перед добавлением удаленного Апи, необходимо предоставить фабрику Http клиента. Воспользуйтесь методом {0}.
+        /// </summary>
+        internal static string NeedSettingHttpClientBeforeUseMethodFormat {
+            get {
+                return ResourceManager.GetString("NeedSettingHttpClientBeforeUseMethodFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на В Js классе {0} не зарегистрировано ни одного метода.
         /// </summary>
         internal static string NoMethodsInWorkerFormat {
             get {
                 return ResourceManager.GetString("NoMethodsInWorkerFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удаленное апи с названием &apos;{0}&apos; уже зарегистрировано.
+        /// </summary>
+        internal static string RemoteApiWithNameAlreadyRegisteredFormat {
+            get {
+                return ResourceManager.GetString("RemoteApiWithNameAlreadyRegisteredFormat", resourceCulture);
             }
         }
         

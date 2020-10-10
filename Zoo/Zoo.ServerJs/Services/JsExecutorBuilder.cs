@@ -50,13 +50,12 @@ namespace Zoo.ServerJs.Services
         {
             if(_httpClientFactory == null)
             {
-                throw new InvalidOperationException("Перед добавлением удаленного Апи, необходимо предоставить фабрику Http клиента. " +
-                    $"Воспользуйтесь методом {nameof(AddHttpClientFactory)}");
+                throw new InvalidOperationException(string.Format(ExceptionTexts.NeedSettingHttpClientBeforeUseMethodFormat, nameof(AddHttpClientFactory)));
             }
 
             if (_remoteApis.ContainsKey(remoteApi.Name))
             {
-                throw new InvalidOperationException($"Удаленное апи с названием '{remoteApi.Name}' уже зарегистрировано");
+                throw new InvalidOperationException(string.Format(ExceptionTexts.RemoteApiWithNameAlreadyRegisteredFormat, remoteApi.Name));
             }
 
             _remoteApis.Add(remoteApi.Name, remoteApi);
@@ -86,7 +85,7 @@ namespace Zoo.ServerJs.Services
         {
             if(_components.ContainsKey(component.ComponentName))
             {
-                throw new Exception($"Компонент с названием '{component.ComponentName}' уже зарегистрирован");
+                throw new Exception(string.Format(ExceptionTexts.ComponentWithNameAlreadyRegisteredFormat, component.ComponentName));
             }
 
             _components.Add(component.ComponentName, component);
