@@ -347,6 +347,56 @@
             Параметры для метода обработчика. Подробное описание типа.
             </summary>
         </member>
+        <member name="T:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs">
+            <summary>
+            Доки для построения удаленных вызовов
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs.Desription">
+            <summary>
+            Описание ремоута
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs.Docs">
+            <summary>
+            Описание методов ремоута
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs.DocsReceivedOnUtc">
+            <summary>
+            Когда были получены доки
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs.IsDocsReceived">
+            <summary>
+            Были ли получены доки
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs.ReceivingException">
+            <summary>
+            Исключение, которое возникло при последнем получении
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.RemoteJsOpenApi">
+            <summary>
+            Удаленное Апи
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.RemoteJsOpenApi.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.RemoteJsOpenApi.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.RemoteJsOpenApi.HostUrl">
+            <summary>
+            Базовый урл на котором крутится удаленные Апи 
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Resources.ExceptionTexts">
             <summary>
               Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
@@ -498,6 +548,18 @@
             Движок JInt
             </summary>
         </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.UpdateRemotesDocsAsync">
+            <summary>
+            Получить документацию по удаленным открытым Js Api
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.GetRemoteDocs">
+            <summary>
+            Получить документацию по удаленным JsOpenApi
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor.GetDocumentation">
             <summary>
             Получить документацию
@@ -537,6 +599,20 @@
             Конструктор
             </summary>
             <param name="serviceCollection"></param>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddHttpClientFactory(System.Func{System.IServiceProvider,System.Net.Http.HttpClient})">
+            <summary>
+            Добавить фабрику Http клиентов для вызовов удаленных сервисов
+            </summary>
+            <param name="httpClientFactory"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddRemoteApi(Zoo.ServerJs.Models.RemoteJsOpenApi)">
+            <summary>
+            Добавить удаленное Апи
+            </summary>
+            <param name="remoteApi"></param>
+            <returns></returns>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddExternalComponents(System.Collections.Generic.IEnumerable{Zoo.ServerJs.Models.ExternalJsComponent})">
             <summary>
@@ -583,6 +659,16 @@
         <member name="P:Zoo.ServerJs.Services.JsExecutorProperties.ExternalComponents">
             <summary>
             Внешние компоненты
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Services.JsExecutorProperties.RemoteApis">
+            <summary>
+            Удаленные апи
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Services.JsExecutorProperties.HttpClientProvider">
+            <summary>
+            Функция для предоставления Http клиента
             </summary>
         </member>
         <member name="T:Zoo.ServerJs.Services.JsWorkerBuilder">

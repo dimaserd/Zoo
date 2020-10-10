@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo.GenericUserInterface.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo.ServerJs", "Zoo.ServerJs\Zoo.ServerJs.csproj", "{3AAAFDDE-F281-4819-8ED1-983DB852E294}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoo.ServerJs.Tests", "Zoo.ServerJs.Tests\Zoo.ServerJs.Tests.csproj", "{E8084A07-DD70-4D34-99E7-1FAC97FBE59C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo.ServerJs.Tests", "Zoo.ServerJs.Tests\Zoo.ServerJs.Tests.csproj", "{E8084A07-DD70-4D34-99E7-1FAC97FBE59C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

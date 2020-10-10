@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Resources;
@@ -15,6 +16,8 @@ namespace Zoo.ServerJs.Services
     {
         readonly Dictionary<string, ExternalJsComponent> _components = new Dictionary<string, ExternalJsComponent>();
         readonly Dictionary<string, JsWorkerDocumentation> _jsWorkers = new Dictionary<string, JsWorkerDocumentation>();
+        readonly Dictionary<string, RemoteJsOpenApi> _remoteApis = new Dictionary<string, RemoteJsOpenApi>();
+        Func<IServiceProvider, HttpClient> _httpClientFactory;
 
         internal IServiceCollection ServiceCollection { get; }
 
@@ -25,6 +28,39 @@ namespace Zoo.ServerJs.Services
         public JsExecutorBuilder(IServiceCollection serviceCollection)
         {
             ServiceCollection = serviceCollection;
+        }
+
+        /// <summary>
+        /// Добавить фабрику Http клиентов для вызовов удаленных сервисов
+        /// </summary>
+        /// <param name="httpClientFactory"></param>
+        /// <returns></returns>
+        public JsExecutorBuilder AddHttpClientFactory(Func<IServiceProvider, HttpClient> httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+            return this;
+        }
+
+        /// <summary>
+        /// Добавить удаленное Апи
+        /// </summary>
+        /// <param name="remoteApi"></param>
+        /// <returns></returns>
+        public JsExecutorBuilder AddRemoteApi(RemoteJsOpenApi remoteApi)
+        {
+            if(_httpClientFactory == null)
+            {
+                throw new InvalidOperationException("Перед добавлением удаленного Апи, необходимо предоставить фабрику Http клиента. " +
+                    $"Воспользуйтесь методом {nameof(AddHttpClientFactory)}");
+            }
+
+            if (_remoteApis.ContainsKey(remoteApi.Name))
+            {
+                throw new InvalidOperationException($"Удаленное апи с названием '{remoteApi.Name}' уже зарегистрировано");
+            }
+
+            _remoteApis.Add(remoteApi.Name, remoteApi);
+            return this;
         }
 
         /// <summary>
@@ -88,7 +124,9 @@ namespace Zoo.ServerJs.Services
             {
                 EngineAction = action,
                 ExternalComponents = _components,
-                JsWorkers = _jsWorkers
+                JsWorkers = _jsWorkers,
+                RemoteApis = _remoteApis,
+                HttpClientProvider = _httpClientFactory ?? throw new InvalidOperationException("необходимо предоставить фабрику Http клиентов")
             });
             ServiceCollection.AddSingleton<JsExecutor>();
         }

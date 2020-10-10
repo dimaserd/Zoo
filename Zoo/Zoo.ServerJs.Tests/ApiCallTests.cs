@@ -60,6 +60,7 @@ namespace Zoo.ServerJs.Tests
 
             new JsExecutorBuilder(serviceCollcetion)
                 .AddJsWorker(builder => new ProductGroupJsWorker().JsWorkerDocs(builder))
+                .AddHttpClientFactory(srv => new System.Net.Http.HttpClient())
                 .Build();
 
             var srvProvider = serviceCollcetion.BuildServiceProvider();
@@ -92,6 +93,7 @@ namespace Zoo.ServerJs.Tests
 
             new JsExecutorBuilder(serviceCollection)
                 .AddJsWorker(builder => new ProductGroupJsWorker().JsWorkerDocs(builder))
+                .AddHttpClientFactory(srv => new System.Net.Http.HttpClient())
                 .Build();
 
             var executor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();

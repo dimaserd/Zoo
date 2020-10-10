@@ -37,6 +37,5 @@ namespace Zoo.ServerJs.Models.Method
         {
             return _parameters?.Length ?? 0;
         }
-
     }
 }

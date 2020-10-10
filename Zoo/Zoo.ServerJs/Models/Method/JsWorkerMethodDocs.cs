@@ -8,12 +8,40 @@ namespace Zoo.ServerJs.Models.Method
     /// </summary>
     public class JsWorkerMethodDocs
     {
-        internal JsWorkerMethodDocs(JsWorkerMethodDocsOptions opts)
+        internal JsWorkerMethodDocs(Type response, List<Type> parameters, JsWorkerMethodDocsOptions opts)
         {
+            Response = response;
+            Parameters = parameters;
             MethodName = opts.MethodName;
             Description = opts.Description;
             ResultDescription = opts.ResultDescription;
             ParameterDescriptions = opts.ParameterDescriptions;
+            SetDescriptions(Response != null, Parameters?.Count ?? 0);
+        }
+
+        internal void SetDescriptions(bool hasResult, int paramsLength)
+        {
+            if (hasResult && string.IsNullOrEmpty(ResultDescription))
+            {
+                ResultDescription = "";
+            }
+
+            var list = new List<string>();
+
+            if(ParameterDescriptions != null)
+            {
+                foreach(var p in ParameterDescriptions)
+                {
+                    list.Add(p);
+                }
+            }
+
+            for (int i = list.Count; i <= paramsLength; i++)
+            {
+                list.Add("");
+            }
+
+            ParameterDescriptions = list.ToArray();
         }
 
         /// <summary>
