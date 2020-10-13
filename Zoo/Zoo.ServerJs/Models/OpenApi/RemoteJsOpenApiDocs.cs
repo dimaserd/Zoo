@@ -31,5 +31,10 @@ namespace Zoo.ServerJs.Models.OpenApi
         /// Исключение, которое возникло при последнем получении
         /// </summary>
         public ExcepionData ReceivingException { get; set; }
+
+        /// <summary>
+        /// Данные для авторизации
+        /// </summary>
+        public RemoteJsOpenApiAuthenticationData AuthenticationData { get; set; }
     }
 }

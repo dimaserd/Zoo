@@ -132,8 +132,7 @@ namespace Zoo.ServerJs.Services
 
         private async Task<RemoteJsOpenApiDocs> GetRemoteDocsViaHttpRequest(HttpClient httpClient, RemoteJsOpenApi remoteApi)
         {
-
-            RemoteJsOpenApiDocs docsRecord = new RemoteJsOpenApiDocs
+            var docsRecord = new RemoteJsOpenApiDocs
             {
                 Description = remoteApi
             };
