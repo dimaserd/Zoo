@@ -13,23 +13,28 @@ namespace Zoo.ServerJs.Models
     {
         internal JsExecutionContext(JsExecutorComponents components, Action<Engine> engineAction)
         {
-            var jsCallWorker = new HandleJsCallWorker(components, this);
+            JsCallWorker = new HandleJsCallWorker(components, this); ;
+            Components = components;
+            EngineAction = engineAction;
+            Engine = CreateEngine();
+        }
 
+        internal Engine CreateEngine()
+        {
             var engine = new Engine()
-                    .SetValue(JsConsts.InnerApiObjectName, jsCallWorker)
+                    .SetValue(JsConsts.InnerApiObjectName, JsCallWorker)
                     .SetValue("console", new
                     {
                         log = new Action<object[]>(Log)
                     });
-
-            engineAction?.Invoke(engine);
+            EngineAction?.Invoke(engine);
 
             engine.Execute(ScriptResources.ScriptInit);
 
-            Engine = engine;
-            JsCallWorker = jsCallWorker;
-            Components = components;
+            return engine;
         }
+
+        private Action<Engine> EngineAction { get; }
 
         /// <summary>
         /// Список логов консиоли
@@ -37,7 +42,7 @@ namespace Zoo.ServerJs.Models
         public List<JsLogggedVariables> ConsoleLogs { get; } = new List<JsLogggedVariables>();
 
         internal JsExecutorComponents Components { get; }
-
+        
         /// <summary>
         /// Системные логи времени выполнения
         /// </summary>

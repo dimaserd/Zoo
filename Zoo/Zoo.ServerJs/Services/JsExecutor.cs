@@ -10,7 +10,6 @@ using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Models.OpenApi;
-using Zoo.ServerJs.Services.Properties;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
@@ -59,15 +58,17 @@ namespace Zoo.ServerJs.Services
         {
             return new JsOpenApiDocs
             {
-                Workers = Components.JsWorkers.Select(x => x.Value).Select(x => new JsOpenApiWorkerDocumentation(x)).ToList(),
-                ExternalJsComponents = Components.ExternalComponents.Select(x => x.Value).ToList()
+                Workers = Components.JsWorkers.Select(x => x.Value)
+                    .Select(x => new JsOpenApiWorkerDocumentation(x)).ToList(),
+                ExternalJsComponents = Components.ExternalComponents
+                    .Select(x => x.Value).ToList()
             };
         }
         
         #region Методы
 
         /// <summary>
-        /// Получить документацию по удаленным открытым Js Api
+        /// Обновить документацию по удаленным открытым Js Api
         /// </summary>
         /// <returns></returns>
         public async Task UpdateRemotesDocsAsync()

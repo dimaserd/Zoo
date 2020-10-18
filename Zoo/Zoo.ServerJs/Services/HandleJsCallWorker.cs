@@ -1,7 +1,5 @@
-﻿using Jint;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Statics;
@@ -15,6 +13,7 @@ namespace Zoo.ServerJs.Services
     {
         private RemoteJsCaller RemoteCaller { get; }
         private JsExecutorComponents Components { get; }
+        private JsExecutionContext ExecutionContext { get; }
 
 
         /// <summary>
@@ -25,7 +24,8 @@ namespace Zoo.ServerJs.Services
         internal HandleJsCallWorker(JsExecutorComponents components, JsExecutionContext executionContext)
         {
             Components = components;
-            RemoteCaller = new RemoteJsCaller(Components.RemoteApiDocs, Components.HttpClientProvider, executionContext);
+            ExecutionContext = executionContext;
+            RemoteCaller = new RemoteJsCaller(Components.RemoteApiDocs, Components.HttpClientProvider, ExecutionContext);
         }
         
         /// <summary>
@@ -96,8 +96,7 @@ namespace Zoo.ServerJs.Services
 
             var variableScript = $"{uid} = {ZooSerializer.Serialize(methodPayLoad)};";
 
-            var engine = new Engine();
-            engine.SetValue(JsConsts.ApiObjectName, this);
+            var engine = ExecutionContext.CreateEngine();
 
             var variable = engine.Execute(variableScript).GetValue(uid);
 
