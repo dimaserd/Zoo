@@ -5,16 +5,15 @@ using System.Linq;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Resources;
 using Zoo.ServerJs.Services;
-using Zoo.ServerJs.Services.Properties;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Models
 {
     internal class JsExecutionContext
     {
-        internal JsExecutionContext(JsExecutionContextProperties properties)
+        internal JsExecutionContext(JsExecutorComponents components, Action<Engine> engineAction)
         {
-            var jsCallWorker = new HandleJsCallWorker(properties, this);
+            var jsCallWorker = new HandleJsCallWorker(components, this);
 
             var engine = new Engine()
                     .SetValue(JsConsts.InnerApiObjectName, jsCallWorker)
@@ -23,13 +22,13 @@ namespace Zoo.ServerJs.Models
                         log = new Action<object[]>(Log)
                     });
 
-            properties.EngineAction?.Invoke(engine);
+            engineAction?.Invoke(engine);
 
             engine.Execute(ScriptResources.ScriptInit);
 
             Engine = engine;
             JsCallWorker = jsCallWorker;
-            Components = properties.Components;
+            Components = components;
         }
 
         /// <summary>

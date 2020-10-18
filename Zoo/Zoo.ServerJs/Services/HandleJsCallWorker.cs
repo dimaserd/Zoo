@@ -1,11 +1,9 @@
 ﻿using Jint;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
-using Zoo.ServerJs.Services.Properties;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
@@ -22,11 +20,11 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="properties"></param>
+        /// <param name="components"></param>
         /// <param name="executionContext"></param>
-        internal HandleJsCallWorker(JsExecutionContextProperties properties, JsExecutionContext executionContext)
+        internal HandleJsCallWorker(JsExecutorComponents components, JsExecutionContext executionContext)
         {
-            Components = properties.Components;
+            Components = components;
             RemoteCaller = new RemoteJsCaller(Components.RemoteApiDocs, Components.HttpClientProvider, executionContext);
         }
         
@@ -92,12 +90,7 @@ namespace Zoo.ServerJs.Services
 
         private string CallExternalUnSafe(string componentName, string methodName, object methodPayLoad)
         {
-            if (!Components.ExternalComponents.ContainsKey(componentName))
-            {
-                throw new InvalidOperationException($"Компонент не найден по указанному названию '{componentName}'");
-            }
-
-            var component = Components.ExternalComponents[componentName];
+            var component = Components.GetExternalComponent(componentName);
 
             var uid = $"n{Guid.NewGuid()}".Replace("-", "_");
 

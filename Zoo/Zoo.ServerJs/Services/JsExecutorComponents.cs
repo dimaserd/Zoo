@@ -37,5 +37,15 @@ namespace Zoo.ServerJs.Services
 
             return JsWorkers[workerName];
         }
+
+        public ExternalJsComponent GetExternalComponent(string componentName)
+        {
+            if (!ExternalComponents.ContainsKey(componentName))
+            {
+                throw new InvalidOperationException($"Компонент не найден по указанному названию '{componentName}'");
+            }
+
+            return ExternalComponents[componentName];
+        }
     }
 }

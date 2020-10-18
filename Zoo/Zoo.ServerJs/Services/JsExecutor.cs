@@ -30,7 +30,7 @@ namespace Zoo.ServerJs.Services
         
 
         /// <summary>
-        /// 
+        /// Конструктор
         /// </summary>
         /// <param name="serviceProvider"></param>
         /// <param name="httpClientProvider"></param>
@@ -218,7 +218,7 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Вызвать метод рабочего класса.
         /// <para></para>
-        /// Данный метод не возвращает исключений.
+        /// Данный метод не возвращает исключений. Его нужно испльзовать как внешюю точку доступа.
         /// </summary>
         /// <param name="requestModel"></param>
         /// <returns></returns>
@@ -259,11 +259,7 @@ namespace Zoo.ServerJs.Services
 
         private JsExecutionContext GetContext()
         {
-            return new JsExecutionContext(new JsExecutionContextProperties
-            {
-                Components = Components,
-                EngineAction = EngineAction
-            });
+            return new JsExecutionContext(Components, EngineAction);
         }
         #endregion
     }
