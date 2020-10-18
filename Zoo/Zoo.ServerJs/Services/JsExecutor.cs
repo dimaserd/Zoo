@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Croco.Core.Abstractions.Models;
 using Jint;
 using Newtonsoft.Json;
-using Zoo.ServerJs.Consts;
+using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Models.OpenApi;
-using Zoo.ServerJs.Resources;
+using Zoo.ServerJs.Services.Properties;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
@@ -24,87 +22,48 @@ namespace Zoo.ServerJs.Services
     {
         private readonly JsOpenApiDocs _openApiDocs;
 
-        IServiceProvider ServiceProvider { get; }
+        IJsScriptResultStorage Storage { get; }
 
+        JsExecutorComponents Components { get; }
 
-        /// <summary>
-        /// Javascript обработчики
-        /// </summary>
-        Dictionary<string, JsWorkerDocumentation> JsWorkers { get; }
-
-        /// <summary>
-        /// Внешние компоненты
-        /// </summary>
-        Dictionary<string, ExternalJsComponent> ExternalComponents { get; }
-
-        Dictionary<string, RemoteJsOpenApi> RemoteApis { get; }
-
-        readonly ConcurrentDictionary<string, RemoteJsOpenApiDocs> RemoteApiDocs = new ConcurrentDictionary<string, RemoteJsOpenApiDocs>();
-
-
-        readonly Func<IServiceProvider, HttpClient> _httpClientFactory;
-
-        /// <summary>
-        /// Обработчик Js вызовов
-        /// </summary>
-        public HandleJsCallWorker JsCallHandler { get; }
+        Action<Engine> EngineAction { get; }
+        
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="serviceProvider"></param>
+        /// <param name="httpClientProvider"></param>
+        /// <param name="storage"></param>
         /// <param name="properties"></param>
-        public JsExecutor(IServiceProvider serviceProvider, JsExecutorProperties properties)
+        public JsExecutor(IServiceProvider serviceProvider,
+            IServerJsHttpClientProvider httpClientProvider,
+            IJsScriptResultStorage storage, 
+            JsExecutorProperties properties)
         {
-            JsWorkers = properties.JsWorkers;
-            ExternalComponents = properties.ExternalComponents;
-            RemoteApis = properties.RemoteApis;
-            _httpClientFactory = properties.HttpClientProvider;
-
-            _openApiDocs = CreateDocs();
-            JsCallHandler = new HandleJsCallWorker(serviceProvider, JsWorkers, ExternalComponents);
+            Components = new JsExecutorComponents
+            {
+                JsWorkers = properties.JsWorkers,
+                ExternalComponents = properties.ExternalComponents,
+                RemoteApis = properties.RemoteApis,
+                ServiceProvider = serviceProvider,
+                HttpClientProvider = httpClientProvider
+            };
             
-            var engine = new Engine()
-                .SetValue(JsConsts.InnerApiObjectName, JsCallHandler)
-                .SetValue("console", new
-                {
-                    log = new Action<object[]>(Log)
-                });
-
-            properties.EngineAction?.Invoke(engine);
-
-            engine.Execute(ScriptResources.ScriptInit);
-
-            Engine = engine;
-            ServiceProvider = serviceProvider;
-        }
-
-        private HttpClient GetHttpClient()
-        {
-            return _httpClientFactory(ServiceProvider);
+            EngineAction = properties.EngineAction;
+            _openApiDocs = CreateDocs();
+            Storage = storage;
         }
 
         private JsOpenApiDocs CreateDocs()
         {
             return new JsOpenApiDocs
             {
-                Workers = JsWorkers.Select(x => x.Value).Select(x => new JsOpenApiWorkerDocumentation(x)).ToList(),
-                ExternalJsComponents = ExternalComponents.Select(x => x.Value).ToList()
+                Workers = Components.JsWorkers.Select(x => x.Value).Select(x => new JsOpenApiWorkerDocumentation(x)).ToList(),
+                ExternalJsComponents = Components.ExternalComponents.Select(x => x.Value).ToList()
             };
         }
         
-        #region Свойства
-        
-        private readonly List<JsLogggedVariables> Logs = new List<JsLogggedVariables>();
-
-        /// <summary>
-        /// Движок JInt
-        /// </summary>
-        public Engine Engine { get; }
-        
-
-        #endregion
-
         #region Методы
 
         /// <summary>
@@ -113,11 +72,11 @@ namespace Zoo.ServerJs.Services
         /// <returns></returns>
         public async Task UpdateRemotesDocsAsync()
         {
-            var httpClient = GetHttpClient();
+            var httpClient = Components.HttpClientProvider.GetHttpClient();
 
-            foreach (var remoteApi in RemoteApis)
+            foreach (var remoteApi in Components.RemoteApis)
             {
-                RemoteApiDocs[remoteApi.Key] = await GetRemoteDocsViaHttpRequest(httpClient, remoteApi.Value);
+                Components.RemoteApiDocs[remoteApi.Key] = await GetRemoteDocsViaHttpRequest(httpClient, remoteApi.Value);
             }
         }
 
@@ -127,7 +86,7 @@ namespace Zoo.ServerJs.Services
         /// <returns></returns>
         public List<RemoteJsOpenApiDocs> GetRemoteDocs()
         {
-            return RemoteApiDocs.Values.ToList();
+            return Components.RemoteApiDocs.Values.ToList();
         }
 
         private async Task<RemoteJsOpenApiDocs> GetRemoteDocsViaHttpRequest(HttpClient httpClient, RemoteJsOpenApi remoteApi)
@@ -183,7 +142,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodParams">Параметры метода</param>
         public TResult Call<TResult>(string workerName, string method, params object[] methodParams)
         {
-            var res = JsCallHandler.Call(workerName, method, methodParams);
+            var res = GetContext().JsCallWorker.Call(workerName, method, methodParams);
             return ZooSerializer.Deserialize<TResult>(res);
         }
 
@@ -195,7 +154,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodPayload">Параметр, который нужно передать в метод компонента</param>
         public TResult CallExternalComponent<TResult>(string componentName, string methodName, object methodPayload)
         {
-            var res = JsCallHandler.CallExternal(componentName, methodName, methodPayload);
+            var res = GetContext().JsCallWorker.CallExternal(componentName, methodName, methodPayload);
             return ZooSerializer.Deserialize<TResult>(res);
         }
 
@@ -204,51 +163,108 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         /// <param name="jsScript"></param>
         /// <returns></returns>
-        public BaseApiResponse<JsScriptExecutedResult> RunScriptDetaiiled(string jsScript)
+        public async Task<JsScriptExecutedResult> RunScriptDetaiiled(string jsScript)
         {
-            var startDate = DateTime.UtcNow;
-            Logs.Clear();
+            if (string.IsNullOrWhiteSpace(jsScript))
+            {
+                return new JsScriptExecutedResult("Скрипт не может быть пустой строкой");
+            }
 
+            var startDate = DateTime.UtcNow;
+
+            var context = GetContext();
+
+            JsScriptExecutedResult result;
             try
             {
-                Engine.Execute(jsScript);
 
-                return new BaseApiResponse<JsScriptExecutedResult>(true, "Скрипт выполнен успешно", new JsScriptExecutedResult
+                context.Engine.Execute(jsScript);
+
+                result = new JsScriptExecutedResult
                 {
+                    Id = Guid.NewGuid(),
+                    Script = jsScript,
+                    IsSucceeded = true,
                     StartedOnUtc = startDate,
-                    FinishOnUtc = DateTime.UtcNow,
-                    Logs = Logs,
-                });
+                    FinishedOnUtc = DateTime.UtcNow,
+                    ConsoleLogs = context.ConsoleLogs,
+                };
             }
 
             catch(Exception ex)
             {
-                return new BaseApiResponse<JsScriptExecutedResult>(false, "Ошибка при выполнении скрипта. " + ex.Message, new JsScriptExecutedResult
+                result = new JsScriptExecutedResult
                 {
+                    Id = Guid.NewGuid(),
+                    Script = jsScript,
+                    ErrorMessage = ex.Message,
+                    IsSucceeded = false,
                     StartedOnUtc = startDate,
-                    FinishOnUtc = DateTime.UtcNow,
+                    FinishedOnUtc = DateTime.UtcNow,
                     ExceptionData = new ExcepionData 
                     {
                         Message = ex.Message,
                         StackTrace = ex.StackTrace
                     },
-                    Logs = Logs                    
-                });
+                    ConsoleLogs = context.ConsoleLogs
+                };
+            }
+
+            await Storage.AddScriptResult(result);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Вызвать метод рабочего класса.
+        /// <para></para>
+        /// Данный метод не возвращает исключений.
+        /// </summary>
+        /// <param name="requestModel"></param>
+        /// <returns></returns>
+        public CallRemoteOpenApiWorkerMethodResponse CallWorkerMethod(CallRemoteOpenApiMethod requestModel)
+        {
+            if(requestModel == null)
+            {
+                return new CallRemoteOpenApiWorkerMethodResponse
+                {
+                    IsSucceeded = false,
+                    ErrorMessage = "request is null object"
+                };
+            }
+
+            var parameters = new JsWorkerMethodCallParametersFromSerialized(requestModel.SerializedParameters);
+
+            try
+            {
+                var result = Components
+                    .GetJsWorker(requestModel.WorkerName)
+                    .HandleCall(requestModel.MethodName, Components.ServiceProvider, parameters);
+
+                return new CallRemoteOpenApiWorkerMethodResponse
+                {
+                    IsSucceeded = true,
+                    ResponseJson = ZooSerializer.Serialize(result.Result)
+                };
+            }
+            catch(Exception ex)
+            {
+                return new CallRemoteOpenApiWorkerMethodResponse
+                {
+                    IsSucceeded = false,
+                    ErrorMessage = ex.Message
+                };
             }
         }
-        #endregion
 
-        private void Log(params object[] objs)
+        private JsExecutionContext GetContext()
         {
-            Logs.Add(new JsLogggedVariables 
+            return new JsExecutionContext(new JsExecutionContextProperties
             {
-                LoggedOnUtc = DateTime.UtcNow,
-                SerializedVariables = objs.Select(x => new JsSerializedVariable 
-                {
-                    DataJson = ZooSerializer.Serialize(x),
-                    TypeFullName = x.GetType().FullName
-                }).ToList()
+                Components = Components,
+                EngineAction = EngineAction
             });
         }
+        #endregion
     }
 }

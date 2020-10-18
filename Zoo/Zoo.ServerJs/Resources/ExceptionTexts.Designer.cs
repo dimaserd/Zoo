@@ -70,6 +70,15 @@ namespace Zoo.ServerJs.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Провайдер Http клиентов уже зарегистрирован.
+        /// </summary>
+        internal static string HttpClientProviderIsAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("HttpClientProviderIsAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Рабочий Js класс с именем {0} уже зарегистрирован.
         /// </summary>
         internal static string JsWorkerWithNameAlreadyRegisteredFormat {
@@ -115,11 +124,29 @@ namespace Zoo.ServerJs.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на В системе нет зарегистрированного рабочего класса с именем &apos;{0}&apos;.
+        /// </summary>
+        internal static string NoWorkerWithNameRegisteredFormat {
+            get {
+                return ResourceManager.GetString("NoWorkerWithNameRegisteredFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Удаленное апи с названием &apos;{0}&apos; уже зарегистрировано.
         /// </summary>
         internal static string RemoteApiWithNameAlreadyRegisteredFormat {
             get {
                 return ResourceManager.GetString("RemoteApiWithNameAlreadyRegisteredFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Хранилище для скриптов уже установлено.
+        /// </summary>
+        internal static string ScriptStorageIsAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("ScriptStorageIsAlreadyRegistered", resourceCulture);
             }
         }
         

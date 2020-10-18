@@ -20,6 +20,7 @@
   <ItemGroup>
     <PackageReference Include="Jint" Version="2.11.58" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
     <PackageReference Include="NetCroco.Core.Abstractions" Version="1.1.47" />
     <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.45" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
@@ -47,5 +48,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScriptResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>

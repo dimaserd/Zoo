@@ -4,6 +4,32 @@
         <name>Zoo.ServerJs</name>
     </assembly>
     <members>
+        <member name="T:Zoo.ServerJs.Abstractions.IJsScriptResultStorage">
+            <summary>
+            Хранилище для выполненных скриптов
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptResultStorage.AddScriptResult(Zoo.ServerJs.Models.JsScriptExecutedResult)">
+            <summary>
+            Добавить результат выполнения скрипта
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptResultStorage.GetScriptResultById(System.Guid)">
+            <summary>
+            Найти по идентификатору
+            </summary>
+            <param name="scriptId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptResultStorage.GetScriptResults(Zoo.ServerJs.Models.SearchScriptResults)">
+            <summary>
+            Искать скрипты
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.ServerJs.Abstractions.IJsWorker">
             <summary>
             Абстракция над js обработчиком
@@ -14,6 +40,35 @@
             Получить локументацию
             </summary>
             <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.ServerJs.Abstractions.IJsWorkerMethodCallParameters">
+            <summary>
+            Параметры для вызова метода
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IJsWorkerMethodCallParameters.GetParameter``1">
+            <summary>
+            Получить параметр
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IJsWorkerMethodCallParameters.GetParamsLength">
+            <summary>
+            Получить длину параметров
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.ServerJs.Abstractions.IServerJsHttpClientProvider">
+            <summary>
+            Провайдер Http клиента для запросов в удаленные Апи
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IServerJsHttpClientProvider.GetHttpClient">
+            <summary>
+            Получить Http клиента
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Zoo.ServerJs.Consts.JsConsts">
@@ -71,6 +126,46 @@
             Скрипт компонента
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Models.JsExecutionContext.ConsoleLogs">
+            <summary>
+            Список логов консиоли
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsExecutionContext.ExecutionLogs">
+            <summary>
+            Системные логи времени выполнения
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsExecutionContext.Engine">
+            <summary>
+            Движок
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.JsExecutionLog">
+            <summary>
+            Системные логи выполнения
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsExecutionLog.LoggedOnUtc">
+            <summary>
+            Дата логгирования
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsExecutionLog.EventId">
+            <summary>
+            Идентификатор события
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsExecutionLog.Message">
+            <summary>
+            Сообщение в человекопонятном виде
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsExecutionLog.DataJson">
+            <summary>
+            Данные описанные в логе
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Models.JsLogggedVariables">
             <summary>
             Залоггированные переменные
@@ -91,19 +186,49 @@
             Результат выполнения метода серверного javascript обработчика
             </summary>
         </member>
+        <member name="M:Zoo.ServerJs.Models.JsScriptExecutedResult.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.Id">
+            <summary>
+            Идентификатор скрипта
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.Script">
+            <summary>
+            Текст скрипта
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.IsSucceeded">
+            <summary>
+            Выполнено успешно
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.ErrorMessage">
+            <summary>
+            Сообщение об ошибке
+            </summary>
+        </member>
         <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.StartedOnUtc">
             <summary>
             Дата начала
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.FinishOnUtc">
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.FinishedOnUtc">
             <summary>
             Дата окончания
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.Logs">
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.ConsoleLogs">
             <summary>
-            Список логов
+            Список логов консиоли
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.ExecutionLogs">
+            <summary>
+            Системные логи времени выполнения
             </summary>
         </member>
         <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.ExceptionData">
@@ -146,7 +271,7 @@
             Методы обработчика
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerDocumentation.HandleCall(System.String,System.IServiceProvider,Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters)">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerDocumentation.HandleCall(System.String,System.IServiceProvider,Zoo.ServerJs.Abstractions.IJsWorkerMethodCallParameters)">
             <summary>
             Обработка вызова метода
             </summary>
@@ -165,7 +290,7 @@
             Ссылка на функцию
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodBase.HandleCall(Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters,System.IServiceProvider)">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodBase.HandleCall(Zoo.ServerJs.Abstractions.IJsWorkerMethodCallParameters,System.IServiceProvider)">
             <summary>
             Обработать вызов
             </summary>
@@ -177,13 +302,6 @@
             <summary>
             Параметры вызова javascript метода
             </summary>
-        </member>
-        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters.GetParameter``1">
-            <summary>
-            Получить параметр
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
         </member>
         <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodDocs">
             <summary>
@@ -263,6 +381,46 @@
         <member name="P:Zoo.ServerJs.Models.Method.JsWorkerMethodResult.Result">
             <summary>
             Результат вызова
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.OpenApi.CallRemoteOpenApiMethod">
+            <summary>
+            Вызвать удаленный метод (передается сериализованным)
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.CallRemoteOpenApiMethod.WorkerName">
+            <summary>
+            Имя рабочего класса
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.CallRemoteOpenApiMethod.MethodName">
+            <summary>
+            Название метода
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.CallRemoteOpenApiMethod.SerializedParameters">
+            <summary>
+            Сериализованные параметры
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.OpenApi.CallRemoteOpenApiWorkerMethodResponse">
+            <summary>
+            Результат выполнения 
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.CallRemoteOpenApiWorkerMethodResponse.IsSucceeded">
+            <summary>
+            Определяет успешность вызова
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.CallRemoteOpenApiWorkerMethodResponse.ErrorMessage">
+            <summary>
+            Текст ошибки
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.CallRemoteOpenApiWorkerMethodResponse.ResponseJson">
+            <summary>
+            Сериализованный ответ
             </summary>
         </member>
         <member name="T:Zoo.ServerJs.Models.OpenApi.JsOpenApiDocs">
@@ -357,6 +515,16 @@
             Параметры для метода обработчика. Подробное описание типа.
             </summary>
         </member>
+        <member name="T:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiAuthenticationData">
+            <summary>
+            Данные для авторищации
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiAuthenticationData.AuthToken">
+            <summary>
+            Токен авторизации
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs">
             <summary>
             Доки для построения удаленных вызовов
@@ -387,6 +555,11 @@
             Исключение, которое возникло при последнем получении
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs.AuthenticationData">
+            <summary>
+            Данные для авторизации
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Models.RemoteJsOpenApi">
             <summary>
             Удаленное Апи
@@ -405,6 +578,26 @@
         <member name="P:Zoo.ServerJs.Models.RemoteJsOpenApi.HostUrl">
             <summary>
             Базовый урл на котором крутится удаленные Апи 
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.SearchScriptResults">
+            <summary>
+            Модель для поиска резельтатов выполнения скрипта
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.SearchScriptResults.IsSucceeded">
+            <summary>
+            Скрипт исполнен успешно
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.SearchScriptResults.StartedOnUtc">
+            <summary>
+            Начало выполнения скрипта
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.SearchScriptResults.FinishedOnUtc">
+            <summary>
+            Окончание выполнения скрипта
             </summary>
         </member>
         <member name="T:Zoo.ServerJs.Resources.ExceptionTexts">
@@ -426,6 +619,11 @@
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.ComponentWithNameAlreadyRegisteredFormat">
             <summary>
               Ищет локализованную строку, похожую на Компонент с названием &apos;{0}&apos; уже зарегистрирован.
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.HttpClientProviderIsAlreadyRegistered">
+            <summary>
+              Ищет локализованную строку, похожую на Провайдер Http клиентов уже зарегистрирован.
             </summary>
         </member>
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.JsWorkerWithNameAlreadyRegisteredFormat">
@@ -456,6 +654,11 @@
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.RemoteApiWithNameAlreadyRegisteredFormat">
             <summary>
               Ищет локализованную строку, похожую на Удаленное апи с названием &apos;{0}&apos; уже зарегистрировано.
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.ScriptStorageIsAlreadyRegistered">
+            <summary>
+              Ищет локализованную строку, похожую на Хранилище для скриптов уже установлено.
             </summary>
         </member>
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.TypeOfServiceNotRegisteredInServiceCollectionFormat">
@@ -503,18 +706,42 @@
                 return this.PrepareResul [остаток строки не уместился]&quot;;.
              </summary>
         </member>
+        <member name="T:Zoo.ServerJs.Services.DefaultHttpClientProvider">
+            <summary>
+            Дефолтный Http клиент
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.DefaultHttpClientProvider.GetHttpClient">
+            <summary>
+            Получить Http клиента
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.ServerJs.Services.DefaultJsScriptResultStorage">
+            <summary>
+            Дефолтная реализация хранилища без хранилища
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.AddScriptResult(Zoo.ServerJs.Models.JsScriptExecutedResult)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.GetScriptResultById(System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.GetScriptResults(Zoo.ServerJs.Models.SearchScriptResults)">
+            <inheritdoc />
+        </member>
         <member name="T:Zoo.ServerJs.Services.HandleJsCallWorker">
             <summary>
             Обработчик js вызовов
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.#ctor(System.IServiceProvider,System.Collections.Generic.Dictionary{System.String,Zoo.ServerJs.Models.Method.JsWorkerDocumentation},System.Collections.Generic.Dictionary{System.String,Zoo.ServerJs.Models.ExternalJsComponent})">
+        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.#ctor(Zoo.ServerJs.Services.Properties.JsExecutionContextProperties,Zoo.ServerJs.Models.JsExecutionContext)">
             <summary>
             Конструктор
             </summary>
-            <param name="serviceProvider"></param>
-            <param name="workers"></param>
-            <param name="externalComponents"></param>
+            <param name="properties"></param>
+            <param name="executionContext"></param>
         </member>
         <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.Call(System.String,System.String,System.Object[])">
             <summary>
@@ -523,14 +750,6 @@
             <param name="workerName">название класса рабочего который нужно вызвать</param>
             <param name="method">метод который нужно вызвать у данного рабочего</param>
             <param name="methodParams">Параметры метода</param>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallExternal(System.String,System.String)">
-            <summary>
-            Вызвать внешний сервис, определенный через Js
-            </summary>
-            <param name="componentName"></param>
-            <param name="methodName"></param>
-            <returns></returns>
         </member>
         <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallExternal(System.String,System.String,System.Object)">
             <summary>
@@ -541,37 +760,39 @@
             <param name="methodPayLoad"></param>
             <returns></returns>
         </member>
+        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallRemoteApi(System.String,System.String,System.String,System.Object[])">
+            <summary>
+            Вызвать удаленное апи
+            </summary>
+            <param name="remoteName"></param>
+            <param name="workerName"></param>
+            <param name="methodName"></param>
+            <param name="methodParams"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Zoo.ServerJs.Services.JsExecutorComponents.JsWorkers">
+            <summary>
+            Javascript обработчики
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Services.JsExecutorComponents.ExternalComponents">
+            <summary>
+            Внешние компоненты
+            </summary>
+        </member>
         <member name="T:Zoo.ServerJs.Services.JsExecutor">
             <summary>
             Исполнитель кода на Js
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutor.JsWorkers">
-            <summary>
-            Javascript обработчики
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutor.ExternalComponents">
-            <summary>
-            Внешние компоненты
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutor.JsCallHandler">
-            <summary>
-            Обработчик Js вызовов
-            </summary>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(System.IServiceProvider,Zoo.ServerJs.Services.JsExecutorProperties)">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(System.IServiceProvider,Zoo.ServerJs.Abstractions.IServerJsHttpClientProvider,Zoo.ServerJs.Abstractions.IJsScriptResultStorage,Zoo.ServerJs.Services.JsExecutorProperties)">
             <summary>
             
             </summary>
             <param name="serviceProvider"></param>
+            <param name="httpClientProvider"></param>
+            <param name="storage"></param>
             <param name="properties"></param>
-        </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutor.Engine">
-            <summary>
-            Движок JInt
-            </summary>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor.UpdateRemotesDocsAsync">
             <summary>
@@ -614,6 +835,15 @@
             <param name="jsScript"></param>
             <returns></returns>
         </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.CallWorkerMethod(Zoo.ServerJs.Models.OpenApi.CallRemoteOpenApiMethod)">
+            <summary>
+            Вызвать метод рабочего класса.
+            <para></para>
+            Данный метод не возвращает исключений.
+            </summary>
+            <param name="requestModel"></param>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.ServerJs.Services.JsExecutorBuilder">
             <summary>
             Построитель для <see cref="T:Zoo.ServerJs.Services.JsExecutor"/>
@@ -625,11 +855,11 @@
             </summary>
             <param name="serviceCollection"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddHttpClientFactory(System.Func{System.IServiceProvider,System.Net.Http.HttpClient})">
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddHttpClientFactory``1">
             <summary>
-            Добавить фабрику Http клиентов для вызовов удаленных сервисов
+            Добавить фабрику Http клиентов для вызовов удаленных сервисов.
+            Регистрирует данный объект как синглтон.
             </summary>
-            <param name="httpClientFactory"></param>
             <returns></returns>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddRemoteApi(Zoo.ServerJs.Models.RemoteJsOpenApi)">
@@ -637,6 +867,13 @@
             Добавить удаленное Апи
             </summary>
             <param name="remoteApi"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddScriptStorage``1">
+            <summary>
+            Регистрирует хранилище для скриптов как синглтон
+            </summary>
+            <typeparam name="TStorage"></typeparam>
             <returns></returns>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddExternalComponents(System.Collections.Generic.IEnumerable{Zoo.ServerJs.Models.ExternalJsComponent})">
@@ -689,11 +926,6 @@
         <member name="P:Zoo.ServerJs.Services.JsExecutorProperties.RemoteApis">
             <summary>
             Удаленные апи
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutorProperties.HttpClientProvider">
-            <summary>
-            Функция для предоставления Http клиента
             </summary>
         </member>
         <member name="T:Zoo.ServerJs.Services.JsWorkerBuilder">
@@ -955,6 +1187,24 @@
             <summary>
             Построить Js рабочего
             </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.RemoteJsCaller.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.String,Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs},Zoo.ServerJs.Abstractions.IServerJsHttpClientProvider,Zoo.ServerJs.Models.JsExecutionContext)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="remoteDocs"></param>
+            <param name="httpClientProvider"></param>
+            <param name="executionContext"></param>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.RemoteJsCaller.CallRemoteApi(System.String,System.String,System.String,System.Object[])">
+            <summary>
+            Вызвать внешний сервис, определенный через Js
+            </summary>
+            <param name="remoteName"></param>
+            <param name="workerName"></param>
+            <param name="methodName"></param>
+            <param name="methodParams"></param>
+            <returns></returns>
         </member>
         <member name="T:Zoo.ServerJs.Statics.ZooSerializer">
             <summary>

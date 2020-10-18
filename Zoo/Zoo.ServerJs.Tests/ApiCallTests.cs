@@ -2,6 +2,7 @@ using Croco.Core.Abstractions.Models;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System.Linq;
+using System.Threading.Tasks;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Services;
@@ -50,7 +51,7 @@ namespace Zoo.ServerJs.Tests
     public class ApiCallTests
     {
         [Test]
-        public void Test1()
+        public async Task Test1()
         {
             var serviceCollcetion = new ServiceCollection();
 
@@ -60,18 +61,18 @@ namespace Zoo.ServerJs.Tests
 
             new JsExecutorBuilder(serviceCollcetion)
                 .AddJsWorker(builder => new ProductGroupJsWorker().JsWorkerDocs(builder))
-                .AddHttpClientFactory(srv => new System.Net.Http.HttpClient())
+                .AddHttpClientFactory<DefaultHttpClientProvider>()
                 .Build();
 
             var srvProvider = serviceCollcetion.BuildServiceProvider();
 
             var executor = srvProvider.GetRequiredService<JsExecutor>();
 
-            var result = executor.RunScriptDetaiiled(script);
+            var result = await executor.RunScriptDetaiiled(script);
             Assert.IsTrue(result.IsSucceeded);
-            Assert.AreEqual(1, result.ResponseObject.Logs.Count);
+            Assert.AreEqual(1, result.ConsoleLogs.Count);
 
-            var log = result.ResponseObject.Logs.First();
+            var log = result.ConsoleLogs.First();
 
             var json = ZooSerializer.Serialize(ProductGroupJsWorker.AddProductToGroup(null));
 
@@ -79,7 +80,7 @@ namespace Zoo.ServerJs.Tests
         }
 
         [Test]
-        public void Test2()
+        public async Task Test2()
         {
             var script = $"var t = api.Call(\"{ProductGroupJsWorker.WorkerName}\", \"{ProductGroupJsWorker.GetArrayName}\");";
 
@@ -93,14 +94,14 @@ namespace Zoo.ServerJs.Tests
 
             new JsExecutorBuilder(serviceCollection)
                 .AddJsWorker(builder => new ProductGroupJsWorker().JsWorkerDocs(builder))
-                .AddHttpClientFactory(srv => new System.Net.Http.HttpClient())
+                .AddHttpClientFactory<DefaultHttpClientProvider>()
                 .Build();
 
             var executor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
 
-            var result = executor.RunScriptDetaiiled(script);
+            var result = await executor.RunScriptDetaiiled(script);
             Assert.IsTrue(result.IsSucceeded);
-            Assert.AreEqual(ProductGroupJsWorker.GetArray().Length + 2, result.ResponseObject.Logs.Count);
+            Assert.AreEqual(ProductGroupJsWorker.GetArray().Length + 2, result.ConsoleLogs.Count);
         }
     }
 }

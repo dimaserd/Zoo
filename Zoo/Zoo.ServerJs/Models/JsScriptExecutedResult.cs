@@ -9,19 +9,56 @@ namespace Zoo.ServerJs.Models
     public class JsScriptExecutedResult
     {
         /// <summary>
+        /// Конструктор
+        /// </summary>
+        public JsScriptExecutedResult()
+        {
+        }
+
+        internal JsScriptExecutedResult(string errorMessage)
+        {
+            ErrorMessage = errorMessage;
+        }
+
+        /// <summary>
+        /// Идентификатор скрипта
+        /// </summary>
+        public Guid Id { get; set; }
+
+        /// <summary>
+        /// Текст скрипта
+        /// </summary>
+        public string Script { get; set; }
+
+        /// <summary>
+        /// Выполнено успешно
+        /// </summary>
+        public bool IsSucceeded { get; set; }
+
+        /// <summary>
+        /// Сообщение об ошибке
+        /// </summary>
+        public string ErrorMessage { get; set; }
+
+        /// <summary>
         /// Дата начала
         /// </summary>
-        public DateTime StartedOnUtc { get; set; }
+        public DateTime? StartedOnUtc { get; set; }
 
         /// <summary>
         /// Дата окончания
         /// </summary>
-        public DateTime FinishOnUtc { get; set; }
+        public DateTime? FinishedOnUtc { get; set; }
 
         /// <summary>
-        /// Список логов
+        /// Список логов консиоли
         /// </summary>
-        public List<JsLogggedVariables> Logs { get; set; }
+        public List<JsLogggedVariables> ConsoleLogs { get; set; }
+
+        /// <summary>
+        /// Системные логи времени выполнения
+        /// </summary>
+        public List<JsExecutionLog> ExecutionLogs { get; set; }
 
         /// <summary>
         /// Исключение

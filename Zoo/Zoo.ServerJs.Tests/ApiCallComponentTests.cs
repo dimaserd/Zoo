@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Linq;
+using System.Threading.Tasks;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Services;
 using Zoo.ServerJs.Statics;
@@ -12,7 +13,7 @@ namespace Zoo.ServerJs.Tests
     {
         [TestCase(7, 12)]
         [TestCase(3, 4)]
-        public void Test(int arg1, int arg2)
+        public async Task Test(int arg1, int arg2)
         {
             var serviceCollection = new ServiceCollection();
 
@@ -22,7 +23,7 @@ namespace Zoo.ServerJs.Tests
                 Script = "function Calculator(model) { \n" +
                 "return model.Arg1 + model.Arg2; \n }"
             })
-            .AddHttpClientFactory(srv => new System.Net.Http.HttpClient())
+            .AddHttpClientFactory<DefaultHttpClientProvider>()
             .Build();
 
             var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
@@ -32,14 +33,12 @@ namespace Zoo.ServerJs.Tests
 
             script += "console.log(res)";
 
-            var result = jsExecutor.RunScriptDetaiiled(script);
+            var result = await jsExecutor.RunScriptDetaiiled(script);
 
             Assert.IsTrue(result.IsSucceeded);
 
-            var resp = result.ResponseObject;
-
-            Assert.IsTrue(resp.Logs.Count == 1);
-            var logValue = resp.Logs.First().SerializedVariables.First();
+            Assert.IsTrue(result.ConsoleLogs.Count == 1);
+            var logValue = result.ConsoleLogs.First().SerializedVariables.First();
 
             var expectedRes = (double)(arg1 + arg2);
             var directCallResult = jsExecutor.CallExternalComponent<int>("Test", "Calculator", new { Arg1 = arg1, Arg2 = arg2 });
@@ -50,7 +49,7 @@ namespace Zoo.ServerJs.Tests
 
         [TestCase(6, 6, 4)]
         [TestCase(6, 1, 3)]
-        public void CallAfterCall(double arg1, double arg2, double delimeter)
+        public async Task CallAfterCall(double arg1, double arg2, double delimeter)
         {
             var serviceCollection = new ServiceCollection();
 
@@ -69,7 +68,7 @@ namespace Zoo.ServerJs.Tests
                 Script = "function CalculatorNew(model) { \n" +
                         "return model.Arg1 / model.Arg2; }"
             })
-            .AddHttpClientFactory(srv => new System.Net.Http.HttpClient())
+            .AddHttpClientFactory<DefaultHttpClientProvider>()
             .Build();
 
             var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
@@ -78,15 +77,15 @@ namespace Zoo.ServerJs.Tests
 
             script += "console.log(res);\n";
 
-            var result = jsExecutor.RunScriptDetaiiled(script);
+            var result = await jsExecutor.RunScriptDetaiiled(script);
 
             Assert.IsTrue(result.IsSucceeded);
 
-            var resp = result.ResponseObject;
+            var resp = result;
 
-            Assert.IsTrue(resp.Logs.Count == 1);
+            Assert.IsTrue(resp.ConsoleLogs.Count == 1);
 
-            var logVar = resp.Logs.First().SerializedVariables.First();
+            var logVar = resp.ConsoleLogs.First().SerializedVariables.First();
 
             var directCallValue = jsExecutor.CallExternalComponent<double>("Test", "Calculator", new { Arg1 = arg1, Arg2 = arg2 });
             var expectedValue = (arg1 + arg2) / delimeter;
@@ -99,7 +98,7 @@ namespace Zoo.ServerJs.Tests
         [TestCase(6)]
         [TestCase(7)]
         [TestCase(14)]
-        public void CallWithNoArgs(double n1)
+        public async Task CallWithNoArgs(double n1)
         {
             var serviceCollection = new ServiceCollection();
 
@@ -110,7 +109,7 @@ namespace Zoo.ServerJs.Tests
                 $"return {n1};\n" +
                 " }"
             })
-            .AddHttpClientFactory(srv => new System.Net.Http.HttpClient())
+            .AddHttpClientFactory<DefaultHttpClientProvider>()
             .Build();
 
             var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
@@ -119,15 +118,13 @@ namespace Zoo.ServerJs.Tests
 
             script += "console.log(res);\n";
 
-            var result = jsExecutor.RunScriptDetaiiled(script);
+            var result = await jsExecutor.RunScriptDetaiiled(script);
 
             Assert.IsTrue(result.IsSucceeded);
 
-            var resp = result.ResponseObject;
+            Assert.IsTrue(result.ConsoleLogs.Count == 1);
 
-            Assert.IsTrue(resp.Logs.Count == 1);
-
-            var logVar = resp.Logs.First().SerializedVariables.First();
+            var logVar = result.ConsoleLogs.First().SerializedVariables.First();
 
             Assert.AreEqual(JsonConvert.DeserializeObject<double>(logVar.DataJson), n1);
         }

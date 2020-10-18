@@ -1,9 +1,11 @@
 ﻿using Jint;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
+using Zoo.ServerJs.Services.Properties;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
@@ -13,22 +15,20 @@ namespace Zoo.ServerJs.Services
     /// </summary>
     public class HandleJsCallWorker
     {
+        private RemoteJsCaller RemoteCaller { get; }
+        private JsExecutorComponents Components { get; }
+
+
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="serviceProvider"></param>
-        /// <param name="workers"></param>
-        /// <param name="externalComponents"></param>
-        internal HandleJsCallWorker(IServiceProvider serviceProvider, Dictionary<string, JsWorkerDocumentation> workers, Dictionary<string, ExternalJsComponent> externalComponents)
+        /// <param name="properties"></param>
+        /// <param name="executionContext"></param>
+        internal HandleJsCallWorker(JsExecutionContextProperties properties, JsExecutionContext executionContext)
         {
-            ServiceProvider = serviceProvider;
-            Workers = workers;
-            ExternalComponents = externalComponents;
+            Components = properties.Components;
+            RemoteCaller = new RemoteJsCaller(Components.RemoteApiDocs, Components.HttpClientProvider, executionContext);
         }
-
-        private Dictionary<string, ExternalJsComponent> ExternalComponents { get; }
-        private IServiceProvider ServiceProvider { get; }
-        private Dictionary<string, JsWorkerDocumentation> Workers { get; }
         
         /// <summary>
         /// Вызвать внутренний метод сервис
@@ -38,29 +38,14 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodParams">Параметры метода</param>
         public string Call(string workerName, string method, params dynamic[] methodParams)
         {
-            if (!Workers.ContainsKey(workerName))
-            {
-                throw new InvalidOperationException($"В системе нет зарегистрированного рабочего класса с именем '{workerName}'");
-            }
+            var worker = Components.GetJsWorker(workerName);
 
-            var worker = Workers[workerName];
-
-            var res = worker.HandleCall(method, ServiceProvider, new JsWorkerMethodCallParameters(methodParams)).Result;
+            var res = worker.HandleCall(method, Components.ServiceProvider, new JsWorkerMethodCallParameters(methodParams)).Result;
 
             return ZooSerializer.Serialize(res);
         }
 
-        /// <summary>
-        /// Вызвать внешний сервис, определенный через Js
-        /// </summary>
-        /// <param name="componentName"></param>
-        /// <param name="methodName"></param>
-        /// <returns></returns>
-        public string CallExternal(string componentName, string methodName)
-        {
-            return CallExternal(componentName, methodName, null);
-        }
-
+        
         /// <summary>
         /// Вызвать внешний сервис, определенный через Js
         /// </summary>
@@ -92,14 +77,27 @@ namespace Zoo.ServerJs.Services
             }
         }
 
+        /// <summary>
+        /// Вызвать удаленное апи
+        /// </summary>
+        /// <param name="remoteName"></param>
+        /// <param name="workerName"></param>
+        /// <param name="methodName"></param>
+        /// <param name="methodParams"></param>
+        /// <returns></returns>
+        public Task<string> CallRemoteApi(string remoteName, string workerName, string methodName, params dynamic[] methodParams)
+        {
+            return RemoteCaller.CallRemoteApi(remoteName, workerName, methodName, methodParams);
+        }
+
         private string CallExternalUnSafe(string componentName, string methodName, object methodPayLoad)
         {
-            if (!ExternalComponents.ContainsKey(componentName))
+            if (!Components.ExternalComponents.ContainsKey(componentName))
             {
                 throw new InvalidOperationException($"Компонент не найден по указанному названию '{componentName}'");
             }
 
-            var component = ExternalComponents[componentName];
+            var component = Components.ExternalComponents[componentName];
 
             var uid = $"n{Guid.NewGuid()}".Replace("-", "_");
 

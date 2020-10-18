@@ -1,11 +1,12 @@
-﻿using Zoo.ServerJs.Statics;
+﻿using Zoo.ServerJs.Abstractions;
+using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Models.Method
 {
     /// <summary>
     /// Параметры вызова javascript метода
     /// </summary>
-    public class JsWorkerMethodCallParameters
+    internal class JsWorkerMethodCallParameters : IJsWorkerMethodCallParameters
     {
         private readonly object[] _parameters;
 
@@ -17,12 +18,8 @@ namespace Zoo.ServerJs.Models.Method
             _parameters = parameters;
         }
 
-        /// <summary>
-        /// Получить параметр
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        internal T GetParameter<T>()
+        
+        public T GetParameter<T>()
         {
             var param = _parameters[_currentIndex];
 
@@ -33,7 +30,7 @@ namespace Zoo.ServerJs.Models.Method
             return ZooSerializer.Deserialize<T>(json);
         }
 
-        internal int GetParamsLength()
+        public int GetParamsLength()
         {
             return _parameters?.Length ?? 0;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Resources;
 
 namespace Zoo.ServerJs.Models.Method
@@ -31,7 +32,7 @@ namespace Zoo.ServerJs.Models.Method
         /// <param name="serviceProvider"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        internal JsWorkerMethodResult HandleCall(string methodName, IServiceProvider serviceProvider, JsWorkerMethodCallParameters parameters)
+        internal JsWorkerMethodResult HandleCall(string methodName, IServiceProvider serviceProvider, IJsWorkerMethodCallParameters parameters)
         {
             if (!Methods.ContainsKey(methodName))
             {

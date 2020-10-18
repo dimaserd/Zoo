@@ -120,6 +120,9 @@
   <data name="ComponentWithNameAlreadyRegisteredFormat" xml:space="preserve">
     <value>Компонент с названием '{0}' уже зарегистрирован</value>
   </data>
+  <data name="HttpClientProviderIsAlreadyRegistered" xml:space="preserve">
+    <value>Провайдер Http клиентов уже зарегистрирован</value>
+  </data>
   <data name="JsWorkerWithNameAlreadyRegisteredFormat" xml:space="preserve">
     <value>Рабочий Js класс с именем {0} уже зарегистрирован</value>
   </data>
@@ -135,8 +138,14 @@
   <data name="NoMethodsInWorkerFormat" xml:space="preserve">
     <value>В Js классе {0} не зарегистрировано ни одного метода</value>
   </data>
+  <data name="NoWorkerWithNameRegisteredFormat" xml:space="preserve">
+    <value>В системе нет зарегистрированного рабочего класса с именем '{0}'</value>
+  </data>
   <data name="RemoteApiWithNameAlreadyRegisteredFormat" xml:space="preserve">
     <value>Удаленное апи с названием '{0}' уже зарегистрировано</value>
+  </data>
+  <data name="ScriptStorageIsAlreadyRegistered" xml:space="preserve">
+    <value>Хранилище для скриптов уже установлено</value>
   </data>
   <data name="TypeOfServiceNotRegisteredInServiceCollectionFormat" xml:space="preserve">
     <value>Сервис с типом {0} не зарегистрирован в контейнере зависимостей, для начала зарегистрируйте его в коллекции сервисов.</value>

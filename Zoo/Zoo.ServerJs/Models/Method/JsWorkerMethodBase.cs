@@ -1,4 +1,5 @@
 ﻿using System;
+using Zoo.ServerJs.Abstractions;
 
 namespace Zoo.ServerJs.Models.Method
 {
@@ -10,7 +11,7 @@ namespace Zoo.ServerJs.Models.Method
         /// <summary>
         /// Ссылка на функцию
         /// </summary>
-        public Func<JsWorkerMethodCallParameters, IServiceProvider, JsWorkerMethodResult> FunctionLink { get; set; }
+        public Func<IJsWorkerMethodCallParameters, IServiceProvider, JsWorkerMethodResult> FunctionLink { get; set; }
 
         /// <summary>
         /// Обработать вызов
@@ -18,7 +19,7 @@ namespace Zoo.ServerJs.Models.Method
         /// <param name="parameters"></param>
         /// <param name="serviceProvider"></param>
         /// <returns></returns>
-        public JsWorkerMethodResult HandleCall(JsWorkerMethodCallParameters parameters, IServiceProvider serviceProvider)
+        public JsWorkerMethodResult HandleCall(IJsWorkerMethodCallParameters parameters, IServiceProvider serviceProvider)
         {
             return FunctionLink(parameters, serviceProvider);
         }
