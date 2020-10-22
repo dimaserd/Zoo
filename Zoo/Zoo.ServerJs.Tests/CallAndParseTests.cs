@@ -15,7 +15,7 @@ namespace Zoo.ServerJs.Tests
             var jsExecutor = BuilderCallTests.BuildAndGetExecutor(workerName);
 
             var expectedRes = await new BuilderCallTests.SomeService().SomeTask(a);
-            var res = jsExecutor.Call<int>(workerName, BuilderCallTests.MultiplyByTwoMethodName, a);
+            var res = jsExecutor.CallWorkerMethod<int>(workerName, BuilderCallTests.MultiplyByTwoMethodName, a);
             Assert.AreEqual(expectedRes, res);
         }
 
@@ -27,7 +27,7 @@ namespace Zoo.ServerJs.Tests
         {
             var jsExecutor = BuilderCallTests.BuildAndGetExecutor(workerName);
 
-            var ex = Assert.Throws<InvalidOperationException>(() => jsExecutor.Call<int>(workerName,
+            var ex = Assert.Throws<InvalidOperationException>(() => jsExecutor.CallWorkerMethod<int>(workerName,
                     BuilderCallTests.MultiplyByTwoMethodName));
 
             var mes = string.Format(ExceptionTexts.MethodWasCalledWithLessParamsFormat,

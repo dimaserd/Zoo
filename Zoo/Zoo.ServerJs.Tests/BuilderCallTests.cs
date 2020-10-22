@@ -102,7 +102,6 @@ namespace Zoo.ServerJs.Tests
                     Description = "some"
                 })
                 .Build())
-                .AddHttpClientFactory<DefaultHttpClientProvider>()
                 .Build();
 
             var srvProvider = serviceCollection.BuildServiceProvider();

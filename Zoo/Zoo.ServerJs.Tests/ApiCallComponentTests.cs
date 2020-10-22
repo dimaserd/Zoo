@@ -23,12 +23,10 @@ namespace Zoo.ServerJs.Tests
                 Script = "function Calculator(model) { \n" +
                 "return model.Arg1 + model.Arg2; \n }"
             })
-            .AddHttpClientFactory<DefaultHttpClientProvider>()
             .Build();
 
             var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
 
-            
             var script = $"var res = api.CallExternal('Test', 'Calculator', {{ 'Arg1': {arg1}, 'Arg2': {arg2} }}); \n";
 
             script += "console.log(res)";
@@ -68,7 +66,6 @@ namespace Zoo.ServerJs.Tests
                 Script = "function CalculatorNew(model) { \n" +
                         "return model.Arg1 / model.Arg2; }"
             })
-            .AddHttpClientFactory<DefaultHttpClientProvider>()
             .Build();
 
             var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();
@@ -109,7 +106,6 @@ namespace Zoo.ServerJs.Tests
                 $"return {n1};\n" +
                 " }"
             })
-            .AddHttpClientFactory<DefaultHttpClientProvider>()
             .Build();
 
             var jsExecutor = serviceCollection.BuildServiceProvider().GetRequiredService<JsExecutor>();

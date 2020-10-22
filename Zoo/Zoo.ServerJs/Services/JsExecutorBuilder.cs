@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
@@ -15,7 +16,7 @@ namespace Zoo.ServerJs.Services
     public class JsExecutorBuilder
     {
         bool IsStorageRegistered = false;
-        bool IsHttpClientProviderRegistered = false;
+        bool IsHttpClientRegistered = false;
 
         readonly Dictionary<string, ExternalJsComponent> _components = new Dictionary<string, ExternalJsComponent>();
         readonly Dictionary<string, JsWorkerDocumentation> _jsWorkers = new Dictionary<string, JsWorkerDocumentation>();
@@ -36,16 +37,17 @@ namespace Zoo.ServerJs.Services
         /// Добавить фабрику Http клиентов для вызовов удаленных сервисов.
         /// Регистрирует данный объект как синглтон.
         /// </summary>
+        /// <param name="srvProviderFunc"></param>
         /// <returns></returns>
-        public JsExecutorBuilder AddHttpClientFactory<THttpClientProvider>() where THttpClientProvider : class, IServerJsHttpClientProvider
+        public JsExecutorBuilder AddHttpClient(Func<IServiceProvider, ServerJsHttpClient> srvProviderFunc)
         {
-            if (IsHttpClientProviderRegistered)
+            if (IsHttpClientRegistered)
             {
                 throw new InvalidOperationException(ExceptionTexts.HttpClientProviderIsAlreadyRegistered);
             }
 
-            ServiceCollection.AddSingleton<IServerJsHttpClientProvider, THttpClientProvider>();
-            IsHttpClientProviderRegistered = true;
+            ServiceCollection.AddSingleton<IServerJsHttpClient, ServerJsHttpClient>(srvProviderFunc);
+            IsHttpClientRegistered = true;
             return this;
         }
 
@@ -56,11 +58,6 @@ namespace Zoo.ServerJs.Services
         /// <returns></returns>
         public JsExecutorBuilder AddRemoteApi(RemoteJsOpenApi remoteApi)
         {
-            if(!IsHttpClientProviderRegistered)
-            {
-                throw new InvalidOperationException(string.Format(ExceptionTexts.NeedSettingHttpClientBeforeUseMethodFormat, nameof(AddHttpClientFactory)));
-            }
-
             if (_remoteApis.ContainsKey(remoteApi.Name))
             {
                 throw new InvalidOperationException(string.Format(ExceptionTexts.RemoteApiWithNameAlreadyRegisteredFormat, remoteApi.Name));
@@ -139,6 +136,16 @@ namespace Zoo.ServerJs.Services
         }
 
         /// <summary>
+        /// Добавить нового рабочего
+        /// </summary>
+        /// <param name="jsWorker"></param>
+        /// <returns></returns>
+        public JsExecutorBuilder AddJsWorker(IJsWorker jsWorker)
+        {
+            return AddJsWorker(jsWorker.JsWorkerDocs);
+        }
+
+        /// <summary>
         /// Зарегистрировать класс <see cref="JsExecutor"/> в контейнере зависимостей
         /// </summary>
         /// <param name="action"></param>
@@ -156,6 +163,11 @@ namespace Zoo.ServerJs.Services
             if (!IsStorageRegistered)
             {
                 ServiceCollection.AddSingleton<IJsScriptResultStorage, DefaultJsScriptResultStorage>();
+            }
+
+            if (!IsHttpClientRegistered)
+            {
+                AddHttpClient(srv => new ServerJsHttpClient(new HttpClient()));
             }
         }
     }

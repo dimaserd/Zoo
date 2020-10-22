@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿ <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.9.41</Version>
+    <Version>0.9.42</Version>
     <Company>CrocoSoft</Company>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Authors>Dmitry Serdyukov</Authors>
@@ -48,9 +48,5 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ScriptResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>

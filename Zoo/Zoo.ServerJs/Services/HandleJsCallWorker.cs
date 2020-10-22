@@ -25,7 +25,7 @@ namespace Zoo.ServerJs.Services
         {
             Components = components;
             ExecutionContext = executionContext;
-            RemoteCaller = new RemoteJsCaller(Components.RemoteApiDocs, Components.HttpClientProvider, ExecutionContext);
+            RemoteCaller = new RemoteJsCaller(Components.RemoteApiDocs, Components.HttpClient, ExecutionContext);
         }
         
         /// <summary>

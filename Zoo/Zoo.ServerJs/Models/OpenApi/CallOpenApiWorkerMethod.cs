@@ -3,7 +3,7 @@
     /// <summary>
     /// Вызвать удаленный метод (передается сериализованным)
     /// </summary>
-    public class CallRemoteOpenApiMethod
+    public class CallOpenApiWorkerMethod
     {
         /// <summary>
         /// Имя рабочего класса

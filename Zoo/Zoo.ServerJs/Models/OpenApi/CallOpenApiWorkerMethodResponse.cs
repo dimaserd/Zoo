@@ -3,7 +3,7 @@
     /// <summary>
     /// Результат выполнения 
     /// </summary>
-    public class CallRemoteOpenApiWorkerMethodResponse
+    public class CallOpenApiWorkerMethodResponse
     {
         /// <summary>
         /// Определяет успешность вызова
@@ -12,7 +12,8 @@
         /// <summary>
         /// Текст ошибки
         /// </summary>
-        public string ErrorMessage { get; set; }
+        public ExcepionData ExcepionData { get; set; }
+        
         /// <summary>
         /// Сериализованный ответ
         /// </summary>

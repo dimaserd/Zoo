@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
+using Zoo.ServerJs.Models.Http;
 using Zoo.ServerJs.Models.OpenApi;
 using Zoo.ServerJs.Statics;
 
@@ -14,20 +15,20 @@ namespace Zoo.ServerJs.Services
     internal class RemoteJsCaller
     {
         ConcurrentDictionary<string, RemoteJsOpenApiDocs> RemoteDocs { get; }
-        IServerJsHttpClientProvider HttpClientProvider { get; }
+        IServerJsHttpClient HttpClient { get; }
         JsExecutionContext ExecutionContext { get; }
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="remoteDocs"></param>
-        /// <param name="httpClientProvider"></param>
+        /// <param name="httpClient"></param>
         /// <param name="executionContext"></param>
-        internal RemoteJsCaller(ConcurrentDictionary<string, RemoteJsOpenApiDocs> remoteDocs, 
-            IServerJsHttpClientProvider httpClientProvider, JsExecutionContext executionContext)
+        internal RemoteJsCaller(ConcurrentDictionary<string, RemoteJsOpenApiDocs> remoteDocs,
+            IServerJsHttpClient httpClient, JsExecutionContext executionContext)
         {
             RemoteDocs = remoteDocs;
-            HttpClientProvider = httpClientProvider;
+            HttpClient = httpClient;
             ExecutionContext = executionContext;
         }
 
@@ -80,7 +81,7 @@ namespace Zoo.ServerJs.Services
                 throw new InvalidOperationException($"Во внешнем апи '{remoteName}' в рабочем классе с именем '{workerName}' не обнаружен метож '{methodName}'");
             }
 
-            var requestModel = new CallRemoteOpenApiMethod
+            var requestModel = new CallOpenApiWorkerMethod
             {
                 WorkerName = workerName,
                 MethodName = methodName,
@@ -103,38 +104,9 @@ namespace Zoo.ServerJs.Services
             return callResult.ResponseJson;
         }
 
-        private async Task<CallRemoteOpenApiWorkerMethodResponse> CallResult(RemoteJsOpenApiDocs remoteApi, CallRemoteOpenApiMethod requestModel)
+        private async Task<CallOpenApiWorkerMethodResponse> CallResult(RemoteJsOpenApiDocs remoteApi, CallOpenApiWorkerMethod requestModel)
         {
-            var httpClient = HttpClientProvider.GetHttpClient();
-
-            var json = ZooSerializer.Serialize(requestModel);
-
-            var url = $"{remoteApi.Description.HostUrl}/JsOpenApi/HandleCallFromRemote";
-
-            HttpResponseMessage result;
-
-            try
-            {
-                result = await httpClient.PostAsync(url, new StringContent(json));
-            }
-            catch(Exception ex)
-            {
-                return new CallRemoteOpenApiWorkerMethodResponse
-                {
-                    IsSucceeded = false,
-                    ErrorMessage = ex.Message
-                };
-            }
-            
-            var responseRecord = new RemoteApiResponseRecord
-            {
-                HostName = remoteApi.Description.Name,
-                HostUrl = remoteApi.Description.HostUrl,
-                RequestUrl = url,
-                Request = json,
-                ResponseStatusCode = (int)result.StatusCode,
-                Response = await result.Content.ReadAsStringAsync()
-            };
+            var responseRecord = await HttpClient.PostAsync(remoteApi.Description.HostUrl, remoteApi.Description.Name, HttpPaths.HandleCall, requestModel);
 
             ExecutionContext.ExecutionLogs.Add(new JsExecutionLog
             {
@@ -144,18 +116,10 @@ namespace Zoo.ServerJs.Services
                 DataJson = ZooSerializer.Serialize(responseRecord)
             });
 
-            if (result.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                return new CallRemoteOpenApiWorkerMethodResponse
-                {
-                    IsSucceeded = false,
-                    ErrorMessage = "Ответ не 200",
-                };
-            }
-
             try
             {
-                return ZooSerializer.Deserialize<CallRemoteOpenApiWorkerMethodResponse>(responseRecord.Response);
+                //Task<RemoteApiResponseRecord> PostAsync<TRequest>(string hostUrl, string hostName, string path, TRequest request)
+                return responseRecord.GetResult<CallOpenApiWorkerMethodResponse>();
             }
             catch (Exception ex)
             {
@@ -163,14 +127,14 @@ namespace Zoo.ServerJs.Services
                 {
                     LoggedOnUtc = DateTime.UtcNow,
                     EventId = EventIds.CallRemoteApi.ResponseDeserializationError,
-                    Message = "Логгирование удаленного запроса",
+                    Message = "Ошибка при дессериализации",
                     DataJson = ZooSerializer.Serialize(responseRecord)
                 });
 
-                return new CallRemoteOpenApiWorkerMethodResponse
+                return new CallOpenApiWorkerMethodResponse
                 {
                     IsSucceeded = false,
-                    ErrorMessage = ex.Message
+                    ExcepionData = ExcepionData.Create(ex)
                 };
             }
         }
