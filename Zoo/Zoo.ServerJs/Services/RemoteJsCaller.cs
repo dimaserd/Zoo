@@ -46,7 +46,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodName"></param>
         /// <param name="methodParams"></param>
         /// <returns></returns>
-        public async Task<string> CallRemoteApi(string remoteName, string workerName, string methodName, params dynamic[] methodParams)
+        public async Task<string> CallRemoteWorkerMethod(string remoteName, string workerName, string methodName, params dynamic[] methodParams)
         {
             if (!RemoteDocs.ContainsKey(remoteName))
             {

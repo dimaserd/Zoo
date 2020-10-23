@@ -828,7 +828,7 @@
             <param name="methodPayLoad"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallRemoteApi(System.String,System.String,System.String,System.Object[])">
+        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallRemoteWorkerMethod(System.String,System.String,System.String,System.Object[])">
             <summary>
             Вызвать удаленное апи
             </summary>
@@ -1272,7 +1272,7 @@
             <param name="httpClient"></param>
             <param name="executionContext"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Services.RemoteJsCaller.CallRemoteApi(System.String,System.String,System.String,System.Object[])">
+        <member name="M:Zoo.ServerJs.Services.RemoteJsCaller.CallRemoteWorkerMethod(System.String,System.String,System.String,System.Object[])">
             <summary>
             Вызвать внешний сервис, определенный через Js
             </summary>

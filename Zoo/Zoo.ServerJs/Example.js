@@ -14,8 +14,8 @@ api.CallExternal = function (componentName, methodName, methodPayLoad) {
 
     return this.PrepareResult(result);
 }
-api.CallRemote = function (remoteName, workerName, methodName, p1, p2, p3, p4) {
-    var result = inner_js_api.CallRemote(remoteName, workerName, methodName, p1, p2, p3, p4);
+api.CallRemoteWorkerMethod = function (remoteName, workerName, methodName, p1, p2, p3, p4) {
+    var result = inner_js_api.CallRemoteWorkerMethod(remoteName, workerName, methodName, p1, p2, p3, p4);
 
     return this.PrepareResult(result);
 }

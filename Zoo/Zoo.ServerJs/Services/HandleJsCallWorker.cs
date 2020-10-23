@@ -83,9 +83,9 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodName"></param>
         /// <param name="methodParams"></param>
         /// <returns></returns>
-        public Task<string> CallRemoteApi(string remoteName, string workerName, string methodName, params dynamic[] methodParams)
+        public Task<string> CallRemoteWorkerMethod(string remoteName, string workerName, string methodName, params dynamic[] methodParams)
         {
-            return RemoteCaller.CallRemoteApi(remoteName, workerName, methodName, methodParams);
+            return RemoteCaller.CallRemoteWorkerMethod(remoteName, workerName, methodName, methodParams);
         }
 
         private string CallExternalUnSafe(string componentName, string methodName, object methodPayLoad)
