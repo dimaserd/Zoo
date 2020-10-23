@@ -134,41 +134,38 @@ namespace Zoo.ServerJs.Services
 
             var context = GetContext();
 
-            JsScriptExecutedResult result;
+            JsScriptExecutedResult result = new JsScriptExecutedResult
+            {
+                Id = Guid.NewGuid(),
+                Script = jsScript,
+                StartedOnUtc = startDate
+            };
+
             try
             {
 
                 context.Engine.Execute(jsScript);
 
-                result = new JsScriptExecutedResult
-                {
-                    Id = Guid.NewGuid(),
-                    Script = jsScript,
-                    IsSucceeded = true,
-                    StartedOnUtc = startDate,
-                    FinishedOnUtc = DateTime.UtcNow,
-                    ConsoleLogs = context.ConsoleLogs,
-                };
+                result.IsSucceeded = true;
+                result.ErrorMessage = null;
+                result.ExceptionData = null;
             }
 
             catch(Exception ex)
             {
-                result = new JsScriptExecutedResult
+                result.IsSucceeded = false;
+                result.ErrorMessage = ex.Message;
+                result.ExceptionData = new ExcepionData
                 {
-                    Id = Guid.NewGuid(),
-                    Script = jsScript,
-                    ErrorMessage = ex.Message,
-                    IsSucceeded = false,
-                    StartedOnUtc = startDate,
-                    FinishedOnUtc = DateTime.UtcNow,
-                    ExceptionData = new ExcepionData 
-                    {
-                        Message = ex.Message,
-                        StackTrace = ex.StackTrace
-                    },
-                    ConsoleLogs = context.ConsoleLogs
+                    Message = ex.Message,
+                    StackTrace = ex.StackTrace
                 };
             }
+
+
+            result.FinishedOnUtc = DateTime.UtcNow;
+            result.ConsoleLogs = context.ConsoleLogs;
+            result.ExecutionLogs = context.ExecutionLogs;
 
             await Storage.AddScriptResult(result);
 

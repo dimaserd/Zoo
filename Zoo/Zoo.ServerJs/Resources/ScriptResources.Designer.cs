@@ -64,6 +64,9 @@ namespace Zoo.ServerJs.Resources {
         ///   Ищет локализованную строку, похожую на var api = {};
         ///api.PrepareResult = function (result) {
         ///    if (result !== undefined) {
+        ///
+        ///        console.log(&quot;api.PrepareResult&quot;, result);
+        ///
         ///        return JSON.parse(result);
         ///    }
         ///}
@@ -73,9 +76,7 @@ namespace Zoo.ServerJs.Resources {
         ///    return this.PrepareResult(result);
         ///}
         ///api.CallExternal = function (componentName, methodName, methodPayLoad) {
-        ///    var result = inner_js_api.CallExternal(componentName, methodName, methodPayLoad);
-        ///
-        ///    return this.PrepareResul [остаток строки не уместился]&quot;;.
+        ///    var result = inner_js_api.CallExternal(componentName, meth [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string ScriptInit {
             get {

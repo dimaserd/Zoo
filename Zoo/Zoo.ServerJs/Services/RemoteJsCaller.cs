@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
-using Zoo.ServerJs.Models.Http;
 using Zoo.ServerJs.Models.OpenApi;
 using Zoo.ServerJs.Statics;
 

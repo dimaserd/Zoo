@@ -1,6 +1,9 @@
 ﻿var api = {};
 api.PrepareResult = function (result) {
     if (result !== undefined) {
+
+        console.log("api.PrepareResult", result);
+
         return JSON.parse(result);
     }
 }
