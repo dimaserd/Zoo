@@ -871,6 +871,20 @@
             <param name="remoteApi"></param>
             <returns></returns>
         </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.EditRemoteApi(Zoo.ServerJs.Models.RemoteJsOpenApi)">
+            <summary>
+            Отредактировать удаленное апи
+            </summary>
+            <param name="remoteApi"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.DeleteRemoteApi(System.String)">
+            <summary>
+            Удалить удаленное апи
+            </summary>
+            <param name="hostName"></param>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor.GetHttpClient">
             <summary>
             Получить Http клиента
@@ -1345,6 +1359,12 @@
             Описыватель типов
             </summary>
         </member>
+        <member name="M:Zoo.ServerJs.WorkerExamples.CrocoTypeDescriptionJsWorker.#ctor(System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="workerName"></param>
+        </member>
         <member name="M:Zoo.ServerJs.WorkerExamples.CrocoTypeDescriptionJsWorker.GetEnumTypeDocumentation(System.String)">
             <summary>
             Получить документацию по перечислению. 
@@ -1359,6 +1379,23 @@
             </summary>
             <param name="typeName"></param>
             <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.WorkerExamples.CrocoTypeDescriptionJsWorker.JsWorkerDocs(Zoo.ServerJs.Services.JsWorkerBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zoo.ServerJs.WorkerExamples.RemoteOpenApiCrudOperationsJsWorker">
+            <summary>
+            Js рабочий с методами для работы с удаленными хостами
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.WorkerExamples.RemoteOpenApiCrudOperationsJsWorker.#ctor(System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="workerName"></param>
+        </member>
+        <member name="M:Zoo.ServerJs.WorkerExamples.RemoteOpenApiCrudOperationsJsWorker.JsWorkerDocs(Zoo.ServerJs.Services.JsWorkerBuilder)">
+            <inheritdoc />
         </member>
     </members>
 </doc>

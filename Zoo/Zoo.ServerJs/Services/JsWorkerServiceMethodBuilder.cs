@@ -15,14 +15,18 @@ namespace Zoo.ServerJs.Services
     {
         JsWorkerBuilder Builder { get; }
 
+        static readonly Type[] ExceptionalTypes = new Type[]
+        {
+            typeof(JsExecutor)
+        };
+
         internal JsWorkerServiceMethodBuilder(JsWorkerBuilder builder, IServiceCollection serviceCollection)
         {
             Builder = builder;
 
             var serviceType = typeof(TService);
-            var impl = serviceCollection.FirstOrDefault(x => x.ServiceType == serviceType);
-
-            if(impl == null)
+            
+            if(!serviceCollection.Any(x => x.ServiceType == serviceType) && !ExceptionalTypes.Contains(serviceType))
             {
                 throw new InvalidOperationException(string.Format(ExceptionTexts.TypeOfServiceNotRegisteredInServiceCollectionFormat, serviceType.FullName));
             }

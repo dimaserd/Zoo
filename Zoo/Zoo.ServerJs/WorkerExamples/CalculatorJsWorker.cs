@@ -11,6 +11,10 @@ namespace Zoo.ServerJs.WorkerExamples
     {
         string WorkerName { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="workerName"></param>
         public CalculatorJsWorker(string workerName = "Calculator")
         {
             WorkerName = workerName;

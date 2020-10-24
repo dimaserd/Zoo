@@ -13,6 +13,10 @@ namespace Zoo.ServerJs.WorkerExamples
     {
         string WorkerName { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="workerName"></param>
         public CrocoTypeDescriptionJsWorker(string workerName = "CrocoTypeDescription")
         {
             WorkerName = workerName;
@@ -63,6 +67,7 @@ namespace Zoo.ServerJs.WorkerExamples
             return CrocoTypeDescription.GetDescription(type);
         }
 
+        /// <inheritdoc />
         public JsWorkerDocumentation JsWorkerDocs(JsWorkerBuilder builder)
         {
             return builder.SetWorkerName(WorkerName)

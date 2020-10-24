@@ -104,6 +104,46 @@ namespace Zoo.ServerJs.Services
         }
 
         /// <summary>
+        /// Отредактировать удаленное апи
+        /// </summary>
+        /// <param name="remoteApi"></param>
+        /// <returns></returns>
+        public BaseApiResponse EditRemoteApi(RemoteJsOpenApi remoteApi)
+        {
+            var remoteApis = Components.RemoteApis;
+
+            var hostName = remoteApi.Name;
+
+            if (!remoteApis.ContainsKey(hostName))
+            {
+                return new BaseApiResponse(false, $"Хост не найден по названию '{hostName}'");
+            }
+
+            remoteApis.TryRemove(hostName, out var _);
+            remoteApis.TryAdd(hostName, remoteApi);
+
+            return new BaseApiResponse(true, $"Данные хоста '{hostName}' обновлены");
+        }
+
+        /// <summary>
+        /// Удалить удаленное апи
+        /// </summary>
+        /// <param name="hostName"></param>
+        /// <returns></returns>
+        public BaseApiResponse DeleteRemoteApi(string hostName)
+        {
+            var remoteApis = Components.RemoteApis;
+
+            if (!remoteApis.ContainsKey(hostName))
+            {
+                return new BaseApiResponse(false, $"Хост не найден по названию '{hostName}'");
+            }
+
+            remoteApis.TryRemove(hostName, out var _);
+            return new BaseApiResponse(false, $"Хост с названием '{hostName}' удален");
+        }
+
+        /// <summary>
         /// Получить Http клиента
         /// </summary>
         /// <returns></returns>
@@ -112,7 +152,6 @@ namespace Zoo.ServerJs.Services
             return Components.HttpClient;
         }
         
-
         /// <summary>
         /// Получить документацию
         /// </summary>
@@ -168,7 +207,6 @@ namespace Zoo.ServerJs.Services
 
             try
             {
-
                 context.Engine.Execute(jsScript);
 
                 result.IsSucceeded = true;
@@ -186,7 +224,6 @@ namespace Zoo.ServerJs.Services
                     StackTrace = ex.StackTrace
                 };
             }
-
 
             result.FinishedOnUtc = DateTime.UtcNow;
             result.ConsoleLogs = context.ConsoleLogs;
