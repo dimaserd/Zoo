@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Consts;
@@ -26,9 +24,7 @@ namespace Zoo.ServerJs.Extensions
             {
                 if (response.IsSuccessfull())
                 {
-                    var docs = response.GetResult<JsOpenApiDocs>();
-
-                    docsRecord.Docs = docs;
+                    docsRecord.Docs = response.GetResult<JsOpenApiDocs>();
                     docsRecord.IsDocsReceived = true;
                 }
                 else
