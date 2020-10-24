@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
@@ -60,7 +61,7 @@ namespace Zoo.ServerJs.Services
                 RequestMethod = "POST"
             };
 
-            return CallInner(result, httpClient => HttpClient.PostAsync(url, new StringContent(json)));
+            return CallInner(result, httpClient => HttpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json")));
         }
 
         /// <inheritdoc />

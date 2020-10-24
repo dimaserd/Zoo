@@ -9,6 +9,13 @@ namespace Zoo.ServerJs.WorkerExamples
     /// </summary>
     public class CalculatorJsWorker : IJsWorker
     {
+        string WorkerName { get; }
+
+        public CalculatorJsWorker(string workerName = "Calculator")
+        {
+            WorkerName = workerName;
+        }
+
         private double Divide(double a1, double a2)
         {
             return a1 / a2;
@@ -32,7 +39,7 @@ namespace Zoo.ServerJs.WorkerExamples
         /// <inheritdoc />
         public JsWorkerDocumentation JsWorkerDocs(JsWorkerBuilder builder)
         {
-            return builder.SetWorkerName("Calculator")
+            return builder.SetWorkerName(WorkerName)
                 .SetDescription("Калькулятор")
                 .AddMethodViaFunction<double, double, double>(Divide, new JsWorkerMethodDocsOptions
                 {

@@ -865,6 +865,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.GetHttpClient">
+            <summary>
+            Получить Http клиента
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor.GetDocumentation">
             <summary>
             Получить документацию

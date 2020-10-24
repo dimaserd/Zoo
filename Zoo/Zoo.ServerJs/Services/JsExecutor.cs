@@ -86,6 +86,14 @@ namespace Zoo.ServerJs.Services
             return Components.RemoteApiDocs.Values.ToList();
         }
 
+        /// <summary>
+        /// Получить Http клиента
+        /// </summary>
+        /// <returns></returns>
+        public IServerJsHttpClient GetHttpClient()
+        {
+            return Components.HttpClient;
+        }
         
 
         /// <summary>
