@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Croco.Core.Abstractions.Models;
 using Jint;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Extensions;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Models.OpenApi;
+using Zoo.ServerJs.Resources;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
@@ -42,7 +45,7 @@ namespace Zoo.ServerJs.Services
             {
                 JsWorkers = properties.JsWorkers,
                 ExternalComponents = properties.ExternalComponents,
-                RemoteApis = properties.RemoteApis,
+                RemoteApis = new ConcurrentDictionary<string, RemoteJsOpenApi>(properties.RemoteApis),
                 ServiceProvider = serviceProvider,
                 HttpClient = httpClient
             };
@@ -84,6 +87,20 @@ namespace Zoo.ServerJs.Services
         public List<RemoteJsOpenApiDocs> GetRemoteDocs()
         {
             return Components.RemoteApiDocs.Values.ToList();
+        }
+
+        /// <summary>
+        /// Добавить удаленное Апи
+        /// </summary>
+        /// <param name="remoteApi"></param>
+        /// <returns></returns>
+        public BaseApiResponse AddRemoteApi(RemoteJsOpenApi remoteApi)
+        {
+            var error = string.Format(ExceptionTexts.RemoteApiWithNameAlreadyRegisteredFormat, remoteApi.Name);
+
+            var res = Components.RemoteApis.TryAdd(remoteApi.Name, remoteApi);
+
+            return new BaseApiResponse(res, res ? "Добавлено" : error);
         }
 
         /// <summary>

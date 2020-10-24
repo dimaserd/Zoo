@@ -64,19 +64,18 @@ namespace Zoo.ServerJs.Resources {
         ///   Ищет локализованную строку, похожую на var api = {};
         ///api.PrepareResult = function (result) {
         ///    if (result !== undefined) {
-        ///
-        ///        console.log(&quot;api.PrepareResult&quot;, result);
-        ///
         ///        return JSON.parse(result);
         ///    }
         ///}
-        ///api.Call = function (workerName, methodName, p1, p2, p3, p4) {
-        ///    var result = inner_js_api.Call(workerName, methodName, p1, p2, p3, p4);
+        ///api.Call = function (workerName, methodName, p1, p2, p3, p4, p5, p6) {
+        ///    var result = inner_js_api.Call(workerName, methodName, p1, p2, p3, p4, p5, p6);
         ///
         ///    return this.PrepareResult(result);
         ///}
         ///api.CallExternal = function (componentName, methodName, methodPayLoad) {
-        ///    var result = inner_js_api.CallExternal(componentName, meth [остаток строки не уместился]&quot;;.
+        ///    var result = inner_js_api.CallExternal(componentName, methodName, methodPayLoad);
+        ///
+        ///    return t [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string ScriptInit {
             get {

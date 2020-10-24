@@ -21,7 +21,7 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         public Dictionary<string, ExternalJsComponent> ExternalComponents { get; set; }
 
-        public Dictionary<string, RemoteJsOpenApi> RemoteApis { get; set; }
+        public ConcurrentDictionary<string, RemoteJsOpenApi> RemoteApis { get; set; }
 
         public IServiceProvider ServiceProvider { get; set; }
         public IServerJsHttpClient HttpClient { get; set; }
