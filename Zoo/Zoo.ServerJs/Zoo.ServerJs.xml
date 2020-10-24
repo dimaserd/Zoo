@@ -1340,5 +1340,25 @@
         <member name="M:Zoo.ServerJs.WorkerExamples.CalculatorJsWorker.JsWorkerDocs(Zoo.ServerJs.Services.JsWorkerBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Zoo.ServerJs.WorkerExamples.CrocoTypeDescriptionJsWorker">
+            <summary>
+            Описыватель типов
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.WorkerExamples.CrocoTypeDescriptionJsWorker.GetEnumTypeDocumentation(System.String)">
+            <summary>
+            Получить документацию по перечислению. 
+            Если тип не найден, или найденный тип не является перечислением возвращает null.
+            </summary>
+            <param name="typeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.WorkerExamples.CrocoTypeDescriptionJsWorker.GetTypeDocumentation(System.String)">
+            <summary>
+            Получить документацию по типу данных
+            </summary>
+            <param name="typeName"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
