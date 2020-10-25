@@ -4,26 +4,40 @@
         <name>Zoo.ServerJs</name>
     </assembly>
     <members>
-        <member name="T:Zoo.ServerJs.Abstractions.IJsScriptResultStorage">
+        <member name="T:Zoo.ServerJs.Abstractions.IJsScriptTaskStorage">
             <summary>
-            Хранилище для выполненных скриптов
+            Хранилище для скриптов
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptResultStorage.AddScriptResult(Zoo.ServerJs.Models.JsScriptExecutedResult)">
+        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptTaskStorage.AddTask(Zoo.ServerJs.Models.Task.AddJsTask)">
             <summary>
-            Добавить результат выполнения скрипта
+            Добавить задание
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptResultStorage.GetScriptResultById(System.Guid)">
+        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptTaskStorage.AddResult(Zoo.ServerJs.Models.JsScriptExecutedResult)">
             <summary>
-            Найти по идентификатору
+            Добавить результат исполненного скрипта
             </summary>
-            <param name="scriptId"></param>
+            <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptResultStorage.GetScriptResults(Zoo.ServerJs.Models.SearchScriptResults)">
+        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptTaskStorage.GetTask(System.Guid)">
+            <summary>
+            Получить задание по идентификатору
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptTaskStorage.CancelTask(System.Guid)">
+            <summary>
+            Отменить задание
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IJsScriptTaskStorage.SearchTasks(Zoo.ServerJs.Models.SearchJsTasks)">
             <summary>
             Искать скрипты
             </summary>
@@ -263,11 +277,6 @@
         <member name="M:Zoo.ServerJs.Models.JsScriptExecutedResult.#ctor">
             <summary>
             Конструктор
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.Id">
-            <summary>
-            Идентификатор скрипта
             </summary>
         </member>
         <member name="P:Zoo.ServerJs.Models.JsScriptExecutedResult.Script">
@@ -654,22 +663,72 @@
             Базовый урл на котором крутится удаленные Апи 
             </summary>
         </member>
-        <member name="T:Zoo.ServerJs.Models.SearchScriptResults">
+        <member name="T:Zoo.ServerJs.Models.Task.AddJsTask">
+            <summary>
+            Добавить Js задание
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Task.AddJsTask.Script">
+            <summary>
+            Скрипт
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Task.AddJsTask.ExecuteNowOrOnDate">
+            <summary>
+            Скрипт нуэно выполнить сейчас или в определенную дату
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Task.AddJsTask.ExecuteOnDate">
+            <summary>
+            В какую дату необходимо выполнить скрипт
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.Task.JsTaskModel">
+            <summary>
+            Модель описывающая Js задание
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Task.JsTaskModel.Id">
+            <summary>
+            Идентификатор скрипта
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Task.JsTaskModel.IsExecuted">
+            <summary>
+            Является ли скрипт выполненым
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Task.JsTaskModel.ExecuteNowOrOnDate">
+            <summary>
+            Скрипт нужно исполнить сейчас или в определенную дату
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Task.JsTaskModel.ExecuteOnDate">
+            <summary>
+            В какую дату нужно исполнить скрипт
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Models.Task.JsTaskModel.Result">
+            <summary>
+            Результат выполнения скрипта
+            </summary>
+        </member>
+        <member name="T:Zoo.ServerJs.Models.SearchJsTasks">
             <summary>
             Модель для поиска резельтатов выполнения скрипта
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.SearchScriptResults.IsSucceeded">
+        <member name="P:Zoo.ServerJs.Models.SearchJsTasks.IsSucceeded">
             <summary>
             Скрипт исполнен успешно
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.SearchScriptResults.StartedOnUtc">
+        <member name="P:Zoo.ServerJs.Models.SearchJsTasks.StartedOnUtc">
             <summary>
             Начало выполнения скрипта
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.SearchScriptResults.FinishedOnUtc">
+        <member name="P:Zoo.ServerJs.Models.SearchJsTasks.FinishedOnUtc">
             <summary>
             Окончание выполнения скрипта
             </summary>
@@ -790,13 +849,19 @@
             Дефолтная реализация хранилища без хранилища
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.AddScriptResult(Zoo.ServerJs.Models.JsScriptExecutedResult)">
+        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.AddResult(Zoo.ServerJs.Models.JsScriptExecutedResult)">
             <inheritdoc />
         </member>
-        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.GetScriptResultById(System.Guid)">
+        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.AddTask(Zoo.ServerJs.Models.Task.AddJsTask)">
             <inheritdoc />
         </member>
-        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.GetScriptResults(Zoo.ServerJs.Models.SearchScriptResults)">
+        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.CancelTask(System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.GetTask(System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.SearchTasks(Zoo.ServerJs.Models.SearchJsTasks)">
             <inheritdoc />
         </member>
         <member name="T:Zoo.ServerJs.Services.HandleJsCallWorker">
@@ -843,7 +908,7 @@
             Исполнитель кода на Js
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(System.IServiceProvider,Zoo.ServerJs.Abstractions.IServerJsHttpClient,Zoo.ServerJs.Abstractions.IJsScriptResultStorage,Zoo.ServerJs.Services.JsExecutorProperties)">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(System.IServiceProvider,Zoo.ServerJs.Abstractions.IServerJsHttpClient,Zoo.ServerJs.Abstractions.IJsScriptTaskStorage,Zoo.ServerJs.Services.JsExecutorProperties)">
             <summary>
             Конструктор
             </summary>
@@ -1350,6 +1415,12 @@
             <summary>
             Калькулятор
             </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.WorkerExamples.CalculatorJsWorker.#ctor(System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="workerName"></param>
         </member>
         <member name="M:Zoo.ServerJs.WorkerExamples.CalculatorJsWorker.JsWorkerDocs(Zoo.ServerJs.Services.JsWorkerBuilder)">
             <inheritdoc />

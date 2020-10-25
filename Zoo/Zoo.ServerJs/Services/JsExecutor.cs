@@ -22,7 +22,7 @@ namespace Zoo.ServerJs.Services
     {
         private readonly JsOpenApiDocs _openApiDocs;
 
-        IJsScriptResultStorage Storage { get; }
+        IJsScriptTaskStorage Storage { get; }
 
         JsExecutorComponents Components { get; }
 
@@ -38,7 +38,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="properties"></param>
         public JsExecutor(IServiceProvider serviceProvider,
             IServerJsHttpClient httpClient,
-            IJsScriptResultStorage storage, 
+            IJsScriptTaskStorage storage, 
             JsExecutorProperties properties)
         {
             Components = new JsExecutorComponents
@@ -200,7 +200,6 @@ namespace Zoo.ServerJs.Services
 
             JsScriptExecutedResult result = new JsScriptExecutedResult
             {
-                Id = Guid.NewGuid(),
                 Script = jsScript,
                 StartedOnUtc = startDate
             };
@@ -229,7 +228,7 @@ namespace Zoo.ServerJs.Services
             result.ConsoleLogs = context.ConsoleLogs;
             result.ExecutionLogs = context.ExecutionLogs;
 
-            await Storage.AddScriptResult(result);
+            await Storage.AddResult(result);
 
             return result;
         }

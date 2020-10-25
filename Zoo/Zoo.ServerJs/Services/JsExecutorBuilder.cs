@@ -72,14 +72,14 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         /// <typeparam name="TStorage"></typeparam>
         /// <returns></returns>
-        public JsExecutorBuilder AddScriptStorage<TStorage>() where TStorage : class, IJsScriptResultStorage
+        public JsExecutorBuilder AddScriptStorage<TStorage>() where TStorage : class, IJsScriptTaskStorage
         {
             if (IsStorageRegistered)
             {
                 throw new InvalidOperationException(ExceptionTexts.ScriptStorageIsAlreadyRegistered);
             }
 
-            ServiceCollection.AddSingleton<IJsScriptResultStorage, TStorage>();
+            ServiceCollection.AddSingleton<IJsScriptTaskStorage, TStorage>();
             IsStorageRegistered = true;
             return this;
         }
@@ -162,7 +162,7 @@ namespace Zoo.ServerJs.Services
             
             if (!IsStorageRegistered)
             {
-                ServiceCollection.AddSingleton<IJsScriptResultStorage, DefaultJsScriptResultStorage>();
+                ServiceCollection.AddSingleton<IJsScriptTaskStorage, DefaultJsScriptResultStorage>();
             }
 
             if (!IsHttpClientRegistered)

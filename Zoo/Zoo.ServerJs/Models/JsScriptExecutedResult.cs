@@ -21,11 +21,6 @@ namespace Zoo.ServerJs.Models
         }
 
         /// <summary>
-        /// Идентификатор скрипта
-        /// </summary>
-        public Guid Id { get; set; }
-
-        /// <summary>
         /// Текст скрипта
         /// </summary>
         public string Script { get; set; }

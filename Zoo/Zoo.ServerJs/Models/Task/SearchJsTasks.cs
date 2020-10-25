@@ -6,7 +6,7 @@ namespace Zoo.ServerJs.Models
     /// <summary>
     /// Модель для поиска резельтатов выполнения скрипта
     /// </summary>
-    public class SearchScriptResults
+    public class SearchJsTasks : GetListSearchModel
     {
         /// <summary>
         /// Скрипт исполнен успешно
