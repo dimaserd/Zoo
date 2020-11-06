@@ -1,4 +1,4 @@
-﻿using Croco.Core.Utils;
+﻿using Zoo.GenericUserInterface.Utils;
 
 namespace Zoo.GenericUserInterface.Models.Overridings
 {

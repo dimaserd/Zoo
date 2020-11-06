@@ -1,4 +1,4 @@
-using Croco.Core.Abstractions.Models;
+using Croco.Core.Contract.Models;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System.Linq;

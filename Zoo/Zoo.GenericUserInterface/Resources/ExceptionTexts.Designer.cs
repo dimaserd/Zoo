@@ -169,6 +169,15 @@ namespace Zoo.GenericUserInterface.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Только к типу данных строка можно установить элемент Password.
+        /// </summary>
+        internal static string PasswordCanBeSetOnlyOnStrings {
+            get {
+                return ResourceManager.GetString("PasswordCanBeSetOnlyOnStrings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Recursive types are not supported.
         /// </summary>
         internal static string RecursiveTypesAreNotSupported {

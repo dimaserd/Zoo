@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Croco.Core.Abstractions.Models;
+using Croco.Core.Contract.Models;
 using Jint;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Extensions;

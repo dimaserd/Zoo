@@ -16,6 +16,11 @@
         TextBox,
 
         /// <summary>
+        /// Форма для ввода пароля
+        /// </summary>
+        Password,
+
+        /// <summary>
         /// Большое текстовое поле
         /// </summary>
         TextArea,

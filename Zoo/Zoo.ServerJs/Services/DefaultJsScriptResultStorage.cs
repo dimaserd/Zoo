@@ -1,5 +1,5 @@
-﻿using Croco.Core.Abstractions.Models;
-using Croco.Core.Abstractions.Models.Search;
+﻿using Croco.Core.Contract.Models;
+using Croco.Core.Contract.Models.Search;
 using System;
 using System.Threading.Tasks;
 using Zoo.ServerJs.Abstractions;

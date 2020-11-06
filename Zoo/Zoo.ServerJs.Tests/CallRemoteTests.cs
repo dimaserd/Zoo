@@ -9,22 +9,6 @@ namespace Zoo.ServerJs.Tests
 {
     public class CallRemoteTests
     {
-        [Test]
-        public async Task Test()
-        {
-            var mockHttpClient = NSubstitute.Substitute.For<HttpClient>();
-
-            var services = new ServiceCollection();
-            new JsExecutorBuilder(services)
-                .AddJsWorker(new CalculatorJsWorker())
-                .Build();
-
-            var srvProvider = services.BuildServiceProvider();
-
-            var jsExecutor = srvProvider.GetRequiredService<JsExecutor>();
-
-        }
-
         [TestCase(10, 2, 5)]
         [TestCase(18, 3, 6)]
         [TestCase(18, 2, 9)]

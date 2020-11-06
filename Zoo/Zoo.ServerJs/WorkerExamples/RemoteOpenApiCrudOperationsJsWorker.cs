@@ -1,4 +1,4 @@
-﻿using Croco.Core.Abstractions.Models;
+﻿using Croco.Core.Contract.Models;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;

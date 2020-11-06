@@ -68,6 +68,11 @@
             Текстовое поле
             </summary>
         </member>
+        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.Password">
+            <summary>
+            Форма для ввода пароля
+            </summary>
+        </member>
         <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.TextArea">
             <summary>
             Большое текстовое поле
@@ -689,6 +694,11 @@
               Ищет локализованную строку, похожую на Переопределение интерфейса для типа {0} уже задано.
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.PasswordCanBeSetOnlyOnStrings">
+            <summary>
+              Ищет локализованную строку, похожую на Только к типу данных строка можно установить элемент Password.
+            </summary>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Resources.ExceptionTexts.RecursiveTypesAreNotSupported">
             <summary>
               Ищет локализованную строку, похожую на Recursive types are not supported.
@@ -747,6 +757,12 @@
             <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetTextArea">
+            <summary>
+            Установить тип блока, как большое текстовое поле
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetPassword">
             <summary>
             Установить тип блока, как большое текстовое поле
             </summary>
@@ -959,6 +975,73 @@
             </summary>
             <param name="expression"></param>
             <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Utils.NewtonsoftJsonConverter">
+            <summary>
+            Сериализатор JSON
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Utils.NewtonsoftJsonConverter.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Utils.NewtonsoftJsonConverter.#ctor(Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Utils.NewtonsoftJsonConverter.Deserialize``1(System.String)">
+            <summary>
+            Десериализовать объект
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Utils.NewtonsoftJsonConverter.Serialize(System.Object)">
+            <summary>
+            Сериализовать объект
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Utils.IJsonConverter">
+            <summary>
+            Сериализатор JSON
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Utils.IJsonConverter.Deserialize``1(System.String)">
+            <summary>
+            Десериализовать объект
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Utils.IJsonConverter.Serialize(System.Object)">
+            <summary>
+            Сериализовать объект
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Utils.Tool">
+            <summary>
+            Вспомогательный класс, собирающий в себе большинство базовых методов
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Utils.Tool.SetTools(Zoo.GenericUserInterface.Utils.IJsonConverter)">
+            <summary>
+            Установить тулзы
+            </summary>
+            <param name="jsonConverter"></param>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Utils.Tool.JsonConverter">
+            <summary>
+            Json сериализатор
+            </summary>
         </member>
     </members>
 </doc>

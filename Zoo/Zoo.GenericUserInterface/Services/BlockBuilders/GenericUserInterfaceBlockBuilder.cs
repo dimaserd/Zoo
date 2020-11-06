@@ -87,6 +87,22 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         }
 
         /// <summary>
+        /// Установить тип блока, как большое текстовое поле
+        /// </summary>
+        /// <returns></returns>
+        public GenericUserInterfaceBlockBuilder<TProp> SetPassword()
+        {
+            if (typeof(TProp) != typeof(string))
+            {
+                throw new InvalidOperationException(ExceptionTexts.PasswordCanBeSetOnlyOnStrings);
+            }
+
+            Block.InterfaceType = UserInterfaceType.Password;
+
+            return this;
+        }
+
+        /// <summary>
         /// Установить кастомный тип блока
         /// </summary>
         /// <param name="customType"></param>

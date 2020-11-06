@@ -1,4 +1,4 @@
-﻿using Croco.Core.Abstractions.Models.Search;
+﻿using Croco.Core.Contract.Models.Search;
 using System;
 
 namespace Zoo.ServerJs.Models

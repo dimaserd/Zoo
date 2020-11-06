@@ -1,9 +1,9 @@
 ﻿using Croco.Core.Documentation.Services;
-using Croco.Core.Utils;
 using System;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Resources;
+using Zoo.GenericUserInterface.Utils;
 
 namespace Zoo.GenericUserInterface.Services
 {
