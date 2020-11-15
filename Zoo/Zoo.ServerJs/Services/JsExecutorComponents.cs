@@ -23,7 +23,6 @@ namespace Zoo.ServerJs.Services
 
         public ConcurrentDictionary<string, RemoteJsOpenApi> RemoteApis { get; set; }
 
-        public IServiceProvider ServiceProvider { get; set; }
         public IServerJsHttpClient HttpClient { get; set; }
 
         public ConcurrentDictionary<string, RemoteJsOpenApiDocs> RemoteApiDocs { get; } = new ConcurrentDictionary<string, RemoteJsOpenApiDocs>();

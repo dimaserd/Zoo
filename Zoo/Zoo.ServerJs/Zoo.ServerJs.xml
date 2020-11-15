@@ -869,11 +869,12 @@
             Обработчик js вызовов
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.#ctor(Zoo.ServerJs.Services.JsExecutorComponents,Zoo.ServerJs.Models.JsExecutionContext)">
+        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.#ctor(Zoo.ServerJs.Services.JsExecutorComponents,System.IServiceProvider,Zoo.ServerJs.Models.JsExecutionContext)">
             <summary>
             Конструктор
             </summary>
             <param name="components"></param>
+            <param name="serviceProvider"></param>
             <param name="executionContext"></param>
         </member>
         <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.Call(System.String,System.String,System.Object[])">
@@ -1314,6 +1315,22 @@
             <returns></returns>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaTask(System.Func{`0,System.Threading.Tasks.Task},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+            <summary>
+            Добавить метод
+            </summary>
+            <param name="func"></param>
+            <param name="opts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaTask``1(System.Func{`0,``0,System.Threading.Tasks.Task},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
+            <summary>
+            Добавить метод
+            </summary>
+            <param name="func"></param>
+            <param name="opts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsWorkerServiceMethodBuilder`1.AddMethodViaTask``2(System.Func{`0,``0,``1,System.Threading.Tasks.Task},Zoo.ServerJs.Models.Method.JsWorkerMethodDocsOptions)">
             <summary>
             Добавить метод
             </summary>

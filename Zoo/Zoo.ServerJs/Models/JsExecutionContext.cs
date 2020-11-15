@@ -1,4 +1,5 @@
 ﻿using Jint;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,36 @@ using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Models
 {
-    internal class JsExecutionContext
+    internal class JsExecutionContext : IDisposable
     {
-        internal JsExecutionContext(JsExecutorComponents components, Action<Engine> engineAction)
+        private Action<Engine> EngineAction { get; }
+
+        /// <summary>
+        /// Список логов консиоли
+        /// </summary>
+        public List<JsLogggedVariables> ConsoleLogs { get; } = new List<JsLogggedVariables>();
+
+        internal JsExecutorComponents Components { get; }
+        public IServiceScope ServiceScope { get; }
+
+        /// <summary>
+        /// Системные логи времени выполнения
+        /// </summary>
+        public List<JsExecutionLog> ExecutionLogs { get; } = new List<JsExecutionLog>();
+
+        /// <summary>
+        /// Движок
+        /// </summary>
+        public Engine Engine { get; }
+        public HandleJsCallWorker JsCallWorker { get; }
+
+        internal JsExecutionContext(JsExecutorComponents components, 
+            IServiceScope serviceScope,
+            Action<Engine> engineAction)
         {
-            JsCallWorker = new HandleJsCallWorker(components, this); ;
+            JsCallWorker = new HandleJsCallWorker(components, serviceScope.ServiceProvider, this);
             Components = components;
+            ServiceScope = serviceScope;
             EngineAction = engineAction;
             Engine = CreateEngine();
         }
@@ -34,26 +59,6 @@ namespace Zoo.ServerJs.Models
             return engine;
         }
 
-        private Action<Engine> EngineAction { get; }
-
-        /// <summary>
-        /// Список логов консиоли
-        /// </summary>
-        public List<JsLogggedVariables> ConsoleLogs { get; } = new List<JsLogggedVariables>();
-
-        internal JsExecutorComponents Components { get; }
-        
-        /// <summary>
-        /// Системные логи времени выполнения
-        /// </summary>
-        public List<JsExecutionLog> ExecutionLogs { get; } = new List<JsExecutionLog>();
-
-        /// <summary>
-        /// Движок
-        /// </summary>
-        public Engine Engine { get; }
-        public HandleJsCallWorker JsCallWorker { get; }
-
         private void Log(params object[] objs)
         {
             ConsoleLogs.Add(new JsLogggedVariables
@@ -65,6 +70,11 @@ namespace Zoo.ServerJs.Models
                     TypeFullName = x.GetType().FullName
                 }).ToList() ?? new List<JsSerializedVariable>()
             });
+        }
+
+        public void Dispose()
+        {
+            ServiceScope.Dispose();
         }
     }
 }

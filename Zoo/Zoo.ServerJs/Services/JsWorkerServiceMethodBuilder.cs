@@ -136,6 +136,28 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Добавить метод
         /// </summary>
+        /// <param name="func"></param>
+        /// <param name="opts"></param>
+        /// <returns></returns>
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTask<T1>(Func<TService, T1, Task> func, JsWorkerMethodDocsOptions opts)
+        {
+            return AddMethod(opts, () => JsServiceFuncBuilder.GetTask(func, opts));
+        }
+
+        /// <summary>
+        /// Добавить метод
+        /// </summary>
+        /// <param name="func"></param>
+        /// <param name="opts"></param>
+        /// <returns></returns>
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTask<T1, T2>(Func<TService, T1, T2, Task> func, JsWorkerMethodDocsOptions opts)
+        {
+            return AddMethod(opts, () => JsServiceFuncBuilder.GetTask(func, opts));
+        }
+
+        /// <summary>
+        /// Добавить метод
+        /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="func"></param>
         /// <param name="opts"></param>

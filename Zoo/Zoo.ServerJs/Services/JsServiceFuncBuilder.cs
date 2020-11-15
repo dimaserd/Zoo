@@ -169,6 +169,44 @@ namespace Zoo.ServerJs.Services
             };
         }
 
+        internal static JsWorkerMethodDocs GetTask<TService, T1>(Func<TService, T1, Task> task, JsWorkerMethodDocsOptions opts)
+        {
+            return new JsWorkerMethodDocs(null, null, opts)
+            {
+                Method = new JsWorkerMethodBase
+                {
+                    FunctionLink = (p, srv) =>
+                    {
+                        var service = srv.GetRequiredService<TService>();
+                        task(service, p.GetParameter<T1>()).ConfigureAwait(true).GetAwaiter().GetResult();
+                        return new JsWorkerMethodResult
+                        {
+                            Result = null,
+                        };
+                    }
+                }
+            };
+        }
+
+        internal static JsWorkerMethodDocs GetTask<TService, T1, T2>(Func<TService, T1, T2, Task> task, JsWorkerMethodDocsOptions opts)
+        {
+            return new JsWorkerMethodDocs(null, null, opts)
+            {
+                Method = new JsWorkerMethodBase
+                {
+                    FunctionLink = (p, srv) =>
+                    {
+                        var service = srv.GetRequiredService<TService>();
+                        task(service, p.GetParameter<T1>(), p.GetParameter<T2>()).ConfigureAwait(true).GetAwaiter().GetResult();
+                        return new JsWorkerMethodResult
+                        {
+                            Result = null,
+                        };
+                    }
+                }
+            };
+        }
+
         internal static JsWorkerMethodDocs GetTask<TService, TResult>(Func<TService, Task<TResult>> task, JsWorkerMethodDocsOptions opts)
         {
             return new JsWorkerMethodDocs(typeof(TResult), null, opts)

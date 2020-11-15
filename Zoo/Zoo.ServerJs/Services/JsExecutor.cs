@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Croco.Core.Contract.Models;
 using Jint;
+using Microsoft.Extensions.DependencyInjection;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Extensions;
 using Zoo.ServerJs.Models;
@@ -22,6 +23,7 @@ namespace Zoo.ServerJs.Services
     {
         private readonly JsOpenApiDocs _openApiDocs;
 
+        IServiceProvider ServiceProvider { get; }
         IJsScriptTaskStorage Storage { get; }
 
         JsExecutorComponents Components { get; }
@@ -46,12 +48,12 @@ namespace Zoo.ServerJs.Services
                 JsWorkers = properties.JsWorkers,
                 ExternalComponents = properties.ExternalComponents,
                 RemoteApis = new ConcurrentDictionary<string, RemoteJsOpenApi>(properties.RemoteApis),
-                ServiceProvider = serviceProvider,
                 HttpClient = httpClient
             };
             
             EngineAction = properties.EngineAction;
             _openApiDocs = CreateDocs();
+            ServiceProvider = serviceProvider;
             Storage = storage;
         }
 
@@ -166,7 +168,8 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodParams">Параметры метода</param>
         public TResult CallWorkerMethod<TResult>(string workerName, string method, params object[] methodParams)
         {
-            var res = GetContext().JsCallWorker.Call(workerName, method, methodParams);
+            using var context = GetContext();
+            var res = context.JsCallWorker.Call(workerName, method, methodParams);
             return ZooSerializer.Deserialize<TResult>(res);
         }
 
@@ -178,7 +181,8 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodPayload">Параметр, который нужно передать в метод компонента</param>
         public TResult CallExternalComponent<TResult>(string componentName, string methodName, object methodPayload)
         {
-            var res = GetContext().JsCallWorker.CallExternal(componentName, methodName, methodPayload);
+            using var context = GetContext();
+            var res = context.JsCallWorker.CallExternal(componentName, methodName, methodPayload);
             return ZooSerializer.Deserialize<TResult>(res);
         }
 
@@ -255,9 +259,10 @@ namespace Zoo.ServerJs.Services
 
             try
             {
+                using var scope = ServiceProvider.CreateScope();
                 var result = Components
                     .GetJsWorker(requestModel.WorkerName)
-                    .HandleCall(requestModel.MethodName, Components.ServiceProvider, parameters);
+                    .HandleCall(requestModel.MethodName, scope.ServiceProvider, parameters);
 
                 return new CallOpenApiWorkerMethodResponse
                 {
@@ -277,7 +282,7 @@ namespace Zoo.ServerJs.Services
 
         private JsExecutionContext GetContext()
         {
-            return new JsExecutionContext(Components, EngineAction);
+            return new JsExecutionContext(Components, ServiceProvider.CreateScope(), EngineAction);
         }
         #endregion
     }

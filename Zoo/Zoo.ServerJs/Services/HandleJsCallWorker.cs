@@ -12,6 +12,7 @@ namespace Zoo.ServerJs.Services
     {
         private RemoteJsCaller RemoteCaller { get; }
         private JsExecutorComponents Components { get; }
+        private IServiceProvider ServiceProvider { get; }
         private JsExecutionContext ExecutionContext { get; }
 
 
@@ -19,10 +20,12 @@ namespace Zoo.ServerJs.Services
         /// Конструктор
         /// </summary>
         /// <param name="components"></param>
+        /// <param name="serviceProvider"></param>
         /// <param name="executionContext"></param>
-        internal HandleJsCallWorker(JsExecutorComponents components, JsExecutionContext executionContext)
+        internal HandleJsCallWorker(JsExecutorComponents components, IServiceProvider serviceProvider, JsExecutionContext executionContext)
         {
             Components = components;
+            ServiceProvider = serviceProvider;
             ExecutionContext = executionContext;
             RemoteCaller = new RemoteJsCaller(Components.RemoteApiDocs, Components.HttpClient, ExecutionContext);
         }
@@ -37,7 +40,7 @@ namespace Zoo.ServerJs.Services
         {
             var worker = Components.GetJsWorker(workerName);
 
-            var res = worker.HandleCall(method, Components.ServiceProvider, new JsWorkerMethodCallParameters(methodParams)).Result;
+            var res = worker.HandleCall(method, ServiceProvider, new JsWorkerMethodCallParameters(methodParams)).Result;
 
             return ZooSerializer.Serialize(res);
         }
