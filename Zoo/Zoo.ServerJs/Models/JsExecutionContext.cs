@@ -64,12 +64,26 @@ namespace Zoo.ServerJs.Models
             ConsoleLogs.Add(new JsLogggedVariables
             {
                 LoggedOnUtc = DateTime.UtcNow,
-                SerializedVariables = objs?.Select(x => new JsSerializedVariable
-                {
-                    DataJson = ZooSerializer.Serialize(x),
-                    TypeFullName = x.GetType().FullName
-                }).ToList() ?? new List<JsSerializedVariable>()
+                SerializedVariables = objs?.Select(ToJsSerializedVariable).ToList() ?? new List<JsSerializedVariable>()
             });
+        }
+
+        private JsSerializedVariable ToJsSerializedVariable(object obj)
+        {
+            if(obj == null)
+            {
+                return new JsSerializedVariable
+                {
+                    DataJson = "null",
+                    TypeFullName = null
+                };
+            }
+
+            return new JsSerializedVariable
+            {
+                DataJson = ZooSerializer.Serialize(obj),
+                TypeFullName = obj.GetType().FullName
+            };
         }
 
         public void Dispose()
