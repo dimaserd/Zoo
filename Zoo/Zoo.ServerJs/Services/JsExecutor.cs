@@ -76,6 +76,7 @@ namespace Zoo.ServerJs.Services
         /// <returns></returns>
         public async Task UpdateRemotesDocsAsync()
         {
+            Components.RemoteApiDocs.Clear();
             foreach (var remoteApi in Components.RemoteApis)
             {
                 Components.RemoteApiDocs[remoteApi.Key] = await Components.HttpClient.GetRemoteDocsViaHttpRequest(remoteApi.Value);
@@ -141,8 +142,9 @@ namespace Zoo.ServerJs.Services
                 return new BaseApiResponse(false, $"Хост не найден по названию '{hostName}'");
             }
 
-            remoteApis.TryRemove(hostName, out var _);
-            return new BaseApiResponse(false, $"Хост с названием '{hostName}' удален");
+            var result = remoteApis.TryRemove(hostName, out var _);
+            var mes = result ? $"Хост с названием '{hostName}' удален" : "Не удалено";
+            return new BaseApiResponse(result, mes);
         }
 
         /// <summary>
