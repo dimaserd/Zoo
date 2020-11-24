@@ -12,6 +12,7 @@ using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Models.OpenApi;
 using Zoo.ServerJs.Resources;
+using Zoo.ServerJs.Services.Internal;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Services
@@ -21,8 +22,6 @@ namespace Zoo.ServerJs.Services
     /// </summary>
     public class JsExecutor
     {
-        private readonly JsOpenApiDocs _openApiDocs;
-
         IServiceProvider ServiceProvider { get; }
         IJsScriptTaskStorage Storage { get; }
 
@@ -37,37 +36,25 @@ namespace Zoo.ServerJs.Services
         /// <param name="serviceProvider"></param>
         /// <param name="httpClient"></param>
         /// <param name="storage"></param>
+        /// <param name="persistedStorage"></param>
         /// <param name="properties"></param>
         public JsExecutor(IServiceProvider serviceProvider,
             IServerJsHttpClient httpClient,
-            IJsScriptTaskStorage storage, 
+            IJsScriptTaskStorage storage,
+            IPersistedStorage persistedStorage,
             JsExecutorProperties properties)
         {
-            Components = new JsExecutorComponents
+            Components = new JsExecutorComponents(persistedStorage, properties.ExternalComponents, properties.RemoteApis)
             {
                 JsWorkers = properties.JsWorkers,
-                ExternalComponents = properties.ExternalComponents,
-                RemoteApis = new ConcurrentDictionary<string, RemoteJsOpenApi>(properties.RemoteApis),
                 HttpClient = httpClient
             };
-            
+
             EngineAction = properties.EngineAction;
-            _openApiDocs = CreateDocs();
             ServiceProvider = serviceProvider;
             Storage = storage;
         }
 
-        private JsOpenApiDocs CreateDocs()
-        {
-            return new JsOpenApiDocs
-            {
-                Workers = Components.JsWorkers.Select(x => x.Value)
-                    .Select(x => new JsOpenApiWorkerDocumentation(x)).ToList(),
-                ExternalJsComponents = Components.ExternalComponents
-                    .Select(x => x.Value).ToList()
-            };
-        }
-        
         #region Методы
 
         /// <summary>
@@ -77,7 +64,8 @@ namespace Zoo.ServerJs.Services
         public async Task UpdateRemotesDocsAsync()
         {
             Components.RemoteApiDocs.Clear();
-            foreach (var remoteApi in Components.RemoteApis)
+            var remoteApis = await Components.RemoteApis.GetInternalValueAsync();
+            foreach (var remoteApi in remoteApis)
             {
                 Components.RemoteApiDocs[remoteApi.Key] = await Components.HttpClient.GetRemoteDocsViaHttpRequest(remoteApi.Value);
             }
@@ -97,13 +85,21 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         /// <param name="remoteApi"></param>
         /// <returns></returns>
-        public BaseApiResponse AddRemoteApi(RemoteJsOpenApi remoteApi)
+        public async Task<BaseApiResponse> AddRemoteApi(RemoteJsOpenApi remoteApi)
         {
             var error = string.Format(ExceptionTexts.RemoteApiWithNameAlreadyRegisteredFormat, remoteApi.Name);
 
-            var res = Components.RemoteApis.TryAdd(remoteApi.Name, remoteApi);
+            var remoteApis = Components.RemoteApis;
+            var key = remoteApi.Name;
+            
+            if (await remoteApis.ContainsKeyAsync(key))
+            {
+                return new BaseApiResponse(false, error);
+            }
 
-            return new BaseApiResponse(res, res ? "Добавлено" : error);
+            await remoteApis.SetValueAsync(key, remoteApi);
+
+            return new BaseApiResponse(true, "Добавлено");
         }
 
         /// <summary>
@@ -111,19 +107,18 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         /// <param name="remoteApi"></param>
         /// <returns></returns>
-        public BaseApiResponse EditRemoteApi(RemoteJsOpenApi remoteApi)
+        public async Task<BaseApiResponse> EditRemoteApi(RemoteJsOpenApi remoteApi)
         {
             var remoteApis = Components.RemoteApis;
 
             var hostName = remoteApi.Name;
 
-            if (!remoteApis.ContainsKey(hostName))
+            if (!await remoteApis.ContainsKeyAsync(hostName))
             {
                 return new BaseApiResponse(false, $"Хост не найден по названию '{hostName}'");
             }
 
-            remoteApis.TryRemove(hostName, out var _);
-            remoteApis.TryAdd(hostName, remoteApi);
+            await remoteApis.SetValueAsync(hostName, remoteApi);
 
             return new BaseApiResponse(true, $"Данные хоста '{hostName}' обновлены");
         }
@@ -133,18 +128,17 @@ namespace Zoo.ServerJs.Services
         /// </summary>
         /// <param name="hostName"></param>
         /// <returns></returns>
-        public BaseApiResponse DeleteRemoteApi(string hostName)
+        public async Task<BaseApiResponse> DeleteRemoteApi(string hostName)
         {
             var remoteApis = Components.RemoteApis;
 
-            if (!remoteApis.ContainsKey(hostName))
+            if (!await remoteApis.ContainsKeyAsync(hostName))
             {
                 return new BaseApiResponse(false, $"Хост не найден по названию '{hostName}'");
             }
 
-            var result = remoteApis.TryRemove(hostName, out var _);
-            var mes = result ? $"Хост с названием '{hostName}' удален" : "Не удалено";
-            return new BaseApiResponse(result, mes);
+            await remoteApis.RemoveAsync(hostName);
+            return new BaseApiResponse(true, $"Хост с названием '{hostName}' удален");
         }
 
         /// <summary>
@@ -160,7 +154,16 @@ namespace Zoo.ServerJs.Services
         /// Получить документацию
         /// </summary>
         /// <returns></returns>
-        public JsOpenApiDocs GetDocumentation() => _openApiDocs;
+        public async Task<JsOpenApiDocs> GetDocumentation()
+        {
+            return new JsOpenApiDocs
+            {
+                Workers = Components.JsWorkers.Select(x => x.Value)
+                    .Select(x => new JsOpenApiWorkerDocumentation(x)).ToList(),
+                ExternalJsComponents = (await Components.ExternalComponents.GetInternalValueAsync())
+                    .Select(x => x.Value).ToList()
+            };
+        }
 
         /// <summary>
         /// Вызвать внутренний сервис, написанный на Js
@@ -263,7 +266,7 @@ namespace Zoo.ServerJs.Services
             {
                 using var scope = ServiceProvider.CreateScope();
                 var result = Components
-                    .GetJsWorker(requestModel.WorkerName)
+                    .GetJsWorker(requestModel.WorkerName, GetContext())
                     .HandleCall(requestModel.MethodName, scope.ServiceProvider, parameters);
 
                 return new CallOpenApiWorkerMethodResponse

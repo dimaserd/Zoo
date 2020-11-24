@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Statics;
 
-namespace Zoo.ServerJs.Services
+namespace Zoo.ServerJs.Services.Internal
 {
     /// <summary>
     /// Обработчик js вызовов
     /// </summary>
-    public class HandleJsCallWorker
+    internal class HandleJsCallWorker
     {
         private RemoteJsCaller RemoteCaller { get; }
         private JsExecutorComponents Components { get; }
@@ -29,7 +32,7 @@ namespace Zoo.ServerJs.Services
             ExecutionContext = executionContext;
             RemoteCaller = new RemoteJsCaller(Components.RemoteApiDocs, Components.HttpClient, ExecutionContext);
         }
-        
+
         /// <summary>
         /// Вызвать внутренний метод сервис
         /// </summary>
@@ -38,14 +41,14 @@ namespace Zoo.ServerJs.Services
         /// <param name="methodParams">Параметры метода</param>
         public string Call(string workerName, string method, params dynamic[] methodParams)
         {
-            var worker = Components.GetJsWorker(workerName);
+            var worker = Components.GetJsWorker(workerName, ExecutionContext);
 
             var res = worker.HandleCall(method, ServiceProvider, new JsWorkerMethodCallParameters(methodParams)).Result;
 
             return ZooSerializer.Serialize(res);
         }
 
-        
+
         /// <summary>
         /// Вызвать внешний сервис, определенный через Js
         /// </summary>
@@ -57,14 +60,15 @@ namespace Zoo.ServerJs.Services
         {
             try
             {
-                return CallExternalUnSafe(componentName, methodName, methodPayLoad);
-            } 
-            catch(Exception ex)
+                var result = CallExternalUnSafe(componentName, methodName, methodPayLoad).GetAwaiter().GetResult();
+                return result;
+            }
+            catch (Exception ex)
             {
                 var mes = $"Произошла ошибка при вызове внешнего компонента. Название внешнего компонента = '{componentName}'.\n "
                     + $"Название метода = '{methodName}'.\n";
 
-                if(methodPayLoad != null)
+                if (methodPayLoad != null)
                 {
                     mes += $"Параметр метода = {ZooSerializer.Serialize(methodPayLoad)}.\n ";
                 }
@@ -91,13 +95,22 @@ namespace Zoo.ServerJs.Services
                 .ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
-        private string CallExternalUnSafe(string componentName, string methodName, object methodPayLoad)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="componentName"></param>
+        /// <param name="methodName"></param>
+        /// <param name="methodPayLoad"></param>
+        /// <returns></returns>
+        private async Task<string> CallExternalUnSafe(string componentName, string methodName, object methodPayLoad)
         {
-            var component = Components.GetExternalComponent(componentName);
+            var component = await Components.GetExternalComponent(componentName, ExecutionContext);
 
             var uid = $"n{Guid.NewGuid()}".Replace("-", "_");
 
-            var variableScript = $"{uid} = {ZooSerializer.Serialize(methodPayLoad)};";
+            var payloadJson = ZooSerializer.Serialize(methodPayLoad);
+
+            var variableScript = $"{uid} = {payloadJson};";
 
             var engine = ExecutionContext.CreateEngine();
 
@@ -110,7 +123,22 @@ namespace Zoo.ServerJs.Services
                 throw new Exception($"Метод '{methodName}' не найден в компоненте '{componentName}'");
             }
 
-            return ZooSerializer.Serialize(methodExpr.Invoke(variable).ToObject());
+            var resultJson = ZooSerializer.Serialize(methodExpr.Invoke(variable).ToObject());
+
+            ExecutionContext.ExecutionLogs.Add(new JsExecutionLog
+            {
+                EventIdName = EventIds.JsExecutorComponents.CallExternalComponentOnResult,
+                Message = "Завершен вызов внешнего компонента",
+                DataJson = JsonConvert.SerializeObject(new
+                {
+                    ComponentName = componentName, 
+                    MethodName = methodName,
+                    PayloadJson = payloadJson,
+                    ResultJson = resultJson
+                })
+            });
+
+            return resultJson;
         }
     }
 }

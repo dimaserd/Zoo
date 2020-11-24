@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Zoo.ServerJs.Services;
+using Zoo.ServerJs.Statics;
 using Zoo.ServerJs.WorkerExamples;
 
 namespace Zoo.ServerJs.Tests
@@ -12,7 +13,7 @@ namespace Zoo.ServerJs.Tests
         [TestCase(10, 2, 5)]
         [TestCase(18, 3, 6)]
         [TestCase(18, 2, 9)]
-        public void TestCall(int param1, int param2, int expectedResult)
+        public void TestCall(int param1, int param2, double expectedResult)
         {
             var services = new ServiceCollection();
             new JsExecutorBuilder(services)
@@ -31,7 +32,8 @@ namespace Zoo.ServerJs.Tests
             });
 
             Assert.IsTrue(result.IsSucceeded);
-            Assert.AreEqual(expectedResult.ToString(), result.ResponseJson);
+            var expetedDataResult = ZooSerializer.Serialize(expectedResult);
+            Assert.AreEqual(expetedDataResult, result.ResponseJson);
         }
     }
 }

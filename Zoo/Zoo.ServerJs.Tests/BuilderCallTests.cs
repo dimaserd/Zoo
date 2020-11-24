@@ -112,10 +112,10 @@ namespace Zoo.ServerJs.Tests
         [TestCase("someName")]
         [TestCase("someName1")]
         [TestCase("someName2")]
-        public void TestDocumentation(string workerName)
+        public async Task TestDocumentation(string workerName)
         {
             var jsExecutor = BuildAndGetExecutor(workerName);
-            var docs = jsExecutor.GetDocumentation();
+            var docs = await jsExecutor.GetDocumentation();
             Assert.AreEqual(1, docs.Workers.Count);
 
             var fWorker = docs.Workers.First();

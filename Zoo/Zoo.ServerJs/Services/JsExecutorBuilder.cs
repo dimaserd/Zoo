@@ -15,8 +15,9 @@ namespace Zoo.ServerJs.Services
     /// </summary>
     public class JsExecutorBuilder
     {
-        bool IsStorageRegistered = false;
+        bool IsResultsStorageRegistered = false;
         bool IsHttpClientRegistered = false;
+        bool IsPersistedStorageRegistered = false;
 
         readonly Dictionary<string, ExternalJsComponent> _components = new Dictionary<string, ExternalJsComponent>();
         readonly Dictionary<string, JsWorkerDocumentation> _jsWorkers = new Dictionary<string, JsWorkerDocumentation>();
@@ -68,19 +69,54 @@ namespace Zoo.ServerJs.Services
         }
 
         /// <summary>
+        /// Регистрирует хранилище для персистентных данных как синглтон
+        /// </summary>
+        /// <typeparam name="TStorage"></typeparam>
+        /// <returns></returns>
+        public JsExecutorBuilder AddPersistedStorage<TStorage>() where TStorage : class, IPersistedStorage
+        {
+            if (IsPersistedStorageRegistered)
+            {
+                throw new InvalidOperationException(ExceptionTexts.PersistedStorageIsAlreadyRegistered);
+            }
+
+            ServiceCollection.AddSingleton<IPersistedStorage, TStorage>();
+            IsPersistedStorageRegistered = true;
+            return this;
+        }
+
+        /// <summary>
+        /// Регистрирует хранилище для персистентных данных как синглтон
+        /// </summary>
+        /// <typeparam name="TStorage"></typeparam>
+        /// <param name="providerFunc"></param>
+        /// <returns></returns>
+        public JsExecutorBuilder AddPersistedStorage<TStorage>(Func<IServiceProvider, TStorage> providerFunc) where TStorage : class, IPersistedStorage
+        {
+            if (IsPersistedStorageRegistered)
+            {
+                throw new InvalidOperationException(ExceptionTexts.PersistedStorageIsAlreadyRegistered);
+            }
+
+            ServiceCollection.AddSingleton<IPersistedStorage, TStorage>(providerFunc);
+            IsPersistedStorageRegistered = true;
+            return this;
+        }
+
+        /// <summary>
         /// Регистрирует хранилище для скриптов как синглтон
         /// </summary>
         /// <typeparam name="TStorage"></typeparam>
         /// <returns></returns>
         public JsExecutorBuilder AddScriptStorage<TStorage>() where TStorage : class, IJsScriptTaskStorage
         {
-            if (IsStorageRegistered)
+            if (IsResultsStorageRegistered)
             {
                 throw new InvalidOperationException(ExceptionTexts.ScriptStorageIsAlreadyRegistered);
             }
 
             ServiceCollection.AddSingleton<IJsScriptTaskStorage, TStorage>();
-            IsStorageRegistered = true;
+            IsResultsStorageRegistered = true;
             return this;
         }
 
@@ -160,7 +196,7 @@ namespace Zoo.ServerJs.Services
             });
             ServiceCollection.AddSingleton<JsExecutor>();
             
-            if (!IsStorageRegistered)
+            if (!IsResultsStorageRegistered)
             {
                 ServiceCollection.AddSingleton<IJsScriptTaskStorage, DefaultJsScriptResultStorage>();
             }
@@ -168,6 +204,11 @@ namespace Zoo.ServerJs.Services
             if (!IsHttpClientRegistered)
             {
                 AddHttpClient(srv => new ServerJsHttpClient(new HttpClient()));
+            }
+
+            if (!IsPersistedStorageRegistered)
+            {
+                ServiceCollection.AddSingleton<IPersistedStorage, FilePersistedStorage>();
             }
         }
     }

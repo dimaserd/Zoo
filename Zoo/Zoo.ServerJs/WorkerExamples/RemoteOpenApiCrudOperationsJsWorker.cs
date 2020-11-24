@@ -28,7 +28,7 @@ namespace Zoo.ServerJs.WorkerExamples
             return builder.SetWorkerName(WorkerName)
                 .SetDescription("Crud операции над удаленными хостами")
                 .GetServiceMethodBuilder<JsExecutor>()
-                .AddMethodViaFunction<RemoteJsOpenApi, BaseApiResponse>((srv, p1) => srv.AddRemoteApi(p1), new JsWorkerMethodDocsOptions
+                .AddMethodViaTaskWithResult<RemoteJsOpenApi, BaseApiResponse>((srv, p1) => srv.AddRemoteApi(p1), new JsWorkerMethodDocsOptions
                 {
                     MethodName = "Add",
                     Description = "Добавить новый удаленный апи хост",
@@ -38,7 +38,7 @@ namespace Zoo.ServerJs.WorkerExamples
                     },
                     ResultDescription = "Результат операции"
                 })
-                .AddMethodViaFunction<RemoteJsOpenApi, BaseApiResponse>((srv, p1) => srv.EditRemoteApi(p1), new JsWorkerMethodDocsOptions
+                .AddMethodViaTaskWithResult<RemoteJsOpenApi, BaseApiResponse>((srv, p1) => srv.EditRemoteApi(p1), new JsWorkerMethodDocsOptions
                 {
                     MethodName = "Edit",
                     Description = "Редактировать удаленный апи хост",
@@ -48,7 +48,7 @@ namespace Zoo.ServerJs.WorkerExamples
                     },
                     ResultDescription = "Результат операции"
                 })
-                .AddMethodViaFunction<string, BaseApiResponse>((srv, p1) => srv.DeleteRemoteApi(p1), new JsWorkerMethodDocsOptions
+                .AddMethodViaTaskWithResult<string, BaseApiResponse>((srv, p1) => srv.DeleteRemoteApi(p1), new JsWorkerMethodDocsOptions
                 {
                     MethodName = "Delete",
                     Description = "Удалить удаленный апи хост",

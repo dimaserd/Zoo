@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 
 namespace Zoo.ServerJs.Models
 {
@@ -11,12 +10,12 @@ namespace Zoo.ServerJs.Models
         /// <summary>
         /// Дата логгирования
         /// </summary>
-        public DateTime LoggedOnUtc { get; set; }
+        public DateTime LoggedOnUtc { get; } = DateTime.UtcNow;
 
         /// <summary>
         /// Идентификатор события
         /// </summary>
-        public EventId EventId { get; set; }
+        public string EventIdName { get; set; }
 
         /// <summary>
         /// Сообщение в человекопонятном виде

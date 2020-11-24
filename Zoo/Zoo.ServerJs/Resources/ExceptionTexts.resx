@@ -141,6 +141,9 @@
   <data name="NoWorkerWithNameRegisteredFormat" xml:space="preserve">
     <value>В системе нет зарегистрированного рабочего класса с именем '{0}'</value>
   </data>
+  <data name="PersistedStorageIsAlreadyRegistered" xml:space="preserve">
+    <value>Персистентное хранилище данных уже установлено</value>
+  </data>
   <data name="RemoteApiWithNameAlreadyRegisteredFormat" xml:space="preserve">
     <value>Удаленное апи с названием '{0}' уже зарегистрировано</value>
   </data>

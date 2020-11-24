@@ -133,6 +133,15 @@ namespace Zoo.ServerJs.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Персистентное хранилище данных уже установлено.
+        /// </summary>
+        internal static string PersistedStorageIsAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("PersistedStorageIsAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Удаленное апи с названием &apos;{0}&apos; уже зарегистрировано.
         /// </summary>
         internal static string RemoteApiWithNameAlreadyRegisteredFormat {

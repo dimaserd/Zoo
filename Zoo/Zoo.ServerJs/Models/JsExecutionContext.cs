@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Resources;
-using Zoo.ServerJs.Services;
+using Zoo.ServerJs.Services.Internal;
 using Zoo.ServerJs.Statics;
 
 namespace Zoo.ServerJs.Models

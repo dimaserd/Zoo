@@ -8,7 +8,7 @@ using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.OpenApi;
 using Zoo.ServerJs.Statics;
 
-namespace Zoo.ServerJs.Services
+namespace Zoo.ServerJs.Services.Internal
 {
     internal class RemoteJsCaller
     {
@@ -50,8 +50,7 @@ namespace Zoo.ServerJs.Services
             {
                 throw WriteLogAndGetException(new JsExecutionLog
                 {
-                    LoggedOnUtc = DateTime.UtcNow,
-                    EventId = EventIds.CallRemoteApi.RemoteApiNotFound,
+                    EventIdName = EventIds.CallRemoteApi.RemoteApiNotFound,
                     Message = $"В системе нет зарегистрированного внешнего апи с именем '{remoteName}'",
                     DataJson = null
                 });
@@ -61,12 +60,11 @@ namespace Zoo.ServerJs.Services
 
             var worker = remoteApi.Docs.Workers.FirstOrDefault(x => x.WorkerName == workerName);
 
-            if(worker == null)
+            if (worker == null)
             {
                 throw WriteLogAndGetException(new JsExecutionLog
                 {
-                    LoggedOnUtc = DateTime.UtcNow,
-                    EventId = EventIds.CallRemoteApi.NoWorkerWithNameFound,
+                    EventIdName = EventIds.CallRemoteApi.NoWorkerWithNameFound,
                     Message = $"Во внешнем апи '{remoteName}' не зарегистрирован рабочий класс с именем '{workerName}'",
                     DataJson = null
                 });
@@ -74,7 +72,7 @@ namespace Zoo.ServerJs.Services
 
             var method = worker.Methods.FirstOrDefault(x => x.MethodName == methodName);
 
-            if(method == null)
+            if (method == null)
             {
                 throw new InvalidOperationException($"Во внешнем апи '{remoteName}' в рабочем классе с именем '{workerName}' не обнаружен метож '{methodName}'");
             }
@@ -92,8 +90,7 @@ namespace Zoo.ServerJs.Services
             {
                 throw WriteLogAndGetException(new JsExecutionLog
                 {
-                    EventId = EventIds.CallRemoteApi.CallNotSucceeded,
-                    LoggedOnUtc = DateTime.UtcNow,
+                    EventIdName = EventIds.CallRemoteApi.CallNotSucceeded,
                     Message = "Ошибка при выполнении удалленного запроса",
                     DataJson = ZooSerializer.Serialize(callResult)
                 });
@@ -108,8 +105,7 @@ namespace Zoo.ServerJs.Services
 
             ExecutionContext.ExecutionLogs.Add(new JsExecutionLog
             {
-                LoggedOnUtc = DateTime.UtcNow,
-                EventId = EventIds.CallRemoteApi.CallLogged,
+                EventIdName = EventIds.CallRemoteApi.CallLogged,
                 Message = "Логгирование удаленного запроса",
                 DataJson = ZooSerializer.Serialize(responseRecord)
             });
@@ -123,8 +119,7 @@ namespace Zoo.ServerJs.Services
             {
                 ExecutionContext.ExecutionLogs.Add(new JsExecutionLog
                 {
-                    LoggedOnUtc = DateTime.UtcNow,
-                    EventId = EventIds.CallRemoteApi.ResponseDeserializationError,
+                    EventIdName = EventIds.CallRemoteApi.ResponseDeserializationError,
                     Message = "Ошибка при дессериализации",
                     DataJson = ZooSerializer.Serialize(responseRecord)
                 });

@@ -74,6 +74,56 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Zoo.ServerJs.Abstractions.IPersistedStorage">
+            <summary>
+            Хранилище с постоянными данными
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IPersistedStorage.AddOrUpdateValue``1(System.String,``0)">
+            <summary>
+            Добавление значения в хранилище
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IPersistedStorage.AddOrUpdateValueAsync``1(System.String,``0)">
+            <summary>
+            Добавление значения в хранилище
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IPersistedStorage.GetValue``1(System.String)">
+            <summary>
+            Получение значения из хранилища по ключу
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IPersistedStorage.GetValueAsync``1(System.String)">
+            <summary>
+            Получение значения из хранилища по ключу
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IPersistedStorage.Remove(System.String)">
+            <summary>
+            Удаление значения из кеша по ключу
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Zoo.ServerJs.Abstractions.IPersistedStorage.RemoveAsync(System.String)">
+            <summary>
+            Удаление значения из кеша по ключу
+            </summary>
+            <param name="key"></param>
+        </member>
         <member name="T:Zoo.ServerJs.Abstractions.IServerJsHttpClient">
             <summary>
             Http клиент для js исполнителя
@@ -239,7 +289,7 @@
             Дата логгирования
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Models.JsExecutionLog.EventId">
+        <member name="P:Zoo.ServerJs.Models.JsExecutionLog.EventIdName">
             <summary>
             Идентификатор события
             </summary>
@@ -789,6 +839,11 @@
               Ищет локализованную строку, похожую на В системе нет зарегистрированного рабочего класса с именем &apos;{0}&apos;.
             </summary>
         </member>
+        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.PersistedStorageIsAlreadyRegistered">
+            <summary>
+              Ищет локализованную строку, похожую на Персистентное хранилище данных уже установлено.
+            </summary>
+        </member>
         <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.RemoteApiWithNameAlreadyRegisteredFormat">
             <summary>
               Ищет локализованную строку, похожую на Удаленное апи с названием &apos;{0}&apos; уже зарегистрировано.
@@ -864,12 +919,46 @@
         <member name="M:Zoo.ServerJs.Services.DefaultJsScriptResultStorage.SearchTasks(Zoo.ServerJs.Models.SearchJsTasks)">
             <inheritdoc />
         </member>
-        <member name="T:Zoo.ServerJs.Services.HandleJsCallWorker">
+        <member name="T:Zoo.ServerJs.Services.FilePersistedStorage">
+            <summary>
+            Персистентное хранилище в файловой системе
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.FilePersistedStorage.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.FilePersistedStorage.#ctor(System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="baseDirectory"></param>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.FilePersistedStorage.AddOrUpdateValueAsync``1(System.String,``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zoo.ServerJs.Services.FilePersistedStorage.GetValueAsync``1(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zoo.ServerJs.Services.FilePersistedStorage.RemoveAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zoo.ServerJs.Services.FilePersistedStorage.AddOrUpdateValue``1(System.String,``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zoo.ServerJs.Services.FilePersistedStorage.GetValue``1(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zoo.ServerJs.Services.FilePersistedStorage.Remove(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zoo.ServerJs.Services.Internal.HandleJsCallWorker">
             <summary>
             Обработчик js вызовов
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.#ctor(Zoo.ServerJs.Services.JsExecutorComponents,System.IServiceProvider,Zoo.ServerJs.Models.JsExecutionContext)">
+        <member name="M:Zoo.ServerJs.Services.Internal.HandleJsCallWorker.#ctor(Zoo.ServerJs.Services.Internal.JsExecutorComponents,System.IServiceProvider,Zoo.ServerJs.Models.JsExecutionContext)">
             <summary>
             Конструктор
             </summary>
@@ -877,7 +966,7 @@
             <param name="serviceProvider"></param>
             <param name="executionContext"></param>
         </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.Call(System.String,System.String,System.Object[])">
+        <member name="M:Zoo.ServerJs.Services.Internal.HandleJsCallWorker.Call(System.String,System.String,System.Object[])">
             <summary>
             Вызвать внутренний метод сервис
             </summary>
@@ -885,7 +974,7 @@
             <param name="method">метод который нужно вызвать у данного рабочего</param>
             <param name="methodParams">Параметры метода</param>
         </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallExternal(System.String,System.String,System.Object)">
+        <member name="M:Zoo.ServerJs.Services.Internal.HandleJsCallWorker.CallExternal(System.String,System.String,System.Object)">
             <summary>
             Вызвать внешний сервис, определенный через Js
             </summary>
@@ -894,9 +983,46 @@
             <param name="methodPayLoad"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.HandleJsCallWorker.CallRemoteWorkerMethod(System.String,System.String,System.String,System.Object[])">
+        <member name="M:Zoo.ServerJs.Services.Internal.HandleJsCallWorker.CallRemoteWorkerMethod(System.String,System.String,System.String,System.Object[])">
             <summary>
             Вызвать удаленное апи
+            </summary>
+            <param name="remoteName"></param>
+            <param name="workerName"></param>
+            <param name="methodName"></param>
+            <param name="methodParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.Internal.HandleJsCallWorker.CallExternalUnSafe(System.String,System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="componentName"></param>
+            <param name="methodName"></param>
+            <param name="methodPayLoad"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Zoo.ServerJs.Services.Internal.JsExecutorComponents.JsWorkers">
+            <summary>
+            Javascript обработчики
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Services.Internal.JsExecutorComponents.ExternalComponents">
+            <summary>
+            Внешние компоненты
+            </summary>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.Internal.RemoteJsCaller.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.String,Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs},Zoo.ServerJs.Abstractions.IServerJsHttpClient,Zoo.ServerJs.Models.JsExecutionContext)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="remoteDocs"></param>
+            <param name="httpClient"></param>
+            <param name="executionContext"></param>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.Internal.RemoteJsCaller.CallRemoteWorkerMethod(System.String,System.String,System.String,System.Object[])">
+            <summary>
+            Вызвать внешний сервис, определенный через Js
             </summary>
             <param name="remoteName"></param>
             <param name="workerName"></param>
@@ -909,13 +1035,14 @@
             Исполнитель кода на Js
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(System.IServiceProvider,Zoo.ServerJs.Abstractions.IServerJsHttpClient,Zoo.ServerJs.Abstractions.IJsScriptTaskStorage,Zoo.ServerJs.Services.JsExecutorProperties)">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(System.IServiceProvider,Zoo.ServerJs.Abstractions.IServerJsHttpClient,Zoo.ServerJs.Abstractions.IJsScriptTaskStorage,Zoo.ServerJs.Abstractions.IPersistedStorage,Zoo.ServerJs.Services.JsExecutorProperties)">
             <summary>
             Конструктор
             </summary>
             <param name="serviceProvider"></param>
             <param name="httpClient"></param>
             <param name="storage"></param>
+            <param name="persistedStorage"></param>
             <param name="properties"></param>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor.UpdateRemotesDocsAsync">
@@ -1021,6 +1148,21 @@
             <param name="remoteApi"></param>
             <returns></returns>
         </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddPersistedStorage``1">
+            <summary>
+            Регистрирует хранилище для персистентных данных как синглтон
+            </summary>
+            <typeparam name="TStorage"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddPersistedStorage``1(System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Регистрирует хранилище для персистентных данных как синглтон
+            </summary>
+            <typeparam name="TStorage"></typeparam>
+            <param name="providerFunc"></param>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.AddScriptStorage``1">
             <summary>
             Регистрирует хранилище для скриптов как синглтон
@@ -1061,16 +1203,6 @@
             Зарегистрировать класс <see cref="T:Zoo.ServerJs.Services.JsExecutor"/> в контейнере зависимостей
             </summary>
             <param name="action"></param>
-        </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutorComponents.JsWorkers">
-            <summary>
-            Javascript обработчики
-            </summary>
-        </member>
-        <member name="P:Zoo.ServerJs.Services.JsExecutorComponents.ExternalComponents">
-            <summary>
-            Внешние компоненты
-            </summary>
         </member>
         <member name="T:Zoo.ServerJs.Services.JsExecutorProperties">
             <summary>
@@ -1372,24 +1504,6 @@
             <summary>
             Построить Js рабочего
             </summary>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.RemoteJsCaller.#ctor(System.Collections.Concurrent.ConcurrentDictionary{System.String,Zoo.ServerJs.Models.OpenApi.RemoteJsOpenApiDocs},Zoo.ServerJs.Abstractions.IServerJsHttpClient,Zoo.ServerJs.Models.JsExecutionContext)">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="remoteDocs"></param>
-            <param name="httpClient"></param>
-            <param name="executionContext"></param>
-        </member>
-        <member name="M:Zoo.ServerJs.Services.RemoteJsCaller.CallRemoteWorkerMethod(System.String,System.String,System.String,System.Object[])">
-            <summary>
-            Вызвать внешний сервис, определенный через Js
-            </summary>
-            <param name="remoteName"></param>
-            <param name="workerName"></param>
-            <param name="methodName"></param>
-            <param name="methodParams"></param>
-            <returns></returns>
         </member>
         <member name="T:Zoo.ServerJs.Services.ServerJsHttpClient">
             <summary>
