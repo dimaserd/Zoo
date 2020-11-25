@@ -19,8 +19,8 @@ namespace Zoo.ServerJs.Consts
             public static readonly string GetExternalComponentFound = "JsExecutorComponents.GetExternalComponent.Found";
 
 
-            public static readonly string GetJsWorkerNotFound = "JsExecutorComponents.GetExternalComponent.NotFound";
-            public static readonly string GetJsWorkerFound = "JsExecutorComponents.GetExternalComponent.Found";
+            public static readonly string GetJsWorkerNotFound = "JsExecutorComponents.GetJsWorker.NotFound";
+            public static readonly string GetJsWorkerFound = "JsExecutorComponents.GetJsWorker.Found";
 
             public static readonly string CallExternalComponentOnResult = "JsExecutor.CallExternalComponent.OnResult";
         }

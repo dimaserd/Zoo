@@ -68,7 +68,6 @@ namespace Zoo.ServerJs.Services.Internal
             {
                 return new Dictionary<string, TValue>();
             }
-
             return result.Value;
         }
 
