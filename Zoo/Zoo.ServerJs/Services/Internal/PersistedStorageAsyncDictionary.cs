@@ -13,7 +13,16 @@ namespace Zoo.ServerJs.Services.Internal
         {
             _persistedStorage = persistedStorage;
             _key = key;
-            SaveInternalValue(defaultValue);
+            
+            var value = GetInternalValue();
+            foreach(var keyValuePair in defaultValue)
+            {
+                if (!value.ContainsKey(keyValuePair.Key))
+                {
+                    value[keyValuePair.Key] = keyValuePair.Value;
+                }
+            }
+            SaveInternalValue(value);
         }
 
         public async Task<TValue> GetValueAsync(string key)

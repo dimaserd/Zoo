@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.9.58</Version>
+    <Version>0.9.60</Version>
     <Company>CrocoSoft</Company>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Authors>Dmitry Serdyukov</Authors>
