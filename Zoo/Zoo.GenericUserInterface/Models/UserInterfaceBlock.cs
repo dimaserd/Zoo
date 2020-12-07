@@ -33,6 +33,11 @@ namespace Zoo.GenericUserInterface.Models
         public string LabelText { get; set; }
 
         /// <summary>
+        /// Является ли блок видимым
+        /// </summary>
+        public bool IsVisible { get; set; } = true;
+
+        /// <summary>
         /// Тип пользовательского интрефейса
         /// </summary>
         public UserInterfaceType InterfaceType { get; set; }

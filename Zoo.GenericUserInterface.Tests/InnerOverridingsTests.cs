@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Services;
 

@@ -5,10 +5,11 @@ using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
+using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Models.Overridings;
-using Zoo.GenericUserInterface.Services;
 
-namespace Zoo.GenericUserInterface.Models.Bag
+namespace Zoo.GenericUserInterface.Services
 {
     /// <summary>
     /// Портфель из пользовательских интерфейсов для типов и прочего добра необходимого для
@@ -18,11 +19,13 @@ namespace Zoo.GenericUserInterface.Models.Bag
     {
         IServiceProvider ServiceProvider { get; }
 
+        string ApplicationHostUrl { get; }
+
         /// <summary>
         /// Какой тип нужно переопределить и каким переопределителем
         /// </summary>
         internal ConcurrentDictionary<Type, Type> DefaultInterfaceOverriders { get; }
- 
+
         internal ConcurrentDictionary<string, Type> AutoCompletionDataProviders { get; }
         internal ConcurrentDictionary<string, Type> SelectListDataProviders { get; }
 
@@ -46,6 +49,7 @@ namespace Zoo.GenericUserInterface.Models.Bag
         /// <param name="options"></param>
         public GenericUserInterfaceBag(IServiceProvider serviceProvider, GenericUserInterfaceBagOptions bagOptions, GenericInterfaceOptions options)
         {
+            ApplicationHostUrl = bagOptions.ApplicationHostUrl;
             SelectListDataProviders = new ConcurrentDictionary<string, Type>(bagOptions.SelectListDataProviders);
             DefaultInterfaceOverriders = new ConcurrentDictionary<Type, Type>(bagOptions.DefaultInterfaceOverriders);
             AutoCompletionDataProviders = new ConcurrentDictionary<string, Type>(bagOptions.AutoCompletionDataProviders);
@@ -113,6 +117,22 @@ namespace Zoo.GenericUserInterface.Models.Bag
         }
 
         /// <summary>
+        /// Получить модель для генерации пользовательского интерфейса на удаленной машине
+        /// </summary>
+        /// <param name="typeDisplayFullName"></param>
+        /// <returns></returns>
+        public async Task<GenerateOnRemoteUserInterfaceModel> GetDefaultInterfaceOnRemote(string typeDisplayFullName)
+        {
+            var interfaceModel = await GetDefaultInterface(typeDisplayFullName);
+
+            return new GenerateOnRemoteUserInterfaceModel
+            {
+                ApplicationHostUrl = ApplicationHostUrl,
+                GemerateInterfaceModel = interfaceModel
+            };
+        }
+
+        /// <summary>
         /// Получить интерфейс
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
@@ -161,7 +181,7 @@ namespace Zoo.GenericUserInterface.Models.Bag
 
             var type = CrocoTypeSearcher.FindFirstTypeByName(typeDisplayFullName, x => !x.IsGenericTypeDefinition);
 
-            if(type != null)
+            if (type != null)
             {
                 TypeSearchMatchings[typeDisplayFullName] = type;
             }
@@ -209,7 +229,7 @@ namespace Zoo.GenericUserInterface.Models.Bag
                     var defaultInterface = await GetOrAddDefaultInterfaceFromComputed(block.TypeDisplayFullName);
                     block.InnerGenericInterface = defaultInterface.Item2.Interface;
                 }
-                else if(block.InterfaceType == UserInterfaceType.GenericInterfaceForArray)
+                else if (block.InterfaceType == UserInterfaceType.GenericInterfaceForArray)
                 {
                     var defaultInterface = await GetOrAddDefaultInterfaceFromComputed(block.TypeDisplayFullName[0..^2]);
                     block.InnerGenericInterface = defaultInterface.Item2.Interface;

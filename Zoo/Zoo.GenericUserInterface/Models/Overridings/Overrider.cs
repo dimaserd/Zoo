@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Zoo.GenericUserInterface.Models.Bag;
+using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Models.Overridings
 {

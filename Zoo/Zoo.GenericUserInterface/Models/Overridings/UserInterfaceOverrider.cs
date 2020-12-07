@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Models.Overridings

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Models.Bag;
+using Zoo.GenericUserInterface.Services;
 using Zoo.GenericUserInterface.Utils;
 
 namespace Zoo.GenericUserInterface.Tests

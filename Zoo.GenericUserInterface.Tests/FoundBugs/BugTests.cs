@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Services;

@@ -6,7 +6,6 @@ using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
-using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Resources;
@@ -69,6 +68,18 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             Block.LabelText = labelText;
             return this;
         }
+
+        /// <summary>
+        /// Установить видимость блока
+        /// </summary>
+        /// <param name="isVisible"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceBlockBuilder<TProp> SetVisibility(bool isVisible)
+        {
+            Block.IsVisible = isVisible;
+            return this;
+        }
+
 
         /// <summary>
         /// Установить тип блока, как большое текстовое поле

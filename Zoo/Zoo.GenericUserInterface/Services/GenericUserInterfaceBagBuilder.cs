@@ -5,6 +5,7 @@ using System.Linq;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Resources;
+using Zoo.GenericUserInterface.Services;
 
 namespace Zoo.GenericUserInterface.Models.Overridings
 {
@@ -14,6 +15,8 @@ namespace Zoo.GenericUserInterface.Models.Overridings
     public class GenericUserInterfaceBagBuilder
     {
         GenericInterfaceOptions InterfaceOptions { get; set; }
+
+        string _applicationHostUrl;
         readonly Dictionary<Type, Type> DefaultInterfaceOverriders = new Dictionary<Type, Type>();
         readonly Dictionary<string, Type> AutoCompletionDataProviders = new Dictionary<string, Type>();
         readonly Dictionary<string, Type> SelectListDataProviders = new Dictionary<string, Type>();
@@ -27,6 +30,17 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         public GenericUserInterfaceBagBuilder(IServiceCollection serviceCollection)
         {
             ServiceCollection = serviceCollection;
+        }
+
+        /// <summary>
+        /// Установить корневой url адрес
+        /// </summary>
+        /// <param name="hostUrl"></param>
+        /// <returns></returns>
+        public GenericUserInterfaceBagBuilder SetHostUrl(string hostUrl)
+        {
+            _applicationHostUrl = hostUrl;
+            return this;
         }
 
         /// <summary>
@@ -107,7 +121,8 @@ namespace Zoo.GenericUserInterface.Models.Overridings
             {
                 SelectListDataProviders = SelectListDataProviders,
                 AutoCompletionDataProviders = AutoCompletionDataProviders,
-                DefaultInterfaceOverriders = DefaultInterfaceOverriders
+                DefaultInterfaceOverriders = DefaultInterfaceOverriders,
+                ApplicationHostUrl = _applicationHostUrl
             });
             ServiceCollection.AddSingleton<GenericUserInterfaceBag>();
         }
