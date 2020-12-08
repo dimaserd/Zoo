@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services.BlockBuilders;
 
@@ -14,11 +15,11 @@ namespace Zoo.GenericUserInterface.Services
         /// <summary>
         /// Установить видимость для блока
         /// </summary>
-        /// <typeparam name="TItem"></typeparam>
+        /// <typeparam name="TBuilder"></typeparam>
         /// <param name="blockBuilder"></param>
         /// <param name="isVisible"></param>
         /// <returns></returns>
-        public static GenericUserInterfaceBlockBuilder<TItem> SetVisibility<TItem>(this GenericUserInterfaceBlockBuilder<TItem> blockBuilder, bool isVisible)
+        public static TBuilder SetVisibility<TBuilder>(this TBuilder blockBuilder, bool isVisible) where TBuilder : IGenericInterfaceBlockBuilder
         {
             blockBuilder.Block.IsVisible = isVisible;
             return blockBuilder;
@@ -30,7 +31,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <param name="blockBuilder"></param>
         /// <param name="labelText"></param>
         /// <returns></returns>
-        public static GenericUserInterfaceBlockBuilder<TItem> SetLabel<TItem>(this GenericUserInterfaceBlockBuilder<TItem> blockBuilder, string labelText)
+        public static TBuilder SetLabel<TBuilder>(this TBuilder blockBuilder, string labelText) where TBuilder : IGenericInterfaceBlockBuilder
         {
             blockBuilder.Block.LabelText = labelText;
             return blockBuilder;

@@ -27,6 +27,16 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Abstractions.IGenericInterfaceBlockBuilder">
+            <summary>
+            Построитель для блока
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Abstractions.IGenericInterfaceBlockBuilder.Block">
+            <summary>
+            Редактируемый блок
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Abstractions.IGenericInterfaceBuilder">
             <summary>
             Абстракция построителя интерфейсов
@@ -854,16 +864,16 @@
             Расширения
             </summary>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetVisibility``1(Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder{``0},System.Boolean)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetVisibility``1(``0,System.Boolean)">
             <summary>
             Установить видимость для блока
             </summary>
-            <typeparam name="TItem"></typeparam>
+            <typeparam name="TBuilder"></typeparam>
             <param name="blockBuilder"></param>
             <param name="isVisible"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetLabel``1(Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder{``0},System.String)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetLabel``1(``0,System.String)">
             <summary>
             Установить текст лейбла для блока
             </summary>

@@ -16,7 +16,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
     /// Построитель для конкретного блока в интерейсе
     /// </summary>
     /// <typeparam name="TProp"></typeparam>
-    public class GenericUserInterfaceBlockBuilder<TProp> : IGenericInterfaceBuilder
+    public class GenericUserInterfaceBlockBuilder<TProp> : IGenericInterfaceBlockBuilder
     {
         /// <summary>
         /// Построитель интерфейса
@@ -31,7 +31,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// <summary>
         /// Редактируемый блок
         /// </summary>
-        internal UserInterfaceBlock Block { get; }
+        public UserInterfaceBlock Block { get; }
         
         /// <summary>
         /// Описанный тип данных

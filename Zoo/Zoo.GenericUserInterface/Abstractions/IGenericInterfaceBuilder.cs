@@ -4,6 +4,17 @@ using Zoo.GenericUserInterface.Services;
 namespace Zoo.GenericUserInterface.Abstractions
 {
     /// <summary>
+    /// Построитель для блока
+    /// </summary>
+    public interface IGenericInterfaceBlockBuilder : IGenericInterfaceBuilder
+    {
+        /// <summary>
+        /// Редактируемый блок
+        /// </summary>
+        UserInterfaceBlock Block { get; }
+    }
+
+    /// <summary>
     /// Абстракция построителя интерфейсов
     /// </summary>
     public interface IGenericInterfaceBuilder
