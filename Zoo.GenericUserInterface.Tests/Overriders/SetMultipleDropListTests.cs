@@ -43,6 +43,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
 
             var interfaceModel = new GenericUserInterfaceModelBuilder<SomeType>(TestsHelper.CreateDefaultBag())
                     .GetBlockBuilderForCollection(x => x.Prop2)
+                    .SetLabel("SomeLabel")
                     .SetMultipleDropDownList(new List<SelectListItemData<string>>
                     {
                         new SelectListItemData<string>

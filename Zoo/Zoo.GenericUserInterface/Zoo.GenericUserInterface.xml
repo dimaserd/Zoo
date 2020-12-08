@@ -748,12 +748,6 @@
             <typeparam name="TDataProvider"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetHidden">
-            <summary>
-            Устновить скрытый тип элемента ввода
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilderForCollectionType`1">
             <summary>
             Построитель блока для обощенного интерфейса с типом коллекция
@@ -871,6 +865,12 @@
             <typeparam name="TBuilder"></typeparam>
             <param name="blockBuilder"></param>
             <param name="isVisible"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetHidden``1(``0)">
+            <summary>
+            Устновить скрытый тип элемента ввода
+            </summary>
             <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetLabel``1(``0,System.String)">

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Zoo.GenericUserInterface.Abstractions;
+using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services.BlockBuilders;
 
@@ -22,6 +23,16 @@ namespace Zoo.GenericUserInterface.Services
         public static TBuilder SetVisibility<TBuilder>(this TBuilder blockBuilder, bool isVisible) where TBuilder : IGenericInterfaceBlockBuilder
         {
             blockBuilder.Block.IsVisible = isVisible;
+            return blockBuilder;
+        }
+
+        /// <summary>
+        /// Устновить скрытый тип элемента ввода
+        /// </summary>
+        /// <returns></returns>
+        public static TBuilder SetHidden<TBuilder>(this TBuilder blockBuilder) where TBuilder : IGenericInterfaceBlockBuilder
+        {
+            blockBuilder.Block.InterfaceType = UserInterfaceType.Hidden;
             return blockBuilder;
         }
 

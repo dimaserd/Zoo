@@ -146,17 +146,6 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             return this;
         }
 
-        
-        /// <summary>
-        /// Устновить скрытый тип элемента ввода
-        /// </summary>
-        /// <returns></returns>
-        public GenericUserInterfaceBlockBuilder<TProp> SetHidden()
-        {
-            Block.InterfaceType = UserInterfaceType.Hidden;
-            return this;
-        }
-
         private void DropDownListChecks()
         {
             var mainDoc = DocsBuilder.GetTypeDescriptionResult(typeof(TProp)).GetMainTypeDescription();
