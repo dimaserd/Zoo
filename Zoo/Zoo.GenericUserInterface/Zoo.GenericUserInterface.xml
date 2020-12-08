@@ -166,6 +166,174 @@
             Переопределители интерфейсов
             </summary>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Definition.AutoCompleteSuggestion">
+            <summary>
+            Модель данных для автокомплита
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Definition.AutoCompleteSuggestion.Text">
+            <summary>
+            Текст, который будет показан
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Definition.AutoCompleteSuggestion.DataJson">
+            <summary>
+            Дополнительные данные
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Definition.AutoCompleteSuggestion.Value">
+            <summary>
+            Сериализованное значение
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Definition.AutoCompleteSuggestionData`1">
+            <summary>
+            Обобщенная модель данных для автокомлита
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Definition.AutoCompleteSuggestionData`1.Text">
+            <summary>
+            Текст который будет показан
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Definition.AutoCompleteSuggestionData`1.DataJson">
+            <summary>
+            Дополнительные данные
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Definition.AutoCompleteSuggestionData`1.Value">
+            <summary>
+            Значение
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Definition.Overrider">
+            <summary>
+            Переопределитель интерфейсов
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Definition.Overrider.MainOverrideFunction">
+            <summary>
+            Основная Функция для переопределения
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Definition.Overrider.SetDropDownDatasFunction">
+            <summary>
+            Вторая функция для переопределения
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1">
+            <summary>
+            Данные для построения выпадающего списка
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Text">
+            <summary>
+            Текст для показа
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Selected">
+            <summary>
+            Флаг выбранности
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.DataJson">
+            <summary>
+            Кастомные данные
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Value">
+            <summary>
+            Значение
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.UserInterfaceDefinition`1">
+            <summary>
+            Переопределитель интерфейса
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.UserInterfaceDefinition`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceBag,Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
+            <summary>
+            
+            </summary>
+            <param name="bag"></param>
+            <param name="overrider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.UserInterfaceDefinition`1.GetOverrider">
+            <summary>
+            Получить переопределитель
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder">
+            <summary>
+            Построитель портфеля обобщенных пользовательских интерфейсов
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="serviceCollection"></param>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.SetHostUrl(System.String)">
+            <summary>
+            Установить корневой url адрес
+            </summary>
+            <param name="hostUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDefaultDefinition``1">
+            <summary>
+            Добавить определение для интерфейса
+            </summary>
+            <typeparam name="TDefinition"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDefaultDefinition``1(System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Добавить переопределение для интерфейса
+            </summary>
+            <typeparam name="TDefinition"></typeparam>
+            <param name="providerFunc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForAutoCompletion``1">
+            <summary>
+            Добавить провайдер данных для автокомплита
+            </summary>
+            <typeparam name="TDataProvider"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForAutoCompletion``1(System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Добавить провайдер данных для автокомплита
+            </summary>
+            <typeparam name="TDataProvider"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForSelectList``1">
+            <summary>
+            Добавить провайдер данных для выпадающего списка
+            </summary>
+            <typeparam name="TDataProvider"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForSelectList``1(System.Func{System.IServiceProvider,``0})">
+            <summary>
+            Добавить провайдер данных для выпадающего списка
+            </summary>
+            <typeparam name="TDataProvider"></typeparam>
+            <param name="providerFunc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.Build">
+            <summary>
+            Построить
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Models.DropDownListData">
             <summary>
             Данные для построения выпадающего списка
@@ -266,174 +434,6 @@
             Дефолтные опции
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestion">
-            <summary>
-            Модель данных для автокомплита
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestion.Text">
-            <summary>
-            Текст, который будет показан
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestion.DataJson">
-            <summary>
-            Дополнительные данные
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestion.Value">
-            <summary>
-            Сериализованное значение
-            </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestionData`1">
-            <summary>
-            Обобщенная модель данных для автокомлита
-            </summary>
-            <typeparam name="TItem"></typeparam>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestionData`1.Text">
-            <summary>
-            Текст который будет показан
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestionData`1.DataJson">
-            <summary>
-            Дополнительные данные
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.AutoCompleteSuggestionData`1.Value">
-            <summary>
-            Значение
-            </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.Overrider">
-            <summary>
-            Переопределитель интерфейсов
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.MainOverrideFunction">
-            <summary>
-            Основная Функция для переопределения
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.Overrider.SetDropDownDatasFunction">
-            <summary>
-            Вторая функция для переопределения
-            </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1">
-            <summary>
-            Данные для построения выпадающего списка
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Text">
-            <summary>
-            Текст для показа
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Selected">
-            <summary>
-            Флаг выбранности
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.DataJson">
-            <summary>
-            Кастомные данные
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Overridings.SelectListItemData`1.Value">
-            <summary>
-            Значение
-            </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.UserInterfaceOverrider`1">
-            <summary>
-            Переопределитель интерфейса
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.UserInterfaceOverrider`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceBag,Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
-            <summary>
-            
-            </summary>
-            <param name="bag"></param>
-            <param name="overrider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.UserInterfaceOverrider`1.GetOverrider">
-            <summary>
-            Получить переопределитель
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder">
-            <summary>
-            Построитель портфеля обобщенных пользовательских интерфейсов
-            </summary>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="serviceCollection"></param>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.SetHostUrl(System.String)">
-            <summary>
-            Установить корневой url адрес
-            </summary>
-            <param name="hostUrl"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDefaultOverrider``1">
-            <summary>
-            Добавить переопределение для интерфейса
-            </summary>
-            <typeparam name="TOverrider"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDefaultOverrider``1(System.Func{System.IServiceProvider,``0})">
-            <summary>
-            Добавить переопределение для интерфейса
-            </summary>
-            <typeparam name="TOverrider"></typeparam>
-            <param name="providerFunc"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForAutoCompletion``1">
-            <summary>
-            Добавить провайдер данных для автокомплита
-            </summary>
-            <typeparam name="TDataProvider"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForAutoCompletion``1(System.Func{System.IServiceProvider,``0})">
-            <summary>
-            Добавить провайдер данных для автокомплита
-            </summary>
-            <typeparam name="TDataProvider"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForSelectList``1">
-            <summary>
-            Добавить провайдер данных для выпадающего списка
-            </summary>
-            <typeparam name="TDataProvider"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.AddDataProviderForSelectList``1(System.Func{System.IServiceProvider,``0})">
-            <summary>
-            Добавить провайдер данных для выпадающего списка
-            </summary>
-            <typeparam name="TDataProvider"></typeparam>
-            <param name="providerFunc"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder.Build">
-            <summary>
-            Построить
-            </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Providers.DataProviderForAutoCompletion`1">
             <summary>
@@ -709,32 +709,6 @@
             <param name="builder"></param>
             <param name="block"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetLabel(System.String)">
-            <summary>
-            Установить текст лейбла
-            </summary>
-            <param name="labelText"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetVisibility(System.Boolean)">
-            <summary>
-            Установить видимость блока
-            </summary>
-            <param name="isVisible"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetTextArea">
-            <summary>
-            Установить тип блока, как большое текстовое поле
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetPassword">
-            <summary>
-            Установить тип блока, как большое текстовое поле
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetCustom(System.String,System.String)">
             <summary>
             Установить кастомный тип блока
@@ -879,6 +853,37 @@
             <summary>
             Расширения
             </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetVisibility``1(Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder{``0},System.Boolean)">
+            <summary>
+            Установить видимость для блока
+            </summary>
+            <typeparam name="TItem"></typeparam>
+            <param name="blockBuilder"></param>
+            <param name="isVisible"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetLabel``1(Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder{``0},System.String)">
+            <summary>
+            Установить текст лейбла для блока
+            </summary>
+            <param name="blockBuilder"></param>
+            <param name="labelText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetTextArea(Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder{System.String})">
+            <summary>
+            Установить блок в виде текстарии
+            </summary>
+            <param name="blockBuilder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetPassword(Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder{System.String})">
+            <summary>
+            Установить блок в виде инпута для пароля
+            </summary>
+            <param name="blockBuilder"></param>
+            <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.GetBlockBuilderForCollection``2(Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{``0},System.Linq.Expressions.Expression{System.Func{``0,``1[]}})">
             <summary>

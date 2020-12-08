@@ -18,17 +18,8 @@ namespace Zoo.GenericUserInterface.Tests
             public string Prop2 { get; set; }
         }
 
-        public class FailingOverrider : UserInterfaceOverrider<SomeType>
-        {
-            public override Task OverrideInterfaceAsync(GenericUserInterfaceBag bag, GenericUserInterfaceModelBuilder<SomeType> overrider)
-            {
-                overrider.GetBlockBuilder(x => x.Prop1).SetTextArea();
 
-                return Task.CompletedTask;
-            }
-        }
-
-        public class GoodOverrider : UserInterfaceOverrider<SomeType>
+        public class GoodOverrider : UserInterfaceDefinition<SomeType>
         {
             public override Task OverrideInterfaceAsync(GenericUserInterfaceBag bag, GenericUserInterfaceModelBuilder<SomeType> overrider)
             {
@@ -39,28 +30,12 @@ namespace Zoo.GenericUserInterface.Tests
         }
 
         [Test]
-        public void SetOnNonStringPropShouldFail()
-        {
-            var services = new ServiceCollection();
-            
-            new GenericUserInterfaceBagBuilder(services)
-                .AddDefaultOverrider<FailingOverrider>()
-                .Build();
-
-            var bag = services.BuildServiceProvider().GetRequiredService<GenericUserInterfaceBag>();
-
-            var ex = Assert.ThrowsAsync<InvalidOperationException>(() => bag.GetDefaultInterface<SomeType>());
-
-            Assert.AreEqual(ExceptionTexts.TextAreaCanBeSetOnlyOnStrings, ex.Message);
-        }
-
-        [Test]
         public async Task SetOnStringPropShouldSucceded()
         {
             var services = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(services)
-                .AddDefaultOverrider<GoodOverrider>()
+                .AddDefaultDefinition<GoodOverrider>()
                 .Build();
 
             var bag = services.BuildServiceProvider().GetRequiredService<GenericUserInterfaceBag>();

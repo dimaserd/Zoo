@@ -31,7 +31,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
         /// <summary>
         /// Редактируемый блок
         /// </summary>
-        protected UserInterfaceBlock Block { get; }
+        internal UserInterfaceBlock Block { get; }
         
         /// <summary>
         /// Описанный тип данных
@@ -56,61 +56,6 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             DocsBuilder = builder;
             Block = block;
             DescribedType = DocsBuilder.GetTypeDescriptionResult(typeof(TProp));
-        }
-
-        /// <summary>
-        /// Установить текст лейбла
-        /// </summary>
-        /// <param name="labelText"></param>
-        /// <returns></returns>
-        public GenericUserInterfaceBlockBuilder<TProp> SetLabel(string labelText)
-        {
-            Block.LabelText = labelText;
-            return this;
-        }
-
-        /// <summary>
-        /// Установить видимость блока
-        /// </summary>
-        /// <param name="isVisible"></param>
-        /// <returns></returns>
-        public GenericUserInterfaceBlockBuilder<TProp> SetVisibility(bool isVisible)
-        {
-            Block.IsVisible = isVisible;
-            return this;
-        }
-
-
-        /// <summary>
-        /// Установить тип блока, как большое текстовое поле
-        /// </summary>
-        /// <returns></returns>
-        public GenericUserInterfaceBlockBuilder<TProp> SetTextArea()
-        {
-            if (typeof(TProp) != typeof(string))
-            {
-                throw new InvalidOperationException(ExceptionTexts.TextAreaCanBeSetOnlyOnStrings);
-            }
-
-            Block.InterfaceType = UserInterfaceType.TextArea;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Установить тип блока, как большое текстовое поле
-        /// </summary>
-        /// <returns></returns>
-        public GenericUserInterfaceBlockBuilder<TProp> SetPassword()
-        {
-            if (typeof(TProp) != typeof(string))
-            {
-                throw new InvalidOperationException(ExceptionTexts.PasswordCanBeSetOnlyOnStrings);
-            }
-
-            Block.InterfaceType = UserInterfaceType.Password;
-
-            return this;
         }
 
         /// <summary>

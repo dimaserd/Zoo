@@ -37,7 +37,7 @@ namespace Zoo.GenericUserInterface.Tests
             }
         }
 
-        public class SomeModelInterfaceOverrider : UserInterfaceOverrider<SomeModel>
+        public class SomeModelInterfaceOverrider : UserInterfaceDefinition<SomeModel>
         {
             public override Task OverrideInterfaceAsync(GenericUserInterfaceBag bag, GenericUserInterfaceModelBuilder<SomeModel> overrider)
             {
@@ -55,7 +55,7 @@ namespace Zoo.GenericUserInterface.Tests
 
             //Не регистрируем провайдера данных для переопределителя
             new GenericUserInterfaceBagBuilder(srvCollection)
-                .AddDefaultOverrider<SomeModelInterfaceOverrider>()
+                .AddDefaultDefinition<SomeModelInterfaceOverrider>()
                 .Build();
 
             var bag = srvCollection.BuildServiceProvider()
@@ -76,7 +76,7 @@ namespace Zoo.GenericUserInterface.Tests
 
             new GenericUserInterfaceBagBuilder(srvCollection)
                 .AddDataProviderForSelectList<SomeSelectListDataProvider>()
-                .AddDefaultOverrider<SomeModelInterfaceOverrider>()
+                .AddDefaultDefinition<SomeModelInterfaceOverrider>()
                 .Build();
 
             var bag = srvCollection.BuildServiceProvider()

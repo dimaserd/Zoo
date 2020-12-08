@@ -15,7 +15,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
         public string SomeProperty { get; set; }
     }
 
-    public class SomeTypeOverrider : UserInterfaceOverrider<SomeTypeToOverride>
+    public class SomeTypeOverrider : UserInterfaceDefinition<SomeTypeToOverride>
     {
         string LabelText { get; }
 
@@ -49,8 +49,8 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var ex = Assert.Throws<InvalidOperationException>(() =>
             {
                 new GenericUserInterfaceBagBuilder(new ServiceCollection())
-                    .AddDefaultOverrider<SomeTypeOverrider>()
-                    .AddDefaultOverrider<SomeTypeOverrider>();
+                    .AddDefaultDefinition<SomeTypeOverrider>()
+                    .AddDefaultDefinition<SomeTypeOverrider>();
             });
 
             var expectedMes = string.Format(ExceptionTexts.OverridingForTypeIsAlreadySetFormat, typeof(SomeTypeToOverride).FullName);
@@ -66,7 +66,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var srv = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(srv)
-                .AddDefaultOverrider(srv => new SomeTypeOverrider(labelText))
+                .AddDefaultDefinition(srv => new SomeTypeOverrider(labelText))
                 .Build();
 
             var provider = srv.BuildServiceProvider();

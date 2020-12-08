@@ -1,4 +1,4 @@
-﻿namespace Zoo.GenericUserInterface.Models.Overridings
+﻿namespace Zoo.GenericUserInterface.Models.Definition
 {
     /// <summary>
     /// Модель данных для автокомплита

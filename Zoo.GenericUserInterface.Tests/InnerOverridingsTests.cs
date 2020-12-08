@@ -23,7 +23,7 @@ namespace Zoo.GenericUserInterface.Tests
             public string Prop1 { get; set; }
         }
 
-        public class SomeInnerTypeInterfaceOverrider : UserInterfaceOverrider<SomeInnerType>
+        public class SomeInnerTypeInterfaceOverrider : UserInterfaceDefinition<SomeInnerType>
         {
             public override Task OverrideInterfaceAsync(GenericUserInterfaceBag bag, GenericUserInterfaceModelBuilder<SomeInnerType> overrider)
             {
@@ -47,7 +47,7 @@ namespace Zoo.GenericUserInterface.Tests
             var serviceCollection = new ServiceCollection();
 
             new GenericUserInterfaceBagBuilder(serviceCollection)
-                .AddDefaultOverrider<SomeInnerTypeInterfaceOverrider>()
+                .AddDefaultDefinition<SomeInnerTypeInterfaceOverrider>()
                 .Build();
                 
             var bag = serviceCollection.BuildServiceProvider()

@@ -7,7 +7,7 @@ using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Models.Bag;
-using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Definition;
 
 namespace Zoo.GenericUserInterface.Services
 {

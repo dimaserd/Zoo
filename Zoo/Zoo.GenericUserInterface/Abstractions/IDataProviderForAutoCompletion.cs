@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Definition;
 
 namespace Zoo.GenericUserInterface.Abstractions
 {

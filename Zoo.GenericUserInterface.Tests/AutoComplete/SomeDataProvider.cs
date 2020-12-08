@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Definition;
 using Zoo.GenericUserInterface.Models.Providers;
 
 namespace Zoo.GenericUserInterface.Tests.AutoComplete

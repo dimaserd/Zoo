@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Zoo.GenericUserInterface.Models.Definition;
 using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Services;
@@ -62,7 +63,7 @@ namespace Zoo.GenericUserInterface.Tests.FoundBugs
         public string[] Descriptions { get; set; }
     }
 
-    public class TestClassInterfaceOverrider : UserInterfaceOverrider<TestClass>
+    public class TestClassInterfaceOverrider : UserInterfaceDefinition<TestClass>
     {
         public override Task OverrideInterfaceAsync(GenericUserInterfaceBag bag, GenericUserInterfaceModelBuilder<TestClass> overrider)
         {
@@ -152,7 +153,7 @@ namespace Zoo.GenericUserInterface.Tests.FoundBugs
 
             new GenericUserInterfaceBagBuilder(services)
                 .AddDataProviderForAutoCompletion<TestDataProvider>()
-                .AddDefaultOverrider<TestClassInterfaceOverrider>()
+                .AddDefaultDefinition<TestClassInterfaceOverrider>()
                 .Build();
 
             var bag = services.BuildServiceProvider().GetRequiredService<GenericUserInterfaceBag>();

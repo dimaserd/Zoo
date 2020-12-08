@@ -1,6 +1,6 @@
 ﻿using Zoo.GenericUserInterface.Utils;
 
-namespace Zoo.GenericUserInterface.Models.Overridings
+namespace Zoo.GenericUserInterface.Models.Definition
 {
     /// <summary>
     /// Обобщенная модель данных для автокомлита
@@ -28,7 +28,7 @@ namespace Zoo.GenericUserInterface.Models.Overridings
             {
                 DataJson = DataJson,
                 Text = Text,
-                Value = typeof(TItem) == typeof(string)? Value.ToString() : Tool.JsonConverter.Serialize(Value)
+                Value = typeof(TItem) == typeof(string) ? Value.ToString() : Tool.JsonConverter.Serialize(Value)
             };
         }
     }

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Extensions;
-using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services.BlockBuilders;
 
@@ -15,6 +11,53 @@ namespace Zoo.GenericUserInterface.Services
     /// </summary>
     public static class GenericUserInterfaceBuilderExtensions
     {
+        /// <summary>
+        /// Установить видимость для блока
+        /// </summary>
+        /// <typeparam name="TItem"></typeparam>
+        /// <param name="blockBuilder"></param>
+        /// <param name="isVisible"></param>
+        /// <returns></returns>
+        public static GenericUserInterfaceBlockBuilder<TItem> SetVisibility<TItem>(this GenericUserInterfaceBlockBuilder<TItem> blockBuilder, bool isVisible)
+        {
+            blockBuilder.Block.IsVisible = isVisible;
+            return blockBuilder;
+        }
+
+        /// <summary>
+        /// Установить текст лейбла для блока
+        /// </summary>
+        /// <param name="blockBuilder"></param>
+        /// <param name="labelText"></param>
+        /// <returns></returns>
+        public static GenericUserInterfaceBlockBuilder<TItem> SetLabel<TItem>(this GenericUserInterfaceBlockBuilder<TItem> blockBuilder, string labelText)
+        {
+            blockBuilder.Block.LabelText = labelText;
+            return blockBuilder;
+        }
+
+        /// <summary>
+        /// Установить блок в виде текстарии
+        /// </summary>
+        /// <param name="blockBuilder"></param>
+        /// <returns></returns>
+        public static GenericUserInterfaceBlockBuilder<string> SetTextArea(this GenericUserInterfaceBlockBuilder<string> blockBuilder)
+        {
+            blockBuilder.Block.InterfaceType = Enumerations.UserInterfaceType.TextArea;
+            return blockBuilder;
+        }
+
+        /// <summary>
+        /// Установить блок в виде инпута для пароля
+        /// </summary>
+        /// <param name="blockBuilder"></param>
+        /// <returns></returns>
+        public static GenericUserInterfaceBlockBuilder<string> SetPassword(this GenericUserInterfaceBlockBuilder<string> blockBuilder)
+        {
+            blockBuilder.Block.InterfaceType = Enumerations.UserInterfaceType.Password;
+            return blockBuilder;
+        }
+
         /// <summary>
         /// Получить конфигуратор для блока, который является колекцией
         /// </summary>
@@ -68,23 +111,6 @@ namespace Zoo.GenericUserInterface.Services
         public static GenericUserInterfaceBlockBuilder<TProp> GetBlockBuilder<TModel, TProp>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TProp>> expression) where TModel : class
         {
             return new GenericUserInterfaceBlockBuilder<TProp>(builder, builder.TypeDescriptionBuilder, builder.GetBlockByExpression(expression));
-        }
-
-        //TODO Реализовать позже
-        private static void SetInterfaceForClass<TModel, TProp, TOverrider>(this GenericUserInterfaceModelBuilder<TModel> builder, Expression<Func<TModel, TProp>> expression, TOverrider overrider) 
-            where TModel : class 
-            where TProp : class
-            where TOverrider : UserInterfaceOverrider<TProp>
-        {
-            var propName = MyExpressionExtensions.GetMemberName(expression);
-            var blockForProp = builder.Result.Interface.Blocks.First(x => x.PropertyName == propName);
-
-            if(blockForProp.InterfaceType != UserInterfaceType.GenericInterfaceForClass)
-            {
-                throw new InvalidOperationException("");
-            }
-
-            //blockForProp.InnerGenericInterface = overrider.OverrideInterfaceAsync<>
         }
 
         private static void CheckCollectionItem<TItem>()

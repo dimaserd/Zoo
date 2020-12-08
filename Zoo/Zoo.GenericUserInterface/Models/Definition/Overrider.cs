@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Services;
 
-namespace Zoo.GenericUserInterface.Models.Overridings
+namespace Zoo.GenericUserInterface.Models.Definition
 {
     /// <summary>
     /// Переопределитель интерфейсов

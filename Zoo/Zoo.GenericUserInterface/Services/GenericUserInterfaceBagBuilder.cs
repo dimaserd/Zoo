@@ -44,24 +44,24 @@ namespace Zoo.GenericUserInterface.Models.Overridings
         }
 
         /// <summary>
-        /// Добавить переопределение для интерфейса
+        /// Добавить определение для интерфейса
         /// </summary>
-        /// <typeparam name="TOverrider"></typeparam>
+        /// <typeparam name="TDefinition"></typeparam>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddDefaultOverrider<TOverrider>() where TOverrider : class, IGenericInterfaceOverrider
+        public GenericUserInterfaceBagBuilder AddDefaultDefinition<TDefinition>() where TDefinition : class, IGenericInterfaceOverrider
         {
-            return AddDefaultOverriderInner<TOverrider>(() => ServiceCollection.AddTransient<TOverrider>());
+            return AddDefaultOverriderInner<TDefinition>(() => ServiceCollection.AddTransient<TDefinition>());
         }
 
         /// <summary>
         /// Добавить переопределение для интерфейса
         /// </summary>
-        /// <typeparam name="TOverrider"></typeparam>
+        /// <typeparam name="TDefinition"></typeparam>
         /// <param name="providerFunc"></param>
         /// <returns></returns>
-        public GenericUserInterfaceBagBuilder AddDefaultOverrider<TOverrider>(Func<IServiceProvider, TOverrider> providerFunc) where TOverrider : class, IGenericInterfaceOverrider
+        public GenericUserInterfaceBagBuilder AddDefaultDefinition<TDefinition>(Func<IServiceProvider, TDefinition> providerFunc) where TDefinition : class, IGenericInterfaceOverrider
         {
-            return AddDefaultOverriderInner<TOverrider>(() => ServiceCollection.AddTransient(providerFunc));
+            return AddDefaultOverriderInner<TDefinition>(() => ServiceCollection.AddTransient(providerFunc));
         }
 
         /// <summary>
@@ -150,9 +150,9 @@ namespace Zoo.GenericUserInterface.Models.Overridings
                 .First();
         }
 
-        private GenericUserInterfaceBagBuilder AddDefaultOverriderInner<TOverrider>(Action action) where TOverrider : class, IGenericInterfaceOverrider
+        private GenericUserInterfaceBagBuilder AddDefaultOverriderInner<TDefinition>(Action action) where TDefinition : class, IGenericInterfaceOverrider
         {
-            var type = typeof(TOverrider);
+            var type = typeof(TDefinition);
 
             AddDefaultOverriderRecord(type, GetFirstInnerGeneric(type));
             action();

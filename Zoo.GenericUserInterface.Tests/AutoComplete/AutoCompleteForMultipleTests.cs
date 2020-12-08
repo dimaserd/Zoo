@@ -29,7 +29,7 @@ namespace Zoo.GenericUserInterface.Tests.AutoComplete
             public int[] Names { get; set; }
         }
 
-        public class SomeModelForAutoCompleteOverrider : UserInterfaceOverrider<SomeModelForAutoComplete>
+        public class SomeModelForAutoCompleteOverrider : UserInterfaceDefinition<SomeModelForAutoComplete>
         {
             public override Task OverrideInterfaceAsync(GenericUserInterfaceBag bag, GenericUserInterfaceModelBuilder<SomeModelForAutoComplete> overrider)
             {
@@ -45,7 +45,7 @@ namespace Zoo.GenericUserInterface.Tests.AutoComplete
 
             new GenericUserInterfaceBagBuilder(serviceCollection)
                 .AddDataProviderForAutoCompletion<SomeDataProvider>()
-                .AddDefaultOverrider<SomeModelForAutoCompleteOverrider>()
+                .AddDefaultDefinition<SomeModelForAutoCompleteOverrider>()
                 .Build();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
