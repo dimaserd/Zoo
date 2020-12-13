@@ -2,17 +2,16 @@
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Models.Definition;
 using Zoo.GenericUserInterface.Services;
 
-namespace Zoo.GenericUserInterface.Models.Overridings
+namespace Zoo.GenericUserInterface.Models.Definition
 {
     /// <summary>
     /// Переопределитель интерфейса
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class UserInterfaceDefinition<T> : IGenericInterfaceOverrider
-        where T : class 
+        where T : class
     {
         /// <summary>
         /// 

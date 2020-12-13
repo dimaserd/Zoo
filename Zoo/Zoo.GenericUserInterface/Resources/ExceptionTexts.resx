@@ -162,4 +162,7 @@
   <data name="TextAreaCanBeSetOnlyOnStrings" xml:space="preserve">
     <value>Только к типу данных строка можно установить элемент TextArea</value>
   </data>
+  <data name="TypeNotFoundByThisNameFormat" xml:space="preserve">
+    <value>Тип данных не найден по указанному имени '{0}'</value>
+  </data>
 </root>

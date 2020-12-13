@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Definition;
 using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services;
 

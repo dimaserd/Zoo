@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models;
-using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Definition;
 using Zoo.GenericUserInterface.Utils;
 
 namespace Zoo.GenericUserInterface.Extensions

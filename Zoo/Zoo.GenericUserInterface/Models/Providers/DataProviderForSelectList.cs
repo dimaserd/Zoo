@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Extensions;
-using Zoo.GenericUserInterface.Models.Overridings;
+using Zoo.GenericUserInterface.Models.Definition;
 
 namespace Zoo.GenericUserInterface.Models.Providers
 {

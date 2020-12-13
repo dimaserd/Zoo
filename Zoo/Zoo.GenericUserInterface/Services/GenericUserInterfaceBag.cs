@@ -8,6 +8,7 @@ using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Models.Bag;
 using Zoo.GenericUserInterface.Models.Definition;
+using Zoo.GenericUserInterface.Resources;
 
 namespace Zoo.GenericUserInterface.Services
 {
@@ -104,6 +105,11 @@ namespace Zoo.GenericUserInterface.Services
         public async Task<GenerateGenericUserInterfaceModel> GetDefaultInterface(string typeDisplayFullName)
         {
             var interfaceModelWithType = await GetOrAddDefaultInterfaceFromComputed(typeDisplayFullName);
+
+            if(interfaceModelWithType == (null, null))
+            {
+                throw new InvalidOperationException(string.Format(ExceptionTexts.TypeNotFoundByThisNameFormat, typeDisplayFullName));
+            }
 
             var overriding = GetDefaultOverriding(interfaceModelWithType.Item1);
 

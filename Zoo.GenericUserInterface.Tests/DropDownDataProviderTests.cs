@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
+using Zoo.GenericUserInterface.Models.Definition;
 using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Resources;

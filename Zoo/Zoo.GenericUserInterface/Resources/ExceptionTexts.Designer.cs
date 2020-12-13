@@ -194,5 +194,14 @@ namespace Zoo.GenericUserInterface.Resources {
                 return ResourceManager.GetString("TextAreaCanBeSetOnlyOnStrings", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тип данных не найден по указанному имени &apos;{0}&apos;.
+        /// </summary>
+        internal static string TypeNotFoundByThisNameFormat {
+            get {
+                return ResourceManager.GetString("TypeNotFoundByThisNameFormat", resourceCulture);
+            }
+        }
     }
 }
