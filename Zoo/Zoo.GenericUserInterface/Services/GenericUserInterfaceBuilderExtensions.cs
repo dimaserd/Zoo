@@ -55,7 +55,7 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         public static GenericUserInterfaceBlockBuilder<string> SetTextArea(this GenericUserInterfaceBlockBuilder<string> blockBuilder)
         {
-            blockBuilder.Block.InterfaceType = Enumerations.UserInterfaceType.TextArea;
+            blockBuilder.Block.InterfaceType = UserInterfaceType.TextArea;
             return blockBuilder;
         }
 
