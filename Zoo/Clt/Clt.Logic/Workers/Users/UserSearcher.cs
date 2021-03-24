@@ -10,7 +10,6 @@ using Clt.Logic.Extensions;
 using System.Collections.Generic;
 using Croco.Core.Search.Extensions;
 using Croco.Core.Contract.Models.Search;
-using Croco.Core.Logic.Workers;
 using Croco.Core.Contract;
 using Clt.Model.Entities;
 using Clt.Model.Entities.Default;

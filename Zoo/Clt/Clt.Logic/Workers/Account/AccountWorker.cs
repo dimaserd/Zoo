@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Clt.Logic.Abstractions;
 using Clt.Contract.Models.Common;
-using Clt.Logic.Extensions;
 using Clt.Logic.Core.Workers;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
@@ -23,8 +22,6 @@ namespace Clt.Logic.Workers.Account
         /// <summary>
         /// Создается пользователь Root в системе и ему присваиваются все необходимые права
         /// </summary>
-        /// <param name="roleManager"></param>
-        /// <param name="userManager"></param>
         /// <returns></returns>
         public async Task<BaseApiResponse> InitAsync()
         {

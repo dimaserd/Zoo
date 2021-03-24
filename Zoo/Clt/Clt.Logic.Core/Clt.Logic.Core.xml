@@ -141,12 +141,28 @@
               Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является Супер-Администратором.
             </summary>
         </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordChanger`2.ChangePasswordBaseAsync(`0,System.String,Microsoft.AspNetCore.Identity.UserManager{`0})">
+        <member name="M:Clt.Logic.Core.Workers.PasswordChanger`2.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Identity.SignInManager{`0})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="userManager"></param>
+            <param name="signInManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordChanger`2.ChangePasswordAsync(Clt.Contract.Models.Account.ChangeUserPasswordModel)">
+            <summary>
+            Изменить пароль
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordChanger`2.ChangePasswordBaseAsync(`0,System.String)">
             <summary>
             Данный метод не может быть вынесен в API (Базовый метод)
             </summary>
-            <param name="model"></param>
-            <param name="userManager"></param>
+            <param name="user"></param>
+            <param name="newPassword"></param>
             <returns></returns>
         </member>
     </members>

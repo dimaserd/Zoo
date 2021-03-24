@@ -14,8 +14,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-    <PackageReference Include="Croco.Core.Logic" Version="1.0.6" />
-    <PackageReference Include="Croco.Core" Version="2.0.16" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.0.13" />
+    <PackageReference Include="Croco.Core" Version="2.0.21" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.13" />
   </ItemGroup>
 

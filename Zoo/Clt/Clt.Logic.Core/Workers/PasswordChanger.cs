@@ -15,11 +15,29 @@ namespace Clt.Logic.Core.Workers
         where TUser : IdentityUser, new()
         where TDbContext : DbContext
     {
-        public PasswordChanger(ICrocoAmbientContextAccessor context, ICrocoApplication application) : base(context, application)
+        UserManager<TUser> UserManager { get; }
+        SignInManager<TUser> SignInManager { get; }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="application"></param>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
+        public PasswordChanger(ICrocoAmbientContextAccessor context, ICrocoApplication application,
+            UserManager<TUser> userManager, SignInManager<TUser> signInManager) : base(context, application)
         {
+            UserManager = userManager;
+            SignInManager = signInManager;
         }
 
-        public async Task<BaseApiResponse> ChangePasswordAsync(ChangeUserPasswordModel model, UserManager<TUser> userManager, SignInManager<TUser> signInManager)
+        /// <summary>
+        /// Изменить пароль
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<BaseApiResponse> ChangePasswordAsync(ChangeUserPasswordModel model)
         {
             if (!IsAuthenticated)
             {
@@ -38,14 +56,14 @@ namespace Clt.Logic.Core.Workers
                 return new BaseApiResponse(false, "Новый и старый пароль совпадют");
             }
 
-            var user = await userManager.FindByIdAsync(UserId);
+            var user = await UserManager.FindByIdAsync(UserId);
 
             if (user == null)
             {
                 return new BaseApiResponse(false, "Пользователь не найден по указанному идентификатору");
             }
 
-            var result = await userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            var result = await UserManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
 
             if (!result.Succeeded)
             {
@@ -54,15 +72,15 @@ namespace Clt.Logic.Core.Workers
 
             if (user != null)
             {
-                await signInManager.SignInAsync(user, true);
+                await SignInManager.SignInAsync(user, true);
             }
 
             return new BaseApiResponse(true, "Ваш пароль изменен");
         }
 
-        public async Task<BaseApiResponse> ChangePasswordByAdminAsync(ResetPasswordByAdminModel model, UserManager<TUser> userManager, Func<string, Task<ApplicationUserBaseModel>> getUserByIdFunc)
+        public async Task<BaseApiResponse> ChangePasswordByAdminAsync(ResetPasswordByAdminModel model, Func<string, Task<ApplicationUserBaseModel>> getUserByIdFunc)
         {
-            var user = await userManager.FindByIdAsync(model.Id);
+            var user = await UserManager.FindByIdAsync(model.Id);
 
             if (user == null)
             {
@@ -78,25 +96,25 @@ namespace Clt.Logic.Core.Workers
                 return result;
             }
 
-            return await ChangePasswordBaseAsync(user, model.Password, userManager);
+            return await ChangePasswordBaseAsync(user, model.Password);
         }
 
         /// <summary>
         /// Данный метод не может быть вынесен в API (Базовый метод)
         /// </summary>
-        /// <param name="model"></param>
-        /// <param name="userManager"></param>
+        /// <param name="user"></param>
+        /// <param name="newPassword"></param>
         /// <returns></returns>
-        public static async Task<BaseApiResponse> ChangePasswordBaseAsync(TUser user, string newPassword, UserManager<TUser> userManager)
+        public async Task<BaseApiResponse> ChangePasswordBaseAsync(TUser user, string newPassword)
         {
             if (user == null)
             {
                 return new BaseApiResponse(false, "Пользователь не найден");
             }
 
-            var code = await userManager.GeneratePasswordResetTokenAsync(user);
+            var code = await UserManager.GeneratePasswordResetTokenAsync(user);
 
-            var resetResult = await userManager.ResetPasswordAsync(user, code, newPassword);
+            var resetResult = await UserManager.ResetPasswordAsync(user, code, newPassword);
 
             if (!resetResult.Succeeded)
             {

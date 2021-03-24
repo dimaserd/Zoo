@@ -7,7 +7,6 @@ using Clt.Contract.Models.Roles;
 using System;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Models;
-using Croco.Core.Logic.Workers;
 using Croco.Core.Logic.Extensions;
 using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
