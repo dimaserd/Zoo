@@ -57,11 +57,12 @@ namespace Clt.Logic.RegistrationModule
                     $"Воспользуйтесь методом {nameof(EFCrocoApplicationRegistrator.AddEntityFrameworkDataConnection)} класса {nameof(EFCrocoApplicationRegistrator)} для регистрации соединения");
             }
 
-            var imageCheckerRecord = services.FirstOrDefault(x => x.ServiceType == typeof(IFileImageChecker));
+            var imageCheckerType = typeof(IFileImageChecker);
+            var imageCheckerRecord = services.FirstOrDefault(x => x.ServiceType == imageCheckerType);
 
             if (imageCheckerRecord == null || imageCheckerRecord.Lifetime != ServiceLifetime.Singleton)
             {
-                throw new InvalidOperationException($"Необходимо зарегистрировать {nameof(IFileImageChecker)} как singleton");
+                throw new InvalidOperationException($"Необходимо зарегистрировать {imageCheckerType.FullName} как singleton");
             }
         }
 
