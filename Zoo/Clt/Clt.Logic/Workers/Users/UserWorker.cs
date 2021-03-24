@@ -9,11 +9,11 @@ using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Clt.Model.Entities;
-using Clt.Logic.Settings;
 using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
 using Clt.Logic.Core.Resources;
 using Microsoft.Extensions.Logging;
+using Clt.Contract.Settings;
 
 namespace Clt.Logic.Workers.Users
 {

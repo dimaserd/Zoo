@@ -13,7 +13,6 @@ using Croco.Core.Contract.Application;
 using Microsoft.Extensions.Logging;
 using Clt.Logic.Core.Workers;
 using Clt.Model.Entities;
-using Clt.Logic.Settings;
 using Clt.Model.Entities.Default;
 using Clt.Model;
 

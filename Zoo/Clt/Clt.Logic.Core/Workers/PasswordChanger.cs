@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Clt.Logic.Core.Workers
 {
-    public class PasswordChanger<TUser, TDbContext> : BaseCltWorker<TDbContext> 
+    public class PasswordChanger<TUser, TDbContext> : BaseCltCoreWorker<TDbContext> 
         where TUser : IdentityUser, new()
         where TDbContext : DbContext
     {

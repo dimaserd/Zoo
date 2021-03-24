@@ -7,11 +7,11 @@ using Clt.Logic.Extensions;
 using Clt.Logic.Core.Workers;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
-using Clt.Logic.Settings;
 using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
 using Clt.Model.Entities;
 using Croco.Core.Contract.Application;
+using Clt.Contract.Settings;
 
 namespace Clt.Logic.Workers.Account
 {

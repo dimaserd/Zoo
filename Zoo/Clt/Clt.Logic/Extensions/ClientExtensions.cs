@@ -9,7 +9,6 @@ using Clt.Contract.Models.Users;
 using Clt.Contract.Settings;
 using System.Collections.Generic;
 using Clt.Model.Entities;
-using Clt.Logic.Settings;
 using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
 
@@ -91,9 +90,11 @@ namespace Clt.Logic.Extensions
             return imageId.HasValue ? CrocoApp.Application.FileCopyWorker.GetVirtualResizedImageLocalPath(imageId.Value, imageSizeType) : null;
         }
 
-        public static UserDifferenceAction GetComparingAction(ApplicationUserBaseModel userFromCookie, ApplicationUserBaseModel userFromDb, AccountSettingsModel accountSettings)
+        public static UserDifferenceAction GetComparingAction(ApplicationUserBaseModel userFromCookie, ApplicationUserBaseModel userFromDb, 
+            AccountSettingsModel accountSettings,
+            RightsSettings rightsSettings)
         {
-            if (!userFromCookie.EmailConfirmed && userFromCookie.Email != RightsSettings.RootEmail && !accountSettings.IsLoginEnabledForUsersWhoDidNotConfirmEmail)
+            if (!userFromCookie.EmailConfirmed && userFromCookie.Email != rightsSettings.RootEmail && !accountSettings.IsLoginEnabledForUsersWhoDidNotConfirmEmail)
             {
                 return UserDifferenceAction.Logout;
             }

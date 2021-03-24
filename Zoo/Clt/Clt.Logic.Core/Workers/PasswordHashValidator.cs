@@ -1,17 +1,18 @@
 ﻿using Croco.Core.Contract;
+using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
-using Croco.Core.Logic.Workers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace Clt.Logic.Core.Workers
 {
-    public class PasswordHashValidator<TUser, TContext> : LightCrocoWorker<TContext> 
+    public class PasswordHashValidator<TUser, TContext> : BaseCltCoreWorker<TContext>
         where TUser : IdentityUser
         where TContext : DbContext
     {
-        public PasswordHashValidator(ICrocoAmbientContextAccessor context) : base(context)
+        public PasswordHashValidator(ICrocoAmbientContextAccessor context, ICrocoApplication app)
+            : base(context, app)
         {
         }
 

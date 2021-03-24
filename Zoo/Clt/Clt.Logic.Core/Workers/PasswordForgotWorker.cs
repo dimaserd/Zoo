@@ -5,7 +5,6 @@ using Clt.Contract.Settings;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
-using Croco.Core.Logic.Workers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,7 +14,7 @@ using System.Web;
 
 namespace Clt.Logic.Core.Workers
 {
-    public class PasswordForgotWorker<TUser, TDbContext> : BaseCrocoWorker<TDbContext> 
+    public class PasswordForgotWorker<TUser, TDbContext> : BaseCltCoreWorker<TDbContext>
         where TUser : IdentityUser, new()
         where TDbContext : DbContext
     {

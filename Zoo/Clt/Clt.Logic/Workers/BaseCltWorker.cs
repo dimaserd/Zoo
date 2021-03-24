@@ -1,14 +1,13 @@
 ﻿using Clt.Logic.Core.Resources;
-using Clt.Logic.Settings;
+using Clt.Logic.Core.Workers;
 using Clt.Model;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
-using Croco.Core.Logic.Workers;
 
 namespace Clt.Logic.Workers
 {
-    public class BaseCltWorker : BaseCrocoWorker<CltDbContext>
+    public class BaseCltWorker : BaseCltCoreWorker<CltDbContext>
     {
         public BaseCltWorker(ICrocoAmbientContextAccessor contextAccessor, ICrocoApplication application) : base(contextAccessor, application)
         {
@@ -16,7 +15,7 @@ namespace Clt.Logic.Workers
 
         public bool IsUserAdmin()
         {
-            return User.IsInRole(RightsSettings.AdminRoleName);
+            return User.IsInRole(RolesSetting.AdminRoleName);
         }
 
         public BaseApiResponse ValidateModelAndUserIsAdmin(object model)

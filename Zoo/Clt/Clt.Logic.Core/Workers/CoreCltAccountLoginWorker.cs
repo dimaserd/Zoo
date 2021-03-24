@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Clt.Logic.Core.Workers
 {
-    public class CoreCltAccountLoginWorker<TUser, TDbContext> : BaseCltWorker<TDbContext> 
+    public class CoreCltAccountLoginWorker<TUser, TDbContext> : BaseCltCoreWorker<TDbContext> 
         where TUser : IdentityUser
         where TDbContext : DbContext
     {

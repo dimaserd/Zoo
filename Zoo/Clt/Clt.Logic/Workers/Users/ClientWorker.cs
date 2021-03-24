@@ -8,10 +8,10 @@ using Croco.Core.Contract;
 using Clt.Logic.Abstractions;
 using Croco.Core.Logic.Files.Abstractions;
 using Clt.Model.Entities;
-using Clt.Logic.Settings;
 using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
 using Clt.Logic.Core.Resources;
+using Clt.Contract.Settings;
 
 namespace Clt.Logic.Workers.Users
 {
