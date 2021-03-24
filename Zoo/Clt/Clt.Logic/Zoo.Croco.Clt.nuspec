@@ -1,0 +1,36 @@
+<package>
+  <metadata>
+    <id>Zoo.Croco.Clt</id>
+    <version>0.8.0</version>
+    <title>Zoo Croco Clt</title>
+    <authors>Dmitry Serdyukov</authors>
+    <owners>Dmitry Serdyukov</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Базовая логика для авторизации и работы с клиентами на движке Croco.Core</description>
+    <releaseNotes>Что-то сделали лучше, что-то сделали хуже.</releaseNotes>
+    <copyright>Copyright 2021</copyright>
+    <dependencies>
+      <dependency id="Microsoft.AspNetCore.Identity" version="2.2.0" />
+      <dependency id="Croco.Core.Logic" version="1.0.6" />
+      <dependency id="Croco.Core" version="2.0.16" />
+      <dependency id="Microsoft.AspNetCore.Identity.EntityFrameworkCore" version="3.1.13" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\netcoreapp3.1\Clt.Logic.dll" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\netcoreapp3.1\Clt.Logic.pdb" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\netcoreapp3.1\Clt.Logic.xml" target="lib\netcoreapp3.1"></file>
+
+    <file src="bin\Release\netcoreapp3.1\Clt.Contract.dll" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\netcoreapp3.1\Clt.Contract.pdb" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\netcoreapp3.1\Clt.Contract.xml" target="lib\netcoreapp3.1"></file>
+
+    <file src="bin\Release\netcoreapp3.1\Clt.Logic.Core.dll" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\netcoreapp3.1\Clt.Logic.Core.pdb" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\netcoreapp3.1\Clt.Logic.Core.xml" target="lib\netcoreapp3.1"></file>
+
+    <file src="bin\Release\netcoreapp3.1\Clt.Model.dll" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\netcoreapp3.1\Clt.Model.pdb" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\netcoreapp3.1\Clt.Model.xml" target="lib\netcoreapp3.1"></file>
+  </files>
+</package>

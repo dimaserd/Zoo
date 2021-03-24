@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Clt.Contract</name>
+    </assembly>
+    <members>
+        <member name="T:Clt.Contract.Enumerations.UserRight">
+            <summary>
+            Перечисление описывающее право пользователя
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Enumerations.UserRight.SuperAdmin">
+            <summary>
+            Супер-администратор
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Enumerations.UserRight.Admin">
+            <summary>
+            Администратор
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Enumerations.UserRight.Seller">
+            <summary>
+            Пользователь группы Продавец может создавать продавцов
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.LoginModelBase.Password">
+            <summary>
+            Пароль
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.LoginModelBase.RememberMe">
+            <summary>
+            Запомнить пользователя (Если свойство указано как true, то пользователь будет залогинен навечно)
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditClient.Name">
+            <summary>
+            Имя пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditClient.Surname">
+            <summary>
+            Фамилия пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditClient.Patronymic">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditClient.Sex">
+            <summary>
+            Пол
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditClient.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.BirthDate">
+            <summary>
+            Дата рождения
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.UserIdModel.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.UserWithNameAndEmailAvatarModel.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Resources.AnnotationsErrorMessages">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.AnnotationsErrorMessages.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.AnnotationsErrorMessages.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.AnnotationsErrorMessages.PhoneNumberShouldBeDefined">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать номер телефона.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.AnnotationsErrorMessages.UserNameShouldBeDefined">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать имя пользователя.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Clt.Logic</name>
+    </assembly>
+    <members>
+        <member name="T:Clt.Logic.Extensions.MyIdentityExtensions">
+            <summary>
+            Расширения
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Extensions.UserManagerExtensions.AddRight(Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Model.Entities.Default.ApplicationUser,Clt.Contract.Enumerations.UserRight)">
+            <summary>
+            Добавляет право пользователю
+            </summary>
+            <param name="userManager"></param>
+            <param name="user"></param>
+            <param name="userRight"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Name">
+            <summary>
+            Имя пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Surname">
+            <summary>
+            Фамилия пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Patronymic">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Sex">
+            <summary>
+            Пол
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.UserActivation.DeActivated">
+            <summary>
+            Если true, значит пользователь деактивирован в системе
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.UserActivation.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.UserSearch.GetAllUsers">
+            <summary>
+            Получить всех пользователей
+            </summary>
+        </member>
+        <member name="T:Clt.Logic.Resources.ClientResource">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ClientResource.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ClientResource.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ClientResource.ClientAvatarUpdated">
+            <summary>
+              Ищет локализованную строку, похожую на Аватар клиента обновлен.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ClientResource.ClientDataRenewed">
+            <summary>
+              Ищет локализованную строку, похожую на Данные пользователя обновлены.
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountLoginWorker.LogOut(Clt.Logic.Abstractions.IApplicationAuthenticationManager)">
+            <summary>
+            Разлогинивание в системе
+            </summary>
+            <param name="user"></param>
+            <param name="authenticationManager"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountRegistrationWorker.RegisterUserByAdminAsync(Clt.Contract.Models.Account.RegisterModel)">
+            <summary>
+            Метод регистрирующий пользователя администратором
+            </summary>
+            <param name="model"></param>
+            <param name="userManager"></param>
+            <param name="userRights"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountManager.InitAsync">
+            <summary>
+            Создается пользователь Root в системе и ему присваиваются все необходимые права
+            </summary>
+            <param name="roleManager"></param>
+            <param name="userManager"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Workers.Users.UserSearcher">
+            <summary>
+            Класс предоставляющий методы для поиска пользователей
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserWorker.EditUserAsync(Clt.Logic.Models.Users.EditApplicationUser)">
+            <summary>
+            Редактирование пользователя администратором
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

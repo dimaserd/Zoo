@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Clt.Model</name>
+    </assembly>
+    <members>
+        <member name="P:Clt.Model.CltDbContext.Clients">
+            <summary>
+            Клиенты приложения
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.Name">
+            <inheritdoc />
+            <summary>
+            Имя
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.Surname">
+            <inheritdoc />
+            <summary>
+            Фамилия
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.Patronymic">
+            <inheritdoc />
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.BirthDate">
+            <summary>
+            Дата рождения
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.Sex">
+            <summary>
+            Пол (Null - не указано, 0 - женский, 1 - мужской)
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.Balance">
+            <summary>
+            Баланс пользователя
+            </summary>
+        </member>
+    </members>
+</doc>
