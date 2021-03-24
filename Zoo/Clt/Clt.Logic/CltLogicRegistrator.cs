@@ -7,6 +7,8 @@ using Clt.Model.Entities.Default;
 using Croco.Core.Application;
 using Croco.Core.Application.Registrators;
 using Croco.Core.Implementations;
+using Croco.Core.Logic.Files;
+using Croco.Core.Logic.Files.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -63,6 +65,16 @@ namespace Clt.Logic.RegistrationModule
             if (imageCheckerRecord == null || imageCheckerRecord.Lifetime != ServiceLifetime.Singleton)
             {
                 throw new InvalidOperationException($"Необходимо зарегистрировать {imageCheckerType.FullName} как singleton");
+            }
+
+            var dbFileMangerType = typeof(IDbFileManager);
+
+            var dbFileMangerTypeRecord = services.FirstOrDefault(x => x.ServiceType == dbFileMangerType);
+
+            if (dbFileMangerTypeRecord == null)
+            {
+                throw new InvalidOperationException($"Необходимо зарегистрировать {dbFileMangerType.FullName}." +
+                    $" Воспользуйтесь классом {nameof(DbFileManagerServiceCollectionExtensions)} для регистрации файлового менеджера в бд");
             }
         }
 
