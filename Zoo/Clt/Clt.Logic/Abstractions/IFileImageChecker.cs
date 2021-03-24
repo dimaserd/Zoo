@@ -2,8 +2,16 @@
 
 namespace Clt.Logic.Abstractions
 {
+    /// <summary>
+    /// Проверщик для файлов на изображения
+    /// </summary>
     public interface IFileImageChecker
     {
-        public bool IsImage(IFileData fileData);
+        /// <summary>
+        /// Является ли файл изображением
+        /// </summary>
+        /// <param name="fileData"></param>
+        /// <returns></returns>
+        bool IsImage(IFileData fileData);
     }
 }

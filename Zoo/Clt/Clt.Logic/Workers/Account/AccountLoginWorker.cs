@@ -18,23 +18,44 @@ using Clt.Model;
 
 namespace Clt.Logic.Workers.Account
 {
+    /// <summary>
+    /// Сервис для работы с методами логинирования
+    /// </summary>
     public class AccountLoginWorker : BaseCltWorker
     {
         SignInManager<ApplicationUser> SignInManager { get; }
         UserSearcher UserSearcher { get; }
         PasswordHashValidator<ApplicationUser, CltDbContext> PasswordHashValidator { get; }
+        IApplicationAuthenticationManager AuthenticationManager { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
+        /// <param name="signInManager"></param>
+        /// <param name="userSearcher"></param>
+        /// <param name="passwordHashValidator"></param>
+        /// <param name="authenticationManager"></param>
         public AccountLoginWorker(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication application,
             SignInManager<ApplicationUser> signInManager,
             UserSearcher userSearcher,
-            PasswordHashValidator<ApplicationUser, CltDbContext> passwordHashValidator) : base(ambientContext, application)
+            PasswordHashValidator<ApplicationUser, CltDbContext> passwordHashValidator,
+            IApplicationAuthenticationManager authenticationManager) : base(ambientContext, application)
         {
             SignInManager = signInManager;
             UserSearcher = userSearcher;
             PasswordHashValidator = passwordHashValidator;
+            AuthenticationManager = authenticationManager;
         }
 
+
+        /// <summary>
+        /// Авторизоваться по Email
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse<LoginResultModel>> LoginAsync(LoginModel model)
         {
             var validation = ValidateModel(model);
@@ -122,6 +143,11 @@ namespace Clt.Logic.Workers.Account
             return new BaseApiResponse<LoginResultModel>(false, "Неудачная попытка входа", new LoginResultModel { Result = LoginResult.UnSuccessfulAttempt, TokenId = null });
         }
 
+        /// <summary>
+        /// Авторизоваться по номеру телефона
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse<LoginResultModel>> LoginByPhoneNumberAsync(LoginByPhoneNumberModel model)
         {
             var validation = ValidateModel(model);
@@ -144,17 +170,15 @@ namespace Clt.Logic.Workers.Account
         /// <summary>
         /// Разлогинивание в системе
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="authenticationManager"></param>
         /// <returns></returns>
-        public async Task<BaseApiResponse> LogOut(IApplicationAuthenticationManager authenticationManager)
+        public async Task<BaseApiResponse> LogOut()
         {
             if(!IsAuthenticated)
             {
                 return new BaseApiResponse(false, "Вы и так не авторизованы");
             }
 
-            await authenticationManager.SignOutAsync();
+            await AuthenticationManager.SignOutAsync();
 
             return new BaseApiResponse(true, "Вы успешно разлогинены в системе");
         }

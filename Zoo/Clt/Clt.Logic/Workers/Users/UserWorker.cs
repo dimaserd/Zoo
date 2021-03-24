@@ -17,10 +17,19 @@ using Clt.Contract.Settings;
 
 namespace Clt.Logic.Workers.Users
 {
+    /// <summary>
+    /// Сервис для работы с пользователями
+    /// </summary>
     public class UserWorker : BaseCltWorker
     {
         UserSearcher UserSearcher { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
+        /// <param name="userSearcher"></param>
         public UserWorker(ICrocoAmbientContextAccessor ambientContext,
             ICrocoApplication application,
             UserSearcher userSearcher) : base(ambientContext, application)
@@ -28,6 +37,11 @@ namespace Clt.Logic.Workers.Users
             UserSearcher = userSearcher;
         }
 
+        /// <summary>
+        /// Удалить пользователя
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> RemoveUserAsync(string userId)
         {
             if(!RightsSettings.UserRemovingEnabled)
@@ -67,7 +81,7 @@ namespace Clt.Logic.Workers.Users
             return res;
         }
 
-        public async Task GenericDelete<TEntity>(Expression<Func<TEntity, bool>> whereExpression) where TEntity : class
+        private async Task GenericDelete<TEntity>(Expression<Func<TEntity, bool>> whereExpression) where TEntity : class
         {
             DeleteHandled(await Query<TEntity>().Where(whereExpression).ToListAsync());
         }
@@ -152,7 +166,11 @@ namespace Clt.Logic.Workers.Users
             return await TrySaveChangesAndReturnResultAsync("Данные пользователя обновлены");
         }
 
-        
+        /// <summary>
+        /// Активировать или деактивировать пользователя
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> ActivateOrDeActivateUserAsync(UserActivation model)
         {
             var userDto = await UserSearcher.GetUserByIdAsync(model.Id);
@@ -197,7 +215,6 @@ namespace Clt.Logic.Workers.Users
             {
                 return new BaseApiResponse(false, "Пользователь уже активирован");
             }
-
             
             user.DeActivated = false;
 

@@ -14,17 +14,21 @@ using System.Linq;
 
 namespace Clt.Logic.RegistrationModule
 {
+    /// <summary>
+    /// Регистратор клиентской логики
+    /// </summary>
     public static class CltLogicRegistrator
     {
+        /// <summary>
+        /// Зарегистрировать клиентскую логику
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
+        /// <param name="setupAction"></param>
         public static void Register(CrocoApplicationBuilder applicationBuilder, Action<IdentityOptions> setupAction = null)
         {
             var services = applicationBuilder.Services;
 
-            if (!CrocoAppData.GetRegisteredDataConnctions().Any(x => x.ImplementationType == typeof(EntityFrameworkDataConnection<CltDbContext>)))
-            {
-                throw new InvalidOperationException($"Необходимо зарегистрировать соединение {nameof(EntityFrameworkDataConnection<CltDbContext>)}. " +
-                    $"Воспользуйтесь методом {nameof(EFCrocoApplicationRegistrator.AddEntityFrameworkDataConnection)} класса {nameof(EFCrocoApplicationRegistrator)} для регистрации соединения");
-            }
+            Check(services);
 
             services.AddScoped<IApplicationAuthenticationManager, ApplicationAuthenticationManager>();
             services.AddScoped<IClientDataRefresher, ClientDataRefresher>();
@@ -43,6 +47,22 @@ namespace Clt.Logic.RegistrationModule
 
             RegisterCoreTypes(services);
             RegisterCltWorkerTypes(services);
+        }
+
+        private static void Check(IServiceCollection services)
+        {
+            if (!CrocoAppData.GetRegisteredDataConnctions().Any(x => x.ImplementationType == typeof(EntityFrameworkDataConnection<CltDbContext>)))
+            {
+                throw new InvalidOperationException($"Необходимо зарегистрировать соединение {nameof(EntityFrameworkDataConnection<CltDbContext>)}. " +
+                    $"Воспользуйтесь методом {nameof(EFCrocoApplicationRegistrator.AddEntityFrameworkDataConnection)} класса {nameof(EFCrocoApplicationRegistrator)} для регистрации соединения");
+            }
+
+            var imageCheckerRecord = services.FirstOrDefault(x => x.ServiceType == typeof(IFileImageChecker));
+
+            if (imageCheckerRecord == null || imageCheckerRecord.Lifetime != ServiceLifetime.Singleton)
+            {
+                throw new InvalidOperationException($"Необходимо зарегистрировать {nameof(IFileImageChecker)} как singleton");
+            }
         }
 
         private static void RegisterCoreTypes(IServiceCollection services)

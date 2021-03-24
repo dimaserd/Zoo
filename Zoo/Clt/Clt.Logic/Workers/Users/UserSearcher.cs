@@ -24,17 +24,31 @@ namespace Clt.Logic.Workers.Users
     {
         #region Методы получения одного пользователя
 
+        /// <summary>
+        /// Найти пользователя по номеру телефона
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
         public Task<ApplicationUserBaseModel> GetUserByPhoneNumberAsync(string phoneNumber)
         {
             return GetUserByPredicateExpression(x => x.PhoneNumber == phoneNumber);
         }
 
+        /// <summary>
+        /// Найти пользователя по идентификатору
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public Task<ApplicationUserBaseModel> GetUserByIdAsync(string userId)
         {   
             return GetUserByPredicateExpression(x => x.Id == userId);
         }
 
-
+        /// <summary>
+        /// Найти пользователя по Email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public Task<ApplicationUserBaseModel> GetUserByEmailAsync(string email)
         {
             return GetUserByPredicateExpression(x => x.Email == email);
@@ -62,6 +76,11 @@ namespace Clt.Logic.Workers.Users
                    select l1;
         }
 
+        /// <summary>
+        /// Искать пользователей
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Task<GetListResult<UserWithNameAndEmailAvatarModel>> GetUsers(UserSearch model)
         {
             var criterias = model.GetCriterias();

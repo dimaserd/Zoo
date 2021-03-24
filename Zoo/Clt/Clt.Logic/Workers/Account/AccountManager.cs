@@ -14,6 +14,9 @@ using Clt.Contract.Settings;
 
 namespace Clt.Logic.Workers.Account
 {
+    /// <summary>
+    /// Методы для работы с учетными записями
+    /// </summary>
     public class AccountManager : BaseCltWorker
     {
         RoleManager<ApplicationRole> RoleManager { get; }
@@ -59,7 +62,11 @@ namespace Clt.Logic.Workers.Account
             return new BaseApiResponse(true, "Пользователь root создан");
         }
 
-        public BaseApiResponse<ApplicationUserBaseModel> CheckUserChanges(IApplicationAuthenticationManager authenticationManager, SignInManager<ApplicationUser> signInManager)
+        /// <summary>
+        /// Проверить изменения пользователя
+        /// </summary>
+        /// <returns></returns>
+        public BaseApiResponse<ApplicationUserBaseModel> CheckUserChanges()
         {
             if (!IsAuthenticated)
             {
@@ -69,7 +76,13 @@ namespace Clt.Logic.Workers.Account
             return new BaseApiResponse<ApplicationUserBaseModel>(true, "", null);
         }
 
-
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="app"></param>
+        /// <param name="roleManager"></param>
+        /// <param name="userManager"></param>
         public AccountManager(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication app,
             RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager) : base(ambientContext, app)
         {

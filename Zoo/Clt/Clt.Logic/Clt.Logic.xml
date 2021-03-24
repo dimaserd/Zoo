@@ -4,6 +4,30 @@
         <name>Clt.Logic</name>
     </assembly>
     <members>
+        <member name="T:Clt.Logic.Abstractions.IFileImageChecker">
+            <summary>
+            Проверщик для файлов на изображения
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Abstractions.IFileImageChecker.IsImage(Croco.Core.Contract.Files.IFileData)">
+            <summary>
+            Является ли файл изображением
+            </summary>
+            <param name="fileData"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.RegistrationModule.CltLogicRegistrator">
+            <summary>
+            Регистратор клиентской логики
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.RegistrationModule.CltLogicRegistrator.Register(Croco.Core.Application.CrocoApplicationBuilder,System.Action{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+            Зарегистрировать клиентскую логику
+            </summary>
+            <param name="applicationBuilder"></param>
+            <param name="setupAction"></param>
+        </member>
         <member name="T:Clt.Logic.Extensions.MyIdentityExtensions">
             <summary>
             Расширения
@@ -53,6 +77,11 @@
             Идентификатор пользователя
             </summary>
         </member>
+        <member name="T:Clt.Logic.Models.Users.UserSearch">
+            <summary>
+            Модель для поиск пользователей
+            </summary>
+        </member>
         <member name="P:Clt.Logic.Models.Users.UserSearch.GetAllUsers">
             <summary>
             Получить всех пользователей
@@ -84,12 +113,87 @@
               Ищет локализованную строку, похожую на Данные пользователя обновлены.
             </summary>
         </member>
-        <member name="M:Clt.Logic.Workers.Account.AccountLoginWorker.LogOut(Clt.Logic.Abstractions.IApplicationAuthenticationManager)">
+        <member name="T:Clt.Logic.Workers.Account.AccountLoginWorker">
+            <summary>
+            Сервис для работы с методами логинирования
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountLoginWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Workers.Users.UserSearcher,Clt.Logic.Core.Workers.PasswordHashValidator{Clt.Model.Entities.Default.ApplicationUser,Clt.Model.CltDbContext},Clt.Logic.Abstractions.IApplicationAuthenticationManager)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+            <param name="signInManager"></param>
+            <param name="userSearcher"></param>
+            <param name="passwordHashValidator"></param>
+            <param name="authenticationManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountLoginWorker.LoginAsync(Clt.Contract.Models.Account.LoginModel)">
+            <summary>
+            Авторизоваться по Email
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountLoginWorker.LoginByPhoneNumberAsync(Clt.Logic.Models.Account.LoginByPhoneNumberModel)">
+            <summary>
+            Авторизоваться по номеру телефона
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountLoginWorker.LogOut">
             <summary>
             Разлогинивание в системе
             </summary>
-            <param name="user"></param>
-            <param name="authenticationManager"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Workers.Account.AccountManager">
+            <summary>
+            Методы для работы с учетными записями
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountManager.InitAsync">
+            <summary>
+            Создается пользователь Root в системе и ему присваиваются все необходимые права
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountManager.CheckUserChanges">
+            <summary>
+            Проверить изменения пользователя
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountManager.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.RoleManager{Clt.Model.Entities.Default.ApplicationRole},Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="app"></param>
+            <param name="roleManager"></param>
+            <param name="userManager"></param>
+        </member>
+        <member name="T:Clt.Logic.Workers.Account.AccountRegistrationWorker">
+            <summary>
+            Методы для регистрации
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountRegistrationWorker.RegisterAndSignInAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
+            <summary>
+            Зарегистрировать пользователя и авторизоаться
+            </summary>
+            <param name="model"></param>
+            <param name="createRandomPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountRegistrationWorker.RegisterAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
+            <summary>
+            Зарегистрироваться
+            </summary>
+            <param name="model"></param>
+            <param name="createRandomPass"></param>
             <returns></returns>
         </member>
         <member name="M:Clt.Logic.Workers.Account.AccountRegistrationWorker.RegisterUserByAdminAsync(Clt.Contract.Models.Account.RegisterModel)">
@@ -97,16 +201,91 @@
             Метод регистрирующий пользователя администратором
             </summary>
             <param name="model"></param>
-            <param name="userManager"></param>
-            <param name="userRights"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Workers.Account.AccountManager.InitAsync">
+        <member name="M:Clt.Logic.Workers.Account.AccountRegistrationWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser})">
             <summary>
-            Создается пользователь Root в системе и ему присваиваются все необходимые права
+            Конструктор
             </summary>
-            <param name="roleManager"></param>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
             <param name="userManager"></param>
+            <param name="signInManager"></param>
+        </member>
+        <member name="T:Clt.Logic.Workers.Users.ClientWorker">
+            <summary>
+            Менеджер для работы с клиентами
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.ClientWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Clt.Logic.Abstractions.IClientDataRefresher,Clt.Logic.Abstractions.IFileImageChecker,Croco.Core.Logic.Files.Abstractions.IDbFileManager)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="app"></param>
+            <param name="clientDataRefresher"></param>
+            <param name="fileImageChecker"></param>
+            <param name="dbFileManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.ClientWorker.UpdateClientPhotoAsync(System.Int32)">
+            <summary>
+            Обновить фото клиента
+            </summary>
+            <param name="fileId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.ClientWorker.EditClientAsync(Clt.Contract.Models.Users.EditClient)">
+            <summary>
+            Редактировать клиента
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.ClientWorker.GetClientFromAuthorizationAsync">
+            <summary>
+            Получить клиента из контекста авторизации
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.ClientWorker.GetClientByIdAsync(System.String)">
+            <summary>
+            Получить клиента по идентификатору
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Workers.Users.UserRoleWorker">
+            <summary>
+            Сервис для работы с ролями пользователей
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserRoleWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="app"></param>
+            <param name="userManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserRoleWorker.GetApplicationRoles``1">
+            <summary>
+            Получить список ролей пользователя
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserRoleWorker.AddUserToRoleAsync(Clt.Contract.Models.Roles.UserIdAndRole)">
+            <summary>
+            Добавить роль пользователю
+            </summary>
+            <param name="userIdAndRole"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserRoleWorker.RemoveRoleFromUserAsync(Clt.Contract.Models.Roles.UserIdAndRole)">
+            <summary>
+            Удалить роль у пользователя
+            </summary>
+            <param name="userIdAndRole"></param>
             <returns></returns>
         </member>
         <member name="T:Clt.Logic.Workers.Users.UserSearcher">
@@ -114,9 +293,64 @@
             Класс предоставляющий методы для поиска пользователей
             </summary>
         </member>
+        <member name="M:Clt.Logic.Workers.Users.UserSearcher.GetUserByPhoneNumberAsync(System.String)">
+            <summary>
+            Найти пользователя по номеру телефона
+            </summary>
+            <param name="phoneNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserSearcher.GetUserByIdAsync(System.String)">
+            <summary>
+            Найти пользователя по идентификатору
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserSearcher.GetUserByEmailAsync(System.String)">
+            <summary>
+            Найти пользователя по Email
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserSearcher.GetUsers(Clt.Logic.Models.Users.UserSearch)">
+            <summary>
+            Искать пользователей
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Workers.Users.UserWorker">
+            <summary>
+            Сервис для работы с пользователями
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Clt.Logic.Workers.Users.UserSearcher)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+            <param name="userSearcher"></param>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserWorker.RemoveUserAsync(System.String)">
+            <summary>
+            Удалить пользователя
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Clt.Logic.Workers.Users.UserWorker.EditUserAsync(Clt.Logic.Models.Users.EditApplicationUser)">
             <summary>
             Редактирование пользователя администратором
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserWorker.ActivateOrDeActivateUserAsync(Clt.Logic.Models.Users.UserActivation)">
+            <summary>
+            Активировать или деактивировать пользователя
             </summary>
             <param name="model"></param>
             <returns></returns>

@@ -7,6 +7,9 @@ using Croco.Core.Search.Extensions;
 
 namespace Clt.Logic.Models.Users
 {
+    /// <summary>
+    /// Модель для поиск пользователей
+    /// </summary>
     public class UserSearch : GetListSearchModel
     {
         [Display(Name = "Поисковая строка")]

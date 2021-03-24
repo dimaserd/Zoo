@@ -15,12 +15,23 @@ using Clt.Contract.Settings;
 
 namespace Clt.Logic.Workers.Users
 {
+    /// <summary>
+    /// Менеджер для работы с клиентами
+    /// </summary>
     public class ClientWorker : BaseCltWorker
     {
         IClientDataRefresher ClientDataRefresher { get; }
         IFileImageChecker FileImageChecker { get; }
         IDbFileManager DbFileManager { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="app"></param>
+        /// <param name="clientDataRefresher"></param>
+        /// <param name="fileImageChecker"></param>
+        /// <param name="dbFileManager"></param>
         public ClientWorker(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication app,
             IClientDataRefresher clientDataRefresher,
@@ -37,6 +48,11 @@ namespace Clt.Logic.Workers.Users
             return Query<ApplicationUser>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        /// <summary>
+        /// Обновить фото клиента
+        /// </summary>
+        /// <param name="fileId"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> UpdateClientPhotoAsync(int fileId)
         {
             if (!IsAuthenticated)
@@ -78,7 +94,12 @@ namespace Clt.Logic.Workers.Users
             });
         }
 
-        public async Task<BaseApiResponse> EditUserAsync(EditClient model)
+        /// <summary>
+        /// Редактировать клиента
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<BaseApiResponse> EditClientAsync(EditClient model)
         {
             if (!IsAuthenticated)
             {
@@ -112,7 +133,6 @@ namespace Clt.Logic.Workers.Users
             {
                 return new BaseApiResponse(false, "Root не может редактировать сам себя");
             }
-
             
             userToEditEntity.Name = model.Name;
             userToEditEntity.Surname = model.Surname;
@@ -133,7 +153,11 @@ namespace Clt.Logic.Workers.Users
             });
         }
         
-        public async Task<BaseApiResponse<ClientModel>> GetUserAsync()
+        /// <summary>
+        /// Получить клиента из контекста авторизации
+        /// </summary>
+        /// <returns></returns>
+        public async Task<BaseApiResponse<ClientModel>> GetClientFromAuthorizationAsync()
         {
             if (!User.Identity.IsAuthenticated)
             {
@@ -143,6 +167,11 @@ namespace Clt.Logic.Workers.Users
             return await GetClientByIdAsync(UserId);
         }
 
+        /// <summary>
+        /// Получить клиента по идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse<ClientModel>> GetClientByIdAsync(string id)
         {
             var repo = GetRepository<Client>();

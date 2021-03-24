@@ -18,11 +18,22 @@ using Clt.Model.Entities;
 
 namespace Clt.Logic.Workers.Account
 {
+    /// <summary>
+    /// Методы для регистрации
+    /// </summary>
     public class AccountRegistrationWorker : BaseCltWorker
     {
-        public UserManager<ApplicationUser> UserManager { get; }
-        public SignInManager<ApplicationUser> SignInManager { get; }
+        UserManager<ApplicationUser> UserManager { get; }
+        SignInManager<ApplicationUser> SignInManager { get; }
+
         #region Методы регистрации
+
+        /// <summary>
+        /// Зарегистрировать пользователя и авторизоаться
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="createRandomPassword"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse<RegisteredUser>> RegisterAndSignInAsync(RegisterModel model, bool createRandomPassword)
         {
             var result = await RegisterInnerAsync(model, createRandomPassword);
@@ -52,6 +63,12 @@ namespace Clt.Logic.Workers.Account
             }
         }
 
+        /// <summary>
+        /// Зарегистрироваться
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="createRandomPass"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse<RegisteredUser>> RegisterAsync(RegisterModel model, bool createRandomPass)
         {
             var result = await RegisterInnerAsync(model, createRandomPass);
@@ -112,8 +129,6 @@ namespace Clt.Logic.Workers.Account
         /// Метод регистрирующий пользователя администратором
         /// </summary>
         /// <param name="model"></param>
-        /// <param name="userManager"></param>
-        /// <param name="userRights"></param>
         /// <returns></returns>
         public async Task<BaseApiResponse<string>> RegisterUserByAdminAsync(RegisterModel model)
         {
@@ -226,6 +241,13 @@ namespace Clt.Logic.Workers.Account
             return new BaseApiResponse(true, "");
         }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
         public AccountRegistrationWorker(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication application,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) : base(ambientContext, application)

@@ -15,26 +15,32 @@ using Croco.Core.Contract.Application;
 
 namespace Clt.Logic.Workers.Users
 {
+    /// <summary>
+    /// Сервис для работы с ролями пользователей
+    /// </summary>
     public class UserRoleWorker : BaseCltWorker
     {
-        public static int GetTheHighestRoleOfUser(IList<string> roles)
+        UserManager<ApplicationUser> UserManager { get; }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="app"></param>
+        /// <param name="userManager"></param>
+        public UserRoleWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication app,
+            UserManager<ApplicationUser> userManager)
+            : base(ambientContext, app)
         {
-            var rights = new[]
-            {
-                UserRight.Root, UserRight.SuperAdmin, UserRight.Admin
-            };
-
-            foreach(var right in rights)
-            {
-                if(roles.Contains(right.ToString()))
-                {
-                    return (int)right;
-                }
-            }
-
-            return int.MaxValue;
+            UserManager = userManager;
         }
 
+        
+        /// <summary>
+        /// Получить список ролей пользователя
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <returns></returns>
         public async Task<List<ApplicationRoleModel>> GetApplicationRoles<TEnum>() where TEnum : Enum
         {
             var res = await Query<ApplicationRole>().Select(x => new ApplicationRoleModel
@@ -58,17 +64,28 @@ namespace Clt.Logic.Workers.Users
             return res;
         }
 
-        public Task<BaseApiResponse> AddUserToRoleAsync(UserIdAndRole userIdAndRole, UserManager<ApplicationUser> userManager)
+        /// <summary>
+        /// Добавить роль пользователю
+        /// </summary>
+        /// <param name="userIdAndRole"></param>
+        /// <returns></returns>
+        public Task<BaseApiResponse> AddUserToRoleAsync(UserIdAndRole userIdAndRole)
         {
-            return AddOrRemoveUserRoleAsync(userIdAndRole, true, userManager);
+            return AddOrRemoveUserRoleAsync(userIdAndRole, true);
         }
 
-        public Task<BaseApiResponse> RemoveRoleFromUserAsync(UserIdAndRole userIdAndRole, UserManager<ApplicationUser> userManager)
+        /// <summary>
+        /// Удалить роль у пользователя
+        /// </summary>
+        /// <param name="userIdAndRole"></param>
+        /// <returns></returns>
+        public Task<BaseApiResponse> RemoveRoleFromUserAsync(UserIdAndRole userIdAndRole)
         {
-            return AddOrRemoveUserRoleAsync(userIdAndRole, false, userManager);
+            return AddOrRemoveUserRoleAsync(userIdAndRole, false);
         }
 
-        public async Task<BaseApiResponse> AddOrRemoveUserRoleAsync(UserIdAndRole userIdAndRole, bool addOrRemove, UserManager<ApplicationUser> userManager)
+        
+        private async Task<BaseApiResponse> AddOrRemoveUserRoleAsync(UserIdAndRole userIdAndRole, bool addOrRemove)
         {
             if (!IsUserAdmin())
             {
@@ -101,8 +118,8 @@ namespace Clt.Logic.Workers.Users
             }
 
             //Находим роли редактируемого и редактора
-            var rolesOfEditUser = await userManager.GetRolesAsync(user);
-            var rolesOfUserEditor = await userManager.GetRolesAsync(userEditor);
+            var rolesOfEditUser = await UserManager.GetRolesAsync(user);
+            var rolesOfUserEditor = await UserManager.GetRolesAsync(userEditor);
 
             var roleOfEditUser = GetTheHighestRoleOfUser(rolesOfEditUser);
             var roleOfUserEditor = GetTheHighestRoleOfUser(rolesOfUserEditor);
@@ -147,10 +164,22 @@ namespace Clt.Logic.Workers.Users
             return await TrySaveChangesAndReturnResultAsync(addOrRemove ? "Право добавлено" : "Право удалено");
         }
 
-        
-        public UserRoleWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication app) 
-            : base(ambientContext, app)
+        private static int GetTheHighestRoleOfUser(IList<string> roles)
         {
+            var rights = new[]
+            {
+                UserRight.Root, UserRight.SuperAdmin, UserRight.Admin
+            };
+
+            foreach (var right in rights)
+            {
+                if (roles.Contains(right.ToString()))
+                {
+                    return (int)right;
+                }
+            }
+
+            return int.MaxValue;
         }
     }
 }

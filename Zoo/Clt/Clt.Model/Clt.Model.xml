@@ -42,5 +42,30 @@
             Баланс пользователя
             </summary>
         </member>
+        <member name="T:Clt.Model.Entities.Default.ApplicationUser">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Default.ApplicationUser.Roles">
+            <summary>
+            Роли пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Default.ApplicationUser.CreatedBy">
+            <inheritdoc />
+        </member>
+        <member name="P:Clt.Model.Entities.Default.ApplicationUser.CreatedOn">
+            <inheritdoc />
+        </member>
+        <member name="P:Clt.Model.Entities.Default.ApplicationUser.LastModifiedOn">
+            <inheritdoc />
+        </member>
+        <member name="P:Clt.Model.Entities.Default.ApplicationUser.LastModifiedBy">
+            <inheritdoc />
+        </member>
+        <member name="P:Clt.Model.Entities.Default.ApplicationUser.RowVersion">
+            <inheritdoc />
+        </member>
     </members>
 </doc>
