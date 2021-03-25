@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EmailIsNotValid" xml:space="preserve">
+    <value>Неправильный Email адрес</value>
+  </data>
+  <data name="EmailIsRequired" xml:space="preserve">
+    <value>Необходимо указать Email</value>
+  </data>
+  <data name="ErrorOccuredFormat" xml:space="preserve">
+    <value>Произошла ошибка. {0}</value>
+  </data>
+  <data name="ModelIsNullObject" xml:space="preserve">
+    <value>Модель является пустым объектом</value>
+  </data>
+  <data name="ModelIsValid" xml:space="preserve">
+    <value>Модель валидна</value>
+  </data>
+  <data name="ProductAddedToCart" xml:space="preserve">
+    <value>Товар добавлен в корзину</value>
+  </data>
+  <data name="ProductIsAlreadyInCart" xml:space="preserve">
+    <value>Товар уже добавлен в корзину</value>
+  </data>
+  <data name="ProductItemIdIsRequired" xml:space="preserve">
+    <value>Необходимо указать идентификатор товарной позиции</value>
+  </data>
+  <data name="ProductItemIsNotFoundByProvidedIdentifier" xml:space="preserve">
+    <value>Товарная позиция не найдена по указанному идентификатору</value>
+  </data>
+  <data name="ProductItemIsNotFoundInCart" xml:space="preserve">
+    <value>Товарная позиция не найдена в корзине</value>
+  </data>
+  <data name="ThisEmailIsAlreadyTaken" xml:space="preserve">
+    <value>Данный Email уже занят другим пользователем</value>
+  </data>
+  <data name="ThisPhoneNumberIsAlreadyTaken" xml:space="preserve">
+    <value>Данный номер телефона уже занят другим пользователем</value>
+  </data>
+  <data name="ThisPhoneNumberIsAlreadyTakenByOtherUser" xml:space="preserve">
+    <value>Данный номер телефона уже занят другим пользователем</value>
+  </data>
+  <data name="UriIsRequired" xml:space="preserve">
+    <value>Необходимо указать Uri</value>
+  </data>
+  <data name="UserFound" xml:space="preserve">
+    <value>Пользователь найден</value>
+  </data>
+  <data name="UserIdentifierMustBeProvided" xml:space="preserve">
+    <value>Необходимо указать идентификатор пользователя</value>
+  </data>
+  <data name="UserIdIsRequired" xml:space="preserve">
+    <value>Необходимо указать идентификатор пользователя</value>
+  </data>
+  <data name="UserIsNotFoundByIdentifier" xml:space="preserve">
+    <value>Пользователь не найден по указанному идентификатору</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Пользователь не найден</value>
+  </data>
+  <data name="YouAreNotAnAdministrator" xml:space="preserve">
+    <value>Вы не являетесь администратором</value>
+  </data>
+  <data name="YouAreNotAuthorized" xml:space="preserve">
+    <value>Вы не авторизованы</value>
+  </data>
+  <data name="YouCantAddOrEditProductToCartWithQuantityLessOrEqualThanZero" xml:space="preserve">
+    <value>Вы не можете изменить или добавить товар в корзину с колличеством меньшим или равным нулю</value>
+  </data>
+  <data name="YouCantEditRootUser" xml:space="preserve">
+    <value>Вы не можете редактировать пользователя Root</value>
+  </data>
+  <data name="YouCantEditUserBecauseHeIsAdministrator" xml:space="preserve">
+    <value>Вы не можете редактировать пользователя, так как он является администратором</value>
+  </data>
+  <data name="YouCantEditUserBecauseHeIsSuperAdministrator" xml:space="preserve">
+    <value>Вы не можете редактировать пользователя, так как он является Супер-Администратором</value>
+  </data>
+  <data name="BrandNameCanNotBeEmpty" xml:space="preserve">
+    <value>Название бренда не может быть пустым</value>
+  </data>
+  <data name="ProductFileIdsArrayIsEmpty" xml:space="preserve">
+    <value>Список идентификаторов файлов для товара пуст</value>
+  </data>
+  <data name="YouAreNotAnAdministratorOrSeller" xml:space="preserve">
+    <value>Вы не являетесь администратором или продавцом.</value>
+  </data>
+  <data name="ProductCategoryMenuNameCanNotBeEmpty" xml:space="preserve">
+    <value>Название  меню продуктовых категорий не может быть пустым</value>
+  </data>
+</root>

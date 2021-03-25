@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Doc.Logic</name>
+    </assembly>
+    <members>
+        <member name="M:Doc.Logic.DocumentRegistrator.Register(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Регистрирует <see cref="T:Doc.Logic.Word.Abstractions.IWordProccessorEngine"/> в контейнере зависимостей
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:Doc.Logic.Word.Abstractions.IWordProccessorEngine">
+            <summary>
+            Процессор документов с раширеним docxs
+            </summary>
+        </member>
+        <member name="M:Doc.Logic.Word.Abstractions.IWordProccessorEngine.ProccessTemplate(Doc.Logic.Word.Models.DocXDocumentObjectModel)">
+            <summary>
+            Создать документ на основе шаблона
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Doc.Logic.Word.Models.DocTableSettings">
+            <summary>
+            Настройки для отрисовки таблицы
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocTableSettings.BorderColor">
+            <summary>
+            Цвет границы
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocTableSettings.BorderSize">
+            <summary>
+            Размер границы
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocTableSettings.HeaderFontSize">
+            <summary>
+            Размер шрифта заголовка
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocTableSettings.BoldHeader">
+            <summary>
+            Использовать жирные заголовки
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocTableSettings.TableRowFontSize">
+            <summary>
+            Размер шрифта в таблице
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocTableSettings.BoldTableRow">
+            <summary>
+            Жирный ряд в таблице
+            </summary>
+        </member>
+        <member name="T:Doc.Logic.Word.Models.DocXDocumentObjectModel">
+            <summary>
+            Модеь описывающая процессинг docx документа
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocXDocumentObjectModel.DocumentTemplateFileName">
+            <summary>
+            Шаблон документа для преобразования
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocXDocumentObjectModel.DocumentSaveFileName">
+            <summary>
+            Куда сохранить документ
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocXDocumentObjectModel.Replaces">
+            <summary>
+            Текстовые замены
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocXDocumentObjectModel.ToReplaceImages">
+            <summary>
+            Замены для изображений, ключ - вместо чего вставить, значение - путь к локальному изображению
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocXDocumentObjectModel.Tables">
+            <summary>
+            Замены
+            </summary>
+        </member>
+        <member name="T:Doc.Logic.Word.Models.DocumentTable">
+            <summary>
+            Документ описывающий таблицу
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocumentTable.PlacingText">
+            <summary>
+            Вместо данного текста будет установлена таблица
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocumentTable.Header">
+            <summary>
+            Заголовок таблицы
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocumentTable.Data">
+            <summary>
+            Данные в таблице
+            </summary>
+        </member>
+        <member name="T:Doc.Logic.Word.Models.DocxImageReplace">
+            <summary>
+            Модель для вставки изображения вместо указанного текста
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocxImageReplace.TextToReplace">
+            <summary>
+            Текст, который будет заменен изображением
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Word.Models.DocxImageReplace.ImageFilePath">
+            <summary>
+            Путь к изображению, который будет вставлен вместо текста
+            </summary>
+        </member>
+        <member name="T:Doc.Logic.Word.Services.DocOpenFormatWordEngine">
+            <summary>
+            Процессор доументов с расширением docx
+            </summary>
+        </member>
+        <member name="M:Doc.Logic.Word.Services.DocOpenFormatWordEngine.#ctor(Microsoft.Extensions.Logging.ILogger{Doc.Logic.Word.Services.DocOpenFormatWordEngine})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Doc.Logic.Word.Services.DocOpenFormatWordEngine.ProcessTemplate(Doc.Logic.Word.Models.DocXDocumentObjectModel)">
+            <summary>
+            УБрать из шаблона документа тексты, которые являются разбитыми по нескольким элементам
+            </summary>
+            <param name="model"></param>
+        </member>
+        <member name="M:Doc.Logic.Word.Services.DocOpenFormatWordEngine.ProccessTemplate(Doc.Logic.Word.Models.DocXDocumentObjectModel)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
