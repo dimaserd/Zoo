@@ -24,6 +24,41 @@
             Пользователь группы Продавец может создавать продавцов
             </summary>
         </member>
+        <member name="T:Clt.Contract.Events.ClientRegisteredEvent">
+            <summary>
+            Событие описывающие регистрациию клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Events.ClientRegisteredEvent.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Events.ClientRegisteredEvent.IsPasswordGenerated">
+            <summary>
+            Сгененрированный пароль
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Events.ClientRegisteredEvent.Password">
+            <summary>
+            Пароль
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Events.ClientStartedRestoringPasswordEvent">
+            <summary>
+            Клиент начал оперцаю сброса пароля
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Events.ClientStartedRestoringPasswordEvent.Code">
+            <summary>
+            Код для сброса
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Events.ClientStartedRestoringPasswordEvent.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
         <member name="P:Clt.Contract.Models.Account.LoginModelBase.Password">
             <summary>
             Пароль
@@ -69,9 +104,49 @@
             Идентификатор пользователя
             </summary>
         </member>
+        <member name="T:Clt.Contract.Models.Common.UserWithNameAndEmailAvatarModel">
+            <summary>
+            Пользователь с полями
+            </summary>
+        </member>
         <member name="P:Clt.Contract.Models.Common.UserWithNameAndEmailAvatarModel.Id">
             <summary>
             Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.UserWithNameAndEmailAvatarModel.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.UserWithNameAndEmailAvatarModel.Name">
+            <summary>
+            Имя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.UserWithNameAndEmailAvatarModel.AvatarFileId">
+            <summary>
+            Идентификатор аватара
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Roles.ApplicationRoleModel">
+            <summary>
+            Модель роли пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Roles.ApplicationRoleModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Roles.ApplicationRoleModel.RoleName">
+            <summary>
+            Название
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Roles.ApplicationRoleModel.DisplayRoleName">
+            <summary>
+            Название для отображения
             </summary>
         </member>
         <member name="T:Clt.Contract.Resources.AnnotationsErrorMessages">
@@ -98,6 +173,31 @@
         <member name="P:Clt.Contract.Resources.AnnotationsErrorMessages.UserNameShouldBeDefined">
             <summary>
               Ищет локализованную строку, похожую на Необходимо указать имя пользователя.
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Settings.AccountSettingsModel">
+            <summary>
+            Настройки для учетных записей
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Settings.AccountSettingsModel.IsLoginEnabledForUsersWhoDidNotConfirmEmail">
+            <summary>
+            Разрешить авторизацию тем, кто не подтвердил почту
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Settings.AccountSettingsModel.ShouldUsersConfirmEmail">
+            <summary>
+            Должны ли пользователи подтвержать почту
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Settings.AccountSettingsModel.RegistrationEnabled">
+            <summary>
+            Разрешена ли регистрация
+            </summary>
+        </member>
+        <member name="M:Clt.Contract.Settings.AccountSettingsModel.#ctor">
+            <summary>
+            Конструктор
             </summary>
         </member>
     </members>

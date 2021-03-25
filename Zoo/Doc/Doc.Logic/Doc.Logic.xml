@@ -4,6 +4,11 @@
         <name>Doc.Logic</name>
     </assembly>
     <members>
+        <member name="T:Doc.Logic.DocumentRegistrator">
+            <summary>
+            Регситратор сервисов необходимых для работы с документами
+            </summary>
+        </member>
         <member name="M:Doc.Logic.DocumentRegistrator.Register(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             Регистрирует <see cref="T:Doc.Logic.Word.Abstractions.IWordProccessorEngine"/> в контейнере зависимостей

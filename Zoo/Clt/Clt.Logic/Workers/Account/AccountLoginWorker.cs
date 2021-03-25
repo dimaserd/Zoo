@@ -121,12 +121,9 @@ namespace Clt.Logic.Workers.Account
                     return new BaseApiResponse<LoginResultModel>(true, "Вы успешно авторизованы", new LoginResultModel { Result = LoginResult.SuccessfulLogin });
                 }
 
-                if (accountSettings.ConfirmLogin == AccountSettingsModel.ConfirmLoginType.None) //не логинить пользователя если нужно подтвержать логин
-                {
-                    await SignInManager.SignInAsync(user, model.RememberMe);
+                await SignInManager.SignInAsync(user, model.RememberMe);
 
-                    result = true;
-                }
+                result = true;
             }
             catch (Exception ex)
             {

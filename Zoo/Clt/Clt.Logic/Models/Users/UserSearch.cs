@@ -12,18 +12,33 @@ namespace Clt.Logic.Models.Users
     /// </summary>
     public class UserSearch : GetListSearchModel
     {
+        /// <summary>
+        /// Поисковая строка
+        /// </summary>
         [Display(Name = "Поисковая строка")]
         public string Q { get; set; }
 
+        /// <summary>
+        /// Фильтровать по активированности
+        /// </summary>
         [Display(Name = "Является ли пользователь деактивированным")]
         public bool? Deactivated { get; set; }
 
+        /// <summary>
+        /// Дата регистрации
+        /// </summary>
         [Display(Name = "Дата регистрации")]
         public GenericRange<DateTime> RegistrationDate { get; set; }
 
+        /// <summary>
+        /// ФИльтровать по полу
+        /// </summary>
         [Display(Name = "Фильтровать по полу")]
         public bool SearchSex { get; set; }
 
+        /// <summary>
+        /// Пол
+        /// </summary>
         [Display(Name = "Пол")]
         public bool? Sex { get; set; }
 
@@ -36,7 +51,7 @@ namespace Clt.Logic.Models.Users
             OffSet = 0
         };
         
-        public IEnumerable<SearchQueryCriteria<Client>> GetCriterias()
+        internal IEnumerable<SearchQueryCriteria<Client>> GetCriterias()
         {
             yield return Q.MapString(str => new SearchQueryCriteria<Client>(x => x.Email.Contains(str) || x.PhoneNumber.Contains(str) || x.Name.Contains(str)));
 

@@ -4,9 +4,19 @@ using System;
 
 namespace Clt.Model.Entities
 {
+    /// <summary>
+    /// Сущность описывающая клиента
+    /// </summary>
     public class Client : AuditableEntityBase, ICrocoUser
     {
+        /// <summary>
+        /// Идентификатор
+        /// </summary>
         public string Id { get; set; }
+
+        /// <summary>
+        /// Адрес электронной почты
+        /// </summary>
         public string Email { get; set; }
 
         /// <inheritdoc />
@@ -38,16 +48,23 @@ namespace Clt.Model.Entities
         public bool? Sex { get; set; }
 
         /// <summary>
-        /// Баланс пользователя
+        /// Является ли пользователь деактивированным
         /// </summary>
-        public decimal Balance { get; set; }
-
         public bool DeActivated { get; set; }
 
+        /// <summary>
+        /// Дополнительные данные в формате json
+        /// </summary>
         public string ObjectJson { get; set; }
 
+        /// <summary>
+        /// Номер телефона
+        /// </summary>
         public string PhoneNumber { get; set; }
 
+        /// <summary>
+        /// Идентификатор аватарки с файлом
+        /// </summary>
         public int? AvatarFileId { get; set; }
     }
 }

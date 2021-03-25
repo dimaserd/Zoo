@@ -9,6 +9,21 @@
             Клиенты приложения
             </summary>
         </member>
+        <member name="T:Clt.Model.Entities.Client">
+            <summary>
+            Сущность описывающая клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
         <member name="P:Clt.Model.Entities.Client.Name">
             <inheritdoc />
             <summary>
@@ -37,9 +52,34 @@
             Пол (Null - не указано, 0 - женский, 1 - мужской)
             </summary>
         </member>
-        <member name="P:Clt.Model.Entities.Client.Balance">
+        <member name="P:Clt.Model.Entities.Client.DeActivated">
             <summary>
-            Баланс пользователя
+            Является ли пользователь деактивированным
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.ObjectJson">
+            <summary>
+            Дополнительные данные в формате json
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Client.AvatarFileId">
+            <summary>
+            Идентификатор аватарки с файлом
+            </summary>
+        </member>
+        <member name="T:Clt.Model.Entities.Default.ApplicationRole">
+            <summary>
+            Роль в приложении
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Default.ApplicationRole.UserRoles">
+            <summary>
+            Пользователи имеющие данную роль
             </summary>
         </member>
         <member name="T:Clt.Model.Entities.Default.ApplicationUser">
@@ -66,6 +106,61 @@
         </member>
         <member name="P:Clt.Model.Entities.Default.ApplicationUser.RowVersion">
             <inheritdoc />
+        </member>
+        <member name="T:Clt.Model.Entities.Default.ApplicationUserRole">
+            <summary>
+            Сущность описывающая пользователя имеющего определнную роль
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Default.ApplicationUserRole.User">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.Default.ApplicationUserRole.Role">
+            <summary>
+            Роль
+            </summary>
+        </member>
+        <member name="T:Clt.Model.Entities.UserInvitation">
+            <summary>
+            Сущность описывающая приглашение одного пользователя другим
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.UserInvitation.Id">
+            <summary>
+            Идентификатор приглашения
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.UserInvitation.SenderUserId">
+            <summary>
+            Идентификатор клиента отправителя
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.UserInvitation.SenderUser">
+            <summary>
+            Клиент отправитель
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.UserInvitation.ReceiverUserId">
+            <summary>
+            Идентификатор клиента получателя
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.UserInvitation.ReceiverUser">
+            <summary>
+            Клиент получатель
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.UserInvitation.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.UserInvitation.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
         </member>
     </members>
 </doc>

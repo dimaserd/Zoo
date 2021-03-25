@@ -4,8 +4,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Clt.Logic.Models.Users
 {
+    /// <summary>
+    /// Модель для редактирования пользователя
+    /// </summary>
     public class EditApplicationUser
     {
+        /// <summary>
+        /// Идентификатор пользователя
+        /// </summary>
         public string Id { get; set; }
 
         /// <summary>
@@ -14,10 +20,16 @@ namespace Clt.Logic.Models.Users
         [Display(Name = "Имя")]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Адрес электоронной почты
+        /// </summary>
         [Required(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.EmailIsRequired))]
         [EmailAddress(ErrorMessageResourceType = typeof(ValidationMessages), ErrorMessageResourceName = nameof(ValidationMessages.EmailIsNotValid))]
         public string Email { get; set; }
 
+        /// <summary>
+        /// Дата рождения
+        /// </summary>
         [Display(Name = "Дата рождения")]
         public DateTime? BirthDate { get; set; }
 
@@ -39,6 +51,9 @@ namespace Clt.Logic.Models.Users
         [Display(Name = "Пол")]
         public bool? Sex { get; set; } 
 
+        /// <summary>
+        /// Доп данные
+        /// </summary>
         public string ObjectJson { get; set; }
 
         /// <summary>

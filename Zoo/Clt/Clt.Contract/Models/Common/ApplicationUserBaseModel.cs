@@ -19,10 +19,6 @@ namespace Clt.Contract.Models.Common
         [Display(Name = "Номер телефона подтвержден")]
         public bool PhoneNumberConfirmed { get; set; }
 
-        [Description("Баланс")]
-        [Display(Name = "Баланс")]
-        public decimal Balance { get; set; }
-
         [Description("Пол")]
         [Display(Name = "Пол")]
         public bool? Sex { get; set; }

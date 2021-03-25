@@ -1,5 +1,8 @@
 ﻿namespace Clt.Logic.Models.Users
 {
+    /// <summary>
+    /// Модель активации пользователя
+    /// </summary>
     public class UserActivation
     {
         /// <summary>

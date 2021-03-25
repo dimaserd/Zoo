@@ -69,13 +69,6 @@ namespace Clt.Logic.Workers.Users
 
         #region Метод получения списка пользователей
 
-        public static IEnumerable<string> JoinLists(IEnumerable<string> list1, IEnumerable<string> list2)
-        {
-            return from l1 in list1
-                   join l2 in list2 on l1 equals l2
-                   select l1;
-        }
-
         /// <summary>
         /// Искать пользователей
         /// </summary>
@@ -97,6 +90,11 @@ namespace Clt.Logic.Workers.Users
             });
         }
 
+        /// <summary>
+        /// Получить пользователей
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Task<GetListResult<ApplicationUserBaseModel>> GetUsersAsync(UserSearch model)
         {
             var criterias = model.GetCriterias();
@@ -109,6 +107,11 @@ namespace Clt.Logic.Workers.Users
         }
         #endregion
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="app"></param>
         public UserSearcher(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication app) : base(ambientContext, app)
         {
         }

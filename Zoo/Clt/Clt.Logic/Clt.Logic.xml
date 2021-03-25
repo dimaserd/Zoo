@@ -42,9 +42,44 @@
             <param name="userRight"></param>
             <returns></returns>
         </member>
+        <member name="T:Clt.Logic.Models.ClientJoinedWithApplicationUser">
+            <summary>
+            Клиент объединенный с пользователем
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.ClientJoinedWithApplicationUser.Client">
+            <summary>
+            Клиент 
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.ClientJoinedWithApplicationUser.User">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="T:Clt.Logic.Models.Users.EditApplicationUser">
+            <summary>
+            Модель для редактирования пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
         <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Name">
             <summary>
             Имя пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Email">
+            <summary>
+            Адрес электоронной почты
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.BirthDate">
+            <summary>
+            Дата рождения
             </summary>
         </member>
         <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Surname">
@@ -62,9 +97,19 @@
             Пол
             </summary>
         </member>
+        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.ObjectJson">
+            <summary>
+            Доп данные
+            </summary>
+        </member>
         <member name="P:Clt.Logic.Models.Users.EditApplicationUser.PhoneNumber">
             <summary>
             Номер телефона
+            </summary>
+        </member>
+        <member name="T:Clt.Logic.Models.Users.UserActivation">
+            <summary>
+            Модель активации пользователя
             </summary>
         </member>
         <member name="P:Clt.Logic.Models.Users.UserActivation.DeActivated">
@@ -80,6 +125,31 @@
         <member name="T:Clt.Logic.Models.Users.UserSearch">
             <summary>
             Модель для поиск пользователей
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.UserSearch.Q">
+            <summary>
+            Поисковая строка
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.UserSearch.Deactivated">
+            <summary>
+            Фильтровать по активированности
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.UserSearch.RegistrationDate">
+            <summary>
+            Дата регистрации
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.UserSearch.SearchSex">
+            <summary>
+            ФИльтровать по полу
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Users.UserSearch.Sex">
+            <summary>
+            Пол
             </summary>
         </member>
         <member name="P:Clt.Logic.Models.Users.UserSearch.GetAllUsers">
@@ -320,6 +390,20 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserSearcher.GetUsersAsync(Clt.Logic.Models.Users.UserSearch)">
+            <summary>
+            Получить пользователей
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.Users.UserSearcher.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="app"></param>
         </member>
         <member name="T:Clt.Logic.Workers.Users.UserWorker">
             <summary>

@@ -14,7 +14,7 @@ using Clt.Model.Entities.Default;
 
 namespace Clt.Logic.Extensions
 {
-    public static class ClientExtensions
+    internal static class ClientExtensions
     {
         public static Expression<Func<ClientJoinedWithApplicationUser, ApplicationUserBaseModel>> SelectExpression = x => new ApplicationUserBaseModel
         {
@@ -22,7 +22,6 @@ namespace Clt.Logic.Extensions
             Surname = x.Client.Surname,
             ObjectJson = x.Client.ObjectJson,
             DeActivated = x.Client.DeActivated,
-            Balance = x.Client.Balance,
             BirthDate = x.Client.BirthDate,
             Patronymic = x.Client.Patronymic,
             Sex = x.Client.Sex,

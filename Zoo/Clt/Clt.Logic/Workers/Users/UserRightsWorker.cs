@@ -6,7 +6,7 @@ using Croco.Core.Contract.Models;
 
 namespace Clt.Logic.Workers.Users
 {
-    public static class UserRightsWorker
+    internal static class UserRightsWorker
     {
         public static BaseApiResponse HasRightToEditUser(ApplicationUserBaseModel userDto, IPrincipal userPrincipal)
         {
