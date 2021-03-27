@@ -4,9 +4,9 @@ using Croco.Core.Contract.Models;
 using System.Linq;
 using System.Security.Principal;
 
-namespace Clt.Logic.Core.Workers
+namespace Clt.Logic.Extensions
 {
-    public static class UserRightsWorker
+    internal static class UserRightsExtensions
     {
         public static BaseApiResponse HasRightToEditUser(ApplicationUserBaseModel userDto, IPrincipal userPrincipal, CltRolesSetting setting)
         {

@@ -91,7 +91,7 @@ namespace Clt.Logic.Extensions
 
         public static UserDifferenceAction GetComparingAction(ApplicationUserBaseModel userFromCookie, ApplicationUserBaseModel userFromDb, 
             AccountSettingsModel accountSettings,
-            RightsSettings rightsSettings)
+            RootSettings rightsSettings)
         {
             if (!userFromCookie.EmailConfirmed && userFromCookie.Email != rightsSettings.RootEmail && !accountSettings.IsLoginEnabledForUsersWhoDidNotConfirmEmail)
             {

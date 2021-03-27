@@ -17,32 +17,19 @@ namespace Ecc.Logic.Workers.Emails
     /// </summary>
     public class MailMessageSender : BaseEccWorker
     {
-        IEccFileService FileService { get; }
-        IEmailSenderProvider SenderProvider { get; }
+        IEmailSender EmailSender { get; }
 
-        public MailMessageSender(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application, IEccFileService fileService, IEmailSenderProvider senderProvider) : base(ambientContext, application)
+        public MailMessageSender(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application, IEmailSender emailSender) : base(ambientContext, application)
         {
-            FileService = fileService;
-            SenderProvider = senderProvider;
+            EmailSender = emailSender;
         }
 
-        private async Task<IEmailSender> GetEmailSender(int[] fileIds)
-        {
-            return SenderProvider.GetEmailSender(new GetEmailSenderOptions
-            {
-                AmbientContextAccessor = AmbientContextAccessor,
-                //Устанавливаю вложения, получая их из базы данных
-                Attachments = await FileService.GetFileDatas(fileIds)
-            });
-        }
 
         public async Task<List<UpdateInteractionStatus>> SendInteractions(List<SendEmailModelWithInteractionId> messages)
         {
             var fileIds = messages.SelectMany(x => x.EmailModel.AttachmentFileIds).ToArray();
 
-            var sender = await GetEmailSender(fileIds);
-
-            var res = await sender.SendEmails(messages, x => x.EmailModel);
+            var res = await EmailSender.SendEmails(messages, x => x.EmailModel);
 
             return res.Select(x => new UpdateInteractionStatus
             {

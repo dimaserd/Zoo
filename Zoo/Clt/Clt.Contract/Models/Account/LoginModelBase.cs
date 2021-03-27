@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Clt.Contract.Models.Account
 {
+    /// <summary>
+    /// Базовая модель для логинирования
+    /// </summary>
     public class LoginModelBase
     {
         /// <summary>

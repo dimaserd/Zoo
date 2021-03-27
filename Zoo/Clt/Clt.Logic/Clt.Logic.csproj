@@ -14,13 +14,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Clt.Contract\Clt.Contract.csproj" />
-    <ProjectReference Include="..\Clt.Logic.Core\Clt.Logic.Core.csproj" />
     <ProjectReference Include="..\Clt.Model\Clt.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Resources\ClientResource.Designer.cs">
       <DependentUpon>ClientResource.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\ValidationMessages.Designer.cs">
+      <DependentUpon>ValidationMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -31,6 +35,17 @@
       <LastGenOutput>ClientResource.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ValidationMessages.resx">
+      <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.0.14" />
+    <PackageReference Include="Croco.Core" Version="2.0.22" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.13" />
   </ItemGroup>
 
 </Project>

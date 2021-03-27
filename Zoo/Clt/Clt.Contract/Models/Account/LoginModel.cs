@@ -3,18 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Clt.Contract.Models.Account
 {
+    /// <summary>
+    /// Модель описывающая логин через Email
+    /// </summary>
     public class LoginModel : LoginModelBase
     {
-        public static LoginModel GetModel(LoginByPhoneNumberModel model, string email)
-        {
-            return new LoginModel
-            {
-                Email = email,
-                Password = model.Password,
-                RememberMe = model.RememberMe
-            };
-        }
-
+        /// <summary>
+        /// Адрес электронной почты
+        /// </summary>
         [Required(ErrorMessage = "Необходимо указать адрес электронной почты")]
         [Display(Name = "Адрес электронной почты")]
         [EmailAddress]

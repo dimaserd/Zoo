@@ -11,9 +11,9 @@ using Croco.Core.Contract.Application;
 using Clt.Model.Entities;
 using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
-using Clt.Logic.Core.Resources;
-using Microsoft.Extensions.Logging;
 using Clt.Contract.Settings;
+using Clt.Logic.Resources;
+using Microsoft.Extensions.Logging;
 
 namespace Clt.Logic.Workers.Users
 {
@@ -44,7 +44,7 @@ namespace Clt.Logic.Workers.Users
         /// <returns></returns>
         public async Task<BaseApiResponse> RemoveUserAsync(string userId)
         {
-            if(!RightsSettings.UserRemovingEnabled)
+            if(!RootSettings.UserRemovingEnabled)
             {
                 return new BaseApiResponse(false, "В настройках вашего приложения выключена опция удаления пользователей");
             }
@@ -109,7 +109,7 @@ namespace Clt.Logic.Workers.Users
                 return new BaseApiResponse(false, ValidationMessages.UserIsNotFoundByIdentifier);
             }
 
-            if (userDto.Email == RightsSettings.RootEmail)
+            if (userDto.Email == RootSettings.RootEmail)
             {
                 return new BaseApiResponse(false, ValidationMessages.YouCantEditRootUser);
             }

@@ -10,11 +10,10 @@ using Clt.Contract.Settings;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
-using Microsoft.Extensions.Logging;
 using Clt.Logic.Core.Workers;
 using Clt.Model.Entities;
 using Clt.Model.Entities.Default;
-using Clt.Model;
+using Microsoft.Extensions.Logging;
 
 namespace Clt.Logic.Workers.Account
 {
@@ -25,7 +24,7 @@ namespace Clt.Logic.Workers.Account
     {
         SignInManager<ApplicationUser> SignInManager { get; }
         UserSearcher UserSearcher { get; }
-        PasswordHashValidator<ApplicationUser, CltDbContext> PasswordHashValidator { get; }
+        PasswordHashValidator PasswordHashValidator { get; }
         IApplicationAuthenticationManager AuthenticationManager { get; }
 
         /// <summary>
@@ -41,7 +40,7 @@ namespace Clt.Logic.Workers.Account
             ICrocoApplication application,
             SignInManager<ApplicationUser> signInManager,
             UserSearcher userSearcher,
-            PasswordHashValidator<ApplicationUser, CltDbContext> passwordHashValidator,
+            PasswordHashValidator passwordHashValidator,
             IApplicationAuthenticationManager authenticationManager) : base(ambientContext, application)
         {
             SignInManager = signInManager;
@@ -97,7 +96,7 @@ namespace Clt.Logic.Workers.Account
             var accountSettings = GetSetting<AccountSettingsModel>();
 
             //если логинирование не разрешено для пользователей которые не подтвердили Email и у пользователя Email не потверждён
-            if (user.Email != RightsSettings.RootEmail && !user.EmailConfirmed && !accountSettings.IsLoginEnabledForUsersWhoDidNotConfirmEmail)
+            if (user.Email != RootSettings.RootEmail && !user.EmailConfirmed && !accountSettings.IsLoginEnabledForUsersWhoDidNotConfirmEmail)
             {
                 return new BaseApiResponse<LoginResultModel>(false, "Ваш Email не подтверждён", new LoginResultModel { Result = LoginResult.EmailNotConfirmed });
             }
@@ -114,7 +113,7 @@ namespace Clt.Logic.Workers.Account
                     return new BaseApiResponse<LoginResultModel>(false, "Неудачная попытка входа", new LoginResultModel { Result = LoginResult.UnSuccessfulAttempt, TokenId = null });
                 }
                 
-                if (user.Email == RightsSettings.RootEmail) //root входит без подтверждений
+                if (user.Email == RootSettings.RootEmail) //root входит без подтверждений
                 {
                     await SignInManager.SignInAsync(user, model.RememberMe);
 
@@ -161,7 +160,7 @@ namespace Clt.Logic.Workers.Account
                 return new BaseApiResponse<LoginResultModel>(false, "Пользователь не найден по указанному номеру телефона");
             }
 
-            return await LoginAsync(LoginModel.GetModel(model, user.Email));
+            return await LoginAsync(GetLoginModel(model, user.Email));
         }
 
         /// <summary>
@@ -178,6 +177,16 @@ namespace Clt.Logic.Workers.Account
             await AuthenticationManager.SignOutAsync();
 
             return new BaseApiResponse(true, "Вы успешно разлогинены в системе");
+        }
+
+        private static LoginModel GetLoginModel(LoginByPhoneNumberModel model, string email)
+        {
+            return new LoginModel
+            {
+                Email = email,
+                Password = model.Password,
+                RememberMe = model.RememberMe
+            };
         }
     }
 }

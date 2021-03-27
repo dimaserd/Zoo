@@ -4,9 +4,34 @@
         <name>Clt.Contract</name>
     </assembly>
     <members>
+        <member name="T:Clt.Contract.Enumerations.UserDifferenceAction">
+            <summary>
+            Действие, которое должно быть вызвано при различии в пользовательских данных
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Enumerations.UserDifferenceAction.None">
+            <summary>
+            Ничего не делать
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Enumerations.UserDifferenceAction.AutoReLogin">
+            <summary>
+            Перелогиниться автома
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Enumerations.UserDifferenceAction.Logout">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Clt.Contract.Enumerations.UserRight">
             <summary>
             Перечисление описывающее право пользователя
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Enumerations.UserRight.Root">
+            <summary>
+            Рут
             </summary>
         </member>
         <member name="F:Clt.Contract.Enumerations.UserRight.SuperAdmin">
@@ -22,6 +47,26 @@
         <member name="F:Clt.Contract.Enumerations.UserRight.Seller">
             <summary>
             Пользователь группы Продавец может создавать продавцов
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Enumerations.UserRight.Customer">
+            <summary>
+            Клиент
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Enumerations.UserRight.Developer">
+            <summary>
+            Разработчик
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Events.ClientChangedPassword">
+            <summary>
+            Клиент изменил пароль
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Events.ClientChangedPassword.ClientId">
+            <summary>
+            Идентификатор клиента
             </summary>
         </member>
         <member name="T:Clt.Contract.Events.ClientRegisteredEvent">
@@ -59,6 +104,76 @@
             Идентификатор пользователя
             </summary>
         </member>
+        <member name="T:Clt.Contract.Models.Account.ChangePasswordByToken">
+            <summary>
+            Изменить пароль используя токен
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.ChangePasswordByToken.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.ChangePasswordByToken.Token">
+            <summary>
+            Токен
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.ChangePasswordByToken.NewPassword">
+            <summary>
+            Новый пароль
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Account.ChangeUserPasswordModel">
+            <summary>
+            Модель для изменения пароля
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.ChangeUserPasswordModel.OldPassword">
+            <summary>
+            Старый пароль
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.ChangeUserPasswordModel.NewPassword">
+            <summary>
+            Новый пароль
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Account.ForgotPasswordModel">
+            <summary>
+            Запрос на забытие пароль
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.ForgotPasswordModel.Email">
+            <summary>
+            Почта
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Account.ForgotPasswordModelByPhone">
+            <summary>
+            Клиент забыл пароль и хочет востановить его по номеру тел
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.ForgotPasswordModelByPhone.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Account.LoginModel">
+            <summary>
+            Модель описывающая логин через Email
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.LoginModel.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Account.LoginModelBase">
+            <summary>
+            Базовая модель для логинирования
+            </summary>
+        </member>
         <member name="P:Clt.Contract.Models.Account.LoginModelBase.Password">
             <summary>
             Пароль
@@ -69,9 +184,169 @@
             Запомнить пользователя (Если свойство указано как true, то пользователь будет залогинен навечно)
             </summary>
         </member>
+        <member name="T:Clt.Contract.Models.Account.LoginResult">
+            <summary>
+            Перечисление описывающее результат авторизации
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Models.Account.LoginResult.Error">
+            <summary>
+            Ошибка
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Models.Account.LoginResult.AlreadyAuthenticated">
+            <summary>
+            Уже авторизован
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Models.Account.LoginResult.UnSuccessfulAttempt">
+            <summary>
+            Неудачная попытка входа
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Models.Account.LoginResult.EmailNotConfirmed">
+            <summary>
+            Электронная почта не подтверждена
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Models.Account.LoginResult.SuccessfulLogin">
+            <summary>
+            Удачное логинирование
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Models.Account.LoginResult.NeedConfirmation">
+            <summary>
+            Нужно подтверждение входа
+            </summary>
+        </member>
+        <member name="F:Clt.Contract.Models.Account.LoginResult.UserDeactivated">
+            <summary>
+            Пользователь деактивирован
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Account.LoginResultModel">
+            <summary>
+            Модель описывающая результат авторизации
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.LoginResultModel.Result">
+            <summary>
+            Результат авторизации
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.LoginResultModel.TokenId">
+            <summary>
+            Идентификатор токена
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Account.RegisterModel">
+            <summary>
+            Модель для регистрации пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.RegisterModel.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.RegisterModel.Name">
+            <summary>
+            Имя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.RegisterModel.Surname">
+            <summary>
+            Фамилия
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.RegisterModel.Patronymic">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.RegisterModel.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.RegisterModel.Password">
+            <summary>
+            Пароль
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Account.ResetPasswordByAdminModel">
+            <summary>
+            Сбросить пароль пользователя администратором
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.ResetPasswordByAdminModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Account.ResetPasswordByAdminModel.Password">
+            <summary>
+            Пароль
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Users.ClientModel">
+            <summary>
+            Модель описывающая клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.Name">
+            <summary>
+            Имя клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.BirthDate">
+            <summary>
+            Дата рождения
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.Surname">
+            <summary>
+            Фамилия пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.Patronymic">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.Sex">
+            <summary>
+            Пол
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.AvatarFileId">
+            <summary>
+            Идентификатор файла с аватаром
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Users.EditClient">
+            <summary>
+            Модель для редактирования клиента
+            </summary>
+        </member>
         <member name="P:Clt.Contract.Models.Users.EditClient.Name">
             <summary>
             Имя пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditClient.BirthDate">
+            <summary>
+            Дата рождения
             </summary>
         </member>
         <member name="P:Clt.Contract.Models.Users.EditClient.Surname">
@@ -94,9 +369,99 @@
             Номер телефона
             </summary>
         </member>
+        <member name="T:Clt.Contract.Models.Users.RegisteredUser">
+            <summary>
+            Модель описывающая зарегистрированного пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.RegisteredUser.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.RegisteredUser.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.RegisteredUser.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Common.ApplicationUserBaseModel">
+            <summary>
+            Базовая модель пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.EmailConfirmed">
+            <summary>
+            Email подтвержден
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.PhoneNumberConfirmed">
+            <summary>
+            Номер телефона подтвержден
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.Sex">
+            <summary>
+            Пол
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.ObjectJson">
+            <summary>
+            JSON Объект
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.SecurityStamp">
+            <summary>
+            Штамп безопасности
+            </summary>
+        </member>
         <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.BirthDate">
             <summary>
             Дата рождения
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.DeActivated">
+            <summary>
+            Деактивирован
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.RoleNames">
+            <summary>
+            Роли пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.Surname">
+            <summary>
+            Фамилия
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.Patronymic">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.PasswordHash">
+            <summary>
+            Хеш пароля
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.CreatedOn">
+            <summary>
+            Дата создания
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Common.UserIdModel">
+            <summary>
+            Модель с идентификатором пользователя
             </summary>
         </member>
         <member name="P:Clt.Contract.Models.Common.UserIdModel.Id">
@@ -149,6 +514,21 @@
             Название для отображения
             </summary>
         </member>
+        <member name="T:Clt.Contract.Models.Roles.UserIdAndRole">
+            <summary>
+            Идентифкатор пользователя с ролью
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Roles.UserIdAndRole.UserId">
+            <summary>
+            Идентифкатор пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Roles.UserIdAndRole.Role">
+            <summary>
+            Роль
+            </summary>
+        </member>
         <member name="T:Clt.Contract.Resources.AnnotationsErrorMessages">
             <summary>
               Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
@@ -198,6 +578,61 @@
         <member name="M:Clt.Contract.Settings.AccountSettingsModel.#ctor">
             <summary>
             Конструктор
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Settings.CltRolesSetting">
+            <summary>
+            Модель описывающая настройки названий системных ролей
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Settings.CltRolesSetting.AdminRoleName">
+            <summary>
+            Название роли администратора
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Settings.CltRolesSetting.RootRoleName">
+            <summary>
+            Название роли Рута
+            </summary>
+        </member>
+        <member name="M:Clt.Contract.Settings.CltRolesSetting.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Settings.RootSettings">
+            <summary>
+            Настройки прав для рута
+            </summary>
+        </member>
+        <member name="M:Clt.Contract.Settings.RootSettings.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Settings.RootSettings.RootEmail">
+            <summary>
+            Электронный адрес рута
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Settings.RootSettings.RootPassword">
+            <summary>
+            Пароль
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Settings.RootSettings.UserRemovingEnabled">
+            <summary>
+            Разрешено ли руту удалять пользователей
+            </summary>
+        </member>
+        <member name="T:Clt.Logic.Models.Account.LoginByPhoneNumberModel">
+            <summary>
+            Залогиниться по номеру телефона
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Models.Account.LoginByPhoneNumberModel.PhoneNumber">
+            <summary>
+            Номер телефона
             </summary>
         </member>
     </members>

@@ -4,6 +4,30 @@
         <name>Clt.Logic</name>
     </assembly>
     <members>
+        <member name="T:Clt.Logic.Abstractions.IApplicationAuthenticationManager">
+            <summary>
+            Менеджер для выхода из авторизованности
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Abstractions.IApplicationAuthenticationManager.SignOutAsync">
+            <summary>
+            Разлогиниться
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Abstractions.IClientDataRefresher">
+            <summary>
+            Обновитель клиентских данных хранящихся в авторизации
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Abstractions.IClientDataRefresher.UpdateUserDataAsync(Clt.Model.Entities.Default.ApplicationUser,Clt.Model.Entities.Client)">
+            <summary>
+            Обновить данные пользователя
+            </summary>
+            <param name="user"></param>
+            <param name="client"></param>
+            <returns></returns>
+        </member>
         <member name="T:Clt.Logic.Abstractions.IFileImageChecker">
             <summary>
             Проверщик для файлов на изображения
@@ -33,6 +57,14 @@
             Расширения
             </summary>
         </member>
+        <member name="M:Clt.Logic.Extensions.MyIdentityExtensions.HasRight(System.Security.Principal.IPrincipal,Clt.Contract.Enumerations.UserRight)">
+            <summary>
+            Проверка на наличие права
+            </summary>
+            <param name="rolePrincipal"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
         <member name="M:Clt.Logic.Extensions.UserManagerExtensions.AddRight(Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Model.Entities.Default.ApplicationUser,Clt.Contract.Enumerations.UserRight)">
             <summary>
             Добавляет право пользователю
@@ -40,6 +72,77 @@
             <param name="userManager"></param>
             <param name="user"></param>
             <param name="userRight"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Implementations.ApplicationAuthenticationManager">
+            <summary>
+            Менеджер авторизациии для приложения
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Implementations.ApplicationAuthenticationManager.#ctor(Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="signInManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Implementations.ApplicationAuthenticationManager.SignOutAsync">
+            <summary>
+            Выйти
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Implementations.ApplicationSignInManager">
+            <summary>
+            Переопределение для менеджера авторизации
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Implementations.ApplicationSignInManager.#ctor(Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.IUserClaimsPrincipalFactory{Clt.Model.Entities.Default.ApplicationUser},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions},Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser}},Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="userManager"></param>
+            <param name="contextAccessor"></param>
+            <param name="claimsFactory"></param>
+            <param name="optionsAccessor"></param>
+            <param name="logger"></param>
+            <param name="schemes"></param>
+        </member>
+        <member name="T:Clt.Logic.Implementations.ApplicationUserManager">
+            <summary>
+            Переопределение для менеджера пользователей
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Implementations.ApplicationUserManager.#ctor(Microsoft.AspNetCore.Identity.IUserStore{Clt.Model.Entities.Default.ApplicationUser},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions},Microsoft.AspNetCore.Identity.IPasswordHasher{Clt.Model.Entities.Default.ApplicationUser},System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Identity.IUserValidator{Clt.Model.Entities.Default.ApplicationUser}},System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Identity.IPasswordValidator{Clt.Model.Entities.Default.ApplicationUser}},Microsoft.AspNetCore.Identity.ILookupNormalizer,Microsoft.AspNetCore.Identity.IdentityErrorDescriber,System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser}})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="store"></param>
+            <param name="optionsAccessor"></param>
+            <param name="passwordHasher"></param>
+            <param name="userValidators"></param>
+            <param name="passwordValidators"></param>
+            <param name="keyNormalizer"></param>
+            <param name="errors"></param>
+            <param name="services"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="T:Clt.Logic.Implementations.ClientDataRefresher">
+            <summary>
+            Обновитель клиентских данных хранящихся в авторизации
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Implementations.ClientDataRefresher.#ctor(Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="signInManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Implementations.ClientDataRefresher.UpdateUserDataAsync(Clt.Model.Entities.Default.ApplicationUser,Clt.Model.Entities.Client)">
+            <summary>
+            Обновить данные пользователя
+            </summary>
+            <param name="user"></param>
+            <param name="client"></param>
             <returns></returns>
         </member>
         <member name="T:Clt.Logic.Models.ClientJoinedWithApplicationUser">
@@ -183,12 +286,163 @@
               Ищет локализованную строку, похожую на Данные пользователя обновлены.
             </summary>
         </member>
+        <member name="T:Clt.Logic.Resources.ValidationMessages">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.EmailIsNotValid">
+            <summary>
+              Ищет локализованную строку, похожую на Неправильный Email адрес.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.EmailIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать Email.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.ErrorOccuredFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Произошла ошибка. {0}.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.FileIsNotFoundById">
+            <summary>
+              Ищет локализованную строку, похожую на Файл не найден по указанному идентификатору.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.FileIsNotImage">
+            <summary>
+              Ищет локализованную строку, похожую на Файл не является изображением.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.ModelIsNullObject">
+            <summary>
+              Ищет локализованную строку, похожую на Модель является пустым объектом.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.ModelIsValid">
+            <summary>
+              Ищет локализованную строку, похожую на Модель валидна.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.ThisEmailIsAlreadyTaken">
+            <summary>
+              Ищет локализованную строку, похожую на Данный Email уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTaken">
+            <summary>
+              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTakenByOtherUser">
+            <summary>
+              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTakenByOtherUser1">
+            <summary>
+              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.UriIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать Uri.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.UserFound">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь найден.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.UserIdentifierMustBeProvided">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать идентификатор пользователя.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.UserIdIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать идентификатор пользователя.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.UserIsNotFoundByIdentifier">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь не найден по указанному идентификатору.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.UserNotFound">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь не найден.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.YouAreNotAnAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не являетесь администратором.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.YouAreNotAnAdministratorOrSeller">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не являетесь администратором или продавцом..
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.YouAreNotAuthorized">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не авторизованы.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.YouCantEditRootUser">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя Root.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.YouCantEditUserBecauseHeIsAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является администратором.
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Resources.ValidationMessages.YouCantEditUserBecauseHeIsSuperAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является Супер-Администратором.
+            </summary>
+        </member>
+        <member name="T:Clt.Logic.Workers.Account.AccountLoginAsUserService">
+            <summary>
+            Сервис для логинирования за другого пользователя
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountLoginAsUserService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="signInManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Workers.Account.AccountLoginAsUserService.LoginAsUserAsync(Clt.Contract.Models.Common.UserIdModel)">
+            <summary>
+            Залогиниться как другой пользователь
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Clt.Logic.Workers.Account.AccountLoginWorker">
             <summary>
             Сервис для работы с методами логинирования
             </summary>
         </member>
-        <member name="M:Clt.Logic.Workers.Account.AccountLoginWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Workers.Users.UserSearcher,Clt.Logic.Core.Workers.PasswordHashValidator{Clt.Model.Entities.Default.ApplicationUser,Clt.Model.CltDbContext},Clt.Logic.Abstractions.IApplicationAuthenticationManager)">
+        <member name="M:Clt.Logic.Workers.Account.AccountLoginWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Workers.Users.UserSearcher,Clt.Logic.Core.Workers.PasswordHashValidator,Clt.Logic.Abstractions.IApplicationAuthenticationManager)">
             <summary>
             Конструктор
             </summary>
@@ -281,6 +535,47 @@
             <param name="application"></param>
             <param name="userManager"></param>
             <param name="signInManager"></param>
+        </member>
+        <member name="T:Clt.Logic.Workers.BaseCltWorker">
+            <summary>
+            Базовый сервис для клиентского контекста
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Workers.BaseCltWorker.RolesSetting">
+            <summary>
+            Настройки клиенстких ролей
+            </summary>
+        </member>
+        <member name="P:Clt.Logic.Workers.BaseCltWorker.RootSettings">
+            <summary>
+            Настройки прав приложения
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Workers.BaseCltWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Clt.Logic.Workers.BaseCltWorker.IsUserRoot">
+            <summary>
+            Является ли пользователь рутом
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.BaseCltWorker.IsUserAdmin">
+            <summary>
+            Является ли пользователь администратором
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Workers.BaseCltWorker.ValidateModelAndUserIsAdmin(System.Object)">
+            <summary>
+            Валидировать модель и убедиться что пользователь является админом
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
         </member>
         <member name="T:Clt.Logic.Workers.Users.ClientWorker">
             <summary>
@@ -437,6 +732,98 @@
             Активировать или деактивировать пользователя
             </summary>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Core.Workers.PasswordChanger">
+            <summary>
+            Сервис для изменеия пароля
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordChanger.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="userManager"></param>
+            <param name="signInManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordChanger.ChangePasswordAsync(Clt.Contract.Models.Account.ChangeUserPasswordModel)">
+            <summary>
+            Изменить пароль
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordChanger.ChangePasswordByAdminAsync(Clt.Contract.Models.Account.ResetPasswordByAdminModel,System.Func{System.String,System.Threading.Tasks.Task{Clt.Contract.Models.Common.ApplicationUserBaseModel}})">
+            <summary>
+            Изменить пароль администратором
+            </summary>
+            <param name="model"></param>
+            <param name="getUserByIdFunc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordChanger.ChangePasswordBaseAsync(Clt.Model.Entities.Default.ApplicationUser,System.String)">
+            <summary>
+            Данный метод не может быть вынесен в API (Базовый метод)
+            </summary>
+            <param name="user"></param>
+            <param name="newPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Core.Workers.PasswordForgotWorker">
+            <summary>
+            Предоставляет методы для работы с забывшими пароль пользователями
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordForgotWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="userManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordForgotWorker.UserForgotPassword(Clt.Contract.Models.Account.ForgotPasswordModel)">
+            <summary>
+            Востановить пароль через адрес электронной почты
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordForgotWorker.UserForgotPasswordByPhoneHandlerAsync(Clt.Contract.Models.Account.ForgotPasswordModelByPhone)">
+            <summary>
+            Востановить пароль через номер телефона
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordForgotWorker.ChangePasswordByToken(Clt.Contract.Models.Account.ChangePasswordByToken)">
+            <summary>
+            Изменить пароль по токену
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Core.Workers.PasswordHashValidator">
+            <summary>
+            Валидатор хешей паролей
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordHashValidator.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="app"></param>
+        </member>
+        <member name="M:Clt.Logic.Core.Workers.PasswordHashValidator.CheckUserNameAndPasswordAsync(System.String,System.String,System.String)">
+            <summary>
+            Проверить пароль
+            </summary>
+            <param name="userId"></param>
+            <param name="userName"></param>
+            <param name="pass"></param>
             <returns></returns>
         </member>
     </members>

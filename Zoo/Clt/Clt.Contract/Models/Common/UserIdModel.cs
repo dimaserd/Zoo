@@ -1,5 +1,8 @@
 ﻿namespace Clt.Contract.Models.Common
 {
+    /// <summary>
+    /// Модель с идентификатором пользователя
+    /// </summary>
     public class UserIdModel
     {
         /// <summary>

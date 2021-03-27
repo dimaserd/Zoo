@@ -7,6 +7,9 @@ namespace Clt.Contract.Enumerations
     /// </summary>
     public enum UserRight
     {
+        /// <summary>
+        /// Рут
+        /// </summary>
         [Display(Name = "Root")]
         Root,
 
@@ -28,9 +31,15 @@ namespace Clt.Contract.Enumerations
         [Display(Name = "Продавец")]
         Seller,
 
+        /// <summary>
+        /// Клиент
+        /// </summary>
         [Display(Name = "Клиент")]
         Customer,
 
+        /// <summary>
+        /// Разработчик
+        /// </summary>
         [Display(Name = "Разработчик")]
         Developer
     }

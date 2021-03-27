@@ -1,14 +1,11 @@
 ﻿using Clt.Logic.Abstractions;
-using Clt.Logic.Core.Workers;
 using Clt.Logic.Implementations;
 using Clt.Logic.Workers;
 using Clt.Model;
 using Clt.Model.Entities.Default;
 using Croco.Core.Application;
 using Croco.Core.Application.Registrators;
-using Croco.Core.Implementations;
 using Croco.Core.Logic.Files;
-using Croco.Core.Logic.Files.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -28,9 +25,9 @@ namespace Clt.Logic.RegistrationModule
         /// <param name="setupAction"></param>
         public static void Register(CrocoApplicationBuilder applicationBuilder, Action<IdentityOptions> setupAction = null)
         {
+            Check(applicationBuilder);
+            
             var services = applicationBuilder.Services;
-
-            Check(services);
 
             services.AddScoped<IApplicationAuthenticationManager, ApplicationAuthenticationManager>();
             services.AddScoped<IClientDataRefresher, ClientDataRefresher>();
@@ -47,43 +44,22 @@ namespace Clt.Logic.RegistrationModule
                 .AddEntityFrameworkStores<CltDbContext>()
                 .AddDefaultTokenProviders();
 
-            RegisterCoreTypes(services);
             RegisterCltWorkerTypes(services);
         }
 
-        private static void Check(IServiceCollection services)
+        private static void Check(CrocoApplicationBuilder applicationBuilder)
         {
-            if (!CrocoAppData.GetRegisteredDataConnctions().Any(x => x.ImplementationType == typeof(EntityFrameworkDataConnection<CltDbContext>)))
-            {
-                throw new InvalidOperationException($"Необходимо зарегистрировать соединение {nameof(EntityFrameworkDataConnection<CltDbContext>)}. " +
-                    $"Воспользуйтесь методом {nameof(EFCrocoApplicationRegistrator.AddEntityFrameworkDataConnection)} класса {nameof(EFCrocoApplicationRegistrator)} для регистрации соединения");
-            }
+            new EFCrocoApplicationRegistrator(applicationBuilder).CheckForEFDataCoonection<CltDbContext>();
 
             var imageCheckerType = typeof(IFileImageChecker);
-            var imageCheckerRecord = services.FirstOrDefault(x => x.ServiceType == imageCheckerType);
+            var imageCheckerRecord = applicationBuilder.Services.FirstOrDefault(x => x.ServiceType == imageCheckerType);
 
             if (imageCheckerRecord == null || imageCheckerRecord.Lifetime != ServiceLifetime.Singleton)
             {
                 throw new InvalidOperationException($"Необходимо зарегистрировать {imageCheckerType.FullName} как singleton");
             }
 
-            var dbFileMangerType = typeof(IDbFileManager);
-
-            var dbFileMangerTypeRecord = services.FirstOrDefault(x => x.ServiceType == dbFileMangerType);
-
-            if (dbFileMangerTypeRecord == null)
-            {
-                throw new InvalidOperationException($"Необходимо зарегистрировать {dbFileMangerType.FullName}." +
-                    $" Воспользуйтесь классом {nameof(DbFileManagerServiceCollectionExtensions)} для регистрации файлового менеджера в бд");
-            }
-        }
-
-        private static void RegisterCoreTypes(IServiceCollection services)
-        {
-            services.AddScoped<CoreCltAccountLoginWorker<ApplicationUser, CltDbContext>>();
-            services.AddScoped<PasswordChanger<ApplicationUser, CltDbContext>>();
-            services.AddScoped<PasswordForgotWorker<ApplicationUser, CltDbContext>>();
-            services.AddScoped<PasswordHashValidator<ApplicationUser, CltDbContext>>();
+            DbFileManagerServiceCollectionExtensions.CheckForDbFileManager(applicationBuilder.Services);
         }
 
         private static void RegisterCltWorkerTypes(IServiceCollection services)

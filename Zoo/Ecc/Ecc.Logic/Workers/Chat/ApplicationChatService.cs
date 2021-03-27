@@ -236,7 +236,8 @@ namespace Ecc.Logic.Workers.Chat
                     SentOnUtcTicks = x.SentOnUtcTicks,
                     Message = x.Message
                 }).OrderBy(x => x.SentOnUtcTicks)
-            .Take(model.Count).ToListAsync();
+                .Take(model.Count)
+                .ToListAsync();
         }
     }
 }

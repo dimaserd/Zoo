@@ -1,14 +1,16 @@
-﻿using Croco.Core.Contract.Models;
+﻿using Clt.Model.Entities.Default;
+using Croco.Core.Contract.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clt.Logic.Core.Workers
+namespace Clt.Logic.Extensions
 {
-    public static class RoleFromEnumCreator
+    internal static class RoleManagerExtensions
     {
-        public static async Task<BaseApiResponse> CreateRolesAsync<TEnum, TRole>(RoleManager<TRole> roleManager) where TEnum : Enum where TRole : IdentityRole, new()
+        public static async Task<BaseApiResponse> CreateRolesAsync<TEnum>(this RoleManager<ApplicationRole> roleManager) 
+            where TEnum : Enum
         {
             var list = Enum.GetValues(typeof(TEnum)).Cast<TEnum>().ToList();
 
@@ -18,7 +20,7 @@ namespace Clt.Logic.Core.Workers
             {
                 if (!await roleManager.RoleExistsAsync(role))
                 {
-                    await roleManager.CreateAsync(new TRole { Name = role, ConcurrencyStamp = Guid.NewGuid().ToString() });
+                    await roleManager.CreateAsync(new ApplicationRole { Name = role, ConcurrencyStamp = Guid.NewGuid().ToString() });
                 }
             }
 

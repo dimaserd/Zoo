@@ -1,4 +1,4 @@
-﻿using Clt.Logic.Core.Resources;
+﻿using Clt.Logic.Resources;
 using System;
 using System.ComponentModel.DataAnnotations;
 

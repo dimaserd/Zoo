@@ -1,31 +1,48 @@
 ﻿using Clt.Contract.Events;
 using Clt.Contract.Models.Account;
-using Clt.Contract.Models.Common;
 using Clt.Contract.Settings;
+using Clt.Logic.Workers;
+using Clt.Model.Entities.Default;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
 namespace Clt.Logic.Core.Workers
 {
-    public class PasswordForgotWorker<TUser, TDbContext> : BaseCltCoreWorker<TDbContext>
-        where TUser : IdentityUser, new()
-        where TDbContext : DbContext
+    /// <summary>
+    /// Предоставляет методы для работы с забывшими пароль пользователями
+    /// </summary>
+    public class PasswordForgotWorker : BaseCltWorker
     {
-        public PasswordForgotWorker(ICrocoAmbientContextAccessor context, ICrocoApplication application) : base(context, application)
-        {
-        }
+        UserManager<ApplicationUser> UserManager { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="application"></param>
+        /// <param name="userManager"></param>
+        public PasswordForgotWorker(ICrocoAmbientContextAccessor context, 
+            ICrocoApplication application,
+            UserManager<ApplicationUser> userManager
+            ) : base(context, application)
+        {
+            UserManager = userManager;
+        }
         
         #region Методы восстановления пароля
 
-        public async Task<BaseApiResponse> UserForgotPasswordByEmailHandlerAsync(ForgotPasswordModel model, UserManager<TUser> userManager, Func<string, Task<ApplicationUserBaseModel>> userEmailFunc)
+        /// <summary>
+        /// Востановить пароль через адрес электронной почты
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<BaseApiResponse> UserForgotPassword(ForgotPasswordModel model)
         {
             if (model == null)
             {
@@ -37,17 +54,23 @@ namespace Clt.Logic.Core.Workers
                 return new BaseApiResponse(false, "Вы авторизованы в системе");
             }
 
-            var user = await userEmailFunc(model.Email);
+            var user = await Query<ApplicationUser>()
+                .FirstOrDefaultAsync(x => x.Email == model.Email);
 
             if (user == null)
             {
                 return new BaseApiResponse(false, $"Пользователь не найден по указанному электронному адресу {model.Email}");
             }
 
-            return await UserForgotPasswordNotificateHandlerAsync(user.ToEntity<TUser>(), userManager);
+            return await UserForgotPasswordNotificateHandlerAsync(user);
         }
 
-        public async Task<BaseApiResponse> UserForgotPasswordByPhoneHandlerAsync(ForgotPasswordModelByPhone model, UserManager<TUser> userManager, Func<string, Task<ApplicationUserBaseModel>> userByPhoneNumberFunc)
+        /// <summary>
+        /// Востановить пароль через номер телефона
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<BaseApiResponse> UserForgotPasswordByPhoneHandlerAsync(ForgotPasswordModelByPhone model)
         {
             var validation = ValidateModel(model);
 
@@ -61,12 +84,18 @@ namespace Clt.Logic.Core.Workers
                 return new BaseApiResponse(false, "Вы авторизованы в системе");
             }
 
-            var user = await userByPhoneNumberFunc(model.PhoneNumber);
+            var user = await Query<ApplicationUser>()
+                .FirstOrDefaultAsync(x => x.PhoneNumber == model.PhoneNumber);
 
-            return await UserForgotPasswordNotificateHandlerAsync(user.ToEntity<TUser>(), userManager);
+            if (user == null)
+            {
+                return new BaseApiResponse(false, $"Пользователь не найден по указанному номеру телефона {model.PhoneNumber}");
+            }
+
+            return await UserForgotPasswordNotificateHandlerAsync(user);
         }
 
-        private async Task<BaseApiResponse> UserForgotPasswordNotificateHandlerAsync(TUser user, UserManager<TUser> userManager)
+        private async Task<BaseApiResponse> UserForgotPasswordNotificateHandlerAsync(ApplicationUser user)
         {
             var accountSettings = GetSetting<AccountSettingsModel>();
 
@@ -76,10 +105,10 @@ namespace Clt.Logic.Core.Workers
                 return new BaseApiResponse(false, "Пользователь не существует или его Email не подтверждён");
             }
 
-            await userManager.UpdateSecurityStampAsync(user);
+            await UserManager.UpdateSecurityStampAsync(user);
 
             // Отправка сообщения электронной почты с этой ссылкой
-            var code = await userManager.GeneratePasswordResetTokenAsync(user);
+            var code = await UserManager.GeneratePasswordResetTokenAsync(user);
 
             await PublishMessageAsync(new ClientStartedRestoringPasswordEvent
             {
@@ -90,16 +119,21 @@ namespace Clt.Logic.Core.Workers
             return new BaseApiResponse(true, "Ok");
         }
 
-        public async Task<BaseApiResponse> ChangePasswordByToken(ChangePasswordByToken model, UserManager<TUser> userManager)
+        /// <summary>
+        /// Изменить пароль по токену
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<BaseApiResponse> ChangePasswordByToken(ChangePasswordByToken model)
         {
-            var user = await userManager.FindByIdAsync(model.UserId);
+            var user = await UserManager.FindByIdAsync(model.UserId);
 
             if (user == null)
             {
                 return new BaseApiResponse(false, "Пользователь не найден по указанному идентификатору");
             }
 
-            var resp = await userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
+            var resp = await UserManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
 
             if (!resp.Succeeded)
             {

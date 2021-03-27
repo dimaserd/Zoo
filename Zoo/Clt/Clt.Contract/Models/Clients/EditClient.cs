@@ -4,6 +4,9 @@ using Clt.Contract.Resources;
 
 namespace Clt.Contract.Models.Users
 {
+    /// <summary>
+    /// Модель для редактирования клиента
+    /// </summary>
     public class EditClient
     {
         /// <summary>
@@ -12,6 +15,9 @@ namespace Clt.Contract.Models.Users
         [Required(ErrorMessageResourceName = nameof(AnnotationsErrorMessages.UserNameShouldBeDefined), ErrorMessageResourceType = typeof(AnnotationsErrorMessages))]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Дата рождения
+        /// </summary>
         public DateTime? BirthDate { get; set; }
 
         /// <summary>
@@ -28,8 +34,6 @@ namespace Clt.Contract.Models.Users
         /// Пол
         /// </summary>
         public bool? Sex { get; set; }
-
-        public string ObjectJson { get; set; }
 
         /// <summary>
         /// Номер телефона

@@ -4,10 +4,27 @@
         <name>Clt.Model</name>
     </assembly>
     <members>
+        <member name="T:Clt.Model.CltDbContext">
+            <summary>
+            Контекст с данными клиента
+            </summary>
+        </member>
+        <member name="M:Clt.Model.CltDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Clt.Model.CltDbContext})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="options"></param>
+        </member>
         <member name="P:Clt.Model.CltDbContext.Clients">
             <summary>
             Клиенты приложения
             </summary>
+        </member>
+        <member name="M:Clt.Model.CltDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Переопределение
+            </summary>
+            <param name="builder"></param>
         </member>
         <member name="T:Clt.Model.Entities.Client">
             <summary>

@@ -7,10 +7,17 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Clt.Model
 {
+    /// <summary>
+    /// Контекст с данными клиента
+    /// </summary>
     public class CltDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>,
-    ApplicationUserRole, IdentityUserLogin<string>,
-    IdentityRoleClaim<string>, IdentityUserToken<string>>
+        ApplicationUserRole, IdentityUserLogin<string>,
+        IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="options"></param>
         public CltDbContext([NotNull] DbContextOptions<CltDbContext> options) : base(options)
         {
         }
@@ -20,6 +27,10 @@ namespace Clt.Model
         /// </summary>
         public DbSet<Client> Clients { get; set; }
 
+        /// <summary>
+        /// Переопределение
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

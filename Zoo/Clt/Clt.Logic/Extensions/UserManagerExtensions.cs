@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Clt.Logic.Extensions
 {
-    public static class UserManagerExtensions
+    internal static class UserManagerExtensions
     {
         /// <summary>
         /// Добавляет право пользователю

@@ -1,22 +1,25 @@
 ﻿using Clt.Contract.Models.Account;
 using Clt.Contract.Models.Common;
+using Clt.Logic.Extensions;
+using Clt.Logic.Workers;
+using Clt.Model.Entities.Default;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Clt.Logic.Core.Workers
 {
-    public class PasswordChanger<TUser, TDbContext> : BaseCltCoreWorker<TDbContext> 
-        where TUser : IdentityUser, new()
-        where TDbContext : DbContext
+    /// <summary>
+    /// Сервис для изменеия пароля
+    /// </summary>
+    public class PasswordChanger : BaseCltWorker
     {
-        UserManager<TUser> UserManager { get; }
-        SignInManager<TUser> SignInManager { get; }
+        UserManager<ApplicationUser> UserManager { get; }
+        SignInManager<ApplicationUser> SignInManager { get; }
 
         /// <summary>
         /// Конструктор
@@ -26,7 +29,7 @@ namespace Clt.Logic.Core.Workers
         /// <param name="userManager"></param>
         /// <param name="signInManager"></param>
         public PasswordChanger(ICrocoAmbientContextAccessor context, ICrocoApplication application,
-            UserManager<TUser> userManager, SignInManager<TUser> signInManager) : base(context, application)
+            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) : base(context, application)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -78,6 +81,12 @@ namespace Clt.Logic.Core.Workers
             return new BaseApiResponse(true, "Ваш пароль изменен");
         }
 
+        /// <summary>
+        /// Изменить пароль администратором
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="getUserByIdFunc"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> ChangePasswordByAdminAsync(ResetPasswordByAdminModel model, Func<string, Task<ApplicationUserBaseModel>> getUserByIdFunc)
         {
             var user = await UserManager.FindByIdAsync(model.Id);
@@ -89,7 +98,7 @@ namespace Clt.Logic.Core.Workers
 
             var userDto = await getUserByIdFunc(user.Id);
 
-            var result = UserRightsWorker.HasRightToEditUser(userDto, User, RolesSetting);
+            var result = UserRightsExtensions.HasRightToEditUser(userDto, User, RolesSetting);
 
             if (!result.IsSucceeded)
             {
@@ -105,7 +114,7 @@ namespace Clt.Logic.Core.Workers
         /// <param name="user"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        public async Task<BaseApiResponse> ChangePasswordBaseAsync(TUser user, string newPassword)
+        private async Task<BaseApiResponse> ChangePasswordBaseAsync(ApplicationUser user, string newPassword)
         {
             if (user == null)
             {

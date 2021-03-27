@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Clt.Logic.Abstractions;
 using Clt.Contract.Models.Common;
-using Clt.Logic.Core.Workers;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Clt.Contract.Enumerations;
@@ -11,6 +9,7 @@ using Clt.Model.Entities.Default;
 using Clt.Model.Entities;
 using Croco.Core.Contract.Application;
 using Clt.Contract.Settings;
+using Clt.Logic.Extensions;
 
 namespace Clt.Logic.Workers.Account
 {
@@ -28,27 +27,27 @@ namespace Clt.Logic.Workers.Account
         /// <returns></returns>
         public async Task<BaseApiResponse> InitAsync()
         {
-            await RoleFromEnumCreator.CreateRolesAsync<UserRight, ApplicationRole>(RoleManager);
+            await RoleManager.CreateRolesAsync<UserRight>();
 
-            var maybeRoot = await UserManager.FindByEmailAsync(RightsSettings.RootEmail);
+            var maybeRoot = await UserManager.FindByEmailAsync(RootSettings.RootEmail);
 
             if (maybeRoot == null)
             {
                 maybeRoot = new ApplicationUser
                 {
-                    Email = RightsSettings.RootEmail,
+                    Email = RootSettings.RootEmail,
                     EmailConfirmed = true,
-                    UserName = RightsSettings.RootEmail,
+                    UserName = RootSettings.RootEmail,
                     SecurityStamp = Guid.NewGuid().ToString()
                 };
 
-                await UserManager.CreateAsync(maybeRoot, RightsSettings.RootPassword);
+                await UserManager.CreateAsync(maybeRoot, RootSettings.RootPassword);
 
                 CreateHandled(new Client
                 {
                     Id = maybeRoot.Id,
-                    Email = RightsSettings.RootEmail,
-                    Name = RightsSettings.RootEmail
+                    Email = RootSettings.RootEmail,
+                    Name = RootSettings.RootEmail
                 });
 
                 await SaveChangesAsync();

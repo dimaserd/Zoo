@@ -10,8 +10,8 @@ using Croco.Core.Contract.Models;
 using Croco.Core.Logic.Extensions;
 using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
-using Clt.Logic.Core.Resources;
 using Croco.Core.Contract.Application;
+using Clt.Logic.Resources;
 
 namespace Clt.Logic.Workers.Users
 {

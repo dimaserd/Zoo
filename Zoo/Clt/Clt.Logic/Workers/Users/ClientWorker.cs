@@ -10,7 +10,6 @@ using Croco.Core.Logic.Files.Abstractions;
 using Clt.Model.Entities;
 using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
-using Clt.Logic.Core.Resources;
 using Clt.Contract.Settings;
 
 namespace Clt.Logic.Workers.Users
@@ -129,7 +128,7 @@ namespace Clt.Logic.Workers.Users
                 return new BaseApiResponse(false, ValidationMessages.UserNotFound);
             }
 
-            if (userToEditEntity.Email == RightsSettings.RootEmail)
+            if (userToEditEntity.Email == RootSettings.RootEmail)
             {
                 return new BaseApiResponse(false, "Root не может редактировать сам себя");
             }

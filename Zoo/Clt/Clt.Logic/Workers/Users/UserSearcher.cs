@@ -7,7 +7,6 @@ using Clt.Logic.Models.Users;
 using Clt.Contract.Models.Common;
 using Clt.Logic.Models;
 using Clt.Logic.Extensions;
-using System.Collections.Generic;
 using Croco.Core.Search.Extensions;
 using Croco.Core.Contract.Models.Search;
 using Croco.Core.Contract;

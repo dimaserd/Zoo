@@ -1,4 +1,6 @@
-﻿using Croco.Core.Contract;
+﻿using Clt.Logic.Workers;
+using Clt.Model.Entities.Default;
+using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Microsoft.AspNetCore.Identity;
@@ -7,21 +9,34 @@ using System.Threading.Tasks;
 
 namespace Clt.Logic.Core.Workers
 {
-    public class PasswordHashValidator<TUser, TContext> : BaseCltCoreWorker<TContext>
-        where TUser : IdentityUser
-        where TContext : DbContext
+    /// <summary>
+    /// Валидатор хешей паролей
+    /// </summary>
+    public class PasswordHashValidator : BaseCltWorker
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="app"></param>
         public PasswordHashValidator(ICrocoAmbientContextAccessor context, ICrocoApplication app)
             : base(context, app)
         {
         }
 
+        /// <summary>
+        /// Проверить пароль
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="userName"></param>
+        /// <param name="pass"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> CheckUserNameAndPasswordAsync(string userId, string userName, string pass)
         {
-            var user = await Query<TUser>()
+            var user = await Query<ApplicationUser>()
                 .FirstOrDefaultAsync(x => x.Id == userId);
 
-            var passHasher = new PasswordHasher<TUser>();
+            var passHasher = new PasswordHasher<ApplicationUser>();
 
             var t = passHasher.VerifyHashedPassword(user, user.PasswordHash, pass) != PasswordVerificationResult.Failed && user.UserName == userName;
 
