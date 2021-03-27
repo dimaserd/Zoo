@@ -102,5 +102,84 @@
             Класс посылающий письма
             </summary>
         </member>
+        <member name="T:Ecc.Logic.Workers.Messaging.UserNotificationsWorker">
+            <summary>
+            Сервис для работы с системными уведомлениями
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.GetUserNotificationsIncludingUsersAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
+            <summary>
+            Получить список уведомлений с пользователями
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.GetUserNotificationsAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
+            <summary>
+            Получить список уведомлений без пользователей
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.RemoveNotificationAsync(System.String)">
+            <summary>
+            Удалить уведомление
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.CreateNotificationAsync(Ecc.Logic.Models.Notifications.CreateNotification)">
+            <summary>
+            Создать уведомление
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.GetLastUnReadNotificationAsync">
+            <summary>
+            Получить последнее непрочитанное уведомление
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.MarkNotificationAsReadAsync(System.String)">
+            <summary>
+            Пометить уведомление как прочитанное
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+        </member>
+        <member name="T:Ecc.Logic.Workers.Users.UserService">
+            <summary>
+            Сервис для работы с пользователями
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Users.UserService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Users.UserService.CreateUser(Ecc.Contract.Commands.CreateUserCommand)">
+            <summary>
+            Создать пользователя
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Users.UserService.UpdateUser(Ecc.Contract.Commands.UpdateUserCommand)">
+            <summary>
+            Обновить пользователя
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

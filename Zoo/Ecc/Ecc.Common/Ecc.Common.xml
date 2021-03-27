@@ -34,5 +34,35 @@
             Ошибка
             </summary>
         </member>
+        <member name="T:Ecc.Common.Enumerations.UserNotificationType">
+            <summary>
+            Тип пользовательского уведомления
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.UserNotificationType.Success">
+            <summary>
+            Успешное
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.UserNotificationType.Info">
+            <summary>
+            Информационное
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.UserNotificationType.Warning">
+            <summary>
+            Предупреждение
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.UserNotificationType.Danger">
+            <summary>
+            Опасность
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.UserNotificationType.Custom">
+            <summary>
+            Кастом
+            </summary>
+        </member>
     </members>
 </doc>

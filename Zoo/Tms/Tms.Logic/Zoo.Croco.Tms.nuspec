@@ -10,8 +10,8 @@
     <releaseNotes>Что-то сделали лучше, что-то сделали хуже.</releaseNotes>
     <copyright>Copyright 2021</copyright>
     <dependencies>
-      <dependency id="Croco.Core.Logic" version="1.0.14" />
-      <dependency id="Croco.Core" version="2.0.22" />
+      <dependency id="Croco.Core.Logic" version="1.0.16" />
+      <dependency id="Croco.Core" version="2.0.24" />
       <dependency id="Microsoft.EntityFrameworkCore" version="3.1.13" />
     </dependencies>
   </metadata>

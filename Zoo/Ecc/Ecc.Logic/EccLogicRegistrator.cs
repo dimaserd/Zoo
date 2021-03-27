@@ -9,7 +9,6 @@ using Ecc.Logic.Handlers;
 using Ecc.Logic.Services;
 using Ecc.Logic.Settings;
 using Ecc.Logic.Workers.Base;
-using Ecc.Logic.Workers.Emails;
 using Ecc.Logic.Workers.Emails.Senders;
 using Ecc.Model.Contexts;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,8 +16,16 @@ using System.Linq;
 
 namespace Ecc.Logic
 {
+    /// <summary>
+    /// Регистратор сервисов для работы логики Ecc
+    /// </summary>
     public static class EccLogicRegistrator
     {
+        /// <summary>
+        /// Зарегистрировать логику
+        /// </summary>
+        /// <param name="appBuilder"></param>
+        /// <param name="settings"></param>
         public static void RegisterLogic(CrocoApplicationBuilder appBuilder, EccSettings settings)
         {
             Check(appBuilder);
@@ -47,18 +54,11 @@ namespace Ecc.Logic
             var eventSourceOptions = appBuilder.EventSourceOptions;
 
             eventSourceOptions
-                .AddMessageHandler<CreateUserCommand, CreateUserCommandHandler>();
-            
-            eventSourceOptions
-                .AddMessageHandler<UpdateUserCommand, UpdateUserCommandHandler>();
-
-            eventSourceOptions
-                .AddMessageHandler<AppendEmailsFromFileToGroup, AppendEmailsFromFileToGroupMessageHandler>();
-            eventSourceOptions
-                .AddMessageHandler<SendMailsForEmailGroup, SendMailsForEmailGroupMessageHandler>();
-
-            eventSourceOptions
-                .AddMessageHandler<FilesUploadedEvent, FilesUploadedEventHandler>();
+                .AddMessageHandler<CreateUserCommand, CreateUserCommandHandler>()
+                .AddMessageHandler<UpdateUserCommand, UpdateUserCommandHandler>()
+                .AddMessageHandler<AppendEmailsFromFileToGroup, AppendEmailsFromFileToGroupMessageHandler>()
+                .AddMessageHandler<SendMailsForEmailGroup, SendMailsForEmailGroupMessageHandler>()
+                .AddMessageHandler<FilesUploadedEvent, FilesUploadedEventHandler>(true);
         }
 
         private static void RegisterEccWorkerTypes(IServiceCollection services)
