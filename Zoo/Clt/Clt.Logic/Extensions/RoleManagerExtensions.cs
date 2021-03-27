@@ -2,21 +2,15 @@
 using Croco.Core.Contract.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Clt.Logic.Extensions
 {
     internal static class RoleManagerExtensions
     {
-        public static async Task<BaseApiResponse> CreateRolesAsync<TEnum>(this RoleManager<ApplicationRole> roleManager) 
-            where TEnum : Enum
+        public static async Task<BaseApiResponse> CreateRolesAsync(this RoleManager<ApplicationRole> roleManager, string[] roleNames)
         {
-            var list = Enum.GetValues(typeof(TEnum)).Cast<TEnum>().ToList();
-
-            var roles = list.Select(x => x.ToString()).ToArray();
-
-            foreach (var role in roles)
+            foreach (var role in roleNames)
             {
                 if (!await roleManager.RoleExistsAsync(role))
                 {

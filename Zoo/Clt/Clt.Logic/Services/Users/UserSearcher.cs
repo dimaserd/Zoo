@@ -14,7 +14,7 @@ using Clt.Model.Entities;
 using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
 
-namespace Clt.Logic.Workers.Users
+namespace Clt.Logic.Services.Users
 {
     /// <summary>
     /// Класс предоставляющий методы для поиска пользователей

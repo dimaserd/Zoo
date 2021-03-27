@@ -1,6 +1,7 @@
 ﻿using Clt.Logic.Abstractions;
+using Clt.Logic.HealthChecks;
 using Clt.Logic.Implementations;
-using Clt.Logic.Workers;
+using Clt.Logic.Services;
 using Clt.Model;
 using Clt.Model.Entities.Default;
 using Croco.Core.Application;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 
-namespace Clt.Logic.RegistrationModule
+namespace Clt.Logic
 {
     /// <summary>
     /// Регистратор клиентской логики
@@ -26,7 +27,7 @@ namespace Clt.Logic.RegistrationModule
         public static void Register(CrocoApplicationBuilder applicationBuilder, Action<IdentityOptions> setupAction = null)
         {
             Check(applicationBuilder);
-            
+
             var services = applicationBuilder.Services;
 
             services.AddScoped<IApplicationAuthenticationManager, ApplicationAuthenticationManager>();
@@ -45,6 +46,10 @@ namespace Clt.Logic.RegistrationModule
                 .AddDefaultTokenProviders();
 
             RegisterCltWorkerTypes(services);
+
+            applicationBuilder
+                .RegisterHealthCheck<CltSettingsHealthCheck>()
+                .RegisterHealthCheck<RootHealthCheck>();
         }
 
         private static void Check(CrocoApplicationBuilder applicationBuilder)

@@ -33,11 +33,6 @@
             </summary>
             <param name="monthShift"></param>
         </member>
-        <member name="M:Tms.Logic.Models.CalendarMonthViewModel.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Tms.Logic.Models.CalendarMonthViewModel.TodayDate">
             <summary>
             Дата сегодняшнего дня

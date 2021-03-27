@@ -1,7 +1,6 @@
 ﻿using Clt.Contract.Models.Account;
 using Clt.Contract.Models.Common;
 using Clt.Logic.Extensions;
-using Clt.Logic.Workers;
 using Clt.Model.Entities.Default;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
@@ -11,7 +10,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clt.Logic.Core.Workers
+namespace Clt.Logic.Services.Base
 {
     /// <summary>
     /// Сервис для изменеия пароля

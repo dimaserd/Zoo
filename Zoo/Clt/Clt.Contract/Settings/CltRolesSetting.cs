@@ -1,4 +1,7 @@
-﻿namespace Clt.Contract.Settings
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Clt.Contract.Settings
 {
     /// <summary>
     /// Модель описывающая настройки названий системных ролей
@@ -16,12 +19,32 @@
         public string RootRoleName { get; set; }
 
         /// <summary>
+        /// Названия остальных ролей в приложении
+        /// </summary>
+        public string[] OtherRoleNames { get; set; }
+
+
+        /// <summary>
+        /// Получить все возможные роли
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetAllRoleNames()
+        {
+            return new List<string>(OtherRoleNames)
+            {
+                AdminRoleName,
+                RootRoleName
+            }.Distinct().ToArray();
+        }
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         public CltRolesSetting()
         {
             AdminRoleName = "Admin";
             RootRoleName = "Root";
+            OtherRoleNames = new string[0];
         }
     }
 }

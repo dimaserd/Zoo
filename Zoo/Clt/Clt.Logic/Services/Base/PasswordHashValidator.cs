@@ -1,5 +1,4 @@
-﻿using Clt.Logic.Workers;
-using Clt.Model.Entities.Default;
+﻿using Clt.Model.Entities.Default;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
@@ -7,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace Clt.Logic.Core.Workers
+namespace Clt.Logic.Services.Base
 {
     /// <summary>
     /// Валидатор хешей паролей
@@ -40,7 +39,7 @@ namespace Clt.Logic.Core.Workers
 
             var t = passHasher.VerifyHashedPassword(user, user.PasswordHash, pass) != PasswordVerificationResult.Failed && user.UserName == userName;
 
-            return new BaseApiResponse(t, t? "Ok" : "Not Ok");
+            return new BaseApiResponse(t, t ? "Ok" : "Not Ok");
         }
     }
 }

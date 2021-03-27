@@ -6,7 +6,7 @@ using Croco.Core.Contract.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
-namespace Clt.Logic.Workers.Account
+namespace Clt.Logic.Services.Account
 {
     /// <summary>
     /// Сервис для логинирования за другого пользователя

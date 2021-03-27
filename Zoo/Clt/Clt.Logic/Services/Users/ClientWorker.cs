@@ -12,7 +12,7 @@ using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
 using Clt.Contract.Settings;
 
-namespace Clt.Logic.Workers.Users
+namespace Clt.Logic.Services.Users
 {
     /// <summary>
     /// Менеджер для работы с клиентами

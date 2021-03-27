@@ -6,7 +6,7 @@ using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Croco.Core.Logic.Workers;
 
-namespace Clt.Logic.Workers
+namespace Clt.Logic.Services
 {
     /// <summary>
     /// Базовый сервис для клиентского контекста
@@ -50,7 +50,7 @@ namespace Clt.Logic.Workers
         /// <returns></returns>
         public bool IsUserAdmin()
         {
-            return User.IsInRole(RolesSetting.AdminRoleName);
+            return IsUserRoot() || User.IsInRole(RolesSetting.AdminRoleName);
         }
 
         /// <summary>

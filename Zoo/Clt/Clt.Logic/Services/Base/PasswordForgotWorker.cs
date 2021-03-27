@@ -1,7 +1,6 @@
 ﻿using Clt.Contract.Events;
 using Clt.Contract.Models.Account;
 using Clt.Contract.Settings;
-using Clt.Logic.Workers;
 using Clt.Model.Entities.Default;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
@@ -12,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Clt.Logic.Core.Workers
+namespace Clt.Logic.Services.Base
 {
     /// <summary>
     /// Предоставляет методы для работы с забывшими пароль пользователями
@@ -27,14 +26,14 @@ namespace Clt.Logic.Core.Workers
         /// <param name="context"></param>
         /// <param name="application"></param>
         /// <param name="userManager"></param>
-        public PasswordForgotWorker(ICrocoAmbientContextAccessor context, 
+        public PasswordForgotWorker(ICrocoAmbientContextAccessor context,
             ICrocoApplication application,
             UserManager<ApplicationUser> userManager
             ) : base(context, application)
         {
             UserManager = userManager;
         }
-        
+
         #region Методы восстановления пароля
 
         /// <summary>

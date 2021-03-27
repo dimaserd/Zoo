@@ -13,7 +13,7 @@ using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
 using Clt.Logic.Resources;
 
-namespace Clt.Logic.Workers.Users
+namespace Clt.Logic.Services.Users
 {
     /// <summary>
     /// Сервис для работы с ролями пользователей
@@ -35,7 +35,7 @@ namespace Clt.Logic.Workers.Users
             UserManager = userManager;
         }
 
-        
+
         /// <summary>
         /// Получить список ролей пользователя
         /// </summary>
@@ -55,7 +55,7 @@ namespace Clt.Logic.Workers.Users
             {
                 var hasEnumValue = enumValues.Any(t => t.ToString() == x.RoleName);
 
-                if(hasEnumValue)
+                if (hasEnumValue)
                 {
                     x.DisplayRoleName = enumValues.FirstOrDefault(t => t.ToString() == x.RoleName).ToDisplayName();
                 }
@@ -84,7 +84,7 @@ namespace Clt.Logic.Workers.Users
             return AddOrRemoveUserRoleAsync(userIdAndRole, false);
         }
 
-        
+
         private async Task<BaseApiResponse> AddOrRemoveUserRoleAsync(UserIdAndRole userIdAndRole, bool addOrRemove)
         {
             if (!IsUserAdmin())
@@ -92,7 +92,7 @@ namespace Clt.Logic.Workers.Users
                 return new BaseApiResponse(false, ValidationMessages.YouAreNotAnAdministrator);
             }
 
-            var role = await Query<ApplicationRole>().FirstOrDefaultAsync(x => x.Name == userIdAndRole.Role.ToString());
+            var role = await Query<ApplicationRole>().FirstOrDefaultAsync(x => x.Name == userIdAndRole.Role);
 
             if (role == null)
             {
@@ -121,17 +121,9 @@ namespace Clt.Logic.Workers.Users
             var rolesOfEditUser = await UserManager.GetRolesAsync(user);
             var rolesOfUserEditor = await UserManager.GetRolesAsync(userEditor);
 
-            var roleOfEditUser = GetTheHighestRoleOfUser(rolesOfEditUser);
-            var roleOfUserEditor = GetTheHighestRoleOfUser(rolesOfUserEditor);
-
-            if (roleOfUserEditor >= roleOfEditUser)
+            if ((rolesOfEditUser.Contains(RolesSetting.RootRoleName) || rolesOfUserEditor.Contains(RolesSetting.AdminRoleName)) && !rolesOfUserEditor.Contains(RolesSetting.RootRoleName))
             {
-                return new BaseApiResponse(false, "Вы не имеете прав изменять роль данного пользователя");
-            }
-
-            if (roleOfUserEditor >= (int)userIdAndRole.Role)
-            {
-                return new BaseApiResponse(false, "Вы не имеете прав добавлять/удалять роль равную или выше вашей");
+                return new BaseApiResponse(false, "Вы не имеете прав изменять роли администратора");
             }
 
             var userRole = await Query<ApplicationUserRole>().FirstOrDefaultAsync(x => x.RoleId == role.Id && x.UserId == user.Id);
@@ -162,24 +154,6 @@ namespace Clt.Logic.Workers.Users
             }
 
             return await TrySaveChangesAndReturnResultAsync(addOrRemove ? "Право добавлено" : "Право удалено");
-        }
-
-        private static int GetTheHighestRoleOfUser(IList<string> roles)
-        {
-            var rights = new[]
-            {
-                UserRight.Root, UserRight.SuperAdmin, UserRight.Admin
-            };
-
-            foreach (var right in rights)
-            {
-                if (roles.Contains(right.ToString()))
-                {
-                    return (int)right;
-                }
-            }
-
-            return int.MaxValue;
         }
     }
 }

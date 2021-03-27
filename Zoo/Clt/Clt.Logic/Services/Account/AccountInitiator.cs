@@ -4,19 +4,18 @@ using Microsoft.AspNetCore.Identity;
 using Clt.Contract.Models.Common;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
-using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
 using Clt.Model.Entities;
 using Croco.Core.Contract.Application;
 using Clt.Contract.Settings;
 using Clt.Logic.Extensions;
 
-namespace Clt.Logic.Workers.Account
+namespace Clt.Logic.Services.Account
 {
     /// <summary>
     /// Методы для работы с учетными записями
     /// </summary>
-    public class AccountManager : BaseCltWorker
+    public class AccountInitiator : BaseCltWorker
     {
         RoleManager<ApplicationRole> RoleManager { get; }
         UserManager<ApplicationUser> UserManager { get; }
@@ -27,7 +26,7 @@ namespace Clt.Logic.Workers.Account
         /// <returns></returns>
         public async Task<BaseApiResponse> InitAsync()
         {
-            await RoleManager.CreateRolesAsync<UserRight>();
+            await RoleManager.CreateRolesAsync(RolesSetting.GetAllRoleNames());
 
             var maybeRoot = await UserManager.FindByEmailAsync(RootSettings.RootEmail);
 
@@ -53,10 +52,7 @@ namespace Clt.Logic.Workers.Account
                 await SaveChangesAsync();
             }
 
-            foreach (UserRight right in Enum.GetValues(typeof(UserRight)))
-            {
-                await UserManager.AddToRoleAsync(maybeRoot, right.ToString());
-            }
+            await UserManager.AddToRolesAsync(maybeRoot, RolesSetting.GetAllRoleNames());
 
             return new BaseApiResponse(true, "Пользователь root создан");
         }
@@ -82,7 +78,7 @@ namespace Clt.Logic.Workers.Account
         /// <param name="app"></param>
         /// <param name="roleManager"></param>
         /// <param name="userManager"></param>
-        public AccountManager(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication app,
+        public AccountInitiator(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication app,
             RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager) : base(ambientContext, app)
         {
             RoleManager = roleManager;

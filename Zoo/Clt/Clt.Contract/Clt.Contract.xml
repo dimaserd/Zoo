@@ -24,41 +24,6 @@
             
             </summary>
         </member>
-        <member name="T:Clt.Contract.Enumerations.UserRight">
-            <summary>
-            Перечисление описывающее право пользователя
-            </summary>
-        </member>
-        <member name="F:Clt.Contract.Enumerations.UserRight.Root">
-            <summary>
-            Рут
-            </summary>
-        </member>
-        <member name="F:Clt.Contract.Enumerations.UserRight.SuperAdmin">
-            <summary>
-            Супер-администратор
-            </summary>
-        </member>
-        <member name="F:Clt.Contract.Enumerations.UserRight.Admin">
-            <summary>
-            Администратор
-            </summary>
-        </member>
-        <member name="F:Clt.Contract.Enumerations.UserRight.Seller">
-            <summary>
-            Пользователь группы Продавец может создавать продавцов
-            </summary>
-        </member>
-        <member name="F:Clt.Contract.Enumerations.UserRight.Customer">
-            <summary>
-            Клиент
-            </summary>
-        </member>
-        <member name="F:Clt.Contract.Enumerations.UserRight.Developer">
-            <summary>
-            Разработчик
-            </summary>
-        </member>
         <member name="T:Clt.Contract.Events.ClientChangedPassword">
             <summary>
             Клиент изменил пароль
@@ -594,6 +559,17 @@
             <summary>
             Название роли Рута
             </summary>
+        </member>
+        <member name="P:Clt.Contract.Settings.CltRolesSetting.OtherRoleNames">
+            <summary>
+            Названия остальных ролей в приложении
+            </summary>
+        </member>
+        <member name="M:Clt.Contract.Settings.CltRolesSetting.GetAllRoleNames">
+            <summary>
+            Получить все возможные роли
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Clt.Contract.Settings.CltRolesSetting.#ctor">
             <summary>

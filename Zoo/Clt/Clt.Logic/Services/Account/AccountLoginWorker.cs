@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Clt.Contract.Models.Account;
-using Clt.Logic.Workers.Users;
+using Clt.Logic.Services.Users;
 using Clt.Logic.Models.Account;
 using Clt.Logic.Abstractions;
 using Microsoft.AspNetCore.Identity;
@@ -10,12 +10,12 @@ using Clt.Contract.Settings;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
-using Clt.Logic.Core.Workers;
 using Clt.Model.Entities;
 using Clt.Model.Entities.Default;
 using Microsoft.Extensions.Logging;
+using Clt.Logic.Services.Base;
 
-namespace Clt.Logic.Workers.Account
+namespace Clt.Logic.Services.Account
 {
     /// <summary>
     /// Сервис для работы с методами логинирования

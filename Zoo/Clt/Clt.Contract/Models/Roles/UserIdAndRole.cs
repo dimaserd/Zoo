@@ -1,6 +1,4 @@
-﻿using Clt.Contract.Enumerations;
-
-namespace Clt.Contract.Models.Roles
+﻿namespace Clt.Contract.Models.Roles
 {
     /// <summary>
     /// Идентифкатор пользователя с ролью
@@ -15,6 +13,6 @@ namespace Clt.Contract.Models.Roles
         /// <summary>
         /// Роль
         /// </summary>
-        public UserRight Role { get; set; }
+        public string Role { get; set; }
     }
 }

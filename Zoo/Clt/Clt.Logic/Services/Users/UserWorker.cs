@@ -15,7 +15,7 @@ using Clt.Contract.Settings;
 using Clt.Logic.Resources;
 using Microsoft.Extensions.Logging;
 
-namespace Clt.Logic.Workers.Users
+namespace Clt.Logic.Services.Users
 {
     /// <summary>
     /// Сервис для работы с пользователями
@@ -44,24 +44,24 @@ namespace Clt.Logic.Workers.Users
         /// <returns></returns>
         public async Task<BaseApiResponse> RemoveUserAsync(string userId)
         {
-            if(!RootSettings.UserRemovingEnabled)
+            if (!RootSettings.UserRemovingEnabled)
             {
                 return new BaseApiResponse(false, "В настройках вашего приложения выключена опция удаления пользователей");
             }
-            
-            if(!User.HasRight(UserRight.Root))
+
+            if (!User.IsInRole(RolesSetting.RootRoleName))
             {
                 return new BaseApiResponse(false, "Вы не имеете прав для удаления пользователя");
             }
 
             var userToRemove = await UserSearcher.GetUserByIdAsync(userId);
 
-            if(userToRemove == null)
+            if (userToRemove == null)
             {
                 return new BaseApiResponse(false, "Пользователь не найден по указанному идентификатору");
             }
 
-            if(userToRemove.HasRight(UserRight.Root))
+            if (userToRemove.IsInRole(RolesSetting.RootRoleName))
             {
                 return new BaseApiResponse(false, "Вы не можете удалить Root пользователя");
             }
@@ -70,10 +70,10 @@ namespace Clt.Logic.Workers.Users
             await GenericDelete<ApplicationUserRole>(x => x.UserId == userId);
             await GenericDelete<ApplicationUser>(x => x.Id == userId);
 
-            
+
             var res = await TrySaveChangesAndReturnResultAsync($"Пользователь {userToRemove.Email} удален");
 
-            if(!res.IsSucceeded)
+            if (!res.IsSucceeded)
             {
                 return res;
             }
@@ -103,7 +103,7 @@ namespace Clt.Logic.Workers.Users
             var clientRepo = GetRepository<Client>();
 
             var userDto = await UserSearcher.GetUserByIdAsync(model.Id);
-            
+
             if (userDto == null)
             {
                 return new BaseApiResponse(false, ValidationMessages.UserIsNotFoundByIdentifier);
@@ -114,30 +114,19 @@ namespace Clt.Logic.Workers.Users
                 return new BaseApiResponse(false, ValidationMessages.YouCantEditRootUser);
             }
 
-            if(await clientRepo.Query().AnyAsync(x => x.Email == model.Email && x.Id != model.Id))
+            if (await clientRepo.Query().AnyAsync(x => x.Email == model.Email && x.Id != model.Id))
             {
                 return new BaseApiResponse(false, ValidationMessages.ThisEmailIsAlreadyTaken);
             }
-            
-            if(await clientRepo.Query().AnyAsync(x => x.PhoneNumber == model.PhoneNumber && x.Id != model.Id))
+
+            if (await clientRepo.Query().AnyAsync(x => x.PhoneNumber == model.PhoneNumber && x.Id != model.Id))
             {
                 return new BaseApiResponse(false, ValidationMessages.ThisPhoneNumberIsAlreadyTaken);
             }
-            
 
-            if(!User.HasRight(UserRight.Root) && (userDto.HasRight(UserRight.Admin) || userDto.HasRight(UserRight.SuperAdmin)))
+            if (!User.IsInRole(RolesSetting.AdminRoleName) && (userDto.IsInRole(RolesSetting.AdminRoleName)))
             {
                 return new BaseApiResponse(false, ValidationMessages.YouCantEditUserBecauseHeIsAdministrator);
-            }
-
-            if(!User.HasRight(UserRight.Root) && User.HasRight(UserRight.SuperAdmin) && userDto.HasRight(UserRight.SuperAdmin))
-            {
-                return new BaseApiResponse(false, ValidationMessages.YouCantEditUserBecauseHeIsSuperAdministrator);
-            }
-
-            if (!User.HasRight(UserRight.Root) && !User.HasRight(UserRight.SuperAdmin) && User.HasRight(UserRight.Admin) && userDto.HasRight(UserRight.Admin))
-            {
-                return new BaseApiResponse(false, "Вы не имеете прав Супер-Администратора, следовательно не можете редактировать пользователя, так как он является Администратором");
             }
 
             var userToEditEntity = await clientRepo.Query().FirstOrDefaultAsync(x => x.Id == model.Id);
@@ -151,7 +140,6 @@ namespace Clt.Logic.Workers.Users
                 return new BaseApiResponse(ex);
             }
 
-            
             userToEditEntity.Email = model.Email;
             userToEditEntity.Name = model.Name;
             userToEditEntity.Surname = model.Surname;
@@ -179,10 +167,10 @@ namespace Clt.Logic.Workers.Users
             {
                 return new BaseApiResponse(false, "Пользователь не найден по указанному идентификатору");
             }
-            
-            var result = UserRightsWorker.HasRightToEditUser(userDto, User);
-            
-            if(!result.IsSucceeded)
+
+            var result = UserRightsExtensions.HasRightToEditUser(userDto, User, RolesSetting);
+
+            if (!result.IsSucceeded)
             {
                 return result;
             }
@@ -198,12 +186,12 @@ namespace Clt.Logic.Workers.Users
 
             if (model.DeActivated)
             {
-                if(user.DeActivated)
+                if (user.DeActivated)
                 {
                     return new BaseApiResponse(false, "Пользователь уже является деактивированным");
                 }
 
-                
+
                 user.DeActivated = true;
 
                 userRepo.UpdateHandled(user);
@@ -211,11 +199,11 @@ namespace Clt.Logic.Workers.Users
                 return await TrySaveChangesAndReturnResultAsync("Пользователь деактивирован");
             }
 
-            if(!user.DeActivated)
+            if (!user.DeActivated)
             {
                 return new BaseApiResponse(false, "Пользователь уже активирован");
             }
-            
+
             user.DeActivated = false;
 
             userRepo.UpdateHandled(user);

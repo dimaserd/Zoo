@@ -7,7 +7,6 @@ using Clt.Logic.Models;
 using System;
 using Clt.Contract.Models.Users;
 using Clt.Contract.Settings;
-using System.Collections.Generic;
 using Clt.Model.Entities;
 using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
@@ -48,31 +47,14 @@ namespace Clt.Logic.Extensions
                    };
         }
 
-        public static bool HasRight(this ApplicationUserBaseModel user, UserRight right)
+        public static bool IsInRole(this ApplicationUserBaseModel user, string roleName)
         {
             if (user.RoleNames == null)
             {
                 throw new ApplicationException("Роли не установлены");
             }
 
-            return user.RoleNames.Any(x => x == right.ToString());
-        }
-
-        public static List<UserRight> GetRights(this ApplicationUserBaseModel user)
-        {
-            return user.RoleNames.Select(x =>
-            {
-                UserRight? res = null;
-
-                if (Enum.TryParse(x, out UserRight result))
-                {
-                    res = result;
-                }
-
-                return res;
-            }).Where(x => x.HasValue)
-            .Select(x => x.Value)
-            .ToList();
+            return user.RoleNames.Any(x => x == roleName);
         }
 
         public static string GetAvatarLink(this ClientModel user, ImageSizeType imageSizeType)

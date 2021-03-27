@@ -46,7 +46,7 @@ namespace Tms.Logic.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<List<DayTaskModel>> GetDayTasksAsync(UserScheduleSearchModel model)
+        public async Task<DayTaskModel[]> GetDayTasksAsync(UserScheduleSearchModel model)
         {
             if (model == null)
             {
@@ -201,13 +201,13 @@ namespace Tms.Logic.Services
             return ToDayTaskModel(users, model);
         }
 
-        private async Task<List<DayTaskModel>> GetDayTasks(List<DayTaskModelWithNoUsersJustIds> model)
+        private async Task<DayTaskModel[]> GetDayTasks(List<DayTaskModelWithNoUsersJustIds> model)
         {
             var users = await UsersStorage.GetUsersDictionary();
 
             return model
                 .Select(m => ToDayTaskModel(users, m))
-                .ToList();
+                .ToArray();
         }
 
         private DayTaskModel ToDayTaskModel(Dictionary<string, UserFullNameEmailAndAvatarModel> users,

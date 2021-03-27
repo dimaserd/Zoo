@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Clt.Contract.Events;
@@ -7,16 +6,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Clt.Contract.Models.Account;
 using Clt.Contract.Models.Users;
-using Clt.Logic.Extensions;
 using Clt.Contract.Settings;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
-using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
 using Clt.Model.Entities;
 
-namespace Clt.Logic.Workers.Account
+namespace Clt.Logic.Services.Account
 {
     /// <summary>
     /// Методы для регистрации
@@ -105,7 +102,7 @@ namespace Clt.Logic.Workers.Account
                 model.Password = "testpass";
             }
 
-            var result = await RegisterHelpMethodAsync(model, new List<UserRight> { UserRight.Customer });
+            var result = await RegisterHelpMethodAsync(model);
 
             if (!result.IsSucceeded)
             {
@@ -129,8 +126,9 @@ namespace Clt.Logic.Workers.Account
         /// Метод регистрирующий пользователя администратором
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="roleNames"></param>
         /// <returns></returns>
-        public async Task<BaseApiResponse<string>> RegisterUserByAdminAsync(RegisterModel model)
+        public async Task<BaseApiResponse<string>> RegisterUserByAdminAsync(RegisterModel model, string[] roleNames)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
             
@@ -139,7 +137,7 @@ namespace Clt.Logic.Workers.Account
                 return new BaseApiResponse<string>(validation);
             }
 
-            var result = await RegisterHelpMethodAsync(model, new List<UserRight>());
+            var result = await RegisterHelpMethodAsync(model, roleNames);
 
             if (!result.IsSucceeded)
             {
@@ -157,7 +155,7 @@ namespace Clt.Logic.Workers.Account
             return new BaseApiResponse<string>(true, "Вы успешно зарегистрировали пользователя", user.Id);
         }
 
-        private async Task<BaseApiResponse<ApplicationUser>> RegisterHelpMethodAsync(RegisterModel model, List<UserRight> userRights)
+        private async Task<BaseApiResponse<ApplicationUser>> RegisterHelpMethodAsync(RegisterModel model, string[] roleNames = null)
         {
             var accountSettings = GetSetting<AccountSettingsModel>();
 
@@ -183,21 +181,11 @@ namespace Clt.Logic.Workers.Account
                 return new BaseApiResponse<ApplicationUser>(false, result.Errors.ToList().First().Description);
             }
 
-            await UserManager.AddRight(user, UserRight.Customer);
-
-            if (userRights != null)
+            if(roleNames != null && roleNames.Length > 0)
             {
-                var rightsThatCantBeAdded = new[]
-                {
-                    UserRight.SuperAdmin, UserRight.Admin, UserRight.Root, UserRight.Seller
-                };
-
-                foreach (var right in userRights.Where(x => !rightsThatCantBeAdded.Contains(x)))
-                {
-                    await UserManager.AddRight(user, right);
-                }
+                await UserManager.AddToRolesAsync(user, roleNames);
             }
-
+            
             //Создается внутренний пользователь
             CreateHandled(new Client
             {

@@ -64,14 +64,13 @@ namespace Tms.Logic.Models
 
             int lastDayInLastMonthDayOfWeekInt = (int)lastDayInThisMonthDate.DayOfWeek;
 
-
             int startDayOfWeekInThisMonth = (int)firstDayInThisMonthDate.DayOfWeek;
 
             //для того чтобы догружались даты из предыдущего месяца
             startDayOfWeekInThisMonth = startDayOfWeekInThisMonth == 0 ? 7 : startDayOfWeekInThisMonth;
 
 
-            TodayDate = date;
+            TodayDate = date.Date;
 
             DaysInPrevMonth = new List<DateTime>();
             DaysInThisMonth = new List<DateTime>();
@@ -93,26 +92,12 @@ namespace Tms.Logic.Models
                 DaysInThisMonth.Add(dateP);
             }
 
-            int a = 1;
-
             for (var i = lastDayInLastMonthDayOfWeekInt; i < 7; i++)
             {
-                DateTime dateP = GetDayInNextMonth(date, a);
+                DateTime dateP = GetDayInNextMonth(date, 1 + i);
 
                 DaysInNextMonth.Add(dateP);
-
-                a++;
             }
-
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public CalendarMonthViewModel() : this(0)
-        {
-
         }
 
         /// <summary>
