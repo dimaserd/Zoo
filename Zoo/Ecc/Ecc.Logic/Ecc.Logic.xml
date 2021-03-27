@@ -4,6 +4,18 @@
         <name>Ecc.Logic</name>
     </assembly>
     <members>
+        <member name="T:Ecc.Logic.EccLogicRegistrator">
+            <summary>
+            Регистратор сервисов для работы логики Ecc
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.EccLogicRegistrator.RegisterLogic(Croco.Core.Application.CrocoApplicationBuilder,Ecc.Logic.Settings.EccSettings)">
+            <summary>
+            Зарегистрировать логику
+            </summary>
+            <param name="appBuilder"></param>
+            <param name="settings"></param>
+        </member>
         <member name="P:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate.JsScript">
             <summary>
             Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
