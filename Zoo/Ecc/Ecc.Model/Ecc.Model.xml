@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ecc.Model</name>
+    </assembly>
+    <members>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.EmailTemplates">
+            <summary>
+            Шаблоны Email сообщений
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.Attachments">
+            <summary>
+            Вложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailTemplate.JsScript">
+            <summary>
+            Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUserGroup.Users">
+            <summary>
+            Пользователи принадлежащие к данной группе
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting">
+            <summary>
+            Модель пользователя интегрированного с внешним приложением
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.SendNow">
+            <summary>
+            Отправить немедленно
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.SendOn">
+            <summary>
+            Отправить в определенное время
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.SentOn">
+            <summary>
+            Сообщение было отправлено в данную дату
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.DeliveredOn">
+            <summary>
+            Сообщение было доставлено в данную дату
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.ReadOn">
+            <summary>
+            Сообщение было прочитано в данную дату
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.UserId">
+            <summary>
+            Идентификатор пользователя, которому нужно отправить сообщение
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Ecc.Messaging.MailDistribution">
+            <summary>
+            Рассылка пользователям по почте
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistribution.Subject">
+            <summary>
+            Заголовок сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistribution.Body">
+            <summary>
+            Тело сообщения
+            </summary>
+        </member>
+    </members>
+</doc>

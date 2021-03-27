@@ -13,6 +13,9 @@ using Croco.Core.Contract.Application;
 
 namespace Ecc.Logic.Workers.Messaging
 {
+    /// <summary>
+    /// Сервис для работы с системными уведомлениями
+    /// </summary>
     public class UserNotificationsWorker : BaseEccWorker
     {
         IOrderedQueryable<UserNotificationInteraction> GetFilteredQuery(NotificationSearchQueryModel model)
@@ -22,16 +25,31 @@ namespace Ecc.Logic.Workers.Messaging
                 .OrderByDescending(x => x.CreatedOn);
         }
 
+        /// <summary>
+        /// Получить список уведомлений с пользователями
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Task<GetListResult<NotificationModelWithUserModel>> GetUserNotificationsIncludingUsersAsync(NotificationSearchQueryModel model)
         {
             return EFCoreExtensions.GetAsync(model, GetFilteredQuery(model), NotificationModelWithUserModel.SelectExpression);
         }
 
+        /// <summary>
+        /// Получить список уведомлений без пользователей
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Task<GetListResult<NotificationModel>> GetUserNotificationsAsync(NotificationSearchQueryModel model)
         {
             return EFCoreExtensions.GetAsync(model, GetFilteredQuery(model), NotificationModel.SelectExpression);
         }
 
+        /// <summary>
+        /// Удалить уведомление
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> RemoveNotificationAsync(string id)
         {
             if (!IsUserAdmin())
@@ -58,6 +76,11 @@ namespace Ecc.Logic.Workers.Messaging
             return await TrySaveChangesAndReturnResultAsync("Уведомление удалено");
         }
 
+        /// <summary>
+        /// Создать уведомление
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> CreateNotificationAsync(CreateNotification model)
         {
             var validation = ValidateModel(model);
@@ -85,6 +108,10 @@ namespace Ecc.Logic.Workers.Messaging
             return await TrySaveChangesAndReturnResultAsync("Создано уведомление для пользователя");
         }
 
+        /// <summary>
+        /// Получить последнее непрочитанное уведомление
+        /// </summary>
+        /// <returns></returns>
         public Task<NotificationModel> GetLastUnReadNotificationAsync()
         {
             return Query<UserNotificationInteraction>().Where(x => !x.ReadOn.HasValue)
@@ -92,6 +119,11 @@ namespace Ecc.Logic.Workers.Messaging
                 .FirstOrDefaultAsync(x => x.UserId == UserId);
         }
 
+        /// <summary>
+        /// Пометить уведомление как прочитанное
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> MarkNotificationAsReadAsync(string id)
         {
             var repo = GetRepository<UserNotificationInteraction>();
@@ -115,6 +147,11 @@ namespace Ecc.Logic.Workers.Messaging
             return await TrySaveChangesAndReturnResultAsync("Уведомление помечено как прочитанное");
         }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
         public UserNotificationsWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application) : base(ambientContext, application)
         {
         }

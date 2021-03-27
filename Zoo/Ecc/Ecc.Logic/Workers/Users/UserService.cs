@@ -9,12 +9,25 @@ using System.Threading.Tasks;
 
 namespace Ecc.Logic.Workers.Users
 {
+    /// <summary>
+    /// Сервис для работы с пользователями
+    /// </summary>
     public class UserService : BaseEccWorker
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="application"></param>
         public UserService(ICrocoAmbientContextAccessor context, ICrocoApplication application) : base(context, application)
         {
         }
 
+        /// <summary>
+        /// Создать пользователя
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> CreateUser(CreateUserCommand model)
         {
             var repo = GetRepository<EccUser>();
@@ -34,6 +47,11 @@ namespace Ecc.Logic.Workers.Users
             return await TrySaveChangesAndReturnResultAsync("Пользователь успешно добавлен");
         }
 
+        /// <summary>
+        /// Обновить пользователя
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> UpdateUser(UpdateUserCommand model)
         {
             var repo = GetRepository<EccUser>();

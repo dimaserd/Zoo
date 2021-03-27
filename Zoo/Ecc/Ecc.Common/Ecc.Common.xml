@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ecc.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Ecc.Common.Enumerations.InteractionStatus">
+            <summary>
+            Статус взаимодействия
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.InteractionStatus.Created">
+            <summary>
+            Создано
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.InteractionStatus.InProccess">
+            <summary>
+            В процессе отправки
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.InteractionStatus.Sent">
+            <summary>
+            Статус пока неизвестен. (Нужно проверить у провайдера)
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.InteractionStatus.Delivered">
+            <summary>
+            Успешно
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.InteractionStatus.Error">
+            <summary>
+            Ошибка
+            </summary>
+        </member>
+    </members>
+</doc>

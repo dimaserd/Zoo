@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ecc.Logic</name>
+    </assembly>
+    <members>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate.JsScript">
+            <summary>
+            Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.EmailTemplateModel.JsScript">
+            <summary>
+            Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.IntegratedApps.SendUserNotificationViaApplication">
+            <summary>
+            Отправить уведомление пользователю через интегрированное приложение
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.Messaging.ChangeUserGroupsInMailDistributionModel">
+            <summary>
+            Модель добавления или удаления группы пользователей из рассылки
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.Messaging.MailDistributionModel">
+            <summary>
+            Рассылка пользователям по почте
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.MailDistributionModel.Subject">
+            <summary>
+            Заголовок сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.MailDistributionModel.Body">
+            <summary>
+            Тело сообщения
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.Messaging.UserGroupIMailDistributionAddOrDelete">
+            <summary>
+            Модель добавления или удаления одной группы пользователя из рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.UserGroupIMailDistributionAddOrDelete.UserGroupId">
+            <summary>
+            Идентификатор группы пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.UserGroupIMailDistributionAddOrDelete.AddOrDelete">
+            <summary>
+            Если добавить в рассылку то значение равно true, если удалить значить false
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Notifications.NotificationModel.Id">
+            <summary>
+            Идентификатор уведомления
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserGroupModelWithUsers.Users">
+            <summary>
+            Пользователи принадлежащие к данной группе
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Resources.ValidationMessages">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.ValidationMessages.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.ValidationMessages.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.ValidationMessages.YouAreNotAnAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не являетесь администратором.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.ValidationMessages.YouAreNotAuthorized">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не авторизованы.
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccPixelUrlProvider.GetPixelEmailUrl(System.String)">
+            <summary>
+            Получить адрес для установки пикселя для определения прочитанности писем
+            </summary>
+            <param name="interactionId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Workers.Emails.MailMessageSender">
+            <summary>
+            Класс посылающий письма
+            </summary>
+        </member>
+    </members>
+</doc>
