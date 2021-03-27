@@ -23,7 +23,7 @@ namespace Tms.Logic.Services
         /// </summary>
         public int DaysSpan = 1;
 
-        public IUsersStorage UsersStorage { get; }
+        IUsersStorage UsersStorage { get; }
 
         /// <summary>
         /// Конструктор

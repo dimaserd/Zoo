@@ -1,22 +1,23 @@
 ﻿using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Extensions;
+using Ecc.Logic.Models;
 using Ecc.Logic.Settings;
 using Ecc.Logic.Workers.Base;
 using Ecc.Model.Entities.LinkCatch;
 using System;
 using System.Linq;
 
-namespace Ecc.Logic.Services
+namespace Ecc.Logic.Workers.Emails
 {
-    public class EccLinkFunctionInvoker : BaseEccWorker, IEccTextFunctionInvoker
+    public class EmailLinkFunctionInvoker : BaseEccWorker
     {
         string UrlRedirectFormat { get; }
 
-        public EccLinkFunctionInvoker(ICrocoAmbientContextAccessor ambientContextAccessor, 
-            ICrocoApplication application, EccLinkFunctionInvokerSettings settings) : base(ambientContextAccessor, application)
+        public EmailLinkFunctionInvoker(ICrocoAmbientContextAccessor ambientContextAccessor,
+            ICrocoApplication application, EccSettings settings) : base(ambientContextAccessor, application)
         {
-            UrlRedirectFormat = settings.UrlRedirectFormat;
+            UrlRedirectFormat = settings.FunctionInvokerSettings.UrlRedirectFormat;
         }
 
         public string GetUrlById(string id)

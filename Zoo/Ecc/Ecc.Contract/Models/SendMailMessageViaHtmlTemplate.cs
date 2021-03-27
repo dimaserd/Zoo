@@ -17,7 +17,7 @@ namespace Ecc.Contract.Models
         /// <summary>
         /// Список идентификаторов файлов с вложениями
         /// </summary>
-        public List<int> AttachmentFileIds { get; set; }
+        public int[] AttachmentFileIds { get; set; }
 
         public string TemplateFilePath { get; set; }
 

@@ -1,45 +1,63 @@
 ﻿using Croco.Core.Application;
 using Croco.Core.Application.Registrators;
-using Croco.Core.Implementations;
 using Croco.Core.Logic.Files;
-using Croco.Core.Logic.Files.Abstractions;
 using Croco.Core.Logic.Files.Events;
 using Ecc.Contract.Commands;
 using Ecc.Contract.Models.EmailGroup;
+using Ecc.Logic.Abstractions;
 using Ecc.Logic.Handlers;
+using Ecc.Logic.Services;
 using Ecc.Logic.Settings;
 using Ecc.Logic.Workers.Base;
+using Ecc.Logic.Workers.Emails;
+using Ecc.Logic.Workers.Emails.Senders;
 using Ecc.Model.Contexts;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Linq;
 
 namespace Ecc.Logic
 {
     public static class EccLogicRegistrator
     {
-        public static void RegisterLogic(CrocoApplicationBuilder appBuilder, EccLinkFunctionInvokerSettings functionInvokerSettings)
+        public static void RegisterLogic(CrocoApplicationBuilder appBuilder, EccSettings settings)
         {
             Check(appBuilder);
-            appBuilder.Services.AddSingleton(functionInvokerSettings);
-            RegisterEccWorkerTypes(appBuilder.Services);
+
+            var services = appBuilder.Services;
+            RegisterServices(services, settings);
+
+            RegisterEccWorkerTypes(services);
             AddMessageHandlers(appBuilder);
+        }
+
+        private static void RegisterServices(IServiceCollection services, EccSettings settings)
+        {
+            services.AddSingleton(settings);
+
+            if (!services.Any(x => x.ServiceType == typeof(IEmailSender)))
+            {
+                services.AddScoped<IEmailSender, SmtpEmailSender>();
+            }
+
+            services.AddSingleton<EccPixelUrlProvider>();
         }
 
         private static void AddMessageHandlers(CrocoApplicationBuilder appBuilder)
         {
-            appBuilder.EventSourceOptions
+            var eventSourceOptions = appBuilder.EventSourceOptions;
+
+            eventSourceOptions
                 .AddMessageHandler<CreateUserCommand, CreateUserCommandHandler>();
-            appBuilder.EventSourceOptions
+            
+            eventSourceOptions
                 .AddMessageHandler<UpdateUserCommand, UpdateUserCommandHandler>();
 
-            appBuilder.EventSourceOptions
+            eventSourceOptions
                 .AddMessageHandler<AppendEmailsFromFileToGroup, AppendEmailsFromFileToGroupMessageHandler>();
-            appBuilder.EventSourceOptions
+            eventSourceOptions
                 .AddMessageHandler<SendMailsForEmailGroup, SendMailsForEmailGroupMessageHandler>();
 
-            appBuilder.EventSourceOptions
+            eventSourceOptions
                 .AddMessageHandler<FilesUploadedEvent, FilesUploadedEventHandler>();
         }
 
@@ -49,8 +67,7 @@ namespace Ecc.Logic
 
             var typesToRegister = baseType
                 .Assembly.GetTypes()
-                .Where(t => t.IsSubclassOf(baseType) && !t.IsAbstract)
-                .ToList();
+                .Where(t => t.IsSubclassOf(baseType) && !t.IsAbstract);
 
             foreach (var typeToRegister in typesToRegister)
             {
@@ -62,15 +79,6 @@ namespace Ecc.Logic
         {
             new EFCrocoApplicationRegistrator(appBuilder).CheckForEFDataCoonection<EccDbContext>();
             DbFileManagerServiceCollectionExtensions.CheckForDbFileManager(appBuilder.Services);
-        }
-
-        private static void CheckForEFDataCoonection<TDbContext>() where TDbContext : DbContext
-        {
-            if (!CrocoAppData.GetRegisteredDataConnctions().Any(x => x.ImplementationType == typeof(EntityFrameworkDataConnection<TDbContext>)))
-            {
-                throw new InvalidOperationException($"Необходимо зарегистрировать EF соединение {nameof(EntityFrameworkDataConnection<TDbContext>)}. " +
-                    $"Воспользуйтесь методом {nameof(EFCrocoApplicationRegistrator.AddEntityFrameworkDataConnection)} класса {nameof(EFCrocoApplicationRegistrator)} для регистрации соединения");
-            }
         }
     }
 }

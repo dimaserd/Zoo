@@ -39,7 +39,7 @@ namespace Ecc.Logic.Workers.Messaging
                         Subject = x.Interaction.TitleText,
                         Body = x.Interaction.MessageText,
                         Email = x.Interaction.ReceiverEmail,
-                        AttachmentFileIds = x.Interaction.Attachments.Select(t => t.FileId).ToList(),
+                        AttachmentFileIds = x.Interaction.Attachments.Select(t => t.FileId).ToArray(),
                     }
                 })
                 .ToListAsync();

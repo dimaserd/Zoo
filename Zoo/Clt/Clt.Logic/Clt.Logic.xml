@@ -40,39 +40,26 @@
             <param name="fileData"></param>
             <returns></returns>
         </member>
-        <member name="T:Clt.Logic.RegistrationModule.CltLogicRegistrator">
+        <member name="T:Clt.Logic.CltLogicRegistrator">
             <summary>
             Регистратор клиентской логики
             </summary>
         </member>
-        <member name="M:Clt.Logic.RegistrationModule.CltLogicRegistrator.Register(Croco.Core.Application.CrocoApplicationBuilder,System.Action{Microsoft.AspNetCore.Identity.IdentityOptions})">
+        <member name="M:Clt.Logic.CltLogicRegistrator.Register(Croco.Core.Application.CrocoApplicationBuilder,System.Action{Microsoft.AspNetCore.Identity.IdentityOptions})">
             <summary>
             Зарегистрировать клиентскую логику
             </summary>
             <param name="applicationBuilder"></param>
             <param name="setupAction"></param>
         </member>
-        <member name="T:Clt.Logic.Extensions.MyIdentityExtensions">
+        <member name="M:Clt.Logic.HealthChecks.CltSettingsHealthCheck.#ctor(Croco.Core.Contract.ISettingsFactory)">
             <summary>
-            Расширения
+            Конструктор
             </summary>
+            <param name="settingsFactory"></param>
         </member>
-        <member name="M:Clt.Logic.Extensions.MyIdentityExtensions.HasRight(System.Security.Principal.IPrincipal,Clt.Contract.Enumerations.UserRight)">
-            <summary>
-            Проверка на наличие права
-            </summary>
-            <param name="rolePrincipal"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Extensions.UserManagerExtensions.AddRight(Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Model.Entities.Default.ApplicationUser,Clt.Contract.Enumerations.UserRight)">
-            <summary>
-            Добавляет право пользователю
-            </summary>
-            <param name="userManager"></param>
-            <param name="user"></param>
-            <param name="userRight"></param>
-            <returns></returns>
+        <member name="M:Clt.Logic.HealthChecks.CltSettingsHealthCheck.CheckHealth">
+            <inheritdoc />
         </member>
         <member name="T:Clt.Logic.Implementations.ApplicationAuthenticationManager">
             <summary>
@@ -417,6 +404,32 @@
               Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является Супер-Администратором.
             </summary>
         </member>
+        <member name="T:Clt.Logic.Services.Account.AccountInitiator">
+            <summary>
+            Методы для работы с учетными записями
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Services.Account.AccountInitiator.InitAsync">
+            <summary>
+            Создается пользователь Root в системе и ему присваиваются все необходимые права
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Account.AccountInitiator.CheckUserChanges">
+            <summary>
+            Проверить изменения пользователя
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Account.AccountInitiator.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.RoleManager{Clt.Model.Entities.Default.ApplicationRole},Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="app"></param>
+            <param name="roleManager"></param>
+            <param name="userManager"></param>
+        </member>
         <member name="T:Clt.Logic.Services.Account.AccountLoginAsUserService">
             <summary>
             Сервис для логинирования за другого пользователя
@@ -442,7 +455,7 @@
             Сервис для работы с методами логинирования
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountLoginWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher,Clt.Logic.Core.Workers.PasswordHashValidator,Clt.Logic.Abstractions.IApplicationAuthenticationManager)">
+        <member name="M:Clt.Logic.Services.Account.AccountLoginWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher,Clt.Logic.Services.Base.PasswordHashValidator,Clt.Logic.Abstractions.IApplicationAuthenticationManager)">
             <summary>
             Конструктор
             </summary>
@@ -473,32 +486,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Clt.Logic.Services.Account.AccountManager">
-            <summary>
-            Методы для работы с учетными записями
-            </summary>
-        </member>
-        <member name="M:Clt.Logic.Services.Account.AccountManager.InitAsync">
-            <summary>
-            Создается пользователь Root в системе и ему присваиваются все необходимые права
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Services.Account.AccountManager.CheckUserChanges">
-            <summary>
-            Проверить изменения пользователя
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Services.Account.AccountManager.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.RoleManager{Clt.Model.Entities.Default.ApplicationRole},Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="ambientContext"></param>
-            <param name="app"></param>
-            <param name="roleManager"></param>
-            <param name="userManager"></param>
-        </member>
         <member name="T:Clt.Logic.Services.Account.AccountRegistrationWorker">
             <summary>
             Методы для регистрации
@@ -520,11 +507,12 @@
             <param name="createRandomPass"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.RegisterUserByAdminAsync(Clt.Contract.Models.Account.RegisterModel)">
+        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.RegisterUserByAdminAsync(Clt.Contract.Models.Account.RegisterModel,System.String[])">
             <summary>
             Метод регистрирующий пользователя администратором
             </summary>
             <param name="model"></param>
+            <param name="roleNames"></param>
             <returns></returns>
         </member>
         <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser})">
@@ -575,6 +563,98 @@
             Валидировать модель и убедиться что пользователь является админом
             </summary>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Services.Base.PasswordChanger">
+            <summary>
+            Сервис для изменеия пароля
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordChanger.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="userManager"></param>
+            <param name="signInManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordChanger.ChangePasswordAsync(Clt.Contract.Models.Account.ChangeUserPasswordModel)">
+            <summary>
+            Изменить пароль
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordChanger.ChangePasswordByAdminAsync(Clt.Contract.Models.Account.ResetPasswordByAdminModel,System.Func{System.String,System.Threading.Tasks.Task{Clt.Contract.Models.Common.ApplicationUserBaseModel}})">
+            <summary>
+            Изменить пароль администратором
+            </summary>
+            <param name="model"></param>
+            <param name="getUserByIdFunc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordChanger.ChangePasswordBaseAsync(Clt.Model.Entities.Default.ApplicationUser,System.String)">
+            <summary>
+            Данный метод не может быть вынесен в API (Базовый метод)
+            </summary>
+            <param name="user"></param>
+            <param name="newPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Services.Base.PasswordForgotWorker">
+            <summary>
+            Предоставляет методы для работы с забывшими пароль пользователями
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordForgotWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="userManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordForgotWorker.UserForgotPassword(Clt.Contract.Models.Account.ForgotPasswordModel)">
+            <summary>
+            Востановить пароль через адрес электронной почты
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordForgotWorker.UserForgotPasswordByPhoneHandlerAsync(Clt.Contract.Models.Account.ForgotPasswordModelByPhone)">
+            <summary>
+            Востановить пароль через номер телефона
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordForgotWorker.ChangePasswordByToken(Clt.Contract.Models.Account.ChangePasswordByToken)">
+            <summary>
+            Изменить пароль по токену
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Clt.Logic.Services.Base.PasswordHashValidator">
+            <summary>
+            Валидатор хешей паролей
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordHashValidator.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="app"></param>
+        </member>
+        <member name="M:Clt.Logic.Services.Base.PasswordHashValidator.CheckUserNameAndPasswordAsync(System.String,System.String,System.String)">
+            <summary>
+            Проверить пароль
+            </summary>
+            <param name="userId"></param>
+            <param name="userName"></param>
+            <param name="pass"></param>
             <returns></returns>
         </member>
         <member name="T:Clt.Logic.Services.Users.ClientWorker">
@@ -732,98 +812,6 @@
             Активировать или деактивировать пользователя
             </summary>
             <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Clt.Logic.Core.Workers.PasswordChanger">
-            <summary>
-            Сервис для изменеия пароля
-            </summary>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordChanger.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser})">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="context"></param>
-            <param name="application"></param>
-            <param name="userManager"></param>
-            <param name="signInManager"></param>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordChanger.ChangePasswordAsync(Clt.Contract.Models.Account.ChangeUserPasswordModel)">
-            <summary>
-            Изменить пароль
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordChanger.ChangePasswordByAdminAsync(Clt.Contract.Models.Account.ResetPasswordByAdminModel,System.Func{System.String,System.Threading.Tasks.Task{Clt.Contract.Models.Common.ApplicationUserBaseModel}})">
-            <summary>
-            Изменить пароль администратором
-            </summary>
-            <param name="model"></param>
-            <param name="getUserByIdFunc"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordChanger.ChangePasswordBaseAsync(Clt.Model.Entities.Default.ApplicationUser,System.String)">
-            <summary>
-            Данный метод не может быть вынесен в API (Базовый метод)
-            </summary>
-            <param name="user"></param>
-            <param name="newPassword"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Clt.Logic.Core.Workers.PasswordForgotWorker">
-            <summary>
-            Предоставляет методы для работы с забывшими пароль пользователями
-            </summary>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordForgotWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="context"></param>
-            <param name="application"></param>
-            <param name="userManager"></param>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordForgotWorker.UserForgotPassword(Clt.Contract.Models.Account.ForgotPasswordModel)">
-            <summary>
-            Востановить пароль через адрес электронной почты
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordForgotWorker.UserForgotPasswordByPhoneHandlerAsync(Clt.Contract.Models.Account.ForgotPasswordModelByPhone)">
-            <summary>
-            Востановить пароль через номер телефона
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordForgotWorker.ChangePasswordByToken(Clt.Contract.Models.Account.ChangePasswordByToken)">
-            <summary>
-            Изменить пароль по токену
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Clt.Logic.Core.Workers.PasswordHashValidator">
-            <summary>
-            Валидатор хешей паролей
-            </summary>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordHashValidator.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="context"></param>
-            <param name="app"></param>
-        </member>
-        <member name="M:Clt.Logic.Core.Workers.PasswordHashValidator.CheckUserNameAndPasswordAsync(System.String,System.String,System.String)">
-            <summary>
-            Проверить пароль
-            </summary>
-            <param name="userId"></param>
-            <param name="userName"></param>
-            <param name="pass"></param>
             <returns></returns>
         </member>
     </members>

@@ -10,7 +10,7 @@ namespace Ecc.Contract.Models.Emails
 
         public string Email { get; set; }
 
-        public List<int> AttachmentFileIds { get; set; }
+        public int[] AttachmentFileIds { get; set; }
 
         public List<KeyValuePair<string, string>> MaskItems { get; set; }
     }

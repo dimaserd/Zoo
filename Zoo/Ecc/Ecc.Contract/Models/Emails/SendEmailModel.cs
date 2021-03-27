@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Ecc.Contract.Models.Emails
+﻿namespace Ecc.Contract.Models.Emails
 {
     public class SendEmailModel
     {
@@ -10,6 +8,6 @@ namespace Ecc.Contract.Models.Emails
 
         public string Email { get; set; }
 
-        public List<int> AttachmentFileIds { get; set; }
+        public int[] AttachmentFileIds { get; set; }
     }
 }

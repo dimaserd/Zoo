@@ -6,17 +6,16 @@ using Ecc.Logic.Abstractions;
 using Ecc.Logic.Workers.Base;
 using Ecc.Model.Entities.Email;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Ecc.Logic.Workers.Emails
 {
     public class EmailGroupFromFileCreator : BaseEccWorker
     {
-        IEccFileEmailsExtractor EmailsExtractor { get; }
-
-        public EmailGroupFromFileCreator(ICrocoAmbientContextAccessor context, ICrocoApplication application, IEccFileEmailsExtractor emailsExtractor) : base(context, application)
+        public EmailGroupFromFileCreator(ICrocoAmbientContextAccessor context, 
+            ICrocoApplication application) : base(context, application)
         {
-            EmailsExtractor = emailsExtractor;
         }
 
         public async Task<BaseApiResponse> ApppendEmailsToGroup(AppendEmailsFromFileToGroup model)
@@ -33,7 +32,7 @@ namespace Ecc.Logic.Workers.Emails
                 return new BaseApiResponse(false, "Группа не найдена по указанному идентификатору");
             }
 
-            if (!EmailsExtractor.FileExists(model.FilePath))
+            if (!File.Exists(Application.MapPath(model.FilePath)))
             {
                 return new BaseApiResponse(false, "Файл не существует");
             }

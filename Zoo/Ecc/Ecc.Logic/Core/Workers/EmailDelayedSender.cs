@@ -19,16 +19,13 @@ namespace Ecc.Logic.Core.Workers
 {
     public class EmailDelayedSender : BaseEccWorker
     {
-        IEccPixelUrlProvider UrlProvider { get; }
-        Dictionary<string, IEccTextFunctionInvoker> TextFunctions { get; }
-
-        public EmailDelayedSender(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application, 
-            IEccPixelUrlProvider urlProvider, IEccTextFunctionsProvider textFunctionsProvider) : base(ambientContext, application)
+        EccPixelUrlProvider UrlProvider { get; }
+        
+        public EmailDelayedSender(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application,
+            EccPixelUrlProvider urlProvider) : base(ambientContext, application)
         {
             UrlProvider = urlProvider;
-            TextFunctions = textFunctionsProvider.GetFunctions();
         }
-
 
         public Task<BaseApiResponse> SendEmail(SendMailMessage message)
         {
@@ -101,7 +98,7 @@ namespace Ecc.Logic.Core.Workers
             return await TrySaveChangesAndReturnResultAsync("Email-сообщения добавлены в очередь");
         }
 
-        private static List<InteractionAttachment> GetAttachments(string id, List<int> attachmentFileIds)
+        private static List<InteractionAttachment> GetAttachments(string id, int[] attachmentFileIds)
         {
             var attachments = attachmentFileIds?.Select(x => new InteractionAttachment
             {
@@ -116,13 +113,11 @@ namespace Ecc.Logic.Core.Workers
         {
             var id = Guid.NewGuid().ToString();
 
-            var body = EccGetMasksService.ProcessTextViaFunctions(message.Body, id, AmbientContextAccessor, TextFunctions);
-
             return (new MailMessageInteraction
             {
                 Id = id,
                 TitleText = message.Subject,
-                MessageText = AddReadingLink(body, id),
+                MessageText = AddReadingLink(message.Body, id),
                 SendNow = true,
                 UserId = message.UserId,
                 Type = EccConsts.EmailType,
@@ -141,13 +136,11 @@ namespace Ecc.Logic.Core.Workers
         {
             var id = Guid.NewGuid().ToString();
 
-            var body = EccGetMasksService.ProcessTextViaFunctions(message.Body, id, AmbientContextAccessor, TextFunctions);
-
             return (new MailMessageInteraction
             {
                 Id = id,
                 TitleText = message.Subject,
-                MessageText = AddReadingLink(body, id),
+                MessageText = AddReadingLink(message.Body, id),
                 ReceiverEmail = message.Email,
                 SendNow = true,
                 UserId = null,

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models.Definition;
 
 namespace Zoo.GenericUserInterface.Tests

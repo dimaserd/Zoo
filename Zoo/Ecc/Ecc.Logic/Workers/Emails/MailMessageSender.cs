@@ -17,19 +17,18 @@ namespace Ecc.Logic.Workers.Emails
     /// </summary>
     public class MailMessageSender : BaseEccWorker
     {
-        IEmailSender EmailSender { get; }
+        EmailWrapperSender EmailSender { get; }
 
-        public MailMessageSender(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application, IEmailSender emailSender) : base(ambientContext, application)
+        public MailMessageSender(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application, EmailWrapperSender emailSender) : base(ambientContext, application)
         {
             EmailSender = emailSender;
         }
-
 
         public async Task<List<UpdateInteractionStatus>> SendInteractions(List<SendEmailModelWithInteractionId> messages)
         {
             var fileIds = messages.SelectMany(x => x.EmailModel.AttachmentFileIds).ToArray();
 
-            var res = await EmailSender.SendEmails(messages, x => x.EmailModel);
+            var res = await EmailSender.SendEmails(messages);
 
             return res.Select(x => new UpdateInteractionStatus
             {

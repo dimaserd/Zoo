@@ -4,7 +4,6 @@ using Croco.Core.EventSourcing.Implementations;
 using Croco.Core.Utils;
 using Ecc.Contract.Models;
 using Ecc.Contract.Models.EmailGroup;
-using Ecc.Logic.Abstractions;
 using Ecc.Logic.Core.Workers;
 using Ecc.Model.Contexts;
 using Ecc.Model.Entities.Email;
@@ -18,18 +17,15 @@ namespace Ecc.Logic.Handlers
 {
     public class SendMailsForEmailGroupMessageHandler : CrocoMessageHandler<SendMailsForEmailGroup>
     {
-        IEccPixelUrlProvider UrlProvider { get; }
-        IEccTextFunctionsProvider TextFunctionsProvider { get; }
+        EmailDelayedSender EmailDelayedSender { get; }
 
         const int CountInPack = 100;
 
-        public SendMailsForEmailGroupMessageHandler(ICrocoApplication application, 
-            IEccPixelUrlProvider urlProvider, 
-            IEccTextFunctionsProvider textFunctionsProvider,
+        public SendMailsForEmailGroupMessageHandler(ICrocoApplication application,
+            EmailDelayedSender emailDelayedSender,
             ILogger<SendMailsForEmailGroupMessageHandler> logger) : base(application, logger)
         {
-            UrlProvider = urlProvider;
-            TextFunctionsProvider = textFunctionsProvider;
+            EmailDelayedSender = emailDelayedSender;
         }
 
 
@@ -75,19 +71,14 @@ namespace Ecc.Logic.Handlers
 
             while (count < emails.Count)
             {
-                await GetSystemTransactionHandler().ExecuteAndCloseTransactionSafe(amb =>
+                await EmailDelayedSender.SendEmails(emails.Skip(count).Take(CountInPack).Select(x => new SendMailMessage
                 {
-                    var sender = new EmailDelayedSender(amb, Application, UrlProvider, TextFunctionsProvider);
-
-                    return sender.SendEmails(emails.Skip(count).Take(CountInPack).Select(x => new SendMailMessage
-                    {
-                        Email = x,
-                        Body = model.Body,
-                        Subject = model.Subject,
-                        MessageDistributionId = messageDistribution,
-                        AttachmentFileIds = model.AttachmentFileIds
-                    }));
-                });
+                    Email = x,
+                    Body = model.Body,
+                    Subject = model.Subject,
+                    MessageDistributionId = messageDistribution,
+                    AttachmentFileIds = model.AttachmentFileIds
+                }));
 
                 count += CountInPack;
             }

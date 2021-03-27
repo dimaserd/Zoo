@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Ecc.Contract.Models
+﻿namespace Ecc.Contract.Models
 {
     public class SendMailMessageToUser
     {
@@ -13,6 +11,6 @@ namespace Ecc.Contract.Models
         /// <summary>
         /// Список идентификаторов файлов с вложениями
         /// </summary>
-        public List<int> AttachmentFileIds { get; set; }
+        public int[] AttachmentFileIds { get; set; }
     }
 }

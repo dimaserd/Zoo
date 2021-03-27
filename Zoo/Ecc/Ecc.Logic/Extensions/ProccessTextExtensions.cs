@@ -1,7 +1,7 @@
 ﻿using Croco.Core.Contract.Models;
 using Ecc.Contract.Models;
 using Ecc.Contract.Models.Emails;
-using Ecc.Logic.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -52,9 +52,9 @@ namespace Ecc.Logic.Extensions
             }).ToList();
         }
 
-        public static BaseApiResponse<SendEmailModel> ToSendEmailModel(this SendMailMessageViaHtmlTemplate model, IEccFilePathMapper filePathMapper)
+        public static BaseApiResponse<SendEmailModel> ToSendEmailModel(this SendMailMessageViaHtmlTemplate model, Func<string, string> pathMapper)
         {   
-            var filePath = filePathMapper.MapPath(model.TemplateFilePath);
+            var filePath = pathMapper(model.TemplateFilePath);
 
             if (!File.Exists(filePath))
             {

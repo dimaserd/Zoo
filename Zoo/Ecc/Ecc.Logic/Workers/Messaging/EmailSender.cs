@@ -2,7 +2,6 @@
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Ecc.Contract.Models;
-using Ecc.Logic.Abstractions;
 using Ecc.Logic.Core.Workers;
 using Ecc.Logic.Extensions;
 using Ecc.Logic.Workers.Base;
@@ -12,22 +11,18 @@ namespace Ecc.Logic.Workers.Messaging
 {
     public class EmailSender : BaseEccWorker
     {
-        IEccFilePathMapper FilePathMapper { get; }
         EmailDelayedSender EmailDelayedSender { get; }
 
         public EmailSender(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication application, 
-            IEccFilePathMapper filePathMapper, 
             EmailDelayedSender emailDelayedSender) : base(ambientContext, application)
         {
-            FilePathMapper = filePathMapper;
             EmailDelayedSender = emailDelayedSender;
         }
-
         
         public async Task<BaseApiResponse> SendEmailViaTemplate(SendMailMessageViaHtmlTemplate model)
         {
-            var sendModel = model.ToSendEmailModel(FilePathMapper);
+            var sendModel = model.ToSendEmailModel(Application.MapPath);
 
             if (!sendModel.IsSucceeded)
             {

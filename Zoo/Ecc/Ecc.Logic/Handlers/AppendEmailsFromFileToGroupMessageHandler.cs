@@ -2,6 +2,7 @@
 using Croco.Core.EventSourcing.Implementations;
 using Ecc.Contract.Models.EmailGroup;
 using Ecc.Logic.Abstractions;
+using Ecc.Logic.Services;
 using Ecc.Model.Contexts;
 using Ecc.Model.Entities.Email;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,9 @@ namespace Ecc.Logic.Handlers
     {
         const int CountInPack = 100;
 
-        IEccFileEmailsExtractor EmailsExtractor { get; }
+        EmailListExtractor EmailsExtractor { get; }
 
-        public AppendEmailsFromFileToGroupMessageHandler(IEccFileEmailsExtractor emailsExtractor,
+        public AppendEmailsFromFileToGroupMessageHandler(EmailListExtractor emailsExtractor,
             ICrocoApplication application, 
             ILogger<AppendEmailsFromFileToGroupMessageHandler> logger) : base(application, logger)
         {

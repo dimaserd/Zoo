@@ -8,7 +8,7 @@ namespace Ecc.Contract.Models.Emails
 
         public string BodyFormat { get; set; }
 
-        public List<int> AttachmentFileIds { get; set; }
+        public int[] AttachmentFileIds { get; set; }
 
         public List<SendMailWithMaskItems> EmailWithMasks { get; set; }      
     }
