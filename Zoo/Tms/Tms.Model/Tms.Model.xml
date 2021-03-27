@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tms.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Tms.Model.Entities.DayTask">
+            <summary>
+            Сущность описывающая задание на день
+            </summary>
+        </member>
+        <member name="M:Tms.Model.Entities.DayTask.#ctor">
+            <summary>
+            Конструктор
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.TaskDate">
+            <summary>
+            Дата задания больше день чем просто дата
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.TaskText">
+            <summary>
+            Текст задания
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.TaskTitle">
+            <summary>
+            Название задания
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.FinishDate">
+            <summary>
+            Дата завершения
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.TaskTarget">
+            <summary>
+            Цель Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.TaskReview">
+            <summary>
+            Отчет Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.TaskComment">
+            <summary>
+            Комментарий Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.EstimationSeconds">
+            <summary>
+            Оценка исполнителя
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.CompletionSeconds">
+            <summary>
+            Фактически затраченное время
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.AuthorId">
+            <summary>
+            Идентификатор автора данного задания
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.AssigneeUserId">
+            <summary>
+            Идентифкатор пользователя на которого назначили данное задание
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTask.Comments">
+            <summary>
+            Комментарии к данному заданию
+            </summary>
+        </member>
+        <member name="T:Tms.Model.Entities.DayTaskComment">
+            <summary>
+            Комментарий к заданию от пользователя
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTaskComment.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTaskComment.Comment">
+            <summary>
+            Текст комментария
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTaskComment.DayTaskId">
+            <summary>
+            Идентификатор задания к которому был оставлен комментарий
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTaskComment.DayTask">
+            <summary>
+            Задание к которому был оставлен комментарий
+            </summary>
+        </member>
+        <member name="P:Tms.Model.Entities.DayTaskComment.AuthorId">
+            <summary>
+            Идентификатор автора данного комменатрия к заданию
+            </summary>
+        </member>
+        <member name="T:Tms.Model.TmsDbContext">
+            <summary>
+            DbContext для системы управления заданиями
+            </summary>
+        </member>
+        <member name="M:Tms.Model.TmsDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Tms.Model.TmsDbContext})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:Tms.Model.TmsDbContext.DayTasks">
+            <summary>
+            Задания на день
+            </summary>
+        </member>
+        <member name="P:Tms.Model.TmsDbContext.DayTaskComments">
+            <summary>
+            Комментарии к заданиям
+            </summary>
+        </member>
+    </members>
+</doc>

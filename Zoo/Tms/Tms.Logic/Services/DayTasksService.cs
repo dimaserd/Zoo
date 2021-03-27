@@ -25,6 +25,13 @@ namespace Tms.Logic.Services
 
         public IUsersStorage UsersStorage { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="contextAccessor"></param>
+        /// <param name="application"></param>
+        /// <param name="principalCheker"></param>
+        /// <param name="usersStorage"></param>
         public DayTasksService(ICrocoAmbientContextAccessor contextAccessor, 
             ICrocoApplication application, 
             PrincipalCheker principalCheker,
@@ -69,6 +76,11 @@ namespace Tms.Logic.Services
             return await GetDayTasks(result);
         }
 
+        /// <summary>
+        /// Получить задание по идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<DayTaskModel> GetDayTaskByIdAsync(string id)
         {
             var res = await Query<DayTask>()
@@ -78,6 +90,11 @@ namespace Tms.Logic.Services
             return await GetDayTask(res);
         }
 
+        /// <summary>
+        /// Создать или обновить задание
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Task<BaseApiResponse> CreateOrUpdateDayTaskAsync(CreateOrUpdateDayTask model)
         {
             if (string.IsNullOrEmpty(model.Id))

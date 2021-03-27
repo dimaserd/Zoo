@@ -1,11 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Tms.Logic.Models
 {
+    /// <summary>
+    /// Модель задания на день
+    /// </summary>
     public class DayTaskModel
     {
-        public DayTaskModel(DayTaskModelWithNoUsersJustIds model, 
+        /// <summary>
+        /// Контструктор
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="author"></param>
+        /// <param name="assignee"></param>
+        internal DayTaskModel(DayTaskModelWithNoUsersJustIds model, 
             UserFullNameEmailAndAvatarModel author, 
             UserFullNameEmailAndAvatarModel assignee)
         {
@@ -61,11 +69,6 @@ namespace Tms.Logic.Models
         /// </summary>
         public string TaskComment { get; set; }
 
-        public List<DayTaskCommentModel> Comments { get; set; } = new List<DayTaskCommentModel>();
-
-        #region Свойства отношений
-
-
         /// <summary>
         /// Администратор
         /// </summary>
@@ -75,6 +78,5 @@ namespace Tms.Logic.Models
         /// Исполнитель
         /// </summary>
         public UserFullNameEmailAndAvatarModel AssigneeUser { get; set; }
-        #endregion
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Tms.Logic.Models
 {
-    public class DayTaskModelWithNoUsersJustIds
+    internal class DayTaskModelWithNoUsersJustIds
     {
         /// <summary>
         /// Идентификатор

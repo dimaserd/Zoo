@@ -1,0 +1,662 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tms.Logic</name>
+    </assembly>
+    <members>
+        <member name="T:Tms.Logic.Abstractions.IUsersStorage">
+            <summary>
+            Абстракция файлового хранилища пользователей
+            </summary>
+        </member>
+        <member name="M:Tms.Logic.Abstractions.IUsersStorage.GetUserById(System.String)">
+            <summary>
+            Получить пользователя по идентификатору
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Logic.Abstractions.IUsersStorage.GetUsersDictionary">
+            <summary>
+            Получить список пользователей (ключ является идентификатором)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Logic.Models.CalendarMonthViewModel">
+            <summary>
+            Модель месяца для календаря
+            </summary>
+        </member>
+        <member name="M:Tms.Logic.Models.CalendarMonthViewModel.#ctor(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="monthShift"></param>
+        </member>
+        <member name="M:Tms.Logic.Models.CalendarMonthViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CalendarMonthViewModel.TodayDate">
+            <summary>
+            Дата сегодняшнего дня
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CalendarMonthViewModel.DaysInPrevMonth">
+            <summary>
+            Дни для дат из предыдущего месяца
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CalendarMonthViewModel.DaysInThisMonth">
+            <summary>
+            Дни для дат из этого месяца
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CalendarMonthViewModel.DaysInNextMonth">
+            <summary>
+            Дни для дат в следующем месяце
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.CommentDayTask">
+            <summary>
+            Комментировать задание
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CommentDayTask.DayTaskId">
+            <summary>
+            Идентификатор задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CommentDayTask.Comment">
+            <summary>
+            Текст комментария
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.CreateOrUpdateDayTask">
+            <summary>
+            Создать или обновить задание
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.Id">
+            <summary>
+            Идентификатор задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskDate">
+            <summary>
+            День на которое назначено задание
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskText">
+            <summary>
+            Описание задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskTitle">
+            <summary>
+            Название задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.AssigneeUserId">
+            <summary>
+            Идентификатор исполнителя
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskTarget">
+            <summary>
+            Цель Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskReview">
+            <summary>
+            Отчет Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskComment">
+            <summary>
+            Комментарий Html (Summernote)
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.DayTaskModel">
+            <summary>
+            Модель задания на день
+            </summary>
+        </member>
+        <member name="M:Tms.Logic.Models.DayTaskModel.#ctor(Tms.Logic.Models.DayTaskModelWithNoUsersJustIds,Tms.Logic.Models.UserFullNameEmailAndAvatarModel,Tms.Logic.Models.UserFullNameEmailAndAvatarModel)">
+            <summary>
+            Контструктор
+            </summary>
+            <param name="model"></param>
+            <param name="author"></param>
+            <param name="assignee"></param>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.TaskDate">
+            <summary>
+            Дата задания больше день чем просто дата
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.TaskText">
+            <summary>
+            Текст задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.TaskTitle">
+            <summary>
+            Название задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.FinishDate">
+            <summary>
+            Дата завершения
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.TaskTarget">
+            <summary>
+            Цель Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.TaskReview">
+            <summary>
+            Отчет Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.TaskComment">
+            <summary>
+            Комментарий Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.Author">
+            <summary>
+            Администратор
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModel.AssigneeUser">
+            <summary>
+            Исполнитель
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.TaskDate">
+            <summary>
+            Дата задания больше день чем просто дата
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.TaskText">
+            <summary>
+            Текст задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.TaskTitle">
+            <summary>
+            Название задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.FinishDate">
+            <summary>
+            Дата завершения
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.TaskTarget">
+            <summary>
+            Цель Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.TaskReview">
+            <summary>
+            Отчет Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.TaskComment">
+            <summary>
+            Комментарий Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.AuthorId">
+            <summary>
+            Администратор
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.AssigneeId">
+            <summary>
+            Исполнитель
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.UpdateDayTaskComment">
+            <summary>
+            Модель для обновления комментария
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UpdateDayTaskComment.DayTaskCommentId">
+            <summary>
+            Идентификатор комментария
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UpdateDayTaskComment.Comment">
+            <summary>
+            Текст комментария
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.UserFullNameEmailAndAvatarModel">
+            <summary>
+            Модель для отображения пользователя
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UserFullNameEmailAndAvatarModel.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UserFullNameEmailAndAvatarModel.Surname">
+            <summary>
+            Фамилия
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UserFullNameEmailAndAvatarModel.Patronymic">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UserFullNameEmailAndAvatarModel.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UserFullNameEmailAndAvatarModel.Name">
+            <summary>
+            Имя пользователя
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UserFullNameEmailAndAvatarModel.AvatarFileId">
+            <summary>
+            Идентификатор аватара
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.UserScheduleSearchModel">
+            <summary>
+            Модель для получения расписания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UserScheduleSearchModel.MonthShift">
+            <summary>
+            Сдвиг по месяцам
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UserScheduleSearchModel.UserIds">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UserScheduleSearchModel.ShowTasksWithNoAssignee">
+            <summary>
+            Показывать задания без исполнителя
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Resources.TaskerResource">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.TaskerResource.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.TaskerResource.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.TaskerResource.CommentAdded">
+            <summary>
+              Ищет локализованную строку, похожую на Комментарий добавлен.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.TaskerResource.CommentCantBeEmpty">
+            <summary>
+              Ищет локализованную строку, похожую на Комментарий к заданию не может быть пустым.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.TaskerResource.CommentUpdated">
+            <summary>
+              Ищет локализованную строку, похожую на Комментарий обновлён.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.TaskerResource.DayTaskCommentNotFoundById">
+            <summary>
+              Ищет локализованную строку, похожую на Комментарий к заданию не найден по указанному идентификатору.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.TaskerResource.DayTaskNotFoundByProvidedId">
+            <summary>
+              Ищет локализованную строку, похожую на Задание не найдено по указанному идентификатору.
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Resources.ValidationMessages">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.BrandNameCanNotBeEmpty">
+            <summary>
+              Ищет локализованную строку, похожую на Название бренда не может быть пустым.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.EmailIsNotValid">
+            <summary>
+              Ищет локализованную строку, похожую на Неправильный Email адрес.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.EmailIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать Email.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ErrorOccuredFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Произошла ошибка. {0}.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ModelIsNullObject">
+            <summary>
+              Ищет локализованную строку, похожую на Модель является пустым объектом.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ModelIsValid">
+            <summary>
+              Ищет локализованную строку, похожую на Модель валидна.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ProductAddedToCart">
+            <summary>
+              Ищет локализованную строку, похожую на Товар добавлен в корзину.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ProductCategoryMenuNameCanNotBeEmpty">
+            <summary>
+              Ищет локализованную строку, похожую на Название  меню продуктовых категорий не может быть пустым.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ProductFileIdsArrayIsEmpty">
+            <summary>
+              Ищет локализованную строку, похожую на Список идентификаторов файлов для товара пуст.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ProductIsAlreadyInCart">
+            <summary>
+              Ищет локализованную строку, похожую на Товар уже добавлен в корзину.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ProductItemIdIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать идентификатор товарной позиции.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ProductItemIsNotFoundByProvidedIdentifier">
+            <summary>
+              Ищет локализованную строку, похожую на Товарная позиция не найдена по указанному идентификатору.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ProductItemIsNotFoundInCart">
+            <summary>
+              Ищет локализованную строку, похожую на Товарная позиция не найдена в корзине.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ThisEmailIsAlreadyTaken">
+            <summary>
+              Ищет локализованную строку, похожую на Данный Email уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTaken">
+            <summary>
+              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTakenByOtherUser">
+            <summary>
+              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.UriIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать Uri.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.UserFound">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь найден.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.UserIdentifierMustBeProvided">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать идентификатор пользователя.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.UserIdIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать идентификатор пользователя.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.UserIsNotFoundByIdentifier">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь не найден по указанному идентификатору.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.UserNotFound">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь не найден.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.YouAreNotAnAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не являетесь администратором.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.YouAreNotAnAdministratorOrSeller">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не являетесь администратором или продавцом..
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.YouAreNotAuthorized">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не авторизованы.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.YouCantAddOrEditProductToCartWithQuantityLessOrEqualThanZero">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете изменить или добавить товар в корзину с колличеством меньшим или равным нулю.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.YouCantEditRootUser">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя Root.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.YouCantEditUserBecauseHeIsAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является администратором.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.ValidationMessages.YouCantEditUserBecauseHeIsSuperAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является Супер-Администратором.
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Services.DayTaskCommentService">
+            <summary>
+            Сервис для комментирования заданий на день
+            </summary>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTaskCommentService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Tms.Logic.Services.PrincipalCheker,Tms.Logic.Services.DayTasksService)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="contextAccessor"></param>
+            <param name="application"></param>
+            <param name="principalCheker"></param>
+            <param name="dayTasksService"></param>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTaskCommentService.CommentDayTaskAsync(Tms.Logic.Models.CommentDayTask)">
+            <summary>
+            Добавить комментарий к заданию
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTaskCommentService.UpdateDayTaskCommentAsync(Tms.Logic.Models.UpdateDayTaskComment)">
+            <summary>
+            Обновить комментарий
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Logic.Services.DayTasksService">
+            <summary>
+            Класс для работы с заданиями на день 
+            </summary>
+        </member>
+        <member name="F:Tms.Logic.Services.DayTasksService.DaysSpan">
+            <summary>
+            Задания можно создавать и редактировать за один прошедший день
+            </summary>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTasksService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Tms.Logic.Services.PrincipalCheker,Tms.Logic.Abstractions.IUsersStorage)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="contextAccessor"></param>
+            <param name="application"></param>
+            <param name="principalCheker"></param>
+            <param name="usersStorage"></param>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTasksService.GetDayTasksAsync(Tms.Logic.Models.UserScheduleSearchModel)">
+            <summary>
+            Возвращает задания на месяц для текущего пользователя
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTasksService.GetDayTaskByIdAsync(System.String)">
+            <summary>
+            Получить задание по идентификатору
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTasksService.CreateOrUpdateDayTaskAsync(Tms.Logic.Models.CreateOrUpdateDayTask)">
+            <summary>
+            Создать или обновить задание
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTasksService.CreateDayTaskAsync(Tms.Logic.Models.CreateOrUpdateDayTask)">
+            <summary>
+            Создание задания
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTasksService.UpdateDayTaskAsync(Tms.Logic.Models.CreateOrUpdateDayTask)">
+            <summary>
+            Редактирование задания
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTasksService.GetAllowedDate">
+            <summary>
+            Получить допустимую дату
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTasksService.GetDatesTuple(System.DateTime,System.Int32)">
+            <summary>
+            Метод высчитывающий начальную 
+            </summary>
+            <param name="dateNow"></param>
+            <param name="monthShift"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Logic.Services.PrincipalCheker">
+            <summary>
+            Проверщик прав
+            </summary>
+        </member>
+        <member name="M:Tms.Logic.Services.PrincipalCheker.#ctor(System.Func{System.Security.Principal.IPrincipal,System.Boolean})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="isAdminFunc"></param>
+        </member>
+        <member name="M:Tms.Logic.Services.PrincipalCheker.IsAdmin(System.Security.Principal.IPrincipal)">
+            <summary>
+            Определение администратора
+            </summary>
+            <param name="rolePrincipal"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Logic.Services.TmsBaseService">
+            <summary>
+            Базовый класс для менеджера заданий
+            </summary>
+        </member>
+        <member name="M:Tms.Logic.Services.TmsBaseService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Tms.Logic.Services.PrincipalCheker)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="contextAccessor"></param>
+            <param name="application"></param>
+            <param name="principalCheker"></param>
+        </member>
+        <member name="M:Tms.Logic.Services.TmsBaseService.IsUserAdmin">
+            <summary>
+            Проверка на администратора
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Tms.Logic.TmsRegistrator">
+            <summary>
+            Регистратор для контекста Tms
+            </summary>
+        </member>
+        <member name="M:Tms.Logic.TmsRegistrator.Register``1(Croco.Core.Application.CrocoApplicationBuilder,System.Func{System.Security.Principal.IPrincipal,System.Boolean})">
+            <summary>
+            Зарегистрировать контекст
+            </summary>
+            <typeparam name="TUsersStorage"></typeparam>
+            <param name="appBuilder"></param>
+            <param name="isAdminChecker"></param>
+        </member>
+        <member name="M:Tms.Logic.TmsRegistrator.Register``1(Croco.Core.Application.CrocoApplicationBuilder,System.Func{System.IServiceProvider,``0},System.Func{System.Security.Principal.IPrincipal,System.Boolean})">
+            <summary>
+            Зарегистрировать контекст
+            </summary>
+            <typeparam name="TUsersStorage"></typeparam>
+            <param name="appBuilder"></param>
+            <param name="regiteringStorage"></param>
+            <param name="isAdminChecker"></param>
+        </member>
+    </members>
+</doc>

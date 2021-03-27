@@ -9,10 +9,20 @@ using Tms.Model.Entities;
 
 namespace Tms.Logic.Services
 {
+    /// <summary>
+    /// Сервис для комментирования заданий на день
+    /// </summary>
     public class DayTaskCommentService : TmsBaseService
     {
         DayTasksService DayTasksService { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="contextAccessor"></param>
+        /// <param name="application"></param>
+        /// <param name="principalCheker"></param>
+        /// <param name="dayTasksService"></param>
         public DayTaskCommentService(ICrocoAmbientContextAccessor contextAccessor, 
             ICrocoApplication application, 
             PrincipalCheker principalCheker,
@@ -69,6 +79,11 @@ namespace Tms.Logic.Services
             });
         }
 
+        /// <summary>
+        /// Обновить комментарий
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse<DayTaskModel>> UpdateDayTaskCommentAsync(UpdateDayTaskComment model)
         {
             if (!IsAuthenticated)

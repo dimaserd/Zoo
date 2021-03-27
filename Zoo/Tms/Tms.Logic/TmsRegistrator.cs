@@ -10,14 +10,30 @@ using Tms.Model;
 
 namespace Tms.Logic
 {
+    /// <summary>
+    /// Регистратор для контекста Tms
+    /// </summary>
     public static class TmsRegistrator
     {
+        /// <summary>
+        /// Зарегистрировать контекст
+        /// </summary>
+        /// <typeparam name="TUsersStorage"></typeparam>
+        /// <param name="appBuilder"></param>
+        /// <param name="isAdminChecker"></param>
         public static void Register<TUsersStorage>(CrocoApplicationBuilder appBuilder, Func<IPrincipal, bool> isAdminChecker)
             where TUsersStorage : class, IUsersStorage
         {
             RegisterInner<TUsersStorage>(appBuilder, isAdminChecker, () => appBuilder.Services.AddScoped<IUsersStorage, TUsersStorage>());
         }
 
+        /// <summary>
+        /// Зарегистрировать контекст
+        /// </summary>
+        /// <typeparam name="TUsersStorage"></typeparam>
+        /// <param name="appBuilder"></param>
+        /// <param name="regiteringStorage"></param>
+        /// <param name="isAdminChecker"></param>
         public static void Register<TUsersStorage>(CrocoApplicationBuilder appBuilder, Func<IServiceProvider, TUsersStorage> regiteringStorage, Func<IPrincipal, bool> isAdminChecker)
             where TUsersStorage : class, IUsersStorage
         {

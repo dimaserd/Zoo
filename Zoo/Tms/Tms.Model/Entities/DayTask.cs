@@ -6,8 +6,14 @@ using Newtonsoft.Json;
 
 namespace Tms.Model.Entities
 {
+    /// <summary>
+    /// Сущность описывающая задание на день
+    /// </summary>
     public class DayTask : AuditableEntityBase
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public DayTask()
         {
             Comments = new List<DayTaskComment>();
@@ -64,8 +70,6 @@ namespace Tms.Model.Entities
         /// </summary>
         public int CompletionSeconds { get; set; }
 
-        public int Seconds { get; set; }
-
         #region Свойства отношений
 
         /// <summary>
@@ -73,6 +77,9 @@ namespace Tms.Model.Entities
         /// </summary>
         public string AuthorId { get; set; }
 
+        /// <summary>
+        /// Идентифкатор пользователя на которого назначили данное задание
+        /// </summary>
         public string AssigneeUserId { get; set; }
 
         /// <summary>

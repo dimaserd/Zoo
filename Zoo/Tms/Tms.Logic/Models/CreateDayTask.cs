@@ -2,10 +2,19 @@
 
 namespace Tms.Logic.Models
 {
+    /// <summary>
+    /// Создать или обновить задание
+    /// </summary>
     public class CreateOrUpdateDayTask
     {
+        /// <summary>
+        /// Идентификатор задания
+        /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        /// День на которое назначено задание
+        /// </summary>
         public DateTime TaskDate { get; set; }
 
         /// <summary>
@@ -18,6 +27,9 @@ namespace Tms.Logic.Models
         /// </summary>
         public string TaskTitle { get; set; }
 
+        /// <summary>
+        /// Идентификатор исполнителя
+        /// </summary>
         public string AssigneeUserId { get; set; }
 
         /// <summary>
