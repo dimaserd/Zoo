@@ -1,6 +1,7 @@
 ﻿using Clt.Contract.Models.Account;
 using Clt.Contract.Models.Common;
 using Clt.Logic.Extensions;
+using Clt.Logic.Services.Users;
 using Clt.Model.Entities.Default;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
@@ -19,6 +20,7 @@ namespace Clt.Logic.Services.Base
     {
         UserManager<ApplicationUser> UserManager { get; }
         SignInManager<ApplicationUser> SignInManager { get; }
+        UserSearcher UserSearcher { get; }
 
         /// <summary>
         /// Конструктор
@@ -27,11 +29,14 @@ namespace Clt.Logic.Services.Base
         /// <param name="application"></param>
         /// <param name="userManager"></param>
         /// <param name="signInManager"></param>
+        /// <param name="userSearcher"></param>
         public PasswordChanger(ICrocoAmbientContextAccessor context, ICrocoApplication application,
-            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) : base(context, application)
+            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+            UserSearcher userSearcher) : base(context, application)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            UserSearcher = userSearcher;
         }
 
         /// <summary>
@@ -84,9 +89,8 @@ namespace Clt.Logic.Services.Base
         /// Изменить пароль администратором
         /// </summary>
         /// <param name="model"></param>
-        /// <param name="getUserByIdFunc"></param>
         /// <returns></returns>
-        public async Task<BaseApiResponse> ChangePasswordByAdminAsync(ResetPasswordByAdminModel model, Func<string, Task<ApplicationUserBaseModel>> getUserByIdFunc)
+        public async Task<BaseApiResponse> ChangePasswordByAdminAsync(ResetPasswordByAdminModel model)
         {
             var user = await UserManager.FindByIdAsync(model.Id);
 
@@ -95,7 +99,7 @@ namespace Clt.Logic.Services.Base
                 return new BaseApiResponse(false, "Пользователь не найден");
             }
 
-            var userDto = await getUserByIdFunc(user.Id);
+            var userDto = await UserSearcher.GetUserByIdAsync(user.Id);
 
             var result = UserRightsExtensions.HasRightToEditUser(userDto, User, RolesSetting);
 

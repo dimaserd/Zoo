@@ -570,7 +570,7 @@
             Сервис для изменеия пароля
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Base.PasswordChanger.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser})">
+        <member name="M:Clt.Logic.Services.Base.PasswordChanger.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher)">
             <summary>
             Конструктор
             </summary>
@@ -578,6 +578,7 @@
             <param name="application"></param>
             <param name="userManager"></param>
             <param name="signInManager"></param>
+            <param name="userSearcher"></param>
         </member>
         <member name="M:Clt.Logic.Services.Base.PasswordChanger.ChangePasswordAsync(Clt.Contract.Models.Account.ChangeUserPasswordModel)">
             <summary>
@@ -586,12 +587,11 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Base.PasswordChanger.ChangePasswordByAdminAsync(Clt.Contract.Models.Account.ResetPasswordByAdminModel,System.Func{System.String,System.Threading.Tasks.Task{Clt.Contract.Models.Common.ApplicationUserBaseModel}})">
+        <member name="M:Clt.Logic.Services.Base.PasswordChanger.ChangePasswordByAdminAsync(Clt.Contract.Models.Account.ResetPasswordByAdminModel)">
             <summary>
             Изменить пароль администратором
             </summary>
             <param name="model"></param>
-            <param name="getUserByIdFunc"></param>
             <returns></returns>
         </member>
         <member name="M:Clt.Logic.Services.Base.PasswordChanger.ChangePasswordBaseAsync(Clt.Model.Entities.Default.ApplicationUser,System.String)">
