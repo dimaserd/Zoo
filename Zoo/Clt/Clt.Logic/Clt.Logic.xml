@@ -455,7 +455,7 @@
             Сервис для работы с методами логинирования
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountLoginWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher,Clt.Logic.Services.Base.PasswordHashValidator,Clt.Logic.Abstractions.IApplicationAuthenticationManager)">
+        <member name="M:Clt.Logic.Services.Account.AccountLoginWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher,Clt.Logic.Services.Base.PasswordHashValidator,Clt.Logic.Abstractions.IApplicationAuthenticationManager,Microsoft.Extensions.Logging.ILogger{Clt.Logic.Services.Account.AccountLoginWorker})">
             <summary>
             Конструктор
             </summary>
@@ -465,6 +465,7 @@
             <param name="userSearcher"></param>
             <param name="passwordHashValidator"></param>
             <param name="authenticationManager"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:Clt.Logic.Services.Account.AccountLoginWorker.LoginAsync(Clt.Contract.Models.Account.LoginModel)">
             <summary>
@@ -491,7 +492,7 @@
             Методы для регистрации
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher)">
+        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher,Microsoft.Extensions.Logging.ILogger{Clt.Logic.Services.Account.AccountRegistrationWorker})">
             <summary>
             Конструктор
             </summary>
@@ -500,6 +501,7 @@
             <param name="userManager"></param>
             <param name="signInManager"></param>
             <param name="userSearcher"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.RegisterAndSignInAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
             <summary>

@@ -77,13 +77,19 @@ namespace Clt.Logic.Services.Account
 
             var user = await SignInManager.UserManager.FindByEmailAsync(model.Email);
 
+            if (user == null)
+            {
+                Logger.LogTrace("user is null");
+                return UnSuccessfulLoginAttempt();
+            }
+
             var client = await Query<Client>()
                 .FirstOrDefaultAsync(x => x.Email == model.Email);
 
-            if (user == null || client == null)
+            if(client == null)
             {
-                Logger.LogTrace("user or client is null");
-                return new BaseApiResponse<LoginResultModel>(false, "Неудачная попытка входа", new LoginResultModel { Result = LoginResult.UnSuccessfulAttempt });
+                Logger.LogTrace("client is null");
+                return UnSuccessfulLoginAttempt();
             }
 
             if (client.DeActivated)
@@ -110,7 +116,7 @@ namespace Clt.Logic.Services.Account
                 //если пароль не подходит выдаю ответ
                 if (!passCheckResult.IsSucceeded)
                 {
-                    return new BaseApiResponse<LoginResultModel>(false, "Неудачная попытка входа", new LoginResultModel { Result = LoginResult.UnSuccessfulAttempt, TokenId = null });
+                    return UnSuccessfulLoginAttempt();
                 }
                 
                 if (user.Email == RootSettings.RootEmail) //root входит без подтверждений
@@ -141,6 +147,11 @@ namespace Clt.Logic.Services.Account
                 });
             }
 
+            return UnSuccessfulLoginAttempt();
+        }
+
+        private static BaseApiResponse<LoginResultModel> UnSuccessfulLoginAttempt()
+        {
             return new BaseApiResponse<LoginResultModel>(false, "Неудачная попытка входа", new LoginResultModel { Result = LoginResult.UnSuccessfulAttempt, TokenId = null });
         }
 
