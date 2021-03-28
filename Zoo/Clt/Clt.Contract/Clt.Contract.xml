@@ -34,6 +34,16 @@
             Идентификатор клиента
             </summary>
         </member>
+        <member name="T:Clt.Contract.Events.ClientDataUpdatedEvent">
+            <summary>
+            Данные клиента обновлены
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Events.ClientDataUpdatedEvent.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
         <member name="T:Clt.Contract.Events.ClientRegisteredEvent">
             <summary>
             Событие описывающие регистрациию клиента

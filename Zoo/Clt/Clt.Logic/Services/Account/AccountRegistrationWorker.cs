@@ -12,6 +12,8 @@ using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Clt.Model.Entities.Default;
 using Clt.Model.Entities;
+using Clt.Contract.Models.Common;
+using Clt.Logic.Services.Users;
 
 namespace Clt.Logic.Services.Account
 {
@@ -22,6 +24,26 @@ namespace Clt.Logic.Services.Account
     {
         UserManager<ApplicationUser> UserManager { get; }
         SignInManager<ApplicationUser> SignInManager { get; }
+        UserSearcher UserSearcher { get; }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
+        /// <param name="userSearcher"></param>
+        public AccountRegistrationWorker(ICrocoAmbientContextAccessor ambientContext,
+            ICrocoApplication application,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            UserSearcher userSearcher) : base(ambientContext, application)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+            UserSearcher = userSearcher;
+        }
 
         #region Методы регистрации
 
@@ -42,8 +64,10 @@ namespace Clt.Logic.Services.Account
 
             try
             {
-                var user = result.ResponseObject;
+                var userModel = result.ResponseObject;
 
+                var user = await UserManager.Users.FirstOrDefaultAsync(x => x.Id == userModel.Id);
+                
                 //авторизация пользователя в системе. через распаковку во внутренную модель
                 await SignInManager.SignInAsync(user, false);
 
@@ -83,18 +107,18 @@ namespace Clt.Logic.Services.Account
             });
         }
 
-        private async Task<BaseApiResponse<ApplicationUser>> RegisterInnerAsync(RegisterModel model, bool createRandomPassword)
+        private async Task<BaseApiResponse<ApplicationUserBaseModel>> RegisterInnerAsync(RegisterModel model, bool createRandomPassword)
         {
             var accountSettings = GetSetting<AccountSettingsModel>();
 
             if (!accountSettings.RegistrationEnabled)
             {
-                return new BaseApiResponse<ApplicationUser>(false, "В данном приложении запрещена регистрация");
+                return new BaseApiResponse<ApplicationUserBaseModel>(false, "В данном приложении запрещена регистрация");
             }
 
             if (IsAuthenticated)
             {
-                return new BaseApiResponse<ApplicationUser>(false, "Вы не можете регистрироваться, так как вы авторизованы в системе");
+                return new BaseApiResponse<ApplicationUserBaseModel>(false, "Вы не можете регистрироваться, так как вы авторизованы в системе");
             }
 
             return await RegisterUserWithNoChecksAsync(model, createRandomPassword);
@@ -106,7 +130,7 @@ namespace Clt.Logic.Services.Account
         /// <param name="model"></param>
         /// <param name="createRandomPassword"></param>
         /// <returns></returns>
-        public async Task<BaseApiResponse<ApplicationUser>> RegisterUserWithNoChecksAsync(RegisterModel model, bool createRandomPassword)
+        public async Task<BaseApiResponse<ApplicationUserBaseModel>> RegisterUserWithNoChecksAsync(RegisterModel model, bool createRandomPassword)
         {
             if (createRandomPassword)
             {
@@ -117,7 +141,7 @@ namespace Clt.Logic.Services.Account
 
             if (!result.IsSucceeded)
             {
-                return new BaseApiResponse<ApplicationUser>(result);
+                return new BaseApiResponse<ApplicationUserBaseModel>(result);
             }
 
             //Выбрасываем событие о регистрации клиента
@@ -130,7 +154,7 @@ namespace Clt.Logic.Services.Account
 
             var user = result.ResponseObject;
 
-            return new BaseApiResponse<ApplicationUser>(true, "Регистрация прошла успешно.", user);
+            return new BaseApiResponse<ApplicationUserBaseModel>(true, "Регистрация прошла успешно.", user);
         }
 
         /// <summary>
@@ -166,7 +190,7 @@ namespace Clt.Logic.Services.Account
             return new BaseApiResponse<string>(true, "Вы успешно зарегистрировали пользователя", user.Id);
         }
 
-        private async Task<BaseApiResponse<ApplicationUser>> RegisterHelpMethodAsync(RegisterModel model, string[] roleNames = null)
+        private async Task<BaseApiResponse<ApplicationUserBaseModel>> RegisterHelpMethodAsync(RegisterModel model, string[] roleNames = null)
         {
             var accountSettings = GetSetting<AccountSettingsModel>();
 
@@ -182,14 +206,14 @@ namespace Clt.Logic.Services.Account
 
             if (!checkResult.IsSucceeded)
             {
-                return new BaseApiResponse<ApplicationUser>(checkResult.IsSucceeded, checkResult.Message);
+                return new BaseApiResponse<ApplicationUserBaseModel>(checkResult.IsSucceeded, checkResult.Message);
             }
 
-            var result = await UserManager.CreateAsync(user, model.Password);
+            var creationResult = await UserManager.CreateAsync(user, model.Password);
 
-            if (!result.Succeeded)
+            if (!creationResult.Succeeded)
             {
-                return new BaseApiResponse<ApplicationUser>(false, result.Errors.ToList().First().Description);
+                return new BaseApiResponse<ApplicationUserBaseModel>(false, creationResult.Errors.ToList().First().Description);
             }
 
             if(roleNames != null && roleNames.Length > 0)
@@ -208,10 +232,45 @@ namespace Clt.Logic.Services.Account
                 PhoneNumber = model.PhoneNumber
             });
 
-            return await TrySaveChangesAndReturnResultAsync("Пользователь создан", user);
+            var result = await TrySaveChangesAndReturnResultAsync("Пользователь создан", await UserSearcher.GetUserByIdAsync(user.Id));
+
+            if (!result.IsSucceeded)
+            {
+                await RemoveUserAndClient(user.Id);
+            }
+
+            return result;
         }
 
         #endregion
+
+        private async Task RemoveUserAndClient(string userId)
+        {
+            var userRoles = await Query<ApplicationUserRole>()
+                .Where(x => x.UserId == userId).ToListAsync();
+
+            if(userRoles.Count > 0)
+            {
+                DeleteHandled(userRoles);
+            }
+
+            var user = await UserManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            
+            if(user != null)
+            {
+                DeleteHandled(user);
+                await SaveChangesAsync();
+            }
+
+            var client = await Query<Client>().FirstOrDefaultAsync(x => x.Id == userId);
+
+            if(client != null)
+            {
+                DeleteHandled(client);
+            }
+
+            await SaveChangesAsync();
+        }
 
         private async Task<BaseApiResponse> CheckUserAsync(ApplicationUser user)
         {
@@ -238,21 +297,6 @@ namespace Clt.Logic.Services.Account
             }
 
             return new BaseApiResponse(true, "");
-        }
-
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="ambientContext"></param>
-        /// <param name="application"></param>
-        /// <param name="userManager"></param>
-        /// <param name="signInManager"></param>
-        public AccountRegistrationWorker(ICrocoAmbientContextAccessor ambientContext, 
-            ICrocoApplication application,
-            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) : base(ambientContext, application)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
         }
     }
 }
