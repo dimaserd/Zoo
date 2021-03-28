@@ -15,7 +15,7 @@ namespace Clt.Logic.Services.Users
     /// <summary>
     /// Сервис для работы с ролями пользователей
     /// </summary>
-    public class UserRoleWorker : BaseCltWorker
+    public class UserRoleWorker : BaseCltService
     {
         UserManager<ApplicationUser> UserManager { get; }
 

@@ -19,7 +19,7 @@ namespace Clt.Logic.Services.Users
     /// <summary>
     /// Класс предоставляющий методы для поиска пользователей
     /// </summary>
-    public class UserSearcher : BaseCltWorker
+    public class UserSearcher : BaseCltService
     {
         #region Методы получения одного пользователя
 

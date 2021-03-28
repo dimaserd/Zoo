@@ -5,18 +5,30 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Croco.Core.Logic.Workers;
-using Ecc.Model.Contexts;
 using Croco.Core.Contract;
+using Ecc.Logic.Workers.Base;
+using Croco.Core.Contract.Application;
 
 namespace Ecc.Logic.Workers.Messaging
 {
-    public class MessageDistributionQueryWorker : LightCrocoWorker<EccDbContext>
+    /// <summary>
+    /// Предоставляет методы для работы
+    /// </summary>
+    public class MessageDistributionQueryWorker : BaseEccWorker
     {
-        public MessageDistributionQueryWorker(ICrocoAmbientContextAccessor context) : base(context)
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="app"></param>
+        public MessageDistributionQueryWorker(ICrocoAmbientContextAccessor context, ICrocoApplication app) : base(context, app)
         {
         }
 
+        /// <summary>
+        /// Получить список рассылок
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<MessageDistributionCountModel>> GetDistributions()
         {
             var q = await (from mes in Query<MessageDistribution>()

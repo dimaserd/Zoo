@@ -21,7 +21,7 @@ namespace Clt.Logic.Services.Users
     /// <summary>
     /// Сервис для работы с пользователями
     /// </summary>
-    public class UserWorker : BaseCltWorker
+    public class UserWorker : BaseCltService
     {
         UserSearcher UserSearcher { get; }
 

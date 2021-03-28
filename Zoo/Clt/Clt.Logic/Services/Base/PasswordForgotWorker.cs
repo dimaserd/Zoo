@@ -16,7 +16,7 @@ namespace Clt.Logic.Services.Base
     /// <summary>
     /// Предоставляет методы для работы с забывшими пароль пользователями
     /// </summary>
-    public class PasswordForgotWorker : BaseCltWorker
+    public class PasswordForgotWorker : BaseCltService
     {
         UserManager<ApplicationUser> UserManager { get; }
 

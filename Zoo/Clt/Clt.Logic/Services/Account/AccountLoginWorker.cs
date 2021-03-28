@@ -20,7 +20,7 @@ namespace Clt.Logic.Services.Account
     /// <summary>
     /// Сервис для работы с методами логинирования
     /// </summary>
-    public class AccountLoginWorker : BaseCltWorker
+    public class AccountLoginWorker : BaseCltService
     {
         SignInManager<ApplicationUser> SignInManager { get; }
         UserSearcher UserSearcher { get; }
@@ -36,12 +36,14 @@ namespace Clt.Logic.Services.Account
         /// <param name="userSearcher"></param>
         /// <param name="passwordHashValidator"></param>
         /// <param name="authenticationManager"></param>
+        /// <param name="logger"></param>
         public AccountLoginWorker(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication application,
             SignInManager<ApplicationUser> signInManager,
             UserSearcher userSearcher,
             PasswordHashValidator passwordHashValidator,
-            IApplicationAuthenticationManager authenticationManager) : base(ambientContext, application)
+            IApplicationAuthenticationManager authenticationManager,
+            ILogger<AccountLoginWorker> logger) : base(ambientContext, application, logger)
         {
             SignInManager = signInManager;
             UserSearcher = userSearcher;
@@ -113,6 +115,7 @@ namespace Clt.Logic.Services.Account
                 
                 if (user.Email == RootSettings.RootEmail) //root входит без подтверждений
                 {
+                    Logger.LogTrace("AccountLoginWorker.LoginAsync.RootCase");
                     await SignInManager.SignInAsync(user, model.RememberMe);
 
                     return new BaseApiResponse<LoginResultModel>(true, "Вы успешно авторизованы", new LoginResultModel { Result = LoginResult.SuccessfulLogin });

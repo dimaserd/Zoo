@@ -533,41 +533,49 @@
             <param name="roleNames"></param>
             <returns></returns>
         </member>
-        <member name="T:Clt.Logic.Services.BaseCltWorker">
+        <member name="T:Clt.Logic.Services.BaseCltService">
             <summary>
             Базовый сервис для клиентского контекста
             </summary>
         </member>
-        <member name="P:Clt.Logic.Services.BaseCltWorker.RolesSetting">
+        <member name="P:Clt.Logic.Services.BaseCltService.RolesSetting">
             <summary>
             Настройки клиенстких ролей
             </summary>
         </member>
-        <member name="P:Clt.Logic.Services.BaseCltWorker.RootSettings">
+        <member name="P:Clt.Logic.Services.BaseCltService.RootSettings">
             <summary>
             Настройки прав приложения
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.BaseCltWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+        <member name="M:Clt.Logic.Services.BaseCltService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Clt.Logic.Services.BaseCltService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
             <summary>
             Конструктор
             </summary>
             <param name="context"></param>
             <param name="application"></param>
         </member>
-        <member name="M:Clt.Logic.Services.BaseCltWorker.IsUserRoot">
+        <member name="M:Clt.Logic.Services.BaseCltService.IsUserRoot">
             <summary>
             Является ли пользователь рутом
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.BaseCltWorker.IsUserAdmin">
+        <member name="M:Clt.Logic.Services.BaseCltService.IsUserAdmin">
             <summary>
             Является ли пользователь администратором
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.BaseCltWorker.ValidateModelAndUserIsAdmin(System.Object)">
+        <member name="M:Clt.Logic.Services.BaseCltService.ValidateModelAndUserIsAdmin(System.Object)">
             <summary>
             Валидировать модель и убедиться что пользователь является админом
             </summary>

@@ -11,7 +11,7 @@ namespace Clt.Logic.Services.Account
     /// <summary>
     /// Сервис для логинирования за другого пользователя
     /// </summary>
-    public class AccountLoginAsUserService : BaseCltWorker
+    public class AccountLoginAsUserService : BaseCltService
     {
         SignInManager<ApplicationUser> SignInManager { get; }
 

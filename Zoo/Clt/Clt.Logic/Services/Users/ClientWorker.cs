@@ -18,7 +18,7 @@ namespace Clt.Logic.Services.Users
     /// <summary>
     /// Менеджер для работы с клиентами
     /// </summary>
-    public class ClientWorker : BaseCltWorker
+    public class ClientWorker : BaseCltService
     {
         IClientDataRefresher ClientDataRefresher { get; }
         IFileImageChecker FileImageChecker { get; }

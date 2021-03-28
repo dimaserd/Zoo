@@ -14,13 +14,14 @@ using Clt.Model.Entities.Default;
 using Clt.Model.Entities;
 using Clt.Contract.Models.Common;
 using Clt.Logic.Services.Users;
+using Microsoft.Extensions.Logging;
 
 namespace Clt.Logic.Services.Account
 {
     /// <summary>
     /// Методы для регистрации
     /// </summary>
-    public class AccountRegistrationWorker : BaseCltWorker
+    public class AccountRegistrationWorker : BaseCltService
     {
         UserManager<ApplicationUser> UserManager { get; }
         SignInManager<ApplicationUser> SignInManager { get; }
@@ -34,11 +35,13 @@ namespace Clt.Logic.Services.Account
         /// <param name="userManager"></param>
         /// <param name="signInManager"></param>
         /// <param name="userSearcher"></param>
+        /// <param name="logger"></param>
         public AccountRegistrationWorker(ICrocoAmbientContextAccessor ambientContext,
             ICrocoApplication application,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            UserSearcher userSearcher) : base(ambientContext, application)
+            UserSearcher userSearcher,
+            ILogger<AccountRegistrationWorker> logger) : base(ambientContext, application, logger)
         {
             UserManager = userManager;
             SignInManager = signInManager;

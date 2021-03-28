@@ -15,6 +15,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Contract.Abstractions.IUserMasterStorage">
+            <summary>
+            Хранилище пользовательских данных от которого будет синхронизироваться контекст рассылок
+            </summary>
+        </member>
+        <member name="M:Ecc.Contract.Abstractions.IUserMasterStorage.GetUserById(System.String)">
+            <summary>
+            Получить пользователя по идентификатору
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Contract.Commands.CreateUserCommand">
             <summary>
             Команда для создания пользователя
@@ -143,6 +155,26 @@
         <member name="P:Ecc.Contract.Models.Chat.GetChatMessages.ChatId">
             <summary>
             Идентификатор чата
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.EccUserModel">
+            <summary>
+            Модель описывающая пользвателя в контексте рассылок
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EccUserModel.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EccUserModel.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EccUserModel.PhoneNumber">
+            <summary>
+            Номер телефона
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.EmailGroup.SendMailsForEmailGroup">
@@ -324,6 +356,21 @@
         <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionEdit.Body">
             <summary>
             Тело сообщения
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.Replacing">
+            <summary>
+            Модель описывающая замену по ключу
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Replacing.Key">
+            <summary>
+            Ключ который будет заменен
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Replacing.Value">
+            <summary>
+            Значение, на которое будет произведена замена
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.SendMailMessage">

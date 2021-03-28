@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="106.11.7" />
-    <PackageReference Include="Croco.Core.Logic" Version="1.0.16" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.0.17" />
   </ItemGroup>
 
   <ItemGroup>

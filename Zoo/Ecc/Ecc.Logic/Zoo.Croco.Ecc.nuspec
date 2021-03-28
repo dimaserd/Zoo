@@ -10,7 +10,7 @@
     <releaseNotes>Что-то сделали лучше, что-то сделали хуже.</releaseNotes>
     <copyright>Copyright 2021</copyright>
     <dependencies>
-      <dependency id="Croco.Core.Logic" version="1.0.16" />
+      <dependency id="Croco.Core.Logic" version="1.0.17" />
       <dependency id="Croco.Core" version="2.0.24" />
       <dependency id="RestSharp" version="106.11.7" />
     </dependencies>

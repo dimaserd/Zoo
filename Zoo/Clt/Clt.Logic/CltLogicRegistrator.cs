@@ -69,7 +69,7 @@ namespace Clt.Logic
 
         private static void RegisterCltWorkerTypes(IServiceCollection services)
         {
-            var baseType = typeof(BaseCltWorker);
+            var baseType = typeof(BaseCltService);
 
             var typesToRegister = baseType
                 .Assembly.GetTypes()

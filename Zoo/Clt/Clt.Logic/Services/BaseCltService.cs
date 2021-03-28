@@ -4,14 +4,15 @@ using Clt.Model;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
-using Croco.Core.Logic.Workers;
+using Croco.Core.Logic.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Clt.Logic.Services
 {
     /// <summary>
     /// Базовый сервис для клиентского контекста
     /// </summary>
-    public class BaseCltWorker : BaseCrocoWorker<CltDbContext>
+    public class BaseCltService : BaseCrocoService<CltDbContext>
     {
         /// <summary>
         /// Настройки клиенстких ролей
@@ -28,7 +29,21 @@ namespace Clt.Logic.Services
         /// </summary>
         /// <param name="context"></param>
         /// <param name="application"></param>
-        public BaseCltWorker(ICrocoAmbientContextAccessor context, ICrocoApplication application) : base(context, application)
+        /// <param name="logger"></param>
+        public BaseCltService(ICrocoAmbientContextAccessor context, ICrocoApplication application, ILogger logger)
+            : base(context, application, logger)
+        {
+            var settingsFactory = Application.SettingsFactory;
+            RolesSetting = settingsFactory.GetSetting<CltRolesSetting>();
+            RootSettings = settingsFactory.GetSetting<RootSettings>();
+        }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="application"></param>
+        public BaseCltService(ICrocoAmbientContextAccessor context, ICrocoApplication application) : base(context, application)
         {
             var settingsFactory = Application.SettingsFactory;
             RolesSetting = settingsFactory.GetSetting<CltRolesSetting>();

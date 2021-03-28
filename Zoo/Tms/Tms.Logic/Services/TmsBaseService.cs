@@ -1,6 +1,6 @@
 ﻿using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
-using Croco.Core.Logic.Workers;
+using Croco.Core.Logic.Services;
 using Tms.Model;
 
 namespace Tms.Logic.Services
@@ -8,7 +8,7 @@ namespace Tms.Logic.Services
     /// <summary>
     /// Базовый класс для менеджера заданий
     /// </summary>
-    public class TmsBaseService : BaseCrocoWorker<TmsDbContext>
+    public class TmsBaseService : BaseCrocoService<TmsDbContext>
     {
         PrincipalCheker PrincipalCheker { get; }
 

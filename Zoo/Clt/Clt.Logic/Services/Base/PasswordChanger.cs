@@ -16,7 +16,7 @@ namespace Clt.Logic.Services.Base
     /// <summary>
     /// Сервис для изменеия пароля
     /// </summary>
-    public class PasswordChanger : BaseCltWorker
+    public class PasswordChanger : BaseCltService
     {
         UserManager<ApplicationUser> UserManager { get; }
         SignInManager<ApplicationUser> SignInManager { get; }

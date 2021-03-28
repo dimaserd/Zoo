@@ -15,7 +15,7 @@ namespace Clt.Logic.Services.Account
     /// <summary>
     /// Методы для работы с учетными записями
     /// </summary>
-    public class AccountInitiator : BaseCltWorker
+    public class AccountInitiator : BaseCltService
     {
         RoleManager<ApplicationRole> RoleManager { get; }
         UserManager<ApplicationUser> UserManager { get; }

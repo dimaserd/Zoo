@@ -11,7 +11,7 @@ namespace Clt.Logic.Services.Base
     /// <summary>
     /// Валидатор хешей паролей
     /// </summary>
-    public class PasswordHashValidator : BaseCltWorker
+    public class PasswordHashValidator : BaseCltService
     {
         /// <summary>
         /// Конструктор

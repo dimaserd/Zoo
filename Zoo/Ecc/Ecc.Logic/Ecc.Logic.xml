@@ -9,12 +9,52 @@
             Регистратор сервисов для работы логики Ecc
             </summary>
         </member>
-        <member name="M:Ecc.Logic.EccLogicRegistrator.RegisterLogic(Croco.Core.Application.CrocoApplicationBuilder,Ecc.Logic.Settings.EccSettings)">
+        <member name="M:Ecc.Logic.EccLogicRegistrator.RegisterLogic``1(Croco.Core.Application.CrocoApplicationBuilder,Ecc.Logic.Settings.EccSettings)">
             <summary>
             Зарегистрировать логику
             </summary>
             <param name="appBuilder"></param>
             <param name="settings"></param>
+        </member>
+        <member name="T:Ecc.Logic.Handlers.AppendEmailsFromFileToGroupMessageHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.AppendEmailsFromFileToGroupMessageHandler.#ctor(Ecc.Logic.Services.EmailListExtractor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Handlers.AppendEmailsFromFileToGroupMessageHandler})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="emailsExtractor"></param>
+            <param name="application"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.AppendEmailsFromFileToGroupMessageHandler.HandleMessage(Ecc.Contract.Models.EmailGroup.AppendEmailsFromFileToGroup)">
+            <summary>
+            Обработать сообщение
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Handlers.CreateUserCommandHandler">
+            <summary>
+            Обработчик для команды создания пользователя
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.CreateUserCommandHandler.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Handlers.CreateUserCommandHandler},Ecc.Logic.Workers.Users.UserService)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="application"></param>
+            <param name="logger"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.CreateUserCommandHandler.HandleMessage(Ecc.Contract.Commands.CreateUserCommand)">
+            <summary>
+            Обработать сообщение
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
         </member>
         <member name="T:Ecc.Logic.Handlers.SendMailsForEmailGroupMessageHandler">
             <summary>
@@ -136,6 +176,31 @@
             <param name="interactionId"></param>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Workers.Base.BaseEccWorker">
+            <summary>
+            Базовый сервис контекста рассылок
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Base.BaseEccWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Base.BaseEccWorker.IsUserAdmin">
+            <summary>
+            Является ли пользователь админом
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Base.BaseEccWorker.ValidateModelAndUserIsAdmin(System.Object)">
+            <summary>
+            Валидировать модель и проверить пользователя на админа
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Logic.Workers.Emails.MailMessageSender">
             <summary>
             Класс посылающий письма
@@ -160,6 +225,32 @@
             <param name="emailModel"></param>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Workers.Emails.UserMailMessageWorker">
+            <summary>
+            Сервис для работы с отправленными Email
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Emails.UserMailMessageWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Emails.UserMailMessageWorker.GetMailsAsync(Croco.Core.Contract.Models.Search.GetListSearchModel)">
+            <summary>
+            Получить список отправленных адресов
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Emails.UserMailMessageWorker.DeterminingDateOfOpening(System.String)">
+            <summary>
+            Установить дату открытия письма
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Logic.Workers.Messaging.EmailSender">
             <summary>
             Отправитель электроннной почты
@@ -178,6 +269,24 @@
             Отправить через шаблон
             </summary>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Workers.Messaging.MessageDistributionQueryWorker">
+            <summary>
+            Предоставляет методы для работы
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.MessageDistributionQueryWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="app"></param>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.MessageDistributionQueryWorker.GetDistributions">
+            <summary>
+            Получить список рассылок
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Ecc.Logic.Workers.Messaging.UserNotificationsWorker">
