@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Models;
-using Ecc.Logic.Workers.Base;
+using Ecc.Logic.Services.Base;
 
 namespace Ecc.Logic.Core.Workers
 {
-    public class EmailDelayedSender : BaseEccWorker
+    public class EmailDelayedSender : BaseEccService
     {
         EccPixelUrlProvider UrlProvider { get; }
         

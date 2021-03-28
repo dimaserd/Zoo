@@ -1,7 +1,7 @@
 ﻿using Croco.Core.Contract.Application;
 using Croco.Core.EventSourcing.Implementations;
 using Ecc.Contract.Commands;
-using Ecc.Logic.Workers.Users;
+using Ecc.Logic.Services.Users;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 

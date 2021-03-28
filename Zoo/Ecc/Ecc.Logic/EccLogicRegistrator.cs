@@ -9,8 +9,8 @@ using Ecc.Logic.Abstractions;
 using Ecc.Logic.Handlers;
 using Ecc.Logic.Services;
 using Ecc.Logic.Settings;
-using Ecc.Logic.Workers.Base;
-using Ecc.Logic.Workers.Emails.Senders;
+using Ecc.Logic.Services.Base;
+using Ecc.Logic.Services.Emails.Senders;
 using Ecc.Model.Contexts;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
@@ -67,7 +67,7 @@ namespace Ecc.Logic
 
         private static void RegisterEccWorkerTypes(IServiceCollection services)
         {
-            var baseType = typeof(BaseEccWorker);
+            var baseType = typeof(BaseEccService);
 
             var typesToRegister = baseType
                 .Assembly.GetTypes()

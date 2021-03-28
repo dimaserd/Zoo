@@ -41,7 +41,7 @@
             Обработчик для команды создания пользователя
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Handlers.CreateUserCommandHandler.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Handlers.CreateUserCommandHandler},Ecc.Logic.Workers.Users.UserService)">
+        <member name="M:Ecc.Logic.Handlers.CreateUserCommandHandler.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Handlers.CreateUserCommandHandler},Ecc.Logic.Services.Users.UserService)">
             <summary>
             Конструктор
             </summary>
@@ -176,87 +176,87 @@
             <param name="interactionId"></param>
             <returns></returns>
         </member>
-        <member name="T:Ecc.Logic.Workers.Base.BaseEccWorker">
+        <member name="T:Ecc.Logic.Services.Base.BaseEccService">
             <summary>
             Базовый сервис контекста рассылок
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Workers.Base.BaseEccWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+        <member name="M:Ecc.Logic.Services.Base.BaseEccService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
             <summary>
             Конструктор
             </summary>
             <param name="context"></param>
             <param name="application"></param>
         </member>
-        <member name="M:Ecc.Logic.Workers.Base.BaseEccWorker.IsUserAdmin">
+        <member name="M:Ecc.Logic.Services.Base.BaseEccService.IsUserAdmin">
             <summary>
             Является ли пользователь админом
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Workers.Base.BaseEccWorker.ValidateModelAndUserIsAdmin(System.Object)">
+        <member name="M:Ecc.Logic.Services.Base.BaseEccService.ValidateModelAndUserIsAdmin(System.Object)">
             <summary>
             Валидировать модель и проверить пользователя на админа
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="T:Ecc.Logic.Workers.Emails.MailMessageSender">
+        <member name="T:Ecc.Logic.Services.Emails.MailMessageSender">
             <summary>
             Класс посылающий письма
             </summary>
         </member>
-        <member name="T:Ecc.Logic.Workers.Emails.Senders.SmtpEmailSender">
+        <member name="T:Ecc.Logic.Services.Emails.Senders.SmtpEmailSender">
             <summary>
             Отправитель Email по smtp
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Workers.Emails.Senders.SmtpEmailSender.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Workers.Emails.Senders.SmtpEmailSender})">
+        <member name="M:Ecc.Logic.Services.Emails.Senders.SmtpEmailSender.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Services.Emails.Senders.SmtpEmailSender})">
             <summary>
             Конструктор
             </summary>
             <param name="application"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:Ecc.Logic.Workers.Emails.Senders.SmtpEmailSender.SendEmail(Ecc.Contract.Models.Emails.SendEmailModelWithLoadedAttachments)">
+        <member name="M:Ecc.Logic.Services.Emails.Senders.SmtpEmailSender.SendEmail(Ecc.Contract.Models.Emails.SendEmailModelWithLoadedAttachments)">
             <summary>
             Отправить email
             </summary>
             <param name="emailModel"></param>
             <returns></returns>
         </member>
-        <member name="T:Ecc.Logic.Workers.Emails.UserMailMessageWorker">
+        <member name="T:Ecc.Logic.Services.Emails.UserMailMessageWorker">
             <summary>
             Сервис для работы с отправленными Email
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Workers.Emails.UserMailMessageWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+        <member name="M:Ecc.Logic.Services.Emails.UserMailMessageWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
             <summary>
             Конструктор
             </summary>
             <param name="ambientContext"></param>
             <param name="application"></param>
         </member>
-        <member name="M:Ecc.Logic.Workers.Emails.UserMailMessageWorker.GetMailsAsync(Croco.Core.Contract.Models.Search.GetListSearchModel)">
+        <member name="M:Ecc.Logic.Services.Emails.UserMailMessageWorker.GetMailsAsync(Croco.Core.Contract.Models.Search.GetListSearchModel)">
             <summary>
             Получить список отправленных адресов
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Workers.Emails.UserMailMessageWorker.DeterminingDateOfOpening(System.String)">
+        <member name="M:Ecc.Logic.Services.Emails.UserMailMessageWorker.DeterminingDateOfOpening(System.String)">
             <summary>
             Установить дату открытия письма
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Ecc.Logic.Workers.Messaging.EmailSender">
+        <member name="T:Ecc.Logic.Services.Messaging.EmailSender">
             <summary>
             Отправитель электроннной почты
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.EmailSender.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Logic.Core.Workers.EmailDelayedSender)">
+        <member name="M:Ecc.Logic.Services.Messaging.EmailSender.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Logic.Core.Workers.EmailDelayedSender)">
             <summary>
             Отправитель email
             </summary>
@@ -264,104 +264,104 @@
             <param name="application"></param>
             <param name="emailDelayedSender"></param>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.EmailSender.SendEmailViaTemplate(Ecc.Contract.Models.SendMailMessageViaHtmlTemplate)">
+        <member name="M:Ecc.Logic.Services.Messaging.EmailSender.SendEmailViaTemplate(Ecc.Contract.Models.SendMailMessageViaHtmlTemplate)">
             <summary>
             Отправить через шаблон
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="T:Ecc.Logic.Workers.Messaging.MessageDistributionQueryWorker">
+        <member name="T:Ecc.Logic.Services.Messaging.MessageDistributionQueryWorker">
             <summary>
             Предоставляет методы для работы
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.MessageDistributionQueryWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+        <member name="M:Ecc.Logic.Services.Messaging.MessageDistributionQueryWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
             <summary>
             Конструктор
             </summary>
             <param name="context"></param>
             <param name="app"></param>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.MessageDistributionQueryWorker.GetDistributions">
+        <member name="M:Ecc.Logic.Services.Messaging.MessageDistributionQueryWorker.GetDistributions">
             <summary>
             Получить список рассылок
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Ecc.Logic.Workers.Messaging.UserNotificationsWorker">
+        <member name="T:Ecc.Logic.Services.Messaging.UserNotificationsWorker">
             <summary>
             Сервис для работы с системными уведомлениями
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.GetUserNotificationsIncludingUsersAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.GetUserNotificationsIncludingUsersAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
             <summary>
             Получить список уведомлений с пользователями
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.GetUserNotificationsAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.GetUserNotificationsAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
             <summary>
             Получить список уведомлений без пользователей
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.RemoveNotificationAsync(System.String)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.RemoveNotificationAsync(System.String)">
             <summary>
             Удалить уведомление
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.CreateNotificationAsync(Ecc.Logic.Models.Notifications.CreateNotification)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.CreateNotificationAsync(Ecc.Logic.Models.Notifications.CreateNotification)">
             <summary>
             Создать уведомление
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.GetLastUnReadNotificationAsync">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.GetLastUnReadNotificationAsync">
             <summary>
             Получить последнее непрочитанное уведомление
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.MarkNotificationAsReadAsync(System.String)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.MarkNotificationAsReadAsync(System.String)">
             <summary>
             Пометить уведомление как прочитанное
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Workers.Messaging.UserNotificationsWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
             <summary>
             Конструктор
             </summary>
             <param name="ambientContext"></param>
             <param name="application"></param>
         </member>
-        <member name="T:Ecc.Logic.Workers.Users.UserService">
+        <member name="T:Ecc.Logic.Services.Users.UserService">
             <summary>
             Сервис для работы с пользователями
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Workers.Users.UserService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+        <member name="M:Ecc.Logic.Services.Users.UserService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
             <summary>
             Конструктор
             </summary>
             <param name="context"></param>
             <param name="application"></param>
         </member>
-        <member name="M:Ecc.Logic.Workers.Users.UserService.CreateUser(Ecc.Contract.Commands.CreateUserCommand)">
+        <member name="M:Ecc.Logic.Services.Users.UserService.CreateUser(Ecc.Contract.Commands.CreateUserCommand)">
             <summary>
             Создать пользователя
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Workers.Users.UserService.UpdateUser(Ecc.Contract.Commands.UpdateUserCommand)">
+        <member name="M:Ecc.Logic.Services.Users.UserService.UpdateUser(Ecc.Contract.Commands.UpdateUserCommand)">
             <summary>
             Обновить пользователя
             </summary>
