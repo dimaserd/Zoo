@@ -2,6 +2,7 @@
 using Croco.Core.Application.Registrators;
 using Croco.Core.Logic.Files;
 using Croco.Core.Logic.Files.Events;
+using Ecc.Contract.Abstractions;
 using Ecc.Contract.Commands;
 using Ecc.Contract.Models.EmailGroup;
 using Ecc.Logic.Abstractions;
@@ -26,19 +27,22 @@ namespace Ecc.Logic
         /// </summary>
         /// <param name="appBuilder"></param>
         /// <param name="settings"></param>
-        public static void RegisterLogic(CrocoApplicationBuilder appBuilder, EccSettings settings)
+        public static void RegisterLogic<TUserStorage>(CrocoApplicationBuilder appBuilder, EccSettings settings)
+            where TUserStorage : class, IUserMasterStorage
         {
             Check(appBuilder);
 
             var services = appBuilder.Services;
-            RegisterServices(services, settings);
+            RegisterServices<TUserStorage>(services, settings);
 
             RegisterEccWorkerTypes(services);
             AddMessageHandlers(appBuilder);
         }
 
-        private static void RegisterServices(IServiceCollection services, EccSettings settings)
+        private static void RegisterServices<TUserStorage>(IServiceCollection services, EccSettings settings)
+            where TUserStorage : class, IUserMasterStorage
         {
+            services.AddScoped<IUserMasterStorage, TUserStorage>();
             services.AddSingleton(settings);
 
             if (!services.Any(x => x.ServiceType == typeof(IEmailSender)))

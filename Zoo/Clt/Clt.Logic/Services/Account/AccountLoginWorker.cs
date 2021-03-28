@@ -80,11 +80,7 @@ namespace Clt.Logic.Services.Account
 
             if (user == null || client == null)
             {
-                if(user != null && client == null)
-                {
-                    Logger.LogError(new Exception($"There is user without client {user.Id}"), "AccountLoginWorker.LoginAsync.OnException");
-                }
-
+                Logger.LogTrace("user or client is null");
                 return new BaseApiResponse<LoginResultModel>(false, "Неудачная попытка входа", new LoginResultModel { Result = LoginResult.UnSuccessfulAttempt });
             }
 
@@ -106,6 +102,8 @@ namespace Clt.Logic.Services.Account
                 //проверяю пароль
                 var passCheckResult = await PasswordHashValidator
                     .CheckUserNameAndPasswordAsync(user.Id, user.UserName, model.Password);
+
+                Logger.LogTrace("AccountLoginWorker.LoginAsync.PassCheckResult", passCheckResult);
 
                 //если пароль не подходит выдаю ответ
                 if (!passCheckResult.IsSucceeded)
@@ -133,7 +131,11 @@ namespace Clt.Logic.Services.Account
             
             if (result)
             {   
-                return new BaseApiResponse<LoginResultModel>(true, "Авторизация прошла успешно", new LoginResultModel { Result = LoginResult.SuccessfulLogin, TokenId = null });
+                return new BaseApiResponse<LoginResultModel>(true, "Авторизация прошла успешно", new LoginResultModel 
+                { 
+                    Result = LoginResult.SuccessfulLogin, 
+                    TokenId = null 
+                });
             }
 
             return new BaseApiResponse<LoginResultModel>(false, "Неудачная попытка входа", new LoginResultModel { Result = LoginResult.UnSuccessfulAttempt, TokenId = null });
