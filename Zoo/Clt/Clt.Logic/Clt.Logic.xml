@@ -507,6 +507,14 @@
             <param name="createRandomPass"></param>
             <returns></returns>
         </member>
+        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.RegisterUserWithNoChecksAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
+            <summary>
+            Зарегистрировать пользователя без всяких проверок
+            </summary>
+            <param name="model"></param>
+            <param name="createRandomPassword"></param>
+            <returns></returns>
+        </member>
         <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.RegisterUserByAdminAsync(Clt.Contract.Models.Account.RegisterModel,System.String[])">
             <summary>
             Метод регистрирующий пользователя администратором
@@ -712,11 +720,10 @@
             <param name="app"></param>
             <param name="userManager"></param>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserRoleWorker.GetApplicationRoles``1">
+        <member name="M:Clt.Logic.Services.Users.UserRoleWorker.GetApplicationRoles(System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Получить список ролей пользователя
             </summary>
-            <typeparam name="TEnum"></typeparam>
             <returns></returns>
         </member>
         <member name="M:Clt.Logic.Services.Users.UserRoleWorker.AddUserToRoleAsync(Clt.Contract.Models.Roles.UserIdAndRole)">

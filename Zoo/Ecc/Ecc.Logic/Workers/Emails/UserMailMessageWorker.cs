@@ -12,12 +12,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecc.Logic.Workers.Emails
 {
+    /// <summary>
+    /// Сервис для работы с отправленными Email
+    /// </summary>
     public class UserMailMessageWorker : BaseEccWorker
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
         public UserMailMessageWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application) : base(ambientContext, application)
         {
         }
 
+        /// <summary>
+        /// Получить список отправленных адресов
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Task<GetListResult<UserMailMessageModel>> GetMailsAsync(GetListSearchModel model)
         {
             var initQuery = Query<MailMessageInteraction>().OrderByDescending(x => x.CreatedOn);
@@ -25,6 +38,11 @@ namespace Ecc.Logic.Workers.Emails
             return EFCoreExtensions.GetAsync(model, initQuery, UserMailMessageModel.SelectExpression);
         }
 
+        /// <summary>
+        /// Установить дату открытия письма
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> DeterminingDateOfOpening(string id)
         {
             var repo = GetRepository<MailMessageInteraction>();

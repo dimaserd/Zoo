@@ -13,12 +13,20 @@ using Microsoft.Extensions.Logging;
 
 namespace Ecc.Logic.Workers.Emails.Senders
 {
+    /// <summary>
+    /// Отправитель Email по smtp
+    /// </summary>
     public class SmtpEmailSender : IEmailSender
     {
         SmtpEmailSettingsModel EmailSettings { get; }
         SmtpClient SmtpClient { get; }
         ILogger Logger { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="logger"></param>
         public SmtpEmailSender(ICrocoApplication application, ILogger<SmtpEmailSender> logger)
         {
             EmailSettings = application.SettingsFactory.GetSetting<SmtpEmailSettingsModel>();
@@ -26,6 +34,11 @@ namespace Ecc.Logic.Workers.Emails.Senders
             Logger = logger;
         }
 
+        /// <summary>
+        /// Отправить email
+        /// </summary>
+        /// <param name="emailModel"></param>
+        /// <returns></returns>
         public Task<BaseApiResponse> SendEmail(SendEmailModelWithLoadedAttachments emailModel)
         {
             using var mail = ToMailMessage(emailModel);

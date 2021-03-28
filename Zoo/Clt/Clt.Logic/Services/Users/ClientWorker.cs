@@ -11,6 +11,7 @@ using Clt.Model.Entities;
 using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
 using Clt.Contract.Settings;
+using Clt.Contract.Events;
 
 namespace Clt.Logic.Services.Users
 {
@@ -147,6 +148,11 @@ namespace Clt.Logic.Services.Users
                 await RepositoryFactory.SaveChangesAsync();
 
                 await ClientDataRefresher.UpdateUserDataAsync(await GetUserByIdAsync(userToEditEntity.Id), userToEditEntity);
+
+                await PublishMessageAsync(new ClientDataUpdatedEvent
+                {
+                    Id = userToEditEntity.Id
+                });
 
                 return new BaseApiResponse(true, ClientResource.ClientDataRenewed);
             });

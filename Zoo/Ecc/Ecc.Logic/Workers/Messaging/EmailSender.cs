@@ -9,10 +9,19 @@ using System.Threading.Tasks;
 
 namespace Ecc.Logic.Workers.Messaging
 {
+    /// <summary>
+    /// Отправитель электроннной почты
+    /// </summary>
     public class EmailSender : BaseEccWorker
     {
         EmailDelayedSender EmailDelayedSender { get; }
 
+        /// <summary>
+        /// Отправитель email
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
+        /// <param name="emailDelayedSender"></param>
         public EmailSender(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication application, 
             EmailDelayedSender emailDelayedSender) : base(ambientContext, application)
@@ -20,6 +29,11 @@ namespace Ecc.Logic.Workers.Messaging
             EmailDelayedSender = emailDelayedSender;
         }
         
+        /// <summary>
+        /// Отправить через шаблон
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> SendEmailViaTemplate(SendMailMessageViaHtmlTemplate model)
         {
             var sendModel = model.ToSendEmailModel(Application.MapPath);

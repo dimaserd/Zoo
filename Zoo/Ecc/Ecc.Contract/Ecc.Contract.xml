@@ -4,6 +4,17 @@
         <name>Ecc.Contract</name>
     </assembly>
     <members>
+        <member name="T:Ecc.Contract.Abstractions.ISendEmailModel">
+            <summary>
+            Абстракция конвертируемости в модель Email
+            </summary>
+        </member>
+        <member name="M:Ecc.Contract.Abstractions.ISendEmailModel.ToSendEmailModel">
+            <summary>
+            Привести к модели отправки Email сообщения
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Contract.Commands.CreateUserCommand">
             <summary>
             Команда для создания пользователя
@@ -12,6 +23,46 @@
         <member name="T:Ecc.Contract.Commands.UpdateUserCommand">
             <summary>
             Команда для обновления данных пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Commands.UpdateUserCommand.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Commands.UpdateUserCommand.Email">
+            <summary>
+            Адрес электоронной почты
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Commands.UpdateUserCommand.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Events.Chat.ChatCreatedEvent">
+            <summary>
+            Событие о создании чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Events.Chat.ChatCreatedEvent.ChatId">
+            <summary>
+            Идентификатор чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Events.Chat.ChatCreatedEvent.UserIds">
+            <summary>
+            Идентификаторы пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Events.Chat.ChatRelationUpdatedEvent.ChatId">
+            <summary>
+            Идентификатор чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Events.Chat.ChatRelationUpdatedEvent.UserId">
+            <summary>
+            Идентификатор пользователя
             </summary>
         </member>
         <member name="P:Ecc.Contract.Models.Chat.ChatIdWithMessage.ChatId">
@@ -119,6 +170,122 @@
             Идентификаторы файлов
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.Emails.MassSendMail">
+            <summary>
+            Массовая отправка сообщений
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.MassSendMail.SubjectFormat">
+            <summary>
+            Формат заголовка
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.MassSendMail.BodyFormat">
+            <summary>
+            Формат тела сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.MassSendMail.AttachmentFileIds">
+            <summary>
+            Файлы вложений
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.MassSendMail.EmailWithMasks">
+            <summary>
+            Маски для каждого email
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.Emails.SendEmailModel">
+            <summary>
+            Модель для отправки Email
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailModel.Subject">
+            <summary>
+            Тема письма
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailModel.Body">
+            <summary>
+            Тело письма
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailModel.Email">
+            <summary>
+            АДрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailModel.AttachmentFileIds">
+            <summary>
+            Файлы вложений
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.Emails.SendEmailWithProccessTextModel">
+            <summary>
+            Отправить Email c препроцессингом текста
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailWithProccessTextModel.SubjectFormat">
+            <summary>
+            Формат темы письма
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailWithProccessTextModel.BodyFormat">
+            <summary>
+            Формат тела письма
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailWithProccessTextModel.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailWithProccessTextModel.AttachmentFileIds">
+            <summary>
+            Идентификаторы файлов вложений
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailWithProccessTextModel.MaskItems">
+            <summary>
+            Маски для замены
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.Emails.SendMailWithMaskItems">
+            <summary>
+            Отправить на данный Email c таким процессингом
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendMailWithMaskItems.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendMailWithMaskItems.MaskItems">
+            <summary>
+            Маски
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.SendEmailModelWithInteractionId">
+            <summary>
+            Отправить Email как взаимодейтсвие
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendEmailModelWithInteractionId.InteractionId">
+            <summary>
+            Идентифкатор взаимодействия
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendEmailModelWithInteractionId.EmailModel">
+            <summary>
+            Модель для отправки сообщения
+            </summary>
+        </member>
+        <member name="M:Ecc.Contract.Models.SendEmailModelWithInteractionId.ToSendEmailModel">
+            <summary>
+            Предоставить модель сообщения
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Contract.Models.Interactions.UpdateInteractionStatus">
             <summary>
             Модель для обновления статусов взаимодействий
@@ -159,6 +326,26 @@
             Тело сообщения
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.SendMailMessage">
+            <summary>
+            Отправить Email
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendMailMessage.Body">
+            <summary>
+            Тело письма
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendMailMessage.Subject">
+            <summary>
+            Тема письма
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendMailMessage.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
         <member name="P:Ecc.Contract.Models.SendMailMessage.MessageDistributionId">
             <summary>
             Идентификатор рассылки для сообщений
@@ -169,9 +356,34 @@
             Список идентификаторов файлов с вложениями
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.SendMailMessageToUser">
+            <summary>
+            Отправить Email пользоателю
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendMailMessageToUser.Body">
+            <summary>
+            Тело сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendMailMessageToUser.Subject">
+            <summary>
+            Тема сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendMailMessageToUser.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
         <member name="P:Ecc.Contract.Models.SendMailMessageToUser.AttachmentFileIds">
             <summary>
             Список идентификаторов файлов с вложениями
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.SendMailMessageViaHtmlTemplate">
+            <summary>
+            Отправка сообщения через Html шаблон
             </summary>
         </member>
         <member name="P:Ecc.Contract.Models.SendMailMessageViaHtmlTemplate.Subject">
@@ -187,6 +399,16 @@
         <member name="P:Ecc.Contract.Models.SendMailMessageViaHtmlTemplate.AttachmentFileIds">
             <summary>
             Список идентификаторов файлов с вложениями
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendMailMessageViaHtmlTemplate.TemplateFilePath">
+            <summary>
+            Путь к файлу шаблона
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.SendMailMessageViaHtmlTemplate.Replacings">
+            <summary>
+            Текстовые замены
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.UserGroups.ChangeUsersInUserGroupModel">

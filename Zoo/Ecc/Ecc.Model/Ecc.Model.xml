@@ -74,5 +74,15 @@
             Тело сообщения
             </summary>
         </member>
+        <member name="T:Ecc.Model.Schemas">
+            <summary>
+            Схема
+            </summary>
+        </member>
+        <member name="F:Ecc.Model.Schemas.EccSchema">
+            <summary>
+            Схема рассылок
+            </summary>
+        </member>
     </members>
 </doc>

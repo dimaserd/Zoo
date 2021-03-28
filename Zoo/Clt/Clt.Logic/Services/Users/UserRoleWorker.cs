@@ -4,11 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Clt.Contract.Models.Roles;
-using System;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Models;
-using Croco.Core.Logic.Extensions;
-using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
 using Clt.Logic.Resources;
@@ -39,9 +36,8 @@ namespace Clt.Logic.Services.Users
         /// <summary>
         /// Получить список ролей пользователя
         /// </summary>
-        /// <typeparam name="TEnum"></typeparam>
         /// <returns></returns>
-        public async Task<List<ApplicationRoleModel>> GetApplicationRoles<TEnum>() where TEnum : Enum
+        public async Task<List<ApplicationRoleModel>> GetApplicationRoles(Dictionary<string, string> displayRoleNamesStorage = null)
         {
             var res = await Query<ApplicationRole>().Select(x => new ApplicationRoleModel
             {
@@ -49,15 +45,16 @@ namespace Clt.Logic.Services.Users
                 RoleName = x.Name
             }).ToListAsync();
 
-            var enumValues = Enum.GetValues(typeof(TEnum)).Cast<TEnum>().ToList();
+            if(displayRoleNamesStorage == null)
+            {
+                return res;
+            }
 
             res.ForEach(x =>
             {
-                var hasEnumValue = enumValues.Any(t => t.ToString() == x.RoleName);
-
-                if (hasEnumValue)
+                if (displayRoleNamesStorage.TryGetValue(x.RoleName, out var displayRoleName))
                 {
-                    x.DisplayRoleName = enumValues.FirstOrDefault(t => t.ToString() == x.RoleName).ToDisplayName();
+                    x.DisplayRoleName = displayRoleName;
                 }
             });
 

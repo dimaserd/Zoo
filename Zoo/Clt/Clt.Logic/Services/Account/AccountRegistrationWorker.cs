@@ -97,7 +97,18 @@ namespace Clt.Logic.Services.Account
                 return new BaseApiResponse<ApplicationUser>(false, "Вы не можете регистрироваться, так как вы авторизованы в системе");
             }
 
-            if(createRandomPassword)
+            return await RegisterUserWithNoChecksAsync(model, createRandomPassword);
+        }
+
+        /// <summary>
+        /// Зарегистрировать пользователя без всяких проверок
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="createRandomPassword"></param>
+        /// <returns></returns>
+        public async Task<BaseApiResponse<ApplicationUser>> RegisterUserWithNoChecksAsync(RegisterModel model, bool createRandomPassword)
+        {
+            if (createRandomPassword)
             {
                 model.Password = "testpass";
             }
@@ -128,7 +139,7 @@ namespace Clt.Logic.Services.Account
         /// <param name="model"></param>
         /// <param name="roleNames"></param>
         /// <returns></returns>
-        public async Task<BaseApiResponse<string>> RegisterUserByAdminAsync(RegisterModel model, string[] roleNames)
+        public async Task<BaseApiResponse<string>> RegisterUserByAdminAsync(RegisterModel model, string[] roleNames = null)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
             

@@ -16,6 +16,33 @@
             <param name="appBuilder"></param>
             <param name="settings"></param>
         </member>
+        <member name="T:Ecc.Logic.Handlers.SendMailsForEmailGroupMessageHandler">
+            <summary>
+            обработчик для события начала рассылки
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.SendMailsForEmailGroupMessageHandler.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Ecc.Logic.Core.Workers.EmailDelayedSender,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Handlers.SendMailsForEmailGroupMessageHandler})">
+            <summary>
+            
+            </summary>
+            <param name="application"></param>
+            <param name="emailDelayedSender"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.SendMailsForEmailGroupMessageHandler.StartEmailDistribution(Ecc.Contract.Models.EmailGroup.SendMailsForEmailGroup)">
+            <summary>
+            Начать рассылку
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.SendMailsForEmailGroupMessageHandler.HandleMessage(Ecc.Contract.Models.EmailGroup.SendMailsForEmailGroup)">
+            <summary>
+            Обработчик сообщения
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="P:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate.JsScript">
             <summary>
             Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
@@ -113,6 +140,45 @@
             <summary>
             Класс посылающий письма
             </summary>
+        </member>
+        <member name="T:Ecc.Logic.Workers.Emails.Senders.SmtpEmailSender">
+            <summary>
+            Отправитель Email по smtp
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Emails.Senders.SmtpEmailSender.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Workers.Emails.Senders.SmtpEmailSender})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="application"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Emails.Senders.SmtpEmailSender.SendEmail(Ecc.Contract.Models.Emails.SendEmailModelWithLoadedAttachments)">
+            <summary>
+            Отправить email
+            </summary>
+            <param name="emailModel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Workers.Messaging.EmailSender">
+            <summary>
+            Отправитель электроннной почты
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.EmailSender.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Logic.Core.Workers.EmailDelayedSender)">
+            <summary>
+            Отправитель email
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+            <param name="emailDelayedSender"></param>
+        </member>
+        <member name="M:Ecc.Logic.Workers.Messaging.EmailSender.SendEmailViaTemplate(Ecc.Contract.Models.SendMailMessageViaHtmlTemplate)">
+            <summary>
+            Отправить через шаблон
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
         </member>
         <member name="T:Ecc.Logic.Workers.Messaging.UserNotificationsWorker">
             <summary>

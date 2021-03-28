@@ -13,19 +13,33 @@ using System.Threading.Tasks;
 
 namespace Ecc.Logic.Handlers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AppendEmailsFromFileToGroupMessageHandler : CrocoMessageHandler<AppendEmailsFromFileToGroup>
     {
         const int CountInPack = 100;
 
         EmailListExtractor EmailsExtractor { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="emailsExtractor"></param>
+        /// <param name="application"></param>
+        /// <param name="logger"></param>
         public AppendEmailsFromFileToGroupMessageHandler(EmailListExtractor emailsExtractor,
             ICrocoApplication application, 
             ILogger<AppendEmailsFromFileToGroupMessageHandler> logger) : base(application, logger)
         {
             EmailsExtractor = emailsExtractor;
         }
-        
+
+        /// <summary>
+        /// Обработать сообщение
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public override async Task HandleMessage(AppendEmailsFromFileToGroup model)
         {
             var emailsSafeValue = await GetSystemTransactionHandler().ExecuteAndCloseTransactionSafe(amb =>

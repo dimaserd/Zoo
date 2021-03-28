@@ -14,6 +14,7 @@ using Clt.Model.Entities.Default;
 using Clt.Contract.Settings;
 using Clt.Logic.Resources;
 using Microsoft.Extensions.Logging;
+using Clt.Contract.Events;
 
 namespace Clt.Logic.Services.Users
 {
@@ -151,7 +152,17 @@ namespace Clt.Logic.Services.Users
 
             clientRepo.UpdateHandled(userToEditEntity);
 
-            return await TrySaveChangesAndReturnResultAsync("Данные пользователя обновлены");
+            var response = await TrySaveChangesAndReturnResultAsync("Данные пользователя обновлены");
+
+            if (response.IsSucceeded)
+            {
+                await PublishMessageAsync(new ClientDataUpdatedEvent
+                {
+                    Id = userToEditEntity.Id
+                });
+            }
+
+            return response;
         }
 
         /// <summary>

@@ -15,12 +15,21 @@ using System.Threading.Tasks;
 
 namespace Ecc.Logic.Handlers
 {
+    /// <summary>
+    /// обработчик для события начала рассылки
+    /// </summary>
     public class SendMailsForEmailGroupMessageHandler : CrocoMessageHandler<SendMailsForEmailGroup>
     {
         EmailDelayedSender EmailDelayedSender { get; }
 
         const int CountInPack = 100;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="emailDelayedSender"></param>
+        /// <param name="logger"></param>
         public SendMailsForEmailGroupMessageHandler(ICrocoApplication application,
             EmailDelayedSender emailDelayedSender,
             ILogger<SendMailsForEmailGroupMessageHandler> logger) : base(application, logger)
@@ -28,7 +37,11 @@ namespace Ecc.Logic.Handlers
             EmailDelayedSender = emailDelayedSender;
         }
 
-
+        /// <summary>
+        /// Начать рассылку
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> StartEmailDistribution(SendMailsForEmailGroup model)
         {
             var eamilsInGroupSafeValue = await GetSystemTransactionHandler().ExecuteAndCloseTransactionSafe(amb =>
@@ -86,6 +99,11 @@ namespace Ecc.Logic.Handlers
             return new BaseApiResponse(true, "Ok");
         }
 
+        /// <summary>
+        /// Обработчик сообщения
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public override Task HandleMessage(SendMailsForEmailGroup model)
         {
             return StartEmailDistribution(model);
