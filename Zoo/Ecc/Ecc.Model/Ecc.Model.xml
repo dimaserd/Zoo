@@ -19,6 +19,11 @@
             Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
             </summary>
         </member>
+        <member name="T:Ecc.Model.Entities.External.EccFile">
+            <summary>
+            Сущность описывающая файл в контексте рассылок
+            </summary>
+        </member>
         <member name="P:Ecc.Model.Entities.External.EccUserGroup.Users">
             <summary>
             Пользователи принадлежащие к данной группе

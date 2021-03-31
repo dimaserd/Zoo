@@ -71,7 +71,6 @@ namespace Clt.Logic.Services.Users
             await GenericDelete<ApplicationUserRole>(x => x.UserId == userId);
             await GenericDelete<ApplicationUser>(x => x.Id == userId);
 
-
             var res = await TrySaveChangesAndReturnResultAsync($"Пользователь {userToRemove.Email} удален");
 
             if (!res.IsSucceeded)

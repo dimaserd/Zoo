@@ -7,10 +7,19 @@ using System.Threading.Tasks;
 
 namespace Ecc.Logic.Handlers
 {
+    /// <summary>
+    /// Обработчик события обновления пользовательских данных
+    /// </summary>
     public class UpdateUserCommandHandler : CrocoMessageHandler<UpdateUserCommand>
     {
         UserService UserService { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="logger"></param>
+        /// <param name="userService"></param>
         public UpdateUserCommandHandler(ICrocoApplication application,
             ILogger<UpdateUserCommandHandler> logger,
             UserService userService) : base(application, logger)
@@ -19,6 +28,11 @@ namespace Ecc.Logic.Handlers
         }
 
 
+        /// <summary>
+        /// Обработчик
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public override Task HandleMessage(UpdateUserCommand model)
         {
             return UserService.UpdateUser(model);

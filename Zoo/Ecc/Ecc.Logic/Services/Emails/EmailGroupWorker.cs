@@ -11,12 +11,25 @@ using System.Threading.Tasks;
 
 namespace Ecc.Logic.Services.Emails
 {
+    /// <summary>
+    /// Сервис для работы с группами электронных адресов
+    /// </summary>
     public class EmailGroupWorker : BaseEccService
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
         public EmailGroupWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application) : base(ambientContext, application)
         {
         }
 
+        /// <summary>
+        /// Удалить группу
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> RemoveGroup(string id)
         {
             if (!IsUserAdmin())
@@ -36,6 +49,11 @@ namespace Ecc.Logic.Services.Emails
             return await TrySaveChangesAndReturnResultAsync("Группа для эмелов удалена");
         }
 
+        /// <summary>
+        /// Создать группу
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse<string>> CreateGroup(CreateEmailGroup model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -63,6 +81,11 @@ namespace Ecc.Logic.Services.Emails
             return await TrySaveChangesAndReturnResultAsync("Группа эмейлов создана", id);
         }
 
+        /// <summary>
+        /// Добавить адресов в группу
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> AddEmailsToGroup(AddEmailsToEmailGroup model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);

@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ecc.Model.Entities.External
 {
+    /// <summary>
+    /// Сущность описывающая файл в контексте рассылок
+    /// </summary>
     [Table(nameof(EccFile), Schema = Schemas.EccSchema)]
     public class EccFile : IHaveIntId
     {

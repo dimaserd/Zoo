@@ -1,5 +1,4 @@
 ﻿using Ecc.Contract.Models;
-using Ecc.Logic.Abstractions;
 using Ecc.Logic.Services;
 using Ecc.Model.Consts;
 using Ecc.Model.Entities.External;
@@ -17,16 +16,30 @@ using Ecc.Logic.Services.Base;
 
 namespace Ecc.Logic.Core.Workers
 {
+    /// <summary>
+    /// Отложенный отправитель сообщений
+    /// </summary>
     public class EmailDelayedSender : BaseEccService
     {
         EccPixelUrlProvider UrlProvider { get; }
         
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
+        /// <param name="urlProvider"></param>
         public EmailDelayedSender(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application,
             EccPixelUrlProvider urlProvider) : base(ambientContext, application)
         {
             UrlProvider = urlProvider;
         }
 
+        /// <summary>
+        /// Отправить сообщение
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public Task<BaseApiResponse> SendEmail(SendMailMessage message)
         {
             var toMes = ToMailMessage(message);
@@ -38,6 +51,11 @@ namespace Ecc.Logic.Core.Workers
             return TrySaveChangesAndReturnResultAsync("Email-сообщение добавлено в очередь");
         }
 
+        /// <summary>
+        /// Отправить сообщения
+        /// </summary>
+        /// <param name="messages"></param>
+        /// <returns></returns>
         public Task<BaseApiResponse> SendEmails(IEnumerable<SendMailMessage> messages)
         {
             var interations = messages.Select(ToMailMessage).ToList();
@@ -49,6 +67,11 @@ namespace Ecc.Logic.Core.Workers
             return TrySaveChangesAndReturnResultAsync("Email-сообщения добавлено в очередь");
         }
 
+        /// <summary>
+        /// Отправить сообщение пользователю
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> SendEmail(SendMailMessageToUser message)
         {
             var emailAndId = await Query<EccUser>().Select(x => new { x.Email, x.Id })
@@ -68,6 +91,11 @@ namespace Ecc.Logic.Core.Workers
             return await TrySaveChangesAndReturnResultAsync("Email-сообщение добавлено в очередь");
         }
 
+        /// <summary>
+        /// Отправить сообщения
+        /// </summary>
+        /// <param name="messages"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> SendEmails(IEnumerable<SendMailMessageToUser> messages)
         {
             var userIds = messages.Select(x => x.UserId).ToList();
@@ -109,7 +137,7 @@ namespace Ecc.Logic.Core.Workers
             return attachments ?? new List<InteractionAttachment>();
         }
 
-        public (MailMessageInteraction, InteractionStatusLog, List<InteractionAttachment>) ToMailMessage(SendMailMessageToUser message, string email)
+        private (MailMessageInteraction, InteractionStatusLog, List<InteractionAttachment>) ToMailMessage(SendMailMessageToUser message, string email)
         {
             var id = Guid.NewGuid().ToString();
 
@@ -132,7 +160,7 @@ namespace Ecc.Logic.Core.Workers
             GetAttachments(id, message.AttachmentFileIds));
         }
 
-        public (MailMessageInteraction, InteractionStatusLog, List<InteractionAttachment>) ToMailMessage(SendMailMessage message)
+        private (MailMessageInteraction, InteractionStatusLog, List<InteractionAttachment>) ToMailMessage(SendMailMessage message)
         {
             var id = Guid.NewGuid().ToString();
 
@@ -156,7 +184,7 @@ namespace Ecc.Logic.Core.Workers
             GetAttachments(id, message.AttachmentFileIds));
         }
 
-        public string AddReadingLink(string body, string id)
+        private string AddReadingLink(string body, string id)
         {
             return body += $"<img src=\"{UrlProvider.GetPixelEmailUrl(id)}\" height=\"1\" width=\"1\" />";
         }

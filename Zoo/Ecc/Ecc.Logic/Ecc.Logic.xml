@@ -4,6 +4,47 @@
         <name>Ecc.Logic</name>
     </assembly>
     <members>
+        <member name="T:Ecc.Logic.Core.Workers.EmailDelayedSender">
+            <summary>
+            Отложенный отправитель сообщений
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Core.Workers.EmailDelayedSender.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Logic.Services.EccPixelUrlProvider)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+            <param name="urlProvider"></param>
+        </member>
+        <member name="M:Ecc.Logic.Core.Workers.EmailDelayedSender.SendEmail(Ecc.Contract.Models.SendMailMessage)">
+            <summary>
+            Отправить сообщение
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Core.Workers.EmailDelayedSender.SendEmails(System.Collections.Generic.IEnumerable{Ecc.Contract.Models.SendMailMessage})">
+            <summary>
+            Отправить сообщения
+            </summary>
+            <param name="messages"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Core.Workers.EmailDelayedSender.SendEmail(Ecc.Contract.Models.SendMailMessageToUser)">
+            <summary>
+            Отправить сообщение пользователю
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Core.Workers.EmailDelayedSender.SendEmails(System.Collections.Generic.IEnumerable{Ecc.Contract.Models.SendMailMessageToUser})">
+            <summary>
+            Отправить сообщения
+            </summary>
+            <param name="messages"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Logic.EccLogicRegistrator">
             <summary>
             Регистратор сервисов для работы логики Ecc
@@ -56,6 +97,26 @@
             <param name="model"></param>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Handlers.FilesUploadedEventHandler">
+            <summary>
+            Обработчик события загруженных файлов
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.FilesUploadedEventHandler.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Handlers.FilesUploadedEventHandler},Ecc.Logic.Services.Files.EccFileService)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="application"></param>
+            <param name="logger"></param>
+            <param name="eccFileService"></param>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.FilesUploadedEventHandler.HandleMessage(Croco.Core.Logic.Files.Events.FilesUploadedEvent)">
+            <summary>
+            Обработать сообщение
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Logic.Handlers.SendMailsForEmailGroupMessageHandler">
             <summary>
             обработчик для события начала рассылки
@@ -79,6 +140,26 @@
         <member name="M:Ecc.Logic.Handlers.SendMailsForEmailGroupMessageHandler.HandleMessage(Ecc.Contract.Models.EmailGroup.SendMailsForEmailGroup)">
             <summary>
             Обработчик сообщения
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Handlers.UpdateUserCommandHandler">
+            <summary>
+            Обработчик события обновления пользовательских данных
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.UpdateUserCommandHandler.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Handlers.UpdateUserCommandHandler},Ecc.Logic.Services.Users.UserService)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="application"></param>
+            <param name="logger"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Ecc.Logic.Handlers.UpdateUserCommandHandler.HandleMessage(Ecc.Contract.Commands.UpdateUserCommand)">
+            <summary>
+            Обработчик
             </summary>
             <param name="model"></param>
             <returns></returns>
@@ -169,13 +250,6 @@
               Ищет локализованную строку, похожую на Вы не авторизованы.
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Services.EccPixelUrlProvider.GetPixelEmailUrl(System.String)">
-            <summary>
-            Получить адрес для установки пикселя для определения прочитанности писем
-            </summary>
-            <param name="interactionId"></param>
-            <returns></returns>
-        </member>
         <member name="T:Ecc.Logic.Services.Base.BaseEccService">
             <summary>
             Базовый сервис контекста рассылок
@@ -187,6 +261,14 @@
             </summary>
             <param name="context"></param>
             <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Base.BaseEccService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:Ecc.Logic.Services.Base.BaseEccService.IsUserAdmin">
             <summary>
@@ -200,6 +282,217 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.Chat.ApplicationChatService">
+            <summary>
+            Сервис для работы с чатами
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Chat.ApplicationChatService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Chat.ApplicationChatService.CreateOrGetExistingDialogWithUser(System.String)">
+            <summary>
+            Создать диалог с пользователем
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Chat.ApplicationChatService.SendMessage(Ecc.Contract.Models.Chat.SendMessageToChat)">
+            <summary>
+            Написать сообщение
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Chat.ApplicationChatService.GetCountOfUnreadMessages">
+            <summary>
+            Получить список непрочитанных сообщений
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Chat.ApplicationChatService.GetChats">
+            <summary>
+            Получить список чатов
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Chat.ApplicationChatService.VisitChat(System.Int32)">
+            <summary>
+            Посетить чат
+            </summary>
+            <param name="chatId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Chat.ApplicationChatService.GetMessages(Ecc.Contract.Models.Chat.GetChatMessages)">
+            <summary>
+            Получить сообщения
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccPixelUrlProvider.GetPixelEmailUrl(System.String)">
+            <summary>
+            Получить адрес для установки пикселя для определения прочитанности писем
+            </summary>
+            <param name="interactionId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.EmailRedirects.EmailRedirectsQueryWorker">
+            <summary>
+            Сервис для работы с методами поиска редиректов в Email
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailRedirects.EmailRedirectsQueryWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailRedirects.EmailRedirectsQueryWorker.GetCatchesByEmailId(System.String)">
+            <summary>
+            Получить список пойманных переходов со счетчиками
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailRedirects.EmailRedirectsQueryWorker.Query(Croco.Core.Contract.Models.Search.GetListSearchModel)">
+            <summary>
+            Искать ловителей переходов
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailRedirects.EmailRedirectsQueryWorker.GetById(System.String)">
+            <summary>
+            Получить список всех переходов по данному ловителю переходов
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.Emails.EmailGroupSender">
+            <summary>
+            Отправитель Email группе пользователей
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailGroupSender.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailGroupSender.StartEmailDistributionForGroup(Ecc.Contract.Models.EmailGroup.SendMailsForEmailGroup)">
+            <summary>
+            Начать рассылку для группы
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.Emails.EmailGroupWorker">
+            <summary>
+            Сервис для работы с группами электронных адресов
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailGroupWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailGroupWorker.RemoveGroup(System.String)">
+            <summary>
+            Удалить группу
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailGroupWorker.CreateGroup(Ecc.Contract.Models.EmailGroup.CreateEmailGroup)">
+            <summary>
+            Создать группу
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailGroupWorker.AddEmailsToGroup(Ecc.Contract.Models.EmailGroup.AddEmailsToEmailGroup)">
+            <summary>
+            Добавить адресов в группу
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.Emails.MailDistributionWorker">
+            <summary>
+            Сервис для работы с рассылками сообщений
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailDistributionWorker.CreateAsync(Ecc.Contract.Models.MailDistributions.MailDistributionCreate)">
+            <summary>
+            Создать рассылку
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailDistributionWorker.EditMailDistributionAsync(Ecc.Contract.Models.MailDistributions.MailDistributionEdit)">
+            <summary>
+            Редактировать рассылку
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailDistributionWorker.RemoveUserGroupFromMailDistributionAsync(Ecc.Contract.Models.MailDistributions.MainDistributionUserGroupRelationIdModel)">
+            <summary>
+            Удалить группу пользователей из рассылки
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailDistributionWorker.RemoveMailDistributionAsync(System.String)">
+            <summary>
+            Удалить рассылку по идентификатору
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailDistributionWorker.AddUserGroupToMailDistributionAsync(Ecc.Logic.Models.Messaging.AddMailDistributionUserGroupRelation)">
+            <summary>
+            Добавить группу пользователей в рассылку
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailDistributionWorker.GetMailDistributionsAsync">
+            <summary>
+            Получить список рассылок
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailDistributionWorker.GetMailDistributionWithUserGroupsAsync(System.String)">
+            <summary>
+            Получить список рассылок с пользователями
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailDistributionWorker.ChangeUsersInGroupAsync(Ecc.Logic.Models.Messaging.ChangeUserGroupsInMailDistributionModel)">
+            <summary>
+            Изменить пользователей в группе
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailDistributionWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
         </member>
         <member name="T:Ecc.Logic.Services.Emails.MailMessageSender">
             <summary>
@@ -247,6 +540,131 @@
         <member name="M:Ecc.Logic.Services.Emails.UserMailMessageWorker.DeterminingDateOfOpening(System.String)">
             <summary>
             Установить дату открытия письма
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.EmailTemplates.EmailTemplatesWorker">
+            <summary>
+            Сервис для работы с шаблонами сообщений
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailTemplates.EmailTemplatesWorker.CreateEmailTemplateAsync(Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate)">
+            <summary>
+            Создать шаблон сообщения
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailTemplates.EmailTemplatesWorker.UpdateEmailTemplateAsync(Ecc.Logic.Models.EmailTemplates.EditEmailTemplate)">
+            <summary>
+            Редактировать шаблон сообщения
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailTemplates.EmailTemplatesWorker.GetEmailTemplatesAsync">
+            <summary>
+            Получить список шаблонов
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailTemplates.EmailTemplatesWorker.GetActiveEmailTemplates(System.String)">
+            <summary>
+            Получить список активных шаблонов
+            </summary>
+            <param name="templateType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailTemplates.EmailTemplatesWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+        </member>
+        <member name="T:Ecc.Logic.Services.Files.EccFileService">
+            <summary>
+            Сервис для работы с файлами
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Files.EccFileService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Files.EccFileService.CreateFiles(System.Int32[])">
+            <summary>
+            Создать файлы
+            </summary>
+            <param name="fileIds"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.EccUserGroupWorker">
+            <summary>
+            Сервис для работы с группами пользователей
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccUserGroupWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccUserGroupWorker.CreateGroupAsync(Ecc.Contract.Models.UserGroups.UserGroupCreate)">
+            <summary>
+            Создать группу пользователей
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccUserGroupWorker.EditGroupAsync(Ecc.Contract.Models.UserGroups.UserGroupEdit)">
+            <summary>
+            Редактировать группу
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccUserGroupWorker.RemoveUserFromGroupAsync(Ecc.Contract.Models.UserGroups.UserInUserGroupIdModel)">
+            <summary>
+            Удалить пользователя из группы
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccUserGroupWorker.ChangeUsersInGroupAsync(Ecc.Contract.Models.UserGroups.ChangeUsersInUserGroupModel)">
+            <summary>
+            Изменить пользователей в группе
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccUserGroupWorker.RemoveUserGroupAsync(System.String)">
+            <summary>
+            Удалить группу пользователей
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccUserGroupWorker.AddUserToGroupAsync(Ecc.Contract.Models.UserGroups.UserInUserGroupIdModel)">
+            <summary>
+            Добавить пользователя в группу
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccUserGroupWorker.GetUserGroupsAsync">
+            <summary>
+            Получить группы пользователей
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccUserGroupWorker.GetUserGroupWithUsers(System.String)">
+            <summary>
+            Получить группу пользователей с пользователями
             </summary>
             <param name="id"></param>
             <returns></returns>
@@ -367,6 +785,16 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Settings.EccSettings">
+            <summary>
+            Основные настройки пконтекста рассылок
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Settings.EccSettings.ApplicationUrl">
+            <summary>
+            Адрес приложения
+            </summary>
         </member>
     </members>
 </doc>

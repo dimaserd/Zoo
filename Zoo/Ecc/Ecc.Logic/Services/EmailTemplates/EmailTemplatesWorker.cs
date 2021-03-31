@@ -11,8 +11,16 @@ using Croco.Core.Contract.Models;
 
 namespace Ecc.Logic.Services.EmailTemplates
 {
+    /// <summary>
+    /// Сервис для работы с шаблонами сообщений
+    /// </summary>
     public class EmailTemplatesWorker : BaseEccService
     {
+        /// <summary>
+        /// Создать шаблон сообщения
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> CreateEmailTemplateAsync(CreateEmailTemplate model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -34,6 +42,11 @@ namespace Ecc.Logic.Services.EmailTemplates
             return await TrySaveChangesAndReturnResultAsync("Шаблон создан");
         }
 
+        /// <summary>
+        /// Редактировать шаблон сообщения
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> UpdateEmailTemplateAsync(EditEmailTemplate model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -63,6 +76,10 @@ namespace Ecc.Logic.Services.EmailTemplates
             return await TrySaveChangesAndReturnResultAsync("Шаблон обновлён");
         }
 
+        /// <summary>
+        /// Получить список шаблонов
+        /// </summary>
+        /// <returns></returns>
         public Task<List<EmailTemplateModel>> GetEmailTemplatesAsync()
         {
             return Query<EmailTemplate>().Select(x => new EmailTemplateModel
@@ -76,6 +93,11 @@ namespace Ecc.Logic.Services.EmailTemplates
             }).ToListAsync();
         }
 
+        /// <summary>
+        /// Получить список активных шаблонов
+        /// </summary>
+        /// <param name="templateType"></param>
+        /// <returns></returns>
         public Task<EmailTemplateModel[]> GetActiveEmailTemplates(string templateType)
         {
             return Query<EmailTemplate>()
@@ -91,6 +113,11 @@ namespace Ecc.Logic.Services.EmailTemplates
                 }).ToArrayAsync();
         }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
         public EmailTemplatesWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application) : base(ambientContext, application)
         {
         }

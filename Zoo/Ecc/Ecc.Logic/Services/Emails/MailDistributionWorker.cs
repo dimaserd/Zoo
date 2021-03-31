@@ -15,8 +15,16 @@ using Croco.Core.Contract.Models;
 
 namespace Ecc.Logic.Services.Emails
 {
+    /// <summary>
+    /// Сервис для работы с рассылками сообщений
+    /// </summary>
     public class MailDistributionWorker : BaseEccService
     {
+        /// <summary>
+        /// Создать рассылку
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> CreateAsync(MailDistributionCreate model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -38,6 +46,11 @@ namespace Ecc.Logic.Services.Emails
             return await TrySaveChangesAndReturnResultAsync($"Рассылка {model.Name} создана");
         }
 
+        /// <summary>
+        /// Редактировать рассылку
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> EditMailDistributionAsync(MailDistributionEdit model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -66,6 +79,11 @@ namespace Ecc.Logic.Services.Emails
             return await TrySaveChangesAndReturnResultAsync("Рассылка отредактирована");
         }
 
+        /// <summary>
+        /// Удалить группу пользователей из рассылки
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> RemoveUserGroupFromMailDistributionAsync(MainDistributionUserGroupRelationIdModel model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -100,6 +118,11 @@ namespace Ecc.Logic.Services.Emails
             return await TrySaveChangesAndReturnResultAsync("Группа пользователей удалена из рассылки");
         }
 
+        /// <summary>
+        /// Удалить рассылку по идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> RemoveMailDistributionAsync(string id)
         {
             if (!IsUserAdmin())
@@ -124,6 +147,11 @@ namespace Ecc.Logic.Services.Emails
             return await TrySaveChangesAndReturnResultAsync("Рассылка удалена");
         }
 
+        /// <summary>
+        /// Добавить группу пользователей в рассылку
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> AddUserGroupToMailDistributionAsync(AddMailDistributionUserGroupRelation model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -163,16 +191,30 @@ namespace Ecc.Logic.Services.Emails
             return await TrySaveChangesAndReturnResultAsync("Группа пользователей добавлена к рассылке");
         }
 
+        /// <summary>
+        /// Получить список рассылок
+        /// </summary>
+        /// <returns></returns>
         public Task<List<MailDistributionModel>> GetMailDistributionsAsync()
         {
             return Query<MailDistribution>().Select(MailDistributionModel.SelectExpression).ToListAsync();
         }
 
+        /// <summary>
+        /// Получить список рассылок с пользователями
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Task<MailDistributionModel> GetMailDistributionWithUserGroupsAsync(string id)
         {
             return Query<MailDistribution>().Select(MailDistributionModel.SelectExpression).FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        /// <summary>
+        /// Изменить пользователей в группе
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> ChangeUsersInGroupAsync(ChangeUserGroupsInMailDistributionModel model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -219,6 +261,11 @@ namespace Ecc.Logic.Services.Emails
             return await TrySaveChangesAndReturnResultAsync("Группы пользователей изменены");
         }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
         public MailDistributionWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application) : base(ambientContext, application)
         {
         }

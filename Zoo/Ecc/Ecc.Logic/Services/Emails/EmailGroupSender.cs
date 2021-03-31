@@ -9,12 +9,25 @@ using System.Threading.Tasks;
 
 namespace Ecc.Logic.Services.Emails
 {
+    /// <summary>
+    /// Отправитель Email группе пользователей
+    /// </summary>
     public class EmailGroupSender : BaseEccService
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="application"></param>
         public EmailGroupSender(ICrocoAmbientContextAccessor context, ICrocoApplication application) : base(context, application)
         {
         }
 
+        /// <summary>
+        /// Начать рассылку для группы
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> StartEmailDistributionForGroup(SendMailsForEmailGroup model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
