@@ -5,10 +5,19 @@ using System.Linq.Expressions;
 
 namespace Ecc.Logic.Models.Notifications
 {
+    /// <summary>
+    /// Модель пользователя с уведомлением
+    /// </summary>
     public class NotificationModelWithUserModel
     {
+        /// <summary>
+        /// Пользователь
+        /// </summary>
         public EccUserModel User { get; set; }
 
+        /// <summary>
+        /// Уведомление
+        /// </summary>
         public NotificationModel Notification { get; set; }
 
         internal static Expression<Func<UserNotificationInteraction, NotificationModelWithUserModel>> SelectExpression = x => new NotificationModelWithUserModel

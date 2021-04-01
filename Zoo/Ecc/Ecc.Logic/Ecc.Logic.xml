@@ -219,9 +219,104 @@
             Идентификатор уведомления
             </summary>
         </member>
+        <member name="T:Ecc.Logic.Models.Users.UserGroupModelWithUsers">
+            <summary>
+            Группа пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserGroupModelWithUsers.Id">
+            <summary>
+            Идентификатор группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserGroupModelWithUsers.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserGroupModelWithUsers.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserGroupModelWithUsers.Deleted">
+            <summary>
+            Признак удаленности
+            </summary>
+        </member>
         <member name="P:Ecc.Logic.Models.Users.UserGroupModelWithUsers.Users">
             <summary>
             Пользователи принадлежащие к данной группе
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.Users.UserGroupModelNoUsers">
+            <summary>
+            Модель описывающая группу без пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserGroupModelNoUsers.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserGroupModelNoUsers.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserGroupModelNoUsers.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserGroupModelNoUsers.Deleted">
+            <summary>
+            Признак удаленности
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.Users.UserMailMessageModel">
+            <summary>
+            Письмо для пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserMailMessageModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserMailMessageModel.ReceiverEmail">
+            <summary>
+            Адрес получателя
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserMailMessageModel.Body">
+            <summary>
+            Тело сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserMailMessageModel.Subject">
+            <summary>
+            Тема письма
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserMailMessageModel.CreationDate">
+            <summary>
+            Дата создания
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserMailMessageModel.SentDate">
+            <summary>
+            Дата отправки
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserMailMessageModel.ReadDate">
+            <summary>
+            Дата прочтения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserMailMessageModel.User">
+            <summary>
+            Получатель
             </summary>
         </member>
         <member name="T:Ecc.Logic.Resources.ValidationMessages">
@@ -689,6 +784,33 @@
             <param name="model"></param>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Services.Messaging.MailDistributionQueryWorker">
+            <summary>
+            Сервис для работы с поисковыми запросами к электронным письмам
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.MailDistributionQueryWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Logic.Services.EmailRedirects.EmailRedirectsQueryWorker)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+            <param name="emailRedirectsQueryWorker"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.MailDistributionQueryWorker.GetMailMessageDetailed(System.String)">
+            <summary>
+            Получить подробную информацию о сообщении
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.MailDistributionQueryWorker.GetClientMailMessages(Ecc.Logic.Models.Messaging.GetClientInteractions)">
+            <summary>
+            Получить Email отправленные клиенту
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Logic.Services.Messaging.MessageDistributionQueryWorker">
             <summary>
             Предоставляет методы для работы
@@ -705,6 +827,32 @@
             <summary>
             Получить список рассылок
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.Messaging.SmsMessageWorker">
+            <summary>
+            Сервис для работы с смсками
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.SmsMessageWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.SmsMessageWorker.SendSms(Ecc.Contract.Models.Sms.SendSmsToClient)">
+            <summary>
+            Отправить смс
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.SmsMessageWorker.GetClientSmsMessages(Ecc.Logic.Models.Messaging.GetClientInteractions)">
+            <summary>
+            Получить смс-сообщения отправленные клиенту
+            </summary>
+            <param name="model"></param>
             <returns></returns>
         </member>
         <member name="T:Ecc.Logic.Services.Messaging.UserNotificationsWorker">

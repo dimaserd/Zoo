@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace Ecc.Logic.Extensions
 {
-    public static class ProccessTextExtensions
+    internal static class ProccessTextExtensions
     {
-        static string ProccessReplacings(string text, List<KeyValuePair<string, string>> maskItems)
+        public static string ProccessReplacings(string text, List<KeyValuePair<string, string>> maskItems)
         {
             if (string.IsNullOrWhiteSpace(text))
             {

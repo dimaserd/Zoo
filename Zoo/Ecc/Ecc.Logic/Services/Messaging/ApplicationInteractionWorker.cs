@@ -12,13 +12,22 @@ using Croco.Core.Contract.Application;
 
 namespace Ecc.Logic.Services.Messaging
 {
+    /// <summary>
+    /// Сервис для работы со взаимодействиями с клиентами
+    /// </summary>
     public class ApplicationInteractionWorker : BaseEccService
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
         public ApplicationInteractionWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application) : base(ambientContext, application)
         {
         }
 
-        public static IQueryable<ApplicationInteractionWithStatus<TInteraction>> GetQueryWithStatus<TInteraction>(IQueryable<TInteraction> query)
+
+        internal static IQueryable<ApplicationInteractionWithStatus<TInteraction>> GetQueryWithStatus<TInteraction>(IQueryable<TInteraction> query)
             where TInteraction : Interaction, new()
         {
             return query.Select(x => new ApplicationInteractionWithStatus<TInteraction>
@@ -28,6 +37,13 @@ namespace Ecc.Logic.Services.Messaging
             });
         }
 
+        /// <summary>
+        /// Установить статус для взаимодействий
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="status"></param>
+        /// <param name="statusDescription"></param>
+        /// <returns></returns>
         public Task SetStatusForInteractions(IEnumerable<string> ids, InteractionStatus status, string statusDescription)
         {
             var now = Application.DateTimeProvider.Now;
@@ -45,6 +61,11 @@ namespace Ecc.Logic.Services.Messaging
             return SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Обновить статусы взаимодействиям
+        /// </summary>
+        /// <param name="statuses"></param>
+        /// <returns></returns>
         public Task UpdateInteractionStatusesAsync(List<UpdateInteractionStatus> statuses)
         {
             var now = Application.DateTimeProvider.Now;
@@ -62,6 +83,11 @@ namespace Ecc.Logic.Services.Messaging
             return SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Получить базовый запрос для взаимодействий, которые необходимо отправить
+        /// </summary>
+        /// <typeparam name="TInteraction"></typeparam>
+        /// <returns></returns>
         public IQueryable<TInteraction> GetInitQueryToSend<TInteraction>() where TInteraction : Interaction, new()
         {
             var dateNow = Application.DateTimeProvider.Now;

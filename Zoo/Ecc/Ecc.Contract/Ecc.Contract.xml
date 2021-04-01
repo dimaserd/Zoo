@@ -157,6 +157,19 @@
             Идентификатор чата
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.Chat.UserInChatModel">
+            <summary>
+            Модель описывающая пользователя в чате
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Chat.UserInChatModel.User">
+            Пользователь
+        </member>
+        <member name="P:Ecc.Contract.Models.Chat.UserInChatModel.LastVisitUtcTicks">
+            <summary>
+            Дата последнего посещения
+            </summary>
+        </member>
         <member name="T:Ecc.Contract.Models.EccUserModel">
             <summary>
             Модель описывающая пользвателя в контексте рассылок
@@ -463,6 +476,41 @@
             Модель добавления или удаления пользователей из группы
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.UserGroups.UserGroupCreate">
+            <summary>
+            Создание группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserGroups.UserGroupCreate.Name">
+            <summary>
+            Название 
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserGroups.UserGroupCreate.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.UserGroups.UserGroupEdit">
+            <summary>
+            Редактирование группы пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserGroups.UserGroupEdit.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserGroups.UserGroupEdit.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserGroups.UserGroupEdit.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
         <member name="T:Ecc.Contract.Models.UserGroups.UserInGroupAddOrDelete">
             <summary>
             Модель добавления или удаления одного пользователя из группы
@@ -476,6 +524,36 @@
         <member name="P:Ecc.Contract.Models.UserGroups.UserInGroupAddOrDelete.AddOrDelete">
             <summary>
             Если добавить в группу то значение равно true, если удалить значить false
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.UserGroups.UserInUserGroupIdModel">
+            <summary>
+            Перевязка пользователя с группой
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserGroups.UserInUserGroupIdModel.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserGroups.UserInUserGroupIdModel.UserGroupId">
+            <summary>
+            Идентификатор группы
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.UserIdAndEmailModel">
+            <summary>
+            Идентификатор с эмейлом
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserIdAndEmailModel.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserIdAndEmailModel.Email">
+            <summary>
+            Адрес электронной почты
             </summary>
         </member>
         <member name="T:Ecc.Contract.Settings.SmtpEmailSettingsModel">
