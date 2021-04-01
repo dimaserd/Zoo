@@ -20,13 +20,21 @@ using Croco.Core.Contract.Models;
 
 namespace Ecc.Logic.Services.Messaging
 {
+    /// <summary>
+    /// Сервис для работы с смсками
+    /// </summary>
     public class SmsMessageWorker : ApplicationInteractionWorker
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
         public SmsMessageWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application) : base(ambientContext, application)
         {
         }
 
-        public static readonly Expression<Func<ApplicationInteractionWithStatus<SmsMessageInteraction>, SmsMessageModel>> SelectExpression = x => new SmsMessageModel
+        static readonly Expression<Func<ApplicationInteractionWithStatus<SmsMessageInteraction>, SmsMessageModel>> SelectExpression = x => new SmsMessageModel
         {
             Id = x.Interaction.Id,
             Body = x.Interaction.MessageText,
@@ -37,6 +45,11 @@ namespace Ecc.Logic.Services.Messaging
             Status = x.Status
         };
 
+        /// <summary>
+        /// Отправить смс
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> SendSms(SendSmsToClient model)
         {
             if(!IsUserAdmin())
@@ -59,6 +72,11 @@ namespace Ecc.Logic.Services.Messaging
             return await TrySaveChangesAndReturnResultAsync("Sms-сообщение добавлено в очередь");
         }
 
+        /// <summary>
+        /// Получить смс-сообщения отправленные клиенту
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Task<GetListResult<SmsMessageModel>> GetClientSmsMessages(GetClientInteractions model)
         {
             var initQuery = Query<SmsMessageInteraction>();

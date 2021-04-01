@@ -56,14 +56,6 @@ namespace Clt.Logic
         {
             new EFCrocoApplicationRegistrator(applicationBuilder).CheckForEFDataCoonection<CltDbContext>();
 
-            var imageCheckerType = typeof(IFileImageChecker);
-            var imageCheckerRecord = applicationBuilder.Services.FirstOrDefault(x => x.ServiceType == imageCheckerType);
-
-            if (imageCheckerRecord == null || imageCheckerRecord.Lifetime != ServiceLifetime.Singleton)
-            {
-                throw new InvalidOperationException($"Необходимо зарегистрировать {imageCheckerType.FullName} как singleton");
-            }
-
             DbFileManagerServiceCollectionExtensions.CheckForDbFileManager(applicationBuilder.Services);
         }
 

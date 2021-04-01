@@ -11,10 +11,19 @@ using System.Threading.Tasks;
 
 namespace Ecc.Logic.Services.Messaging
 {
+    /// <summary>
+    /// Сервис для работы с поисковыми запросами к электронным письмам
+    /// </summary>
     public class MailDistributionQueryWorker : ApplicationInteractionWorker
     {
         EmailRedirectsQueryWorker EmailRedirectsQueryWorker { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
+        /// <param name="emailRedirectsQueryWorker"></param>
         public MailDistributionQueryWorker(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication application,
             EmailRedirectsQueryWorker emailRedirectsQueryWorker) : base(ambientContext, application)
@@ -22,6 +31,11 @@ namespace Ecc.Logic.Services.Messaging
             EmailRedirectsQueryWorker = emailRedirectsQueryWorker;
         }
 
+        /// <summary>
+        /// Получить подробную информацию о сообщении
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<MailMessageDetailedModel> GetMailMessageDetailed(string id)
         {
             var result = await Query<MailMessageInteraction>().Select(MailMessageDetailedModel.SelectExpression).FirstOrDefaultAsync(x => x.Id == id);
@@ -34,6 +48,11 @@ namespace Ecc.Logic.Services.Messaging
             return result;
         }
 
+        /// <summary>
+        /// Получить Email отправленные клиенту
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Task<GetListResult<MailMessageModel>> GetClientMailMessages(GetClientInteractions model)
         {
             var queryWithStatus = GetQueryWithStatus(Query<MailMessageInteraction>().BuildQuery(model.GetCriterias()));

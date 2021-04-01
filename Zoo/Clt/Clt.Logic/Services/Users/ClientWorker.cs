@@ -12,6 +12,7 @@ using Croco.Core.Contract.Application;
 using Clt.Contract.Settings;
 using Clt.Contract.Events;
 using Clt.Contract.Resources;
+using Croco.Core.Logic.Files.Services;
 
 namespace Clt.Logic.Services.Users
 {
@@ -21,7 +22,7 @@ namespace Clt.Logic.Services.Users
     public class ClientWorker : BaseCltService
     {
         IClientDataRefresher ClientDataRefresher { get; }
-        IFileImageChecker FileImageChecker { get; }
+        FileChecker FileChecker { get; }
         IDbFileManager DbFileManager { get; }
 
         /// <summary>
@@ -30,16 +31,16 @@ namespace Clt.Logic.Services.Users
         /// <param name="ambientContext"></param>
         /// <param name="app"></param>
         /// <param name="clientDataRefresher"></param>
-        /// <param name="fileImageChecker"></param>
+        /// <param name="fileChecker"></param>
         /// <param name="dbFileManager"></param>
         public ClientWorker(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication app,
             IClientDataRefresher clientDataRefresher,
-            IFileImageChecker fileImageChecker,
+            FileChecker fileChecker,
             IDbFileManager dbFileManager) : base(ambientContext, app)
         {
             ClientDataRefresher = clientDataRefresher;
-            FileImageChecker = fileImageChecker;
+            FileChecker = fileChecker;
             DbFileManager = dbFileManager;
         }
 
@@ -76,7 +77,7 @@ namespace Clt.Logic.Services.Users
                 return new BaseApiResponse(false, ValidationMessages.FileIsNotFoundById);
             }
 
-            if (!FileImageChecker.IsImage(file))
+            if (!FileChecker.IsImage(file))
             {
                 return new BaseApiResponse(false, ValidationMessages.FileIsNotImage);
             }
