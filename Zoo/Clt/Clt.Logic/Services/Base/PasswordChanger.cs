@@ -1,5 +1,4 @@
 ﻿using Clt.Contract.Models.Account;
-using Clt.Contract.Models.Common;
 using Clt.Logic.Extensions;
 using Clt.Logic.Services.Users;
 using Clt.Model.Entities.Default;
@@ -7,7 +6,6 @@ using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 

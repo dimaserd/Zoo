@@ -1,5 +1,5 @@
-﻿using Clt.Contract.Settings;
-using Clt.Logic.Resources;
+﻿using Clt.Contract.Resources;
+using Clt.Contract.Settings;
 using Clt.Model;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;

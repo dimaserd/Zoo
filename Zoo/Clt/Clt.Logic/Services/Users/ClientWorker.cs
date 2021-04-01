@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Clt.Logic.Resources;
 using Clt.Contract.Models.Users;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
@@ -12,6 +11,7 @@ using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
 using Clt.Contract.Settings;
 using Clt.Contract.Events;
+using Clt.Contract.Resources;
 
 namespace Clt.Logic.Services.Users
 {
@@ -155,49 +155,6 @@ namespace Clt.Logic.Services.Users
                 });
 
                 return new BaseApiResponse(true, ClientResource.ClientDataRenewed);
-            });
-        }
-        
-        /// <summary>
-        /// Получить клиента из контекста авторизации
-        /// </summary>
-        /// <returns></returns>
-        public async Task<BaseApiResponse<ClientModel>> GetClientFromAuthorizationAsync()
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return new BaseApiResponse<ClientModel>(false, ValidationMessages.YouAreNotAuthorized);
-            }
-
-            return await GetClientByIdAsync(UserId);
-        }
-
-        /// <summary>
-        /// Получить клиента по идентификатору
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<BaseApiResponse<ClientModel>> GetClientByIdAsync(string id)
-        {
-            var repo = GetRepository<Client>();
-
-            var model = await repo.Query().FirstOrDefaultAsync(x => x.Id == id);
-
-            if (model == null)
-            {
-                return new BaseApiResponse<ClientModel>(false, ValidationMessages.UserNotFound);
-            }
-
-            return new BaseApiResponse<ClientModel>(true, ValidationMessages.UserFound, new ClientModel
-            {
-                Email = model.Email,
-                Name = model.Name,
-                Surname = model.Surname,
-                Patronymic = model.Patronymic,
-                Sex = model.Sex,
-                PhoneNumber = model.PhoneNumber,
-                BirthDate = model.BirthDate,
-                AvatarFileId = model.AvatarFileId
             });
         }
     }

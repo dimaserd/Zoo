@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Clt.Model.Entities;
 using Croco.Core.Contract.Models.Search;
-using Croco.Core.Search.Extensions;
 
-namespace Clt.Logic.Models.Users
+namespace Clt.Contract.Models.Users
 {
     /// <summary>
     /// Модель для поиск пользователей
@@ -50,19 +47,5 @@ namespace Clt.Logic.Models.Users
             Count = null,
             OffSet = 0
         };
-        
-        internal IEnumerable<SearchQueryCriteria<Client>> GetCriterias()
-        {
-            yield return Q.MapString(str => new SearchQueryCriteria<Client>(x => x.Email.Contains(str) || x.PhoneNumber.Contains(str) || x.Name.Contains(str)));
-
-            yield return Deactivated.MapNullable(b => new SearchQueryCriteria<Client>(x => x.DeActivated == b));
-
-            yield return RegistrationDate.GetSearchCriteriaFromGenericRange<Client, DateTime>(x => x.CreatedOn);
-
-            if (SearchSex)
-            {
-                yield return new SearchQueryCriteria<Client>(x => x.Sex == Sex);
-            }
-        }
     }
 }

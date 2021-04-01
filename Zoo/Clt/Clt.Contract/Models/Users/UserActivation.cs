@@ -1,4 +1,4 @@
-﻿namespace Clt.Logic.Models.Users
+﻿namespace Clt.Contract.Models.Users
 {
     /// <summary>
     /// Модель активации пользователя

@@ -8,7 +8,7 @@ using Croco.Core.Contract;
 using Croco.Core.Contract.Models;
 using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
-using Clt.Logic.Resources;
+using Clt.Contract.Resources;
 
 namespace Clt.Logic.Services.Users
 {

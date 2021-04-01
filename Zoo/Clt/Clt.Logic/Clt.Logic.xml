@@ -147,263 +147,6 @@
             Пользователь
             </summary>
         </member>
-        <member name="T:Clt.Logic.Models.Users.EditApplicationUser">
-            <summary>
-            Модель для редактирования пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Id">
-            <summary>
-            Идентификатор пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Name">
-            <summary>
-            Имя пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Email">
-            <summary>
-            Адрес электоронной почты
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.BirthDate">
-            <summary>
-            Дата рождения
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Surname">
-            <summary>
-            Фамилия пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Patronymic">
-            <summary>
-            Отчество
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.Sex">
-            <summary>
-            Пол
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.ObjectJson">
-            <summary>
-            Доп данные
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.EditApplicationUser.PhoneNumber">
-            <summary>
-            Номер телефона
-            </summary>
-        </member>
-        <member name="T:Clt.Logic.Models.Users.UserActivation">
-            <summary>
-            Модель активации пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.UserActivation.DeActivated">
-            <summary>
-            Если true, значит пользователь деактивирован в системе
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.UserActivation.Id">
-            <summary>
-            Идентификатор пользователя
-            </summary>
-        </member>
-        <member name="T:Clt.Logic.Models.Users.UserSearch">
-            <summary>
-            Модель для поиск пользователей
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.UserSearch.Q">
-            <summary>
-            Поисковая строка
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.UserSearch.Deactivated">
-            <summary>
-            Фильтровать по активированности
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.UserSearch.RegistrationDate">
-            <summary>
-            Дата регистрации
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.UserSearch.SearchSex">
-            <summary>
-            ФИльтровать по полу
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.UserSearch.Sex">
-            <summary>
-            Пол
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.Users.UserSearch.GetAllUsers">
-            <summary>
-            Получить всех пользователей
-            </summary>
-        </member>
-        <member name="T:Clt.Logic.Resources.ClientResource">
-            <summary>
-              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ClientResource.ResourceManager">
-            <summary>
-              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ClientResource.Culture">
-            <summary>
-              Перезаписывает свойство CurrentUICulture текущего потока для всех
-              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ClientResource.ClientAvatarUpdated">
-            <summary>
-              Ищет локализованную строку, похожую на Аватар клиента обновлен.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ClientResource.ClientDataRenewed">
-            <summary>
-              Ищет локализованную строку, похожую на Данные пользователя обновлены.
-            </summary>
-        </member>
-        <member name="T:Clt.Logic.Resources.ValidationMessages">
-            <summary>
-              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.ResourceManager">
-            <summary>
-              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.Culture">
-            <summary>
-              Перезаписывает свойство CurrentUICulture текущего потока для всех
-              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.EmailIsNotValid">
-            <summary>
-              Ищет локализованную строку, похожую на Неправильный Email адрес.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.EmailIsRequired">
-            <summary>
-              Ищет локализованную строку, похожую на Необходимо указать Email.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.ErrorOccuredFormat">
-            <summary>
-              Ищет локализованную строку, похожую на Произошла ошибка. {0}.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.FileIsNotFoundById">
-            <summary>
-              Ищет локализованную строку, похожую на Файл не найден по указанному идентификатору.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.FileIsNotImage">
-            <summary>
-              Ищет локализованную строку, похожую на Файл не является изображением.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.ModelIsNullObject">
-            <summary>
-              Ищет локализованную строку, похожую на Модель является пустым объектом.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.ModelIsValid">
-            <summary>
-              Ищет локализованную строку, похожую на Модель валидна.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.ThisEmailIsAlreadyTaken">
-            <summary>
-              Ищет локализованную строку, похожую на Данный Email уже занят другим пользователем.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTaken">
-            <summary>
-              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTakenByOtherUser">
-            <summary>
-              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTakenByOtherUser1">
-            <summary>
-              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.UriIsRequired">
-            <summary>
-              Ищет локализованную строку, похожую на Необходимо указать Uri.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.UserFound">
-            <summary>
-              Ищет локализованную строку, похожую на Пользователь найден.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.UserIdentifierMustBeProvided">
-            <summary>
-              Ищет локализованную строку, похожую на Необходимо указать идентификатор пользователя.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.UserIdIsRequired">
-            <summary>
-              Ищет локализованную строку, похожую на Необходимо указать идентификатор пользователя.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.UserIsNotFoundByIdentifier">
-            <summary>
-              Ищет локализованную строку, похожую на Пользователь не найден по указанному идентификатору.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.UserNotFound">
-            <summary>
-              Ищет локализованную строку, похожую на Пользователь не найден.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.YouAreNotAnAdministrator">
-            <summary>
-              Ищет локализованную строку, похожую на Вы не являетесь администратором.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.YouAreNotAnAdministratorOrSeller">
-            <summary>
-              Ищет локализованную строку, похожую на Вы не являетесь администратором или продавцом..
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.YouAreNotAuthorized">
-            <summary>
-              Ищет локализованную строку, похожую на Вы не авторизованы.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.YouCantEditRootUser">
-            <summary>
-              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя Root.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.YouCantEditUserBecauseHeIsAdministrator">
-            <summary>
-              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является администратором.
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Resources.ValidationMessages.YouCantEditUserBecauseHeIsSuperAdministrator">
-            <summary>
-              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является Супер-Администратором.
-            </summary>
-        </member>
         <member name="T:Clt.Logic.Services.Account.AccountInitiator">
             <summary>
             Методы для работы с учетными записями
@@ -676,6 +419,44 @@
             <param name="pass"></param>
             <returns></returns>
         </member>
+        <member name="T:Clt.Logic.Services.Users.ClientQueryService">
+            <summary>
+            Сервис предоставляющий методы для поиска клиентов
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Services.Users.ClientQueryService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Clt.Logic.Services.Users.ClientQueryService.GetClientFromAuthorizationAsync">
+            <summary>
+            Получить клиента из контекста авторизации асинхронно
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Users.ClientQueryService.GetClientFromAuthorization">
+            <summary>
+            Получить клиента из контекста авторизации
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Users.ClientQueryService.GetClientByIdAsync(System.String)">
+            <summary>
+            Получить клиента по идентификатору асинхронно
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Users.ClientQueryService.GetClientById(System.String)">
+            <summary>
+            Получить клиента по идентификатору
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Clt.Logic.Services.Users.ClientWorker">
             <summary>
             Менеджер для работы с клиентами
@@ -703,19 +484,6 @@
             Редактировать клиента
             </summary>
             <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Services.Users.ClientWorker.GetClientFromAuthorizationAsync">
-            <summary>
-            Получить клиента из контекста авторизации
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Services.Users.ClientWorker.GetClientByIdAsync(System.String)">
-            <summary>
-            Получить клиента по идентификатору
-            </summary>
-            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:Clt.Logic.Services.Users.UserRoleWorker">
@@ -777,14 +545,14 @@
             <param name="email"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserSearcher.GetUsers(Clt.Logic.Models.Users.UserSearch)">
+        <member name="M:Clt.Logic.Services.Users.UserSearcher.GetUsers(Clt.Contract.Models.Users.UserSearch)">
             <summary>
             Искать пользователей
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserSearcher.GetUsersAsync(Clt.Logic.Models.Users.UserSearch)">
+        <member name="M:Clt.Logic.Services.Users.UserSearcher.GetUsersAsync(Clt.Contract.Models.Users.UserSearch)">
             <summary>
             Получить пользователей
             </summary>
@@ -818,14 +586,14 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserWorker.EditUserAsync(Clt.Logic.Models.Users.EditApplicationUser)">
+        <member name="M:Clt.Logic.Services.Users.UserWorker.EditUserAsync(Clt.Contract.Models.Users.EditApplicationUser)">
             <summary>
             Редактирование пользователя администратором
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserWorker.ActivateOrDeActivateUserAsync(Clt.Logic.Models.Users.UserActivation)">
+        <member name="M:Clt.Logic.Services.Users.UserWorker.ActivateOrDeActivateUserAsync(Clt.Contract.Models.Users.UserActivation)">
             <summary>
             Активировать или деактивировать пользователя
             </summary>

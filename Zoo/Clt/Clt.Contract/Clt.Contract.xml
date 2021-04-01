@@ -344,6 +344,56 @@
             Номер телефона
             </summary>
         </member>
+        <member name="T:Clt.Contract.Models.Users.EditApplicationUser">
+            <summary>
+            Модель для редактирования пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Name">
+            <summary>
+            Имя пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Email">
+            <summary>
+            Адрес электоронной почты
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.BirthDate">
+            <summary>
+            Дата рождения
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Surname">
+            <summary>
+            Фамилия пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Patronymic">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Sex">
+            <summary>
+            Пол
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.ObjectJson">
+            <summary>
+            Доп данные
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
         <member name="T:Clt.Contract.Models.Users.RegisteredUser">
             <summary>
             Модель описывающая зарегистрированного пользователя
@@ -362,6 +412,56 @@
         <member name="P:Clt.Contract.Models.Users.RegisteredUser.Email">
             <summary>
             Адрес электронной почты
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Users.UserActivation">
+            <summary>
+            Модель активации пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserActivation.DeActivated">
+            <summary>
+            Если true, значит пользователь деактивирован в системе
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserActivation.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Users.UserSearch">
+            <summary>
+            Модель для поиск пользователей
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserSearch.Q">
+            <summary>
+            Поисковая строка
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserSearch.Deactivated">
+            <summary>
+            Фильтровать по активированности
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserSearch.RegistrationDate">
+            <summary>
+            Дата регистрации
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserSearch.SearchSex">
+            <summary>
+            ФИльтровать по полу
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserSearch.Sex">
+            <summary>
+            Пол
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserSearch.GetAllUsers">
+            <summary>
+            Получить всех пользователей
             </summary>
         </member>
         <member name="T:Clt.Contract.Models.Common.ApplicationUserBaseModel">
@@ -528,6 +628,163 @@
         <member name="P:Clt.Contract.Resources.AnnotationsErrorMessages.UserNameShouldBeDefined">
             <summary>
               Ищет локализованную строку, похожую на Необходимо указать имя пользователя.
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Resources.ClientResource">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ClientResource.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ClientResource.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ClientResource.ClientAvatarUpdated">
+            <summary>
+              Ищет локализованную строку, похожую на Аватар клиента обновлен.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ClientResource.ClientDataRenewed">
+            <summary>
+              Ищет локализованную строку, похожую на Данные пользователя обновлены.
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Resources.ValidationMessages">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.EmailIsNotValid">
+            <summary>
+              Ищет локализованную строку, похожую на Неправильный Email адрес.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.EmailIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать Email.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.ErrorOccuredFormat">
+            <summary>
+              Ищет локализованную строку, похожую на Произошла ошибка. {0}.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.FileIsNotFoundById">
+            <summary>
+              Ищет локализованную строку, похожую на Файл не найден по указанному идентификатору.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.FileIsNotImage">
+            <summary>
+              Ищет локализованную строку, похожую на Файл не является изображением.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.ModelIsNullObject">
+            <summary>
+              Ищет локализованную строку, похожую на Модель является пустым объектом.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.ModelIsValid">
+            <summary>
+              Ищет локализованную строку, похожую на Модель валидна.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.ThisEmailIsAlreadyTaken">
+            <summary>
+              Ищет локализованную строку, похожую на Данный Email уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTaken">
+            <summary>
+              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTakenByOtherUser">
+            <summary>
+              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.ThisPhoneNumberIsAlreadyTakenByOtherUser1">
+            <summary>
+              Ищет локализованную строку, похожую на Данный номер телефона уже занят другим пользователем.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.UriIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать Uri.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.UserFound">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь найден.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.UserIdentifierMustBeProvided">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать идентификатор пользователя.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.UserIdIsRequired">
+            <summary>
+              Ищет локализованную строку, похожую на Необходимо указать идентификатор пользователя.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.UserIsNotFoundByIdentifier">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь не найден по указанному идентификатору.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.UserNotFound">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь не найден.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.YouAreNotAnAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не являетесь администратором.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.YouAreNotAnAdministratorOrSeller">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не являетесь администратором или продавцом..
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.YouAreNotAuthorized">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не авторизованы.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.YouCantEditRootUser">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя Root.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.YouCantEditUserBecauseHeIsAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является администратором.
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Resources.ValidationMessages.YouCantEditUserBecauseHeIsSuperAdministrator">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не можете редактировать пользователя, так как он является Супер-Администратором.
             </summary>
         </member>
         <member name="T:Clt.Contract.Settings.AccountSettingsModel">

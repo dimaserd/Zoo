@@ -1,8 +1,8 @@
-﻿using Clt.Logic.Resources;
+﻿using Clt.Contract.Resources;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Clt.Logic.Models.Users
+namespace Clt.Contract.Models.Users
 {
     /// <summary>
     /// Модель для редактирования пользователя
@@ -43,13 +43,13 @@ namespace Clt.Logic.Models.Users
         /// Отчество
         /// </summary>
         [Display(Name = "Отчество")]
-        public string Patronymic { get; set; } 
+        public string Patronymic { get; set; }
 
         /// <summary>
         /// Пол
         /// </summary>
         [Display(Name = "Пол")]
-        public bool? Sex { get; set; } 
+        public bool? Sex { get; set; }
 
         /// <summary>
         /// Доп данные
@@ -60,6 +60,6 @@ namespace Clt.Logic.Models.Users
         /// Номер телефона
         /// </summary>
         [Display(Name = "Имя телефона")]
-        public string PhoneNumber { get; set; }       
+        public string PhoneNumber { get; set; }
     }
 }

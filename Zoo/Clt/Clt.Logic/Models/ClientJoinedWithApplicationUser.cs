@@ -6,7 +6,7 @@ namespace Clt.Logic.Models
     /// <summary>
     /// Клиент объединенный с пользователем
     /// </summary>
-    public class ClientJoinedWithApplicationUser
+    internal class ClientJoinedWithApplicationUser
     {
         /// <summary>
         /// Клиент 

@@ -2,19 +2,18 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Clt.Logic.Models.Users;
 using System.Linq.Expressions;
 using Clt.Logic.Extensions;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Clt.Model.Entities;
-using Clt.Contract.Enumerations;
 using Clt.Model.Entities.Default;
 using Clt.Contract.Settings;
-using Clt.Logic.Resources;
 using Microsoft.Extensions.Logging;
 using Clt.Contract.Events;
+using Clt.Contract.Models.Users;
+using Clt.Contract.Resources;
 
 namespace Clt.Logic.Services.Users
 {

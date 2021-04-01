@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Clt.Logic.Resources {
+namespace Clt.Contract.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Clt.Logic.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Clt.Logic.Resources.ClientResource", typeof(ClientResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Clt.Contract.Resources.ClientResource", typeof(ClientResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
