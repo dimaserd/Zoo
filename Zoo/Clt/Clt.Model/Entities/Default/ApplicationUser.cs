@@ -15,7 +15,7 @@ namespace Clt.Model.Entities.Default
         /// <summary>
         /// Роли пользователя
         /// </summary>
-        public ICollection<ApplicationUserRole> Roles { get; set; }
+        public ICollection<ApplicationUserRole> Roles { get; set; } = new List<ApplicationUserRole>();
 
         /// <inheritdoc />
         public string CreatedBy { get; set; }

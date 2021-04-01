@@ -127,7 +127,7 @@ namespace Tms.Logic.Services
                 return new BaseApiResponse(false, "Пустое описание задания");
             }
 
-            if ((await UsersStorage.GetUserById(model.AssigneeUserId)) != null)
+            if ((await UsersStorage.GetUserById(model.AssigneeUserId)) == null)
             {
                 return new BaseApiResponse(false, "Пользователь не найден по указанному идентификатору");
             }

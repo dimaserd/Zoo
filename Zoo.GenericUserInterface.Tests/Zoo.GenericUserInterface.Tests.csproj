@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zoo\Clt\Clt.Contract\Clt.Contract.csproj" />
     <ProjectReference Include="..\Zoo\Zoo.GenericUserInterface\Zoo.GenericUserInterface.csproj" />
     <ProjectReference Include="..\Zoo\Zoo.ServerJs\Zoo.ServerJs.csproj" />
   </ItemGroup>

@@ -1,7 +1,9 @@
+using Clt.Contract.Models.Users;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Services;
 using Zoo.GenericUserInterface.Tests;
@@ -38,6 +40,16 @@ namespace Tests
 
     public class Tests
     {
+        [Test]
+        public async Task TestOnGeneric()
+        {
+            var bag = TestsHelper.CreateDefaultBag();
+
+            var model = await bag.GetDefaultInterface(typeof(UserSearch).FullName);
+
+            Assert.IsNotNull(model != null);
+        }
+
         [Test]
         public void TestListOfStringPoperty()
         {

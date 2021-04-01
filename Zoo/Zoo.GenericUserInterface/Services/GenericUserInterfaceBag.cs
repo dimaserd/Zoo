@@ -106,14 +106,14 @@ namespace Zoo.GenericUserInterface.Services
         {
             var interfaceModelWithType = await GetOrAddDefaultInterfaceFromComputed(typeDisplayFullName);
 
-            if(interfaceModelWithType == (null, null))
+            if(interfaceModelWithType == null)
             {
                 throw new InvalidOperationException(string.Format(ExceptionTexts.TypeNotFoundByThisNameFormat, typeDisplayFullName));
             }
 
-            var overriding = GetDefaultOverriding(interfaceModelWithType.Item1);
+            var overriding = GetDefaultOverriding(interfaceModelWithType.Type);
 
-            var interfaceModel = interfaceModelWithType.Item2;
+            var interfaceModel = interfaceModelWithType.InterfaceModel;
             if (overriding != null)
             {
                 await overriding.SetDropDownDatasFunction(this, interfaceModel);
@@ -195,18 +195,22 @@ namespace Zoo.GenericUserInterface.Services
             return type;
         }
 
-        private async Task<(Type, GenerateGenericUserInterfaceModel)> GetOrAddDefaultInterfaceFromComputed(string typeDisplayFullName)
+        private async Task<TypeWithInterfaceModel> GetOrAddDefaultInterfaceFromComputed(string typeDisplayFullName)
         {
             var type = SearchTypeFromCache(typeDisplayFullName);
 
             if (type == null)
             {
-                return (null, null);
+                return null;
             }
 
             if (ComputedInterfaces.ContainsKey(type))
             {
-                return (type, ComputedInterfaces[type]);
+                return new TypeWithInterfaceModel 
+                {
+                    Type = type,
+                    InterfaceModel = ComputedInterfaces[type]
+                };
             }
 
             var builder = new GenericUserInterfaceModelBuilder(type, Options);
@@ -223,7 +227,12 @@ namespace Zoo.GenericUserInterface.Services
             }
 
             await ProcessClassesAndArrays(interfaceModel);
-            return (type, interfaceModel);
+
+            return new TypeWithInterfaceModel
+            {
+                Type = type,
+                InterfaceModel = interfaceModel
+            };
         }
 
         private async Task ProcessClassesAndArrays(GenerateGenericUserInterfaceModel interfaceModel)
@@ -233,14 +242,25 @@ namespace Zoo.GenericUserInterface.Services
                 if (block.InterfaceType == UserInterfaceType.GenericInterfaceForClass)
                 {
                     var defaultInterface = await GetOrAddDefaultInterfaceFromComputed(block.TypeDisplayFullName);
-                    block.InnerGenericInterface = defaultInterface.Item2.Interface;
+
+                    if(defaultInterface == null)
+                    {
+                        throw new NotImplementedException($"Не могу создать интерфейс для {block.TypeDisplayFullName}");
+                    }
+                    block.InnerGenericInterface = defaultInterface.InterfaceModel.Interface;
                 }
                 else if (block.InterfaceType == UserInterfaceType.GenericInterfaceForArray)
                 {
                     var defaultInterface = await GetOrAddDefaultInterfaceFromComputed(block.TypeDisplayFullName[0..^2]);
-                    block.InnerGenericInterface = defaultInterface.Item2.Interface;
+                    block.InnerGenericInterface = defaultInterface.InterfaceModel.Interface;
                 }
             }
+        }
+
+        internal class TypeWithInterfaceModel
+        {
+            public Type Type { get; set; }
+            public GenerateGenericUserInterfaceModel InterfaceModel { get; set; }
         }
     }
 }
