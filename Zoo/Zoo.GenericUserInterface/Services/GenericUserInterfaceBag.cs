@@ -73,7 +73,7 @@ namespace Zoo.GenericUserInterface.Services
 
             var typeOfDataProvider = AutoCompletionDataProviders[providerTypeFullName];
 
-            var provider = ServiceProvider.GetRequiredService(typeOfDataProvider) as IDataProviderForAutoCompletion;
+            var provider = GetRequiredServiceSafe(typeOfDataProvider) as IDataProviderForAutoCompletion;
 
             return provider.GetSuggestionsData(input);
         }
@@ -92,7 +92,7 @@ namespace Zoo.GenericUserInterface.Services
 
             var typeOfDataProvider = SelectListDataProviders[providerTypeFullName];
 
-            var provider = ServiceProvider.GetRequiredService(typeOfDataProvider) as IDataProviderForSelectList;
+            var provider = GetRequiredServiceSafe(typeOfDataProvider) as IDataProviderForSelectList;
 
             return provider.GetSelectListItems();
         }
@@ -168,14 +168,19 @@ namespace Zoo.GenericUserInterface.Services
         /// <returns></returns>
         private Overrider GetDefaultOverriding(Type key)
         {
-            if (!DefaultInterfaceOverriders.ContainsKey(key))
+            if (!DefaultInterfaceOverriders.TryGetValue(key, out var overriderType))
             {
                 return null;
             }
 
-            var overrider = ServiceProvider.GetRequiredService(DefaultInterfaceOverriders[key]) as IGenericInterfaceOverrider;
+            var overrider = GetRequiredServiceSafe(overriderType) as IGenericInterfaceOverrider;
 
             return overrider.GetOverrider();
+        }
+
+        private object GetRequiredServiceSafe(Type serviceType)
+        {
+            return ServiceProvider.GetRequiredService(serviceType);
         }
 
         private Type SearchTypeFromCache(string typeDisplayFullName)

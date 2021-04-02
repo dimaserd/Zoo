@@ -33,6 +33,7 @@ namespace Zoo.GenericUserInterface.Tests
                     {
                         new SelectListItemData<string>
                         {
+                            Selected = true,
                             Text = "Text",
                             Value = "Value"
                         }

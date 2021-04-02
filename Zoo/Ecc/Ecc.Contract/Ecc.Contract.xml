@@ -265,6 +265,31 @@
             Файлы вложений
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.Emails.SendEmailModelWithLoadedAttachments">
+            <summary>
+            Отправить эмейл с предзагруженными вложениями
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailModelWithLoadedAttachments.Subject">
+            <summary>
+            Тема письма
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailModelWithLoadedAttachments.Body">
+            <summary>
+            Тело письма
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailModelWithLoadedAttachments.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Emails.SendEmailModelWithLoadedAttachments.AttachmentFiles">
+            <summary>
+            Вложения
+            </summary>
+        </member>
         <member name="T:Ecc.Contract.Models.Emails.SendEmailWithProccessTextModel">
             <summary>
             Отправить Email c препроцессингом текста

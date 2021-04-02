@@ -39,7 +39,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             Block.InterfaceType = UserInterfaceType.MultipleDropDownList;
             Block.DropDownData = new DropDownListData
             {
-                SelectList = GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(selectListItems),
+                SelectList = GenericUserInterfaceModelBuilderMappings.ToSelectListItems(selectListItems),
                 CanAddNewItem = false
             };
 

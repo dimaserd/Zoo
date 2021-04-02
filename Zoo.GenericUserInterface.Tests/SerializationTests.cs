@@ -15,7 +15,7 @@ namespace Zoo.GenericUserInterface.Tests
                 Value = 2
             };
 
-            var mappedAsInt = GenericUserInterfaceModelBuilderExtensions.ToSelectListItem(tInt);
+            var mappedAsInt = GenericUserInterfaceModelBuilderMappings.ToSelectListItem(tInt);
 
             Assert.AreEqual(tInt.Value.ToString(), mappedAsInt.Value);
 
@@ -25,7 +25,7 @@ namespace Zoo.GenericUserInterface.Tests
                 Value = "dasa"
             };
 
-            var mappedAsStr = GenericUserInterfaceModelBuilderExtensions.ToSelectListItem(tStr);
+            var mappedAsStr = GenericUserInterfaceModelBuilderMappings.ToSelectListItem(tStr);
 
             Assert.AreEqual(tStr.Value.ToString(), mappedAsStr.Value);
         }

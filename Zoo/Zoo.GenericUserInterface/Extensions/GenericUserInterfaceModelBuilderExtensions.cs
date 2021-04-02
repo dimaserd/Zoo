@@ -4,29 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models;
-using Zoo.GenericUserInterface.Models.Definition;
-using Zoo.GenericUserInterface.Utils;
 
 namespace Zoo.GenericUserInterface.Extensions
 {
     internal static class GenericUserInterfaceModelBuilderExtensions
     {
-        internal static List<SelectListItem> ToSelectListItems<TProp>(this List<SelectListItemData<TProp>> selectListItems)
-        {
-            return selectListItems.Select(ToSelectListItem).ToList();
-        }
-
-        internal static SelectListItem ToSelectListItem<TProp>(this SelectListItemData<TProp> data)
-        {
-            return new SelectListItem
-            {
-                DataJson = data.DataJson,
-                Text = data.Text,
-                Selected = data.Selected,
-                Value = typeof(TProp) == typeof(string)? data.Value.ToString() : Tool.JsonConverter.Serialize(data.Value)
-            };
-        }
-
         private static string AddPropNameToPrefix(string prefix, string propName)
         {
             return prefix == string.Empty ? propName : $"{prefix}.{propName}";
@@ -197,29 +179,7 @@ namespace Zoo.GenericUserInterface.Extensions
 
             if (propTypeDesc.IsEnumeration)
             {
-                var enumsList = new List<SelectListItem>();
-
-                if (propTypeDesc.IsNullable)
-                {
-                    enumsList.Add(new SelectListItem
-                    {
-                        Value = null,
-                        Selected = true,
-                        Text = opts.NotSelectedText
-                    });
-                }
-
-                enumsList.AddRange(propTypeDesc.EnumDescription.EnumValues.Select(x => new SelectListItem
-                {
-                    Value = x.StringRepresentation,
-                    Text = x.DisplayName
-                }));
-
-                return new DropDownListData
-                {
-                    CanAddNewItem = false,
-                    SelectList = enumsList
-                };
+                return ForEnumDropDownDataBuilder.GetDropDownListData(propTypeDesc, opts);
             }
 
             return null;

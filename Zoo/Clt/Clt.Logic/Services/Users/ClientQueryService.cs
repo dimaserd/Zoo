@@ -7,6 +7,12 @@ using Croco.Core.Contract;
 using Clt.Model.Entities;
 using Croco.Core.Contract.Application;
 using Clt.Contract.Resources;
+using System.Linq.Expressions;
+using System;
+using Croco.Core.Contract.Models.Search;
+using System.Collections.Generic;
+using Clt.Contract.Models.Clients;
+using Croco.Core.Search.Extensions;
 
 namespace Clt.Logic.Services.Users
 {
@@ -59,9 +65,39 @@ namespace Clt.Logic.Services.Users
         /// <returns></returns>
         public async Task<BaseApiResponse<ClientModel>> GetClientByIdAsync(string id)
         {
-            var model = await Query<Client>().FirstOrDefaultAsync(x => x.Id == id);
+            var model = await Query<Client>().Select(ClientSelectExpression).FirstOrDefaultAsync(x => x.Id == id);
 
             return MapToResponse(model);
+        }
+
+        /// <summary>
+        /// Искать клиентов
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public Task<GetListResult<ClientModel>> GetClients(ClientSearch model)
+        {
+            var criterias = GetCriterias(model);
+
+            var clientQuery = Query<Client>().BuildQuery(criterias)
+                .OrderByDescending(x => x.CreatedOn);
+
+            return EFCoreExtensions.GetAsync(model, clientQuery, ClientSelectExpression);
+        }
+
+
+        internal IEnumerable<SearchQueryCriteria<Client>> GetCriterias(ClientSearch model)
+        {
+            yield return model.Q.MapString(str => new SearchQueryCriteria<Client>(x => x.Email.Contains(str) || x.PhoneNumber.Contains(str) || x.Name.Contains(str)));
+
+            yield return model.Deactivated.MapNullable(b => new SearchQueryCriteria<Client>(x => x.DeActivated == b));
+
+            yield return model.RegistrationDate.GetSearchCriteriaFromGenericRange<Client, DateTime>(x => x.CreatedOn);
+
+            if (model.SearchSex)
+            {
+                yield return new SearchQueryCriteria<Client>(x => x.Sex == model.Sex);
+            }
         }
 
         /// <summary>
@@ -71,29 +107,32 @@ namespace Clt.Logic.Services.Users
         /// <returns></returns>
         public BaseApiResponse<ClientModel> GetClientById(string id)
         {
-            var model = Query<Client>().FirstOrDefault(x => x.Id == id);
+            var model = Query<Client>().Select(ClientSelectExpression).FirstOrDefault(x => x.Id == id);
 
             return MapToResponse(model);
         }
 
-        private static BaseApiResponse<ClientModel> MapToResponse(Client model)
+        private static BaseApiResponse<ClientModel> MapToResponse(ClientModel model)
         {
             if (model == null)
             {
                 return new BaseApiResponse<ClientModel>(false, ValidationMessages.UserNotFound);
             }
 
-            return new BaseApiResponse<ClientModel>(true, ValidationMessages.UserFound, new ClientModel
-            {
-                Email = model.Email,
-                Name = model.Name,
-                Surname = model.Surname,
-                Patronymic = model.Patronymic,
-                Sex = model.Sex,
-                PhoneNumber = model.PhoneNumber,
-                BirthDate = model.BirthDate,
-                AvatarFileId = model.AvatarFileId
-            });
+            return new BaseApiResponse<ClientModel>(true, ValidationMessages.UserFound, model);
         }
+
+        internal static Expression<Func<Client, ClientModel>> ClientSelectExpression = model => new ClientModel
+        {
+            Id = model.Id,
+            Email = model.Email,
+            Name = model.Name,
+            Surname = model.Surname,
+            Patronymic = model.Patronymic,
+            Sex = model.Sex,
+            PhoneNumber = model.PhoneNumber,
+            BirthDate = model.BirthDate,
+            AvatarFileId = model.AvatarFileId
+        };
     }
 }

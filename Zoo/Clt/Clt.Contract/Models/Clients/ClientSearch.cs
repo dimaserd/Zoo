@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using Croco.Core.Contract.Models.Search;
 
-namespace Clt.Contract.Models.Users
+namespace Clt.Contract.Models.Clients
 {
     /// <summary>
     /// Модель для поиск пользователей
     /// </summary>
-    public class UserSearch : GetListSearchModel
+    public class ClientSearch : GetListSearchModel
     {
         /// <summary>
         /// Поисковая строка
@@ -42,7 +42,7 @@ namespace Clt.Contract.Models.Users
         /// <summary>
         /// Получить всех пользователей
         /// </summary>
-        public static UserSearch GetAllUsers => new UserSearch
+        public static ClientSearch GetAllUsers => new ClientSearch
         {
             Count = null,
             OffSet = 0

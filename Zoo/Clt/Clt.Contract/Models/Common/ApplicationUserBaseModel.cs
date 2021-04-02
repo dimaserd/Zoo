@@ -32,19 +32,6 @@ namespace Clt.Contract.Models.Common
         public bool PhoneNumberConfirmed { get; set; }
 
         /// <summary>
-        /// Пол
-        /// </summary>
-        [Description("Пол")]
-        [Display(Name = "Пол")]
-        public bool? Sex { get; set; }
-
-        /// <summary>
-        /// JSON Объект
-        /// </summary>
-        [Display(Name = "JSON Объект")]
-        public string ObjectJson { get; set; }
-        
-        /// <summary>
         /// Штамп безопасности
         /// </summary>
         public string SecurityStamp { get; set; }
@@ -68,25 +55,8 @@ namespace Clt.Contract.Models.Common
         public List<string> RoleNames { get; set; }
 
         /// <summary>
-        /// Фамилия
-        /// </summary>
-        [Display(Name = "Фамилия")]
-        public string Surname { get; set; }
-
-        /// <summary>
-        /// Отчество
-        /// </summary>
-        [Display(Name = "Отчество")]
-        public string Patronymic { get; set; }
-
-        /// <summary>
         /// Хеш пароля
         /// </summary>
         public string PasswordHash { get; set; }
-
-        /// <summary>
-        /// Дата создания
-        /// </summary>
-        public DateTime CreatedOn { get; set; }
     }
 }

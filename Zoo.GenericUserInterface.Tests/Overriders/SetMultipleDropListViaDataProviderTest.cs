@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Enumerations;
@@ -75,10 +76,24 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             Assert.AreEqual(typeof(SomeDataProviderForSelectList).FullName, fBlock.DropDownData.DataProviderTypeFullName);
 
             var expectedData = SomeDataProviderForSelectList.Data
-                .Select(GenericUserInterfaceModelBuilderExtensions.ToSelectListItem)
+                .Select(GenericUserInterfaceModelBuilderMappings.ToSelectListItem)
                 .ToList();
 
             TestsHelper.AssertAreEqualViaJson(expectedData, fBlock.DropDownData.SelectList);
+        }
+
+        [Test]
+        public void TestOnNullWithMapping()
+        {
+            var elem = new SelectListItemData<string>
+            {
+                Value = null,
+                Text = "text"
+            };
+
+            var data = GenericUserInterfaceModelBuilderMappings.ToSelectListItem(elem);
+
+            Assert.AreEqual(elem.Text, data.Text);
         }
     }
 }

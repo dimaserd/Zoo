@@ -8,6 +8,11 @@ namespace Clt.Contract.Models.Users
     public class ClientModel
     {
         /// <summary>
+        /// Идентификатор клиента
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
         /// Имя клиента
         /// </summary>
         public string Name { get; set; }
@@ -16,6 +21,11 @@ namespace Clt.Contract.Models.Users
         /// Дата рождения
         /// </summary>
         public DateTime? BirthDate { get; set; }
+
+        /// <summary>
+        /// Дата регистрации
+        /// </summary>
+        public DateTime RegistrationDate { get; set; }
 
         /// <summary>
         /// Фамилия пользователя

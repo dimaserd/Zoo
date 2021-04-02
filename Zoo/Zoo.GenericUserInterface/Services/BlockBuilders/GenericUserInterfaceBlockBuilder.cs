@@ -96,7 +96,7 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             Block.InterfaceType = UserInterfaceType.DropDownList;
             Block.DropDownData = new DropDownListData
             {
-                SelectList = GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(selectListItems),
+                SelectList = GenericUserInterfaceModelBuilderMappings.ToSelectListItems(selectListItems),
                 CanAddNewItem = false
             };
             return this;

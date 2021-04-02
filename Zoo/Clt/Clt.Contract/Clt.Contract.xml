@@ -269,6 +269,11 @@
             Модель описывающая клиента
             </summary>
         </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.Id">
+            <summary>
+            Идентификатор клиента
+            </summary>
+        </member>
         <member name="P:Clt.Contract.Models.Users.ClientModel.Name">
             <summary>
             Имя клиента
@@ -277,6 +282,11 @@
         <member name="P:Clt.Contract.Models.Users.ClientModel.BirthDate">
             <summary>
             Дата рождения
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.ClientModel.RegistrationDate">
+            <summary>
+            Дата регистрации
             </summary>
         </member>
         <member name="P:Clt.Contract.Models.Users.ClientModel.Surname">
@@ -429,37 +439,37 @@
             Идентификатор пользователя
             </summary>
         </member>
-        <member name="T:Clt.Contract.Models.Users.UserSearch">
+        <member name="T:Clt.Contract.Models.Clients.ClientSearch">
             <summary>
             Модель для поиск пользователей
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.UserSearch.Q">
+        <member name="P:Clt.Contract.Models.Clients.ClientSearch.Q">
             <summary>
             Поисковая строка
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.UserSearch.Deactivated">
+        <member name="P:Clt.Contract.Models.Clients.ClientSearch.Deactivated">
             <summary>
             Фильтровать по активированности
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.UserSearch.RegistrationDate">
+        <member name="P:Clt.Contract.Models.Clients.ClientSearch.RegistrationDate">
             <summary>
             Дата регистрации
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.UserSearch.SearchSex">
+        <member name="P:Clt.Contract.Models.Clients.ClientSearch.SearchSex">
             <summary>
             ФИльтровать по полу
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.UserSearch.Sex">
+        <member name="P:Clt.Contract.Models.Clients.ClientSearch.Sex">
             <summary>
             Пол
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.UserSearch.GetAllUsers">
+        <member name="P:Clt.Contract.Models.Clients.ClientSearch.GetAllUsers">
             <summary>
             Получить всех пользователей
             </summary>
@@ -484,16 +494,6 @@
             Номер телефона подтвержден
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.Sex">
-            <summary>
-            Пол
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.ObjectJson">
-            <summary>
-            JSON Объект
-            </summary>
-        </member>
         <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.SecurityStamp">
             <summary>
             Штамп безопасности
@@ -514,24 +514,9 @@
             Роли пользователя
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.Surname">
-            <summary>
-            Фамилия
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.Patronymic">
-            <summary>
-            Отчество
-            </summary>
-        </member>
         <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.PasswordHash">
             <summary>
             Хеш пароля
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Common.ApplicationUserBaseModel.CreatedOn">
-            <summary>
-            Дата создания
             </summary>
         </member>
         <member name="T:Clt.Contract.Models.Common.UserIdModel">
@@ -562,11 +547,6 @@
         <member name="P:Clt.Contract.Models.Common.UserWithNameAndEmailAvatarModel.Name">
             <summary>
             Имя
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Common.UserWithNameAndEmailAvatarModel.AvatarFileId">
-            <summary>
-            Идентификатор аватара
             </summary>
         </member>
         <member name="T:Clt.Contract.Models.Roles.ApplicationRoleModel">

@@ -146,21 +146,6 @@
             <param name="client"></param>
             <returns></returns>
         </member>
-        <member name="T:Clt.Logic.Models.ClientJoinedWithApplicationUser">
-            <summary>
-            Клиент объединенный с пользователем
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.ClientJoinedWithApplicationUser.Client">
-            <summary>
-            Клиент 
-            </summary>
-        </member>
-        <member name="P:Clt.Logic.Models.ClientJoinedWithApplicationUser.User">
-            <summary>
-            Пользователь
-            </summary>
-        </member>
         <member name="T:Clt.Logic.Services.Account.AccountInitiator">
             <summary>
             Методы для работы с учетными записями
@@ -464,6 +449,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Clt.Logic.Services.Users.ClientQueryService.GetClients(Clt.Contract.Models.Clients.ClientSearch)">
+            <summary>
+            Искать клиентов
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="M:Clt.Logic.Services.Users.ClientQueryService.GetClientById(System.String)">
             <summary>
             Получить клиента по идентификатору
@@ -557,20 +549,6 @@
             Найти пользователя по Email
             </summary>
             <param name="email"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Services.Users.UserSearcher.GetUsers(Clt.Contract.Models.Users.UserSearch)">
-            <summary>
-            Искать пользователей
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Services.Users.UserSearcher.GetUsersAsync(Clt.Contract.Models.Users.UserSearch)">
-            <summary>
-            Получить пользователей
-            </summary>
-            <param name="model"></param>
             <returns></returns>
         </member>
         <member name="M:Clt.Logic.Services.Users.UserSearcher.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">

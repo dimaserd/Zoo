@@ -1,3 +1,4 @@
+using Clt.Contract.Models.Clients;
 using Clt.Contract.Models.Users;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace Tests
         {
             var bag = TestsHelper.CreateDefaultBag();
 
-            var model = await bag.GetDefaultInterface(typeof(UserSearch).FullName);
+            var model = await bag.GetDefaultInterface(typeof(ClientSearch).FullName);
 
             Assert.IsNotNull(model != null);
         }

@@ -22,7 +22,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             {
                 new SelectListItemData<bool?>
                 {
-                    Selected = false,
+                    Selected = true,
                     Text = "Text",
                 }
             };
@@ -32,7 +32,7 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
             var lastProp = builder.Result.Interface.Blocks.Last();
 
             Assert.IsTrue(lastProp.InterfaceType == UserInterfaceType.DropDownList);
-            TestsHelper.AssertAreEqualViaJson(GenericUserInterfaceModelBuilderExtensions.ToSelectListItems(list), lastProp.DropDownData.SelectList);
+            TestsHelper.AssertAreEqualViaJson(GenericUserInterfaceModelBuilderMappings.ToSelectListItems(list), lastProp.DropDownData.SelectList);
         }
 
 
@@ -41,7 +41,14 @@ namespace Zoo.GenericUserInterface.Tests.Overriders
         {
             var builder = new GenericUserInterfaceModelBuilder<SomeClass>(TestsHelper.CreateDefaultBag());
 
-            var ex = Assert.Throws<InvalidOperationException>(() => builder.GetBlockBuilder(x => x.EnumProp).SetDropDownList(new List<SelectListItemData<SomeEnumType>>()));
+            var ex = Assert.Throws<InvalidOperationException>(() => builder.GetBlockBuilder(x => x.EnumProp).SetDropDownList(new List<SelectListItemData<SomeEnumType>>() 
+            {
+                new SelectListItemData<SomeEnumType>
+                {
+                    Selected = true,
+                    Value = SomeEnumType.Type1,
+                }
+            }));
 
             var expectedMessage = string.Format(ExceptionTexts.CantImplementSetDropListNameToEnumPropertyFormat, nameof(SomeClass.EnumProp));
             Assert.AreEqual(expectedMessage, ex.Message);

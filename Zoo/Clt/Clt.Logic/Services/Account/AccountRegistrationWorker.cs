@@ -235,14 +235,18 @@ namespace Clt.Logic.Services.Account
                 PhoneNumber = model.PhoneNumber
             });
 
-            var result = await TrySaveChangesAndReturnResultAsync("Пользователь создан", await UserSearcher.GetUserByIdAsync(user.Id));
+            var result = await TrySaveChangesAndReturnResultAsync("Пользователь создан");
 
             if (!result.IsSucceeded)
             {
                 await RemoveUserAndClient(user.Id);
+
+                return new BaseApiResponse<ApplicationUserBaseModel>(result);
             }
 
-            return result;
+            var userModel = await UserSearcher.GetUserByIdAsync(user.Id);
+
+            return new BaseApiResponse<ApplicationUserBaseModel>(result, userModel);
         }
 
         #endregion

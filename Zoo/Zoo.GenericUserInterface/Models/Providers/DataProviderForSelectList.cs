@@ -25,7 +25,7 @@ namespace Zoo.GenericUserInterface.Models.Providers
         public async Task<SelectListItem[]> GetSelectListItems()
         {
             return (await GetData())
-                .Select(GenericUserInterfaceModelBuilderExtensions.ToSelectListItem)
+                .Select(GenericUserInterfaceModelBuilderMappings.ToSelectListItem)
                 .ToArray();
         }
     }

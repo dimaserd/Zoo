@@ -23,11 +23,5 @@ namespace Clt.Contract.Models.Common
         /// </summary>
         [Display(Name = "Имя")]
         public string Name { get; set; }
-
-        /// <summary>
-        /// Идентификатор аватара
-        /// </summary>
-        [Display(Name = "Идентификатор аватара")]
-        public int? AvatarFileId { get; set; }
     }
 }
