@@ -2,6 +2,7 @@
 using Croco.Core.Documentation.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
@@ -83,6 +84,11 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             if (selectListItems is null)
             {
                 throw new ArgumentNullException(nameof(selectListItems));
+            }
+            var countOfSelected = selectListItems.Count(x => x.Selected);
+            if (countOfSelected != 1)
+            {
+                throw new InvalidOperationException($"Необходимо чтобы в выпадающем списке было 1 выбранное значение. У вас их {countOfSelected}");
             }
 
             DropDownListChecks();

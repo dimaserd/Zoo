@@ -64,6 +64,31 @@
             Идентификатор пользователя, которому нужно отправить сообщение
             </summary>
         </member>
+        <member name="T:Ecc.Model.Entities.Interactions.SmsMessageInteraction">
+            <summary>
+            Смс взаимодействие
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.SmsMessageInteraction.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Interactions.UserNotificationInteraction">
+            <summary>
+            Взаимодействие на сайте
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.UserNotificationInteraction.ObjectJson">
+            <summary>
+            Дополнительные данные
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.UserNotificationInteraction.NotificationType">
+            <summary>
+            Тип уведомления
+            </summary>
+        </member>
         <member name="T:Ecc.Model.Entities.Ecc.Messaging.MailDistribution">
             <summary>
             Рассылка пользователям по почте

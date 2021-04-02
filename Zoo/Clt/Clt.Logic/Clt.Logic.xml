@@ -40,6 +40,32 @@
             <param name="applicationBuilder"></param>
             <param name="setupAction"></param>
         </member>
+        <member name="T:Clt.Logic.Extensions.ClaimsPrincipalExtensions">
+            <summary>
+            Расширения для контекста авторизации
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Extensions.ClaimsPrincipalExtensions.GetUserId(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Получить идентификатор пользователя
+            </summary>
+            <param name="principal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Extensions.ClaimsPrincipalExtensions.GetUserId(System.Security.Principal.IPrincipal)">
+            <summary>
+            Получить идентификатор пользователя
+            </summary>
+            <param name="principal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Extensions.ClaimsPrincipalExtensions.GetUserId(System.Security.Principal.IIdentity)">
+            <summary>
+            Получить идентификатор пользователя
+            </summary>
+            <param name="principal"></param>
+            <returns></returns>
+        </member>
         <member name="M:Clt.Logic.HealthChecks.CltSettingsHealthCheck.#ctor(Croco.Core.Contract.ISettingsFactory)">
             <summary>
             Конструктор

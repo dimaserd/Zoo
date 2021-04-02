@@ -471,6 +471,66 @@
             Текстовые замены
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.Sms.SendSmsToClient">
+            <summary>
+            Отправить смс клиенту
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SendSmsToClient.ClientId">
+            <summary>
+            Идентификатор клиента
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SendSmsToClient.Message">
+            <summary>
+            Сообщение
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SendSmsToClient.AttachmentFileIds">
+            <summary>
+            Идентификаторы вложений
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.Sms.SmsMessageModel">
+            <summary>
+            Модель описывающя смс
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SmsMessageModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SmsMessageModel.Body">
+            <summary>
+            Тело сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SmsMessageModel.Header">
+            <summary>
+            Заголовок
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SmsMessageModel.ReadOn">
+            <summary>
+            Дата прочтения
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SmsMessageModel.SentOn">
+            <summary>
+            Дата отправки
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SmsMessageModel.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Sms.SmsMessageModel.Status">
+            <summary>
+            Статус взаимодействия
+            </summary>
+        </member>
         <member name="T:Ecc.Contract.Models.UserGroups.ChangeUsersInUserGroupModel">
             <summary>
             Модель добавления или удаления пользователей из группы

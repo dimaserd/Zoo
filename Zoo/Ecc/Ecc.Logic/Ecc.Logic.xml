@@ -179,6 +179,21 @@
             Отправить уведомление пользователю через интегрированное приложение
             </summary>
         </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.SendUserNotificationViaApplication.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.SendUserNotificationViaApplication.Title">
+            <summary>
+            Заголовок уведомления
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.SendUserNotificationViaApplication.Text">
+            <summary>
+            Текст уведомления
+            </summary>
+        </member>
         <member name="T:Ecc.Logic.Models.Messaging.ChangeUserGroupsInMailDistributionModel">
             <summary>
             Модель добавления или удаления группы пользователей из рассылки
@@ -218,6 +233,47 @@
             <summary>
             Идентификатор уведомления
             </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.Notifications.NotificationModelWithUserModel">
+            <summary>
+            Модель пользователя с уведомлением
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Notifications.NotificationModelWithUserModel.User">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Notifications.NotificationModelWithUserModel.Notification">
+            <summary>
+            Уведомление
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.Notifications.NotificationSearchQueryModel">
+            <summary>
+            Модель для поиска уведомлений
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Notifications.NotificationSearchQueryModel.UserId">
+            <summary>
+            Идентификатор пользователя, к которому прикреплено уведомление
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Notifications.NotificationSearchQueryModel.CreatedOn">
+            <summary>
+            Диапазон для даты создания уведомления
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Notifications.NotificationSearchQueryModel.Read">
+            <summary>
+            Флаг прочитанности
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Models.Notifications.NotificationSearchQueryModel.GetCriterias">
+            <summary>
+            Получить критерии для поиска
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Ecc.Logic.Models.Users.UserGroupModelWithUsers">
             <summary>
@@ -762,6 +818,41 @@
             Получить группу пользователей с пользователями
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.Messaging.ApplicationInteractionWorker">
+            <summary>
+            Сервис для работы со взаимодействиями с клиентами
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.ApplicationInteractionWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.ApplicationInteractionWorker.SetStatusForInteractions(System.Collections.Generic.IEnumerable{System.String},Ecc.Common.Enumerations.InteractionStatus,System.String)">
+            <summary>
+            Установить статус для взаимодействий
+            </summary>
+            <param name="ids"></param>
+            <param name="status"></param>
+            <param name="statusDescription"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.ApplicationInteractionWorker.UpdateInteractionStatusesAsync(System.Collections.Generic.List{Ecc.Contract.Models.Interactions.UpdateInteractionStatus})">
+            <summary>
+            Обновить статусы взаимодействиям
+            </summary>
+            <param name="statuses"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.ApplicationInteractionWorker.GetInitQueryToSend``1">
+            <summary>
+            Получить базовый запрос для взаимодействий, которые необходимо отправить
+            </summary>
+            <typeparam name="TInteraction"></typeparam>
             <returns></returns>
         </member>
         <member name="T:Ecc.Logic.Services.Messaging.EmailSender">
