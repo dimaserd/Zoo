@@ -55,7 +55,7 @@ namespace Tms.Logic
 
         private static void Check(CrocoApplicationBuilder applicationBuilder)
         {
-            new EFCrocoApplicationRegistrator(applicationBuilder).CheckForEFDataCoonection<TmsDbContext>();
+            new EFCrocoApplicationRegistrator(applicationBuilder).RegiterIfNeedEFDataCoonection<TmsDbContext>();
             DbFileManagerServiceCollectionExtensions.CheckForDbFileManager(applicationBuilder.Services);
         }
     }

@@ -54,7 +54,7 @@ namespace Clt.Logic
 
         private static void Check(CrocoApplicationBuilder applicationBuilder)
         {
-            new EFCrocoApplicationRegistrator(applicationBuilder).CheckForEFDataCoonection<CltDbContext>();
+            new EFCrocoApplicationRegistrator(applicationBuilder).RegiterIfNeedEFDataCoonection<CltDbContext>();
 
             DbFileManagerServiceCollectionExtensions.CheckForDbFileManager(applicationBuilder.Services);
         }

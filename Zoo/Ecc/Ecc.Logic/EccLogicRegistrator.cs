@@ -81,7 +81,7 @@ namespace Ecc.Logic
 
         private static void Check(CrocoApplicationBuilder appBuilder)
         {
-            new EFCrocoApplicationRegistrator(appBuilder).CheckForEFDataCoonection<EccDbContext>();
+            new EFCrocoApplicationRegistrator(appBuilder).RegiterIfNeedEFDataCoonection<EccDbContext>();
             DbFileManagerServiceCollectionExtensions.CheckForDbFileManager(appBuilder.Services);
         }
     }
