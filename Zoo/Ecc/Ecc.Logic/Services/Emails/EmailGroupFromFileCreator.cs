@@ -2,7 +2,6 @@
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Ecc.Contract.Models.EmailGroup;
-using Ecc.Logic.Abstractions;
 using Ecc.Logic.Services.Base;
 using Ecc.Model.Entities.Email;
 using Microsoft.EntityFrameworkCore;
@@ -11,13 +10,26 @@ using System.Threading.Tasks;
 
 namespace Ecc.Logic.Services.Emails
 {
+    /// <summary>
+    /// Сервис для создания группы эмейлов из файла
+    /// </summary>
     public class EmailGroupFromFileCreator : BaseEccService
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="application"></param>
         public EmailGroupFromFileCreator(ICrocoAmbientContextAccessor context, 
             ICrocoApplication application) : base(context, application)
         {
         }
 
+        /// <summary>
+        /// Добавить эмейлы в группу
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> ApppendEmailsToGroup(AppendEmailsFromFileToGroup model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);

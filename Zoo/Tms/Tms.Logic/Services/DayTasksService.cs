@@ -122,6 +122,11 @@ namespace Tms.Logic.Services
                 return new BaseApiResponse(false, "Пустое название задания");
             }
 
+            if (!IsAuthenticated)
+            {
+                return new BaseApiResponse(false, "Вы не авторизованы");
+            }
+
             if (string.IsNullOrWhiteSpace(model.TaskText))
             {
                 return new BaseApiResponse(false, "Пустое описание задания");
