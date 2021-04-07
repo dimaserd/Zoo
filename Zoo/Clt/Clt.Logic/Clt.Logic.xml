@@ -192,12 +192,12 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="T:Clt.Logic.Services.Account.AccountLoginWorker">
+        <member name="T:Clt.Logic.Services.Account.AccountLoginService">
             <summary>
             Сервис для работы с методами логинирования
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountLoginWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher,Clt.Logic.Services.Base.PasswordHashValidator,Clt.Logic.Abstractions.IApplicationAuthenticationManager,Microsoft.Extensions.Logging.ILogger{Clt.Logic.Services.Account.AccountLoginWorker})">
+        <member name="M:Clt.Logic.Services.Account.AccountLoginService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher,Clt.Logic.Services.Base.PasswordHashValidator,Clt.Logic.Abstractions.IApplicationAuthenticationManager,Microsoft.Extensions.Logging.ILogger{Clt.Logic.Services.Account.AccountLoginService})">
             <summary>
             Конструктор
             </summary>
@@ -209,32 +209,32 @@
             <param name="authenticationManager"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountLoginWorker.LoginAsync(Clt.Contract.Models.Account.LoginModel)">
+        <member name="M:Clt.Logic.Services.Account.AccountLoginService.LoginAsync(Clt.Contract.Models.Account.LoginModel)">
             <summary>
             Авторизоваться по Email
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountLoginWorker.LoginByPhoneNumberAsync(Clt.Logic.Models.Account.LoginByPhoneNumberModel)">
+        <member name="M:Clt.Logic.Services.Account.AccountLoginService.LoginByPhoneNumberAsync(Clt.Logic.Models.Account.LoginByPhoneNumberModel)">
             <summary>
             Авторизоваться по номеру телефона
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountLoginWorker.LogOut">
+        <member name="M:Clt.Logic.Services.Account.AccountLoginService.LogOut">
             <summary>
             Разлогинивание в системе
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Clt.Logic.Services.Account.AccountRegistrationWorker">
+        <member name="T:Clt.Logic.Services.Account.AccountRegistrationService">
             <summary>
             Методы для регистрации
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher,Microsoft.Extensions.Logging.ILogger{Clt.Logic.Services.Account.AccountRegistrationWorker})">
+        <member name="M:Clt.Logic.Services.Account.AccountRegistrationService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser},Clt.Logic.Services.Users.UserSearcher,Microsoft.Extensions.Logging.ILogger{Clt.Logic.Services.Account.AccountRegistrationService})">
             <summary>
             Конструктор
             </summary>
@@ -245,7 +245,7 @@
             <param name="userSearcher"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.RegisterAndSignInAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
+        <member name="M:Clt.Logic.Services.Account.AccountRegistrationService.RegisterAndSignInAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
             <summary>
             Зарегистрировать пользователя и авторизоаться
             </summary>
@@ -253,7 +253,7 @@
             <param name="createRandomPassword"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.RegisterAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
+        <member name="M:Clt.Logic.Services.Account.AccountRegistrationService.RegisterAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
             <summary>
             Зарегистрироваться
             </summary>
@@ -261,7 +261,7 @@
             <param name="createRandomPass"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.RegisterUserWithNoChecksAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
+        <member name="M:Clt.Logic.Services.Account.AccountRegistrationService.RegisterUserWithNoChecksAsync(Clt.Contract.Models.Account.RegisterModel,System.Boolean)">
             <summary>
             Зарегистрировать пользователя без всяких проверок
             </summary>
@@ -269,7 +269,7 @@
             <param name="createRandomPassword"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountRegistrationWorker.RegisterUserByAdminAsync(Clt.Contract.Models.Account.RegisterModel,System.String[])">
+        <member name="M:Clt.Logic.Services.Account.AccountRegistrationService.RegisterUserByAdminAsync(Clt.Contract.Models.Account.RegisterModel,System.String[])">
             <summary>
             Метод регистрирующий пользователя администратором
             </summary>
@@ -436,6 +436,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Clt.Logic.Services.Users.ClientQueryService.GetClientRolesAsync(System.String)">
+            <summary>
+            Получить роли клиента
+            </summary>
+            <param name="clientId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Clt.Logic.Services.Users.ClientQueryService.GetClientFromAuthorization">
             <summary>
             Получить клиента из контекста авторизации
@@ -463,12 +470,12 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Clt.Logic.Services.Users.ClientWorker">
+        <member name="T:Clt.Logic.Services.Users.ClientService">
             <summary>
             Менеджер для работы с клиентами
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Users.ClientWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Clt.Logic.Abstractions.IClientDataRefresher,Croco.Core.Logic.Files.Services.FileChecker,Croco.Core.Logic.Files.Abstractions.IDbFileManager)">
+        <member name="M:Clt.Logic.Services.Users.ClientService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Clt.Logic.Abstractions.IClientDataRefresher,Croco.Core.Logic.Files.Services.FileChecker,Croco.Core.Logic.Files.Abstractions.IDbFileManager)">
             <summary>
             Конструктор
             </summary>
@@ -478,26 +485,26 @@
             <param name="fileChecker"></param>
             <param name="dbFileManager"></param>
         </member>
-        <member name="M:Clt.Logic.Services.Users.ClientWorker.UpdateClientPhotoAsync(System.Int32)">
+        <member name="M:Clt.Logic.Services.Users.ClientService.UpdateClientPhotoAsync(System.Int32)">
             <summary>
             Обновить фото клиента
             </summary>
             <param name="fileId"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.ClientWorker.EditClientAsync(Clt.Contract.Models.Users.EditClient)">
+        <member name="M:Clt.Logic.Services.Users.ClientService.EditClientAsync(Clt.Contract.Models.Users.EditClient)">
             <summary>
             Редактировать клиента
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="T:Clt.Logic.Services.Users.UserRoleWorker">
+        <member name="T:Clt.Logic.Services.Users.UserRoleService">
             <summary>
             Сервис для работы с ролями пользователей
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserRoleWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
+        <member name="M:Clt.Logic.Services.Users.UserRoleService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
             <summary>
             Конструктор
             </summary>
@@ -505,20 +512,20 @@
             <param name="app"></param>
             <param name="userManager"></param>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserRoleWorker.GetApplicationRoles(System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:Clt.Logic.Services.Users.UserRoleService.GetApplicationRoles(System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             Получить список ролей пользователя
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserRoleWorker.AddUserToRoleAsync(Clt.Contract.Models.Roles.UserIdAndRole)">
+        <member name="M:Clt.Logic.Services.Users.UserRoleService.AddUserToRoleAsync(Clt.Contract.Models.Roles.UserIdAndRole)">
             <summary>
             Добавить роль пользователю
             </summary>
             <param name="userIdAndRole"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserRoleWorker.RemoveRoleFromUserAsync(Clt.Contract.Models.Roles.UserIdAndRole)">
+        <member name="M:Clt.Logic.Services.Users.UserRoleService.RemoveRoleFromUserAsync(Clt.Contract.Models.Roles.UserIdAndRole)">
             <summary>
             Удалить роль у пользователя
             </summary>
@@ -558,12 +565,12 @@
             <param name="ambientContext"></param>
             <param name="app"></param>
         </member>
-        <member name="T:Clt.Logic.Services.Users.UserWorker">
+        <member name="T:Clt.Logic.Services.Users.UserService">
             <summary>
             Сервис для работы с пользователями
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Clt.Logic.Services.Users.UserSearcher)">
+        <member name="M:Clt.Logic.Services.Users.UserService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Clt.Logic.Services.Users.UserSearcher)">
             <summary>
             Конструктор
             </summary>
@@ -571,21 +578,21 @@
             <param name="application"></param>
             <param name="userSearcher"></param>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserWorker.RemoveUserAsync(System.String)">
+        <member name="M:Clt.Logic.Services.Users.UserService.RemoveUserAsync(System.String)">
             <summary>
             Удалить пользователя
             </summary>
             <param name="userId"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserWorker.EditUserAsync(Clt.Contract.Models.Users.EditApplicationUser)">
+        <member name="M:Clt.Logic.Services.Users.UserService.EditUserAsync(Clt.Contract.Models.Users.EditApplicationUser)">
             <summary>
             Редактирование пользователя администратором
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.UserWorker.ActivateOrDeActivateUserAsync(Clt.Contract.Models.Users.UserActivation)">
+        <member name="M:Clt.Logic.Services.Users.UserService.ActivateOrDeActivateUserAsync(Clt.Contract.Models.Users.UserActivation)">
             <summary>
             Активировать или деактивировать пользователя
             </summary>

@@ -10,6 +10,8 @@ using Croco.Core.Contract.Models.Search;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
+using System.Linq.Expressions;
+using System;
 
 namespace Ecc.Logic.Services.Messaging
 {
@@ -42,7 +44,7 @@ namespace Ecc.Logic.Services.Messaging
         /// <returns></returns>
         public Task<GetListResult<NotificationModel>> GetUserNotificationsAsync(NotificationSearchQueryModel model)
         {
-            return EFCoreExtensions.GetAsync(model, GetFilteredQuery(model), NotificationModel.SelectExpression);
+            return EFCoreExtensions.GetAsync(model, GetFilteredQuery(model), NotificationModelSelectExpression);
         }
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace Ecc.Logic.Services.Messaging
         public Task<NotificationModel> GetLastUnReadNotificationAsync()
         {
             return Query<UserNotificationInteraction>().Where(x => !x.ReadOn.HasValue)
-                .Select(NotificationModel.SelectExpression)
+                .Select(NotificationModelSelectExpression)
                 .FirstOrDefaultAsync(x => x.UserId == UserId);
         }
 
@@ -146,6 +148,18 @@ namespace Ecc.Logic.Services.Messaging
 
             return await TrySaveChangesAndReturnResultAsync("Уведомление помечено как прочитанное");
         }
+
+        internal static Expression<Func<UserNotificationInteraction, NotificationModel>> NotificationModelSelectExpression = x => new NotificationModel
+        {
+            Title = x.TitleText,
+            CreatedOn = x.CreatedOn,
+            ReadOn = x.ReadOn,
+            Id = x.Id,
+            ObjectJson = x.ObjectJson,
+            Text = x.TitleText,
+            Type = x.NotificationType,
+            UserId = x.UserId
+        };
 
         /// <summary>
         /// Конструктор

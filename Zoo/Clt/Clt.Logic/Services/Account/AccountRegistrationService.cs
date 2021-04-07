@@ -21,7 +21,7 @@ namespace Clt.Logic.Services.Account
     /// <summary>
     /// Методы для регистрации
     /// </summary>
-    public class AccountRegistrationWorker : BaseCltService
+    public class AccountRegistrationService : BaseCltService
     {
         UserManager<ApplicationUser> UserManager { get; }
         SignInManager<ApplicationUser> SignInManager { get; }
@@ -36,12 +36,12 @@ namespace Clt.Logic.Services.Account
         /// <param name="signInManager"></param>
         /// <param name="userSearcher"></param>
         /// <param name="logger"></param>
-        public AccountRegistrationWorker(ICrocoAmbientContextAccessor ambientContext,
+        public AccountRegistrationService(ICrocoAmbientContextAccessor ambientContext,
             ICrocoApplication application,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             UserSearcher userSearcher,
-            ILogger<AccountRegistrationWorker> logger) : base(ambientContext, application, logger)
+            ILogger<AccountRegistrationService> logger) : base(ambientContext, application, logger)
         {
             UserManager = userManager;
             SignInManager = signInManager;

@@ -12,6 +12,9 @@ using Ecc.Logic.Resources;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
+using System.Linq.Expressions;
+using Ecc.Logic.Models.Users;
+using Croco.Core.Logic.Models.Users;
 
 namespace Ecc.Logic.Services.Emails
 {
@@ -197,7 +200,7 @@ namespace Ecc.Logic.Services.Emails
         /// <returns></returns>
         public Task<List<MailDistributionModel>> GetMailDistributionsAsync()
         {
-            return Query<MailDistribution>().Select(MailDistributionModel.SelectExpression).ToListAsync();
+            return Query<MailDistribution>().Select(MailDistributionModelSelectExpression).ToListAsync();
         }
 
         /// <summary>
@@ -207,7 +210,7 @@ namespace Ecc.Logic.Services.Emails
         /// <returns></returns>
         public Task<MailDistributionModel> GetMailDistributionWithUserGroupsAsync(string id)
         {
-            return Query<MailDistribution>().Select(MailDistributionModel.SelectExpression).FirstOrDefaultAsync(x => x.Id == id);
+            return Query<MailDistribution>().Select(MailDistributionModelSelectExpression).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         /// <summary>
@@ -260,6 +263,25 @@ namespace Ecc.Logic.Services.Emails
 
             return await TrySaveChangesAndReturnResultAsync("Группы пользователей изменены");
         }
+
+        internal static Expression<Func<MailDistribution, MailDistributionModel>> MailDistributionModelSelectExpression = x => new MailDistributionModel
+        {
+            Id = x.Id,
+            Name = x.Name,
+            Body = x.Body,
+            Subject = x.Subject,
+            SendToEveryUser = x.SendToEveryUser,
+            UserGroups = x.UserGroups.Select(t => t.UserGroup).Select(z => new UserGroupModelWithUsers
+            {
+                Id = z.Id,
+                Name = z.Name,
+                Users = z.Users.Select(t => new UserIdNameEmailAvatarModel
+                {
+                    Id = t.User.Id,
+                    Email = t.User.Email
+                }).ToList()
+            }).ToList()
+        };
 
         /// <summary>
         /// Конструктор

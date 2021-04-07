@@ -1,5 +1,4 @@
-﻿using Ecc.Common.Enumerations;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Ecc.Logic.Models.EmailTemplates
 {

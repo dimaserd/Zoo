@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Ecc.Contract.Models.Emails;
-using Ecc.Logic.Abstractions;
 using Ecc.Contract.Models.Interactions;
 using Ecc.Common.Enumerations;
 using Ecc.Contract.Models;
@@ -19,11 +17,22 @@ namespace Ecc.Logic.Services.Emails
     {
         EmailWrapperSender EmailSender { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
+        /// <param name="emailSender"></param>
         public MailMessageSender(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application, EmailWrapperSender emailSender) : base(ambientContext, application)
         {
             EmailSender = emailSender;
         }
 
+        /// <summary>
+        /// Отправить взаимодействия
+        /// </summary>
+        /// <param name="messages"></param>
+        /// <returns></returns>
         public async Task<List<UpdateInteractionStatus>> SendInteractions(List<SendEmailModelWithInteractionId> messages)
         {
             var fileIds = messages.SelectMany(x => x.EmailModel.AttachmentFileIds).ToArray();

@@ -19,7 +19,7 @@ namespace Clt.Logic.Services.Users
     /// <summary>
     /// Менеджер для работы с клиентами
     /// </summary>
-    public class ClientWorker : BaseCltService
+    public class ClientService : BaseCltService
     {
         IClientDataRefresher ClientDataRefresher { get; }
         FileChecker FileChecker { get; }
@@ -33,7 +33,7 @@ namespace Clt.Logic.Services.Users
         /// <param name="clientDataRefresher"></param>
         /// <param name="fileChecker"></param>
         /// <param name="dbFileManager"></param>
-        public ClientWorker(ICrocoAmbientContextAccessor ambientContext, 
+        public ClientService(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication app,
             IClientDataRefresher clientDataRefresher,
             FileChecker fileChecker,

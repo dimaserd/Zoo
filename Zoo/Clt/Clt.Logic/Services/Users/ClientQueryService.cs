@@ -13,6 +13,7 @@ using Croco.Core.Contract.Models.Search;
 using System.Collections.Generic;
 using Clt.Contract.Models.Clients;
 using Croco.Core.Search.Extensions;
+using Clt.Model.Entities.Default;
 
 namespace Clt.Logic.Services.Users
 {
@@ -42,6 +43,19 @@ namespace Clt.Logic.Services.Users
             }
 
             return await GetClientByIdAsync(UserId);
+        }
+
+        /// <summary>
+        /// Получить роли клиента
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
+        public Task<string[]> GetClientRolesAsync(string clientId)
+        {
+            return Query<ApplicationUserRole>()
+                .Where(x => x.UserId == clientId)
+                .Select(x => x.Role.Name)
+                .ToArrayAsync();
         }
 
         /// <summary>

@@ -157,6 +157,21 @@
             Идентификатор чата
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.Chat.SendMessageToChat">
+            <summary>
+            Отправить сообщение в чат
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Chat.SendMessageToChat.ChatId">
+            <summary>
+            Идентификатор чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Chat.SendMessageToChat.Message">
+            <summary>
+            Сообщение
+            </summary>
+        </member>
         <member name="T:Ecc.Contract.Models.Chat.UserInChatModel">
             <summary>
             Модель описывающая пользователя в чате
@@ -394,6 +409,21 @@
         <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionEdit.Body">
             <summary>
             Тело сообщения
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.Messaging.MessageDistributionCountModel">
+            <summary>
+            Модель описывающая рассылку
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Messaging.MessageDistributionCountModel.Id">
+            <summary>
+            Идентификатор рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Messaging.MessageDistributionCountModel.Type">
+            <summary>
+            Тип рассылки
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.Replacing">

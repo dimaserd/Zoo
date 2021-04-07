@@ -1,7 +1,6 @@
 ﻿using Croco.Core.Contract.Application;
 using Croco.Core.EventSourcing.Implementations;
 using Ecc.Contract.Models.EmailGroup;
-using Ecc.Logic.Abstractions;
 using Ecc.Logic.Services;
 using Ecc.Model.Contexts;
 using Ecc.Model.Entities.Email;

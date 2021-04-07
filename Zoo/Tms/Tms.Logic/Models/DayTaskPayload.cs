@@ -3,15 +3,10 @@
 namespace Tms.Logic.Models
 {
     /// <summary>
-    /// Создать или обновить задание
+    /// Данные для обновления задания
     /// </summary>
-    public class CreateOrUpdateDayTask
+    public class DayTaskPayload
     {
-        /// <summary>
-        /// Идентификатор задания
-        /// </summary>
-        public string Id { get; set; }
-
         /// <summary>
         /// День на которое назначено задание
         /// </summary>

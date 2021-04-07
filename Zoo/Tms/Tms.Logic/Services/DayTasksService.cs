@@ -90,27 +90,13 @@ namespace Tms.Logic.Services
             return await GetDayTask(res);
         }
 
-        /// <summary>
-        /// Создать или обновить задание
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public Task<BaseApiResponse> CreateOrUpdateDayTaskAsync(CreateOrUpdateDayTask model)
-        {
-            if (string.IsNullOrEmpty(model.Id))
-            {
-                return CreateDayTaskAsync(model);
-            }
-
-            return UpdateDayTaskAsync(model);
-        }
-
+        
         /// <summary>
         /// Создание задания
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        private async Task<BaseApiResponse> CreateDayTaskAsync(CreateOrUpdateDayTask model)
+        public async Task<BaseApiResponse> CreateDayTaskAsync(DayTaskPayload model)
         {
             if (model.TaskDate < GetAllowedDate())
             {
@@ -159,16 +145,23 @@ namespace Tms.Logic.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        private async Task<BaseApiResponse> UpdateDayTaskAsync(CreateOrUpdateDayTask model)
+        public async Task<BaseApiResponse> UpdateDayTaskAsync(UpdateDayTask model)
         {
             var userId = UserId;
 
-            if (string.IsNullOrWhiteSpace(model.TaskTitle))
+            var payLoad = model.Payload;
+
+            if(payLoad == null)
+            {
+                return new BaseApiResponse(false, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(payLoad.TaskTitle))
             {
                 return new BaseApiResponse(false, "Пустое название задания");
             }
 
-            if (string.IsNullOrWhiteSpace(model.TaskText))
+            if (string.IsNullOrWhiteSpace(payLoad.TaskText))
             {
                 return new BaseApiResponse(false, "Пустое описание задания");
             }
@@ -187,12 +180,12 @@ namespace Tms.Logic.Services
                 return new BaseApiResponse(false, "Вы не можете редактировать данное задание, так как вы не являетесь его исполнителем");
             }
 
-            dayTask.TaskTitle = model.TaskTitle;
-            dayTask.TaskText = model.TaskText;
-            dayTask.TaskDate = model.TaskDate;
-            dayTask.TaskComment = model.TaskComment;
-            dayTask.TaskReview = model.TaskReview;
-            dayTask.TaskTarget = model.TaskTarget;
+            dayTask.TaskTitle = payLoad.TaskTitle;
+            dayTask.TaskText = payLoad.TaskText;
+            dayTask.TaskDate = payLoad.TaskDate;
+            dayTask.TaskComment = payLoad.TaskComment;
+            dayTask.TaskReview = payLoad.TaskReview;
+            dayTask.TaskTarget = payLoad.TaskTarget;
 
             repo.UpdateHandled(dayTask);
 

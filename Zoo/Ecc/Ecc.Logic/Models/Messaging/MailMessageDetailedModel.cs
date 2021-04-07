@@ -1,44 +1,52 @@
 ﻿using Ecc.Contract.Models.EmailRedirects;
-using Ecc.Model.Entities.Interactions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace Ecc.Logic.Models.Messaging
 {
+    /// <summary>
+    /// Детальная модель для рассылки эмейлов
+    /// </summary>
     public class MailMessageDetailedModel
     {
+        /// <summary>
+        /// Идентификатор
+        /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        /// Тело сообщения
+        /// </summary>
         public string Body { get; set; }
 
+        /// <summary>
+        /// Заголовок сообщения
+        /// </summary>
         public string Header { get; set; }
 
+        /// <summary>
+        /// Дата прочтения
+        /// </summary>
         public DateTime? ReadOn { get; set; }
 
+        /// <summary>
+        /// Дата отправки
+        /// </summary>
         public DateTime? SentOn { get; set; }
 
+        /// <summary>
+        /// Куда было отправлено сообщение
+        /// </summary>
         public string EmailAddress { get; set; }
 
+        /// <summary>
+        /// История статусов взаимодействия
+        /// </summary>
         public List<InteractionStatusModel> Statuses { get; set; }
 
+        /// <summary>
+        /// Редиректы
+        /// </summary>
         public List<EmailLinkCatchRedirectsCountModel> Redirects { get; set; }
-
-        public static Expression<Func<MailMessageInteraction, MailMessageDetailedModel>> SelectExpression = x => new MailMessageDetailedModel
-        {
-            Id = x.Id,
-            Body = x.MessageText,
-            Header = x.TitleText,
-            ReadOn = x.ReadOn,
-            SentOn = x.SentOn,
-            EmailAddress = x.ReceiverEmail,
-            Statuses = x.Statuses.OrderByDescending(t => t.StartedOn).Select(t => new InteractionStatusModel
-            {
-                StartedOn = t.StartedOn,
-                Status = t.Status,
-                StatusDescription = t.StatusDescription
-            }).ToList()
-        };
     }
 }

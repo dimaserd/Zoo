@@ -2,11 +2,14 @@
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models.Search;
 using Croco.Core.Search.Extensions;
+using Ecc.Logic.Models;
 using Ecc.Logic.Models.Messaging;
 using Ecc.Logic.Services.EmailRedirects;
 using Ecc.Model.Entities.Interactions;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Ecc.Logic.Services.Messaging
@@ -38,7 +41,7 @@ namespace Ecc.Logic.Services.Messaging
         /// <returns></returns>
         public async Task<MailMessageDetailedModel> GetMailMessageDetailed(string id)
         {
-            var result = await Query<MailMessageInteraction>().Select(MailMessageDetailedModel.SelectExpression).FirstOrDefaultAsync(x => x.Id == id);
+            var result = await Query<MailMessageInteraction>().Select(MailMessageDetailedModelSelectExpression).FirstOrDefaultAsync(x => x.Id == id);
 
             if(result != null)
             {
@@ -57,7 +60,34 @@ namespace Ecc.Logic.Services.Messaging
         {
             var queryWithStatus = GetQueryWithStatus(Query<MailMessageInteraction>().BuildQuery(model.GetCriterias()));
 
-            return EFCoreExtensions.GetAsync(model, queryWithStatus.OrderByDescending(x => x.Interaction.CreatedOn), MailMessageModel.SelectExpression);
+            return EFCoreExtensions.GetAsync(model, queryWithStatus.OrderByDescending(x => x.Interaction.CreatedOn), MailMessageModelSelectExpression);
         }
+
+        internal static Expression<Func<ApplicationInteractionWithStatus<MailMessageInteraction>, MailMessageModel>> MailMessageModelSelectExpression = x => new MailMessageModel
+        {
+            Id = x.Interaction.Id,
+            Body = x.Interaction.MessageText,
+            Header = x.Interaction.TitleText,
+            ReadOn = x.Interaction.ReadOn,
+            SentOn = x.Interaction.SentOn,
+            EmailAddress = x.Interaction.ReceiverEmail,
+            Status = x.Status
+        };
+
+        public static Expression<Func<MailMessageInteraction, MailMessageDetailedModel>> MailMessageDetailedModelSelectExpression = x => new MailMessageDetailedModel
+        {
+            Id = x.Id,
+            Body = x.MessageText,
+            Header = x.TitleText,
+            ReadOn = x.ReadOn,
+            SentOn = x.SentOn,
+            EmailAddress = x.ReceiverEmail,
+            Statuses = x.Statuses.OrderByDescending(t => t.StartedOn).Select(t => new InteractionStatusModel
+            {
+                StartedOn = t.StartedOn,
+                Status = t.Status,
+                StatusDescription = t.StatusDescription
+            }).ToList()
+        };
     }
 }

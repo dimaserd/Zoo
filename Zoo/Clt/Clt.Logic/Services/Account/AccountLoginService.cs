@@ -20,7 +20,7 @@ namespace Clt.Logic.Services.Account
     /// <summary>
     /// Сервис для работы с методами логинирования
     /// </summary>
-    public class AccountLoginWorker : BaseCltService
+    public class AccountLoginService : BaseCltService
     {
         SignInManager<ApplicationUser> SignInManager { get; }
         UserSearcher UserSearcher { get; }
@@ -37,13 +37,13 @@ namespace Clt.Logic.Services.Account
         /// <param name="passwordHashValidator"></param>
         /// <param name="authenticationManager"></param>
         /// <param name="logger"></param>
-        public AccountLoginWorker(ICrocoAmbientContextAccessor ambientContext, 
+        public AccountLoginService(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication application,
             SignInManager<ApplicationUser> signInManager,
             UserSearcher userSearcher,
             PasswordHashValidator passwordHashValidator,
             IApplicationAuthenticationManager authenticationManager,
-            ILogger<AccountLoginWorker> logger) : base(ambientContext, application, logger)
+            ILogger<AccountLoginService> logger) : base(ambientContext, application, logger)
         {
             SignInManager = signInManager;
             UserSearcher = userSearcher;

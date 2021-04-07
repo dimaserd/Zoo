@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-    <PackageReference Include="Croco.Core.Logic" Version="1.0.22" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.0.25" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.13" />
   </ItemGroup>
 

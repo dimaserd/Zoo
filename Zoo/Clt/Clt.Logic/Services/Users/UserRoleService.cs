@@ -15,7 +15,7 @@ namespace Clt.Logic.Services.Users
     /// <summary>
     /// Сервис для работы с ролями пользователей
     /// </summary>
-    public class UserRoleWorker : BaseCltService
+    public class UserRoleService : BaseCltService
     {
         UserManager<ApplicationUser> UserManager { get; }
 
@@ -25,13 +25,12 @@ namespace Clt.Logic.Services.Users
         /// <param name="ambientContext"></param>
         /// <param name="app"></param>
         /// <param name="userManager"></param>
-        public UserRoleWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication app,
+        public UserRoleService(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication app,
             UserManager<ApplicationUser> userManager)
             : base(ambientContext, app)
         {
             UserManager = userManager;
         }
-
 
         /// <summary>
         /// Получить список ролей пользователя

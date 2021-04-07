@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Croco.Core.Logic" Version="1.0.22" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.0.25" />
   </ItemGroup>
 
   <ItemGroup>

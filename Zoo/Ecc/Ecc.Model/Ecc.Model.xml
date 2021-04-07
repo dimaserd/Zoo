@@ -19,6 +19,26 @@
             Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
             </summary>
         </member>
+        <member name="T:Ecc.Model.Entities.Email.MessageDistribution">
+            <summary>
+            Сущнось Рассылка сообщений
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.MessageDistribution.Id">
+            <summary>
+            Идентификатор рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.MessageDistribution.Type">
+            <summary>
+            Тип рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.MessageDistribution.Data">
+            <summary>
+            Дополнительные данные
+            </summary>
+        </member>
         <member name="T:Ecc.Model.Entities.External.EccFile">
             <summary>
             Сущность описывающая файл в контексте рассылок
@@ -32,6 +52,36 @@
         <member name="T:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting">
             <summary>
             Модель пользователя интегрированного с внешним приложением
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Interactions.Interaction">
+            <summary>
+            Сущность описывающая взаимодействие
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.Type">
+            <summary>
+            Тип взаимодействия
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.MessageText">
+            <summary>
+            Текст сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.TitleText">
+            <summary>
+            Текст заголовка
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.MaskItemsJson">
+            <summary>
+            Сериализованные маски
             </summary>
         </member>
         <member name="P:Ecc.Model.Entities.Interactions.Interaction.SendNow">
@@ -62,6 +112,36 @@
         <member name="P:Ecc.Model.Entities.Interactions.Interaction.UserId">
             <summary>
             Идентификатор пользователя, которому нужно отправить сообщение
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.User">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.MessageDistributionId">
+            <summary>
+            Идентификатор рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.Statuses">
+            <summary>
+            Логи статусов
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.Interaction.Attachments">
+            <summary>
+            Вложения
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Interactions.MailMessageInteraction">
+            <summary>
+            Сущность описывающая взаимодействие по почте
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.MailMessageInteraction.ReceiverEmail">
+            <summary>
+            Куда было отправлено сообщение
             </summary>
         </member>
         <member name="T:Ecc.Model.Entities.Interactions.SmsMessageInteraction">

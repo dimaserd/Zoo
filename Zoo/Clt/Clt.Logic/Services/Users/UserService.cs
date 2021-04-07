@@ -20,7 +20,7 @@ namespace Clt.Logic.Services.Users
     /// <summary>
     /// Сервис для работы с пользователями
     /// </summary>
-    public class UserWorker : BaseCltService
+    public class UserService : BaseCltService
     {
         UserSearcher UserSearcher { get; }
 
@@ -30,7 +30,7 @@ namespace Clt.Logic.Services.Users
         /// <param name="ambientContext"></param>
         /// <param name="application"></param>
         /// <param name="userSearcher"></param>
-        public UserWorker(ICrocoAmbientContextAccessor ambientContext,
+        public UserService(ICrocoAmbientContextAccessor ambientContext,
             ICrocoApplication application,
             UserSearcher userSearcher) : base(ambientContext, application)
         {

@@ -68,51 +68,6 @@
             Текст комментария
             </summary>
         </member>
-        <member name="T:Tms.Logic.Models.CreateOrUpdateDayTask">
-            <summary>
-            Создать или обновить задание
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.Id">
-            <summary>
-            Идентификатор задания
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskDate">
-            <summary>
-            День на которое назначено задание
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskText">
-            <summary>
-            Описание задания
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskTitle">
-            <summary>
-            Название задания
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.AssigneeUserId">
-            <summary>
-            Идентификатор исполнителя
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskTarget">
-            <summary>
-            Цель Html (Summernote)
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskReview">
-            <summary>
-            Отчет Html (Summernote)
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.CreateOrUpdateDayTask.TaskComment">
-            <summary>
-            Комментарий Html (Summernote)
-            </summary>
-        </member>
         <member name="T:Tms.Logic.Models.DayTaskModel">
             <summary>
             Модель задания на день
@@ -224,6 +179,61 @@
         <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.AssigneeId">
             <summary>
             Исполнитель
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.DayTaskPayload">
+            <summary>
+            Данные для обновления задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskPayload.TaskDate">
+            <summary>
+            День на которое назначено задание
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskPayload.TaskText">
+            <summary>
+            Описание задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskPayload.TaskTitle">
+            <summary>
+            Название задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskPayload.AssigneeUserId">
+            <summary>
+            Идентификатор исполнителя
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskPayload.TaskTarget">
+            <summary>
+            Цель Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskPayload.TaskReview">
+            <summary>
+            Отчет Html (Summernote)
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskPayload.TaskComment">
+            <summary>
+            Комментарий Html (Summernote)
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.UpdateDayTask">
+            <summary>
+            Создать или обновить задание
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UpdateDayTask.Id">
+            <summary>
+            Идентификатор задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.UpdateDayTask.Payload">
+            <summary>
+            Данные в задании
             </summary>
         </member>
         <member name="T:Tms.Logic.Models.UpdateDayTaskComment">
@@ -559,21 +569,14 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Tms.Logic.Services.DayTasksService.CreateOrUpdateDayTaskAsync(Tms.Logic.Models.CreateOrUpdateDayTask)">
-            <summary>
-            Создать или обновить задание
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Tms.Logic.Services.DayTasksService.CreateDayTaskAsync(Tms.Logic.Models.CreateOrUpdateDayTask)">
+        <member name="M:Tms.Logic.Services.DayTasksService.CreateDayTaskAsync(Tms.Logic.Models.DayTaskPayload)">
             <summary>
             Создание задания
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Tms.Logic.Services.DayTasksService.UpdateDayTaskAsync(Tms.Logic.Models.CreateOrUpdateDayTask)">
+        <member name="M:Tms.Logic.Services.DayTasksService.UpdateDayTaskAsync(Tms.Logic.Models.UpdateDayTask)">
             <summary>
             Редактирование задания
             </summary>

@@ -10,19 +10,37 @@ using Croco.Core.Contract.Data.Entities.HaveId;
 
 namespace Ecc.Model.Entities.Interactions
 {
+    /// <summary>
+    /// Сущность описывающая взаимодействие
+    /// </summary>
     [Table(nameof(Interaction), Schema = Schemas.EccSchema)]
     public class Interaction : AuditableEntityBase, IHaveStringId
     {
+        /// <summary>
+        /// Идентификатор
+        /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
+        /// <summary>
+        /// Тип взаимодействия
+        /// </summary>
         [MaxLength(24)]
         public string Type { get; set; }
 
+        /// <summary>
+        /// Текст сообщения
+        /// </summary>
         public string MessageText { get; set; }
 
+        /// <summary>
+        /// Текст заголовка
+        /// </summary>
         public string TitleText { get; set; }
 
+        /// <summary>
+        /// Сериализованные маски
+        /// </summary>
         public string MaskItemsJson { get; set; }
 
         /// <summary>
@@ -56,13 +74,25 @@ namespace Ecc.Model.Entities.Interactions
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
 
+        /// <summary>
+        /// Пользователь
+        /// </summary>
         public virtual EccUser User { get; set; }
 
+        /// <summary>
+        /// Идентификатор рассылки
+        /// </summary>
         [MaxLength(128)]
         public string MessageDistributionId { get; set; }
 
+        /// <summary>
+        /// Логи статусов
+        /// </summary>
         public virtual ICollection<InteractionStatusLog> Statuses { get; set; }
 
+        /// <summary>
+        /// Вложения
+        /// </summary>
         public virtual ICollection<InteractionAttachment> Attachments { get; set; }
 
         public static void OnModelCreating(ModelBuilder modelBuilder)

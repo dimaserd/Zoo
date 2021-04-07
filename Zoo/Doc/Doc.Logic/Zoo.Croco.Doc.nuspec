@@ -11,7 +11,7 @@
     <copyright>Copyright 2021</copyright>
     <dependencies>
       <dependency id="DocumentFormat.OpenXml" version="2.12.3" />
-      <dependency id="Croco.Core.Logic" version="1.0.22" />
+      <dependency id="Croco.Core.Logic" version="1.0.25" />
     </dependencies>
   </metadata>
   <files>
