@@ -418,6 +418,41 @@
             <param name="pass"></param>
             <returns></returns>
         </member>
+        <member name="T:Clt.Logic.Services.Roles.UserRoleService">
+            <summary>
+            Сервис для работы с ролями пользователей
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Services.Roles.UserRoleService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="app"></param>
+            <param name="userManager"></param>
+        </member>
+        <member name="M:Clt.Logic.Services.Roles.UserRoleService.GetApplicationRoles(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Получить список ролей пользователя
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Roles.UserRoleService.AddUserToRoleAsync(Clt.Contract.Models.Roles.UserIdAndRole,System.Boolean)">
+            <summary>
+            Добавить роль пользователю
+            </summary>
+            <param name="userIdAndRole"></param>
+            <param name="checkUserWhoEdits"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Roles.UserRoleService.RemoveRoleFromUserAsync(Clt.Contract.Models.Roles.UserIdAndRole,System.Boolean)">
+            <summary>
+            Удалить роль у пользователя
+            </summary>
+            <param name="userIdAndRole"></param>
+            <param name="checkUserWhoEdits"></param>
+            <returns></returns>
+        </member>
         <member name="T:Clt.Logic.Services.Users.ClientQueryService">
             <summary>
             Сервис предоставляющий методы для поиска клиентов
@@ -497,39 +532,6 @@
             Редактировать клиента
             </summary>
             <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Clt.Logic.Services.Users.UserRoleService">
-            <summary>
-            Сервис для работы с ролями пользователей
-            </summary>
-        </member>
-        <member name="M:Clt.Logic.Services.Users.UserRoleService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser})">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="ambientContext"></param>
-            <param name="app"></param>
-            <param name="userManager"></param>
-        </member>
-        <member name="M:Clt.Logic.Services.Users.UserRoleService.GetApplicationRoles(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Получить список ролей пользователя
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Services.Users.UserRoleService.AddUserToRoleAsync(Clt.Contract.Models.Roles.UserIdAndRole)">
-            <summary>
-            Добавить роль пользователю
-            </summary>
-            <param name="userIdAndRole"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Clt.Logic.Services.Users.UserRoleService.RemoveRoleFromUserAsync(Clt.Contract.Models.Roles.UserIdAndRole)">
-            <summary>
-            Удалить роль у пользователя
-            </summary>
-            <param name="userIdAndRole"></param>
             <returns></returns>
         </member>
         <member name="T:Clt.Logic.Services.Users.UserSearcher">

@@ -10,7 +10,7 @@ using Clt.Model.Entities.Default;
 using Croco.Core.Contract.Application;
 using Clt.Contract.Resources;
 
-namespace Clt.Logic.Services.Users
+namespace Clt.Logic.Services.Roles
 {
     /// <summary>
     /// Сервис для работы с ролями пользователей
@@ -44,7 +44,7 @@ namespace Clt.Logic.Services.Users
                 RoleName = x.Name
             }).ToListAsync();
 
-            if(displayRoleNamesStorage == null)
+            if (displayRoleNamesStorage == null)
             {
                 return res;
             }
@@ -64,24 +64,50 @@ namespace Clt.Logic.Services.Users
         /// Добавить роль пользователю
         /// </summary>
         /// <param name="userIdAndRole"></param>
+        /// <param name="checkUserWhoEdits"></param>
         /// <returns></returns>
-        public Task<BaseApiResponse> AddUserToRoleAsync(UserIdAndRole userIdAndRole)
+        public Task<BaseApiResponse> AddUserToRoleAsync(UserIdAndRole userIdAndRole, bool checkUserWhoEdits)
         {
-            return AddOrRemoveUserRoleAsync(userIdAndRole, true);
+            return AddOrRemoveUserRoleAsync(userIdAndRole, true, checkUserWhoEdits);
         }
 
         /// <summary>
         /// Удалить роль у пользователя
         /// </summary>
         /// <param name="userIdAndRole"></param>
+        /// <param name="checkUserWhoEdits"></param>
         /// <returns></returns>
-        public Task<BaseApiResponse> RemoveRoleFromUserAsync(UserIdAndRole userIdAndRole)
+        public Task<BaseApiResponse> RemoveRoleFromUserAsync(UserIdAndRole userIdAndRole, bool checkUserWhoEdits = true)
         {
-            return AddOrRemoveUserRoleAsync(userIdAndRole, false);
+            return AddOrRemoveUserRoleAsync(userIdAndRole, false, checkUserWhoEdits);
         }
 
 
-        private async Task<BaseApiResponse> AddOrRemoveUserRoleAsync(UserIdAndRole userIdAndRole, bool addOrRemove)
+        private async Task<BaseApiResponse> CheckUserWhoEdits(ApplicationUser user)
+        {
+            var userRepo = GetRepository<ApplicationUser>();
+
+            //Находим себя 
+            var userEditor = await userRepo.Query().FirstOrDefaultAsync(x => x.Id == UserId);
+
+            if (userEditor == null)
+            {
+                return new BaseApiResponse(false, "Пользователь не найден");
+            }
+
+            //Находим роли редактируемого и редактора
+            var rolesOfEditUser = await UserManager.GetRolesAsync(user);
+            var rolesOfUserEditor = await UserManager.GetRolesAsync(userEditor);
+
+            if ((rolesOfEditUser.Contains(RolesSetting.RootRoleName) || rolesOfUserEditor.Contains(RolesSetting.AdminRoleName)) && !rolesOfUserEditor.Contains(RolesSetting.RootRoleName))
+            {
+                return new BaseApiResponse(false, "Вы не имеете прав изменять роли администратора");
+            }
+
+            return new BaseApiResponse(true, "Ok");
+        }
+
+        private async Task<BaseApiResponse> AddOrRemoveUserRoleAsync(UserIdAndRole userIdAndRole, bool addOrRemove, bool checkUserWhoEdits = true)
         {
             if (!IsUserAdmin())
             {
@@ -105,21 +131,14 @@ namespace Clt.Logic.Services.Users
                 return new BaseApiResponse(false, "Изменяемый пользователь не найден");
             }
 
-            //Находим себя 
-            var userEditor = await userRepo.Query().FirstOrDefaultAsync(x => x.Id == UserId);
-
-            if (userEditor == null)
+            if (checkUserWhoEdits)
             {
-                return new BaseApiResponse(false, "Пользователь не найден");
-            }
+                var checkResponse = await CheckUserWhoEdits(user);
 
-            //Находим роли редактируемого и редактора
-            var rolesOfEditUser = await UserManager.GetRolesAsync(user);
-            var rolesOfUserEditor = await UserManager.GetRolesAsync(userEditor);
-
-            if ((rolesOfEditUser.Contains(RolesSetting.RootRoleName) || rolesOfUserEditor.Contains(RolesSetting.AdminRoleName)) && !rolesOfUserEditor.Contains(RolesSetting.RootRoleName))
-            {
-                return new BaseApiResponse(false, "Вы не имеете прав изменять роли администратора");
+                if (!checkResponse.IsSucceeded)
+                {
+                    return checkResponse;
+                }
             }
 
             var userRole = await Query<ApplicationUserRole>().FirstOrDefaultAsync(x => x.RoleId == role.Id && x.UserId == user.Id);
