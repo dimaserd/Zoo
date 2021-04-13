@@ -239,6 +239,16 @@
             Рассылка пользователям по почте
             </summary>
         </member>
+        <member name="P:Ecc.Logic.Models.Messaging.MailDistributionModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.MailDistributionModel.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
         <member name="P:Ecc.Logic.Models.Messaging.MailDistributionModel.Subject">
             <summary>
             Заголовок сообщения
@@ -247,6 +257,16 @@
         <member name="P:Ecc.Logic.Models.Messaging.MailDistributionModel.Body">
             <summary>
             Тело сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.MailDistributionModel.SendToEveryUser">
+            <summary>
+            Отправлять каждому пользователю
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.MailDistributionModel.UserGroups">
+            <summary>
+            Группы пользователей
             </summary>
         </member>
         <member name="T:Ecc.Logic.Models.Messaging.MailMessageDetailedModel">
@@ -854,6 +874,21 @@
             <summary>
             Класс посылающий письма
             </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailMessageSender.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Logic.Services.Emails.EmailWrapperSender)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContext"></param>
+            <param name="application"></param>
+            <param name="emailSender"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.MailMessageSender.SendInteractions(System.Collections.Generic.List{Ecc.Contract.Models.SendEmailModelWithInteractionId})">
+            <summary>
+            Отправить взаимодействия
+            </summary>
+            <param name="messages"></param>
+            <returns></returns>
         </member>
         <member name="T:Ecc.Logic.Services.Emails.Senders.SmtpEmailSender">
             <summary>

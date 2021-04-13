@@ -4,6 +4,21 @@
         <name>Ecc.Common</name>
     </assembly>
     <members>
+        <member name="T:Ecc.Common.Enumerations.IntegratedAppType">
+            <summary>
+            Тип приложения для интеграции
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.IntegratedAppType.IosApplication">
+            <summary>
+            iOS приложение
+            </summary>
+        </member>
+        <member name="F:Ecc.Common.Enumerations.IntegratedAppType.AndroidApplication">
+            <summary>
+            Android приложение
+            </summary>
+        </member>
         <member name="T:Ecc.Common.Enumerations.InteractionStatus">
             <summary>
             Статус взаимодействия

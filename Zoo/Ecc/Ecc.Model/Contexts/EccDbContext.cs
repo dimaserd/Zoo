@@ -1,4 +1,5 @@
 ﻿using Ecc.Model.Entities.Chats;
+using Ecc.Model.Entities.Ecc.Messaging;
 using Ecc.Model.Entities.Email;
 using Ecc.Model.Entities.External;
 using Ecc.Model.Entities.IntegratedApps;
@@ -8,8 +9,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecc.Model.Contexts
 {
+    /// <summary>
+    /// Контекст для рассылок
+    /// </summary>
     public class EccDbContext : DbContext
     {
+        /// <summary>
+        /// Приложения с интеграциями
+        /// </summary>
         public DbSet<IntegratedApp> IntegratedApps { get; set; }
 
         public DbSet<IntegratedAppUserSetting> IntegratedAppUserSettings { get; set; }
@@ -57,6 +64,7 @@ namespace Ecc.Model.Contexts
             
             EmailGroup.OnModelCreating(modelBuilder);
             MessageDistribution.OnModelCreating(modelBuilder);
+            MailDistributionUserGroupRelation.OnModelCreating(modelBuilder);
         }
     }
 }

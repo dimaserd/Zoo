@@ -411,6 +411,21 @@
             Тело сообщения
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.MailDistributions.MainDistributionUserGroupRelationIdModel">
+            <summary>
+            Модель описывающая привязку группы к рассылке
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.MailDistributions.MainDistributionUserGroupRelationIdModel.MailDistributionId">
+            <summary>
+            Идентификатор рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.MailDistributions.MainDistributionUserGroupRelationIdModel.GroupId">
+            <summary>
+            Идентификатор группы
+            </summary>
+        </member>
         <member name="T:Ecc.Contract.Models.Messaging.MessageDistributionCountModel">
             <summary>
             Модель описывающая рассылку

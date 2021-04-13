@@ -418,6 +418,20 @@
             <param name="pass"></param>
             <returns></returns>
         </member>
+        <member name="T:Clt.Logic.Services.Roles.RoleService">
+            <summary>
+            Сервис для работы с ролями приложения
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Services.Roles.RoleService.#ctor(Microsoft.AspNetCore.Identity.RoleManager{Clt.Model.Entities.Default.ApplicationRole},Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Clt.Logic.Services.Roles.RoleService})">
+            <summary>
+            Конструктора
+            </summary>
+            <param name="roleManager"></param>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="logger"></param>
+        </member>
         <member name="T:Clt.Logic.Services.Roles.UserRoleService">
             <summary>
             Сервис для работы с ролями пользователей

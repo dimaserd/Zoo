@@ -4,6 +4,16 @@
         <name>Ecc.Model</name>
     </assembly>
     <members>
+        <member name="T:Ecc.Model.Contexts.EccDbContext">
+            <summary>
+            Контекст для рассылок
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.IntegratedApps">
+            <summary>
+            Приложения с интеграциями
+            </summary>
+        </member>
         <member name="P:Ecc.Model.Contexts.EccDbContext.EmailTemplates">
             <summary>
             Шаблоны Email сообщений
@@ -182,6 +192,31 @@
         <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistribution.Body">
             <summary>
             Тело сообщения
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Ecc.Messaging.MailDistributionUserGroupRelation">
+            <summary>
+            Сущность описывающая привзяку рассылки к группе пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistributionUserGroupRelation.MailDistributionId">
+            <summary>
+            Идентификатор рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistributionUserGroupRelation.MailDistribution">
+            <summary>
+            Рассылка
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistributionUserGroupRelation.GroupId">
+            <summary>
+            Идентификатор группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistributionUserGroupRelation.UserGroup">
+            <summary>
+            Группа пользователей
             </summary>
         </member>
         <member name="T:Ecc.Model.Schemas">
