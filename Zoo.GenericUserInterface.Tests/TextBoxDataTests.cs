@@ -2,6 +2,7 @@
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Services;
+using Zoo.GenericUserInterface.Utils;
 
 namespace Zoo.GenericUserInterface.Tests
 {
@@ -21,13 +22,14 @@ namespace Zoo.GenericUserInterface.Tests
 
             var prop1Block = interfaceModel.Interface.Blocks.First();
 
-            Assert.AreEqual(UserInterfaceType.TextBox, prop1Block.InterfaceType);
+            Assert.AreEqual(UserInterfaceType.NumberBox, prop1Block.InterfaceType);
 
-            var textBoxData = prop1Block.TextBoxData;
+            var textBoxData = prop1Block.NumberBoxData;
 
             Assert.IsNotNull(textBoxData);
             Assert.IsTrue(textBoxData.IsInteger);
-            Assert.AreEqual(1, textBoxData.IntStep);
+            Assert.AreEqual(Tool.JsonConverter.Serialize(int.MinValue), textBoxData.MinValue);
+            Assert.AreEqual(Tool.JsonConverter.Serialize(int.MaxValue), textBoxData.MaxValue);
         }
     }
 }

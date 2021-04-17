@@ -12,12 +12,21 @@ using Croco.Core.Contract.Application;
 
 namespace Ecc.Logic.Services.Messaging
 {
+    /// <summary>
+    /// Сервис для работы с рассылками электронной почты
+    /// </summary>
     public class MailDistributionInteractionWorker : ApplicationInteractionWorker
     {
         private static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
 
         MailMessageSender MailMessageSender { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
+        /// <param name="mailMessageSender"></param>
         public MailDistributionInteractionWorker(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication application,
             MailMessageSender mailMessageSender) : base(ambientContext, application)
@@ -25,6 +34,10 @@ namespace Ecc.Logic.Services.Messaging
             MailMessageSender = mailMessageSender;
         }
 
+        /// <summary>
+        /// Отправить эмейлы
+        /// </summary>
+        /// <returns></returns>
         public async Task SendEmailsAsync()
         {
             await semaphore.WaitAsync();

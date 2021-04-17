@@ -89,6 +89,12 @@ namespace Ecc.Logic.Services.Messaging
             return EFCoreExtensions.GetAsync(model, GetQueryWithStatus(initQuery).OrderByDescending(x => x.Interaction.CreatedOn), SelectExpression);
         }
 
+        /// <summary>
+        /// Привести к смс сообщению
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
         public (SmsMessageInteraction, InteractionStatusLog, List<InteractionAttachment>) ToSmsMessage(SendSmsToClient message, string phoneNumber)
         {
             var id = Guid.NewGuid().ToString();

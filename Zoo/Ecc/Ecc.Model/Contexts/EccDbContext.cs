@@ -19,10 +19,19 @@ namespace Ecc.Model.Contexts
         /// </summary>
         public DbSet<IntegratedApp> IntegratedApps { get; set; }
 
+        /// <summary>
+        /// Настройки для интеграций
+        /// </summary>
         public DbSet<IntegratedAppUserSetting> IntegratedAppUserSettings { get; set; }
 
+        /// <summary>
+        /// Группы эмейлов
+        /// </summary>
         public DbSet<EmailGroup> EmailGroups { get; set; }
 
+        /// <summary>
+        /// Эмейлы в группах эмейлов
+        /// </summary>
         public DbSet<EmailInEmailGroupRelation> EmailInEmailGroupRelations { get; set; }
 
         /// <summary>
@@ -31,21 +40,46 @@ namespace Ecc.Model.Contexts
         public DbSet<EmailTemplate> EmailTemplates { get; set; }
 
         #region Сообщения и чаты
+        /// <summary>
+        /// Чаты
+        /// </summary>
         public DbSet<EccChat> Chats { get; set; }
 
+        /// <summary>
+        /// Сообщения
+        /// </summary>
         public DbSet<EccChatMessage> ChatMessages { get; set; }
 
+        /// <summary>
+        /// Пользователи в чатах
+        /// </summary>
         public DbSet<EccChatUserRelation> ChatUserRelations { get; set; }
 
+        /// <summary>
+        /// Вложения к сообщениям
+        /// </summary>
         public DbSet<EccChatMessageAttachment> ChatMessageAttachments { get; set; }
         #endregion
 
+        /// <summary>
+        /// Перехваты переходов по ссылкам в эмейле
+        /// </summary>
         public DbSet<EmailLinkCatch> EmailLinkCatches { get; set; }
 
+        /// <summary>
+        /// Редиректы на перехваты
+        /// </summary>
         public DbSet<EmailLinkCatchRedirect> EmailLinkCatchRedirects { get; set; }
 
+        /// <summary>
+        /// Рассылки сообщений
+        /// </summary>
         public DbSet<MessageDistribution> MessageDistributions { get; set; }
 
+        /// <summary>
+        /// Переорпеделение создания модели для контекста
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -65,6 +99,7 @@ namespace Ecc.Model.Contexts
             EmailGroup.OnModelCreating(modelBuilder);
             MessageDistribution.OnModelCreating(modelBuilder);
             MailDistributionUserGroupRelation.OnModelCreating(modelBuilder);
+            MailDistribution.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -17,8 +17,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Ecc.Logic.Services.IntegratedApps
 {
+
+    /// <summary>
+    /// Сервис для работы с интеграционными приложениями
+    /// </summary>
     public class IntegratedAppWorker : BaseEccService
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContext"></param>
+        /// <param name="application"></param>
         public IntegratedAppWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application) : base(ambientContext, application)
         {
         }
@@ -30,6 +39,10 @@ namespace Ecc.Logic.Services.IntegratedApps
             return new BaseApiResponse(false, ex.Message);
         }
 
+        /// <summary>
+        /// Список приложений
+        /// </summary>
+        /// <returns></returns>
         public async Task<BaseApiResponse<List<CreateOrEditApplication>>> GetApplicationsAsync()
         {
             var result = await Query<IntegratedApp>().Select(x => new CreateOrEditApplication
@@ -44,6 +57,11 @@ namespace Ecc.Logic.Services.IntegratedApps
             return new BaseApiResponse<List<CreateOrEditApplication>>(true, "Успешно", result);
         }
 
+        /// <summary>
+        /// Добавить приложение
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> AddApplicationAsync(CreateOrEditApplication model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -74,6 +92,11 @@ namespace Ecc.Logic.Services.IntegratedApps
             return await TrySaveChangesAndReturnResultAsync("Создано интегрированное приложение");
         }
 
+        /// <summary>
+        /// Редактировать приложение
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> EditApplicationAsync(CreateOrEditApplication model)
         {
             var validation = ValidateModelAndUserIsAdmin(model);
@@ -103,6 +126,11 @@ namespace Ecc.Logic.Services.IntegratedApps
             return await TrySaveChangesAndReturnResultAsync("Настройки интегрированного приложения отредактированы");
         }
 
+        /// <summary>
+        /// Добавить настройку для приложения
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> AddUserAppSettingIdAsync(AddUserAppSetting model)
         {
             if (!IsAuthenticated)
@@ -174,6 +202,11 @@ namespace Ecc.Logic.Services.IntegratedApps
             return await TrySaveChangesAndReturnResultAsync($"Добавлена новая настройка для пользователя интегрированного приложения '{app.Name}'");
         }
 
+        /// <summary>
+        /// Отправить уведомления
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> SendUserNotificationsAsync(List<Interaction> model)
         {
             if (model.Count == 0)
@@ -199,6 +232,11 @@ namespace Ecc.Logic.Services.IntegratedApps
             return null;
         }
         
+        /// <summary>
+        /// Отправить уведомления небезопасно
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse> SendUserNotificationViaIntegratedApplicationUnsafeAsync(SendUserNotificationViaApplication model)
         {
             var settings = await Query<IntegratedAppUserSetting>()

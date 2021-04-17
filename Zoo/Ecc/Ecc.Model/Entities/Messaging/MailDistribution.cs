@@ -11,9 +11,14 @@ namespace Ecc.Model.Entities.Ecc.Messaging
     [Table(nameof(MailDistribution), Schema = Schemas.EccSchema)]
     public class MailDistribution
     {
+        /// <summary>
+        /// Идентификатор рассылки
+        /// </summary>
         public string Id { get; set; }
 
-
+        /// <summary>
+        /// Название
+        /// </summary>
         [MaxLength(128)]
         public string Name { get; set; }
 
@@ -28,11 +33,17 @@ namespace Ecc.Model.Entities.Ecc.Messaging
         /// </summary>
         public string Body { get; set; }
 
+        /// <summary>
+        /// Отправлять каждому пользователю
+        /// </summary>
         public bool SendToEveryUser { get; set; }
 
+        /// <summary>
+        /// Группы пользователей
+        /// </summary>
         public ICollection<MailDistributionUserGroupRelation> UserGroups { get; set; }
 
-        public static void OnModelCreating(ModelBuilder modelBuilder)
+        internal static void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MailDistribution>()
                 .HasIndex(p => new { p.Name }).IsUnique();

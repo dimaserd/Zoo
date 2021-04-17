@@ -3,7 +3,7 @@
     /// <summary>
     /// Дополнительная информация о текстбоксе
     /// </summary>
-    public class UserInterfaceTextBoxData
+    public class UserInterfaceNumberBoxData
     {
         /// <summary>
         /// Тип данных является целым числом
@@ -11,8 +11,13 @@
         public bool IsInteger { get; set; }
 
         /// <summary>
-        /// Целочисленный шаг
+        /// Минимальное значение
         /// </summary>
-        public int IntStep { get; set; }
+        public string MinValue { get; set; }
+
+        /// <summary>
+        /// Максимальное значение
+        /// </summary>
+        public string MaxValue { get; set; }
     }
 }

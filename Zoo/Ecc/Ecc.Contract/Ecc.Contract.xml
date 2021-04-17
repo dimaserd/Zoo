@@ -391,6 +391,16 @@
             Описание статуса взаимодействия (может содержать Exception StackTrace)
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.MailDistributions.MailDistributionCreate">
+            <summary>
+            Создание рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionCreate.Name">
+            <summary>
+            Название рассылки
+            </summary>
+        </member>
         <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionCreate.Subject">
             <summary>
             Заголовок сообщения
@@ -401,6 +411,26 @@
             Тело сообщения
             </summary>
         </member>
+        <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionCreate.SendToEveryUser">
+            <summary>
+            Отправлять каждому пользователю
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.MailDistributions.MailDistributionEdit">
+            <summary>
+            Модель для редактирования рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionEdit.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionEdit.Name">
+            <summary>
+            Название рассылки
+            </summary>
+        </member>
         <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionEdit.Subject">
             <summary>
             Заголовок сообщения
@@ -409,6 +439,11 @@
         <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionEdit.Body">
             <summary>
             Тело сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.MailDistributions.MailDistributionEdit.SendToEveryUser">
+            <summary>
+            Отправлять всем пользователям
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.MailDistributions.MainDistributionUserGroupRelationIdModel">

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Zoo.GenericUserInterface</id>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
     <title>Generic UserInterface</title>
     <authors>Dmitry Serdyukov</authors>
     <owners>Dmitry Serdyukov</owners>
@@ -12,7 +12,7 @@
     <copyright>Copyright 2020</copyright>
     <dependencies>
       <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="3.1.13" />
-      <dependency id="NetCroco.Core.Documentation" version="1.1.47" />
+      <dependency id="NetCroco.Core.Documentation" version="1.1.51" />
     </dependencies>
   </metadata>
   <files>

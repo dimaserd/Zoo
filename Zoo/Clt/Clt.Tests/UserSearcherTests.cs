@@ -34,7 +34,7 @@ namespace Clt.Tests
             appBuilder.RegisterFileStorage(new CrocoFileOptions
             {
                 SourceDirectory = Directory.GetCurrentDirectory(),
-                ImgFileResizeSettings = Array.Empty<ImgFileResizeSetting>()
+                ImgFileResizeSettings = new System.Collections.Generic.Dictionary<string, ImgFileResizeSetting>()
             });
 
             DbFileManagerServiceCollectionExtensions.RegisterDbFileManager(appBuilder);

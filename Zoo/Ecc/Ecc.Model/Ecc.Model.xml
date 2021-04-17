@@ -14,10 +14,66 @@
             Приложения с интеграциями
             </summary>
         </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.IntegratedAppUserSettings">
+            <summary>
+            Настройки для интеграций
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.EmailGroups">
+            <summary>
+            Группы эмейлов
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.EmailInEmailGroupRelations">
+            <summary>
+            Эмейлы в группах эмейлов
+            </summary>
+        </member>
         <member name="P:Ecc.Model.Contexts.EccDbContext.EmailTemplates">
             <summary>
             Шаблоны Email сообщений
             </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.Chats">
+            <summary>
+            Чаты
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.ChatMessages">
+            <summary>
+            Сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.ChatUserRelations">
+            <summary>
+            Пользователи в чатах
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.ChatMessageAttachments">
+            <summary>
+            Вложения к сообщениям
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.EmailLinkCatches">
+            <summary>
+            Перехваты переходов по ссылкам в эмейле
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.EmailLinkCatchRedirects">
+            <summary>
+            Редиректы на перехваты
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Contexts.EccDbContext.MessageDistributions">
+            <summary>
+            Рассылки сообщений
+            </summary>
+        </member>
+        <member name="M:Ecc.Model.Contexts.EccDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Переорпеделение создания модели для контекста
+            </summary>
+            <param name="modelBuilder"></param>
         </member>
         <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.Attachments">
             <summary>
@@ -144,6 +200,66 @@
             Вложения
             </summary>
         </member>
+        <member name="T:Ecc.Model.Entities.Interactions.InteractionAttachment">
+            <summary>
+            Сущность описывающая вложение
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionAttachment.InteractionId">
+            <summary>
+            Идентификтаор взаимодействия
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionAttachment.Interaction">
+            <summary>
+            Вхаимодействие
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionAttachment.FileId">
+            <summary>
+            Идентификатор файла
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionAttachment.File">
+            <summary>
+            Файл
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Interactions.InteractionStatusLog">
+            <summary>
+            Лог об изменении статсуса взаимодействия
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionStatusLog.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionStatusLog.InteractionId">
+            <summary>
+            Идентификатор взаимодействия
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionStatusLog.Interaction">
+            <summary>
+            Взаимодействие
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionStatusLog.Status">
+            <summary>
+            Статус взаимодействия
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionStatusLog.StartedOn">
+            <summary>
+            Дата установки статуса
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Interactions.InteractionStatusLog.StatusDescription">
+            <summary>
+            Описание статуса
+            </summary>
+        </member>
         <member name="T:Ecc.Model.Entities.Interactions.MailMessageInteraction">
             <summary>
             Сущность описывающая взаимодействие по почте
@@ -184,6 +300,16 @@
             Рассылка пользователям по почте
             </summary>
         </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistribution.Id">
+            <summary>
+            Идентификатор рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistribution.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
         <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistribution.Subject">
             <summary>
             Заголовок сообщения
@@ -192,6 +318,16 @@
         <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistribution.Body">
             <summary>
             Тело сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistribution.SendToEveryUser">
+            <summary>
+            Отправлять каждому пользователю
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Ecc.Messaging.MailDistribution.UserGroups">
+            <summary>
+            Группы пользователей
             </summary>
         </member>
         <member name="T:Ecc.Model.Entities.Ecc.Messaging.MailDistributionUserGroupRelation">

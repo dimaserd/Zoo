@@ -16,6 +16,11 @@
         TextBox,
 
         /// <summary>
+        /// Поле для ввода числа
+        /// </summary>
+        NumberBox,
+
+        /// <summary>
         /// Форма для ввода пароля
         /// </summary>
         Password,

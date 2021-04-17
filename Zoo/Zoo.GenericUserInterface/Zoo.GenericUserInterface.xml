@@ -78,6 +78,11 @@
             Текстовое поле
             </summary>
         </member>
+        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.NumberBox">
+            <summary>
+            Поле для ввода числа
+            </summary>
+        </member>
         <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.Password">
             <summary>
             Форма для ввода пароля
@@ -481,7 +486,7 @@
             Данные для построения выпадающего списка
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.TextBoxData">
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.NumberBoxData">
             <summary>
             Дополнительная информация для текстового блока
             </summary>
@@ -506,19 +511,24 @@
             Ссылка на тип данных из (Croco.Documentation)
             </summary>
         </member>
-        <member name="T:Zoo.GenericUserInterface.Models.UserInterfaceTextBoxData">
+        <member name="T:Zoo.GenericUserInterface.Models.UserInterfaceNumberBoxData">
             <summary>
             Дополнительная информация о текстбоксе
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceTextBoxData.IsInteger">
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceNumberBoxData.IsInteger">
             <summary>
             Тип данных является целым числом
             </summary>
         </member>
-        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceTextBoxData.IntStep">
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceNumberBoxData.MinValue">
             <summary>
-            Целочисленный шаг
+            Минимальное значение
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceNumberBoxData.MaxValue">
+            <summary>
+            Максимальное значение
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder">

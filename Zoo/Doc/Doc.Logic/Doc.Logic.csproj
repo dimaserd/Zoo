@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.12.3" />
-    <PackageReference Include="Croco.Core.Logic" Version="1.0.26" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.0.40" />
   </ItemGroup>
 
 </Project>

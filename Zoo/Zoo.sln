@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecc.Logic", "Ecc\Ecc.Logic\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecc.Model", "Ecc\Ecc.Model\Ecc.Model.csproj", "{704C3268-26DF-4932-B1D8-EE1221E9BFDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clt.Tests", "Clt\Clt.Tests\Clt.Tests.csproj", "{3B0903F2-5B35-46F0-A087-BD712864A808}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clt.Tests", "Clt\Clt.Tests\Clt.Tests.csproj", "{3B0903F2-5B35-46F0-A087-BD712864A808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

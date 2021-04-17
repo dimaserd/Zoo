@@ -55,7 +55,7 @@ namespace Zoo.GenericUserInterface.Models
         /// <summary>
         /// Дополнительная информация для текстового блока
         /// </summary>
-        public UserInterfaceTextBoxData TextBoxData { get; set; }
+        public UserInterfaceNumberBoxData NumberBoxData { get; set; }
 
         /// <summary>
         /// Json с кастомными данными, можно использовать для построения кастомного инпута

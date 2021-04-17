@@ -1,14 +1,48 @@
 ﻿using Croco.Core.Documentation.Models;
+using Croco.Core.Documentation.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Utils;
 
 namespace Zoo.GenericUserInterface.Extensions
 {
     internal static class GenericUserInterfaceModelBuilderExtensions
     {
+        public class MinMax
+        {
+            public MinMax(object min, object max)
+            {
+                MinValue = Tool.JsonConverter.Serialize(min);
+                MaxValue = Tool.JsonConverter.Serialize(max);
+            }
+
+            public string MinValue { get; private set; }
+
+            public string MaxValue { get; private set; }
+        }
+
+        internal static readonly Dictionary<Type, MinMax> IntegerTypes = new Dictionary<Type, MinMax>
+        {
+            [typeof(int)] = new MinMax(int.MinValue, int.MaxValue),
+            [typeof(uint)] = new MinMax(uint.MinValue, uint.MaxValue),
+            [typeof(long)] = new MinMax(long.MinValue, long.MaxValue),
+            [typeof(ulong)] = new MinMax(ulong.MinValue, ulong.MaxValue),
+            [typeof(ushort)] = new MinMax(ushort.MinValue, ushort.MaxValue),
+            [typeof(short)] = new MinMax(short.MinValue, short.MaxValue),
+            [typeof(byte)] = new MinMax(byte.MinValue, byte.MaxValue),
+            [typeof(sbyte)] = new MinMax(sbyte.MinValue, sbyte.MaxValue)
+        };
+
+        internal static readonly Dictionary<Type, MinMax> NonIntegerTypes = new Dictionary<Type, MinMax>
+        {
+            [typeof(decimal)] = new MinMax(decimal.MinValue, decimal.MaxValue),
+            [typeof(double)] = new MinMax(double.MinValue, double.MaxValue),
+            [typeof(float)] = new MinMax(float.MinValue, float.MaxValue),
+        };
+
         private static string AddPropNameToPrefix(string prefix, string propName)
         {
             return prefix == string.Empty ? propName : $"{prefix}.{propName}";
@@ -59,32 +93,36 @@ namespace Zoo.GenericUserInterface.Extensions
             return result;
         }
 
-        private static UserInterfaceTextBoxData GetTextBoxDataForProperty(CrocoTypeDescription prop, UserInterfaceType interfaceType)
+        private static UserInterfaceNumberBoxData GetNumberBoxDataForProperty(CrocoTypeDescription prop, UserInterfaceType interfaceType)
         {
-            if (interfaceType != UserInterfaceType.TextBox)
+            if (interfaceType != UserInterfaceType.NumberBox)
             {
                 return null;
             }
 
-            var integerTypes = new[]
-            {
-                typeof(int),
-                typeof(uint),
-                typeof(long),
-                typeof(ulong),
-                typeof(ushort),
-                typeof(short),
-                typeof(byte)
-            };
-
             var type = prop.ExtractType();
 
-            var isInteger = integerTypes.Contains(type);
-
-            return new UserInterfaceTextBoxData
+            if (CrocoClassDescriptionBuilder.IsNullable(type, out var extractedType))
             {
-                IsInteger = isInteger,
-                IntStep = 1,
+                type = extractedType;
+            }
+
+            if (IntegerTypes.TryGetValue(type, out var minMax))
+            {
+                return new UserInterfaceNumberBoxData
+                {
+                    IsInteger = true,
+                    MinValue = minMax.MinValue,
+                    MaxValue = minMax.MaxValue
+                };
+            };
+            minMax = NonIntegerTypes[type];
+
+            return new UserInterfaceNumberBoxData
+            {
+                IsInteger = false,
+                MinValue = minMax.MinValue,
+                MaxValue = minMax.MaxValue
             };
         }
 
@@ -102,7 +140,7 @@ namespace Zoo.GenericUserInterface.Extensions
                 {   
                     InterfaceType = type,
                     DropDownData = selectList,
-                    TextBoxData = GetTextBoxDataForProperty(propTypeDescription, type)
+                    NumberBoxData = GetNumberBoxDataForProperty(propTypeDescription, type)
                 };
             }
 
@@ -202,6 +240,11 @@ namespace Zoo.GenericUserInterface.Extensions
             if (desc.IsEnumeration)
             {
                 return UserInterfaceType.DropDownList;
+            }
+
+            if (desc.IsNumber)
+            {
+                return UserInterfaceType.NumberBox;
             }
 
             return UserInterfaceType.TextBox;
