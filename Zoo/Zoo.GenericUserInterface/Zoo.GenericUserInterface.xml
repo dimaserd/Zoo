@@ -63,6 +63,16 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Consts.DefinedAttributes">
+            <summary>
+            Заранее определенные системой атрибуты
+            </summary>
+        </member>
+        <member name="F:Zoo.GenericUserInterface.Consts.DefinedAttributes.Email">
+            <summary>
+            Атрибут обозначающий, что свойство является электронный адресом
+            </summary>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Enumerations.UserInterfaceType">
             <summary>
             Тип пользовательского интерейса для свойства
@@ -96,11 +106,6 @@
         <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.DropDownList">
             <summary>
             Выпадающий список
-            </summary>
-        </member>
-        <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.Hidden">
-            <summary>
-            Скрытый инпут со значением
             </summary>
         </member>
         <member name="F:Zoo.GenericUserInterface.Enumerations.UserInterfaceType.DatePicker">
@@ -154,31 +159,6 @@
         <member name="P:Zoo.GenericUserInterface.Models.AutoCompleteData.DataProviderTypeFullName">
             <summary>
             Провайдер данных
-            </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions">
-            <summary>
-            Опции для создания портфеля из интерфейсов
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.ApplicationHostUrl">
-            <summary>
-            Хост урл для приложения
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.SelectListDataProviders">
-            <summary>
-            Провайдеры данных для выпадающего списка
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.AutoCompletionDataProviders">
-            <summary>
-            Провайдеры данных для автокомплита
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.DefaultInterfaceOverriders">
-            <summary>
-            Переопределители интерфейсов
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Definition.AutoCompleteSuggestion">
@@ -383,44 +363,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Providers.DataProviderForAutoCompletion`1">
-            <summary>
-            Провайдер данных для автокомплита
-            </summary>
-            <typeparam name="TItem"></typeparam>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Providers.DataProviderForAutoCompletion`1.GetData(System.String)">
-            <summary>
-            Функция для получения данных
-            </summary>
-            <param name="typedText"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Providers.DataProviderForAutoCompletion`1.GetSuggestionsData(System.String)">
-            <summary>
-            Реализация с перекладкой. Используется внутри библиотекой
-            </summary>
-            <param name="typedText"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Providers.DataProviderForSelectList`1">
-            <summary>
-            Провайдер данных для выпадающего списка
-            </summary>
-            <typeparam name="TITem"></typeparam>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Providers.DataProviderForSelectList`1.GetData">
-            <summary>
-            Функция для получения данных
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Providers.DataProviderForSelectList`1.GetSelectListItems">
-            <summary>
-            Реализация с перекладкой. Используется внутри библиотекой
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Zoo.GenericUserInterface.Models.SelectListItem">
             <summary>
             Элемент выпадающего списка
@@ -506,9 +448,29 @@
             Данные для построения автокомплита
             </summary>
         </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.Attributes">
+            <summary>
+            Атрибуты
+            </summary>
+        </member>
         <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlock.TypeDisplayFullName">
             <summary>
             Ссылка на тип данных из (Croco.Documentation)
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.UserInterfaceBlockAttribute">
+            <summary>
+            Атрибут примененный к определенному блоку
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlockAttribute.Name">
+            <summary>
+            Название атрибута
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceBlockAttribute.DataJson">
+            <summary>
+            Сериализованные данные для атрибута
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.UserInterfaceNumberBoxData">
@@ -529,6 +491,31 @@
         <member name="P:Zoo.GenericUserInterface.Models.UserInterfaceNumberBoxData.MaxValue">
             <summary>
             Максимальное значение
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions">
+            <summary>
+            Опции для создания портфеля из интерфейсов
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.ApplicationHostUrl">
+            <summary>
+            Хост урл для приложения
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.SelectListDataProviders">
+            <summary>
+            Провайдеры данных для выпадающего списка
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.AutoCompletionDataProviders">
+            <summary>
+            Провайдеры данных для автокомплита
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions.DefaultInterfaceOverriders">
+            <summary>
+            Переопределители интерфейсов
             </summary>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.Overridings.GenericUserInterfaceBagBuilder">
@@ -756,6 +743,12 @@
             <typeparam name="TDataProvider"></typeparam>
             <returns></returns>
         </member>
+        <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.AddAttribute(Zoo.GenericUserInterface.Models.UserInterfaceBlockAttribute)">
+            <summary>
+            Добавить атрибут
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Zoo.GenericUserInterface.Services.BlockBuilders.GenericUserInterfaceBlockBuilder`1.SetAutoCompleteFor``1">
             <summary>
             Установить список с автоподсказами для свойства данного объекта
@@ -880,12 +873,6 @@
             <typeparam name="TBuilder"></typeparam>
             <param name="blockBuilder"></param>
             <param name="isVisible"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetHidden``1(``0)">
-            <summary>
-            Устновить скрытый тип элемента ввода
-            </summary>
             <returns></returns>
         </member>
         <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBuilderExtensions.SetLabel``1(``0,System.String)">
@@ -1050,6 +1037,44 @@
             Переместить свойство в конец списка
             </summary>
             <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Services.Providers.DataProviderForAutoCompletion`1">
+            <summary>
+            Провайдер данных для автокомплита
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.Providers.DataProviderForAutoCompletion`1.GetData(System.String)">
+            <summary>
+            Функция для получения данных
+            </summary>
+            <param name="typedText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.Providers.DataProviderForAutoCompletion`1.GetSuggestionsData(System.String)">
+            <summary>
+            Реализация с перекладкой. Используется внутри библиотекой
+            </summary>
+            <param name="typedText"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Services.Providers.DataProviderForSelectList`1">
+            <summary>
+            Провайдер данных для выпадающего списка
+            </summary>
+            <typeparam name="TITem"></typeparam>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.Providers.DataProviderForSelectList`1.GetData">
+            <summary>
+            Функция для получения данных
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.Providers.DataProviderForSelectList`1.GetSelectListItems">
+            <summary>
+            Реализация с перекладкой. Используется внутри библиотекой
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Zoo.GenericUserInterface.Utils.NewtonsoftJsonConverter">

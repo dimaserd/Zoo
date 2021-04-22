@@ -8,8 +8,8 @@ using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Models.Definition;
-using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Resources;
+using Zoo.GenericUserInterface.Services.Providers;
 
 namespace Zoo.GenericUserInterface.Services.BlockBuilders
 {
@@ -123,6 +123,26 @@ namespace Zoo.GenericUserInterface.Services.BlockBuilders
             {
                 DataProviderTypeFullName = typeof(TDataProvider).FullName
             };
+            return this;
+        }
+
+        /// <summary>
+        /// Добавить атрибут
+        /// </summary>
+        /// <returns></returns>
+        public GenericUserInterfaceBlockBuilder<TProp> AddAttribute(UserInterfaceBlockAttribute attribute)
+        {
+            if(Block.Attributes.Any(x => x.Name == attribute.Name))
+            {
+                return this;
+            }
+            var list = new List<UserInterfaceBlockAttribute>(Block.Attributes)
+            {
+                attribute
+            };
+
+            Block.Attributes = list.ToArray();
+
             return this;
         }
 

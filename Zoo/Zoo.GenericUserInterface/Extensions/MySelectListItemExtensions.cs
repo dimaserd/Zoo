@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Options;
 
 namespace Zoo.GenericUserInterface.Extensions
 {

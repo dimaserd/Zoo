@@ -8,6 +8,7 @@ using Zoo.GenericUserInterface.Models.Definition;
 using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services;
+using Zoo.GenericUserInterface.Services.Definition;
 
 namespace Zoo.GenericUserInterface.Tests.Overriders
 {

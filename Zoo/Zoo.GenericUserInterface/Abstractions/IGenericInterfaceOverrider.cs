@@ -1,4 +1,4 @@
-﻿using Zoo.GenericUserInterface.Models.Definition;
+﻿using Zoo.GenericUserInterface.Services.Definition;
 
 namespace Zoo.GenericUserInterface.Abstractions
 {

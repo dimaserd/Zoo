@@ -2,6 +2,7 @@
 using System;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Options;
 using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Utils;
 

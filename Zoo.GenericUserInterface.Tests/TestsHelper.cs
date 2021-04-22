@@ -2,8 +2,8 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Models.Bag;
+using Zoo.GenericUserInterface.Options;
 using Zoo.GenericUserInterface.Services;
 using Zoo.GenericUserInterface.Utils;
 

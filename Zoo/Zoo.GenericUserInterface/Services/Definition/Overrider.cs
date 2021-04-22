@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Services;
 
-namespace Zoo.GenericUserInterface.Models.Definition
+namespace Zoo.GenericUserInterface.Services.Definition
 {
     /// <summary>
     /// Переопределитель интерфейсов

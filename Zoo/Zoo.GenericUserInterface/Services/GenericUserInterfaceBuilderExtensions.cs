@@ -27,16 +27,6 @@ namespace Zoo.GenericUserInterface.Services
         }
 
         /// <summary>
-        /// Устновить скрытый тип элемента ввода
-        /// </summary>
-        /// <returns></returns>
-        public static TBuilder SetHidden<TBuilder>(this TBuilder blockBuilder) where TBuilder : IGenericInterfaceBlockBuilder
-        {
-            blockBuilder.Block.InterfaceType = UserInterfaceType.Hidden;
-            return blockBuilder;
-        }
-
-        /// <summary>
         /// Установить текст лейбла для блока
         /// </summary>
         /// <param name="blockBuilder"></param>

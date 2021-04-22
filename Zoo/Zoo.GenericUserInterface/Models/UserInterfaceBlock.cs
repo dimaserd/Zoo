@@ -73,6 +73,11 @@ namespace Zoo.GenericUserInterface.Models
         public AutoCompleteData AutoCompleteData { get; set; }
 
         /// <summary>
+        /// Атрибуты
+        /// </summary>
+        public UserInterfaceBlockAttribute[] Attributes { get; set; }
+
+        /// <summary>
         /// Ссылка на тип данных из (Croco.Documentation)
         /// </summary>
         public string TypeDisplayFullName { get; set; }

@@ -6,8 +6,8 @@ using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
 using Zoo.GenericUserInterface.Models.Definition;
-using Zoo.GenericUserInterface.Models.Providers;
 using Zoo.GenericUserInterface.Resources;
+using Zoo.GenericUserInterface.Services.Providers;
 
 namespace Zoo.GenericUserInterface.Services.BlockBuilders
 {

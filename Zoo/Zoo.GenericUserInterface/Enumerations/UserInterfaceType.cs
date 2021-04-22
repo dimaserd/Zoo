@@ -36,11 +36,6 @@
         DropDownList,
 
         /// <summary>
-        /// Скрытый инпут со значением
-        /// </summary>
-        Hidden,
-
-        /// <summary>
         /// Календарь для даты
         /// </summary>
         DatePicker,

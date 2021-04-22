@@ -1,4 +1,4 @@
-﻿namespace Zoo.GenericUserInterface.Models
+﻿namespace Zoo.GenericUserInterface.Options
 {
     /// <summary>
     /// Опции для создания обобщенного интерфейса

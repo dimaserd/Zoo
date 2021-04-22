@@ -200,9 +200,7 @@ namespace Clt.Logic.Services.Users
                     return new BaseApiResponse(false, "Пользователь уже является деактивированным");
                 }
 
-
                 user.DeActivated = true;
-
                 userRepo.UpdateHandled(user);
 
                 return await TrySaveChangesAndReturnResultAsync("Пользователь деактивирован");
@@ -214,7 +212,6 @@ namespace Clt.Logic.Services.Users
             }
 
             user.DeActivated = false;
-
             userRepo.UpdateHandled(user);
 
             return await TrySaveChangesAndReturnResultAsync("Пользователь активирован");

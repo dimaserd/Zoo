@@ -4,10 +4,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Zoo.GenericUserInterface.Enumerations;
-using Zoo.GenericUserInterface.Models.Definition;
 using Zoo.GenericUserInterface.Models.Overridings;
 using Zoo.GenericUserInterface.Resources;
 using Zoo.GenericUserInterface.Services;
+using Zoo.GenericUserInterface.Services.Definition;
 
 namespace Zoo.GenericUserInterface.Tests
 {

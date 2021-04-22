@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Zoo.GenericUserInterface.Enumerations;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Options;
 using Zoo.GenericUserInterface.Utils;
 
 namespace Zoo.GenericUserInterface.Extensions

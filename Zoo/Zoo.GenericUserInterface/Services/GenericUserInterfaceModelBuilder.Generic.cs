@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Zoo.GenericUserInterface.Abstractions;
 using Zoo.GenericUserInterface.Extensions;
 using Zoo.GenericUserInterface.Models;
+using Zoo.GenericUserInterface.Options;
 using Zoo.GenericUserInterface.Utils;
 
 namespace Zoo.GenericUserInterface.Services
@@ -59,7 +60,7 @@ namespace Zoo.GenericUserInterface.Services
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public GenericUserInterfaceModelBuilder<TModel> ShiftToStartFor(Expression<Func<TModel, object>> expression)
+        public GenericUserInterfaceModelBuilder<TModel> ShiftToStartFor<TProp>(Expression<Func<TModel, TProp>> expression)
         {
             var block = GetBlockByExpression(expression);
 
