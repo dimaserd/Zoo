@@ -38,8 +38,14 @@ namespace Ecc.Model.Entities.IntegratedApps
         /// </summary>
         public virtual IntegratedApp App { get; set; }
 
+        /// <summary>
+        /// Флаг активности
+        /// </summary>
         public bool Active { get; set; }
 
+        /// <summary>
+        /// Идентификатор пользователя в приложении
+        /// </summary>
         [Required]
         public string UserUidInApp { get; set; }
     }

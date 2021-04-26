@@ -95,7 +95,7 @@ namespace Ecc.Model.Entities.Interactions
         /// </summary>
         public virtual ICollection<InteractionAttachment> Attachments { get; set; }
 
-        public static void OnModelCreating(ModelBuilder modelBuilder)
+        internal static void OnModelCreating(ModelBuilder modelBuilder)
         {
             var entityBuilder = modelBuilder.Entity<Interaction>();
 

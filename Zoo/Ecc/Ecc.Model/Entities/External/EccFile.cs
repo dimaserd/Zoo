@@ -12,7 +12,7 @@ namespace Ecc.Model.Entities.External
     {
         public int Id { get; set; }
 
-        public static void OnModelCreating(ModelBuilder modelBuilder)
+        internal static void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EccFile>().Property(x => x.Id).ValueGeneratedNever();
         }
