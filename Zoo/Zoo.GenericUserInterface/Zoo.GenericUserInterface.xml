@@ -143,7 +143,7 @@
             Расширения для построения списков
             </summary>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Extensions.MySelectListItemExtensions.GetBooleanList(System.Boolean,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
+        <member name="M:Zoo.GenericUserInterface.Extensions.MySelectListItemExtensions.GetBooleanList(System.Boolean,Zoo.GenericUserInterface.Options.GenericInterfaceOptions)">
             <summary>
             Получить список из булевых значений
             </summary>
@@ -202,21 +202,6 @@
             Значение
             </summary>
         </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Definition.Overrider">
-            <summary>
-            Переопределитель интерфейсов
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Definition.Overrider.MainOverrideFunction">
-            <summary>
-            Основная Функция для переопределения
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.Definition.Overrider.SetDropDownDatasFunction">
-            <summary>
-            Вторая функция для переопределения
-            </summary>
-        </member>
         <member name="T:Zoo.GenericUserInterface.Models.Definition.SelectListItemData`1">
             <summary>
             Данные для построения выпадающего списка
@@ -241,26 +226,6 @@
             <summary>
             Значение
             </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.Definition.UserInterfaceDefinition`1">
-            <summary>
-            Переопределитель интерфейса
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Definition.UserInterfaceDefinition`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceBag,Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
-            <summary>
-            
-            </summary>
-            <param name="bag"></param>
-            <param name="overrider"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.Definition.UserInterfaceDefinition`1.GetOverrider">
-            <summary>
-            Получить переопределитель
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.DropDownListData">
             <summary>
@@ -336,32 +301,6 @@
             <summary>
             Блоки для свойств
             </summary>
-        </member>
-        <member name="T:Zoo.GenericUserInterface.Models.GenericInterfaceOptions">
-            <summary>
-            Опции для создания обобщенного интерфейса
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.GenericInterfaceOptions.NotSelectedText">
-            <summary>
-            Текст при не выбрано
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.GenericInterfaceOptions.TextOnTrue">
-            <summary>
-            Текст при true
-            </summary>
-        </member>
-        <member name="P:Zoo.GenericUserInterface.Models.GenericInterfaceOptions.TextOnFalse">
-            <summary>
-            Текст при false
-            </summary>
-        </member>
-        <member name="M:Zoo.GenericUserInterface.Models.GenericInterfaceOptions.Default">
-            <summary>
-            Дефолтные опции
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Zoo.GenericUserInterface.Models.SelectListItem">
             <summary>
@@ -585,6 +524,32 @@
             Построить
             </summary>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Options.GenericInterfaceOptions">
+            <summary>
+            Опции для создания обобщенного интерфейса
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Options.GenericInterfaceOptions.NotSelectedText">
+            <summary>
+            Текст при не выбрано
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Options.GenericInterfaceOptions.TextOnTrue">
+            <summary>
+            Текст при true
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Options.GenericInterfaceOptions.TextOnFalse">
+            <summary>
+            Текст при false
+            </summary>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Options.GenericInterfaceOptions.Default">
+            <summary>
+            Дефолтные опции
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Resources.ExceptionTexts">
             <summary>
               Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
@@ -782,6 +747,41 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Zoo.GenericUserInterface.Services.Definition.Overrider">
+            <summary>
+            Переопределитель интерфейсов
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Services.Definition.Overrider.MainOverrideFunction">
+            <summary>
+            Основная Функция для переопределения
+            </summary>
+        </member>
+        <member name="P:Zoo.GenericUserInterface.Services.Definition.Overrider.SetDropDownDatasFunction">
+            <summary>
+            Вторая функция для переопределения
+            </summary>
+        </member>
+        <member name="T:Zoo.GenericUserInterface.Services.Definition.UserInterfaceDefinition`1">
+            <summary>
+            Переопределитель интерфейса
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.Definition.UserInterfaceDefinition`1.OverrideInterfaceAsync(Zoo.GenericUserInterface.Services.GenericUserInterfaceBag,Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder{`0})">
+            <summary>
+            
+            </summary>
+            <param name="bag"></param>
+            <param name="overrider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zoo.GenericUserInterface.Services.Definition.UserInterfaceDefinition`1.GetOverrider">
+            <summary>
+            Получить переопределитель
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Zoo.GenericUserInterface.Services.GenericUserInterfaceBag">
             <summary>
             Портфель из пользовательских интерфейсов для типов и прочего добра необходимого для
@@ -803,7 +803,7 @@
             Опции для создания интерфейса
             </summary>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBag.#ctor(System.IServiceProvider,Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceBag.#ctor(System.IServiceProvider,Zoo.GenericUserInterface.Models.Bag.GenericUserInterfaceBagOptions,Zoo.GenericUserInterface.Options.GenericInterfaceOptions)">
             <summary>
             Конструктор
             </summary>
@@ -962,14 +962,14 @@
             </summary>
             <param name="type"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.#ctor(System.Type,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.#ctor(System.Type,Zoo.GenericUserInterface.Options.GenericInterfaceOptions)">
             <summary>
             Конструктор
             </summary>
             <param name="type"></param>
             <param name="opts"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.#ctor(System.Type,System.String,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.#ctor(System.Type,System.String,Zoo.GenericUserInterface.Options.GenericInterfaceOptions)">
             <summary>
             Конструктор
             </summary>
@@ -983,7 +983,7 @@
             </summary>
             <param name="result"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.CreateFromType(System.Type,System.String,Zoo.GenericUserInterface.Models.GenericInterfaceOptions)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder.CreateFromType(System.Type,System.String,Zoo.GenericUserInterface.Options.GenericInterfaceOptions)">
             <summary>
             Создать из типа
             </summary>
@@ -1011,7 +1011,7 @@
             Конструктор
             </summary>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.#ctor(Zoo.GenericUserInterface.Models.GenericInterfaceOptions,Zoo.GenericUserInterface.Services.GenericUserInterfaceBag)">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.#ctor(Zoo.GenericUserInterface.Options.GenericInterfaceOptions,Zoo.GenericUserInterface.Services.GenericUserInterfaceBag)">
             <summary>
             Конструктор
             </summary>
@@ -1025,7 +1025,7 @@
             <param name="model"></param>
             <param name="bag"></param>
         </member>
-        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToStartFor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+        <member name="M:Zoo.GenericUserInterface.Services.GenericUserInterfaceModelBuilder`1.ShiftToStartFor``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
             <summary>
             Переместить свойство на начальную позицию
             </summary>

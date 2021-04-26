@@ -5,7 +5,6 @@ using Clt.Contract.Models.Common;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Clt.Model.Entities.Default;
-using Clt.Model.Entities;
 using Croco.Core.Contract.Application;
 using Clt.Contract.Settings;
 using Clt.Logic.Extensions;
@@ -41,13 +40,6 @@ namespace Clt.Logic.Services.Account
                 };
 
                 await UserManager.CreateAsync(maybeRoot, RootSettings.RootPassword);
-
-                CreateHandled(new Client
-                {
-                    Id = maybeRoot.Id,
-                    Email = RootSettings.RootEmail,
-                    Name = RootSettings.RootEmail
-                });
 
                 await SaveChangesAsync();
             }

@@ -181,9 +181,69 @@
             Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
             </summary>
         </member>
+        <member name="T:Ecc.Logic.Models.EmailTemplates.EmailTemplateModel">
+            <summary>
+            Модель описывающая шаблон эмейлв
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.EmailTemplateModel.Id">
+            <summary>
+            Идентифиатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.EmailTemplateModel.TemplateType">
+            <summary>
+            Тип сообощения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.EmailTemplateModel.IsActive">
+            <summary>
+            Флаг активности
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.EmailTemplateModel.CustomEmailType">
+            <summary>
+            Тип шаблона
+            </summary>
+        </member>
         <member name="P:Ecc.Logic.Models.EmailTemplates.EmailTemplateModel.JsScript">
             <summary>
             Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.EmailTemplateModel.IsJsScripted">
+            <summary>
+            Является ли письмо заскриптованным
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.IntegratedApps.CreateOrEditApplication">
+            <summary>
+            Модель для создания и редактирования интеграционного приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.CreateOrEditApplication.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.CreateOrEditApplication.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.CreateOrEditApplication.AppType">
+            <summary>
+            Тип приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.CreateOrEditApplication.Uid">
+            <summary>
+            Уникальный идентификатор приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.CreateOrEditApplication.ConfigurationJson">
+            <summary>
+            Настройки конфигурации
             </summary>
         </member>
         <member name="T:Ecc.Logic.Models.IntegratedApps.SendNotificationViaOneSignal">

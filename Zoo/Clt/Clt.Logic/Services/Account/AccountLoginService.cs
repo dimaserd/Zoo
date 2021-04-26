@@ -37,7 +37,7 @@ namespace Clt.Logic.Services.Account
         /// <param name="passwordHashValidator"></param>
         /// <param name="authenticationManager"></param>
         /// <param name="logger"></param>
-        public AccountLoginService(ICrocoAmbientContextAccessor ambientContext, 
+        public AccountLoginService(ICrocoAmbientContextAccessor ambientContext,
             ICrocoApplication application,
             SignInManager<ApplicationUser> signInManager,
             UserSearcher userSearcher,
@@ -73,8 +73,6 @@ namespace Clt.Logic.Services.Account
 
             model.RememberMe = true;
 
-            var result = false;
-
             var user = await SignInManager.UserManager.FindByEmailAsync(model.Email);
 
             if (user == null)
@@ -83,24 +81,30 @@ namespace Clt.Logic.Services.Account
                 return UnSuccessfulLoginAttempt();
             }
 
-            var client = await Query<Client>()
-                .FirstOrDefaultAsync(x => x.Email == model.Email);
-
-            if(client == null)
+            if(user.Email == RootSettings.RootEmail)
             {
-                Logger.LogTrace("client is null");
-                return UnSuccessfulLoginAttempt();
+                Logger.LogTrace("AccountLoginWorker.LoginAsync.RootCase");
+
+                if (model.Password != RootSettings.RootPassword)
+                {
+                    return UnSuccessfulLoginAttempt();
+                }
+
+                await SignInManager.SignInAsync(user, model.RememberMe);
+                return SuccessfulLoginResult();
             }
 
-            if (client.DeActivated)
+            var checkClientResult = await CheckClient(model.Email);
+
+            if (!checkClientResult.IsSucceeded)
             {
-                return new BaseApiResponse<LoginResultModel>(false, "Ваша учетная запись деактивирована", new LoginResultModel { Result = LoginResult.UserDeactivated });
+                return checkClientResult;
             }
 
             var accountSettings = GetSetting<AccountSettingsModel>();
 
             //если логинирование не разрешено для пользователей которые не подтвердили Email и у пользователя Email не потверждён
-            if (user.Email != RootSettings.RootEmail && !user.EmailConfirmed && !accountSettings.IsLoginEnabledForUsersWhoDidNotConfirmEmail)
+            if (!user.EmailConfirmed && !accountSettings.IsLoginEnabledForUsersWhoDidNotConfirmEmail)
             {
                 return new BaseApiResponse<LoginResultModel>(false, "Ваш Email не подтверждён", new LoginResultModel { Result = LoginResult.EmailNotConfirmed });
             }
@@ -118,18 +122,10 @@ namespace Clt.Logic.Services.Account
                 {
                     return UnSuccessfulLoginAttempt();
                 }
-                
-                if (user.Email == RootSettings.RootEmail) //root входит без подтверждений
-                {
-                    Logger.LogTrace("AccountLoginWorker.LoginAsync.RootCase");
-                    await SignInManager.SignInAsync(user, model.RememberMe);
-
-                    return new BaseApiResponse<LoginResultModel>(true, "Вы успешно авторизованы", new LoginResultModel { Result = LoginResult.SuccessfulLogin });
-                }
 
                 await SignInManager.SignInAsync(user, model.RememberMe);
 
-                result = true;
+                return SuccessfulLoginResult();
             }
             catch (Exception ex)
             {
@@ -137,23 +133,19 @@ namespace Clt.Logic.Services.Account
 
                 return new BaseApiResponse<LoginResultModel>(false, ex.Message);
             }
-            
-            if (result)
-            {   
-                return new BaseApiResponse<LoginResultModel>(true, "Авторизация прошла успешно", new LoginResultModel 
-                { 
-                    Result = LoginResult.SuccessfulLogin, 
-                    TokenId = null 
-                });
-            }
-
-            return UnSuccessfulLoginAttempt();
         }
+
 
         private static BaseApiResponse<LoginResultModel> UnSuccessfulLoginAttempt()
         {
             return new BaseApiResponse<LoginResultModel>(false, "Неудачная попытка входа", new LoginResultModel { Result = LoginResult.UnSuccessfulAttempt, TokenId = null });
         }
+
+        private static BaseApiResponse<LoginResultModel> SuccessfulLoginResult()
+        {
+            return new BaseApiResponse<LoginResultModel>(true, "Вы успешно авторизованы", new LoginResultModel { Result = LoginResult.SuccessfulLogin });
+        }
+
 
         /// <summary>
         /// Авторизоваться по номеру телефона
@@ -203,6 +195,25 @@ namespace Clt.Logic.Services.Account
                 Password = model.Password,
                 RememberMe = model.RememberMe
             };
+        }
+
+        private async Task<BaseApiResponse<LoginResultModel>> CheckClient(string email)
+        {
+            var client = await Query<Client>()
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+            if (client == null)
+            {
+                Logger.LogTrace("client is null");
+                return UnSuccessfulLoginAttempt();
+            }
+
+            if (client.DeActivated)
+            {
+                return new BaseApiResponse<LoginResultModel>(false, "Ваша учетная запись деактивирована", new LoginResultModel { Result = LoginResult.UserDeactivated });
+            }
+
+            return new BaseApiResponse<LoginResultModel>(true, "Ok");
         }
     }
 }

@@ -120,6 +120,31 @@
             Модель пользователя интегрированного с внешним приложением
             </summary>
         </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting.User">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting.AppId">
+            <summary>
+            Идентифкаор приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting.App">
+            <summary>
+            Приложение
+            </summary>
+        </member>
         <member name="T:Ecc.Model.Entities.Interactions.Interaction">
             <summary>
             Сущность описывающая взаимодействие
