@@ -4,6 +4,26 @@
         <name>Ecc.Model</name>
     </assembly>
     <members>
+        <member name="T:Ecc.Model.Consts.EccConsts">
+            <summary>
+            Константы
+            </summary>
+        </member>
+        <member name="F:Ecc.Model.Consts.EccConsts.EmailType">
+            <summary>
+            Эмейл
+            </summary>
+        </member>
+        <member name="F:Ecc.Model.Consts.EccConsts.SmsType">
+            <summary>
+            Смс
+            </summary>
+        </member>
+        <member name="F:Ecc.Model.Consts.EccConsts.InAppNotificationType">
+            <summary>
+            Уведомление внутри приложения
+            </summary>
+        </member>
         <member name="T:Ecc.Model.Contexts.EccDbContext">
             <summary>
             Контекст для рассылок
@@ -75,14 +95,224 @@
             </summary>
             <param name="modelBuilder"></param>
         </member>
+        <member name="T:Ecc.Model.Entities.Chats.EccChat">
+            <summary>
+            Чат пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChat.Id">
+            <summary>
+            Идентификатор чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChat.IsDialog">
+            <summary>
+            Является ли чат диалогои
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChat.ChatName">
+            <summary>
+            Название чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChat.Messages">
+            <summary>
+            Сообщеня
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChat.UserRelations">
+            <summary>
+            Пользователи в чате
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Chats.EccChatMessage">
+            <summary>
+            Сообщение в чате
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.Id">
+            <summary>
+            Идентификатор сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.Message">
+            <summary>
+            Сообщение
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.SentOnUtcTicks">
+            <summary>
+            Дата отправки
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.ChatId">
+            <summary>
+            Идентификатор чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.Chat">
+            <summary>
+            Чат
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.SenderUserId">
+            <summary>
+            Идентификатор отправителя
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.SenderUser">
+            <summary>
+            Отправитель
+            </summary>
+        </member>
         <member name="P:Ecc.Model.Entities.Chats.EccChatMessage.Attachments">
             <summary>
             Вложения
             </summary>
         </member>
+        <member name="T:Ecc.Model.Entities.Chats.EccChatMessageAttachment">
+            <summary>
+            Сущность описывающая вложение в сообщении
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessageAttachment.Id">
+            <summary>
+            Идентификатор вложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessageAttachment.ChatMessageId">
+            <summary>
+            Идентификатор сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessageAttachment.ChatMessage">
+            <summary>
+            Сообщение
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessageAttachment.FileId">
+            <summary>
+            Идентификатор файла
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatMessageAttachment.File">
+            <summary>
+            Файл
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Chats.EccChatUserRelation">
+            <summary>
+            Сущность описывающая принадлежность пользователя к чату
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatUserRelation.ChatId">
+            <summary>
+            Идентификатор чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatUserRelation.Chat">
+            <summary>
+            Ссылка на чат
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatUserRelation.IsChatCreator">
+            <summary>
+            Является ли пользователь создателем чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatUserRelation.LastVisitUtcTicks">
+            <summary>
+            Дата последнего посещения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatUserRelation.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Chats.EccChatUserRelation.User">
+            <summary>
+            Ссылка на пользователя
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Email.EmailGroup">
+            <summary>
+            Сущность описывающая группу эмейлов
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailGroup.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailGroup.Name">
+            <summary>
+            Название группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailGroup.Emails">
+            <summary>
+            Адреса электронной почты
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Email.EmailInEmailGroupRelation">
+            <summary>
+            Сущность описывающая принадлежность адреса электронной почты к группе
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailInEmailGroupRelation.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailInEmailGroupRelation.EmailGroupId">
+            <summary>
+            Идентификатор группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailInEmailGroupRelation.EmailGroup">
+            <summary>
+            Ссылка на группу эмейлов
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailInEmailGroupRelation.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.Email.EmailTemplate">
+            <summary>
+            Сущность описывающая Email шаблон
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailTemplate.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailTemplate.TemplateType">
+            <summary>
+            Тип шаблона сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailTemplate.IsActive">
+            <summary>
+            Флаг активности
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailTemplate.CustomEmailType">
+            <summary>
+            Кастомный тип шаблона
+            </summary>
+        </member>
         <member name="P:Ecc.Model.Entities.Email.EmailTemplate.JsScript">
             <summary>
             Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.Email.EmailTemplate.IsJsScripted">
+            <summary>
+            Является ли шаблон скриптованным
             </summary>
         </member>
         <member name="T:Ecc.Model.Entities.Email.MessageDistribution">
@@ -110,9 +340,114 @@
             Сущность описывающая файл в контексте рассылок
             </summary>
         </member>
+        <member name="T:Ecc.Model.Entities.External.EccUser">
+            <summary>
+            Сущность описывающая пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUser.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUser.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUser.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.External.EccUserGroup">
+            <summary>
+            Сущность описывающая группу пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUserGroup.Id">
+            <summary>
+            Идентификатор группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUserGroup.Name">
+            <summary>
+            Название группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUserGroup.Description">
+            <summary>
+            Описание
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUserGroup.Deleted">
+            <summary>
+            Флаг удаленности
+            </summary>
+        </member>
         <member name="P:Ecc.Model.Entities.External.EccUserGroup.Users">
             <summary>
             Пользователи принадлежащие к данной группе
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.External.EccUserInUserGroupRelation">
+            <summary>
+            Сущность описывающая принадлежность пользователя к группе
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUserInUserGroupRelation.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUserInUserGroupRelation.User">
+            <summary>
+            Пользователь
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUserInUserGroupRelation.UserGroupId">
+            <summary>
+            Идентификатор группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.External.EccUserInUserGroupRelation.UserGroup">
+            <summary>
+            Группа пользователей
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.IntegratedApps.IntegratedApp">
+            <summary>
+            Сущность описывающая интеграционное приложение
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedApp.Id">
+            <summary>
+            Идентификатор приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedApp.Name">
+            <summary>
+            Название приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedApp.Description">
+            <summary>
+            Описание 
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedApp.AppType">
+            <summary>
+            Тип приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedApp.Uid">
+            <summary>
+            Уникальный идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedApp.ConfigurationJson">
+            <summary>
+            Настройки конфигурации
             </summary>
         </member>
         <member name="T:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting">
@@ -143,6 +478,16 @@
         <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting.App">
             <summary>
             Приложение
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting.Active">
+            <summary>
+            Флаг активности
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting.UserUidInApp">
+            <summary>
+            Идентификатор пользователя в приложении
             </summary>
         </member>
         <member name="T:Ecc.Model.Entities.Interactions.Interaction">
@@ -318,6 +663,61 @@
         <member name="P:Ecc.Model.Entities.Interactions.UserNotificationInteraction.NotificationType">
             <summary>
             Тип уведомления
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.LinkCatch.EmailLinkCatch">
+            <summary>
+            Сущность описывающая ловителя ссылок в Email
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.LinkCatch.EmailLinkCatch.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.LinkCatch.EmailLinkCatch.Url">
+            <summary>
+            Урл который ловится
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.LinkCatch.EmailLinkCatch.MailMessageId">
+            <summary>
+            Идентификатор эмейла
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.LinkCatch.EmailLinkCatch.CreatedOnUtc">
+            <summary>
+            Дата создания
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.LinkCatch.EmailLinkCatch.Redirects">
+            <summary>
+            Редиректы
+            </summary>
+        </member>
+        <member name="T:Ecc.Model.Entities.LinkCatch.EmailLinkCatchRedirect">
+            <summary>
+            Cущность описывающая пойманную передаресацию в электронном письме
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.LinkCatch.EmailLinkCatchRedirect.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.LinkCatch.EmailLinkCatchRedirect.EmailLinkCatchId">
+            <summary>
+            Идентифкатор пойманной записи
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.LinkCatch.EmailLinkCatchRedirect.RedirectedOnUtc">
+            <summary>
+            Дата редиректа
+            </summary>
+        </member>
+        <member name="P:Ecc.Model.Entities.LinkCatch.EmailLinkCatchRedirect.LinkCatch">
+            <summary>
+            Ссылка на ловитель ссылок
             </summary>
         </member>
         <member name="T:Ecc.Model.Entities.Ecc.Messaging.MailDistribution">

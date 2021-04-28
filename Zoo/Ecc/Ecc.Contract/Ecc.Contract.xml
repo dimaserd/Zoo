@@ -205,6 +205,26 @@
             Номер телефона
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.EmailGroup.EmailGroupModel">
+            <summary>
+            Группа эмейлов
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailGroup.EmailGroupModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailGroup.EmailGroupModel.Name">
+            <summary>
+            Название
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailGroup.EmailGroupModel.EmailsCount">
+            <summary>
+            Количество эмейлов
+            </summary>
+        </member>
         <member name="T:Ecc.Contract.Models.EmailGroup.SendMailsForEmailGroup">
             <summary>
             Отослать емейлы для группы

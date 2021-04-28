@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>0.8.12</Version>
+    <PackageId>Zoo.Croco.Tms</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Dmitry Serdyukov</Authors>
+    <Company>Dmitry Serdyukov</Company>
+    <Description>Базовая логика для работы с заданями на движке Croco.Core</Description>
+    <PackageReleaseNotes>Что-то сделали лучше, что-то сделали хуже.</PackageReleaseNotes>
+    <Copyright>Copyright 2021</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,7 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Croco.Core.Logic" Version="1.0.40" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.0.43" />
   </ItemGroup>
 
   <ItemGroup>

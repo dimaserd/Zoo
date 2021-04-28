@@ -1483,6 +1483,16 @@
             <param name="model"></param>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Settings.EccLinkFunctionInvokerSettings">
+            <summary>
+            Настройки для редиректа ссылок в письмах
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Settings.EccLinkFunctionInvokerSettings.UrlRedirectFormat">
+            <summary>
+            Урл на который будет отправляться письмо
+            </summary>
+        </member>
         <member name="T:Ecc.Logic.Settings.EccSettings">
             <summary>
             Основные настройки пконтекста рассылок

@@ -2,11 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>0.9.62</Version>
+    <PackageId>Zoo.ServerJs</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.9.61</Version>
-    <Company>CrocoSoft</Company>
-    <PackageReleaseNotes></PackageReleaseNotes>
     <Authors>Dmitry Serdyukov</Authors>
+    <Company>CrocoSoft</Company>
+    <Description>Логика для выполнения js-кода на сервере</Description>
+    <PackageReleaseNotes>Что-то сделали лучше, что-то сделали хуже.</PackageReleaseNotes>
+    <Copyright>Copyright 2021</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -21,7 +24,7 @@
     <PackageReference Include="Croco.Core.Contract" Version="1.0.14" />
     <PackageReference Include="Jint" Version="2.11.58" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.13" />
-    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.49" />
+    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.51" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 

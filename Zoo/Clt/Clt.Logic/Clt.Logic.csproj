@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>Latest</LangVersion>
+    <Version>0.8.24</Version>
+    <PackageId>Zoo.Croco.Clt</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Dmitry Serdyukov</Authors>
+    <Company>Dmitry Serdyukov</Company>
+    <Description>Базовая логика для авторизации и работы с клиентами на движке Croco.Core</Description>
+    <PackageReleaseNotes>Что-то сделали лучше, что-то сделали хуже.</PackageReleaseNotes>
+    <Copyright>Copyright 2021</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,7 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-    <PackageReference Include="Croco.Core.Logic" Version="1.0.40" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.0.43" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.13" />
   </ItemGroup>
 

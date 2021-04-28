@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>0.8.7</Version>
+    <PackageId>Zoo.Croco.Doc</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Dmitry Serdyukov</Authors>
+    <Company>Dmitry Serdyukov</Company>
+    <Description>Базовая логика для работы с автогенерированными документами</Description>
+    <PackageReleaseNotes>Что-то сделали лучше, что-то сделали хуже.</PackageReleaseNotes>
+    <Copyright>Copyright 2021</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -14,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.12.3" />
-    <PackageReference Include="Croco.Core.Logic" Version="1.0.40" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.0.43" />
   </ItemGroup>
 
 </Project>
