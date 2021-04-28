@@ -340,6 +340,11 @@
             Сущность описывающая файл в контексте рассылок
             </summary>
         </member>
+        <member name="P:Ecc.Model.Entities.External.EccFile.Id">
+            <summary>
+            Идентификатор файла
+            </summary>
+        </member>
         <member name="T:Ecc.Model.Entities.External.EccUser">
             <summary>
             Сущность описывающая пользователя
