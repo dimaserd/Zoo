@@ -6,6 +6,7 @@
     <Version>0.8.24</Version>
     <PackageId>Zoo.Croco.Clt</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeReferencedProjects>true</IncludeReferencedProjects>
     <Authors>Dmitry Serdyukov</Authors>
     <Company>Dmitry Serdyukov</Company>
     <Description>Базовая логика для авторизации и работы с клиентами на движке Croco.Core</Description>
@@ -22,8 +23,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Clt.Contract\Clt.Contract.csproj" />
-    <ProjectReference Include="..\Clt.Model\Clt.Model.csproj" />
+    <ProjectReference Include="..\Clt.Contract\Clt.Contract.csproj">
+    </ProjectReference>
+    <ProjectReference Include="..\Clt.Model\Clt.Model.csproj">
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>

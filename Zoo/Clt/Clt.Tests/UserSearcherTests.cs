@@ -1,5 +1,4 @@
-﻿using Clt.Contract.Models.Users;
-using Clt.Contract.Settings;
+﻿using Clt.Contract.Settings;
 using Clt.Logic;
 using Clt.Logic.Services.Account;
 using Clt.Logic.Services.Users;

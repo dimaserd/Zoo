@@ -10,6 +10,9 @@ namespace Ecc.Model.Entities.External
     [Table(nameof(EccFile), Schema = Schemas.EccSchema)]
     public class EccFile : IHaveIntId
     {
+        /// <summary>
+        /// Идентификатор файла
+        /// </summary>
         public int Id { get; set; }
 
         internal static void OnModelCreating(ModelBuilder modelBuilder)

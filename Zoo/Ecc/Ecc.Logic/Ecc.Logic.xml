@@ -181,6 +181,16 @@
             Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
             </summary>
         </member>
+        <member name="T:Ecc.Logic.Models.EmailTemplates.EditEmailTemplate">
+            <summary>
+            Редактирование шаблона эмейла
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.EditEmailTemplate.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
         <member name="T:Ecc.Logic.Models.EmailTemplates.EmailTemplateModel">
             <summary>
             Модель описывающая шаблон эмейлв
@@ -939,6 +949,27 @@
             Добавить адресов в группу
             </summary>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.Emails.EmailLinkFunctionInvoker">
+            <summary>
+            Сервис для процессинга текста
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailLinkFunctionInvoker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Logic.Settings.EccSettings)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContextAccessor"></param>
+            <param name="application"></param>
+            <param name="settings"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailLinkFunctionInvoker.ProccessText(System.String,Ecc.Logic.Models.EccReplacing)">
+            <summary>
+            Преобразовать текст
+            </summary>
+            <param name="interactionId"></param>
+            <param name="replacing"></param>
             <returns></returns>
         </member>
         <member name="T:Ecc.Logic.Services.Emails.MailDistributionWorker">
