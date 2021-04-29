@@ -32,9 +32,7 @@ namespace Clt.Logic
 
             services.AddScoped<IApplicationAuthenticationManager, ApplicationAuthenticationManager>();
             services.AddScoped<IClientDataRefresher, ClientDataRefresher>();
-            services.AddTransient<ApplicationUserManager>();
-            services.AddTransient<ApplicationSignInManager>();
-
+            
             setupAction ??= config =>
             {
                 config.SignIn.RequireConfirmedEmail = false;

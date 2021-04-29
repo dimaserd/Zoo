@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clt.Logic.Services.Base
+namespace Clt.Logic.Services.Account
 {
     /// <summary>
     /// Сервис для изменеия пароля
@@ -74,11 +74,7 @@ namespace Clt.Logic.Services.Base
             {
                 return new BaseApiResponse(false, "Неправильно указан старый пароль");
             }
-
-            if (user != null)
-            {
-                await SignInManager.SignInAsync(user, true);
-            }
+            await SignInManager.SignInAsync(user, true);
 
             return new BaseApiResponse(true, "Ваш пароль изменен");
         }

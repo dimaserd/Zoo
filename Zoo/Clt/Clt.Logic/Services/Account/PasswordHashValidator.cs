@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace Clt.Logic.Services.Base
+namespace Clt.Logic.Services.Account
 {
     /// <summary>
     /// Валидатор хешей паролей

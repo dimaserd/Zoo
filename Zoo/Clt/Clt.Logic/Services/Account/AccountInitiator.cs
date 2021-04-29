@@ -5,9 +5,10 @@ using Clt.Contract.Models.Common;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Clt.Model.Entities.Default;
-using Croco.Core.Contract.Application;
+ using Croco.Core.Contract.Application;
 using Clt.Contract.Settings;
 using Clt.Logic.Extensions;
+using Clt.Logic.Services.Roles;
 
 namespace Clt.Logic.Services.Account
 {
@@ -16,7 +17,7 @@ namespace Clt.Logic.Services.Account
     /// </summary>
     public class AccountInitiator : BaseCltService
     {
-        RoleManager<ApplicationRole> RoleManager { get; }
+        RoleService RoleService { get; }
         UserManager<ApplicationUser> UserManager { get; }
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace Clt.Logic.Services.Account
         /// <returns></returns>
         public async Task<BaseApiResponse> InitAsync()
         {
-            await RoleManager.CreateRolesAsync(RolesSetting.GetAllRoleNames());
+            await RoleService.CreateRolesAsync(RolesSetting.GetAllRoleNames());
 
             var maybeRoot = await UserManager.FindByEmailAsync(RootSettings.RootEmail);
 
@@ -71,9 +72,9 @@ namespace Clt.Logic.Services.Account
         /// <param name="roleManager"></param>
         /// <param name="userManager"></param>
         public AccountInitiator(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication app,
-            RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager) : base(ambientContext, app)
+            RoleService roleManager, UserManager<ApplicationUser> userManager) : base(ambientContext, app)
         {
-            RoleManager = roleManager;
+            RoleService = roleManager;
             UserManager = userManager;
         }
     }

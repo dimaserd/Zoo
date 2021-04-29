@@ -11,12 +11,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Clt.Logic.Services.Base
+namespace Clt.Logic.Services.Account
 {
     /// <summary>
     /// Предоставляет методы для работы с забывшими пароль пользователями
     /// </summary>
-    public class PasswordForgotWorker : BaseCltService
+    public class PasswordForgotService : BaseCltService
     {
         UserManager<ApplicationUser> UserManager { get; }
 
@@ -26,7 +26,7 @@ namespace Clt.Logic.Services.Base
         /// <param name="context"></param>
         /// <param name="application"></param>
         /// <param name="userManager"></param>
-        public PasswordForgotWorker(ICrocoAmbientContextAccessor context,
+        public PasswordForgotService(ICrocoAmbientContextAccessor context,
             ICrocoApplication application,
             UserManager<ApplicationUser> userManager
             ) : base(context, application)

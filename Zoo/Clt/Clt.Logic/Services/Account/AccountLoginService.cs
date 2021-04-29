@@ -13,7 +13,6 @@ using Croco.Core.Contract.Application;
 using Clt.Model.Entities;
 using Clt.Model.Entities.Default;
 using Microsoft.Extensions.Logging;
-using Clt.Logic.Services.Base;
 
 namespace Clt.Logic.Services.Account
 {

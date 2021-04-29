@@ -118,7 +118,7 @@ namespace Clt.Logic.Services.Roles
 
             if (role == null)
             {
-                return new BaseApiResponse(false, "Право не найдено (Возможно оно еще не создано)");
+                return new BaseApiResponse(false, "Роль не найдена (Возможно она еще не создана)");
             }
 
             var userRepo = GetRepository<ApplicationUser>();
@@ -168,7 +168,7 @@ namespace Clt.Logic.Services.Roles
                 DeleteHandled(userRole);
             }
 
-            return await TrySaveChangesAndReturnResultAsync(addOrRemove ? "Право добавлено" : "Право удалено");
+            return await TrySaveChangesAndReturnResultAsync(addOrRemove ? "Роль добавлено" : "Роль удалена");
         }
     }
 }

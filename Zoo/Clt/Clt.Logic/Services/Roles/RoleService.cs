@@ -1,8 +1,11 @@
 ﻿using Clt.Model.Entities.Default;
 using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
+using Croco.Core.Contract.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace Clt.Logic.Services.Roles
 {
@@ -29,6 +32,22 @@ namespace Clt.Logic.Services.Roles
             RoleManager = roleManager;
         }
 
+        /// <summary>
+        /// Создать роли
+        /// </summary>
+        /// <param name="roles"></param>
+        /// <returns></returns>
+        public async Task<BaseApiResponse> CreateRolesAsync(string[] roles)
+        {
+            foreach (var role in roles)
+            {
+                if (!await RoleManager.RoleExistsAsync(role))
+                {
+                    await RoleManager.CreateAsync(new ApplicationRole { Name = role, ConcurrencyStamp = Guid.NewGuid().ToString() });
+                }
+            }
 
+            return new BaseApiResponse(true, "Роли созданы");
+        }
     }
 }

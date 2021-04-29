@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>Latest</LangVersion>
-    <Version>0.8.24</Version>
+    <Version>0.8.25</Version>
     <PackageId>Zoo.Croco.Clt</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeReferencedProjects>true</IncludeReferencedProjects>
