@@ -171,7 +171,7 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetTask<TService, T1>(Func<TService, T1, Task> task, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(null, null, opts)
+            return new JsWorkerMethodDocs(null, new List<Type> { typeof(T1) }, opts)
             {
                 Method = new JsWorkerMethodBase
                 {
@@ -190,7 +190,7 @@ namespace Zoo.ServerJs.Services
 
         internal static JsWorkerMethodDocs GetTask<TService, T1, T2>(Func<TService, T1, T2, Task> task, JsWorkerMethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(null, null, opts)
+            return new JsWorkerMethodDocs(null, new List<Type> { typeof(T1), typeof(T2) }, opts)
             {
                 Method = new JsWorkerMethodBase
                 {

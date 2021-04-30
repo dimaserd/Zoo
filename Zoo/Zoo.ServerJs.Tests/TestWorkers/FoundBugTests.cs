@@ -26,6 +26,8 @@ namespace Zoo.ServerJs.Tests.TestWorkers
 
             var executor = serviceProvider.GetRequiredService<JsExecutor>();
 
+            var docs = await executor.GetDocumentation();
+
             var script = "api.Call(\"Test\", \"CopyFiles\", 10);";
 
             var result = await executor.RunScriptDetaiiled(script);

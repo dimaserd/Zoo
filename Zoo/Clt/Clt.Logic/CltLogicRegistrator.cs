@@ -1,4 +1,5 @@
-﻿using Clt.Logic.Abstractions;
+﻿using Clt.Contract.Events;
+using Clt.Logic.Abstractions;
 using Clt.Logic.HealthChecks;
 using Clt.Logic.Implementations;
 using Clt.Logic.Services;
@@ -6,6 +7,7 @@ using Clt.Model;
 using Clt.Model.Entities.Default;
 using Croco.Core.Application;
 using Croco.Core.Application.Registrators;
+using Croco.Core.Logic.EventDescriptor.Services;
 using Croco.Core.Logic.Files;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +25,10 @@ namespace Clt.Logic
         /// Зарегистрировать клиентскую логику
         /// </summary>
         /// <param name="applicationBuilder"></param>
+        /// <param name="integrationMessagesDescriptorBuilder"></param>
         /// <param name="setupAction"></param>
-        public static void Register(CrocoApplicationBuilder applicationBuilder, Action<IdentityOptions> setupAction = null)
+        public static void Register(CrocoApplicationBuilder applicationBuilder,
+            IntegrationMessagesDescriptorBuilder integrationMessagesDescriptorBuilder = null, Action<IdentityOptions> setupAction = null)
         {
             Check(applicationBuilder);
 
@@ -48,6 +52,16 @@ namespace Clt.Logic
             applicationBuilder
                 .RegisterHealthCheck<CltSettingsHealthCheck>()
                 .RegisterHealthCheck<RootHealthCheck>();
+
+            if(integrationMessagesDescriptorBuilder != null)
+            {
+                integrationMessagesDescriptorBuilder
+                    .AddEventDescription<ClientStartedRestoringPasswordEvent>("Выбрасывается в систему, когда клиент начинает процедуру сброса пароля")
+                    .AddEventDescription<ClientChangedPassword>("Выбрасывыется в систему, когда клиент закончил процедуру изменения пароля")
+                    .AddEventDescription<ClientDataUpdatedEvent>("Выбрасывается в систему, когда данные клиента обновляются либо администратором либо самим клиентом")
+                    .AddEventDescription<ClientRegisteredEvent>("Выбрасывается в систему, когда клиент прошёл регистрацию");
+                    
+            }
         }
 
         private static void Check(CrocoApplicationBuilder applicationBuilder)
