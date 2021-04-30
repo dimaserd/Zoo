@@ -9,6 +9,7 @@ using Croco.Core.Application;
 using Croco.Core.Application.Registrators;
 using Croco.Core.Logic.EventDescriptor.Services;
 using Croco.Core.Logic.Files;
+using Croco.Core.Logic.IntegrationMessagesDescriptor.Enumerations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -56,11 +57,10 @@ namespace Clt.Logic
             if(integrationMessagesDescriptorBuilder != null)
             {
                 integrationMessagesDescriptorBuilder
-                    .AddEventDescription<ClientStartedRestoringPasswordEvent>("Выбрасывается в систему, когда клиент начинает процедуру сброса пароля")
-                    .AddEventDescription<ClientChangedPassword>("Выбрасывыется в систему, когда клиент закончил процедуру изменения пароля")
-                    .AddEventDescription<ClientDataUpdatedEvent>("Выбрасывается в систему, когда данные клиента обновляются либо администратором либо самим клиентом")
-                    .AddEventDescription<ClientRegisteredEvent>("Выбрасывается в систему, когда клиент прошёл регистрацию");
-                    
+                    .AddMessageDescription<ClientStartedRestoringPasswordEvent>("Выбрасывается в систему, когда клиент начинает процедуру сброса пароля", IntegrationMessageType.Event)
+                    .AddMessageDescription<ClientChangedPassword>("Выбрасывыется в систему, когда клиент закончил процедуру изменения пароля", IntegrationMessageType.Event)
+                    .AddMessageDescription<ClientDataUpdatedEvent>("Выбрасывается в систему, когда данные клиента обновляются либо администратором либо самим клиентом", IntegrationMessageType.Event)
+                    .AddMessageDescription<ClientRegisteredEvent>("Выбрасывается в систему, когда клиент прошёл регистрацию", IntegrationMessageType.Event);
             }
         }
 

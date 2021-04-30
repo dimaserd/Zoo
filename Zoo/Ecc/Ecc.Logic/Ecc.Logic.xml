@@ -62,12 +62,13 @@
             Регистратор сервисов для работы логики Ecc
             </summary>
         </member>
-        <member name="M:Ecc.Logic.EccLogicRegistrator.RegisterLogic``1(Croco.Core.Application.CrocoApplicationBuilder,Ecc.Logic.Settings.EccSettings)">
+        <member name="M:Ecc.Logic.EccLogicRegistrator.RegisterLogic``1(Croco.Core.Application.CrocoApplicationBuilder,Ecc.Logic.Settings.EccSettings,Croco.Core.Logic.EventDescriptor.Services.IntegrationMessagesDescriptorBuilder)">
             <summary>
             Зарегистрировать логику
             </summary>
             <param name="appBuilder"></param>
             <param name="settings"></param>
+            <param name="integrationMessagesDescriptorBuilder"></param>
         </member>
         <member name="T:Ecc.Logic.Handlers.AppendEmailsFromFileToGroupMessageHandler">
             <summary>
@@ -175,6 +176,36 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Models.EccReplacing">
+            <summary>
+            Модель описывающая текстовую замену
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EccReplacing.TextToReplace">
+            <summary>
+            Текст для замены
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EccReplacing.Func">
+            <summary>
+            Функция для замены
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.EccTextFunc">
+            <summary>
+            Описание функции текстовой замены
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EccTextFunc.Name">
+            <summary>
+            Название функции
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EccTextFunc.Args">
+            <summary>
+            Аргументы
+            </summary>
         </member>
         <member name="P:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate.JsScript">
             <summary>

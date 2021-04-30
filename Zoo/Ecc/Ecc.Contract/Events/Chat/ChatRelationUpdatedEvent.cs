@@ -1,5 +1,8 @@
 ﻿namespace Ecc.Contract.Events.Chat
 {
+    /// <summary>
+    /// Событие о том, что пользователь изменил свои данные для чата (например посетил его)
+    /// </summary>
     public class ChatRelationUpdatedEvent
     {
         /// <summary>

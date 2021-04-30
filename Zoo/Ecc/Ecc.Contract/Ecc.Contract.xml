@@ -67,6 +67,11 @@
             Идентификаторы пользователей
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Events.Chat.ChatRelationUpdatedEvent">
+            <summary>
+            Событие о том, что пользователь изменил свои данные для чата (например посетил его)
+            </summary>
+        </member>
         <member name="P:Ecc.Contract.Events.Chat.ChatRelationUpdatedEvent.ChatId">
             <summary>
             Идентификатор чата
@@ -283,6 +288,26 @@
         <member name="P:Ecc.Contract.Models.EmailGroup.SendMailsForEmailGroup.AttachmentFileIds">
             <summary>
             Идентификаторы файлов
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.EmailRedirects.EmailLinkCatchDetailedModel">
+            <summary>
+            Модель описывающая пойманный урл в эмейле
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailRedirects.EmailLinkCatchDetailedModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailRedirects.EmailLinkCatchDetailedModel.Url">
+            <summary>
+            Урл
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailRedirects.EmailLinkCatchDetailedModel.RedirectsOn">
+            <summary>
+            Редиректы
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.Emails.MassSendMail">

@@ -14,6 +14,9 @@ using Ecc.Logic.Services.Emails.Senders;
 using Ecc.Model.Contexts;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
+using Croco.Core.Logic.EventDescriptor.Services;
+using Croco.Core.Logic.IntegrationMessagesDescriptor.Enumerations;
+using Ecc.Contract.Events.Chat;
 
 namespace Ecc.Logic
 {
@@ -27,7 +30,9 @@ namespace Ecc.Logic
         /// </summary>
         /// <param name="appBuilder"></param>
         /// <param name="settings"></param>
-        public static void RegisterLogic<TUserStorage>(CrocoApplicationBuilder appBuilder, EccSettings settings)
+        /// <param name="integrationMessagesDescriptorBuilder"></param>
+        public static void RegisterLogic<TUserStorage>(CrocoApplicationBuilder appBuilder, EccSettings settings,
+            IntegrationMessagesDescriptorBuilder integrationMessagesDescriptorBuilder = null)
             where TUserStorage : class, IUserMasterStorage
         {
             Check(appBuilder);
@@ -37,6 +42,19 @@ namespace Ecc.Logic
 
             RegisterEccWorkerTypes(services);
             AddMessageHandlers(appBuilder);
+
+            if(integrationMessagesDescriptorBuilder != null)
+            {
+                integrationMessagesDescriptorBuilder
+                    .AddMessageDescription<CreateUserCommand>("Команда для создания пользователя", IntegrationMessageType.Command)
+                    .AddMessageDescription<UpdateUserCommand>("Команда для обновления данных пользователя", IntegrationMessageType.Command)
+                    .AddMessageDescription<AppendEmailsFromFileToGroup>("Команда для добавления эмейлов в групу из файла", IntegrationMessageType.Command)
+                    .AddMessageDescription<SendMailsForEmailGroup>("Команда для отправки эмейлов для групы", IntegrationMessageType.Command);
+
+                integrationMessagesDescriptorBuilder
+                    .AddMessageDescription<ChatCreatedEvent>("Событие о том, что чат создался", IntegrationMessageType.Event)
+                    .AddMessageDescription<ChatRelationUpdatedEvent>("Событие о том, что пользователь посетил чат или зашёл в него", IntegrationMessageType.Event);
+            }
         }
 
         private static void RegisterServices<TUserStorage>(IServiceCollection services, EccSettings settings)

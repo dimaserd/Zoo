@@ -33,11 +33,12 @@
             Регистратор клиентской логики
             </summary>
         </member>
-        <member name="M:Clt.Logic.CltLogicRegistrator.Register(Croco.Core.Application.CrocoApplicationBuilder,System.Action{Microsoft.AspNetCore.Identity.IdentityOptions})">
+        <member name="M:Clt.Logic.CltLogicRegistrator.Register(Croco.Core.Application.CrocoApplicationBuilder,Croco.Core.Logic.EventDescriptor.Services.IntegrationMessagesDescriptorBuilder,System.Action{Microsoft.AspNetCore.Identity.IdentityOptions})">
             <summary>
             Зарегистрировать клиентскую логику
             </summary>
             <param name="applicationBuilder"></param>
+            <param name="integrationMessagesDescriptorBuilder"></param>
             <param name="setupAction"></param>
         </member>
         <member name="T:Clt.Logic.Extensions.ClaimsPrincipalExtensions">
