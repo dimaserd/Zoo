@@ -7,8 +7,15 @@ using Croco.Core.Utils;
 
 namespace Ecc.Logic.Services
 {
+    /// <summary>
+    /// Экстратор эмейл адресов
+    /// </summary>
     public class EmailListExtractor 
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="app"></param>
         public EmailListExtractor(ICrocoApplication app)
         {
             App = app;
@@ -18,6 +25,11 @@ namespace Ecc.Logic.Services
 
         string MapPath(string filePath) => App.MapPath(filePath);
 
+        /// <summary>
+        /// Вытащить эмейлы из файла
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public async Task<BaseApiResponse<List<string>>> ExtractEmailsListFromFile(string filePath)
         {
             filePath = MapPath(filePath);

@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>0.8.6</Version>
+    <TargetFramework>net5.0</TargetFramework>
+    <Version>0.9.0</Version>
     <PackageId>Zoo.Croco.Ecc</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dmitry Serdyukov</Authors>
@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="106.11.7" />
-    <PackageReference Include="Croco.Core.Logic" Version="1.0.43" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

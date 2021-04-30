@@ -142,6 +142,26 @@
             Последнее отправленное сообщение
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.Chat.ChatUserRelation">
+            <summary>
+            Модель описывающая пользователя в чате
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Chat.ChatUserRelation.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Chat.ChatUserRelation.ChatId">
+            <summary>
+            Идентификатор чата
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Chat.ChatUserRelation.LastVisitUtcTicks">
+            <summary>
+            Дата последнего визита в тиках по UTC 
+            </summary>
+        </member>
         <member name="P:Ecc.Contract.Models.Chat.GetChatMessages.Count">
             <summary>
             Сколько нужно взять сообщений
@@ -203,6 +223,21 @@
         <member name="P:Ecc.Contract.Models.EccUserModel.PhoneNumber">
             <summary>
             Номер телефона
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.EmailGroup.AppendEmailsFromFileToGroup">
+            <summary>
+            Добавить эмейлы из файла в группу эмейлов
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailGroup.AppendEmailsFromFileToGroup.EmailGroupId">
+            <summary>
+            Идентификатор группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailGroup.AppendEmailsFromFileToGroup.FilePath">
+            <summary>
+            Путь к файлу
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.EmailGroup.EmailGroupModel">
@@ -739,6 +774,21 @@
         <member name="P:Ecc.Contract.Models.UserIdAndEmailModel.Email">
             <summary>
             Адрес электронной почты
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Settings.EccRolesSetting">
+            <summary>
+            Настройка ролей для контекста Ecc
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Settings.EccRolesSetting.AdminRoleName">
+            <summary>
+            Название роли
+            </summary>
+        </member>
+        <member name="M:Ecc.Contract.Settings.EccRolesSetting.#ctor">
+            <summary>
+            Конструктор
             </summary>
         </member>
         <member name="T:Ecc.Contract.Settings.SmtpEmailSettingsModel">

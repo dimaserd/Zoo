@@ -23,7 +23,7 @@
   <ItemGroup>
     <PackageReference Include="Croco.Core.Contract" Version="1.0.14" />
     <PackageReference Include="Jint" Version="2.11.58" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.13" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.51" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>

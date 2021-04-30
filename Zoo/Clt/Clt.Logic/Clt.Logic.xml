@@ -92,41 +92,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Clt.Logic.Implementations.ApplicationSignInManager">
-            <summary>
-            Переопределение для менеджера авторизации
-            </summary>
-        </member>
-        <member name="M:Clt.Logic.Implementations.ApplicationSignInManager.#ctor(Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.IUserClaimsPrincipalFactory{Clt.Model.Entities.Default.ApplicationUser},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions},Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.Identity.SignInManager{Clt.Model.Entities.Default.ApplicationUser}},Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider)">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="userManager"></param>
-            <param name="contextAccessor"></param>
-            <param name="claimsFactory"></param>
-            <param name="optionsAccessor"></param>
-            <param name="logger"></param>
-            <param name="schemes"></param>
-        </member>
-        <member name="T:Clt.Logic.Implementations.ApplicationUserManager">
-            <summary>
-            Переопределение для менеджера пользователей
-            </summary>
-        </member>
-        <member name="M:Clt.Logic.Implementations.ApplicationUserManager.#ctor(Microsoft.AspNetCore.Identity.IUserStore{Clt.Model.Entities.Default.ApplicationUser},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions},Microsoft.AspNetCore.Identity.IPasswordHasher{Clt.Model.Entities.Default.ApplicationUser},System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Identity.IUserValidator{Clt.Model.Entities.Default.ApplicationUser}},System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Identity.IPasswordValidator{Clt.Model.Entities.Default.ApplicationUser}},Microsoft.AspNetCore.Identity.ILookupNormalizer,Microsoft.AspNetCore.Identity.IdentityErrorDescriber,System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.Identity.UserManager{Clt.Model.Entities.Default.ApplicationUser}})">
-            <summary>
-            Конструктор
-            </summary>
-            <param name="store"></param>
-            <param name="optionsAccessor"></param>
-            <param name="passwordHasher"></param>
-            <param name="userValidators"></param>
-            <param name="passwordValidators"></param>
-            <param name="keyNormalizer"></param>
-            <param name="errors"></param>
-            <param name="services"></param>
-            <param name="logger"></param>
-        </member>
         <member name="T:Clt.Logic.Implementations.ClientDataRefresher">
             <summary>
             Обновитель клиентских данных хранящихся в авторизации

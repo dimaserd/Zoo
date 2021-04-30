@@ -1,7 +1,7 @@
 <package>
   <metadata>
     <id>Zoo.Croco.Clt</id>
-    <version>0.8.25</version>
+    <version>0.9.0</version>
     <title>Zoo Croco Clt</title>
     <authors>Dmitry Serdyukov</authors>
     <owners>Dmitry Serdyukov</owners>
@@ -11,21 +11,21 @@
     <copyright>Copyright 2021</copyright>
     <dependencies>
       <dependency id="Microsoft.AspNetCore.Identity" version="2.2.0" />
-      <dependency id="Croco.Core.Logic" version="1.0.43" />
-      <dependency id="Microsoft.AspNetCore.Identity.EntityFrameworkCore" version="3.1.13" />
+      <dependency id="Croco.Core.Logic" version="1.1.0" />
+      <dependency id="Microsoft.AspNetCore.Identity.EntityFrameworkCore" version="5.0.5" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\netcoreapp3.1\Clt.Logic.dll" target="lib\netcoreapp3.1"></file>
-    <file src="bin\Release\netcoreapp3.1\Clt.Logic.pdb" target="lib\netcoreapp3.1"></file>
-    <file src="bin\Release\netcoreapp3.1\Clt.Logic.xml" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\net5.0\Clt.Logic.dll" target="lib\net5.0"></file>
+    <file src="bin\Release\net5.0\Clt.Logic.pdb" target="lib\net5.0"></file>
+    <file src="bin\Release\net5.0\Clt.Logic.xml" target="lib\net5.0"></file>
 
-    <file src="bin\Release\netcoreapp3.1\Clt.Contract.dll" target="lib\netcoreapp3.1"></file>
-    <file src="bin\Release\netcoreapp3.1\Clt.Contract.pdb" target="lib\netcoreapp3.1"></file>
-    <file src="bin\Release\netcoreapp3.1\Clt.Contract.xml" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\net5.0\Clt.Contract.dll" target="lib\net5.0"></file>
+    <file src="bin\Release\net5.0\Clt.Contract.pdb" target="lib\net5.0"></file>
+    <file src="bin\Release\net5.0\Clt.Contract.xml" target="lib\net5.0"></file>
 
-    <file src="bin\Release\netcoreapp3.1\Clt.Model.dll" target="lib\netcoreapp3.1"></file>
-    <file src="bin\Release\netcoreapp3.1\Clt.Model.pdb" target="lib\netcoreapp3.1"></file>
-    <file src="bin\Release\netcoreapp3.1\Clt.Model.xml" target="lib\netcoreapp3.1"></file>
+    <file src="bin\Release\net5.0\Clt.Model.dll" target="lib\net5.0"></file>
+    <file src="bin\Release\net5.0\Clt.Model.pdb" target="lib\net5.0"></file>
+    <file src="bin\Release\net5.0\Clt.Model.xml" target="lib\net5.0"></file>
   </files>
 </package>

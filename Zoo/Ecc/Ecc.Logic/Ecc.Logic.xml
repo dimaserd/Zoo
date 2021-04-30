@@ -821,6 +821,24 @@
             <param name="interactionId"></param>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Services.EmailListExtractor">
+            <summary>
+            Экстратор эмейл адресов
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailListExtractor.#ctor(Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.EmailListExtractor.ExtractEmailsListFromFile(System.String)">
+            <summary>
+            Вытащить эмейлы из файла
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Logic.Services.EmailRedirects.EmailRedirectsQueryWorker">
             <summary>
             Сервис для работы с методами поиска редиректов в Email
