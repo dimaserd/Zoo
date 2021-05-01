@@ -37,18 +37,18 @@ namespace Tms.Logic.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<BaseApiResponse<DayTaskModel>> CommentDayTaskAsync(CommentDayTask model)
+        public async Task<BaseApiResponse<DayTaskWithCommentsModel>> CommentDayTaskAsync(CommentDayTask model)
         {
             if (!IsAuthenticated)
             {
-                return new BaseApiResponse<DayTaskModel>(false, ValidationMessages.YouAreNotAuthorized);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(false, ValidationMessages.YouAreNotAuthorized);
             }
 
             var validation = ValidateModel(model);
 
             if (!validation.IsSucceeded)
             {
-                return new BaseApiResponse<DayTaskModel>(validation);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(validation);
             }
 
             var repo = GetRepository<DayTask>();
@@ -57,7 +57,7 @@ namespace Tms.Logic.Services
 
             if (dayTask == null)
             {
-                return new BaseApiResponse<DayTaskModel>(false, TaskerResource.DayTaskNotFoundByProvidedId);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(false, TaskerResource.DayTaskNotFoundByProvidedId);
             }
 
             var commentsRepo = GetRepository<DayTaskComment>();
@@ -75,7 +75,7 @@ namespace Tms.Logic.Services
 
                 var task = await DayTasksService.GetDayTaskByIdAsync(model.DayTaskId);
 
-                return new BaseApiResponse<DayTaskModel>(true, TaskerResource.CommentAdded, task);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(true, TaskerResource.CommentAdded, task);
             });
         }
 
@@ -84,18 +84,18 @@ namespace Tms.Logic.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<BaseApiResponse<DayTaskModel>> UpdateDayTaskCommentAsync(UpdateDayTaskComment model)
+        public async Task<BaseApiResponse<DayTaskWithCommentsModel>> UpdateDayTaskCommentAsync(UpdateDayTaskComment model)
         {
             if (!IsAuthenticated)
             {
-                return new BaseApiResponse<DayTaskModel>(false, ValidationMessages.YouAreNotAuthorized);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(false, ValidationMessages.YouAreNotAuthorized);
             }
 
             var validation = ValidateModel(model);
 
             if (!validation.IsSucceeded)
             {
-                return new BaseApiResponse<DayTaskModel>(validation);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(validation);
             }
 
             var commentsRepo = GetRepository<DayTaskComment>();
@@ -104,7 +104,7 @@ namespace Tms.Logic.Services
 
             if (comment == null)
             {
-                return new BaseApiResponse<DayTaskModel>(false, TaskerResource.DayTaskCommentNotFoundById);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(false, TaskerResource.DayTaskCommentNotFoundById);
             }
 
             comment.Comment = model.Comment;
@@ -118,7 +118,7 @@ namespace Tms.Logic.Services
 
                 var task = await DayTasksService.GetDayTaskByIdAsync(comment.DayTaskId);
 
-                return new BaseApiResponse<DayTaskModel>(true, TaskerResource.CommentUpdated, task);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(true, TaskerResource.CommentUpdated, task);
             });
         }
     }

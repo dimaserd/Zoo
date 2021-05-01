@@ -61,7 +61,16 @@ namespace Clt.Contract.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Аватар клиента обновлен.
+        ///   Ищет локализованную строку, похожую на Аватар клиента удалён.
+        /// </summary>
+        public static string ClientAvatarDeleted {
+            get {
+                return ResourceManager.GetString("ClientAvatarDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Аватар клиента обновлён.
         /// </summary>
         public static string ClientAvatarUpdated {
             get {

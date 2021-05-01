@@ -46,7 +46,7 @@ namespace Tms.Logic.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<DayTaskModel[]> GetDayTasksAsync(UserScheduleSearchModel model)
+        public async Task<DayTaskWithCommentsModel[]> GetDayTasksAsync(UserScheduleSearchModel model)
         {
             if (model == null)
             {
@@ -81,7 +81,7 @@ namespace Tms.Logic.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<DayTaskModel> GetDayTaskByIdAsync(string id)
+        public async Task<DayTaskWithCommentsModel> GetDayTaskByIdAsync(string id)
         {
             var res = await Query<DayTask>()
                 .Select(SelectExpression)
@@ -192,14 +192,14 @@ namespace Tms.Logic.Services
             return await TrySaveChangesAndReturnResultAsync("Задание обновлено");
         }
 
-        private async Task<DayTaskModel> GetDayTask(DayTaskModelWithNoUsersJustIds model)
+        private async Task<DayTaskWithCommentsModel> GetDayTask(DayTaskModelWithNoUsersJustIds model)
         {
             var users = await UsersStorage.GetUsersDictionary();
 
             return ToDayTaskModel(users, model);
         }
 
-        private async Task<DayTaskModel[]> GetDayTasks(List<DayTaskModelWithNoUsersJustIds> model)
+        private async Task<DayTaskSimpleModel[]> GetDayTasks(List<DayTaskModelWithNoUsersJustIds> model)
         {
             var users = await UsersStorage.GetUsersDictionary();
 
@@ -208,12 +208,12 @@ namespace Tms.Logic.Services
                 .ToArray();
         }
 
-        private DayTaskModel ToDayTaskModel(Dictionary<string, UserFullNameEmailAndAvatarModel> users,
+        private DayTaskSimpleModel ToDayTaskModel(Dictionary<string, UserFullNameEmailAndAvatarModel> users,
             DayTaskModelWithNoUsersJustIds model)
         {
             users.TryGetValue(model.AuthorId, out var author);
             users.TryGetValue(model.AssigneeId, out var assignee);
-            return new DayTaskModel(model, author, assignee);
+            return new DayTaskSimpleModel(model, author, assignee);
         }
 
         internal static Expression<Func<DayTask, DayTaskModelWithNoUsersJustIds>> SelectExpression = x => new DayTaskModelWithNoUsersJustIds

@@ -50,11 +50,47 @@ namespace Clt.Logic.Services.Users
         }
 
         /// <summary>
+        /// Удалить аватар клиента
+        /// </summary>
+        /// <returns></returns>
+        public async Task<BaseApiResponse> RemoveClientAvatarAsync()
+        {
+            if (!IsAuthenticated)
+            {
+                return new BaseApiResponse(false, ValidationMessages.YouAreNotAuthorized);
+            }
+
+            var userRepo = GetRepository<Client>();
+
+            var userToEditEntity = await userRepo.Query().FirstOrDefaultAsync(x => x.Id == UserId);
+
+            if (userToEditEntity == null)
+            {
+                return new BaseApiResponse(false, ValidationMessages.UserNotFound);
+            }
+
+            userToEditEntity.AvatarFileId = null;
+            userRepo.UpdateHandled(userToEditEntity);
+
+            return await TryExecuteCodeAndReturnSuccessfulResultAsync(async () =>
+            {
+                await SaveChangesAsync();
+                await PublishMessageAsync(new ClientDataUpdatedEvent
+                {
+                    Id = UserId
+                });
+                await ClientDataRefresher.UpdateUserDataAsync(await GetUserByIdAsync(userToEditEntity.Id), userToEditEntity);
+
+                return new BaseApiResponse(true, ClientResource.ClientAvatarUpdated);
+            });
+        }
+
+        /// <summary>
         /// Обновить фото клиента
         /// </summary>
         /// <param name="fileId"></param>
         /// <returns></returns>
-        public async Task<BaseApiResponse> UpdateClientPhotoAsync(int fileId)
+        public async Task<BaseApiResponse> UpdateClientAvatarAsync(int fileId)
         {
             if (!IsAuthenticated)
             {
@@ -89,6 +125,10 @@ namespace Clt.Logic.Services.Users
             return await TryExecuteCodeAndReturnSuccessfulResultAsync(async () =>
             {
                 await SaveChangesAsync();
+                await PublishMessageAsync(new ClientDataUpdatedEvent
+                {
+                    Id = UserId
+                });
                 await ClientDataRefresher.UpdateUserDataAsync(await GetUserByIdAsync(userToEditEntity.Id), userToEditEntity);
 
                 return new BaseApiResponse(true, ClientResource.ClientAvatarUpdated);

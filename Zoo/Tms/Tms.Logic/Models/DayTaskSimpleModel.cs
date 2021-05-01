@@ -5,7 +5,7 @@ namespace Tms.Logic.Models
     /// <summary>
     /// Модель задания на день
     /// </summary>
-    public class DayTaskModel
+    public class DayTaskSimpleModel
     {
         /// <summary>
         /// Контструктор
@@ -13,7 +13,7 @@ namespace Tms.Logic.Models
         /// <param name="model"></param>
         /// <param name="author"></param>
         /// <param name="assignee"></param>
-        internal DayTaskModel(DayTaskModelWithNoUsersJustIds model, 
+        internal DayTaskSimpleModel(DayTaskModelWithNoUsersJustIds model, 
             UserFullNameEmailAndAvatarModel author, 
             UserFullNameEmailAndAvatarModel assignee)
         {
@@ -55,17 +55,17 @@ namespace Tms.Logic.Models
         public DateTime? FinishDate { get; set; }
 
         /// <summary>
-        /// Цель Html (Summernote)
+        /// Цель Html
         /// </summary>
         public string TaskTarget { get; set; }
 
         /// <summary>
-        /// Отчет Html (Summernote)
+        /// Отчет Html
         /// </summary>
         public string TaskReview { get; set; }
 
         /// <summary>
-        /// Комментарий Html (Summernote)
+        /// Комментарий Html
         /// </summary>
         public string TaskComment { get; set; }
 

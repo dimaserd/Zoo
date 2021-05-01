@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClientAvatarDeleted" xml:space="preserve">
+    <value>Аватар клиента удалён</value>
+  </data>
   <data name="ClientAvatarUpdated" xml:space="preserve">
-    <value>Аватар клиента обновлен</value>
+    <value>Аватар клиента обновлён</value>
   </data>
   <data name="ClientDataRenewed" xml:space="preserve">
     <value>Данные пользователя обновлены</value>
