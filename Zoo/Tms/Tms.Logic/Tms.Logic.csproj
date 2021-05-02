@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Version>0.9.1</Version>
+    <Version>0.9.2</Version>
     <PackageId>Zoo.Croco.Tms</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dmitry Serdyukov</Authors>
