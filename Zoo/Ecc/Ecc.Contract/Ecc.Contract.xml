@@ -172,6 +172,11 @@
             Дата последнего визита в тиках по UTC 
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.Chat.GetChatMessages">
+            <summary>
+            Получить сообщения в чате
+            </summary>
+        </member>
         <member name="P:Ecc.Contract.Models.Chat.GetChatMessages.Count">
             <summary>
             Сколько нужно взять сообщений

@@ -65,6 +65,7 @@ namespace Ecc.Logic
             }
 
             services.AddSingleton<EccPixelUrlProvider>();
+            services.AddSingleton<EmailListExtractor>();
         }
 
         private static void AddMessageHandlers(CrocoApplicationBuilder appBuilder)

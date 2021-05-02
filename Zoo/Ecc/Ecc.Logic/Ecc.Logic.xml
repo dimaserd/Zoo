@@ -417,6 +417,16 @@
             Модель добавления или удаления группы пользователей из рассылки
             </summary>
         </member>
+        <member name="P:Ecc.Logic.Models.Messaging.ChangeUserGroupsInMailDistributionModel.MailDistributionId">
+            <summary>
+            Идентификатор рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.ChangeUserGroupsInMailDistributionModel.UserGroupActions">
+            <summary>
+            Действия с группами пользователей
+            </summary>
+        </member>
         <member name="T:Ecc.Logic.Models.Messaging.GetClientInteractions">
             <summary>
             Получить взаимодействия с клиентом
