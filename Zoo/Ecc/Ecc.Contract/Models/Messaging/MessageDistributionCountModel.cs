@@ -15,8 +15,14 @@
         /// </summary>
         public string Type { get; set; }
 
+        /// <summary>
+        /// Данные
+        /// </summary>
         public string Data { get; set; }
 
+        /// <summary>
+        /// Количество взаимодействий
+        /// </summary>
         public int InteractionsCount { get; set; }
     }
 }

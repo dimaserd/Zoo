@@ -68,67 +68,24 @@
             Текст комментария
             </summary>
         </member>
-        <member name="T:Tms.Logic.Models.DayTaskModel">
+        <member name="T:Tms.Logic.Models.DayTaskCommentModel">
             <summary>
-            Модель задания на день
+            Модель описывающая комментраий к заданию
             </summary>
         </member>
-        <member name="M:Tms.Logic.Models.DayTaskModel.#ctor(Tms.Logic.Models.DayTaskModelWithNoUsersJustIds,Tms.Logic.Models.UserFullNameEmailAndAvatarModel,Tms.Logic.Models.UserFullNameEmailAndAvatarModel)">
+        <member name="P:Tms.Logic.Models.DayTaskCommentModel.Id">
             <summary>
-            Контструктор
-            </summary>
-            <param name="model"></param>
-            <param name="author"></param>
-            <param name="assignee"></param>
-        </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.Id">
-            <summary>
-            Идентификатор
+            Идентифкатор комментария
             </summary>
         </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.TaskDate">
+        <member name="P:Tms.Logic.Models.DayTaskCommentModel.CommentText">
             <summary>
-            Дата задания больше день чем просто дата
+            Текст комментария
             </summary>
         </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.TaskText">
+        <member name="P:Tms.Logic.Models.DayTaskCommentModel.AuthorId">
             <summary>
-            Текст задания
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.TaskTitle">
-            <summary>
-            Название задания
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.FinishDate">
-            <summary>
-            Дата завершения
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.TaskTarget">
-            <summary>
-            Цель Html (Summernote)
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.TaskReview">
-            <summary>
-            Отчет Html (Summernote)
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.TaskComment">
-            <summary>
-            Комментарий Html (Summernote)
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.Author">
-            <summary>
-            Администратор
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.DayTaskModel.AssigneeUser">
-            <summary>
-            Исполнитель
+            Идентифкатор автора
             </summary>
         </member>
         <member name="P:Tms.Logic.Models.DayTaskModelWithNoUsersJustIds.Id">
@@ -219,6 +176,129 @@
         <member name="P:Tms.Logic.Models.DayTaskPayload.TaskComment">
             <summary>
             Комментарий Html (Summernote)
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.DayTaskSimpleModel">
+            <summary>
+            Модель задания на день
+            </summary>
+        </member>
+        <member name="M:Tms.Logic.Models.DayTaskSimpleModel.#ctor(Tms.Logic.Models.DayTaskModelWithNoUsersJustIds,Tms.Logic.Models.UserFullNameEmailAndAvatarModel,Tms.Logic.Models.UserFullNameEmailAndAvatarModel)">
+            <summary>
+            Контструктор
+            </summary>
+            <param name="model"></param>
+            <param name="author"></param>
+            <param name="assignee"></param>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.TaskDate">
+            <summary>
+            Дата задания больше день чем просто дата
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.TaskText">
+            <summary>
+            Текст задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.TaskTitle">
+            <summary>
+            Название задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.FinishDate">
+            <summary>
+            Дата завершения
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.TaskTarget">
+            <summary>
+            Цель Html
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.TaskReview">
+            <summary>
+            Отчет Html
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.TaskComment">
+            <summary>
+            Комментарий Html
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.Author">
+            <summary>
+            Администратор
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskSimpleModel.AssigneeUser">
+            <summary>
+            Исполнитель
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.DayTaskWithCommentsModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.TaskDate">
+            <summary>
+            Дата задания больше день чем просто дата
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.TaskText">
+            <summary>
+            Текст задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.TaskTitle">
+            <summary>
+            Название задания
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.FinishDate">
+            <summary>
+            Дата завершения
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.TaskTarget">
+            <summary>
+            Цель Html
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.TaskReview">
+            <summary>
+            Отчет Html
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.TaskComment">
+            <summary>
+            Комментарий Html
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.AuthorId">
+            <summary>
+            Администратор
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.AssigneeUserId">
+            <summary>
+            Исполнитель
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.DayTaskWithCommentsModel.Comments">
+            <summary>
+            Комментарии
             </summary>
         </member>
         <member name="T:Tms.Logic.Models.UpdateDayTask">
@@ -564,7 +644,7 @@
         </member>
         <member name="M:Tms.Logic.Services.DayTasksService.GetDayTaskByIdAsync(System.String)">
             <summary>
-            Получить задание по идентификатору
+            Получить задание с подгруженными комментариями
             </summary>
             <param name="id"></param>
             <returns></returns>

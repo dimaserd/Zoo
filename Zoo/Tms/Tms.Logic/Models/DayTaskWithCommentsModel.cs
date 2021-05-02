@@ -2,6 +2,9 @@
 
 namespace Tms.Logic.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DayTaskWithCommentsModel
     {
         /// <summary>
@@ -53,5 +56,10 @@ namespace Tms.Logic.Models
         /// Исполнитель
         /// </summary>
         public string AssigneeUserId { get; set; }
+
+        /// <summary>
+        /// Комментарии
+        /// </summary>
+        public DayTaskCommentModel[] Comments { get; set; }
     }
 }

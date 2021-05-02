@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Croco.Core.Contract" Version="1.0.14" />
+    <PackageReference Include="Croco.Core.Contract" Version="1.0.15" />
   </ItemGroup>
 
   <ItemGroup>

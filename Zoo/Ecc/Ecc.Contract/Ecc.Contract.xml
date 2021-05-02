@@ -117,6 +117,11 @@
             Идентификатор отправителя сообщения
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.Chat.ChatModel">
+            <summary>
+            Модель описывающая чат
+            </summary>
+        </member>
         <member name="P:Ecc.Contract.Models.Chat.ChatModel.Id">
             <summary>
             Идентификатор чата
@@ -245,6 +250,16 @@
             Путь к файлу
             </summary>
         </member>
+        <member name="T:Ecc.Contract.Models.EmailGroup.CreateEmailGroup">
+            <summary>
+            Создать группу эмейлов
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailGroup.CreateEmailGroup.Name">
+            <summary>
+            Название группы
+            </summary>
+        </member>
         <member name="T:Ecc.Contract.Models.EmailGroup.EmailGroupModel">
             <summary>
             Группа эмейлов
@@ -263,6 +278,16 @@
         <member name="P:Ecc.Contract.Models.EmailGroup.EmailGroupModel.EmailsCount">
             <summary>
             Количество эмейлов
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.EmailGroup.GetEmailsInGroup">
+            <summary>
+            Получить эмейлы в группе
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailGroup.GetEmailsInGroup.EmailGroupId">
+            <summary>
+            Идентификатор группы
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.EmailGroup.SendMailsForEmailGroup">
@@ -308,6 +333,26 @@
         <member name="P:Ecc.Contract.Models.EmailRedirects.EmailLinkCatchDetailedModel.RedirectsOn">
             <summary>
             Редиректы
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.EmailRedirects.EmailLinkCatchRedirectsCountModel">
+            <summary>
+            Модель описывающая пойманый эмейл в письме
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailRedirects.EmailLinkCatchRedirectsCountModel.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailRedirects.EmailLinkCatchRedirectsCountModel.Url">
+            <summary>
+            Пойманный урл
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailRedirects.EmailLinkCatchRedirectsCountModel.Count">
+            <summary>
+            Количество пойманных перенаправлений
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.Emails.MassSendMail">
@@ -554,6 +599,16 @@
         <member name="P:Ecc.Contract.Models.Messaging.MessageDistributionCountModel.Type">
             <summary>
             Тип рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Messaging.MessageDistributionCountModel.Data">
+            <summary>
+            Данные
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Messaging.MessageDistributionCountModel.InteractionsCount">
+            <summary>
+            Количество взаимодействий
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.Replacing">

@@ -46,7 +46,7 @@ namespace Tms.Logic.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<DayTaskWithCommentsModel[]> GetDayTasksAsync(UserScheduleSearchModel model)
+        public async Task<DayTaskSimpleModel[]> GetDayTasksAsync(UserScheduleSearchModel model)
         {
             if (model == null)
             {
@@ -77,20 +77,36 @@ namespace Tms.Logic.Services
         }
 
         /// <summary>
-        /// Получить задание по идентификатору
+        /// Получить задание с подгруженными комментариями
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<DayTaskWithCommentsModel> GetDayTaskByIdAsync(string id)
+        public Task<DayTaskWithCommentsModel> GetDayTaskByIdAsync(string id)
         {
-            var res = await Query<DayTask>()
-                .Select(SelectExpression)
+            return Query<DayTask>()
+                .Select(x => new DayTaskWithCommentsModel 
+                {
+                    Id = x.Id,
+                    AssigneeUserId = x.AssigneeUserId,
+                    AuthorId = x.AuthorId,
+                    FinishDate = x.FinishDate,
+                    TaskComment = x.TaskComment,
+                    TaskDate = x.TaskDate,
+                    TaskReview = x.TaskReview,
+                    TaskTarget = x.TaskTarget,
+                    TaskText = x.TaskText, 
+                    TaskTitle = x.TaskTitle,
+                    Comments = x.Comments.Select(t => new DayTaskCommentModel
+                    {
+                        Id = t.Id,
+                        CommentText = t.Comment,
+                        AuthorId = t.AuthorId
+                    }).ToArray()
+                })
                 .FirstOrDefaultAsync(x => x.Id == id);
-
-            return await GetDayTask(res);
         }
 
-        
+
         /// <summary>
         /// Создание задания
         /// </summary>
@@ -192,13 +208,6 @@ namespace Tms.Logic.Services
             return await TrySaveChangesAndReturnResultAsync("Задание обновлено");
         }
 
-        private async Task<DayTaskWithCommentsModel> GetDayTask(DayTaskModelWithNoUsersJustIds model)
-        {
-            var users = await UsersStorage.GetUsersDictionary();
-
-            return ToDayTaskModel(users, model);
-        }
-
         private async Task<DayTaskSimpleModel[]> GetDayTasks(List<DayTaskModelWithNoUsersJustIds> model)
         {
             var users = await UsersStorage.GetUsersDictionary();
@@ -208,7 +217,7 @@ namespace Tms.Logic.Services
                 .ToArray();
         }
 
-        private DayTaskSimpleModel ToDayTaskModel(Dictionary<string, UserFullNameEmailAndAvatarModel> users,
+        private static DayTaskSimpleModel ToDayTaskModel(Dictionary<string, UserFullNameEmailAndAvatarModel> users,
             DayTaskModelWithNoUsersJustIds model)
         {
             users.TryGetValue(model.AuthorId, out var author);
@@ -252,7 +261,7 @@ namespace Tms.Logic.Services
         /// <param name="dateNow"></param>
         /// <param name="monthShift"></param>
         /// <returns></returns>
-        private Tuple<DateTime, DateTime> GetDatesTuple(DateTime dateNow, int monthShift)
+        private static Tuple<DateTime, DateTime> GetDatesTuple(DateTime dateNow, int monthShift)
         {
             var date = new DateTime(dateNow.Year, dateNow.Month, 1);
 

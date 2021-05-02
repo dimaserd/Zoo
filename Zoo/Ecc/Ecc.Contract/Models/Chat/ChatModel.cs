@@ -3,6 +3,9 @@ using System.ComponentModel;
 
 namespace Ecc.Contract.Models.Chat
 {
+    /// <summary>
+    /// Модель описывающая чат
+    /// </summary>
     public class ChatModel
     {
         /// <summary>

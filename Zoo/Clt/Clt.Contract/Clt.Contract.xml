@@ -626,9 +626,14 @@
               обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
             </summary>
         </member>
+        <member name="P:Clt.Contract.Resources.ClientResource.ClientAvatarDeleted">
+            <summary>
+              Ищет локализованную строку, похожую на Аватар клиента удалён.
+            </summary>
+        </member>
         <member name="P:Clt.Contract.Resources.ClientResource.ClientAvatarUpdated">
             <summary>
-              Ищет локализованную строку, похожую на Аватар клиента обновлен.
+              Ищет локализованную строку, похожую на Аватар клиента обновлён.
             </summary>
         </member>
         <member name="P:Clt.Contract.Resources.ClientResource.ClientDataRenewed">

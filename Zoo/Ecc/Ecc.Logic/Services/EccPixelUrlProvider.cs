@@ -2,8 +2,15 @@
 
 namespace Ecc.Logic.Services
 {
+    /// <summary>
+    /// Провайдер пикселя для прочитки эмейла
+    /// </summary>
     public class EccPixelUrlProvider
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="settings"></param>
         public EccPixelUrlProvider(EccSettings settings)
         {
             PixelEmalUrlFormat = settings.PixelUrlProviderOptions.PixelEmailUrlFormat;

@@ -15,11 +15,21 @@ using Microsoft.Extensions.Logging;
 
 namespace Ecc.Logic.Services.Emails
 {
+    /// <summary>
+    /// Обертка для отправителей эмейлов
+    /// </summary>
     public class EmailWrapperSender : BaseEccService
     {
         IDbFileManager FileManager { get; }
         IEmailSender EmailSender { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="ambientContextAccessor"></param>
+        /// <param name="application"></param>
+        /// <param name="fileManager"></param>
+        /// <param name="emailSender"></param>
         public EmailWrapperSender(ICrocoAmbientContextAccessor ambientContextAccessor, 
             ICrocoApplication application, IDbFileManager fileManager, IEmailSender emailSender) : base(ambientContextAccessor, application)
         {
@@ -38,6 +48,12 @@ namespace Ecc.Logic.Services.Emails
             return (model, res);
         }
 
+        /// <summary>
+        /// Отправить эмейлы
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="messages"></param>
+        /// <returns></returns>
         public async Task<(TModel, BaseApiResponse)[]> SendEmails<TModel>(IEnumerable<TModel> messages)
             where TModel : ISendEmailModel
         {

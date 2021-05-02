@@ -7,9 +7,8 @@ using Clt.Model;
 using Clt.Model.Entities.Default;
 using Croco.Core.Application;
 using Croco.Core.Application.Registrators;
-using Croco.Core.Logic.EventDescriptor.Services;
+using Croco.Core.IntegrationMessagesDescriptor.Enumerations;
 using Croco.Core.Logic.Files;
-using Croco.Core.Logic.IntegrationMessagesDescriptor.Enumerations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -26,10 +25,8 @@ namespace Clt.Logic
         /// Зарегистрировать клиентскую логику
         /// </summary>
         /// <param name="applicationBuilder"></param>
-        /// <param name="integrationMessagesDescriptorBuilder"></param>
         /// <param name="setupAction"></param>
-        public static void Register(CrocoApplicationBuilder applicationBuilder,
-            IntegrationMessagesDescriptorBuilder integrationMessagesDescriptorBuilder = null, Action<IdentityOptions> setupAction = null)
+        public static void Register(CrocoApplicationBuilder applicationBuilder, Action<IdentityOptions> setupAction = null)
         {
             Check(applicationBuilder);
 
@@ -54,14 +51,11 @@ namespace Clt.Logic
                 .RegisterHealthCheck<CltSettingsHealthCheck>()
                 .RegisterHealthCheck<RootHealthCheck>();
 
-            if(integrationMessagesDescriptorBuilder != null)
-            {
-                integrationMessagesDescriptorBuilder
+            applicationBuilder.IntegrationMessagesDescriptorBuilder
                     .AddMessageDescription<ClientStartedRestoringPasswordEvent>("Выбрасывается в систему, когда клиент начинает процедуру сброса пароля", IntegrationMessageType.Event)
                     .AddMessageDescription<ClientChangedPassword>("Выбрасывыется в систему, когда клиент закончил процедуру изменения пароля", IntegrationMessageType.Event)
                     .AddMessageDescription<ClientDataUpdatedEvent>("Выбрасывается в систему, когда данные клиента обновляются либо администратором либо самим клиентом", IntegrationMessageType.Event)
                     .AddMessageDescription<ClientRegisteredEvent>("Выбрасывается в систему, когда клиент прошёл регистрацию", IntegrationMessageType.Event);
-            }
         }
 
         private static void Check(CrocoApplicationBuilder applicationBuilder)

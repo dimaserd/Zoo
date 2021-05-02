@@ -62,13 +62,12 @@
             Регистратор сервисов для работы логики Ecc
             </summary>
         </member>
-        <member name="M:Ecc.Logic.EccLogicRegistrator.RegisterLogic``1(Croco.Core.Application.CrocoApplicationBuilder,Ecc.Logic.Settings.EccSettings,Croco.Core.Logic.EventDescriptor.Services.IntegrationMessagesDescriptorBuilder)">
+        <member name="M:Ecc.Logic.EccLogicRegistrator.RegisterLogic``1(Croco.Core.Application.CrocoApplicationBuilder,Ecc.Logic.Settings.EccSettings)">
             <summary>
             Зарегистрировать логику
             </summary>
             <param name="appBuilder"></param>
             <param name="settings"></param>
-            <param name="integrationMessagesDescriptorBuilder"></param>
         </member>
         <member name="T:Ecc.Logic.Handlers.AppendEmailsFromFileToGroupMessageHandler">
             <summary>
@@ -177,6 +176,22 @@
             <param name="model"></param>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Models.ApplicationInteractionWithStatus`1">
+            <summary>
+            Модель описываюая взаимодействие с последним статусом
+            </summary>
+            <typeparam name="TInteraction"></typeparam>
+        </member>
+        <member name="P:Ecc.Logic.Models.ApplicationInteractionWithStatus`1.Interaction">
+            <summary>
+            Взаимодействие
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.ApplicationInteractionWithStatus`1.Status">
+            <summary>
+            Статус
+            </summary>
+        </member>
         <member name="T:Ecc.Logic.Models.EccReplacing">
             <summary>
             Модель описывающая текстовую замену
@@ -207,9 +222,34 @@
             Аргументы
             </summary>
         </member>
+        <member name="T:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate">
+            <summary>
+            Создать шаблон эмейла
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate.TemplateType">
+            <summary>
+            Тип шаблона сообщения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate.IsActive">
+            <summary>
+            Флаг активности
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate.CustomEmailType">
+            <summary>
+            Название типа шаблона
+            </summary>
+        </member>
         <member name="P:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate.JsScript">
             <summary>
             Данный джаваскрипт должен описывать две функции GetEmailBody() и GetEmailSubject
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.EmailTemplates.CreateEmailTemplate.IsJsScripted">
+            <summary>
+            Флаг заскриптоанности
             </summary>
         </member>
         <member name="T:Ecc.Logic.Models.EmailTemplates.EditEmailTemplate">
@@ -845,6 +885,17 @@
             <param name="model"></param>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Services.EccPixelUrlProvider">
+            <summary>
+            Провайдер пикселя для прочитки эмейла
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.EccPixelUrlProvider.#ctor(Ecc.Logic.Settings.EccSettings)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="settings"></param>
+        </member>
         <member name="M:Ecc.Logic.Services.EccPixelUrlProvider.GetPixelEmailUrl(System.String)">
             <summary>
             Получить адрес для установки пикселя для определения прочитанности писем
@@ -1125,6 +1176,28 @@
             Отправить email
             </summary>
             <param name="emailModel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Services.Emails.EmailWrapperSender">
+            <summary>
+            Обертка для отправителей эмейлов
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailWrapperSender.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Croco.Core.Logic.Files.Abstractions.IDbFileManager,Ecc.Logic.Abstractions.IEmailSender)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="ambientContextAccessor"></param>
+            <param name="application"></param>
+            <param name="fileManager"></param>
+            <param name="emailSender"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Emails.EmailWrapperSender.SendEmails``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Отправить эмейлы
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="messages"></param>
             <returns></returns>
         </member>
         <member name="T:Ecc.Logic.Services.Emails.UserMailMessageWorker">
