@@ -6,6 +6,7 @@ using Ecc.Model.Entities.IntegratedApps;
 using Ecc.Model.Entities.Interactions;
 using Ecc.Model.Entities.LinkCatch;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Ecc.Model.Contexts
 {
@@ -14,6 +15,14 @@ namespace Ecc.Model.Contexts
     /// </summary>
     public class EccDbContext : DbContext
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="options"></param>
+        public EccDbContext([NotNull] DbContextOptions options) : base(options)
+        {
+        }
+
         /// <summary>
         /// Приложения с интеграциями
         /// </summary>

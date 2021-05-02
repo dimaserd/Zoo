@@ -2,6 +2,9 @@
 
 namespace Ecc.Contract.Models.Chat
 {
+    /// <summary>
+    /// Модель описывающая сообщение в чате
+    /// </summary>
     public class ChatMessageModel
     {
         /// <summary>

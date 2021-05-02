@@ -297,6 +297,21 @@
             Является ли письмо заскриптованным
             </summary>
         </member>
+        <member name="T:Ecc.Logic.Models.IntegratedApps.AddUserAppSetting">
+            <summary>
+            Добавить настройку для пользователя для приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.AddUserAppSetting.AppUId">
+            <summary>
+            Идентификатор приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.IntegratedApps.AddUserAppSetting.UserUidInApp">
+            <summary>
+            Идентификатор пользователя в приложении
+            </summary>
+        </member>
         <member name="T:Ecc.Logic.Models.IntegratedApps.CreateOrEditApplication">
             <summary>
             Модель для создания и редактирования интеграционного приложения
@@ -380,6 +395,21 @@
         <member name="P:Ecc.Logic.Models.IntegratedApps.SendUserNotificationViaApplication.Text">
             <summary>
             Текст уведомления
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Models.Messaging.AddMailDistributionUserGroupRelation">
+            <summary>
+            Добавить группу польщователей к рассылке
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.AddMailDistributionUserGroupRelation.MailDistributionId">
+            <summary>
+            Идентификатор рассылки
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Messaging.AddMailDistributionUserGroupRelation.UserGroupId">
+            <summary>
+            Идентификатор группы пользователей
             </summary>
         </member>
         <member name="T:Ecc.Logic.Models.Messaging.ChangeUserGroupsInMailDistributionModel">
@@ -1654,6 +1684,16 @@
         <member name="P:Ecc.Logic.Settings.EccSettings.ApplicationUrl">
             <summary>
             Адрес приложения
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Settings.EccSettings.FunctionInvokerSettings">
+            <summary>
+            Настройки для редиректа ссылок в письмах
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Settings.EccSettings.PixelUrlProviderOptions">
+            <summary>
+            Опции для создания провайдера пикселя
             </summary>
         </member>
         <member name="T:Ecc.Logic.Settings.PixelUrlProviderOptions">

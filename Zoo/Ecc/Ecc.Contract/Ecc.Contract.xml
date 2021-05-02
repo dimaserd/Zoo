@@ -32,6 +32,21 @@
             Команда для создания пользователя
             </summary>
         </member>
+        <member name="P:Ecc.Contract.Commands.CreateUserCommand.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Commands.CreateUserCommand.Email">
+            <summary>
+            Эмейл
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Commands.CreateUserCommand.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
         <member name="T:Ecc.Contract.Commands.UpdateUserCommand">
             <summary>
             Команда для обновления данных пользователя
@@ -82,24 +97,9 @@
             Идентификатор пользователя
             </summary>
         </member>
-        <member name="P:Ecc.Contract.Models.Chat.ChatIdWithMessage.ChatId">
+        <member name="T:Ecc.Contract.Models.Chat.ChatMessageModel">
             <summary>
-            Идентификатор чата
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Models.Chat.ChatIdWithMessage.Message">
-            <summary>
-            Сообщение
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Models.Chat.ChatIdWithMessages.ChatId">
-            <summary>
-            Идентификатор чата
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Models.Chat.ChatIdWithMessages.Messages">
-            <summary>
-            Сообщения
+            Модель описывающая сообщение в чате
             </summary>
         </member>
         <member name="P:Ecc.Contract.Models.Chat.ChatMessageModel.Message">
@@ -233,6 +233,21 @@
         <member name="P:Ecc.Contract.Models.EccUserModel.PhoneNumber">
             <summary>
             Номер телефона
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.EmailGroup.AddEmailsToEmailGroup">
+            <summary>
+            Добавить эмейлы в группу
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailGroup.AddEmailsToEmailGroup.EmailGroupId">
+            <summary>
+            Идентификатор группы эмейлов
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.EmailGroup.AddEmailsToEmailGroup.Emails">
+            <summary>
+            Эмейлы
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.EmailGroup.AppendEmailsFromFileToGroup">
@@ -774,6 +789,16 @@
         <member name="T:Ecc.Contract.Models.UserGroups.ChangeUsersInUserGroupModel">
             <summary>
             Модель добавления или удаления пользователей из группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserGroups.ChangeUsersInUserGroupModel.GroupId">
+            <summary>
+            Идентификатор группы
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.UserGroups.ChangeUsersInUserGroupModel.UserActions">
+            <summary>
+            Действия с пользователями
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.UserGroups.UserGroupCreate">

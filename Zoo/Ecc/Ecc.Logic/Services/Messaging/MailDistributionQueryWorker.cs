@@ -74,7 +74,7 @@ namespace Ecc.Logic.Services.Messaging
             Status = x.Status
         };
 
-        public static Expression<Func<MailMessageInteraction, MailMessageDetailedModel>> MailMessageDetailedModelSelectExpression = x => new MailMessageDetailedModel
+        internal static Expression<Func<MailMessageInteraction, MailMessageDetailedModel>> MailMessageDetailedModelSelectExpression = x => new MailMessageDetailedModel
         {
             Id = x.Id,
             Body = x.MessageText,

@@ -7,8 +7,14 @@ namespace Ecc.Contract.Models.UserGroups
     /// </summary>
     public class ChangeUsersInUserGroupModel
     {
+        /// <summary>
+        /// Идентификатор группы
+        /// </summary>
         public string GroupId { get; set; }
 
+        /// <summary>
+        /// Действия с пользователями
+        /// </summary>
         public List<UserInGroupAddOrDelete> UserActions { get; set; }
     }
 }

@@ -7,8 +7,14 @@ namespace Ecc.Logic.Models.Messaging
     /// </summary>
     public class ChangeUserGroupsInMailDistributionModel
     {
+        /// <summary>
+        /// Идентификатор рассылки
+        /// </summary>
         public string MailDistributionId { get; set; }
 
+        /// <summary>
+        /// Действия с группами пользователей
+        /// </summary>
         public List<UserGroupIMailDistributionAddOrDelete> UserGroupActions { get; set; }
     }
 }

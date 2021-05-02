@@ -29,6 +29,12 @@
             Контекст для рассылок
             </summary>
         </member>
+        <member name="M:Ecc.Model.Contexts.EccDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="options"></param>
+        </member>
         <member name="P:Ecc.Model.Contexts.EccDbContext.IntegratedApps">
             <summary>
             Приложения с интеграциями
