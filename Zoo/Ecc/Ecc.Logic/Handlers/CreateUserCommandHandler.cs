@@ -34,7 +34,7 @@ namespace Ecc.Logic.Handlers
         /// <returns></returns>
         public override Task HandleMessage(CreateUserCommand model)
         {
-            return UserService.CreateUser(model);
+            return UserService.CreateUserInner(model.UserData);
         }
     }
 }

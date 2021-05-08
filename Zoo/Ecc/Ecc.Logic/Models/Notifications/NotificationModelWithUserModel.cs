@@ -1,4 +1,4 @@
-﻿using Ecc.Contract.Models;
+﻿using Ecc.Contract.Models.Users;
 using Ecc.Model.Entities.Interactions;
 using System;
 using System.Linq.Expressions;

@@ -62,7 +62,7 @@
             Регистратор сервисов для работы логики Ecc
             </summary>
         </member>
-        <member name="M:Ecc.Logic.EccLogicRegistrator.RegisterLogic``1(Croco.Core.Application.CrocoApplicationBuilder,Ecc.Logic.Settings.EccSettings)">
+        <member name="M:Ecc.Logic.EccLogicRegistrator.RegisterLogic(Croco.Core.Application.CrocoApplicationBuilder,Ecc.Logic.Settings.EccSettings)">
             <summary>
             Зарегистрировать логику
             </summary>
@@ -175,6 +175,55 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="T:Ecc.Logic.Integrations.ClientDataUpdatedEventHandler">
+            <summary>
+            Обработчик события зарегистрированного пользователя
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Integrations.ClientDataUpdatedEventHandler.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Integrations.ClientRegisteredEventHandler},Ecc.Logic.Services.Users.UserService)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="application"></param>
+            <param name="logger"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Ecc.Logic.Integrations.ClientDataUpdatedEventHandler.HandleMessage(Clt.Contract.Events.ClientDataUpdatedEvent)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Ecc.Logic.Integrations.ClientRegisteredEventHandler">
+            <summary>
+            Обработчик события зарегистрированного пользователя
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Integrations.ClientRegisteredEventHandler.#ctor(Croco.Core.Contract.Application.ICrocoApplication,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Integrations.ClientRegisteredEventHandler},Ecc.Logic.Services.Users.UserService)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="application"></param>
+            <param name="logger"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Ecc.Logic.Integrations.ClientRegisteredEventHandler.HandleMessage(Clt.Contract.Events.ClientRegisteredEvent)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Ecc.Logic.Integrations.CltUserMasterStorage">
+            <summary>
+            Имплементация клиенсткого хранилища
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Integrations.CltUserMasterStorage.#ctor(Clt.Model.CltDbContext)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="cltDbContext"></param>
+        </member>
+        <member name="M:Ecc.Logic.Integrations.CltUserMasterStorage.GetUserById(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Ecc.Logic.Integrations.CltUserMasterStorage.GetUsers(Croco.Core.Contract.Models.Search.GetListSearchModel)">
+            <inheritdoc />
         </member>
         <member name="T:Ecc.Logic.Models.ApplicationInteractionWithStatus`1">
             <summary>
@@ -1597,24 +1646,42 @@
             <param name="phoneNumber"></param>
             <returns></returns>
         </member>
-        <member name="T:Ecc.Logic.Services.Messaging.UserNotificationsWorker">
+        <member name="T:Ecc.Logic.Services.Messaging.UserNotificationsQueryService">
             <summary>
-            Сервис для работы с системными уведомлениями
+            Сервис для поиска уведомлений внутри приложения
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.GetUserNotificationsIncludingUsersAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsQueryService.GetUserNotificationsIncludingUsersAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
             <summary>
             Получить список уведомлений с пользователями
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.GetUserNotificationsAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsQueryService.GetUserNotificationsAsync(Ecc.Logic.Models.Notifications.NotificationSearchQueryModel)">
             <summary>
             Получить список уведомлений без пользователей
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsQueryService.GetLastClientUnReadNotificationAsync">
+            <summary>
+            Получить последнее непрочитанное уведомление
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsQueryService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="T:Ecc.Logic.Services.Messaging.UserNotificationsWorker">
+            <summary>
+            Сервис для работы с системными уведомлениями
+            </summary>
         </member>
         <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.RemoveNotificationAsync(System.String)">
             <summary>
@@ -1628,12 +1695,6 @@
             Создать уведомление
             </summary>
             <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.GetLastUnReadNotificationAsync">
-            <summary>
-            Получить последнее непрочитанное уведомление
-            </summary>
             <returns></returns>
         </member>
         <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.MarkNotificationAsReadAsync(System.String)">
@@ -1655,23 +1716,38 @@
             Сервис для работы с пользователями
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Services.Users.UserService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+        <member name="M:Ecc.Logic.Services.Users.UserService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Contract.Abstractions.IUserMasterStorage)">
             <summary>
             Конструктор
             </summary>
             <param name="context"></param>
             <param name="application"></param>
+            <param name="userMasterStorage"></param>
         </member>
-        <member name="M:Ecc.Logic.Services.Users.UserService.CreateUser(Ecc.Contract.Commands.CreateUserCommand)">
+        <member name="M:Ecc.Logic.Services.Users.UserService.CreateUser(System.String)">
             <summary>
             Создать пользователя
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Users.UserService.UpdateUser(System.String)">
+            <summary>
+            Обновить пользователя
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Users.UserService.CreateUserInner(Ecc.Contract.Models.Users.EccUserModel)">
+            <summary>
+            Создать пользователя внутренний метод
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Services.Users.UserService.UpdateUser(Ecc.Contract.Commands.UpdateUserCommand)">
+        <member name="M:Ecc.Logic.Services.Users.UserService.UpdateUserInner(Ecc.Contract.Models.Users.EccUserModel)">
             <summary>
-            Обновить пользователя
+            Обновить пользователя внутренний метод
             </summary>
             <param name="model"></param>
             <returns></returns>

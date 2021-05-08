@@ -100,7 +100,7 @@ namespace Clt.Logic.Services.Users
         }
 
 
-        internal IEnumerable<SearchQueryCriteria<Client>> GetCriterias(ClientSearch model)
+        internal static IEnumerable<SearchQueryCriteria<Client>> GetCriterias(ClientSearch model)
         {
             yield return model.Q.MapString(str => new SearchQueryCriteria<Client>(x => x.Email.Contains(str) || x.PhoneNumber.Contains(str) || x.Name.Contains(str)));
 

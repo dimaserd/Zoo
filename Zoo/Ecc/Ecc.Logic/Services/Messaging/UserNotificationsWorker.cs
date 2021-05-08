@@ -16,9 +16,9 @@ using System;
 namespace Ecc.Logic.Services.Messaging
 {
     /// <summary>
-    /// Сервис для работы с системными уведомлениями
+    /// Сервис для поиска уведомлений внутри приложения
     /// </summary>
-    public class UserNotificationsWorker : BaseEccService
+    public class UserNotificationsQueryService : BaseEccService
     {
         IOrderedQueryable<UserNotificationInteraction> GetFilteredQuery(NotificationSearchQueryModel model)
         {
@@ -47,6 +47,44 @@ namespace Ecc.Logic.Services.Messaging
             return EFCoreExtensions.GetAsync(model, GetFilteredQuery(model), NotificationModelSelectExpression);
         }
 
+        /// <summary>
+        /// Получить последнее непрочитанное уведомление
+        /// </summary>
+        /// <returns></returns>
+        public Task<NotificationModel> GetLastClientUnReadNotificationAsync()
+        {
+            return Query<UserNotificationInteraction>().Where(x => !x.ReadOn.HasValue)
+                .Select(NotificationModelSelectExpression)
+                .FirstOrDefaultAsync(x => x.UserId == UserId);
+        }
+
+        internal static Expression<Func<UserNotificationInteraction, NotificationModel>> NotificationModelSelectExpression = x => new NotificationModel
+        {
+            Title = x.TitleText,
+            CreatedOn = x.CreatedOn,
+            ReadOn = x.ReadOn,
+            Id = x.Id,
+            ObjectJson = x.ObjectJson,
+            Text = x.TitleText,
+            Type = x.NotificationType,
+            UserId = x.UserId
+        };
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="application"></param>
+        public UserNotificationsQueryService(ICrocoAmbientContextAccessor context, ICrocoApplication application) : base(context, application)
+        {
+        }
+    }
+
+    /// <summary>
+    /// Сервис для работы с системными уведомлениями
+    /// </summary>
+    public class UserNotificationsWorker : BaseEccService
+    {
         /// <summary>
         /// Удалить уведомление
         /// </summary>
@@ -111,17 +149,6 @@ namespace Ecc.Logic.Services.Messaging
         }
 
         /// <summary>
-        /// Получить последнее непрочитанное уведомление
-        /// </summary>
-        /// <returns></returns>
-        public Task<NotificationModel> GetLastUnReadNotificationAsync()
-        {
-            return Query<UserNotificationInteraction>().Where(x => !x.ReadOn.HasValue)
-                .Select(NotificationModelSelectExpression)
-                .FirstOrDefaultAsync(x => x.UserId == UserId);
-        }
-
-        /// <summary>
         /// Пометить уведомление как прочитанное
         /// </summary>
         /// <param name="id"></param>
@@ -148,18 +175,6 @@ namespace Ecc.Logic.Services.Messaging
 
             return await TrySaveChangesAndReturnResultAsync("Уведомление помечено как прочитанное");
         }
-
-        internal static Expression<Func<UserNotificationInteraction, NotificationModel>> NotificationModelSelectExpression = x => new NotificationModel
-        {
-            Title = x.TitleText,
-            CreatedOn = x.CreatedOn,
-            ReadOn = x.ReadOn,
-            Id = x.Id,
-            ObjectJson = x.ObjectJson,
-            Text = x.TitleText,
-            Type = x.NotificationType,
-            UserId = x.UserId
-        };
 
         /// <summary>
         /// Конструктор

@@ -1,4 +1,6 @@
-﻿namespace Ecc.Contract.Commands
+﻿using Ecc.Contract.Models.Users;
+
+namespace Ecc.Contract.Commands
 {
     /// <summary>
     /// Команда для создания пользователя
@@ -6,18 +8,8 @@
     public class CreateUserCommand
     {
         /// <summary>
-        /// Идентификатор пользователя
+        /// Данные пользователя
         /// </summary>
-        public string UserId { get; set; }
-
-        /// <summary>
-        /// Эмейл
-        /// </summary>
-        public string Email { get; set; }
-        
-        /// <summary>
-        /// Номер телефона
-        /// </summary>
-        public string PhoneNumber { get; set; }
+        public EccUserModel UserData { get; set; }
     }
 }

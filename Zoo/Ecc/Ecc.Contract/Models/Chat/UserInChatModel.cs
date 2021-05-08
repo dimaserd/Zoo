@@ -1,4 +1,6 @@
-﻿namespace Ecc.Contract.Models.Chat
+﻿using Ecc.Contract.Models.Users;
+
+namespace Ecc.Contract.Models.Chat
 {
     /// <summary>
     /// Модель описывающая пользователя в чате

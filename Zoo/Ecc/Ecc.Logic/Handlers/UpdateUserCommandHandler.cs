@@ -35,7 +35,7 @@ namespace Ecc.Logic.Handlers
         /// <returns></returns>
         public override Task HandleMessage(UpdateUserCommand model)
         {
-            return UserService.UpdateUser(model);
+            return UserService.UpdateUserInner(model.UserData);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Ecc.Contract.Models
+﻿namespace Ecc.Contract.Models.Users
 {
     /// <summary>
     /// Идентификатор с эмейлом

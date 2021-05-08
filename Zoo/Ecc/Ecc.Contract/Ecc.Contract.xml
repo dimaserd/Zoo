@@ -27,24 +27,21 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
+        <member name="M:Ecc.Contract.Abstractions.IUserMasterStorage.GetUsers(Croco.Core.Contract.Models.Search.GetListSearchModel)">
+            <summary>
+            Получить список пользователей
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Contract.Commands.CreateUserCommand">
             <summary>
             Команда для создания пользователя
             </summary>
         </member>
-        <member name="P:Ecc.Contract.Commands.CreateUserCommand.UserId">
+        <member name="P:Ecc.Contract.Commands.CreateUserCommand.UserData">
             <summary>
-            Идентификатор пользователя
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Commands.CreateUserCommand.Email">
-            <summary>
-            Эмейл
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Commands.CreateUserCommand.PhoneNumber">
-            <summary>
-            Номер телефона
+            Данные пользователя
             </summary>
         </member>
         <member name="T:Ecc.Contract.Commands.UpdateUserCommand">
@@ -52,19 +49,9 @@
             Команда для обновления данных пользователя
             </summary>
         </member>
-        <member name="P:Ecc.Contract.Commands.UpdateUserCommand.UserId">
+        <member name="P:Ecc.Contract.Commands.UpdateUserCommand.UserData">
             <summary>
-            Идентификатор пользователя
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Commands.UpdateUserCommand.Email">
-            <summary>
-            Адрес электоронной почты
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Commands.UpdateUserCommand.PhoneNumber">
-            <summary>
-            Номер телефона
+            Данные пользователя
             </summary>
         </member>
         <member name="T:Ecc.Contract.Events.Chat.ChatCreatedEvent">
@@ -218,26 +205,6 @@
         <member name="P:Ecc.Contract.Models.Chat.UserInChatModel.LastVisitUtcTicks">
             <summary>
             Дата последнего посещения
-            </summary>
-        </member>
-        <member name="T:Ecc.Contract.Models.EccUserModel">
-            <summary>
-            Модель описывающая пользвателя в контексте рассылок
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Models.EccUserModel.Id">
-            <summary>
-            Идентификатор пользователя
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Models.EccUserModel.Email">
-            <summary>
-            Адрес электронной почты
-            </summary>
-        </member>
-        <member name="P:Ecc.Contract.Models.EccUserModel.PhoneNumber">
-            <summary>
-            Номер телефона
             </summary>
         </member>
         <member name="T:Ecc.Contract.Models.EmailGroup.AddEmailsToEmailGroup">
@@ -871,17 +838,37 @@
             Идентификатор группы
             </summary>
         </member>
-        <member name="T:Ecc.Contract.Models.UserIdAndEmailModel">
+        <member name="T:Ecc.Contract.Models.Users.EccUserModel">
             <summary>
-            Идентификатор с эмейлом
+            Модель описывающая пользвателя в контексте рассылок
             </summary>
         </member>
-        <member name="P:Ecc.Contract.Models.UserIdAndEmailModel.Id">
+        <member name="P:Ecc.Contract.Models.Users.EccUserModel.Id">
             <summary>
             Идентификатор пользователя
             </summary>
         </member>
-        <member name="P:Ecc.Contract.Models.UserIdAndEmailModel.Email">
+        <member name="P:Ecc.Contract.Models.Users.EccUserModel.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Users.EccUserModel.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="T:Ecc.Contract.Models.Users.UserIdAndEmailModel">
+            <summary>
+            Идентификатор с эмейлом
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Users.UserIdAndEmailModel.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Ecc.Contract.Models.Users.UserIdAndEmailModel.Email">
             <summary>
             Адрес электронной почты
             </summary>

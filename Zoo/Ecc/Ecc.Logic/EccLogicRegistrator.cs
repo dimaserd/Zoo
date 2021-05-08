@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using Ecc.Contract.Events.Chat;
 using Croco.Core.IntegrationMessagesDescriptor.Enumerations;
+using Ecc.Logic.Integrations;
+using Clt.Contract.Events;
 
 namespace Ecc.Logic
 {
@@ -29,13 +31,12 @@ namespace Ecc.Logic
         /// </summary>
         /// <param name="appBuilder"></param>
         /// <param name="settings"></param>
-        public static void RegisterLogic<TUserStorage>(CrocoApplicationBuilder appBuilder, EccSettings settings)
-            where TUserStorage : class, IUserMasterStorage
+        public static void RegisterLogic(CrocoApplicationBuilder appBuilder, EccSettings settings)
         {
             Check(appBuilder);
 
             var services = appBuilder.Services;
-            RegisterServices<TUserStorage>(services, settings);
+            RegisterServices<CltUserMasterStorage>(services, settings);
 
             RegisterEccWorkerTypes(services);
             AddMessageHandlers(appBuilder);
@@ -77,6 +78,8 @@ namespace Ecc.Logic
                 .AddMessageHandler<UpdateUserCommand, UpdateUserCommandHandler>()
                 .AddMessageHandler<AppendEmailsFromFileToGroup, AppendEmailsFromFileToGroupMessageHandler>()
                 .AddMessageHandler<SendMailsForEmailGroup, SendMailsForEmailGroupMessageHandler>()
+                .AddMessageHandler<ClientRegisteredEvent, ClientRegisteredEventHandler>(true)
+                .AddMessageHandler<ClientDataUpdatedEvent, ClientDataUpdatedEventHandler>(true)
                 .AddMessageHandler<FilesUploadedEvent, FilesUploadedEventHandler>(true);
         }
 

@@ -182,7 +182,7 @@ namespace Ecc.Logic.Services.Chat
                 Users = x.UserRelations.Select(t => new UserInChatModel
                 {
                     LastVisitUtcTicks = t.LastVisitUtcTicks,
-                    User = new Contract.Models.UserIdAndEmailModel
+                    User = new Contract.Models.Users.UserIdAndEmailModel
                     {
                         Id = t.UserId,
                         Email = t.User.Email
