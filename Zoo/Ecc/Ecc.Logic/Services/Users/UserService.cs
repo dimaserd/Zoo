@@ -3,6 +3,7 @@ using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Ecc.Contract.Abstractions;
 using Ecc.Contract.Models.Users;
+using Ecc.Logic.Resources;
 using Ecc.Logic.Services.Base;
 using Ecc.Model.Entities.External;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +41,7 @@ namespace Ecc.Logic.Services.Users
 
             if(user == null)
             {
-                return new BaseApiResponse(false, "Пользователь не найден в мастер-хранилище по указанному идентификатору");
+                return new BaseApiResponse(false, UserResources.UserNotFoundInMasterStorage);
             }
 
             return await CreateUserInner(user);
@@ -57,10 +58,41 @@ namespace Ecc.Logic.Services.Users
 
             if (user == null)
             {
-                return new BaseApiResponse(false, "Пользователь не найден в мастер-хранилище по указанному идентификатору");
+                return new BaseApiResponse(false, UserResources.UserNotFoundInMasterStorage);
             }
 
             return await UpdateUserInner(user);
+        }
+
+        /// <summary>
+        /// Создать или обновить пользователя
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<BaseApiResponse> CreateOrUpdateUser(EccUserModel model)
+        {
+            var repo = GetRepository<EccUser>();
+
+            var user = await repo.Query().FirstOrDefaultAsync(x => x.Id == model.Id);
+
+            if(user == null)
+            {
+                repo.CreateHandled(new EccUser
+                {
+                    Id = model.Id,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber
+                });
+
+                return await TrySaveChangesAndReturnResultAsync(UserResources.UserCreatedSuccessfully);
+            }
+
+            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+
+            repo.UpdateHandled(user);
+
+            return await TrySaveChangesAndReturnResultAsync(UserResources.UserUpdatedSuccessfully);
         }
 
         /// <summary>
@@ -74,7 +106,7 @@ namespace Ecc.Logic.Services.Users
 
             if(await repo.Query().AnyAsync(x => x.Id == model.Id))
             {
-                return new BaseApiResponse(false, "Пользователь с таким идентификатором уже существует");
+                return new BaseApiResponse(false, UserResources.UserWithIdAlreadyExists);
             }
 
             repo.CreateHandled(new EccUser
@@ -84,7 +116,7 @@ namespace Ecc.Logic.Services.Users
                 PhoneNumber = model.PhoneNumber
             });
 
-            return await TrySaveChangesAndReturnResultAsync("Пользователь успешно добавлен");
+            return await TrySaveChangesAndReturnResultAsync(UserResources.UserCreatedSuccessfully);
         }
 
         /// <summary>
@@ -100,7 +132,7 @@ namespace Ecc.Logic.Services.Users
 
             if (user == null)
             {
-                return new BaseApiResponse(false, "Пользователь не найден с таким идентификатором");
+                return new BaseApiResponse(false, UserResources.UserNotFoundById);
             }
 
             user.Email = model.Email;
@@ -108,7 +140,7 @@ namespace Ecc.Logic.Services.Users
 
             repo.UpdateHandled(user);
 
-            return await TrySaveChangesAndReturnResultAsync("Пользователь успешно добавлен");
+            return await TrySaveChangesAndReturnResultAsync(UserResources.UserUpdatedSuccessfully);
         }
     }
 }

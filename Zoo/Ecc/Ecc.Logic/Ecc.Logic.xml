@@ -763,6 +763,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Models.Users.UserExportResult">
+            <summary>
+            Модель описывающая результат экспортирования пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserExportResult.UsersExported">
+            <summary>
+            Экспортировано пользователей
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Models.Users.UserExportResult.TotalUsers">
+            <summary>
+            Всего пользователей в хранилище
+            </summary>
+        </member>
         <member name="T:Ecc.Logic.Models.Users.UserGroupModelWithUsers">
             <summary>
             Группа пользователей
@@ -861,6 +876,47 @@
         <member name="P:Ecc.Logic.Models.Users.UserMailMessageModel.User">
             <summary>
             Получатель
+            </summary>
+        </member>
+        <member name="T:Ecc.Logic.Resources.UserResources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.UserResources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.UserResources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.UserResources.UserCreatedSuccessfully">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь успешно добавлен.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.UserResources.UserNotFoundById">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь не найден с таким идентификатором.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.UserResources.UserNotFoundInMasterStorage">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь не найден в мастер-хранилище по указанному идентификатору.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.UserResources.UserUpdatedSuccessfully">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь успешно обновлен.
+            </summary>
+        </member>
+        <member name="P:Ecc.Logic.Resources.UserResources.UserWithIdAlreadyExists">
+            <summary>
+              Ищет локализованную строку, похожую на Пользователь с таким идентификатором уже существует.
             </summary>
         </member>
         <member name="T:Ecc.Logic.Resources.ValidationMessages">
@@ -1711,6 +1767,27 @@
             <param name="ambientContext"></param>
             <param name="application"></param>
         </member>
+        <member name="T:Ecc.Logic.Services.Users.UserFixService">
+            <summary>
+            Сервис для проверки пользователей из мастер-хранилища
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Services.Users.UserFixService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Contract.Abstractions.IUserMasterStorage,Ecc.Logic.Services.Users.UserService)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+            <param name="userMasterStorage"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Ecc.Logic.Services.Users.UserFixService.ExportUsers(System.Int32)">
+            <summary>
+            Экспортировать пользователей
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Logic.Services.Users.UserService">
             <summary>
             Сервис для работы с пользователями
@@ -1736,6 +1813,13 @@
             Обновить пользователя
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ecc.Logic.Services.Users.UserService.CreateOrUpdateUser(Ecc.Contract.Models.Users.EccUserModel)">
+            <summary>
+            Создать или обновить пользователя
+            </summary>
+            <param name="model"></param>
             <returns></returns>
         </member>
         <member name="M:Ecc.Logic.Services.Users.UserService.CreateUserInner(Ecc.Contract.Models.Users.EccUserModel)">
