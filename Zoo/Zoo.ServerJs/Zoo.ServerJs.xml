@@ -1198,11 +1198,12 @@
             <param name="jsWorker"></param>
             <returns></returns>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.Build(System.Action{Jint.Engine})">
+        <member name="M:Zoo.ServerJs.Services.JsExecutorBuilder.Build(System.Action{Jint.Engine},System.Action{System.IServiceProvider})">
             <summary>
             Зарегистрировать класс <see cref="T:Zoo.ServerJs.Services.JsExecutor"/> в контейнере зависимостей
             </summary>
-            <param name="action"></param>
+            <param name="engineAction"></param>
+            <param name="scopedServiceProviderAction"></param>
         </member>
         <member name="T:Zoo.ServerJs.Services.JsExecutorProperties">
             <summary>
@@ -1212,6 +1213,11 @@
         <member name="P:Zoo.ServerJs.Services.JsExecutorProperties.EngineAction">
             <summary>
             Действие над движком
+            </summary>
+        </member>
+        <member name="P:Zoo.ServerJs.Services.JsExecutorProperties.ScopedServiceProviderAction">
+            <summary>
+            Действие над провадйером сервисов
             </summary>
         </member>
         <member name="P:Zoo.ServerJs.Services.JsExecutorProperties.JsWorkers">

@@ -17,6 +17,11 @@ namespace Zoo.ServerJs.Services
         public Action<Engine> EngineAction { get; set; }
 
         /// <summary>
+        /// Действие над провадйером сервисов
+        /// </summary>
+        public Action<IServiceProvider> ScopedServiceProviderAction { get; set; }
+
+        /// <summary>
         /// Список обработчиков
         /// </summary>
         public Dictionary<string, JsWorkerDocumentation> JsWorkers { get; set; } = new Dictionary<string, JsWorkerDocumentation>();

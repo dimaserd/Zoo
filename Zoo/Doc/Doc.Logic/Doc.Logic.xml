@@ -15,6 +15,146 @@
             </summary>
             <param name="services"></param>
         </member>
+        <member name="T:Doc.Logic.Excel.Extensions.ExcelExtensions">
+            <summary>
+            Расширения для Экселя
+            </summary>
+        </member>
+        <member name="M:Doc.Logic.Excel.Extensions.ExcelExtensions.ToDictionaryList(System.Data.DataTable)">
+            <summary>
+            Привести DataTable к листу из словарей, где словарь это один из объектов
+            </summary>
+            <param name="dataTable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Doc.Logic.Excel.Extensions.ExcelExtensions.GetMyPropertyDescriptions(System.Type)">
+            <summary>
+            Получить описание для типа
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Doc.Logic.Excel.Extensions.ExcelExtensions.ToDataTable``1(System.Collections.Generic.IList{``0},System.String,System.Boolean)">
+            <summary>
+            Перевести список данных к DataTable
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="tableName"></param>
+            <param name="displayFromAttr"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Doc.Logic.Excel.Extensions.ObjectExtensions">
+            <summary>
+            Расширения для работы с объектами
+            </summary>
+        </member>
+        <member name="M:Doc.Logic.Excel.Extensions.ObjectExtensions.ToObject``1(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Привести словарь к объекту
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Doc.Logic.Excel.Extensions.ObjectExtensions.AsDictionary(System.Object,System.Reflection.BindingFlags)">
+            <summary>
+            Приветсти объект к словарю
+            </summary>
+            <param name="source"></param>
+            <param name="bindingAttr"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Doc.Logic.Excel.Models.MyPropertyDescription">
+            <summary>
+            Описание свойства объекта
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Excel.Models.MyPropertyDescription.PropertyName">
+            <summary>
+            Название свойства
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Excel.Models.MyPropertyDescription.DisplayName">
+            <summary>
+            Свойство для показа
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Excel.Models.MyPropertyDescription.Type">
+            <summary>
+            Тип данных
+            </summary>
+        </member>
+        <member name="T:Doc.Logic.Excel.Resources.MainResource">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Excel.Resources.MainResource.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Excel.Resources.MainResource.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Excel.Resources.MainResource.Truth">
+            <summary>
+              Ищет локализованную строку, похожую на true.
+            </summary>
+        </member>
+        <member name="P:Doc.Logic.Excel.Resources.MainResource.Yes">
+            <summary>
+              Ищет локализованную строку, похожую на Да.
+            </summary>
+        </member>
+        <member name="T:Doc.Logic.Excel.Services.ExcelService">
+            <summary>
+            Сервис для работы с Excel
+            </summary>
+        </member>
+        <member name="M:Doc.Logic.Excel.Services.ExcelService.ExcelToList``1(System.String)">
+            <summary>
+            Перекладывает первый лист из таблицы Excel
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="excelFilePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Doc.Logic.Excel.Services.ExcelService.SaveListToExcel``1(System.Collections.Generic.IList{``0},System.String,System.String,System.Boolean)">
+            <summary>
+            Сохранить лист из объектов в файл Excel
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="filePath"></param>
+            <param name="tableName"></param>
+            <param name="fromDisplayAttr"></param>
+        </member>
+        <member name="M:Doc.Logic.Excel.Services.ExcelService.SaveDataTableToExcel(System.Data.DataTable,System.String)">
+            <summary>
+            Сохранить DataTable в файл Excel
+            </summary>
+            <param name="dt"></param>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:Doc.Logic.Excel.Services.ExcelService.SaveDataSetToExcel(System.Data.DataSet,System.String)">
+            <summary>
+            Сохранить датасет в файл эксель
+            </summary>
+            <param name="ds"></param>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:Doc.Logic.Excel.Services.ExcelService.ExcelToDataTable(System.String)">
+            <summary>
+            Прочитать файл по пути и перевести его в DataTable
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
         <member name="T:Doc.Logic.Word.Abstractions.IWordProccessorEngine">
             <summary>
             Процессор документов с раширеним docxs

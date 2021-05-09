@@ -184,12 +184,14 @@ namespace Zoo.ServerJs.Services
         /// <summary>
         /// Зарегистрировать класс <see cref="JsExecutor"/> в контейнере зависимостей
         /// </summary>
-        /// <param name="action"></param>
-        public void Build(Action<Engine> action = null)
+        /// <param name="engineAction"></param>
+        /// <param name="scopedServiceProviderAction"></param>
+        public void Build(Action<Engine> engineAction = null, Action<IServiceProvider> scopedServiceProviderAction = null)
         {
             ServiceCollection.AddSingleton(new JsExecutorProperties
             {
-                EngineAction = action,
+                EngineAction = engineAction,
+                ScopedServiceProviderAction = scopedServiceProviderAction,
                 ExternalComponents = _components,
                 JsWorkers = _jsWorkers,
                 RemoteApis = _remoteApis

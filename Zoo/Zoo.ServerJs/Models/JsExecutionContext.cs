@@ -35,9 +35,13 @@ namespace Zoo.ServerJs.Models
 
         internal JsExecutionContext(JsExecutorComponents components, 
             IServiceScope serviceScope,
-            Action<Engine> engineAction)
+            Action<Engine> engineAction,
+            Action<IServiceProvider> scopedServiceProviderAction)
         {
-            JsCallWorker = new HandleJsCallWorker(components, serviceScope.ServiceProvider, this);
+            var serviceProvider = serviceScope.ServiceProvider;
+            scopedServiceProviderAction?.Invoke(serviceProvider);
+
+            JsCallWorker = new HandleJsCallWorker(components, serviceProvider, this);
             Components = components;
             ServiceScope = serviceScope;
             EngineAction = engineAction;

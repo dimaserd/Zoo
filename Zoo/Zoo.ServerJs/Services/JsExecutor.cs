@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +27,7 @@ namespace Zoo.ServerJs.Services
         JsExecutorComponents Components { get; }
 
         Action<Engine> EngineAction { get; }
+        Action<IServiceProvider> ScopedServiceProviderAction { get; }
 
 
         /// <summary>
@@ -50,6 +50,7 @@ namespace Zoo.ServerJs.Services
                 HttpClient = httpClient
             };
 
+            ScopedServiceProviderAction = properties.ScopedServiceProviderAction;
             EngineAction = properties.EngineAction;
             ServiceProvider = serviceProvider;
             Storage = storage;
@@ -287,7 +288,7 @@ namespace Zoo.ServerJs.Services
 
         private JsExecutionContext GetContext()
         {
-            return new JsExecutionContext(Components, ServiceProvider.CreateScope(), EngineAction);
+            return new JsExecutionContext(Components, ServiceProvider.CreateScope(), EngineAction, ScopedServiceProviderAction);
         }
         #endregion
     }
