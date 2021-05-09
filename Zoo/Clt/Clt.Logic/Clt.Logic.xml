@@ -439,6 +439,34 @@
             <param name="checkUserWhoEdits"></param>
             <returns></returns>
         </member>
+        <member name="T:Clt.Logic.Services.Users.ClientExtraPropService">
+            <summary>
+            Сервис для работы с дополнительными свойствами клиента
+            </summary>
+        </member>
+        <member name="M:Clt.Logic.Services.Users.ClientExtraPropService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="context"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:Clt.Logic.Services.Users.ClientExtraPropService.AddOrUpdatePropValue``1(Clt.Contract.Models.Clients.Properties.AddOrUpdateClientProperty{``0})">
+            <summary>
+            Добавить или обновить свойство для клиента
+            </summary>
+            <typeparam name="TPropValue"></typeparam>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Clt.Logic.Services.Users.ClientExtraPropService.GetPropValue``1(Clt.Contract.Models.Clients.Properties.GetClientProperty)">
+            <summary>
+            Получить значение свойства
+            </summary>
+            <typeparam name="TPropValue"></typeparam>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:Clt.Logic.Services.Users.ClientQueryService">
             <summary>
             Сервис предоставляющий методы для поиска клиентов
@@ -519,7 +547,7 @@
             <param name="fileId"></param>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Users.ClientService.EditClientAsync(Clt.Contract.Models.Users.EditClient)">
+        <member name="M:Clt.Logic.Services.Users.ClientService.EditClientAsync(Clt.Contract.Models.Clients.EditClient)">
             <summary>
             Редактировать клиента
             </summary>

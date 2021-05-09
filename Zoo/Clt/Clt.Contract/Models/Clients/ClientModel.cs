@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Clt.Contract.Models.Users
+namespace Clt.Contract.Models.Clients
 {
     /// <summary>
     /// Модель описывающая клиента

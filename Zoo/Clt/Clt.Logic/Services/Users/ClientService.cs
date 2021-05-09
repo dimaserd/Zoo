@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Clt.Contract.Models.Users;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Clt.Logic.Abstractions;
@@ -13,6 +12,8 @@ using Clt.Contract.Settings;
 using Clt.Contract.Events;
 using Clt.Contract.Resources;
 using Croco.Core.Logic.Files.Services;
+using Clt.Contract.Models.Clients;
+using Croco.Core.Logic.Files.Models;
 
 namespace Clt.Logic.Services.Users
 {
@@ -21,6 +22,8 @@ namespace Clt.Logic.Services.Users
     /// </summary>
     public class ClientService : BaseCltService
     {
+        const string ClientAvatarRelationName = "Clt.ClientAvatar";
+
         IClientDataRefresher ClientDataRefresher { get; }
         FileChecker FileChecker { get; }
         IDbFileManager DbFileManager { get; }
@@ -69,12 +72,25 @@ namespace Clt.Logic.Services.Users
                 return new BaseApiResponse(false, ValidationMessages.UserNotFound);
             }
 
+            var oldFileId = userToEditEntity.AvatarFileId;
+
             userToEditEntity.AvatarFileId = null;
             userRepo.UpdateHandled(userToEditEntity);
 
             return await TryExecuteCodeAndReturnSuccessfulResultAsync(async () =>
             {
                 await SaveChangesAsync();
+
+                if (oldFileId.HasValue)
+                {
+                    await DbFileManager.DeleteFileRelation(new DeleteFileRelation<Client>
+                    {
+                        FileId = oldFileId.Value,
+                        RelationName = ClientAvatarRelationName,
+                        EntityKey = userToEditEntity.Id
+                    });
+                }
+                
                 await PublishMessageAsync(new ClientDataUpdatedEvent
                 {
                     Id = UserId
@@ -118,6 +134,7 @@ namespace Clt.Logic.Services.Users
                 return new BaseApiResponse(false, ValidationMessages.FileIsNotImage);
             }
 
+            var oldFileId = userToEditEntity.AvatarFileId;
             userToEditEntity.AvatarFileId = fileId;
 
             userRepo.UpdateHandled(userToEditEntity);
@@ -125,6 +142,26 @@ namespace Clt.Logic.Services.Users
             return await TryExecuteCodeAndReturnSuccessfulResultAsync(async () =>
             {
                 await SaveChangesAsync();
+
+                if (oldFileId.HasValue)
+                {
+                    await DbFileManager.DeleteFileRelation(new DeleteFileRelation<Client>
+                    {
+                        FileId = oldFileId.Value,
+                        RelationName = ClientAvatarRelationName,
+                        EntityKey = userToEditEntity.Id
+                    });
+                }
+
+                await DbFileManager.AddFileRelation(new AddFileRelation<Client>
+                {
+                    FileId = fileId,
+                    EntityKey = userToEditEntity.Id,
+                    RelationCustomData = null,
+                    RelationName = ClientAvatarRelationName,
+                    RelationValue = userToEditEntity.Id
+                });
+
                 await PublishMessageAsync(new ClientDataUpdatedEvent
                 {
                     Id = UserId

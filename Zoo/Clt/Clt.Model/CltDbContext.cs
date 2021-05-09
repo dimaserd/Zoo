@@ -28,6 +28,11 @@ namespace Clt.Model
         public DbSet<Client> Clients { get; set; }
 
         /// <summary>
+        /// Дополнительные свойства клиента
+        /// </summary>
+        public DbSet<ClientExtraProperty> ClientExtraProperties { get; set; }
+
+        /// <summary>
         /// Переопределение
         /// </summary>
         /// <param name="builder"></param>
@@ -48,6 +53,14 @@ namespace Clt.Model
                     .WithMany(r => r.Roles)
                     .HasForeignKey(ur => ur.UserId)
                     .IsRequired();
+            });
+
+            builder.Entity<ClientExtraProperty>(clientProp =>
+            {
+                clientProp.Property(x => x.PropertyName).HasMaxLength(128)
+                    .IsRequired();
+
+                clientProp.HasKey(x => new { x.ClientId, x.PropertyName });
             });
         }
     }

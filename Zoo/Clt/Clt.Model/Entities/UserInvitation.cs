@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Clt.Model.Entities
+﻿namespace Clt.Model.Entities
 {
     /// <summary>
     /// Сущность описывающая приглашение одного пользователя другим
@@ -20,7 +18,6 @@ namespace Clt.Model.Entities
         /// <summary>
         /// Клиент отправитель
         /// </summary>
-        [JsonIgnore]
         public virtual Client SenderUser { get; set; }
 
         /// <summary>
@@ -31,7 +28,6 @@ namespace Clt.Model.Entities
         /// <summary>
         /// Клиент получатель
         /// </summary>
-        [JsonIgnore]
         public virtual Client ReceiverUser { get; set; }
 
         /// <summary>

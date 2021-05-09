@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Clt.Contract.Models.Users;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Clt.Model.Entities;

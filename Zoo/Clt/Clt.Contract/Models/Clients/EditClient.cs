@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Clt.Contract.Resources;
 
-namespace Clt.Contract.Models.Users
+namespace Clt.Contract.Models.Clients
 {
     /// <summary>
     /// Модель для редактирования клиента

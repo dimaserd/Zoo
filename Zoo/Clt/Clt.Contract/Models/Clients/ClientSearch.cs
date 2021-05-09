@@ -42,7 +42,7 @@ namespace Clt.Contract.Models.Clients
         /// <summary>
         /// Получить всех пользователей
         /// </summary>
-        public static ClientSearch GetAllUsers => new ClientSearch
+        public static ClientSearch GetAllUsers => new()
         {
             Count = null,
             OffSet = 0

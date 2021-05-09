@@ -264,179 +264,59 @@
             Пароль
             </summary>
         </member>
-        <member name="T:Clt.Contract.Models.Users.ClientModel">
+        <member name="T:Clt.Contract.Models.Clients.ClientModel">
             <summary>
             Модель описывающая клиента
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.Id">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.Id">
             <summary>
             Идентификатор клиента
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.Name">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.Name">
             <summary>
             Имя клиента
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.BirthDate">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.BirthDate">
             <summary>
             Дата рождения
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.RegistrationDate">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.RegistrationDate">
             <summary>
             Дата регистрации
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.Surname">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.Surname">
             <summary>
             Фамилия пользователя
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.Patronymic">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.Patronymic">
             <summary>
             Отчество
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.Sex">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.Sex">
             <summary>
             Пол
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.PhoneNumber">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.PhoneNumber">
             <summary>
             Номер телефона
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.Email">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.Email">
             <summary>
             Адрес электронной почты
             </summary>
         </member>
-        <member name="P:Clt.Contract.Models.Users.ClientModel.AvatarFileId">
+        <member name="P:Clt.Contract.Models.Clients.ClientModel.AvatarFileId">
             <summary>
             Идентификатор файла с аватаром
-            </summary>
-        </member>
-        <member name="T:Clt.Contract.Models.Users.EditClient">
-            <summary>
-            Модель для редактирования клиента
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditClient.Name">
-            <summary>
-            Имя пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditClient.BirthDate">
-            <summary>
-            Дата рождения
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditClient.Surname">
-            <summary>
-            Фамилия пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditClient.Patronymic">
-            <summary>
-            Отчество
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditClient.Sex">
-            <summary>
-            Пол
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditClient.PhoneNumber">
-            <summary>
-            Номер телефона
-            </summary>
-        </member>
-        <member name="T:Clt.Contract.Models.Users.EditApplicationUser">
-            <summary>
-            Модель для редактирования пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Id">
-            <summary>
-            Идентификатор пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Name">
-            <summary>
-            Имя пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Email">
-            <summary>
-            Адрес электоронной почты
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.BirthDate">
-            <summary>
-            Дата рождения
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Surname">
-            <summary>
-            Фамилия пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Patronymic">
-            <summary>
-            Отчество
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Sex">
-            <summary>
-            Пол
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.ObjectJson">
-            <summary>
-            Доп данные
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.PhoneNumber">
-            <summary>
-            Номер телефона
-            </summary>
-        </member>
-        <member name="T:Clt.Contract.Models.Users.RegisteredUser">
-            <summary>
-            Модель описывающая зарегистрированного пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.RegisteredUser.Id">
-            <summary>
-            Идентификатор
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.RegisteredUser.PhoneNumber">
-            <summary>
-            Номер телефона
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.RegisteredUser.Email">
-            <summary>
-            Адрес электронной почты
-            </summary>
-        </member>
-        <member name="T:Clt.Contract.Models.Users.UserActivation">
-            <summary>
-            Модель активации пользователя
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.UserActivation.DeActivated">
-            <summary>
-            Если true, значит пользователь деактивирован в системе
-            </summary>
-        </member>
-        <member name="P:Clt.Contract.Models.Users.UserActivation.Id">
-            <summary>
-            Идентификатор пользователя
             </summary>
         </member>
         <member name="T:Clt.Contract.Models.Clients.ClientSearch">
@@ -472,6 +352,113 @@
         <member name="P:Clt.Contract.Models.Clients.ClientSearch.GetAllUsers">
             <summary>
             Получить всех пользователей
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Clients.EditClient">
+            <summary>
+            Модель для редактирования клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.EditClient.Name">
+            <summary>
+            Имя пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.EditClient.BirthDate">
+            <summary>
+            Дата рождения
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.EditClient.Surname">
+            <summary>
+            Фамилия пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.EditClient.Patronymic">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.EditClient.Sex">
+            <summary>
+            Пол
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.EditClient.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Clients.Properties.AddOrUpdateClientProperty`1">
+            <summary>
+            Добавить или обновить свойство клиента
+            </summary>
+            <typeparam name="TPropValue"></typeparam>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.AddOrUpdateClientProperty`1.ClientId">
+            <summary>
+            Идентификатор клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.AddOrUpdateClientProperty`1.PropertyName">
+            <summary>
+            Название свойства
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.AddOrUpdateClientProperty`1.PropertyValue">
+            <summary>
+            Значение свойства
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Clients.Properties.ClientExtraPropertyModel`1">
+            <summary>
+            Модель описываюящая свойство клиента
+            </summary>
+            <typeparam name="TPropValue"></typeparam>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.ClientExtraPropertyModel`1.PropertyName">
+            <summary>
+            Название свойства
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.ClientExtraPropertyModel`1.Value">
+            <summary>
+            Значение свойства
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Clients.Properties.ClientExtraPropertyRawModel">
+            <summary>
+            Сырая модель описывающая дополнительное свойство клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.ClientExtraPropertyRawModel.PropertyName">
+            <summary>
+            Название свойства
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.ClientExtraPropertyRawModel.TypeFullName">
+            <summary>
+            Тип данных спрятанного там объекта
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.ClientExtraPropertyRawModel.ValueDataJson">
+            <summary>
+            Сериализованные данные значения свойства
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Clients.Properties.GetClientProperty">
+            <summary>
+            Получить свойство клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.GetClientProperty.ClientId">
+            <summary>
+            Идентификатор клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Clients.Properties.GetClientProperty.PropertyName">
+            <summary>
+            Название свойства
             </summary>
         </member>
         <member name="T:Clt.Contract.Models.Common.ApplicationUserBaseModel">
@@ -582,6 +569,91 @@
         <member name="P:Clt.Contract.Models.Roles.UserIdAndRole.Role">
             <summary>
             Роль
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Users.EditApplicationUser">
+            <summary>
+            Модель для редактирования пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Id">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Name">
+            <summary>
+            Имя пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Email">
+            <summary>
+            Адрес электоронной почты
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.BirthDate">
+            <summary>
+            Дата рождения
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Surname">
+            <summary>
+            Фамилия пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Patronymic">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.Sex">
+            <summary>
+            Пол
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.ObjectJson">
+            <summary>
+            Доп данные
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.EditApplicationUser.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Users.RegisteredUser">
+            <summary>
+            Модель описывающая зарегистрированного пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.RegisteredUser.Id">
+            <summary>
+            Идентификатор
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.RegisteredUser.PhoneNumber">
+            <summary>
+            Номер телефона
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.RegisteredUser.Email">
+            <summary>
+            Адрес электронной почты
+            </summary>
+        </member>
+        <member name="T:Clt.Contract.Models.Users.UserActivation">
+            <summary>
+            Модель активации пользователя
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserActivation.DeActivated">
+            <summary>
+            Если true, значит пользователь деактивирован в системе
+            </summary>
+        </member>
+        <member name="P:Clt.Contract.Models.Users.UserActivation.Id">
+            <summary>
+            Идентификатор пользователя
             </summary>
         </member>
         <member name="T:Clt.Contract.Resources.AnnotationsErrorMessages">

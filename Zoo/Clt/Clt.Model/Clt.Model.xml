@@ -20,6 +20,11 @@
             Клиенты приложения
             </summary>
         </member>
+        <member name="P:Clt.Model.CltDbContext.ClientExtraProperties">
+            <summary>
+            Дополнительные свойства клиента
+            </summary>
+        </member>
         <member name="M:Clt.Model.CltDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             Переопределение
@@ -87,6 +92,36 @@
         <member name="P:Clt.Model.Entities.Client.AvatarFileId">
             <summary>
             Идентификатор аватарки с файлом
+            </summary>
+        </member>
+        <member name="T:Clt.Model.Entities.ClientExtraProperty">
+            <summary>
+            Дополнительное свойство для клиента
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.ClientExtraProperty.PropertyName">
+            <summary>
+            Название свойства
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.ClientExtraProperty.ClientId">
+            <summary>
+            Идентификатор клиентв
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.ClientExtraProperty.Client">
+            <summary>
+            Клиент
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.ClientExtraProperty.TypeFullName">
+            <summary>
+            Тип данных спрятанного там объекта
+            </summary>
+        </member>
+        <member name="P:Clt.Model.Entities.ClientExtraProperty.ValueDataJson">
+            <summary>
+            Сериализованные данные значения свойства
             </summary>
         </member>
         <member name="T:Clt.Model.Entities.Default.ApplicationRole">
