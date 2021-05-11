@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using RestSharp;
 using Ecc.Logic.Models.IntegratedApps;
 using Ecc.Model.Entities.IntegratedApps;
 using Ecc.Model.Entities.Interactions;
@@ -14,6 +12,7 @@ using Croco.Core.Contract;
 using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Microsoft.Extensions.Logging;
+using Ecc.Logic.Clients;
 
 namespace Ecc.Logic.Services.IntegratedApps
 {
@@ -23,13 +22,18 @@ namespace Ecc.Logic.Services.IntegratedApps
     /// </summary>
     public class IntegratedAppWorker : BaseEccService
     {
+        OneSignalClient OneSignalClient { get; }
+
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="ambientContext"></param>
         /// <param name="application"></param>
-        public IntegratedAppWorker(ICrocoAmbientContextAccessor ambientContext, ICrocoApplication application) : base(ambientContext, application)
+        /// <param name="oneSignalClient"></param>
+        public IntegratedAppWorker(ICrocoAmbientContextAccessor ambientContext, 
+            ICrocoApplication application, OneSignalClient oneSignalClient) : base(ambientContext, application)
         {
+            OneSignalClient = oneSignalClient;
         }
 
         private BaseApiResponse RaiseAndReturnException(Exception ex)
@@ -266,52 +270,9 @@ namespace Ecc.Logic.Services.IntegratedApps
             };
         }
 
-        private async Task GetSendNotificationTaskForIosApp(IntegratedAppUserSetting setting, SendUserNotificationViaApplication reqModel)
+        private Task GetSendNotificationTaskForIosApp(IntegratedAppUserSetting setting, SendUserNotificationViaApplication reqModel)
         {
-            var client = new RestClient("https://onesignal.com");
-
-            var request = new RestRequest("/api/v1/notifications", Method.POST);
-
-            
-            var model = new SendNotificationViaOneSignal
-            {
-                AppId = setting.App.Uid,
-                Data = new Dictionary<string, string>
-                {
-                    ["foo"] = "bar"
-                },
-                Contents = new Dictionary<string, string>
-                {
-                    ["en"] = "English Message",
-                    ["ru"] = reqModel.Text
-                },
-                Headings = new Dictionary<string, string>
-                {
-                    ["en"] = "111",
-                    ["ru"] = reqModel.Title
-                },
-                IncludePlayerIds = new[]
-                {
-                    setting.UserUidInApp
-                }
-            };
-
-            // Json to post.
-            var jsonToSend = JsonConvert.SerializeObject(model);
-
-            request.AddHeader("Authorization", $"Basic {setting.App.ConfigurationJson}");
-            
-            request.AddParameter("application/json; charset=utf-8", jsonToSend, ParameterType.RequestBody);
-            request.RequestFormat = DataFormat.Json;
-
-            try
-            {
-                var response = await client.ExecuteAsync(request);
-            }
-            catch (Exception error)
-            {
-                Logger.LogError(error, "IntegratedAppWorker.GetSendNotificationTaskForIosApp.OnException");
-            }
+            return OneSignalClient.GetSendNotificationTaskForIosApp(setting, reqModel);
         }
     }
 }

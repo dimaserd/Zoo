@@ -18,6 +18,7 @@ using Ecc.Contract.Events.Chat;
 using Croco.Core.IntegrationMessagesDescriptor.Enumerations;
 using Ecc.Logic.Integrations;
 using Clt.Contract.Events;
+using Ecc.Logic.Clients;
 
 namespace Ecc.Logic
 {
@@ -36,6 +37,7 @@ namespace Ecc.Logic
             Check(appBuilder);
 
             var services = appBuilder.Services;
+            services.AddScoped<OneSignalClient>();
             RegisterServices<CltUserMasterStorage>(services, settings);
 
             RegisterEccWorkerTypes(services);

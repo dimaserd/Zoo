@@ -16,6 +16,26 @@
             <param name="emailModel"></param>
             <returns></returns>
         </member>
+        <member name="T:Ecc.Logic.Clients.OneSignalClient">
+            <summary>
+            Клиент для взаимодействия с OneSignal Api
+            </summary>
+        </member>
+        <member name="M:Ecc.Logic.Clients.OneSignalClient.#ctor(System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Clients.OneSignalClient})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="httpClientFactory"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Ecc.Logic.Clients.OneSignalClient.GetSendNotificationTaskForIosApp(Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting,Ecc.Logic.Models.IntegratedApps.SendUserNotificationViaApplication)">
+            <summary>
+            Отправить уведомление для Ios приложения
+            </summary>
+            <param name="setting"></param>
+            <param name="reqModel"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ecc.Logic.Core.Workers.EmailDelayedSender">
             <summary>
             Отложенный отправитель сообщений
@@ -1501,12 +1521,13 @@
             Сервис для работы с интеграционными приложениями
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Services.IntegratedApps.IntegratedAppWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+        <member name="M:Ecc.Logic.Services.IntegratedApps.IntegratedAppWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Ecc.Logic.Clients.OneSignalClient)">
             <summary>
             Конструктор
             </summary>
             <param name="ambientContext"></param>
             <param name="application"></param>
+            <param name="oneSignalClient"></param>
         </member>
         <member name="M:Ecc.Logic.Services.IntegratedApps.IntegratedAppWorker.GetApplicationsAsync">
             <summary>
