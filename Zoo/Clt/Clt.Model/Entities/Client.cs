@@ -1,5 +1,4 @@
-﻿using Croco.Core.Model.Abstractions.Entity;
-using Croco.Core.Model.Models;
+﻿using Croco.Core.Model.Models;
 using System;
 
 namespace Clt.Model.Entities
@@ -7,7 +6,7 @@ namespace Clt.Model.Entities
     /// <summary>
     /// Сущность описывающая клиента
     /// </summary>
-    public class Client : AuditableEntityBase, ICrocoUser
+    public class Client : AuditableEntityBase
     {
         /// <summary>
         /// Идентификатор

@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Croco.Core.Contract" Version="1.0.15" />
+    <PackageReference Include="Croco.Core.Contract" Version="1.0.16" />
     <PackageReference Include="Jint" Version="2.11.58" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.51" />
