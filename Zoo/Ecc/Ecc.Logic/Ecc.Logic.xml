@@ -21,11 +21,11 @@
             Клиент для взаимодействия с OneSignal Api
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Clients.OneSignalClient.#ctor(System.Net.Http.IHttpClientFactory,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Clients.OneSignalClient})">
+        <member name="M:Ecc.Logic.Clients.OneSignalClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILogger{Ecc.Logic.Clients.OneSignalClient})">
             <summary>
             Конструктор
             </summary>
-            <param name="httpClientFactory"></param>
+            <param name="httpClient"></param>
             <param name="logger"></param>
         </member>
         <member name="M:Ecc.Logic.Clients.OneSignalClient.GetSendNotificationTaskForIosApp(Ecc.Model.Entities.IntegratedApps.IntegratedAppUserSetting,Ecc.Logic.Models.IntegratedApps.SendUserNotificationViaApplication)">

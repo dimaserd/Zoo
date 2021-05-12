@@ -22,11 +22,11 @@ namespace Ecc.Logic.Clients
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="httpClientFactory"></param>
+        /// <param name="httpClient"></param>
         /// <param name="logger"></param>
-        public OneSignalClient(IHttpClientFactory httpClientFactory, ILogger<OneSignalClient> logger)
+        public OneSignalClient(HttpClient httpClient, ILogger<OneSignalClient> logger)
         {
-            HttpClient = httpClientFactory.CreateClient();
+            HttpClient = httpClient;
             Logger = logger;
         }
 

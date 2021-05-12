@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <LangVersion>Latest</LangVersion>
-    <Version>0.9.5</Version>
+    <Version>0.9.6</Version>
     <PackageId>Zoo.Croco.Clt</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeReferencedProjects>true</IncludeReferencedProjects>
