@@ -53,7 +53,7 @@ namespace Clt.Logic.Services.Account
                 return new BaseApiResponse(false, "Вы авторизованы в системе");
             }
 
-            var user = await Query<ApplicationUser>()
+            var user = await UserManager.Users
                 .FirstOrDefaultAsync(x => x.Email == model.Email);
 
             if (user == null)
@@ -83,7 +83,7 @@ namespace Clt.Logic.Services.Account
                 return new BaseApiResponse(false, "Вы авторизованы в системе");
             }
 
-            var user = await Query<ApplicationUser>()
+            var user = await UserManager.Users
                 .FirstOrDefaultAsync(x => x.PhoneNumber == model.PhoneNumber);
 
             if (user == null)

@@ -21,56 +21,10 @@ namespace Clt.Tests
 {
     public class UserSearcherTests
     {
-        public async Task<IServiceProvider> BuildCltAppAndGetServiceProvider()
-        {
-            var services = new ServiceCollection();
-            services.AddLogging();
-            services.AddScoped(srv => MySqLiteFileDatabaseExtensions.Create<CrocoInternalDbContext>(opts => new CrocoInternalDbContext(opts), "croco"));
-            services.AddScoped(srv => MySqLiteFileDatabaseExtensions.Create<CltDbContext>(opts => new CltDbContext(opts), "clt"));
-            var appBuilder = new CrocoApplicationBuilder(services);
-
-            appBuilder.RegisterVirtualPathMapper(Directory.GetCurrentDirectory());
-            appBuilder.RegisterFileStorage(new CrocoFileOptions
-            {
-                SourceDirectory = Directory.GetCurrentDirectory(),
-                ImgFileResizeSettings = new System.Collections.Generic.Dictionary<string, ImgFileResizeSetting>()
-            });
-
-            DbFileManagerServiceCollectionExtensions.RegisterDbFileManager(appBuilder);
-
-            CltLogicRegistrator.Register(appBuilder);
-
-            appBuilder.CheckAndRegisterApplication<CrocoApplication>();
-
-            var srvProvider = services.BuildServiceProvider();
-
-            var scope = srvProvider.CreateScope();
-
-            scope.ServiceProvider
-                .GetRequiredService<CltDbContext>()
-                .Database.EnsureCreated();
-
-            scope.ServiceProvider
-                .GetRequiredService<CrocoInternalDbContext>()
-                .Database.EnsureCreated();
-
-            scope.ServiceProvider
-                .GetRequiredService<ICrocoRequestContextAccessor>()
-                .SetRequestContext(SystemCrocoExtensions.GetRequestContext());
-
-            var accountInitiator = scope.ServiceProvider
-                .GetRequiredService<AccountInitiator>();
-
-            await accountInitiator.InitAsync();
-
-            return srvProvider;
-        }
-
-
         [Test]
         public async Task SearchUser()
         {
-            var srvProvider = await BuildCltAppAndGetServiceProvider();
+            var srvProvider = await TestBuilder.BuildCltAppAndGetServiceProvider();
 
             var scope = srvProvider.CreateScope();
             scope.ServiceProvider
