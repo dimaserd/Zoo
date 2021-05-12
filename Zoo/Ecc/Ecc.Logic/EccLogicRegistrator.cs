@@ -37,7 +37,7 @@ namespace Ecc.Logic
             Check(appBuilder);
 
             var services = appBuilder.Services;
-            services.AddScoped<OneSignalClient>();
+            services.AddHttpClient<OneSignalClient>();
             RegisterServices<CltUserMasterStorage>(services, settings);
 
             RegisterEccWorkerTypes(services);
