@@ -4,6 +4,7 @@ using Croco.Core.Contract.Application;
 using Croco.Core.Contract.Models;
 using Microsoft.EntityFrameworkCore;
 using Tms.Logic.Models;
+using Tms.Logic.Models.Comments;
 using Tms.Logic.Resources;
 using Tms.Model.Entities;
 
@@ -39,12 +40,7 @@ namespace Tms.Logic.Services
         /// <returns></returns>
         public async Task<BaseApiResponse<DayTaskWithCommentsModel>> CommentDayTaskAsync(CommentDayTask model)
         {
-            if (!IsAuthenticated)
-            {
-                return new BaseApiResponse<DayTaskWithCommentsModel>(false, ValidationMessages.YouAreNotAuthorized);
-            }
-
-            var validation = ValidateModel(model);
+            var validation = ValidateAuthenticationAndModel(model);
 
             if (!validation.IsSucceeded)
             {
@@ -69,14 +65,7 @@ namespace Tms.Logic.Services
                 DayTaskId = model.DayTaskId
             });
 
-            return await TryExecuteCodeAndReturnSuccessfulResultAsync(async () =>
-            {
-                await SaveChangesAsync();
-
-                var task = await DayTasksService.GetDayTaskByIdAsync(model.DayTaskId);
-
-                return new BaseApiResponse<DayTaskWithCommentsModel>(true, TaskerResource.CommentAdded, task);
-            });
+            return await SaveChangesAndReturnText(model.DayTaskId, TaskerResource.CommentAdded);
         }
 
         /// <summary>
@@ -86,12 +75,7 @@ namespace Tms.Logic.Services
         /// <returns></returns>
         public async Task<BaseApiResponse<DayTaskWithCommentsModel>> UpdateDayTaskCommentAsync(UpdateDayTaskComment model)
         {
-            if (!IsAuthenticated)
-            {
-                return new BaseApiResponse<DayTaskWithCommentsModel>(false, ValidationMessages.YouAreNotAuthorized);
-            }
-
-            var validation = ValidateModel(model);
+            var validation = ValidateAuthenticationAndModel(model);
 
             if (!validation.IsSucceeded)
             {
@@ -111,14 +95,59 @@ namespace Tms.Logic.Services
 
             commentsRepo.UpdateHandled(comment);
 
-            return await TryExecuteCodeAndReturnSuccessfulResultAsync(async () =>
+            return await SaveChangesAndReturnText(comment.DayTaskId, TaskerResource.CommentUpdated);
+        }
+
+        /// <summary>
+        /// Удаление комментария
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<BaseApiResponse<DayTaskWithCommentsModel>> DeleteDayTaskCommentAsync(DeleteDayTaskComment model)
+        {
+            var validation = ValidateAuthenticationAndModel(model);
+
+            if (!validation.IsSucceeded)
+            {
+                return new BaseApiResponse<DayTaskWithCommentsModel>(validation);
+            }
+
+            var commentsRepo = GetRepository<DayTaskComment>();
+
+            var comment = await commentsRepo.Query().FirstOrDefaultAsync(x => x.Id == model.DayTaskCommentId);
+
+            if (comment == null)
+            {
+                return new BaseApiResponse<DayTaskWithCommentsModel>(false, TaskerResource.DayTaskCommentNotFoundById);
+            }
+
+            commentsRepo.DeleteHandled(comment);
+
+            return await SaveChangesAndReturnText(comment.DayTaskId, TaskerResource.CommentDeleted);
+        }
+
+
+        private BaseApiResponse ValidateAuthenticationAndModel(object model)
+        {
+            if (!IsAuthenticated)
+            {
+                return new BaseApiResponse(false, ValidationMessages.YouAreNotAuthorized);
+            }
+
+            var validation = ValidateModel(model);
+
+            return validation;
+        }
+
+        private Task<BaseApiResponse<DayTaskWithCommentsModel>> SaveChangesAndReturnText(string dayTaskId, string successfulText)
+        {
+            return TryExecuteCodeAndReturnSuccessfulResultAsync(async () =>
             {
                 await SaveChangesAsync();
-                var repo = GetRepository<DayTask>();
 
-                var task = await DayTasksService.GetDayTaskByIdAsync(comment.DayTaskId);
+                var task = await DayTasksService.GetDayTaskByIdAsync(dayTaskId);
 
-                return new BaseApiResponse<DayTaskWithCommentsModel>(true, TaskerResource.CommentUpdated, task);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(true, successfulText, task);
             });
         }
     }

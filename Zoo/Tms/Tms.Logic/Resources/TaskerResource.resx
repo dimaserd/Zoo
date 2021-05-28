@@ -123,6 +123,9 @@
   <data name="CommentCantBeEmpty" xml:space="preserve">
     <value>Комментарий к заданию не может быть пустым</value>
   </data>
+  <data name="CommentDeleted" xml:space="preserve">
+    <value>Комментарий удалён</value>
+  </data>
   <data name="CommentUpdated" xml:space="preserve">
     <value>Комментарий обновлён</value>
   </data>

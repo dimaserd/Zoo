@@ -53,17 +53,42 @@
             Дни для дат в следующем месяце
             </summary>
         </member>
-        <member name="T:Tms.Logic.Models.CommentDayTask">
+        <member name="T:Tms.Logic.Models.Comments.CommentDayTask">
             <summary>
             Комментировать задание
             </summary>
         </member>
-        <member name="P:Tms.Logic.Models.CommentDayTask.DayTaskId">
+        <member name="P:Tms.Logic.Models.Comments.CommentDayTask.DayTaskId">
             <summary>
             Идентификатор задания
             </summary>
         </member>
-        <member name="P:Tms.Logic.Models.CommentDayTask.Comment">
+        <member name="P:Tms.Logic.Models.Comments.CommentDayTask.Comment">
+            <summary>
+            Текст комментария
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.Comments.DeleteDayTaskComment">
+            <summary>
+            Модель для удаления коментария к заданию
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.Comments.DeleteDayTaskComment.DayTaskCommentId">
+            <summary>
+            Идентификатор коментария
+            </summary>
+        </member>
+        <member name="T:Tms.Logic.Models.Comments.UpdateDayTaskComment">
+            <summary>
+            Модель для обновления комментария
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.Comments.UpdateDayTaskComment.DayTaskCommentId">
+            <summary>
+            Идентификатор комментария
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Models.Comments.UpdateDayTaskComment.Comment">
             <summary>
             Текст комментария
             </summary>
@@ -316,21 +341,6 @@
             Данные в задании
             </summary>
         </member>
-        <member name="T:Tms.Logic.Models.UpdateDayTaskComment">
-            <summary>
-            Модель для обновления комментария
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.UpdateDayTaskComment.DayTaskCommentId">
-            <summary>
-            Идентификатор комментария
-            </summary>
-        </member>
-        <member name="P:Tms.Logic.Models.UpdateDayTaskComment.Comment">
-            <summary>
-            Текст комментария
-            </summary>
-        </member>
         <member name="T:Tms.Logic.Models.UserFullNameEmailAndAvatarModel">
             <summary>
             Модель для отображения пользователя
@@ -410,6 +420,11 @@
         <member name="P:Tms.Logic.Resources.TaskerResource.CommentCantBeEmpty">
             <summary>
               Ищет локализованную строку, похожую на Комментарий к заданию не может быть пустым.
+            </summary>
+        </member>
+        <member name="P:Tms.Logic.Resources.TaskerResource.CommentDeleted">
+            <summary>
+              Ищет локализованную строку, похожую на Комментарий удалён.
             </summary>
         </member>
         <member name="P:Tms.Logic.Resources.TaskerResource.CommentUpdated">
@@ -602,16 +617,23 @@
             <param name="principalCheker"></param>
             <param name="dayTasksService"></param>
         </member>
-        <member name="M:Tms.Logic.Services.DayTaskCommentService.CommentDayTaskAsync(Tms.Logic.Models.CommentDayTask)">
+        <member name="M:Tms.Logic.Services.DayTaskCommentService.CommentDayTaskAsync(Tms.Logic.Models.Comments.CommentDayTask)">
             <summary>
             Добавить комментарий к заданию
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Tms.Logic.Services.DayTaskCommentService.UpdateDayTaskCommentAsync(Tms.Logic.Models.UpdateDayTaskComment)">
+        <member name="M:Tms.Logic.Services.DayTaskCommentService.UpdateDayTaskCommentAsync(Tms.Logic.Models.Comments.UpdateDayTaskComment)">
             <summary>
             Обновить комментарий
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tms.Logic.Services.DayTaskCommentService.DeleteDayTaskCommentAsync(Tms.Logic.Models.Comments.DeleteDayTaskComment)">
+            <summary>
+            Удаление комментария
             </summary>
             <param name="model"></param>
             <returns></returns>

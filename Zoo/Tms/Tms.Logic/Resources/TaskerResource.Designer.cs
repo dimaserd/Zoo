@@ -79,6 +79,15 @@ namespace Tms.Logic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Комментарий удалён.
+        /// </summary>
+        public static string CommentDeleted {
+            get {
+                return ResourceManager.GetString("CommentDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Комментарий обновлён.
         /// </summary>
         public static string CommentUpdated {

@@ -1,17 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Tms.Logic.Resources;
 
-namespace Tms.Logic.Models
+namespace Tms.Logic.Models.Comments
 {
     /// <summary>
-    /// Модель для обновления комментария
+    /// Комментировать задание
     /// </summary>
-    public class UpdateDayTaskComment
+    public class CommentDayTask
     {
         /// <summary>
-        /// Идентификатор комментария
+        /// Идентификатор задания
         /// </summary>
-        public string DayTaskCommentId { get; set; }
+        public string DayTaskId { get; set; }
 
         /// <summary>
         /// Текст комментария
