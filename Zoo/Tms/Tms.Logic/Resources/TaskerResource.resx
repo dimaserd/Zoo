@@ -135,4 +135,7 @@
   <data name="DayTaskNotFoundByProvidedId" xml:space="preserve">
     <value>Задание не найдено по указанному идентификатору</value>
   </data>
+  <data name="YouAreNotAuthorOfTaskComment" xml:space="preserve">
+    <value>Вы не являетсь автором данного комментария</value>
+  </data>
 </root>

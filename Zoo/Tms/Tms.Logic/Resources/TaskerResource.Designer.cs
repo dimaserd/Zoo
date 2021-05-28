@@ -113,5 +113,14 @@ namespace Tms.Logic.Resources {
                 return ResourceManager.GetString("DayTaskNotFoundByProvidedId", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы не являетсь автором данного комментария.
+        /// </summary>
+        public static string YouAreNotAuthorOfTaskComment {
+            get {
+                return ResourceManager.GetString("YouAreNotAuthorOfTaskComment", resourceCulture);
+            }
+        }
     }
 }

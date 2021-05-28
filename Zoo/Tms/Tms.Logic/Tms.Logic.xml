@@ -442,6 +442,11 @@
               Ищет локализованную строку, похожую на Задание не найдено по указанному идентификатору.
             </summary>
         </member>
+        <member name="P:Tms.Logic.Resources.TaskerResource.YouAreNotAuthorOfTaskComment">
+            <summary>
+              Ищет локализованную строку, похожую на Вы не являетсь автором данного комментария.
+            </summary>
+        </member>
         <member name="T:Tms.Logic.Resources.ValidationMessages">
             <summary>
               Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.

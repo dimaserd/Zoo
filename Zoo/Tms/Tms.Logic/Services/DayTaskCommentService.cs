@@ -82,18 +82,17 @@ namespace Tms.Logic.Services
                 return new BaseApiResponse<DayTaskWithCommentsModel>(validation);
             }
 
-            var commentsRepo = GetRepository<DayTaskComment>();
+            var commentOrError = await GetCommentOrError(model.DayTaskCommentId);
 
-            var comment = await commentsRepo.Query().FirstOrDefaultAsync(x => x.Id == model.DayTaskCommentId);
-
-            if (comment == null)
+            if (commentOrError.Comment == null)
             {
-                return new BaseApiResponse<DayTaskWithCommentsModel>(false, TaskerResource.DayTaskCommentNotFoundById);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(false, commentOrError.ErrorMessage);
             }
+            var comment = commentOrError.Comment;
 
             comment.Comment = model.Comment;
 
-            commentsRepo.UpdateHandled(comment);
+            UpdateHandled(comment);
 
             return await SaveChangesAndReturnText(comment.DayTaskId, TaskerResource.CommentUpdated);
         }
@@ -112,16 +111,15 @@ namespace Tms.Logic.Services
                 return new BaseApiResponse<DayTaskWithCommentsModel>(validation);
             }
 
-            var commentsRepo = GetRepository<DayTaskComment>();
+            var commentOrError = await GetCommentOrError(model.DayTaskCommentId);
 
-            var comment = await commentsRepo.Query().FirstOrDefaultAsync(x => x.Id == model.DayTaskCommentId);
-
-            if (comment == null)
+            if(commentOrError.Comment == null)
             {
-                return new BaseApiResponse<DayTaskWithCommentsModel>(false, TaskerResource.DayTaskCommentNotFoundById);
+                return new BaseApiResponse<DayTaskWithCommentsModel>(false, commentOrError.ErrorMessage);
             }
+            var comment = commentOrError.Comment;
 
-            commentsRepo.DeleteHandled(comment);
+            DeleteHandled(commentOrError.Comment);
 
             return await SaveChangesAndReturnText(comment.DayTaskId, TaskerResource.CommentDeleted);
         }
@@ -149,6 +147,39 @@ namespace Tms.Logic.Services
 
                 return new BaseApiResponse<DayTaskWithCommentsModel>(true, successfulText, task);
             });
+        }
+
+        private class CommentOrError
+        {
+            public CommentOrError(string error)
+            {
+                ErrorMessage = error;
+            }
+
+            public CommentOrError(DayTaskComment comment)
+            {
+                Comment = comment;
+            }
+
+            public DayTaskComment Comment { get; }
+            public string ErrorMessage { get; }
+        }
+
+        private async Task<CommentOrError> GetCommentOrError(string commentId)
+        {
+            var comment = await GetRepository<DayTaskComment>().Query().FirstOrDefaultAsync(x => x.Id == commentId);
+
+            if (comment == null)
+            {
+                return new CommentOrError(TaskerResource.DayTaskCommentNotFoundById);
+            }
+
+            if (comment.AuthorId != UserId)
+            {
+                return new CommentOrError(TaskerResource.YouAreNotAuthorOfTaskComment);
+            }
+
+            return new CommentOrError(comment);
         }
     }
 }
