@@ -7,7 +7,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Dmitry Serdyukov</Authors>
     <Company>CrocoSoft</Company>
-    <Description>Логика для выполнения js-кода на сервере</Description>
+    <Description>Логика для создания примитивных пользовательских интерфейсов</Description>
     <PackageReleaseNotes>Что-то сделали лучше, что-то сделали хуже.</PackageReleaseNotes>
     <Copyright>Copyright 2021</Copyright>
   </PropertyGroup>
