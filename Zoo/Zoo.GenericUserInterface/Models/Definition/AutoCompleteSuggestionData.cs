@@ -28,7 +28,7 @@ namespace Zoo.GenericUserInterface.Models.Definition
             {
                 DataJson = DataJson,
                 Text = Text,
-                Value = typeof(TItem) == typeof(string) ? Value.ToString() : Tool.JsonConverter.Serialize(Value)
+                Value = typeof(TItem) == typeof(string) ? Value?.ToString() : Tool.JsonConverter.Serialize(Value)
             };
         }
     }

@@ -53,5 +53,19 @@ namespace Zoo.GenericUserInterface.Tests
 
             Assert.AreEqual(tStr.Value.ToString(), mappedAsStr.Value);
         }
+
+        [Test]
+        public void ToAutoCompleteSuggestion_TestOnNulls()
+        {
+            var tStr = new AutoCompleteSuggestionData<string>
+            {
+                Text = "dsafa",
+                Value = null
+            };
+
+            var mappedAsStr = tStr.ToAutoCompleteSuggestion();
+
+            Assert.AreEqual(null, mappedAsStr.Value);
+        }
     }
 }
