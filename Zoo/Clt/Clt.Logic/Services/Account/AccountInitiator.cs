@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Clt.Contract.Models.Common;
 using Croco.Core.Contract.Models;
 using Croco.Core.Contract;
 using Clt.Model.Entities.Default;
- using Croco.Core.Contract.Application;
+using Croco.Core.Contract.Application;
 using Clt.Contract.Settings;
-using Clt.Logic.Extensions;
 using Clt.Logic.Services.Roles;
 
 namespace Clt.Logic.Services.Account
@@ -24,7 +22,7 @@ namespace Clt.Logic.Services.Account
         /// Создается пользователь Root в системе и ему присваиваются все необходимые права
         /// </summary>
         /// <returns></returns>
-        public async Task<BaseApiResponse> InitAsync()
+        public async Task<BaseApiResponse> CreateRootUserAsync()
         {
             await RoleService.CreateRolesAsync(RolesSetting.GetAllRoleNames());
 
@@ -51,17 +49,20 @@ namespace Clt.Logic.Services.Account
         }
 
         /// <summary>
-        /// Проверить изменения пользователя
+        /// Удалить пользователя root
         /// </summary>
         /// <returns></returns>
-        public BaseApiResponse<ApplicationUserBaseModel> CheckUserChanges()
+        public async Task<BaseApiResponse> DeleteRootUserAsync()
         {
-            if (!IsAuthenticated)
+            var root = await UserManager.FindByEmailAsync(RootSettings.RootEmail);
+
+            if(root == null)
             {
-                return new BaseApiResponse<ApplicationUserBaseModel>(true, "Вы не авторизованы в системе", null);
+                return new BaseApiResponse(false, "Пользователь root уже удален");
             }
 
-            return new BaseApiResponse<ApplicationUserBaseModel>(true, "", null);
+            await UserManager.DeleteAsync(root);
+            return new BaseApiResponse(true, "Пользователь root удалён");
         }
 
         /// <summary>

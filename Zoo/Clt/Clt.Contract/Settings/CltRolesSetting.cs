@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Clt.Contract.Settings
@@ -44,7 +45,7 @@ namespace Clt.Contract.Settings
         {
             AdminRoleName = "Admin";
             RootRoleName = "Root";
-            OtherRoleNames = new string[0];
+            OtherRoleNames = Array.Empty<string>();
         }
     }
 }

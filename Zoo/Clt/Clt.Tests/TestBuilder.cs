@@ -55,7 +55,7 @@ namespace Clt.Tests
             var accountInitiator = scope.ServiceProvider
                 .GetRequiredService<AccountInitiator>();
 
-            await accountInitiator.InitAsync();
+            await accountInitiator.CreateRootUserAsync();
 
             return srvProvider;
         }

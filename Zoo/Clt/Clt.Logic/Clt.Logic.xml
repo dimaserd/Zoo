@@ -116,15 +116,15 @@
             Методы для работы с учетными записями
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountInitiator.InitAsync">
+        <member name="M:Clt.Logic.Services.Account.AccountInitiator.CreateRootUserAsync">
             <summary>
             Создается пользователь Root в системе и ему присваиваются все необходимые права
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Clt.Logic.Services.Account.AccountInitiator.CheckUserChanges">
+        <member name="M:Clt.Logic.Services.Account.AccountInitiator.DeleteRootUserAsync">
             <summary>
-            Проверить изменения пользователя
+            Удалить пользователя root
             </summary>
             <returns></returns>
         </member>

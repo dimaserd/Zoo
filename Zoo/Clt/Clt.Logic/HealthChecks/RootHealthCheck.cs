@@ -41,7 +41,7 @@ namespace Clt.Logic.HealthChecks
             {
                 result.State = CrocoHealthState.UnHealthy;
                 result.Message = $"Рут пользователь не создан." +
-                    $" Воспользуйтесь методом {nameof(AccountInitiator.InitAsync)} класса {nameof(AccountInitiator)} чтобы исправить данную ситуацию.";
+                    $" Воспользуйтесь методом {nameof(AccountInitiator.CreateRootUserAsync)} класса {nameof(AccountInitiator)} чтобы исправить данную ситуацию.";
                 
                 return result;
             }
@@ -50,7 +50,7 @@ namespace Clt.Logic.HealthChecks
             {
                 result.State = CrocoHealthState.UnHealthy;
                 result.Message = $"Текущий рут пользователь не имеет рут прав." +
-                    $" Воспользуйтесь методом {nameof(AccountInitiator.InitAsync)} класса {nameof(AccountInitiator)} чтобы исправить данную ситуацию.";
+                    $" Воспользуйтесь методом {nameof(AccountInitiator.CreateRootUserAsync)} класса {nameof(AccountInitiator)} чтобы исправить данную ситуацию.";
                 
                 return result;
             }
