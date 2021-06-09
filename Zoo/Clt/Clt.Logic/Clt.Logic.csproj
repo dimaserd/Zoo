@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <LangVersion>Latest</LangVersion>
-    <Version>0.9.7</Version>
+    <Version>0.9.8</Version>
     <PackageId>Zoo.Croco.Clt</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeReferencedProjects>true</IncludeReferencedProjects>
@@ -31,8 +31,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-    <PackageReference Include="Croco.Core.Logic" Version="1.1.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
   </ItemGroup>
 
 </Project>

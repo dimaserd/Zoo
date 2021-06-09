@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Croco.Core.Logic" Version="1.1.7" />
+    <PackageReference Include="Croco.Core.Logic" Version="1.1.8" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
     <PackageReference Include="Zoo.Croco.Clt" Version="0.9.7" />
   </ItemGroup>

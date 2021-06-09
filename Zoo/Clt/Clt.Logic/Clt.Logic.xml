@@ -524,7 +524,7 @@
             Менеджер для работы с клиентами
             </summary>
         </member>
-        <member name="M:Clt.Logic.Services.Users.ClientService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Clt.Logic.Abstractions.IClientDataRefresher,Croco.Core.Logic.Files.Services.FileChecker,Croco.Core.Logic.Files.Abstractions.IDbFileManager)">
+        <member name="M:Clt.Logic.Services.Users.ClientService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication,Clt.Logic.Abstractions.IClientDataRefresher,Croco.Core.Logic.Files.Services.FileChecker,Croco.Core.Logic.Files.Abstractions.IDbFileManager,Croco.Core.Logic.Files.Abstractions.IDbFileRelationManager)">
             <summary>
             Конструктор
             </summary>
@@ -533,6 +533,7 @@
             <param name="clientDataRefresher"></param>
             <param name="fileChecker"></param>
             <param name="dbFileManager"></param>
+            <param name="relationManager"></param>
         </member>
         <member name="M:Clt.Logic.Services.Users.ClientService.RemoveClientAvatarAsync">
             <summary>

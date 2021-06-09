@@ -27,6 +27,7 @@ namespace Clt.Logic.Services.Users
         IClientDataRefresher ClientDataRefresher { get; }
         FileChecker FileChecker { get; }
         IDbFileManager DbFileManager { get; }
+        IDbFileRelationManager DbFileRelationManager { get; }
 
         /// <summary>
         /// Конструктор
@@ -36,15 +37,18 @@ namespace Clt.Logic.Services.Users
         /// <param name="clientDataRefresher"></param>
         /// <param name="fileChecker"></param>
         /// <param name="dbFileManager"></param>
+        /// <param name="relationManager"></param>
         public ClientService(ICrocoAmbientContextAccessor ambientContext, 
             ICrocoApplication app,
             IClientDataRefresher clientDataRefresher,
             FileChecker fileChecker,
-            IDbFileManager dbFileManager) : base(ambientContext, app)
+            IDbFileManager dbFileManager,
+            IDbFileRelationManager relationManager) : base(ambientContext, app)
         {
             ClientDataRefresher = clientDataRefresher;
             FileChecker = fileChecker;
             DbFileManager = dbFileManager;
+            DbFileRelationManager = relationManager;
         }
 
         private Task<ApplicationUser> GetUserByIdAsync(string id)
@@ -83,7 +87,7 @@ namespace Clt.Logic.Services.Users
 
                 if (oldFileId.HasValue)
                 {
-                    await DbFileManager.DeleteFileRelation(new DeleteFileRelation<Client>
+                    await DbFileRelationManager.DeleteFileRelation(new DeleteFileRelation<Client>
                     {
                         FileId = oldFileId.Value,
                         RelationName = ClientAvatarRelationName,
@@ -143,17 +147,7 @@ namespace Clt.Logic.Services.Users
             {
                 await SaveChangesAsync();
 
-                if (oldFileId.HasValue)
-                {
-                    await DbFileManager.DeleteFileRelation(new DeleteFileRelation<Client>
-                    {
-                        FileId = oldFileId.Value,
-                        RelationName = ClientAvatarRelationName,
-                        EntityKey = userToEditEntity.Id
-                    });
-                }
-
-                await DbFileManager.AddFileRelation(new AddFileRelation<Client>
+                await DbFileRelationManager.AddOrUpdateFileRelation(new AddOrUpdateFileRelation<Client>
                 {
                     FileId = fileId,
                     EntityKey = userToEditEntity.Id,
