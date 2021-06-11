@@ -14,7 +14,6 @@ namespace Zoo.ServerJs.Models.Method
             _parameterJsons = parameterJsons;
         }
 
-
         public T GetParameter<T>()
         {
             var param = _parameterJsons[_currentIndex];

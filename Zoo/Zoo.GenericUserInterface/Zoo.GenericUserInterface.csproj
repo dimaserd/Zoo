@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.51" />
+    <PackageReference Include="NetCroco.Core.Documentation" Version="1.1.52" />
   </ItemGroup>
 
   <ItemGroup>

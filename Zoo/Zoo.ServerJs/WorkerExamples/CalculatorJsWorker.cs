@@ -1,4 +1,5 @@
-﻿using Zoo.ServerJs.Abstractions;
+﻿using Croco.Core.Documentation.Models.Methods;
+using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Services;
 
@@ -45,28 +46,28 @@ namespace Zoo.ServerJs.WorkerExamples
         {
             return builder.SetWorkerName(WorkerName)
                 .SetDescription("Калькулятор")
-                .AddMethodViaFunction<double, double, double>(Divide, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction<double, double, double>(Divide, new MethodDocsOptions
                 {
                     MethodName = "Divide",
                     Description = "Разделить",
                     ParameterDescriptions = new[] { "Делимое", "Делитель" },
                     ResultDescription = "Результат деления",
                 })
-                .AddMethodViaFunction<double, double, double>(Multiply, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction<double, double, double>(Multiply, new MethodDocsOptions
                 {
                     MethodName = "Multiply",
                     Description = "Умножить",
                     ParameterDescriptions = new[] { "Множитель 1", "Множитель 2" },
                     ResultDescription = "Результат умножения",
                 })
-                .AddMethodViaFunction<double, double, double>(Add, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction<double, double, double>(Add, new MethodDocsOptions
                 {
                     MethodName = "Add",
                     Description = "Сложить",
                     ParameterDescriptions = new[] { "Слагаемое 1", "Слагаемое 2" },
                     ResultDescription = "Результат сложения",
                 })
-                .AddMethodViaFunction<double, double, double>(Substract, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction<double, double, double>(Substract, new MethodDocsOptions
                 {
                     MethodName = "Substract",
                     Description = "Вычесть",

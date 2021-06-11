@@ -1,4 +1,5 @@
 ﻿using Croco.Core.Documentation.Models;
+using Croco.Core.Documentation.Models.Methods;
 using Croco.Core.Documentation.Services;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models.Method;
@@ -72,14 +73,14 @@ namespace Zoo.ServerJs.WorkerExamples
         {
             return builder.SetWorkerName(WorkerName)
                 .SetDescription("Описыватель типов")
-                .AddMethodViaFunction<string, CrocoTypeDescriptionResult>(GetTypeDocumentation, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction<string, CrocoTypeDescriptionResult>(GetTypeDocumentation, new MethodDocsOptions
                 {
                     MethodName = "Type",
                     Description = "Получить описание для типа",
                     ParameterDescriptions = new[] { "Полное или сокращенное название типа" },
                     ResultDescription = "Описание типа"
                 })
-                .AddMethodViaFunction<string, CrocoEnumTypeDescription>(GetEnumTypeDocumentation, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction<string, CrocoEnumTypeDescription>(GetEnumTypeDocumentation, new MethodDocsOptions
                 {
                     MethodName = "Enum",
                     Description = "Получить описание для перечисления",

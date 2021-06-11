@@ -1,4 +1,5 @@
 ﻿using Croco.Core.Contract.Models;
+using Croco.Core.Documentation.Models.Methods;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System;
@@ -43,7 +44,7 @@ namespace Zoo.ServerJs.Tests.TestWorkers
                     .SetWorkerName("Test")
                     .SetDescription("Предоставляет тестовые методы")
                 .GetServiceMethodBuilder<FilesCopyService>()
-                .AddMethodViaTask<int>((srv, count) => srv.CopyFiles(count), new JsWorkerMethodDocsOptions
+                .AddMethodViaTask<int>((srv, count) => srv.CopyFiles(count), new MethodDocsOptions
                 {
                     MethodName = "CopyFiles",
                     Description = "Копирует несколько файлов",

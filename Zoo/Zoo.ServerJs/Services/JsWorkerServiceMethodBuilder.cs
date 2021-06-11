@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Croco.Core.Documentation.Models.Methods;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaFunction<TResult>(Func<TService, TResult> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaFunction<TResult>(Func<TService, TResult> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetFunc(func, opts));
         }
@@ -52,7 +53,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaFunction<T1, TResult>(Func<TService, T1, TResult> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaFunction<T1, TResult>(Func<TService, T1, TResult> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetFunc(func, opts));
         }
@@ -66,7 +67,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaFunction<T1, T2, TResult>(Func<TService, T1, T2, TResult> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaFunction<T1, T2, TResult>(Func<TService, T1, T2, TResult> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetFunc(func, opts));
         }
@@ -81,7 +82,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaFunction<T1, T2, T3, TResult>(Func<TService, T1, T2, T3, TResult> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaFunction<T1, T2, T3, TResult>(Func<TService, T1, T2, T3, TResult> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetFunc(func, opts));
         }
@@ -92,7 +93,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaAction(Action<TService> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaAction(Action<TService> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetAction(func, opts));
         }
@@ -104,7 +105,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaAction<T1>(Action<TService, T1> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaAction<T1>(Action<TService, T1> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetAction(func, opts));
         }
@@ -117,7 +118,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaAction<T1, T2>(Action<TService, T1, T2> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaAction<T1, T2>(Action<TService, T1, T2> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetAction(func, opts));
         }
@@ -128,7 +129,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTask(Func<TService, Task> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTask(Func<TService, Task> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetTask(func, opts));
         }
@@ -139,7 +140,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTask<T1>(Func<TService, T1, Task> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTask<T1>(Func<TService, T1, Task> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetTask(func, opts));
         }
@@ -150,7 +151,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTask<T1, T2>(Func<TService, T1, T2, Task> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTask<T1, T2>(Func<TService, T1, T2, Task> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetTask(func, opts));
         }
@@ -162,7 +163,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTaskWithResult<TResult>(Func<TService, Task<TResult>> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTaskWithResult<TResult>(Func<TService, Task<TResult>> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetTask(func, opts));
         }
@@ -175,7 +176,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTaskWithResult<T1, TResult>(Func<TService, T1, Task<TResult>> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTaskWithResult<T1, TResult>(Func<TService, T1, Task<TResult>> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetTask(func, opts));
         }
@@ -189,7 +190,7 @@ namespace Zoo.ServerJs.Services
         /// <param name="func"></param>
         /// <param name="opts"></param>
         /// <returns></returns>
-        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTaskWithResult<T1, T2, TResult>(Func<TService, T1, T2, Task<TResult>> func, JsWorkerMethodDocsOptions opts)
+        public JsWorkerServiceMethodBuilder<TService> AddMethodViaTaskWithResult<T1, T2, TResult>(Func<TService, T1, T2, Task<TResult>> func, MethodDocsOptions opts)
         {
             return AddMethod(opts, () => JsServiceFuncBuilder.GetTask(func, opts));
         }
@@ -202,7 +203,7 @@ namespace Zoo.ServerJs.Services
             return Builder.Build();
         }
 
-        private JsWorkerServiceMethodBuilder<TService> AddMethod(JsWorkerMethodDocsOptions opts, Func<JsWorkerMethodDocs> docsGetter)
+        private JsWorkerServiceMethodBuilder<TService> AddMethod(MethodDocsOptions opts, Func<JsWorkerMethodDocs> docsGetter)
         {
             if (Builder._docs.Methods.ContainsKey(opts.MethodName))
             {

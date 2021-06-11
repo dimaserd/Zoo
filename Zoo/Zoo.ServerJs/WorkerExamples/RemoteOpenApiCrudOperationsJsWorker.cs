@@ -1,4 +1,5 @@
 ﻿using Croco.Core.Contract.Models;
+using Croco.Core.Documentation.Models.Methods;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Models;
 using Zoo.ServerJs.Models.Method;
@@ -28,7 +29,7 @@ namespace Zoo.ServerJs.WorkerExamples
             return builder.SetWorkerName(WorkerName)
                 .SetDescription("Crud операции над удаленными хостами")
                 .GetServiceMethodBuilder<JsExecutor>()
-                .AddMethodViaTaskWithResult<RemoteJsOpenApi, BaseApiResponse>((srv, p1) => srv.AddRemoteApi(p1), new JsWorkerMethodDocsOptions
+                .AddMethodViaTaskWithResult<RemoteJsOpenApi, BaseApiResponse>((srv, p1) => srv.AddRemoteApi(p1), new MethodDocsOptions
                 {
                     MethodName = "Add",
                     Description = "Добавить новый удаленный апи хост",
@@ -38,7 +39,7 @@ namespace Zoo.ServerJs.WorkerExamples
                     },
                     ResultDescription = "Результат операции"
                 })
-                .AddMethodViaTaskWithResult<RemoteJsOpenApi, BaseApiResponse>((srv, p1) => srv.EditRemoteApi(p1), new JsWorkerMethodDocsOptions
+                .AddMethodViaTaskWithResult<RemoteJsOpenApi, BaseApiResponse>((srv, p1) => srv.EditRemoteApi(p1), new MethodDocsOptions
                 {
                     MethodName = "Edit",
                     Description = "Редактировать удаленный апи хост",
@@ -48,7 +49,7 @@ namespace Zoo.ServerJs.WorkerExamples
                     },
                     ResultDescription = "Результат операции"
                 })
-                .AddMethodViaTaskWithResult<string, BaseApiResponse>((srv, p1) => srv.DeleteRemoteApi(p1), new JsWorkerMethodDocsOptions
+                .AddMethodViaTaskWithResult<string, BaseApiResponse>((srv, p1) => srv.DeleteRemoteApi(p1), new MethodDocsOptions
                 {
                     MethodName = "Delete",
                     Description = "Удалить удаленный апи хост",

@@ -1,4 +1,5 @@
 using Croco.Core.Contract.Models;
+using Croco.Core.Documentation.Models.Methods;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System.Linq;
@@ -35,12 +36,12 @@ namespace Zoo.ServerJs.Tests
         public JsWorkerDocumentation JsWorkerDocs(JsWorkerBuilder builder)
         {
             return builder.SetWorkerName(WorkerName)
-                .AddMethodViaFunction<ProductInProductGroupIdModel, BaseApiResponse>(AddProductToGroup, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction<ProductInProductGroupIdModel, BaseApiResponse>(AddProductToGroup, new MethodDocsOptions
                 {
                     MethodName = "AddProductToGroup",
                     Description = "Добавить товар в группу товаров",
                 })
-                .AddMethodViaFunction(GetArray, new JsWorkerMethodDocsOptions
+                .AddMethodViaFunction(GetArray, new MethodDocsOptions
                 {
                     MethodName = GetArrayName,
                     Description = "Получить массив"

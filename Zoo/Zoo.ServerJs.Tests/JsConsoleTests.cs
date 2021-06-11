@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Croco.Core.Documentation.Models.Methods;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Zoo.ServerJs.Models;
-using Zoo.ServerJs.Models.Method;
 using Zoo.ServerJs.Services;
 
 namespace Zoo.ServerJs.Tests
@@ -35,7 +35,7 @@ namespace Zoo.ServerJs.Tests
                 {
                     builder.SetWorkerName("Test")
                         .SetDescription("Test")
-                        .AddMethodViaFunction(FuncWithNull, new JsWorkerMethodDocsOptions
+                        .AddMethodViaFunction(FuncWithNull, new MethodDocsOptions
                         {
                             MethodName = "NullFunc",
                             Description = "Some description"

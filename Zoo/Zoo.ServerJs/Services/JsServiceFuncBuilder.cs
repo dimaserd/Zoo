@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Croco.Core.Documentation.Models.Methods;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,10 +9,11 @@ namespace Zoo.ServerJs.Services
 {
     internal static class JsServiceFuncBuilder
     {
-        internal static JsWorkerMethodDocs GetFunc<TService, TResult>(Func<TService, TResult> func, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetFunc<TService, TResult>(Func<TService, TResult> func, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(typeof(TResult), null, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(typeof(TResult), null, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -29,10 +31,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetFunc<TService, T, TResult>(Func<TService, T, TResult> func, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetFunc<TService, T, TResult>(Func<TService, T, TResult> func, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(typeof(TResult), new List<Type> { typeof(T) }, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(typeof(TResult), new List<Type> { typeof(T) }, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -50,10 +53,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetFunc<TService, T1, T2, TResult>(Func<TService, T1, T2, TResult> func, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetFunc<TService, T1, T2, TResult>(Func<TService, T1, T2, TResult> func, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(typeof(TResult), new List<Type> { typeof(T1), typeof(T2) }, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(typeof(TResult), new List<Type> { typeof(T1), typeof(T2) }, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -71,10 +75,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetFunc<TService, T1, T2, T3, TResult>(Func<TService, T1, T2, T3, TResult> func, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetFunc<TService, T1, T2, T3, TResult>(Func<TService, T1, T2, T3, TResult> func, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(typeof(TResult), new List<Type> { typeof(T1), typeof(T2), typeof(T3) }, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(typeof(TResult), new List<Type> { typeof(T1), typeof(T2), typeof(T3) }, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -92,10 +97,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetAction<TService>(Action<TService> action, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetAction<TService>(Action<TService> action, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(null, null, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(null, null, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -111,10 +117,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetAction<TService, T1>(Action<TService, T1> action, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetAction<TService, T1>(Action<TService, T1> action, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(null, new List<Type> { typeof(T1) }, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(null, new List<Type> { typeof(T1) }, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -131,10 +138,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetAction<TService, T1, T2>(Action<TService, T1, T2> action, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetAction<TService, T1, T2>(Action<TService, T1, T2> action, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(null, new List<Type> { typeof(T1), typeof(T2) }, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(null, new List<Type> { typeof(T1), typeof(T2) }, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -150,10 +158,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetTask<TService>(Func<TService, Task> task, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetTask<TService>(Func<TService, Task> task, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(null, null, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(null, null, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -169,10 +178,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetTask<TService, T1>(Func<TService, T1, Task> task, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetTask<TService, T1>(Func<TService, T1, Task> task, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(null, new List<Type> { typeof(T1) }, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(null, new List<Type> { typeof(T1) }, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -188,10 +198,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetTask<TService, T1, T2>(Func<TService, T1, T2, Task> task, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetTask<TService, T1, T2>(Func<TService, T1, T2, Task> task, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(null, new List<Type> { typeof(T1), typeof(T2) }, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(null, new List<Type> { typeof(T1), typeof(T2) }, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -207,10 +218,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetTask<TService, TResult>(Func<TService, Task<TResult>> task, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetTask<TService, TResult>(Func<TService, Task<TResult>> task, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(typeof(TResult), null, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(typeof(TResult), null, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -226,10 +238,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetTask<TService, T1, TResult>(Func<TService, T1, Task<TResult>> task, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetTask<TService, T1, TResult>(Func<TService, T1, Task<TResult>> task, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(typeof(TResult), new List<Type> { typeof(T1) }, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(typeof(TResult), new List<Type> { typeof(T1) }, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>
@@ -245,10 +258,11 @@ namespace Zoo.ServerJs.Services
             };
         }
 
-        internal static JsWorkerMethodDocs GetTask<TService, T1, T2, TResult>(Func<TService, T1, T2, Task<TResult>> task, JsWorkerMethodDocsOptions opts)
+        internal static JsWorkerMethodDocs GetTask<TService, T1, T2, TResult>(Func<TService, T1, T2, Task<TResult>> task, MethodDocsOptions opts)
         {
-            return new JsWorkerMethodDocs(typeof(TResult), new List<Type> { typeof(T1), typeof(T2) }, opts)
+            return new JsWorkerMethodDocs
             {
+                Description = MethodDescription.Create(typeof(TResult), new List<Type> { typeof(T1), typeof(T2) }, opts),
                 Method = new JsWorkerMethodBase
                 {
                     FunctionLink = (p, srv) =>

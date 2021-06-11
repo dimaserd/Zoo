@@ -41,7 +41,7 @@ namespace Zoo.ServerJs.Models.Method
 
             var method = Methods[methodName];
 
-            var countOfMethodParams = method.Parameters?.Count ?? 0;
+            var countOfMethodParams = method.Description.Parameters?.Count ?? 0;
 
             var paramsInBag = parameters.GetParamsLength();
 

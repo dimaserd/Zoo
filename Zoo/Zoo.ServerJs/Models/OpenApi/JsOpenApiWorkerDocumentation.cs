@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Croco.Core.Documentation.Models.Methods;
+using System.Collections.Generic;
 using System.Linq;
 using Zoo.ServerJs.Models.Method;
 
@@ -17,7 +18,7 @@ namespace Zoo.ServerJs.Models.OpenApi
         {
             WorkerName = docs.WorkerName;
             Description = docs.Description;
-            Methods = docs.Methods.Select(x => new JsOpenApiWorkerMethodDocumentation(x.Value)).ToList();
+            Methods = docs.Methods.Select(x => OpenApiMethodDocumentation.Create(x.Value.Description)).ToList();
         }
 
         /// <summary>
@@ -40,6 +41,6 @@ namespace Zoo.ServerJs.Models.OpenApi
         /// <summary>
         /// Методы
         /// </summary>
-        public List<JsOpenApiWorkerMethodDocumentation> Methods { get; set; }
+        public List<OpenApiMethodDocumentation> Methods { get; set; }
     }
 }

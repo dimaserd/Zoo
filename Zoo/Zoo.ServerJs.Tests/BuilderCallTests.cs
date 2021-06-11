@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Croco.Core.Documentation.Models.Methods;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace Zoo.ServerJs.Tests
             serviceCollection.AddScoped<SomeService>();
 
             var ex = Assert.Throws<InvalidOperationException>(() => new JsExecutorBuilder(serviceCollection)
-                .AddJsWorker(builder => builder.AddMethodViaAction(SomeAction, new JsWorkerMethodDocsOptions
+                .AddJsWorker(builder => builder.AddMethodViaAction(SomeAction, new MethodDocsOptions
                 {
                     MethodName = "sda"
                 })
@@ -86,17 +87,17 @@ namespace Zoo.ServerJs.Tests
             new JsExecutorBuilder(serviceCollection)
                 .AddJsWorker(builder => builder
                 .SetWorkerName(workerName)
-                .AddMethodViaAction(SomeAction, new JsWorkerMethodDocsOptions
+                .AddMethodViaAction(SomeAction, new MethodDocsOptions
                 {
                     MethodName = "sda"
                 })
                 .GetServiceMethodBuilder<SomeService>()
-                .AddMethodViaTaskWithResult<int, int>((srv, p1) => srv.SomeTask(p1), new JsWorkerMethodDocsOptions
+                .AddMethodViaTaskWithResult<int, int>((srv, p1) => srv.SomeTask(p1), new MethodDocsOptions
                 {
                     MethodName = MultiplyByTwoMethodName,
                     Description = "some"
                 })
-                .AddMethodViaTaskWithResult((srv) => srv.SomeTask(2), new JsWorkerMethodDocsOptions
+                .AddMethodViaTaskWithResult((srv) => srv.SomeTask(2), new MethodDocsOptions
                 {
                     MethodName = "MultiplyTwoByTwo",
                     Description = "some"
