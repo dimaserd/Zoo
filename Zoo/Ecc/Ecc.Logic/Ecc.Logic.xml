@@ -1755,33 +1755,33 @@
             <param name="context"></param>
             <param name="application"></param>
         </member>
-        <member name="T:Ecc.Logic.Services.Messaging.UserNotificationsWorker">
+        <member name="T:Ecc.Logic.Services.Messaging.UserNotificationsService">
             <summary>
             Сервис для работы с системными уведомлениями
             </summary>
         </member>
-        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.RemoveNotificationAsync(System.String)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsService.RemoveNotificationAsync(System.String)">
             <summary>
             Удалить уведомление
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.CreateNotificationAsync(Ecc.Logic.Models.Notifications.CreateNotification)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsService.CreateNotificationAsync(Ecc.Logic.Models.Notifications.CreateNotification)">
             <summary>
             Создать уведомление
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.MarkNotificationAsReadAsync(System.String)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsService.MarkNotificationAsReadAsync(System.String)">
             <summary>
             Пометить уведомление как прочитанное
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsWorker.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
+        <member name="M:Ecc.Logic.Services.Messaging.UserNotificationsService.#ctor(Croco.Core.Contract.ICrocoAmbientContextAccessor,Croco.Core.Contract.Application.ICrocoApplication)">
             <summary>
             Конструктор
             </summary>
