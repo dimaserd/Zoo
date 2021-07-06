@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Zoo.ServerJs.Consts;
 using Zoo.ServerJs.Models;
@@ -13,10 +14,12 @@ namespace Zoo.ServerJs.Services.Internal
     /// </summary>
     internal class HandleJsCallWorker
     {
+
         private RemoteJsCaller RemoteCaller { get; }
         private JsExecutorComponents Components { get; }
         private IServiceProvider ServiceProvider { get; }
         private JsExecutionContext ExecutionContext { get; }
+        public ILogger Logger { get; }
 
 
         /// <summary>
@@ -25,11 +28,14 @@ namespace Zoo.ServerJs.Services.Internal
         /// <param name="components"></param>
         /// <param name="serviceProvider"></param>
         /// <param name="executionContext"></param>
-        internal HandleJsCallWorker(JsExecutorComponents components, IServiceProvider serviceProvider, JsExecutionContext executionContext)
+        /// <param name="logger"></param>
+        internal HandleJsCallWorker(JsExecutorComponents components, IServiceProvider serviceProvider, 
+            JsExecutionContext executionContext, ILogger logger)
         {
             Components = components;
             ServiceProvider = serviceProvider;
             ExecutionContext = executionContext;
+            Logger = logger;
             RemoteCaller = new RemoteJsCaller(Components.RemoteApiDocs, Components.HttpClient, ExecutionContext);
         }
 
@@ -43,7 +49,7 @@ namespace Zoo.ServerJs.Services.Internal
         {
             var worker = Components.GetJsWorker(workerName, ExecutionContext);
 
-            var res = worker.HandleCall(method, ServiceProvider, new JsWorkerMethodCallParameters(methodParams)).Result;
+            var res = worker.HandleCall(method, ServiceProvider, new JsWorkerMethodCallParameters(methodParams), ExecutionContext, Logger).Result;
 
             return ZooSerializer.Serialize(res);
         }

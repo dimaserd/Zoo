@@ -1,5 +1,6 @@
 ﻿using Jint;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,12 +37,13 @@ namespace Zoo.ServerJs.Models
         internal JsExecutionContext(JsExecutorComponents components, 
             IServiceScope serviceScope,
             Action<Engine> engineAction,
+            ILogger logger,
             Action<IServiceProvider> scopedServiceProviderAction)
         {
             var serviceProvider = serviceScope.ServiceProvider;
             scopedServiceProviderAction?.Invoke(serviceProvider);
 
-            JsCallWorker = new HandleJsCallWorker(components, serviceProvider, this);
+            JsCallWorker = new HandleJsCallWorker(components, serviceProvider, this, logger);
             Components = components;
             ServiceScope = serviceScope;
             EngineAction = engineAction;

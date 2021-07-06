@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Croco.Core.Contract.Models;
 using Jint;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Extensions;
 using Zoo.ServerJs.Models;
@@ -23,7 +24,7 @@ namespace Zoo.ServerJs.Services
     {
         IServiceProvider ServiceProvider { get; }
         IJsScriptTaskStorage Storage { get; }
-
+        ILogger<JsExecutor> Logger { get; }
         JsExecutorComponents Components { get; }
 
         Action<Engine> EngineAction { get; }
@@ -37,11 +38,13 @@ namespace Zoo.ServerJs.Services
         /// <param name="httpClient"></param>
         /// <param name="storage"></param>
         /// <param name="persistedStorage"></param>
+        /// <param name="logger"></param>
         /// <param name="properties"></param>
         public JsExecutor(IServiceProvider serviceProvider,
             IServerJsHttpClient httpClient,
             IJsScriptTaskStorage storage,
             IPersistedStorage persistedStorage,
+            ILogger<JsExecutor> logger,
             JsExecutorProperties properties)
         {
             Components = new JsExecutorComponents(persistedStorage, properties.ExternalComponents, properties.RemoteApis)
@@ -54,6 +57,7 @@ namespace Zoo.ServerJs.Services
             EngineAction = properties.EngineAction;
             ServiceProvider = serviceProvider;
             Storage = storage;
+            Logger = logger;
         }
 
         #region Методы
@@ -225,6 +229,7 @@ namespace Zoo.ServerJs.Services
 
             catch(Exception ex)
             {
+                Logger.LogError(ex, "RunScriptDetaiiled.Error");
                 result.IsSucceeded = false;
                 result.ErrorMessage = ex.Message;
                 result.ExceptionData = new ExcepionData
@@ -265,10 +270,11 @@ namespace Zoo.ServerJs.Services
 
             try
             {
+                var jsContext = GetContext();
                 using var scope = ServiceProvider.CreateScope();
                 var result = Components
-                    .GetJsWorker(requestModel.WorkerName, GetContext())
-                    .HandleCall(requestModel.MethodName, scope.ServiceProvider, parameters);
+                    .GetJsWorker(requestModel.WorkerName, jsContext)
+                    .HandleCall(requestModel.MethodName, scope.ServiceProvider, parameters, jsContext, Logger);
 
                 return new CallOpenApiWorkerMethodResponse
                 {
@@ -278,6 +284,7 @@ namespace Zoo.ServerJs.Services
             }
             catch(Exception ex)
             {
+                Logger.LogError(ex, "CallWorkerMethod.Error");
                 return new CallOpenApiWorkerMethodResponse
                 {
                     IsSucceeded = false,
@@ -288,7 +295,7 @@ namespace Zoo.ServerJs.Services
 
         private JsExecutionContext GetContext()
         {
-            return new JsExecutionContext(Components, ServiceProvider.CreateScope(), EngineAction, ScopedServiceProviderAction);
+            return new JsExecutionContext(Components, ServiceProvider.CreateScope(), EngineAction, Logger, ScopedServiceProviderAction);
         }
         #endregion
     }

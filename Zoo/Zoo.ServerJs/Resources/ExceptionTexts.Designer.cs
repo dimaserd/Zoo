@@ -99,9 +99,9 @@ namespace Zoo.ServerJs.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Метод с названием &apos;{0}&apos; не существует в группе методов класса &apos;{1}&apos;.
         /// </summary>
-        internal static string MethodWithNameAlreadyExistsInWorkerFormat {
+        internal static string MethodWithNameDoesNotExistInWorkerFormat {
             get {
-                return ResourceManager.GetString("MethodWithNameAlreadyExistsInWorkerFormat", resourceCulture);
+                return ResourceManager.GetString("MethodWithNameDoesNotExistInWorkerFormat", resourceCulture);
             }
         }
         

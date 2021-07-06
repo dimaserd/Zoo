@@ -129,7 +129,7 @@
   <data name="MethodWasCalledWithLessParamsFormat" xml:space="preserve">
     <value>Метод '{0}' Js класса '{1}' содержит {2} параметров, но был вызван с {3} параметрами.</value>
   </data>
-  <data name="MethodWithNameAlreadyExistsInWorkerFormat" xml:space="preserve">
+  <data name="MethodWithNameDoesNotExistInWorkerFormat" xml:space="preserve">
     <value>Метод с названием '{0}' не существует в группе методов класса '{1}'</value>
   </data>
   <data name="NeedSettingHttpClientBeforeUseMethodFormat" xml:space="preserve">

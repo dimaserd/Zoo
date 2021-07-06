@@ -404,13 +404,15 @@
             Методы обработчика
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerDocumentation.HandleCall(System.String,System.IServiceProvider,Zoo.ServerJs.Abstractions.IJsWorkerMethodCallParameters)">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerDocumentation.HandleCall(System.String,System.IServiceProvider,Zoo.ServerJs.Abstractions.IJsWorkerMethodCallParameters,Zoo.ServerJs.Models.JsExecutionContext,Microsoft.Extensions.Logging.ILogger)">
             <summary>
             Обработка вызова метода
             </summary>
             <param name="methodName"></param>
             <param name="serviceProvider"></param>
             <param name="parameters"></param>
+            <param name="executionContext"></param>
+            <param name="logger"></param>
             <returns></returns>
         </member>
         <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodBase">
@@ -423,12 +425,13 @@
             Ссылка на функцию
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodBase.HandleCall(Zoo.ServerJs.Abstractions.IJsWorkerMethodCallParameters,System.IServiceProvider)">
+        <member name="M:Zoo.ServerJs.Models.Method.JsWorkerMethodBase.HandleCall(Zoo.ServerJs.Abstractions.IJsWorkerMethodCallParameters,System.IServiceProvider,Microsoft.Extensions.Logging.ILogger)">
             <summary>
             Обработать вызов
             </summary>
             <param name="parameters"></param>
             <param name="serviceProvider"></param>
+            <param name="logger"></param>
             <returns></returns>
         </member>
         <member name="T:Zoo.ServerJs.Models.Method.JsWorkerMethodCallParameters">
@@ -718,7 +721,7 @@
               Ищет локализованную строку, похожую на Метод &apos;{0}&apos; Js класса &apos;{1}&apos; содержит {2} параметров, но был вызван с {3} параметрами..
             </summary>
         </member>
-        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.MethodWithNameAlreadyExistsInWorkerFormat">
+        <member name="P:Zoo.ServerJs.Resources.ExceptionTexts.MethodWithNameDoesNotExistInWorkerFormat">
             <summary>
               Ищет локализованную строку, похожую на Метод с названием &apos;{0}&apos; не существует в группе методов класса &apos;{1}&apos;.
             </summary>
@@ -857,13 +860,14 @@
             Обработчик js вызовов
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.Internal.HandleJsCallWorker.#ctor(Zoo.ServerJs.Services.Internal.JsExecutorComponents,System.IServiceProvider,Zoo.ServerJs.Models.JsExecutionContext)">
+        <member name="M:Zoo.ServerJs.Services.Internal.HandleJsCallWorker.#ctor(Zoo.ServerJs.Services.Internal.JsExecutorComponents,System.IServiceProvider,Zoo.ServerJs.Models.JsExecutionContext,Microsoft.Extensions.Logging.ILogger)">
             <summary>
             Конструктор
             </summary>
             <param name="components"></param>
             <param name="serviceProvider"></param>
             <param name="executionContext"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:Zoo.ServerJs.Services.Internal.HandleJsCallWorker.Call(System.String,System.String,System.Object[])">
             <summary>
@@ -934,7 +938,7 @@
             Исполнитель кода на Js
             </summary>
         </member>
-        <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(System.IServiceProvider,Zoo.ServerJs.Abstractions.IServerJsHttpClient,Zoo.ServerJs.Abstractions.IJsScriptTaskStorage,Zoo.ServerJs.Abstractions.IPersistedStorage,Zoo.ServerJs.Services.JsExecutorProperties)">
+        <member name="M:Zoo.ServerJs.Services.JsExecutor.#ctor(System.IServiceProvider,Zoo.ServerJs.Abstractions.IServerJsHttpClient,Zoo.ServerJs.Abstractions.IJsScriptTaskStorage,Zoo.ServerJs.Abstractions.IPersistedStorage,Microsoft.Extensions.Logging.ILogger{Zoo.ServerJs.Services.JsExecutor},Zoo.ServerJs.Services.JsExecutorProperties)">
             <summary>
             Конструктор
             </summary>
@@ -942,6 +946,7 @@
             <param name="httpClient"></param>
             <param name="storage"></param>
             <param name="persistedStorage"></param>
+            <param name="logger"></param>
             <param name="properties"></param>
         </member>
         <member name="M:Zoo.ServerJs.Services.JsExecutor.UpdateRemotesDocsAsync">

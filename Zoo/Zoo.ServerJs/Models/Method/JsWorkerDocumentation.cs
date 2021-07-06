@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using Zoo.ServerJs.Abstractions;
 using Zoo.ServerJs.Resources;
@@ -31,12 +32,14 @@ namespace Zoo.ServerJs.Models.Method
         /// <param name="methodName"></param>
         /// <param name="serviceProvider"></param>
         /// <param name="parameters"></param>
+        /// <param name="executionContext"></param>
+        /// <param name="logger"></param>
         /// <returns></returns>
-        internal JsWorkerMethodResult HandleCall(string methodName, IServiceProvider serviceProvider, IJsWorkerMethodCallParameters parameters)
+        internal JsWorkerMethodResult HandleCall(string methodName, IServiceProvider serviceProvider, IJsWorkerMethodCallParameters parameters, JsExecutionContext executionContext, ILogger logger)
         {
             if (!Methods.ContainsKey(methodName))
             {
-                throw new InvalidOperationException(string.Format(ExceptionTexts.MethodWithNameAlreadyExistsInWorkerFormat, methodName, WorkerName));
+                throw new InvalidOperationException(string.Format(ExceptionTexts.MethodWithNameDoesNotExistInWorkerFormat, methodName, WorkerName));
             }
 
             var method = Methods[methodName];
@@ -53,7 +56,7 @@ namespace Zoo.ServerJs.Models.Method
                 throw new InvalidOperationException(mes);
             }
 
-            return method.Method.HandleCall(parameters, serviceProvider);
+            return method.Method.HandleCall(parameters, serviceProvider, logger);
         }
 
         internal void Validate()
